@@ -1,0 +1,37 @@
+nav {
+  min-width: 1200px;
+}
+.header {
+  padding: 0 120px;
+  height: 50px;
+  line-height: 50px;
+  background: rgba(199, 199, 199, 0.54);
+}
+.header .head-left {
+  width: 201px;
+  height: 34px;
+  float: left;
+  background: url("../assets/images/logo.png") no-repeat;
+}
+.header .head-right {
+  float: right;
+}
+.header .btn {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.header .login-btn {
+  background: #fff;
+  font-size: 18px;
+  color: #1c94c4;
+  border: 1px solid #1c94c4;
+}
+.header .register-btn {
+  background: #1c94c4;
+  font-size: 18px;
+  color: #fff;
+}
