@@ -8,13 +8,15 @@ import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { RegisterComponent } from './register/register.component';
+import { DatalistComponent } from './datalist/datalist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DatalistComponent
   ],
   imports: [
     BrowserModule,
