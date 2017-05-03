@@ -7,12 +7,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  state=false;
+  isActive=0;
+  types=[
+    {text:'对外贸易',children:[
+      {text:'对外贸易-child1'},
+      {text:'对外贸易-child1'},
+      {text:'对外贸易-child1'},
+      {text:'对外贸易-child1'},
+      {text:'对外贸易-child1'},
+      {text:'对外贸易-child1'},
+      {text:'对外贸易-child1'}
+
+    ]},
+    {text:'经济主题',children:[
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+      {text:'经济主题-child1'},
+    ]},
+    {text:'item3'},
+    {text:'item4'},
+    {text:'item5'}
+  ]
 
 
-  changeTab(){
-    this.state=!this.state;
-    console.log(this.state)
+  changeTab(i){
+    this.isActive=i;
+    console.log(i)
   }
 
   ngOnInit() {

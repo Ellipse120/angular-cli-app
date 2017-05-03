@@ -50,6 +50,7 @@
   margin:0 auto;
   text-align: left;
   list-style-type: none;
+  position: relative;
 }
 .searchType li{
   float: left;
@@ -62,6 +63,7 @@
   list-style: none;
   margin-top: 20px;
   color: #676767;
+  left:0;
 }
 .btn-none{
   border:none;
@@ -72,7 +74,7 @@
   outline: none;
   border: none;
 }
-.btn-none:disabled{
+.isActive{
   font-size: 18px;
   color: #676767;
 }
