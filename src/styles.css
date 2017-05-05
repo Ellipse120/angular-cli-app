@@ -10,4 +10,149 @@ body{
 *{
   margin:0;
   padding:0;
+  box-sizing: border-box;
+}
+ul li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+.font24{
+  font-size: 24px;
+}
+.font18{
+  font-size: 18px;
+}
+.color-blue{
+  color: #1c94c4;
+}
+.color-gray{
+  color: #676767;
+}
+.text-center{
+  text-align: center;
+}
+/*common style*/
+.clearfix{
+  zoom: 1;
+}
+.clearfix:after{
+  content: '';
+  height:0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.btn{
+  border:none;
+}
+.btn:focus{
+  outline: none;
+  border: none;
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.search-box{
+  line-height: 35px;
+  width: 500px;
+  font-size: 18px;
+  color:#737373 ;
+}
+.search-box:focus{
+  outline: none;
+}
+.searchbtn{
+  display: inline-block;
+  line-height: 40px;
+  background: #1c94c4;
+  width: 100px;
+  margin-left: -6px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+.container{
+  padding:0 120px
+}
+.login-box,.register-box{
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.13);
+  z-index: 1000;
+}
+.login-form,.register-form{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+  width: 400px;
+  background: #fff;
+  padding:10px 20px;
+  padding-bottom: 20px;
+}
+.login-title,.register-title{
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  /*border-bottom: 1px solid #dbdcdc;*/
+}
+
+.fork{
+  cursor: pointer;
+}
+.user-count,.user-email{
+  width: 100%;
+  height: 40px;
+  background: url("assets/images/user.png") no-repeat left center;
+  border:1px solid #ddd;
+  margin-top: 30px;
+  background-position-x: 10px;
+  padding: 0 40px;
+}
+.user-email{
+  background: url("assets/images/email.png") no-repeat left center;
+  background-position-x: 10px;
+  margin-bottom: 10px;
+}
+.user-psd{
+  width: 100%;
+  height: 40px;
+  border:1px solid #ddd;
+  margin-top: 30px;
+  background: url("assets/images/psd.png") no-repeat left center;
+  background-position-x: 10px;
+  padding: 0 40px;
+}
+.login-state{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.forget-psd{
+  color: #1c94c4;
+  cursor: pointer;
+}
+.login,.register{
+  width: 100%;
+  height: 40px;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+  border-radius: 8px;
+  color: #fff;
+  background: #1c94c4;
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }

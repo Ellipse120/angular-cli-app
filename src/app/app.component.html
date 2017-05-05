@@ -1,8 +1,35 @@
 <nav class="header clearfix">
   <div class="head-left"></div>
   <div class="head-right">
-    <button class="btn login-btn" routerLink="/login">登录</button>
-    <button class="btn register-btn" routerLink="/register">注册</button>
+    <button class="btn login-btn" (click)="showLogin()">登录</button>
+    <button class="btn register-btn" (click)="showRegister()">注册</button>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<!--登录弹窗-->
+<div class="login-box" [hidden]="loginState">
+  <div class="login-form">
+    <p class="login-title font24 color-gray"><span class="font18">登录用户账号</span><span class="fork" (click)="hideLogin()">x</span></p>
+    <input type="text" class="user-count" placeholder="账号">
+    <input type="password" class="user-psd" placeholder="密码">
+    <div class="login-state">
+      <label for="auto-login" class="color-gray"><input type="checkbox" id="auto-login"> 下次自动登录</label>
+      <a class="forget-psd">忘记密码? </a>
+    </div>
+    <button class="login btn">登录</button>
+    <p class="text-center">还没有账号？ <a href="#" class="color-blue">点击注册</a></p>
+  </div>
+</div>
+<!--注册弹框-->
+<div class="register-box" [hidden]="registerState">
+  <div class="register-form">
+    <p class="register-title font24 color-gray"><span class="font18">注册账号</span><span class="fork" (click)="hideRegister()">x</span></p>
+    <input type="email" class="user-email" placeholder="请输入邮箱">
+    <input type="checkbox" id="read"> 已阅读 《用户协议》
+    <button class="register btn">注册</button>
+    <p class="text-center">已有账号？ <a href="javascript:;" class="color-blue" >马上登录</a></p>
+  </div>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+

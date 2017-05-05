@@ -8,7 +8,6 @@
   color: #1c94c4;
   font-weight: bold;
   margin-top: 40px;
-  margin-bottom: 20px;
 }
 .totalNum{
   width: 200px;
@@ -20,30 +19,6 @@
   display: inline-block;
   margin-right: 20px;
   color: #929292;
-}
-.search{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.search-box{
-  line-height: 35px;
-  width: 500px;
-  font-size: 18px;
-  color:#737373 ;
-}
-.search-box:focus{
-  outline: none;
-}
-.searchbtn{
-  display: inline-block;
-  line-height: 40px;
-  background: #1c94c4;
-  width: 100px;
-  margin-left: -6px;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
 }
 .searchType{
   width: 600px;
@@ -69,10 +44,6 @@
   border:none;
   background: #fff;
   cursor: pointer;
-}
-.btn:focus{
-  outline: none;
-  border: none;
 }
 .isActive{
   font-size: 18px;

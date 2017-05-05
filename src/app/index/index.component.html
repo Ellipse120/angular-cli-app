@@ -10,7 +10,7 @@
   </div>
   <div class="searchCond">
     <ul class="searchType">
-      <li *ngFor="let item of types;let i=index"><button class="btn btn-none" [ngClass]="{'isActive':isActive == i}" (click)="changeTab(i)">{{item.text}}</button>
+      <li *ngFor="let item of types;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.text}}</button>
         <ul class="secondMenu" *ngIf="isActive == i">
           <li *ngFor="let item of item.children">{{item.text}}</li>
         </ul></li>

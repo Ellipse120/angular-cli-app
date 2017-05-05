@@ -1,0 +1,39 @@
+.datalistArea{
+  margin-top: 20px;
+}
+.searchMenu{
+  width: 200px;
+  text-align: center;
+  float: left;
+}
+.searchMenu ul li{
+  padding:5px 0;
+  border-top: 1px solid #357cc7;
+  cursor: pointer;
+  background: #1c94c4;
+  color: #fff;
+}
+.menuList{
+  font-size: 18px;
+}
+.menuListTwo{
+  font-size: 16px;
+}
+.menuListTwo li{
+  background: rgba(43, 87, 125, 0.54) !important;
+  cursor: pointer;
+}
+.dataList{
+  width: 100%;
+  padding-left:220px;
+}
+.dataItem{
+  padding:5px;
+  color: #676767;
+}
+.dataContent{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
