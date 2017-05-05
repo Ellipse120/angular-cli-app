@@ -11,16 +11,18 @@ export class AppComponent {
 
 
 //  登录
-  showLogin(){
+  showLogin():void{
     this.loginState=false;
+    this.registerState=true;
   }
 //  关闭登录
-  hideLogin(){
+  hideLogin():void{
     this.loginState=true;
   }
 //  注册
   showRegister():void {
     this.registerState=false;
+    this.loginState=true;
   }
 //  关闭注册
   hideRegister():void{

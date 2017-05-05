@@ -16,7 +16,7 @@
       <a class="forget-psd">忘记密码? </a>
     </div>
     <button class="login btn">登录</button>
-    <p class="text-center">还没有账号？ <a href="#" class="color-blue">点击注册</a></p>
+    <p class="text-center">还没有账号？ <a href="javascript:;" class="color-blue" (click)="showRegister()">点击注册</a></p>
   </div>
 </div>
 <!--注册弹框-->
@@ -26,7 +26,7 @@
     <input type="email" class="user-email" placeholder="请输入邮箱">
     <input type="checkbox" id="read"> 已阅读 《用户协议》
     <button class="register btn">注册</button>
-    <p class="text-center">已有账号？ <a href="javascript:;" class="color-blue" >马上登录</a></p>
+    <p class="text-center">已有账号？ <a href="javascript:;" class="color-blue" (click)="showLogin()">马上登录</a></p>
   </div>
 </div>
 <div class="container">
