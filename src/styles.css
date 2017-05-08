@@ -33,6 +33,15 @@ a{
 .text-center{
   text-align: center;
 }
+/*三角形*/
+.triangle-down{
+  width: 0;
+  height: 0;
+  border-left:10px solid transparent;
+  border-right:10px solid transparent;
+  border-top: 16px solid #ddd;
+
+}
 /*common style*/
 .clearfix{
   zoom: 1;
@@ -59,13 +68,56 @@ a{
   margin-top: 20px;
 }
 .search-box{
-  line-height: 35px;
+  width: 600px;
+  margin:0 auto;
+  position: relative;
+}
+.search-input{
+  line-height: 38px;
   width: 500px;
   font-size: 18px;
   color:#737373 ;
+  border:1px solid #d8e5e7;
 }
-.search-box:focus{
+.search-input:focus{
   outline: none;
+}
+.triggle-position{
+  position: absolute;
+  top:12px;
+  right:115px;
+  cursor: pointer;
+}
+.advanced-box{
+  width: 500px;
+  height: 280px;
+  border:1px solid #d8e5e7;
+  position: absolute;
+  top:40px;
+  left:0;
+  background: #fff;
+  z-index: 1000;
+  padding:0 70px;
+  padding-top:56px;
+  font-size: 13px;
+  font-family: '微软雅黑';
+  color: #2e3e45;
+}
+.advanced-box ul {
+  margin-bottom:10px;
+}
+.advanced-box ul li{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  line-height: 40px;
+}
+.advanced-input{
+  width: 222px;
+  height: 30px;
+  margin-left: 15px;
+  border:1px solid #d8e5e7;
+  padding-left:10px;
 }
 .searchbtn{
   display: inline-block;

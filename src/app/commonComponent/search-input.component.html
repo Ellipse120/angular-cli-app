@@ -1,5 +1,17 @@
 <!--搜索框-->
 <div class="search">
-  <input type="text" class="search-box">
-  <div class="searchbtn" routerLink="/datalist">搜索</div>
+  <div class="search-box">
+    <input type="text" class="search-input">
+    <div class="searchbtn" routerLink="/datalist">搜索</div>
+    <span class="triangle-down triggle-position" (click)="toggleAdvancedBox()"></span>
+    <div class="advanced-box" [hidden]="ishide">
+      <ul>
+        <li><span>包含全部检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.allSearchW"></li>
+        <li><span>包含精确检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.exactWords"></li>
+        <li><span>包含至少一个检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.atLeastOne"></li>
+        <li><span>出现检索词的位置</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.wordPosition"></li>
+      </ul>
+      <button class="searchbtn btn" (click)="submitAdvancedSearch()">搜索</button>
+    </div>
+  </div>
 </div>

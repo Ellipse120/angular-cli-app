@@ -10,6 +10,17 @@ import {Component,OnInit} from '@angular/core';
 
 export class SearchInputComponent implements OnInit{
 
+  ishide=true;
+  advancedArr=[];
+  toggleAdvancedBox(){
+    this.ishide=!this.ishide;
+  }
+
+  //提交高级搜索条件
+  submitAdvancedSearch(){
+    console.log(this.advancedArr);
+
+  }
   ngOnInit() {
 
   }
