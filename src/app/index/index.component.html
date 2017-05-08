@@ -4,10 +4,7 @@
     <span>数据库</span>
   </div>
   <h2>经济数据库</h2>
-  <div class="search">
-    <input type="text" class="search-box">
-    <div class="searchbtn" routerLink="/datalist">搜索</div>
-  </div>
+  <search-input></search-input>
   <div class="searchCond">
     <ul class="searchType">
       <li *ngFor="let item of types;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.text}}</button>

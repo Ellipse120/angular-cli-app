@@ -13,12 +13,14 @@ import { DatalistComponent } from './datalist/datalist.component';
 //import {InMemoryDataService} from "./in-memory-data.service";
 import {MyServiceService} from "./app.service";
 import {DataType} from "./data-type";
+import {SearchInputComponent} from "./commonComponent/search-input.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    DatalistComponent
+    DatalistComponent,
+    SearchInputComponent
   ],
   imports: [
     BrowserModule,
