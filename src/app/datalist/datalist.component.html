@@ -16,11 +16,12 @@
     <div class="dataList">
       <p>约找到{{count}}条数据</p>
       <ul>
-        <li *ngFor="let item of dataList"  class="dataItem">
+        <li *ngFor="let item of dataList | paginate:{itemsPerPage:10,currentPage:p}"  class="dataItem">
           <h3>{{item.title}}</h3>
           <span class="dataContent">{{item.content}}</span>
         </li>
       </ul>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>

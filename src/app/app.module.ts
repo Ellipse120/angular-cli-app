@@ -14,6 +14,7 @@ import { DatalistComponent } from './datalist/datalist.component';
 import {MyServiceService} from "./app.service";
 import {DataType} from "./data-type";
 import {SearchInputComponent} from "./commonComponent/search-input.component";
+import {Ng2PaginationModule} from "ng2-pagination/index";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {SearchInputComponent} from "./commonComponent/search-input.component";
     HttpModule,
     AppRoutingModule,
     HttpModule,
+    Ng2PaginationModule
     //InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [MyServiceService],
