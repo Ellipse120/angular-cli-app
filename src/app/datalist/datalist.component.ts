@@ -13,7 +13,7 @@ export class DatalistComponent implements OnInit {
   state=false;
   num:number=0;
   count:number=384354;
-  dataList:DataType;
+  dataList;
   typeList=[
     {text:'时间分类',children:[
       {text:'时间不限'},
@@ -31,7 +31,6 @@ export class DatalistComponent implements OnInit {
   ];
 
   constructor(public service:MyServiceService){
-    //this.dataList=this.service.getList();
     this.getData();
   }
 

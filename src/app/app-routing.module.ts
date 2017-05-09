@@ -2,10 +2,12 @@ import {NgModule} from '@angular/core';
 import {RouterModule,Routes} from '@angular/router'
 import {IndexComponent} from "./index/index.component";
 import {DatalistComponent} from "./datalist/datalist.component";
+import {UserCenterComponent} from "./user-center/user-center.component";
 
 const appRouters:Routes=[
   {path:'index',component:IndexComponent},
   {path:'datalist',component:DatalistComponent},
+  {path:'usercenter',component:UserCenterComponent},
   //重定向路由
   {path:'',redirectTo:'/index',pathMatch:'full'},
   {path:'**',component:IndexComponent}

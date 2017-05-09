@@ -18,6 +18,9 @@ ul li{
 a{
   text-decoration: none;
 }
+img{
+  vertical-align: middle;
+}
 .font24{
   font-size: 24px;
 }
@@ -78,6 +81,7 @@ a{
   font-size: 18px;
   color:#737373 ;
   border:1px solid #d8e5e7;
+  padding-left: 10px;
 }
 .search-input:focus{
   outline: none;
@@ -91,7 +95,9 @@ a{
 .advanced-box{
   width: 500px;
   height: 280px;
+  text-align: center;
   border:1px solid #d8e5e7;
+  border-top:none;
   position: absolute;
   top:40px;
   left:0;
@@ -213,4 +219,7 @@ a{
 /*重写部分*/
 .ng2-pagination li{
   cursor: pointer !important;
+}
+.ng2-pagination{
+  margin-top: 1rem;
 }

@@ -12,16 +12,17 @@ import {AppRoutingModule} from "./app-routing.module";
 import { DatalistComponent } from './datalist/datalist.component';
 //import {InMemoryDataService} from "./in-memory-data.service";
 import {MyServiceService} from "./app.service";
-import {DataType} from "./data-type";
 import {SearchInputComponent} from "./commonComponent/search-input.component";
 import {Ng2PaginationModule} from "ng2-pagination/index";
+import { UserCenterComponent } from './user-center/user-center.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     DatalistComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    UserCenterComponent
   ],
   imports: [
     BrowserModule,

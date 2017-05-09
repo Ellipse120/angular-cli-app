@@ -1,0 +1,153 @@
+.user-center{
+  width: 100%;
+  height: 100%;
+  padding-top: 30px;
+}
+.center-left{
+  width: 203px;
+  float: left;
+  text-align: center;
+}
+.user-menu{
+  margin-top: 20px;
+}
+.menu-item{
+  width: 100%;
+  line-height:50px;
+  font-size: 16px;
+  padding:0 30px;
+ text-align: justify;
+  cursor: pointer;
+}
+.menu-item[ondblclick]{
+  background: blueviolet;
+}
+.user-arrow{
+  margin-left: 66px;
+}
+.active{
+  background: #39baf6;
+  color: #fff;
+}
+.center-right{
+  width: 100%;
+  padding-left: 225px;
+}
+.login-history{
+  width: 100%;
+  line-height: 50px;
+  background: #fcf5ee;
+  color: #ec7c45;
+  font-size: 16px;
+  padding-left: 10px;
+}
+.user-edit{
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #d8e5e7;
+  padding: 30px;
+  font-family:'微软雅黑';
+  color: #333333;
+}
+.user-title{
+  width: 100%;
+  border-bottom: 1px solid #efefef;
+  line-height: 34px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.edit-btn{
+  cursor: pointer;
+}
+.user-info-list li{
+  line-height: 40px;
+  width: 100%;
+  border-bottom:1px solid #efefef;
+}
+.user-info-list input{
+  border: 2px solid #efefef;
+  line-height: 30px;
+}
+.user-info-list input[disabled]{
+  background: #fff;
+  border: none;
+}
+.user-tag{
+  display: inline-block;
+  width: 156px;
+  background: #f7f7f7;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 40px;
+}
+.save-btn{
+  width: 100px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  background: #39baf6;
+  margin-top: 30px;
+  cursor: pointer;
+}
+.identify{
+  width: 100%;
+  border:1px solid #efefef;
+  padding: 30px;
+}
+.iden-type ul li{
+  float: left;
+  padding:10px;
+  font-size:16px;
+  cursor: pointer;
+}
+.iden-type ul{
+  border-bottom:1px solid #efefef;
+  height: 44px;
+}
+.select-type{
+  color: #39baf6;
+  border-bottom: 2px solid #39baf6;
+}
+.iden-content,.gov-content{
+  padding-top:30px;
+}
+.type-ul li{
+  line-height: 52px;
+}
+.type-ul{
+  width: 370px;
+  text-align: right;
+}
+.iden-input{
+  width: 285px;
+  line-height: 40px;
+  border: 1px solid #efefef;
+  padding-left:10px;
+  margin-left: 20px;
+}
+.iden-code{
+  width: 125px;
+  line-height: 40px;
+  background: #39baf6;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+.iden-code[disabled]{
+  background: #d8e5e7;
+}
+.btn-ensure{
+  width: 100px;
+  line-height: 40px;
+  color: #fff;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  font-size: 16px;
+  background: #39baf6;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 84px;
+}
