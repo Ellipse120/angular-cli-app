@@ -14,6 +14,7 @@ export class UserCenterComponent implements OnInit {
   indexType=0;
   timer;
   num=59;
+  able=true;
   content='发送验证码';
   userTag=[
     {text:'个人信息'},
