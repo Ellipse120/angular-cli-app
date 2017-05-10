@@ -9,6 +9,7 @@
     </ul>
   </div>
   <div class="center-right">
+    <!--个人信息-->
     <div class="personal" *ngIf="index==0">
       <div class="login-history">
         <span>上次登录时间：{{user.logintime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>地点：{{user.address}}</span>
@@ -32,35 +33,64 @@
       </div>
     </div>
 
+    <!--认证-->
     <div class="identify" *ngIf="index==1">
       <div class="iden-type">
         <ul class="clearfix">
           <li *ngFor="let item of idenType;let i=index" [class.select-type]="indexType == i" (click)="tabType(i)">{{item.type}}</li>
         </ul>
       </div>
-      <div class="iden-content" *ngIf="indexType==0">
+      <div class="iden-content" *ngIf="indexType==0 && !perstate">
         <ul class="type-ul">
           <li><span>姓名</span> <input class="iden-input" type="text" placeholder="请输入真实姓名" [(ngModel)]="iden.name"></li>
           <li><span>手机号</span> <input class="iden-input" type="tel" placeholder="请输入您的手机号" [(ngModel)]="iden.tel"></li>
-          <li><span>验证码</span><input class="iden-input" type="text" placeholder="请输入验证码" style="width: 156px">
+          <li><span>验证码</span><input class="iden-input" type="text" placeholder="请输入验证码" style="width: 156px" [(ngModel)]="iden.code">
             <button class="btn iden-code" [disabled]="able && !iden.tel" (click)="sendCode()">{{content}}</button>
           </li>
         </ul>
-        <button class="btn btn-ensure">确认</button>
+        <button class="btn btn-ensure" (click)="perEnsure(indexType)">确认</button>
       </div>
-      <div class="gov-content" *ngIf="indexType==1">
+      <!--认证成功后显示-->
+      <div class="iden-success" *ngIf="indexType==0 && perstate">
+        <div class="iden-tip">
+          <img src="./assets/images/pidensucc.png"><br>
+          <span>恭喜，您的实名认证已通过</span>
+        </div>
+        <p>认证身份：个人</p>
+        <p>姓名：{{iden.name}}</p>
+        <p>手机号：{{iden.tel}}</p>
+      </div>
+      <div class="gov-content" *ngIf="indexType==1 && !govstate">
         <ul class="type-ul" style="width: 410px">
-          <li><span>机构名称</span> <input class="iden-input" type="text" placeholder="请输入机构名称"></li>
-          <li><span>姓名</span> <input class="iden-input" type="tel" placeholder="请输入您的真实姓名"></li>
-          <li><span>手机号</span><input class="iden-input" type="text" placeholder="请输入您的手机号"></li>
-          <li><span>公司官网URL</span> <input class="iden-input" type="tel" placeholder="请输入公司官网URL"></li>
+          <li><span>机构名称</span> <input class="iden-input" type="text" placeholder="请输入机构名称" [(ngModel)]="goviden.firm"></li>
+          <li><span>姓名</span> <input class="iden-input" type="tel" placeholder="请输入您的真实姓名" [(ngModel)]="goviden.name"></li>
+          <li><span>手机号</span><input class="iden-input" type="text" placeholder="请输入您的手机号" [(ngModel)]="goviden.tel"></li>
+          <li><span>公司官网URL</span> <input class="iden-input" type="tel" placeholder="请输入公司官网URL" [(ngModel)]="goviden.url"></li>
         </ul>
-        <button class="btn btn-ensure">确认</button>
+        <button class="btn btn-ensure" (click)="perEnsure(indexType)">确认</button>
+      </div>
+      <!--机构认证成功后显示-->
+      <div class="iden-success" *ngIf="indexType==1 && govstate">
+        <div class="iden-tip">
+          <img src="./assets/images/gidensucc.png"><br>
+          <span>恭喜，您的实名认证已通过审核</span>
+        </div>
+        <p>机构名称：{{goviden.firm}}</p>
+        <p>用户姓名：{{goviden.name}}</p>
+        <p>手机号：{{goviden.tel}}</p>
+        <p>公司官网URL：{{goviden.tel}}</p>
       </div>
     </div>
 
+    <!--修改密码-->
     <div class="modify-psd" *ngIf="index==2">
-      修改密码
+      <p>修改密码</p>
+      <ul class="type-ul">
+        <li><span>原密码</span> <input class="psd-input" type="text" placeholder="请输入您的原密码" [(ngModel)]="modify.old"></li>
+        <li><span>新密码</span> <input class="psd-input" type="tel" placeholder="请输入您的新密码" [(ngModel)]="modify.new"></li>
+        <li><span>确认新密码</span><input class="psd-input" type="text" placeholder="请再次输入新密码" [(ngModel)]="modify.new2"></li>
+      </ul>
+      <button class="btn btn-ensure">确认</button>
     </div>
   </div>
 </div>

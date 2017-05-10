@@ -5,13 +5,14 @@ import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
-import {AppRoutingModule} from "./app-routing.module";
-import { DatalistComponent } from './datalist/datalist.component';
-import {MyServiceService} from "./app.service";
-import {SearchInputComponent} from "./commonComponent/search-input.component";
-import {Ng2PaginationModule} from "ng2-pagination/index";
+import {AppRoutingModule} from './app-routing.module';
+import {SearchInputComponent} from './commonComponent/search-input.component';
+import {Ng2PaginationModule} from 'ng2-pagination/index';
 import { UserCenterComponent } from './user-center/user-center.component';
+import {MyServiceService} from './core/app.service';
+import {IndexComponent} from './search/index/index.component';
+import {DatalistComponent} from './search/datalist/datalist.component';
+import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserCenterComponent } from './user-center/user-center.component';
     IndexComponent,
     DatalistComponent,
     SearchInputComponent,
-    UserCenterComponent
+    UserCenterComponent,
+    DataDetailComponent
   ],
   imports: [
     BrowserModule,

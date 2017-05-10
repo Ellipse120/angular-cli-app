@@ -1,25 +1,28 @@
 import {NgModule} from '@angular/core';
 import {RouterModule,Routes} from '@angular/router'
-import {IndexComponent} from "./index/index.component";
-import {DatalistComponent} from "./datalist/datalist.component";
-import {UserCenterComponent} from "./user-center/user-center.component";
+import {UserCenterComponent} from './user-center/user-center.component';
+import {IndexComponent} from './search/index/index.component';
+import {DatalistComponent} from './search/datalist/datalist.component';
+import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
 
-const appRouters:Routes=[
-  {path:'index',component:IndexComponent},
-  {path:'datalist',component:DatalistComponent},
-  {path:'usercenter',component:UserCenterComponent},
-  //重定向路由
-  {path:'',redirectTo:'/index',pathMatch:'full'},
-  {path:'**',component:IndexComponent}
+const appRouters:Routes = [
+  {path: 'index', component: IndexComponent},
+  {path: 'datalist', component: DatalistComponent},
+  {path: 'usercenter', component: UserCenterComponent},
+  {path: 'datadetail', component: DataDetailComponent},
+  // 重定向路由
+  {path: '', redirectTo: '/index', pathMatch: 'full'},
+  {path: '**', component: IndexComponent}
 ]
-//@NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
-@NgModule ({
-  imports:[
+// @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
+@NgModule({
+  imports: [
     RouterModule.forRoot(appRouters)
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
 
-export class AppRoutingModule{}
+export class AppRoutingModule {
+}

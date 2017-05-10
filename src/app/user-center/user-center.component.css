@@ -1,7 +1,6 @@
 .user-center{
   width: 100%;
   height: 100%;
-  padding-top: 30px;
 }
 .center-left{
   width: 203px;
@@ -150,4 +149,30 @@
   cursor: pointer;
   margin-top: 20px;
   margin-left: 84px;
+}
+.iden-success{
+  text-align: center;
+}
+.iden-tip{
+  padding:10px;
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 10px;
+}
+.psd-input{
+  width: 260px;
+  line-height: 40px;
+  border: 1px solid #efefef;
+  padding-left:10px;
+  margin-left: 20px;
+}
+.modify-psd{
+  width: 100%;
+  border:1px solid #efefef;
+  padding: 30px;
+}
+.modify-psd p{
+  display: block;
+  padding:10px;
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 30px;
 }

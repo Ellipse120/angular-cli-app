@@ -33,6 +33,9 @@ img{
 .color-gray{
   color: #676767;
 }
+.green{
+  color: #46b069;
+}
 .text-center{
   text-align: center;
 }
@@ -69,6 +72,7 @@ img{
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .search-box{
   width: 600px;
@@ -136,7 +140,7 @@ img{
   cursor: pointer;
 }
 .container{
-  padding:0 120px
+  padding:30px 120px
 }
 .login-box,.register-box{
   position: absolute;

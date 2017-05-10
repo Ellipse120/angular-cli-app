@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MyServiceService} from "../app.service";
+import {MyServiceService} from '../core/app.service';
 
 @Component({
   selector: 'app-user-center',
@@ -9,65 +9,86 @@ import {MyServiceService} from "../app.service";
 export class UserCenterComponent implements OnInit {
 
   user = {};
-  showEdit=true;
-  index=0;
-  indexType=0;
+  showEdit = true;
+  index = 0;
+  indexType = 0;
   timer;
-  num=59;
-  able=true;
-  content='发送验证码';
-  userTag=[
-    {text:'个人信息'},
-    {text:'实名认证'},
-    {text:'修改密码'}
+  num = 59;
+  able = true;
+  content = '发送验证码';
+  perstate = false;
+  govstate = false;
+  modify = [];
+  userTag = [
+    {text: '个人信息'},
+    {text: '实名认证'},
+    {text: '修改密码'}
   ];
-  idenType=[
-    {type:'个人认证'},
-    {type:'机构认证'}
+  idenType = [
+    {type: '个人认证'},
+    {type: '机构认证'}
   ];
-  iden=[
-    {name:'',tel:'',code:''}
-  ];
-  constructor(public uservice:MyServiceService){
+  iden = [];
+  goviden = [];
+
+  constructor(public uservice: MyServiceService) {
 
   }
-  //获取验证码
-  sendCode(){
-    //if(this.iden.tel){
+
+  // 获取验证码
+  sendCode() {
+    // if(this.iden.tel){
     //
-    //}
-    this.timer=setInterval(() => {
-      this.content=this.num + 's后重新发送';
+    // }
+    this.timer = setInterval(() => {
+      this.content = this.num + 's后重新发送';
       this.num--;
-      if(this.num<=0){
+      if (this.num <= 0) {
         clearInterval(this.timer);
-        this.num=59;
-        this.content='发送验证码';
+        this.num = 59;
+        this.content = '发送验证码';
       }
-    },1000)
+    }, 1000)
 
   }
 
-  //获取用户信息
-  getUserInfo(){
+  // 获取用户信息
+  getUserInfo() {
     this.uservice
-        .getUserInfo()
-        .then(user => this.user = user);
-  }
-  //编辑用户信息
-  ableEdit(){
-    this.showEdit=false;
+      .getUserInfo()
+      .then(user => this.user = user);
   }
 
-  //切换
-  tab(index){
-    this.index=index;
+  // 编辑用户信息
+  ableEdit() {
+    this.showEdit = false;
+  }
+
+  // 切换
+  tab(index) {
+    this.index = index;
 
     console.log(index);
   };
-  tabType(i){
-    this.indexType=i;
+
+  tabType(i) {
+    this.indexType = i;
   }
+
+  // 确定
+  perEnsure(i) {
+    console.log(i)
+    this.perstate = true;
+    switch (i) {
+      case 0:
+        this.perstate = true;
+        break;
+      case 1:
+        this.govstate = true;
+        break;
+    }
+  }
+
   ngOnInit() {
     this.getUserInfo();
   }

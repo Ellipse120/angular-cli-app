@@ -6,26 +6,29 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  loginState=true;
-  registerState=true;
+  loginState = true;
+  registerState = true;
 
 
 //  登录
-  showLogin():void{
-    this.loginState=false;
-    this.registerState=true;
+  showLogin(): void {
+    this.loginState = false;
+    this.registerState = true;
   }
+
 //  关闭登录
-  hideLogin():void{
-    this.loginState=true;
+  hideLogin(): void {
+    this.loginState = true;
   }
+
 //  注册
-  showRegister():void {
-    this.registerState=false;
-    this.loginState=true;
+  showRegister(): void {
+    this.registerState = false;
+    this.loginState = true;
   }
+
 //  关闭注册
-  hideRegister():void{
-    this.registerState=true;
+  hideRegister(): void {
+    this.registerState = true;
   }
 }
