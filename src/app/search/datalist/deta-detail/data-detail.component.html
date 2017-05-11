@@ -1,18 +1,182 @@
 <div class="data-detail">
   <div class="detail-left">
-    <h2>wind万得资讯数据终端</h2>
-    <div class="data-info">
-      <img src="./assets/images/detail1.png" class="firmlogo">
-      <ul class="firm-detail">
-        <li>数据供应商：万得信息技术股份有限公司</li>
-        <li>官方网址：http//www.wind.com.cn</li>
-        <li>是否收费：<i class="green">是</i></li>
-        <li>数据样本：<i class="green">下载</i></li>
-        <li>标签：<b class="color-blue">金融业</b> | <b class="color-blue">大数据</b></li>
+    <div class="clearfix">
+      <h2>wind万得资讯数据终端</h2>
+      <div class="data-info">
+        <img src="./assets/images/detail1.png" class="firmlogo">
+        <ul class="firm-detail">
+          <li>数据供应商：万得信息技术股份有限公司</li>
+          <li>官方网址：http//www.wind.com.cn</li>
+          <li>是否收费：<i class="green">是</i></li>
+          <li>数据样本：<i class="green">下载</i></li>
+          <li>标签：<b class="color-blue">金融业</b> | <b class="color-blue">大数据</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-introduce">
+      <h3 class="mb20">产品简介</h3>
+      <p>在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库，
+        数据内容涵盖股票、基金、债券、外汇、保险、期货、金融衍生品、现货交易、宏观经济、财经新闻等领域，新的信息内容
+        在第一时间进行更新以满足机构投资者的需求。
+      </p>
+      <p>同时国内多数知名的金融学术研究机构和权威的监管机构也是Wind资讯的客户，大量中英文媒体、研究报告、学术论文等经常引用Wind资讯提供的数据。</p>
+      <p>针对金融业的投资机构、研究机构、学术机构、监管部门机构等不同类型客户的需求，Wind资讯开发了一系列围绕信息检索、数据提取与分析、投资组合
+        管理应用等领域的专业分析软件与应用工具。通过这些终端工具，用户可以7x24x365从Wind资讯获取到及时、准确、完整的财经数据、信息和各种分析结果。</p>
+      <p>精于数据，以数据为起点，万得资讯紧密跟随金融市场日新月异的发展，不断向新的领域发展，新的产品和服务战略不断在延伸。</p>
+    </div>
+
+    <div class="write-comment">
+      <h3><img src="./assets/images/write.png">&nbsp;&nbsp;发表评论</h3>
+      <div class="score">
+        <span>请点击星级进行评分</span>
+        <ul class="start-score">
+          <li></li> <li></li> <li></li> <li></li> <li></li>
+        </ul>
+        <i class="color-orange">(0分)</i>
+      </div>
+      <div class="comment-content">
+        <h4 class="color-gray">评论内容</h4>
+        <ng2-ueditor [(ngModel)]="full_source" [setting]="setting"></ng2-ueditor>
+        <div class="push">
+          <label for="checkbox"><input type="checkbox" id="checkbox">匿名</label>
+          <button class="btn push-btn">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!--评论区域-->
+    <div class="total-comment">
+      <p class="color-gray font18">3个评论</p>
+      <ul class="user-comment-list">
+        <li>
+          <div class="user-comment">
+            <p class="font18">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
+            <div class="user-info">
+              <div>
+                <span class="font12 color-blue">用户名</span> <span class="user-level">LV5</span>
+                <span class="font12 color-blue">|&nbsp;&nbsp;&nbsp;&nbsp;发布于4分钟前</span>
+              </div>
+              <div>
+                <img src="./assets/images/comment.png">
+                <span class="my-comments">评论(2)</span>
+                <div class="my-asses">
+                  <span class="green asses-zan"><img src="./assets/images/zan.png"> 0 </span>
+                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> 0 </span>
+                </div>
+              </div>
+            </div>
+            <!--用户的二级评论-->
+            <div class="second-comment" [hidden]="isHidden">
+              <textarea name="second-comment" class="comment-area" placeholder="请输入内容..."></textarea>
+              <button class="btn push-btn">发布</button>
+              <ul class="second-comment-list">
+                <li>
+                  <div>
+                    <span class="font12 color-blue">用户名1</span> <span class="user-level">LV5</span>
+                    <span class="font12 color-blue">|&nbsp;&nbsp;&nbsp;&nbsp;2017.03.24 13:00</span>
+                    <a href="javascript:;" class="color-blue">回复</a>
+                  </div>
+                  <p class="font14">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
+
+                </li>
+                <li>
+                  <div>
+                    <span class="font12 color-blue">用户名2</span> <span class="user-level">LV5</span>
+                    <span class="font12 color-blue">|&nbsp;&nbsp;&nbsp;&nbsp;2017.03.24 13:00</span>
+                    <a href="javascript:;" class="color-blue">回复</a>
+                  </div>
+                  <p class="font14">回复 用户名1 ： Wind资讯已建成国内最完整的大型金融工程和财经数据仓库</p>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="user-comment">
+            <p class="font18">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
+            <div class="user-info">
+              <div>
+                <span class="font12 color-blue">用户名</span> <span class="user-level">LV5</span>
+                <span class="font12 color-blue">|&nbsp;&nbsp;&nbsp;&nbsp;发布于4分钟前</span>
+              </div>
+              <div>
+                <img src="./assets/images/comment.png">
+                <span class="my-comments" (click)="showComment()">评论(2)</span>
+                <div class="my-asses">
+                  <span class="green asses-zan"><img src="./assets/images/zan.png"> 0 </span>
+                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> 0 </span>
+                </div>
+              </div>
+            </div>
+            <!--用户的二级评论-->
+            <div class="second-comment" [hidden]="isHidden">
+              <textarea name="second-comment" class="comment-area" placeholder="请输入内容..."></textarea>
+              <button class="btn push-btn">发布</button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="user-comment">
+            <p class="font18">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
+            <div class="user-info">
+              <div>
+                <span class="font12 color-blue">用户名</span> <span class="user-level">LV5</span>
+                <span class="font12 color-blue">|&nbsp;&nbsp;&nbsp;&nbsp;发布于4分钟前</span>
+              </div>
+              <div>
+                <img src="./assets/images/comment.png">
+                <span class="my-comments">评论(2)</span>
+                <div class="my-asses">
+                  <span class="green asses-zan"><img src="./assets/images/zan.png"> 0 </span>
+                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> 0 </span>
+                </div>
+              </div>
+            </div>
+            <!--用户的二级评论-->
+            <div class="second-comment" [hidden]="isHidden">
+              <textarea name="second-comment" class="comment-area" placeholder="请输入内容..."></textarea>
+              <button class="btn push-btn">发布</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+
+
+  <div class="detail-right">
+    <p>评分</p>
+    <div class="star-score">
+      <ul class="stars-list clearfix">
+        <li></li> <li></li> <li></li> <li></li> <li></li>
+      </ul>
+      <i class="color-orange">(5分)</i>
+    </div>
+
+    <div class="current-info font14">
+      <p>词条信息</p>
+      <ul class="mt10">
+        <li><span>创建者：</span> <span class="color-blue">网名</span></li>
+        <li><span>编辑次数：</span> <span class="color-blue">20次</span></li>
+        <li><span>词条浏览：</span> <span class="color-blue">12343次</span></li>
+        <li><span>最近更新：</span> <span class="color-blue">2017.03.04</span></li>
       </ul>
     </div>
-    div.
-  </div>
-  <div class="detail-right">
+
+    <div class="relative-pro">
+      <p>相关产品</p>
+      <ul class="relative-pro-list font12">
+
+        <li><p class="color-blue">中国宏观数据</p>核心数据在发在发布五分钟内显示核心数据在发布五分钟内显示核心数据在发布五分钟内显示核心数据在发布五分钟内显示核心数据在发布五分钟内显示</li>
+        <li><p class="color-blue">中国宏观数据</p>核心数据在发布五布五分钟内显示核心数据在发布五分钟内显示</li>
+        <li><p class="color-blue">中国宏观数据</p>内显示核心数据在发布五分钟内示</li>
+        <li><p class="color-blue">中国宏观数据</p>核心数据在发布五分钟内据在发布五分钟内显示核心数据在发布五分钟内显示</li>
+        <li><p class="color-blue">中国宏观数据</p>核心数据在发布五分钟内显示核核心数据在发布五分钟内显示</li>
+      </ul>
+    </div>
   </div>
 </div>

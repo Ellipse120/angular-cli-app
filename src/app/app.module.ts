@@ -13,6 +13,7 @@ import {MyServiceService} from './core/app.service';
 import {IndexComponent} from './search/index/index.component';
 import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
+import {Ng2UeditorModule} from 'ng2-ueditor/src/index';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.com
     HttpModule,
     AppRoutingModule,
     HttpModule,
-    Ng2PaginationModule
+    Ng2PaginationModule,
+    Ng2UeditorModule
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]

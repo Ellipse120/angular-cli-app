@@ -1,0 +1,215 @@
+/*详情页*/
+.detail-left{
+  width: 80%;
+  display: inline-block;
+}
+.detail-right{
+  width: 20%;
+  display: inline-block;
+  float: right;
+  padding-left: 20px;
+}
+.data-info{
+  width: 100%;
+  padding: 30px 0;
+}
+.firmlogo{
+  float: left;
+}
+.firm-detail{
+  width: 100%;
+  padding-left: 165px;
+}
+.firm-detail li{
+  float: left;
+  width: 50%;
+  line-height: 36px;
+  border-bottom: 1px dashed #d6d5d5;
+  font-size: 14px;
+  color: #333333;
+}
+.product-introduce{
+  margin-top: 40px;
+  color: #666;
+  background: url("../../../../assets/images/linebottom.png") no-repeat bottom center;
+  background-size: 100%;
+  padding-bottom: 40px;
+  margin-bottom: 45px;
+}
+.product-introduce p{
+  text-indent: 2em;
+  margin-bottom: 44px;
+}
+.score{
+  line-height: 48px;
+  background: #f9fbfb;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.start-score{
+  display: inline-block;
+  margin-left: 46px;
+  margin-right: 10px;
+}
+.start-score li{
+  float: left;
+  margin: 0 3px;
+  width: 22px;
+  height: 22px;
+  background: url("../../../../assets/images/start.png") no-repeat top center;
+  background-position-y: -24px;
+  cursor: pointer;
+}
+.push{
+  text-align: right;
+  margin-top: 10px;
+}
+.push-btn{
+  width: 70px;
+  line-height: 30px;
+  text-align: center;
+  background: #39baf6;
+  color: #fff;
+  font-size: 16px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.total-comment{
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: 32px;
+}
+.user-comment{
+  margin-top: 40px;
+}
+.user-info{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.user-level{
+  display: inline-block;
+  width: 40px;
+  line-height: 15px;
+  color: #39baf6;
+  border:1px solid #39baf6;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  font-family: '微软雅黑';
+  font-weight:bold;
+  margin-left: 5px;
+  margin-right: 18px;
+}
+.my-comments{
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 30px;
+  cursor: pointer;
+}
+.my-asses{
+  display: inline-block;
+  width: 130px;
+  line-height: 26px;
+  border:1px solid #d8e5e7;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  vertical-align: middle;
+  padding:0 10px;
+}
+.asses-zan{
+  display: inline-block;
+  width: 50%;
+  border-right: 1px solid #d8e5e7;
+  cursor: pointer;
+}
+.asses-nozan{
+  display: inline-block;
+  padding-left: 5px;
+  cursor: pointer;
+}
+.my-asses img{
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.second-comment{
+  margin-top: 34px;
+  width: 100%;
+  background: #f9fbfb;
+  padding: 20px;
+}
+.comment-area{
+  width: 100%;
+  height:100px;
+  border:1px solid #d8e5e7;
+  padding: 10px;
+  outline:none;
+  color: #333;
+  font-size: 14px;
+  font-family: '微软雅黑';
+}
+textarea::-moz-placeholder{
+  color: #ddd;
+}
+textarea::-webkit-input-placeholder{
+  color: #ddd;
+}
+textarea:-ms-input-placeholder{
+  color: #ddd;
+}
+.second-comment-list{
+  margin-top: 20px;
+}
+.second-comment-list li{
+  width: 100%;
+  line-height: 34px;
+  border-top: 1px solid #d8e5e7;
+  color: #666;
+}
+
+.stars-list li{
+  width: 18px;
+  height: 18px;
+  background: url("../../../../assets/images/start.png") no-repeat top center;
+  background-size: 100%;
+  float: left;
+  margin-right: 5px;
+}
+.star-score{
+  width: 100%;
+  display: flex;
+  height: 50px;
+  border-bottom: 1px solid #d8e5e7;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.current-info{
+  margin-top: 30px;
+  color: #666;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d8e5e7;
+}
+.relative-pro{
+  margin-top: 30px;
+  color: #666;
+}
+.relative-pro-list{
+  margin-top: 10px;
+}
+.relative-pro-list li{
+  background: url("../../../../assets/images/li1.png") no-repeat left center;
+  padding-left:30px;
+  color: #666;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom:15px ;
+}
