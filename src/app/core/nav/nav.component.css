@@ -26,14 +26,28 @@
   border-radius: 5px;
 }
 .header .user-center-btn {
+  width: 120px;
   display: inline-block;
   cursor: pointer;
   background: #fff;
-  padding: 0 20px;
   border: 1px solid #d8e5e7;
   height: 50px;
   background: url("../../../assets/images/arrowdown.png") no-repeat right center;
-  background-position-x: 88px ;
+  background-position-x: 98px ;
+  position: relative;
+  text-align: center;
+}
+.user-center-list{
+  position: absolute;
+  width: 100%;
+  top:48px;
+}
+.user-center-list li{
+  border:1px solid #d8e5e7;
+}
+.user-center-list li:hover{
+  background: #39baf6;
+  color: #fff;
 }
 .header .login-btn {
   background: #fff;

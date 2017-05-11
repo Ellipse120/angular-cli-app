@@ -7,9 +7,10 @@ import { Component } from '@angular/core';
 })
 
 export  class NavComponent {
-  loginState = true;
   user = [];
+  loginState = true;
   isLogin = false;
+  isUserCenter = false;
 
 
   //  显示登录框
@@ -27,5 +28,9 @@ export  class NavComponent {
     console.log(user);
     this.isLogin = true;
     this.loginState = true;
+  }
+//  切换下拉列表
+  toggle() {
+    this.isUserCenter = !this.isUserCenter;
   }
 }
