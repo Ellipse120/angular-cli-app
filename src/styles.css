@@ -160,7 +160,7 @@ img{
 .container{
   padding:30px 90px
 }
-.login-box,.register-box{
+.login-box{
   position: absolute;
   top:0;
   width: 100%;
@@ -168,7 +168,7 @@ img{
   background-color: rgba(0, 0, 0, 0.13);
   z-index: 1000;
 }
-.login-form,.register-form{
+.login-form{
   position: absolute;
   top:50%;
   left: 50%;
@@ -179,7 +179,7 @@ img{
   padding:10px 20px;
   padding-bottom: 20px;
 }
-.login-title,.register-title{
+.login-title{
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
@@ -191,7 +191,7 @@ img{
 .fork{
   cursor: pointer;
 }
-.user-count,.user-email{
+.user-count{
   width: 100%;
   height: 40px;
   background: url("assets/images/user.png") no-repeat left center;
@@ -199,11 +199,6 @@ img{
   margin-top: 30px;
   background-position-x: 10px;
   padding: 0 40px;
-}
-.user-email{
-  background: url("assets/images/email.png") no-repeat left center;
-  background-position-x: 10px;
-  margin-bottom: 10px;
 }
 .user-psd{
   width: 100%;
@@ -223,7 +218,7 @@ img{
   color: #1c94c4;
   cursor: pointer;
 }
-.login,.register{
+.login{
   width: 100%;
   height: 40px;
   -webkit-border-radius:8px;

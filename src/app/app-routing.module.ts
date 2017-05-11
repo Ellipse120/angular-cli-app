@@ -4,12 +4,14 @@ import {UserCenterComponent} from './user-center/user-center.component';
 import {IndexComponent} from './search/index/index.component';
 import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
+import {RegisterComponent} from "./register/register.component";
 
 const appRouters:Routes = [
   {path: 'index', component: IndexComponent},
   {path: 'datalist', component: DatalistComponent},
   {path: 'usercenter', component: UserCenterComponent},
   {path: 'datadetail', component: DataDetailComponent},
+  {path:'register',component: RegisterComponent},
   // 重定向路由
   {path: '', redirectTo: '/index', pathMatch: 'full'},
   {path: '**', component: IndexComponent}

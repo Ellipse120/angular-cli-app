@@ -1,0 +1,42 @@
+.register{
+  height: 100%;
+  width: 100%;
+  background: url("../../assets/images/registerbg.png") no-repeat;
+  background-size: 100% 100%;
+}
+.register-box{
+  width: 700px;
+  height: 400px;
+  margin: 0 auto;
+  border:1px solid #dce0e1;
+  padding:30px 140px;
+}
+.email{
+  width: 100%;
+  line-height: 40px;
+  border-bottom: 1px solid #dce0e1;
+  background: url("../../assets/images/email.png") no-repeat left center;
+  text-align: left;
+  padding-left: 40px;
+  margin-top: 80px;
+}
+.email input {
+  border: none;
+  line-height: 30px;
+  font-size: 16px;
+  outline: none;
+}
+.agreement{
+  text-align: left;
+  margin-top: 10px;
+}
+.send-email{
+  width: 100%;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  background: #39baf6;
+  margin-top: 56px;
+  cursor: pointer;
+}
