@@ -14,6 +14,7 @@ import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
 import {Ng2UeditorModule} from 'ng2-ueditor/src/index';
 import {SearchInputComponent} from "./search/search-input/search-input.component";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {SearchInputComponent} from "./search/search-input/search-input.component
     DatalistComponent,
     SearchInputComponent,
     UserCenterComponent,
-    DataDetailComponent
+    DataDetailComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
