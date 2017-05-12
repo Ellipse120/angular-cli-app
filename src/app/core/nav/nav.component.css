@@ -25,7 +25,17 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.header .user-center-btn {
+.pro-mage-btn{
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #d8e5e7;
+  height: 50px;
+  cursor: pointer;
+  outline: none;
+}
+.user-center-btn {
   width: 120px;
   display: inline-block;
   cursor: pointer;

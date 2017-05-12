@@ -1,0 +1,19 @@
+<div class="product-mage">
+  <div class="mangement-left">
+    <img src="../../assets/images/userpic.png"><br><br>
+    <span>lijq@qq.com</span>
+
+    <ul class="pro-mage-list">
+      <li *ngFor="let item of proMage;let i =index" (click)="selected(i)" [class.is-selected]="index == i">{{item.text}}
+        <ul *ngIf="index==i" class="second-list">
+          <li *ngFor="let itemc of item.children;let n = index" (click)="selectedCld(n)" [class.color-lightblue]="indexCld == n">{{itemc.text}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="mangement-right">
+    <product-list *ngIf="indexCld == 0 && index == 1"></product-list>
+    <error-correct *ngIf="index == 1 && indexCld == 1"></error-correct>
+  </div>
+</div>

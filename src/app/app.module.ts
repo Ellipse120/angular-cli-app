@@ -16,6 +16,7 @@ import {Ng2UeditorModule} from 'ng2-ueditor/src/index';
 import {SearchInputComponent} from "./search/search-input/search-input.component";
 import { RegisterComponent } from './register/register.component';
 import {NavComponent} from "./core/nav/nav.component";
+import {ProductMangementModule} from "./product-mangement/product-mangement.module";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {NavComponent} from "./core/nav/nav.component";
     AppRoutingModule,
     HttpModule,
     Ng2PaginationModule,
-    Ng2UeditorModule
+    Ng2UeditorModule,
+    ProductMangementModule
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]
