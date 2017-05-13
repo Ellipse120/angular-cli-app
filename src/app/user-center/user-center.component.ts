@@ -19,6 +19,8 @@ export class UserCenterComponent implements OnInit {
   perstate = false;
   govstate = false;
   modify = [];
+  iden = [];
+  goviden = [];
   userTag = [
     {text: '个人信息'},
     {text: '实名认证'},
@@ -28,8 +30,6 @@ export class UserCenterComponent implements OnInit {
     {type: '个人认证'},
     {type: '机构认证'}
   ];
-  iden = [];
-  goviden = [];
 
   constructor(public uservice: MyServiceService) {
 

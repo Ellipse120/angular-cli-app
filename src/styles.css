@@ -249,3 +249,18 @@ img{
 .ng2-pagination{
   margin-top: 1rem;
 }
+.pager li{
+  padding: 5px 10px !important;
+  background: #f7f7f7;
+  border:1px solid #eee;
+  margin: 0 10px !important;
+}
+.ngx-datatable .datatable-header{
+  height: 50px;
+  width: 100%;
+  background: #eee;
+  display: flex !important;
+  align-items: center;
+  padding-left: 4px;
+}
+

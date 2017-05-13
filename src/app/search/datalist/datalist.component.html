@@ -17,7 +17,7 @@
       <p>约找到{{count}}条数据</p>
       <ul>
         <li *ngFor="let item of dataList | paginate:{itemsPerPage:10,currentPage:p}"  class="dataItem">
-          <h3 routerLink="/datadetail" style="cursor: pointer">{{item.title}}</h3>
+          <h3 routerLink="/datadetail/21" style="cursor: pointer">{{item.title}}</h3>
           <span class="dataContent">{{item.content}}</span>
         </li>
       </ul>

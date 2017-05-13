@@ -2,8 +2,8 @@
  * Created by Administrator on 2017/5/10.
  */
 import {Component,ViewChild} from '@angular/core';
-
 import {Ng2Ueditor} from 'ng2-ueditor/src/index';
+import {ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'data-detail',
@@ -14,6 +14,7 @@ import {Ng2Ueditor} from 'ng2-ueditor/src/index';
 export class DataDetailComponent {
   @ViewChild('ueditor') ueditor: Ng2Ueditor;
 
+  id: string;
   full_source = '请输入评论';
   isHidden = true;
 
@@ -31,6 +32,10 @@ export class DataDetailComponent {
   //  默认的编辑器的宽度
     initialFrameWidth:'100%'
 
+  }
+
+  constructor(private route: ActivatedRoute) {
+    route.params.subscribe(params => {this.id = params['id']});
   }
 
 //  点击评论出现评论框
