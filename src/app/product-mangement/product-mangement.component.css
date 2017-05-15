@@ -21,6 +21,7 @@
 .pro-mage-list li{
   line-height: 40px;
   cursor: pointer;
+  outline: none;
 }
 .second-list li{
   background: #f3f8fa;

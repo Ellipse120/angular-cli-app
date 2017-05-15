@@ -4,16 +4,25 @@
     <span>lijq@qq.com</span>
 
     <ul class="pro-mage-list">
-      <li *ngFor="let item of proMage;let i =index" (click)="selected(i)" [class.is-selected]="index == i">{{item.text}}
-        <ul *ngIf="index==i" class="second-list">
-          <li *ngFor="let itemc of item.children;let n = index" (click)="selectedCld(n)" [class.color-lightblue]="indexCld == n">{{itemc.text}}</li>
+      <li class="is-selected">产品管理
+        <ul class="second-list">
+          <li routerLinkActive="color-lightblue" routerLink="productlist">管理产品</li>
+          <li routerLinkActive="color-lightblue" routerLink="error">纠错处理</li>
         </ul>
       </li>
+      <!--<li *ngFor="let item of proMage;let i =index" (click)="selected(i)" [class.is-selected]="index == i" >{{item.text}}-->
+        <!--<ul *ngIf="index==i" class="second-list">-->
+          <!--<li *ngFor="let itemc of item.children;let n = index" (click)="selectedCld(n)"-->
+              <!--[class.color-lightblue]="indexCld == n" [routerLink]="[itemc.path]">-->
+            <!--{{itemc.text}}</li>-->
+        <!--</ul>-->
+      <!--</li>-->
     </ul>
   </div>
 
   <div class="mangement-right">
-    <product-list *ngIf="indexCld == 0 && index == 1"></product-list>
-    <error-correct *ngIf="index == 1 && indexCld == 1"></error-correct>
+    <router-outlet></router-outlet>
+    <!--<product-list *ngIf="indexCld == 0 && index == 1"></product-list>-->
+    <!--<error-correct *ngIf="index == 1 && indexCld == 1"></error-correct>-->
   </div>
 </div>

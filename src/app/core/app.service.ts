@@ -33,6 +33,17 @@ export class MyServiceService {
     });
   }
 
+  // 获得产品数据列表
+  fetch(cb) {
+    const req = new XMLHttpRequest();
+    req.open('GET', `assets/data/productlist.json`);
+
+    req.onload = () => {
+      cb(JSON.parse(req.response));
+    }
+
+    req.send();
+  }
   // 获得用户信息
   getUserInfo(): Promise<any> {
     return Promise.resolve(this.user);

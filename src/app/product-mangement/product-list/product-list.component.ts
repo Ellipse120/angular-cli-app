@@ -1,5 +1,6 @@
 import { Component,OnInit} from '@angular/core';
 import {Page} from "ng2-pagination/dist/pagination-controls.directive";
+import {MyServiceService} from "../../core/app.service";
 
 @Component({
   selector: 'product-list',
@@ -11,45 +12,16 @@ export class ProductListComponent implements OnInit{
 
 
   import = false;
-  //proList = [
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'},
-  //  {proName:'wind万得资讯数据终端',userName:'王明',userType:'已注册未认证用户',isMoney:'是',state:'进行中',updateTime:'207-03-23'}
-  //];
-
   //定义table
-  rows = [
-    //{name: '全选',proName:'万里挑一',time: '1223'}
-  ];
+  rows = [];
   selected = [];
 
-  columns = [
-    //{name: 'name'},
-    //{name: 'proName'},
-    //{name: 'time'}
-  ];
-
-  constructor() {
-    this.fetch((data) => {
+  constructor(public service: MyServiceService) {
+    //获取产品列表数据
+    this.service.fetch((data) => {
       this.rows = data;
       console.log(this.rows)
     })
-  }
-  //获取数据
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `assets/data/productlist.json`);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    }
-
-    req.send();
   }
 
   onSelect({ selected }) {

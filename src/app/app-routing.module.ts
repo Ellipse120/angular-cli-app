@@ -9,7 +9,26 @@ import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
 import {RegisterComponent} from './register/register.component';
 import {ProductMangementComponent} from './product-mangement/product-mangement.component';
+import {ProductListComponent} from "./product-mangement/product-list/product-list.component";
+import {ErrorCorrectComponent} from "./product-mangement/error-correct/error-correct.component";
 
+// 定义嵌套路由
+const childRoutes:Routes = [
+  // 重定向路由
+      {
+        path: 'productlist',
+        component: ProductListComponent
+      },
+      {
+        path: 'error',
+        component: ErrorCorrectComponent
+      },
+  {
+    path: '**',redirectTo: 'productlist'
+  }
+];
+
+// 定义普通路由
 const appRouters:Routes = [
   // 重定向路由
   {path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -18,7 +37,7 @@ const appRouters:Routes = [
   {path: 'usercenter', component: UserCenterComponent},
   {path: 'datadetail/:id', component: DataDetailComponent},
   {path:'register',component: RegisterComponent},
-  {path:'promange',component:ProductMangementComponent},
+  {path:'promange',component:ProductMangementComponent, children: childRoutes},
 
   {path: '**', component: IndexComponent}
 ]
