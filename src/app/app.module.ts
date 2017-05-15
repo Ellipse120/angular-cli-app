@@ -7,16 +7,16 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {Ng2PaginationModule} from 'ng2-pagination/index';
-import { UserCenterComponent } from './user-center/user-center.component';
 import {MyServiceService} from './core/app.service';
 import {IndexComponent} from './search/index/index.component';
 import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
 import {Ng2UeditorModule} from 'ng2-ueditor/src/index';
-import {SearchInputComponent} from "./search/search-input/search-input.component";
+import {SearchInputComponent} from './search/search-input/search-input.component';
 import { RegisterComponent } from './register/register.component';
-import {NavComponent} from "./core/nav/nav.component";
-import {ProductMangementModule} from "./product-mangement/product-mangement.module";
+import {NavComponent} from './core/nav/nav.component';
+import {ProductMangementModule} from './product-mangement/product-mangement.module';
+import {UserCenterModule} from './user-center/user-center.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import {ProductMangementModule} from "./product-mangement/product-mangement.modu
     IndexComponent,
     DatalistComponent,
     SearchInputComponent,
-    UserCenterComponent,
     DataDetailComponent,
     RegisterComponent,
     NavComponent
@@ -37,7 +36,8 @@ import {ProductMangementModule} from "./product-mangement/product-mangement.modu
     HttpModule,
     Ng2PaginationModule,
     Ng2UeditorModule,
-    ProductMangementModule
+    ProductMangementModule,
+    UserCenterModule
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]

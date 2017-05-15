@@ -1,10 +1,10 @@
 <nav class="header">
   <div class="head-left"></div>
   <div class="head-right">
-    <!--<button class="btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>-->
-    <!--<button class="btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>-->
+    <button class="btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>
+    <button class="btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>
     <!--产品管理-->
-    <div class="pro-mage-btn" routerLink="/promange">
+    <div class="pro-mage-btn" routerLink="/promange" *ngIf="isLogin">
       产品管理
     </div>
     <!--用户中心-->

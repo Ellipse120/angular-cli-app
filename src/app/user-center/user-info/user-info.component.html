@@ -1,0 +1,22 @@
+<div class="personal">
+  <div class="login-history">
+    <span>上次登录时间：{{user.logintime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>地点：{{user.address}}</span>
+  </div>
+  <div class="user-edit">
+    <div class="user-title"><span>个人信息</span> <span class="edit-btn" (click)="ableEdit()"><img src="./assets/images/edit.png">&nbsp;&nbsp;编辑</span></div>
+    <div class="user-info">
+      <ul class="user-info-list">
+        <li><span class="user-tag">账号</span> <input type="text" [(ngModel)]="user.count"  [disabled]="showEdit"></li>
+        <li><span class="user-tag">用户名</span> <input type="text" [(ngModel)]="user.username" [disabled]="showEdit"></li>
+        <li><span class="user-tag">姓名</span> <input type="text" [(ngModel)]="user.truename" [disabled]="showEdit"></li>
+        <li><span class="user-tag">性别</span> <input type="text" [(ngModel)]="user.sex" [disabled]="showEdit"></li>
+        <li><span class="user-tag">生日</span> <input type="text" [(ngModel)]="user.birthday" [disabled]="showEdit"></li>
+        <li><span class="user-tag">所在地</span> <input type="text" [(ngModel)]="user.address" [disabled]="showEdit"></li>
+        <li><span class="user-tag">联系方式</span> <input type="text" [(ngModel)]="user.phone" [disabled]="showEdit"></li>
+        <li><span class="user-tag">职业</span> <input type="text" [(ngModel)]="user.job" [disabled]="showEdit"></li>
+      </ul>
+
+      <button class="btn save-btn" *ngIf="able">保存</button>
+    </div>
+  </div>
+</div>

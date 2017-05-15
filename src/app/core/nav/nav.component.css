@@ -1,4 +1,7 @@
 .header {
+  position: absolute;
+  top:0;
+  width: 100%;
   padding: 0 120px;
   height: 50px;
   line-height: 50px;
@@ -7,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100000;
 }
 .header .head-left {
   width: 201px;
@@ -54,6 +58,7 @@
 }
 .user-center-list li{
   border:1px solid #d8e5e7;
+  background: #fff;
 }
 .user-center-list li:hover{
   background: #39baf6;
@@ -64,6 +69,7 @@
   font-size: 18px;
   color: #1c94c4;
   border: 1px solid #1c94c4;
+  cursor: pointer;
 }
 .header .register-btn {
   background: #1c94c4;

@@ -9,10 +9,35 @@ import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
 import {RegisterComponent} from './register/register.component';
 import {ProductMangementComponent} from './product-mangement/product-mangement.component';
-import {ProductListComponent} from "./product-mangement/product-list/product-list.component";
-import {ErrorCorrectComponent} from "./product-mangement/error-correct/error-correct.component";
+import {ProductListComponent} from './product-mangement/product-list/product-list.component';
+import {ErrorCorrectComponent} from './product-mangement/error-correct/error-correct.component';
+import {UserInfoComponent} from './user-center/user-info/user-info.component';
+import {NameCertifyComponent} from './user-center/name-certify/name-certify.component';
+import {PsdModifyComponent} from './user-center/psd-modify/psd-modify.component';
 
-// 定义嵌套路由
+
+//// 定义用户中心管理嵌套路由
+const childUserCenterRoutes:Routes = [
+  // 重定向路由
+  {
+    path: 'userInfo',
+    component: UserInfoComponent
+  },
+  {
+    path: 'nameCertify',
+    component: NameCertifyComponent
+  },
+  {
+    path: 'psdModify',
+    component: PsdModifyComponent
+  },
+  {
+    path: '**',redirectTo: 'userInfo'
+  }
+];
+
+
+// 定义产品管理嵌套路由
 const childRoutes:Routes = [
   // 重定向路由
       {
@@ -34,7 +59,7 @@ const appRouters:Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full'},
   {path: 'index', component: IndexComponent},
   {path: 'datalist', component: DatalistComponent},
-  {path: 'usercenter', component: UserCenterComponent},
+  {path: 'usercenter', component: UserCenterComponent, children: childUserCenterRoutes},
   {path: 'datadetail/:id', component: DataDetailComponent},
   {path:'register',component: RegisterComponent},
   {path:'promange',component:ProductMangementComponent, children: childRoutes},

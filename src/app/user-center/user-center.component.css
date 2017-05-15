@@ -15,7 +15,7 @@
   line-height:50px;
   font-size: 16px;
   padding:0 30px;
- text-align: justify;
+  text-align: justify;
   cursor: pointer;
 }
 .menu-item[ondblclick]{
@@ -133,9 +133,6 @@
   color: #fff;
   font-size: 16px;
   cursor: pointer;
-}
-.iden-code[disabled]{
-  background: #d8e5e7;
 }
 .btn-ensure{
   width: 100px;
