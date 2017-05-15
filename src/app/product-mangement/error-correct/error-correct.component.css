@@ -1,0 +1,34 @@
+.mage-title{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #39baf6;
+  line-height: 50px;
+}
+.content-search{
+  width: 320px;
+  height: 30px;
+  outline:none;
+  padding-left: 10px;
+}
+.search-btn{
+  width: 82px;
+  height: 30px;
+  vertical-align: middle;
+  background-color: #39baf6;
+  margin-left: -5px;
+  cursor: pointer;
+  background-image: url("../../../assets/images/search.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.own-prolist{
+  margin-top: 30px;
+  width: 100%;
+}
+.box-type{
+  padding:10px;
+  border:1px solid #ddd;
+  outline: none;
+}

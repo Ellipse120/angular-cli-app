@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {RouterModule,Routes} from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 import {ProductMangementComponent} from './product-mangement.component';
@@ -22,7 +23,8 @@ import {ProductRoutingModule} from "./product-routing.module";
   imports: [
     BrowserModule,
     NgxDatatableModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 

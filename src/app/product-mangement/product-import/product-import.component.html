@@ -1,3 +1,68 @@
-<div class="import-form">
-  <div class="import-title"><h4>产品录入</h4> <span class="fork">X</span></div>
+<div class="proimport-box">
+  <div class="import-form">
+    <div class="import-title"><h4>产品录入</h4> <span class="fork" (click)="close()">X</span></div>
+    <div class="content-form">
+      <form #dataForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="dataName">名称</label>
+          <input type="text" class="form-control" id="dataName" required name="dataName"
+                 [(ngModel)]="data.name" #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger color-red">名称不能为空</div>
+        </div>
+        <div class="form-group">
+          <label for="summary">简介</label>
+          <textarea id="summary" class="form-control" required name="proSummary"
+                 [(ngModel)]="data.summary" #summary></textarea>
+        </div>
+        <div class="form-group">
+          <label for="url">产品官网</label>
+          <input type="text" id="url" class="form-control" required name="url"
+                 [(ngModel)]="data.url" #url>
+        </div>
+        <div class="form-group">
+          <label for="from">数据来源</label>
+          <select name="dataFrom" id="from" class="form-control" required
+            [(ngModel)]="data.from" #from></select>
+
+          <label for="sample">数据样本</label>
+          <select name="sample" id="sample" class="form-control" required
+            [(ngModel)]="data.sample" #sample></select>
+
+          <label for="collect">采集方式</label>
+          <select name="collect" id="collect" class="form-control" required
+            [(ngModel)]="data.collect" #collect></select>
+
+          <label for="service">服务方式</label>
+          <select name="service" id="service" class="form-control" required
+           [(ngModel)]="data.service" #service></select>
+        </div>
+
+        <div class="form-group">
+          <label for="isMoney">是否收费</label>
+          <select name="isMoney" id="isMoney" class="form-control" required
+           [(ngModel)]="data.isMoney" #isMoney></select>
+        </div>
+
+        <div class="form-group">
+          <label for="area">区域范围</label>
+          <select name="area" id="area" class="form-control" required
+           [(ngModel)]="data.area" #area></select>
+
+          <label>时间范围</label>
+          <select name="timeFrom" id="timeFrom" class="form-control" required
+           [(ngModel)]="data.timeFrom" #timeFrom></select> -
+          <select name="timeTo" id="timeTo" class="form-control" required
+           [(ngModel)]="data.timeTo" #timeTo></select>
+        </div>
+
+        <div class="form-group">
+          <label for="labelClassify">标签分类</label>
+          <select name="labelClassify" id="labelClassify" class="form-control" required
+           [(ngModel)]="data.label" #label></select>
+        </div>
+
+        <button type="submit" class="btn btn-submit">提交</button>
+      </form>
+    </div>
+  </div>
 </div>

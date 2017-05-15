@@ -1,6 +1,8 @@
 import { Component,OnInit} from '@angular/core';
-import {Page} from "ng2-pagination/dist/pagination-controls.directive";
-import {MyServiceService} from "../../core/app.service";
+
+
+import {MyServiceService} from '../../core/app.service';
+import {ProductImportComponent} from '../product-import/product-import.component';
 
 @Component({
   selector: 'product-list',
@@ -11,19 +13,23 @@ import {MyServiceService} from "../../core/app.service";
 export class ProductListComponent implements OnInit{
 
 
-  import = false;
-  //定义table
+  // 定义table
   rows = [];
   selected = [];
+  import = false;
 
   constructor(public service: MyServiceService) {
-    //获取产品列表数据
+    // 获取产品列表数据
     this.service.fetch((data) => {
       this.rows = data;
       console.log(this.rows)
-    })
-  }
+    });
 
+  }
+  // 录入产品
+    proImport() {
+      this.import = true;
+    }
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
 
@@ -46,9 +52,6 @@ export class ProductListComponent implements OnInit{
   remove() {
     this.selected = [];
   }
-  //录入产品
-  proImport() {
-    this.import = true;
-  }
+
   ngOnInit() {}
 }

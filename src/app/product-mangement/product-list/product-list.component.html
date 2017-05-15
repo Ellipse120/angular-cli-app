@@ -65,6 +65,7 @@
         (activate)="onActivate($event)"
         (select)='onSelect($event)'>
         <ngx-datatable-column
+          class="striped"
           [width]="30"
           [sortable]="false"
           [canAutoResize]="false"
@@ -83,6 +84,6 @@
     </div>
   </div>
 </div>
-<div class="proimport-box" *ngIf="import">
+<div *ngIf="import">
   <product-import></product-import>
 </div>

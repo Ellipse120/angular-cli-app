@@ -1,1 +1,78 @@
-hello this is error
+<div class="promage-nav">
+  <div class="mage-title">
+    <h3>产品管理</h3>
+    <div>
+      <input type="text" class="content-search" placeholder="名称/简介">
+      <button class="btn search-btn"></button>
+    </div>
+  </div>
+  <div class="own-prolist">
+    <div class="selected-filter">
+      <input class="box-type" type="text" placeholder="产品名称">
+      <select class="box-type" name="userType" id="userType">
+        <option value="0">用户名称</option>
+        <option value="1">用户名1</option>
+        <option value="2">用户名2</option>
+        <option value="3">用户名3</option>
+      </select>
+
+      <select class="box-type" name="userType" id="updateTime">
+        <option value="0">提交时间</option>
+        <option value="1">一周内</option>
+        <option value="2">一月内</option>
+        <option value="3">三月内</option>
+      </select>
+    </div>
+
+    <div class="pro-list">
+      <!--<ul>-->
+      <!--<li class="pro-list-nav"><span class="all-select">全选</span> <span class="pro-name">产品名称</span>-->
+      <!--<span>用户名称</span> <span class="user-type">用户类型</span> <span class="isMoney">是否收费</span>-->
+      <!--<span class="user-state">状态</span> <span class="update-time">更新时间</span> <span class="option">操作</span>-->
+      <!--</li>-->
+
+      <!--<li *ngFor="let item of proList | paginate: {itemsPerPage: 10, currentPage: p}" class="pro-item">-->
+      <!--<input type="checkbox"> <span>{{item.proName}}</span> <span>{{item.userName}}</span>-->
+      <!--<span>{{item.userType}}</span> <span>{{item.isMoney}}</span> <span>{{item.state}}</span> <span>{{item.updateTime}}</span>-->
+      <!--<span>-->
+      <!--<a href="javascript:;" class="color-blue">启用</a> <a href="javascript:;" class="color-red">禁用</a>-->
+      <!--<a href="javascript:;" class="green">上传</a> <a href="javascript:;" class="color-orange">查看 /</a>-->
+      <!--<a href="javascript:;" class="color-orange">修改</a>-->
+      <!--</span>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <!--分页处理-->
+      <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+      <ngx-datatable
+        style="width: 100%;text-align: center;margin-top: 20px"
+        class="material"
+        [rows]="rows "
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="40"
+        [limit]="10"
+        [selectionType]="'checkbox'"
+        (activate)="onActivate($event)"
+        (select)='onSelect($event)'>
+        <ngx-datatable-column
+          class="striped"
+          [width]="30"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [draggable]="false"
+          [resizeable]="false"
+          [headerCheckboxable]="true"
+          [checkboxable]="true">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="proName"></ngx-datatable-column>
+        <ngx-datatable-column name="userName"></ngx-datatable-column>
+        <ngx-datatable-column name="problem"></ngx-datatable-column>
+        <ngx-datatable-column name="submitTime"></ngx-datatable-column>
+        <ngx-datatable-column name="option"></ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
+

@@ -44,6 +44,27 @@ export class MyServiceService {
 
     req.send();
   }
+
+  // 获得纠错信息数据
+  getError(callback) {
+    const req = new XMLHttpRequest();
+    req.open('GET',`assets/data/error.json`);
+    req.onload = () => {
+      callback(JSON.parse(req.response));
+    }
+
+    req.send();
+  }
+
+  getErrorData(): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(this.dataListUrl + 'error.json')
+      .toPromise()
+      .then(response => resolve(response.json()))
+    }
+
+    )
+  }
   // 获得用户信息
   getUserInfo(): Promise<any> {
     return Promise.resolve(this.user);
