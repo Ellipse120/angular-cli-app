@@ -14,6 +14,7 @@ import {ErrorCorrectComponent} from './product-mangement/error-correct/error-cor
 import {UserInfoComponent} from './user-center/user-info/user-info.component';
 import {NameCertifyComponent} from './user-center/name-certify/name-certify.component';
 import {PsdModifyComponent} from './user-center/psd-modify/psd-modify.component';
+import {ProductRoutingModule} from "./product-mangement/product-routing.module";
 
 
 //// 定义用户中心管理嵌套路由
@@ -37,48 +38,32 @@ const childUserCenterRoutes:Routes = [
 ];
 
 
-// 定义产品管理嵌套路由
-const childRoutes:Routes = [
-  // 重定向路由
-      {
-        path: 'productlist',
-        component: ProductListComponent
-      },
-      {
-        path: 'error',
-        component: ErrorCorrectComponent
-      },
-  {
-    path: '**',redirectTo: 'productlist'
-  }
-];
-
 // 定义普通路由
 const appRouters:Routes = [
   // 重定向路由
-  {path: '', redirectTo: '/index', pathMatch: 'full'},
+  {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'index', component: IndexComponent},
   {path: 'datalist', component: DatalistComponent},
   {path: 'usercenter', component: UserCenterComponent, children: childUserCenterRoutes},
   {path: 'datadetail/:id', component: DataDetailComponent},
   {path:'register',component: RegisterComponent},
-  {path:'promange',component:ProductMangementComponent, children: childRoutes},
-
+  //{path:'promange',component:ProductMangementComponent},
   {path: '**', component: IndexComponent}
 ]
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRouters)
+    RouterModule.forRoot(appRouters),
+    ProductRoutingModule
   ],
   exports: [
     RouterModule
-  ],
-  providers: [
-    { provide: LocationStrategy ,useClass: HashLocationStrategy }
   ]
+  //使用HashLocationStrategy 会在路径中添加#号
+  //providers: [
+  //  { provide: LocationStrategy ,useClass: HashLocationStrategy }
+  //]
 })
 
 export class AppRoutingModule {
-
 }

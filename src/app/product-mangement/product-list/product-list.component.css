@@ -61,7 +61,3 @@
   justify-content: space-around;
   align-items: center;
 }
-.pro-item:nth-child(odd){
-  background: #f7f7f7;
-}
-

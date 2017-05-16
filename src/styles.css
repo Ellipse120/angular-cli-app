@@ -61,6 +61,21 @@ img{
 .text-center{
   text-align: center;
 }
+select {
+  border:1px solid #ddd;
+  /*将默认的select选择框样式清楚*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /*在选择框最右侧显示小箭头的图片*/
+  background: url("assets/images/selectarrow.png") no-repeat right center;
+  /*background-position: 100;*/
+  padding-right: 20px !important;
+
+}
+select::-ms-expand {
+  display: none;
+}
 /*三角形*/
 .triangle-down{
   width: 0;
