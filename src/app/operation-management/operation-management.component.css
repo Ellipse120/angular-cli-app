@@ -1,0 +1,105 @@
+.operate-manage{
+  width: 100%;
+  height: 100%;
+}
+.manage-left{
+  width: 203px;
+  float: left;
+  text-align: center;
+}
+.manage-right{
+  width: 100%;
+  padding-left: 225px;
+}
+.operate-menu{
+  width: 100%;
+  margin-top: 20px;
+}
+.menu-item{
+  width: 100%;
+  line-height:50px;
+  font-size: 16px;
+  padding:0 30px;
+  text-align: justify;
+  cursor: pointer;
+  outline:none;
+  position: relative;
+}
+.user-arrow{
+  margin-left: 66px;
+}
+.active{
+  background: #39baf6;
+  color: #fff;
+}
+.operate-second-menu{
+  position: absolute;
+  top:50px;
+  left:0;
+  width: 100% ;
+  background: #fff;
+  color: #000;
+  text-align: center;
+  outline: none;
+}
+.operate-second-menu li{
+  outline: none;
+  width: 100%;
+  line-height:50px;
+}
+.color-lightblue{
+  background: #c3e2f0 !important;
+}
+
+/*用户管理*/
+.user-manage{
+  width: 100%;
+}
+.mage-title{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #39baf6;
+  line-height: 50px;
+}
+.content-search{
+  width: 320px;
+  height: 30px;
+  outline:none;
+  padding-left: 10px;
+}
+.search-btn{
+  width: 82px;
+  height: 30px;
+  vertical-align: middle;
+  background-color: #39baf6;
+  margin-left: -5px;
+  cursor: pointer;
+  background-image: url("../../assets/images/search.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.total-user-list{
+  width: 100%;
+  margin-top: 30px;
+}
+.box-type{
+  padding:10px;
+  border:1px solid #ddd;
+  outline: none;
+}
+.add-user{
+  padding:10px;
+  color: #fff;
+  background: #39baf6;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  width: 100px;
+  float: right;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}

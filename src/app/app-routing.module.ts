@@ -14,7 +14,8 @@ import {ErrorCorrectComponent} from './product-mangement/error-correct/error-cor
 import {UserInfoComponent} from './user-center/user-info/user-info.component';
 import {NameCertifyComponent} from './user-center/name-certify/name-certify.component';
 import {PsdModifyComponent} from './user-center/psd-modify/psd-modify.component';
-import {ProductRoutingModule} from "./product-mangement/product-routing.module";
+import {ProductRoutingModule} from './product-mangement/product-routing.module';
+import {OperationRoutingModule} from './operation-management/operation-routing.module';
 
 
 //// 定义用户中心管理嵌套路由
@@ -47,14 +48,14 @@ const appRouters:Routes = [
   {path: 'usercenter', component: UserCenterComponent, children: childUserCenterRoutes},
   {path: 'datadetail/:id', component: DataDetailComponent},
   {path:'register',component: RegisterComponent},
-  //{path:'promange',component:ProductMangementComponent},
   {path: '**', component: IndexComponent}
 ]
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
 @NgModule({
   imports: [
     RouterModule.forRoot(appRouters),
-    ProductRoutingModule
+    ProductRoutingModule,
+    OperationRoutingModule
   ],
   exports: [
     RouterModule

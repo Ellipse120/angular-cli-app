@@ -1,0 +1,68 @@
+<div class="user-manage">
+  <div class="mage-title">
+    <h3>产品管理</h3>
+    <div>
+      <input type="text" class="content-search" placeholder="名称/简介">
+      <button class="btn search-btn"></button>
+    </div>
+  </div>
+  <div class="total-user-list">
+    <div class="selected-filter">
+      <input class="box-type" type="text" placeholder="用户名称">
+      <select class="box-type" name="userType" id="userType">
+        <option value="0">用户类型</option>
+        <option value="1">注册用户</option>
+        <option value="2">已认证个人用户</option>
+        <option value="3">已认证机构用户</option>
+      </select>
+
+      <select class="box-type" name="userType" id="userState">
+        <option value="0">状态</option>
+        <option value="1">进行中</option>
+        <option value="2">审核通过</option>
+        <option value="3">审核未通过</option>
+      </select>
+
+      <select class="box-type" name="userType" id="updateTime">
+        <option value="0">更新时间</option>
+        <option value="1">一周内</option>
+        <option value="2">一月内</option>
+        <option value="3">三月内</option>
+      </select>
+      <button class="btn add-user" (click)="addUser()"><img src="./assets/images/pen.png">增加用户</button>
+    </div>
+  </div>
+
+  <div class="total-user-list">
+    <ngx-datatable
+      style="text-align: center"
+      class="material"
+      [rows]="rows"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="40"
+      [limit]="10"
+      [selectionType]="'checkbox'"
+      (activate)="onActivate($event)"
+      (select)='onSelect($event)'>
+      <ngx-datatable-column
+        class="striped"
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true">
+      </ngx-datatable-column>
+      <ngx-datatable-column name="userCount"></ngx-datatable-column>
+      <ngx-datatable-column name="userName"></ngx-datatable-column>
+      <ngx-datatable-column name="userType"></ngx-datatable-column>
+      <ngx-datatable-column name="userState"></ngx-datatable-column>
+      <ngx-datatable-column name="userPhone"></ngx-datatable-column>
+      <ngx-datatable-column name="option"></ngx-datatable-column>
+    </ngx-datatable>
+
+  </div>
+</div>

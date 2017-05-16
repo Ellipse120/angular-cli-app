@@ -271,11 +271,19 @@ select::-ms-expand {
   margin: 0 10px !important;
 }
 .ngx-datatable .datatable-header{
+  width: 100% !important;
   height: 50px;
-  width: 100%;
   background: #eee;
   display: flex !important;
   align-items: center;
   padding-left: 4px;
 }
-
+.ngx-datatable .datatable-body{
+  padding-left: 6px;
+}
+.datatable-header-inner{
+  width: 100% !important;
+}
+.ngx-datatable.fixed-row .datatable-scroll{
+  width: 100% !important;
+}

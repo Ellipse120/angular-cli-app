@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import {NavComponent} from './core/nav/nav.component';
 import {ProductMangementModule} from './product-mangement/product-mangement.module';
 import {UserCenterModule} from './user-center/user-center.module';
+import {OperationManagementModule} from './operation-management/operation-management.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {UserCenterModule} from './user-center/user-center.module';
     Ng2PaginationModule,
     Ng2UeditorModule,
     ProductMangementModule,
-    UserCenterModule
+    UserCenterModule,
+    OperationManagementModule
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]

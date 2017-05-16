@@ -24,6 +24,15 @@ export class MyServiceService {
   constructor(public http: Http) {
   }
 
+  // 获得用户列表
+  getUser():Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(this.dataListUrl + 'userList.json')
+        .toPromise()
+        .then(response => resolve(response.json()))
+    })
+  }
+
   // 获得数据列表
   getList(): Promise<any> {
     return new Promise(resolve => {

@@ -45,7 +45,7 @@
       <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
 
       <ngx-datatable
-        style="width: 100%;text-align: center;margin-top: 20px"
+        style="text-align: center;margin-top: 20px"
         class="material"
         [rows]="rows "
         [columnMode]="'force'"
@@ -57,7 +57,7 @@
         (activate)="onActivate($event)"
         (select)='onSelect($event)'>
         <ngx-datatable-column
-          class="striped"
+          class="striped text-center"
           [width]="30"
           [sortable]="false"
           [canAutoResize]="false"
@@ -66,11 +66,11 @@
           [headerCheckboxable]="true"
           [checkboxable]="true">
         </ngx-datatable-column>
-        <ngx-datatable-column name="proName"></ngx-datatable-column>
-        <ngx-datatable-column name="userName"></ngx-datatable-column>
-        <ngx-datatable-column name="problem"></ngx-datatable-column>
-        <ngx-datatable-column name="submitTime"></ngx-datatable-column>
-        <ngx-datatable-column name="option"></ngx-datatable-column>
+        <ngx-datatable-column name="proName" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="userName" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="problem" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="submitTime" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="option" class="text-center"></ngx-datatable-column>
       </ngx-datatable>
     </div>
   </div>

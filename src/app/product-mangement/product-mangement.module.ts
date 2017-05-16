@@ -10,7 +10,7 @@ import {MyServiceService} from '../core/app.service';
 import {ProductListComponent} from './product-list/product-list.component';
 import {ErrorCorrectComponent} from './error-correct/error-correct.component';
 import {ProductImportComponent} from './product-import/product-import.component';
-import {ProductRoutingModule} from "./product-routing.module";
+import {ProductRoutingModule} from './product-routing.module';
 
 @NgModule({
   declarations: [
