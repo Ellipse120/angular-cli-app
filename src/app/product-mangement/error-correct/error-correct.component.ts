@@ -11,6 +11,8 @@ export class ErrorCorrectComponent implements OnInit {
 
   rows = [];
   selected = [];
+  error = [];
+  errorEdit = false;
   columns = [
     {name: 'proName'},
     {name: 'userName'},
@@ -24,6 +26,17 @@ export class ErrorCorrectComponent implements OnInit {
       this.rows = data;
       console.log(this.rows)
     })
+  }
+
+  closeError() {
+    this.errorEdit = false;
+  }
+
+
+  modifyError(content) {
+    console.log(content);
+    this.error = content;
+    this.errorEdit = true;
   }
 
   onSelect({ selected }) {

@@ -55,11 +55,20 @@ img{
 .color-red{
   color: red;
 }
+.color-bluelight{
+  color: #adc9d5;
+}
 .green{
   color: #46b069;
 }
 .text-center{
   text-align: center;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
 }
 select {
   border:1px solid #ddd;

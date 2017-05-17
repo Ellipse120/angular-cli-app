@@ -70,9 +70,40 @@
         <ngx-datatable-column name="userName" class="text-center"></ngx-datatable-column>
         <ngx-datatable-column name="problem" class="text-center"></ngx-datatable-column>
         <ngx-datatable-column name="submitTime" class="text-center"></ngx-datatable-column>
-        <ngx-datatable-column name="option" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="option">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <a href="javascript:;" class="color-orange">查看 / </a>
+            <a href="javascript:;" class="color-orange" (click)="modifyError(row)">修改</a>
+          </ng-template>
+        </ngx-datatable-column>
+        <!--<ngx-datatable-column name="option" class="text-center"></ngx-datatable-column>-->
       </ngx-datatable>
     </div>
+  </div>
+</div>
+
+<div class="edit-eorror" *ngIf="errorEdit">
+  <div class="edit-box">
+    <div class="error-title">
+      <h3>内容描述</h3> <b style="cursor: pointer" class="color-bluelight font18" (click)="closeError()">X</b>
+    </div>
+    <div class="error-content">
+      {{error.problem}}
+    </div>
+    <h3 style="display: inline-block">修改</h3> <img src="./assets/images/edit.png">
+    <div class="error-article">
+      sdgjkdflhgv sd十多个开了房你多高手动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
+    </div>
+
+    <button class="btn btn-submit fr" >提交</button>
   </div>
 </div>
 
