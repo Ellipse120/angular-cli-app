@@ -9,6 +9,53 @@
   float: right;
   padding-left: 20px;
 }
+.error-correct{
+  width: 60px;
+  line-height: 30px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  background: #ffeddf;
+  text-align: center;
+  color: #ffa54e;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.problem{
+  width: 450px;
+  height: 135px;
+  background: url("../../../../assets/images/errorbox.png") no-repeat;
+  -webkit-background-size:100% 100%;
+  background-size:100% 100%;
+  padding: 20px;
+  position: absolute;
+}
+.no-border{
+  border:none;
+  outline: none;
+  width: 100%;
+}
+.error-area{
+  min-height: 70px;
+  font-family: '微软雅黑';
+  font-size: 12px;
+  line-height: 24px;
+}
+.error-submit{
+  width: 50px;
+  line-height: 20px;
+  background: #39baf6;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  bottom: 20px;
+  right:20px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  cursor: pointer;
+}
 .data-info{
   width: 100%;
   padding: 30px 0;
@@ -212,4 +259,13 @@ textarea:-ms-input-placeholder{
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom:15px ;
+}
+textarea:-moz-placeholder{
+  color: #999;
+}
+textarea:-ms-input-placeholder{
+  color: #999;
+}
+textarea::-webkit-input-placeholder{
+  color: #999;
 }

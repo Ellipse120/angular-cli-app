@@ -15,27 +15,30 @@ export class DataDetailComponent {
   @ViewChild('ueditor') ueditor: Ng2Ueditor;
 
   id: string;
+  showProblem = false;
   full_source = '请输入评论';
   isHidden = true;
 
   setting = {
     // 这里可以选择自己需要的工具按钮名称,此处仅选择如下几个
-    toolbars: [['insertimage','Undo','Redo','Bold','forecolor','emotion'] ],
+    toolbars: [['insertimage', 'Undo', 'Redo', 'Bold', 'forecolor', 'emotion']],
     // focus时自动清空初始化的内容
     autoClearinitialContent: false,
     //  关闭字数统计
     wordCount: false,
-  //  关闭elementPath
+    //  关闭elementPath
     elementPathEnabled: false,
-  //  默认的编辑区域高度
+    //  默认的编辑区域高度
     initialFrameHeight: 250,
-  //  默认的编辑器的宽度
-    initialFrameWidth:'100%'
+    //  默认的编辑器的宽度
+    initialFrameWidth: '100%'
 
   }
 
-  constructor(private route: ActivatedRoute) {
-    route.params.subscribe(params => {this.id = params['id']});
+
+//  纠错
+  writeProblem() {
+    this.showProblem = !this.showProblem;
   }
 
 //  点击评论出现评论框
