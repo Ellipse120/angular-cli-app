@@ -17,19 +17,21 @@
 .totalNum span{
   font-size: 16px;
   display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
   margin-right: 20px;
   color: #929292;
 }
 .searchType{
   width: 600px;
   margin:0 auto;
+  margin-top: 40px;
   text-align: left;
   list-style-type: none;
   position: relative;
 }
 .searchType li{
   float: left;
-  padding: 5px 10px;
   cursor: pointer;
 }
 .secondMenu{
@@ -39,13 +41,23 @@
   margin-top: 20px;
   color: #676767;
   left:0;
+  top:8px;
+  border:1px solid #d8e5e7;
+}
+.second-nav{
+  padding:5px 10px;
+  margin:5px 10px;
+  background: #f6f9fa;
 }
 .btn-none{
   border:none;
   background: #fff;
   cursor: pointer;
+  padding: 5px 10px;
 }
 .isActive{
-  font-size: 18px;
-  color: #676767;
+  color: #1c94c4;
+  border:1px solid #d8e5e7;
+  border-bottom: none;
+  padding:5px 10px;
 }

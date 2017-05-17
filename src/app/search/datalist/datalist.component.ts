@@ -10,8 +10,9 @@ export class DatalistComponent implements OnInit {
 
 
   state = false;
-  num:number = 0;
-  count:number = 384354;
+  num: number = 0;
+  numc: number = 0;
+  count: number = 384354;
   dataList;
   typeList = [
     {
@@ -39,11 +40,12 @@ export class DatalistComponent implements OnInit {
 
   // 二级菜单
   showMenu(i) {
-    this.state = !this.state;
     this.num = i;
-    console.log(this.num);
   }
 
+  showSecondMenu(i) {
+    this.numc = i;
+  }
   // 获取数据
   getData(): void {
     this.service

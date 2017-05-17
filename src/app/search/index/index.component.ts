@@ -33,10 +33,7 @@ export class IndexComponent implements OnInit {
       {text: '经济主题-child1'},
       {text: '经济主题-child1'},
     ]
-    },
-    {text: 'item3'},
-    {text: 'item4'},
-    {text: 'item5'}
+    }
   ]
 
 

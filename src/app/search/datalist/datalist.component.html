@@ -6,9 +6,10 @@
     <!--搜索菜单-->
     <div class="searchMenu">
       <ul class="menuList">
-        <li *ngFor="let item of typeList;let i = index" (click)="showMenu(i)">{{item.text}}
+        <li *ngFor="let item of typeList;let i = index" (click)="showMenu(i)" class="active">
+          {{item.text}} <img class="tag-arrow" [src]="num == i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">
           <ul class="menuListTwo" *ngIf="num == i">
-            <li *ngFor="let itemChild of item.children">{{itemChild.text}}</li>
+            <li *ngFor="let itemChild of item.children;let n =index" (click)="showSecondMenu(n)" [class.childActive]="numc == n">{{itemChild.text}}</li>
           </ul>
         </li>
       </ul>
@@ -19,6 +20,7 @@
         <li *ngFor="let item of dataList | paginate:{itemsPerPage:10,currentPage:p}"  class="dataItem">
           <h3 [routerLink]="['/datadetail','21']" style="cursor: pointer">{{item.title}}</h3>
           <span class="dataContent">{{item.content}}</span>
+          <div class="tag">标签1</div> <div class="tag">标签2</div>
         </li>
       </ul>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>

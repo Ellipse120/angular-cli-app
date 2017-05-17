@@ -1,7 +1,7 @@
 <div class="indexCon">
   <div class="totalNum">
-    <span>厂商</span>
-    <span>数据库</span>
+    <img src="./assets/images/factory.png"><span>厂商</span>
+    <img src="./assets/images/database.png"><span>数据库</span>
   </div>
   <h2>经济数据库</h2>
   <search-input></search-input>
@@ -9,7 +9,7 @@
     <ul class="searchType">
       <li *ngFor="let item of types;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.text}}</button>
         <ul class="secondMenu" *ngIf="isActive == i">
-          <li *ngFor="let item of item.children">{{item.text}}</li>
+          <li *ngFor="let item of item.children" class="second-nav">{{item.text}}</li>
         </ul></li>
     </ul>
   </div>
