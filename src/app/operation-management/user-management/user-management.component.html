@@ -1,6 +1,6 @@
 <div class="user-manage">
   <div class="mage-title">
-    <h3>产品管理</h3>
+    <h3>用户管理</h3>
     <div>
       <input type="text" class="content-search" placeholder="名称/简介">
       <button class="btn search-btn"></button>
@@ -8,6 +8,7 @@
   </div>
   <div class="total-user-list">
     <div class="selected-filter">
+      <input class="box-type" type="text" placeholder="用户账号">
       <input class="box-type" type="text" placeholder="用户名称">
       <select class="box-type" name="userType" id="userType">
         <option value="0">用户类型</option>
@@ -21,13 +22,6 @@
         <option value="1">进行中</option>
         <option value="2">审核通过</option>
         <option value="3">审核未通过</option>
-      </select>
-
-      <select class="box-type" name="userType" id="updateTime">
-        <option value="0">更新时间</option>
-        <option value="1">一周内</option>
-        <option value="2">一月内</option>
-        <option value="3">三月内</option>
       </select>
       <button class="btn add-user" (click)="addUser()"><img src="./assets/images/pen.png">增加用户</button>
     </div>
@@ -64,5 +58,36 @@
       <ngx-datatable-column name="option"></ngx-datatable-column>
     </ngx-datatable>
 
+  </div>
+</div>
+<div class="new-user" *ngIf="newUser">
+  <div class="new-user-box">
+    <div class="mage-title">
+      <h3>增加用户</h3>
+      <b class="color-blue font18 fork" (click)="closeUser()">X</b>
+    </div>
+
+    <div class="base-info">
+      <h3 class="color-blue">基本信息</h3>
+      <ul class="base-info-list">
+        <li><span>账号</span> <input type="text" class="box-type"></li>
+        <li><span>密码</span> <input type="password" class="box-type"></li>
+        <li><span>姓名</span> <input type="text" class="box-type"></li>
+        <li><span>邮箱</span> <input type="email" class="box-type"></li>
+      </ul>
+    </div>
+    <div class="gov-info">
+      <h3 class="color-blue">机构信息</h3>
+      <ul class="gov-info-list">
+        <li><span>机构名称</span> <input type="text" class="box-type"></li>
+        <li><span>logo图片</span> <div class="file-box font12 color-gray"><a href="javascript:;" class="file">选择文件<input type="file"></a>支持jpg，png格式，大小不超过1m</div></li>
+        <li><span>公司网址</span> <input type="text" class="box-type"></li>
+        <li><span>联系人</span> <input type="text" class="box-type"></li>
+        <li><span>联系电话</span> <input type="tel" class="box-type"></li>
+        <li><span>电子邮件</span> <input type="email" class="box-type"></li>
+        <li><span>公司地址</span> <input type="text" class="box-type"></li>
+      </ul>
+      <button class="btn btn-submit">提交</button>
+    </div>
   </div>
 </div>

@@ -7,17 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OperationManagementComponent implements OnInit {
 
-  index = 0;
+  index;
   operateTag = [
     {text: '用户管理', path: 'userManage'},
-    {text: '产品管理', path: 'product',children: [
+    {text: '产品管理',path: 'productlist',children: [
       {text: '产品管理', path: 'productlist'},
-      {text: '纠错处理', path: 'errorlist'}
+      {text: '纠错处理', path: 'error'}
     ]}
   ]
 
   tab(i) {
     this.index = i;
+  }
+
+  prePropagation(event) {
+    console.log('hello')
+    event.stopPropagation();
   }
   constructor() { }
 

@@ -82,7 +82,7 @@
 }
 .total-user-list{
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .box-type{
   padding:10px;
@@ -102,4 +102,85 @@
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
+}
+.new-user{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.13);
+  z-index: 10000000;
+}
+.new-user-box{
+  padding: 30px;
+  width: 520px;
+  background: #fff;
+  margin:0 auto;
+  margin-top: 60px;
+}
+.base-info,.gov-info{
+  margin-top: 20px;
+  width: 100%;
+  padding:0 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #ddd;
+}
+.base-info-list,.gov-info-list{
+  margin-top: 20px;
+}
+.base-info-list li{
+  width: 100%;
+  line-height: 50px;
+  text-align: right;
+}
+.base-info-list input{
+  width: 320px;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+.gov-info-list li{
+  width: 100%;
+  line-height: 50px;
+  text-align: right;
+}
+.gov-info-list input{
+  width: 320px;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+.file-box{
+  width: 320px;
+  padding-left: 10px;
+  margin-left: 10px;
+  display: inline-block;
+  text-align: left;
+}
+.file {
+  height: 30px;
+  position: relative;
+  display: inline-block;
+  background: #D0EEFF;
+  border:1px solid #ddd;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+  padding:4px 12px;
+  color: #1E88C7;
+  text-decoration: none;
+  text-indent:0;
+  line-height: 20px;
+  margin-right: 10px;
+}
+.file input{
+  position: absolute;
+  left:0;
+  top:0;
+  opacity: 0;
+}
+.file:hover{
+  background: #AADFFD;
+  border-color: #78c3f3;
+  color: #004974;
+  text-decoration: none;
 }

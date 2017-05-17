@@ -12,6 +12,7 @@ export class UserManagementComponent {
 
   rows = [];
   selected = [];
+  newUser = false;
 
   constructor(public service:MyServiceService){
     this.service.getUser()
@@ -21,6 +22,15 @@ export class UserManagementComponent {
     })
   }
 
+
+  //  增加用户
+  addUser() {
+    this.newUser = true;
+  }
+
+  closeUser() {
+    this.newUser = false;
+  }
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
 
@@ -45,8 +55,5 @@ export class UserManagementComponent {
   }
 
 
-  //  增加用户
-  addUser() {
 
-  }
 }

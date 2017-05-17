@@ -6,7 +6,7 @@
       <li *ngFor="let item of operateTag;let i = index" (click)="tab(i)" [routerLink]="[item.path]" class="menu-item" routerLinkActive="active">
         {{item.text}} <img class="user-arrow" [src]="index==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">
         <ul class="operate-second-menu" *ngIf="index == 1">
-          <li *ngFor="let itemc of item.children;" roterLinkActive="color-lightblue" routerLink="itemc.path">{{itemc.text}}</li>
+          <li *ngFor="let itemc of item.children;" (click)="prePropagation($event)" routerLinkActive="color-lightblue" [routerLink]="[itemc.path]">{{itemc.text}}</li>
         </ul>
       </li>
     </ul>

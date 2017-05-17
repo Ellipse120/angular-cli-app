@@ -5,6 +5,8 @@ import { RouterModule , Routes } from '@angular/router';
 import {OperationManagementComponent} from './operation-management.component';
 import {UserManagementComponent} from './user-management/user-management.component';
 import {ProManageComponent} from "./pro-manage/pro-manage.component";
+import {ProductListComponent} from "../product-mangement/product-list/product-list.component";
+import {ErrorCorrectComponent} from "../product-mangement/error-correct/error-correct.component";
 
 
 const operationChildRouters:Routes = [
@@ -13,9 +15,14 @@ const operationChildRouters:Routes = [
     component: UserManagementComponent
   },
   {
-    path: 'product',
-    component: ProManageComponent
+    path: 'productlist',
+    component: ProductListComponent
   },
+  {
+    path: 'error',
+    component: ErrorCorrectComponent
+  },
+  //{path: 'productList'}
   {
     path: '**', redirectTo: 'userManage'
   }
