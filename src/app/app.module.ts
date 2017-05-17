@@ -18,6 +18,7 @@ import {NavComponent} from './core/nav/nav.component';
 import {ProductMangementModule} from './product-mangement/product-mangement.module';
 import {UserCenterModule} from './user-center/user-center.module';
 import {OperationManagementModule} from './operation-management/operation-management.module';
+import {FooterComponent} from './core/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {OperationManagementModule} from './operation-management/operation-manage
     SearchInputComponent,
     DataDetailComponent,
     RegisterComponent,
-    NavComponent
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

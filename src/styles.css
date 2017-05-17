@@ -7,17 +7,34 @@ body{
   height:100%;
   min-width: 1200px;
   position: relative;
+  font-family: '微软雅黑' !important;
 }
 *{
   margin:0;
   padding:0;
   box-sizing: border-box;
 }
+input,textarea,a,ul,li,select{
+  outline: none;
+}
+*::-moz-placeholder{
+  font-family: '微软雅黑';
+}
+*:-ms-input-placeholder{
+  font-family: '微软雅黑';
+}
+*::-webkit-input-placeholder{
+  font-family: '微软雅黑';
+}
 ul li{
   list-style: none;
 }
 a{
   text-decoration: none;
+  font-family: '微软雅黑';
+}
+p{
+  font-family: '微软雅黑';
 }
 img{
   vertical-align: middle;
@@ -125,6 +142,7 @@ textarea::-webkit-scrollbar-thumb
 }
 .btn{
   border:none;
+  font-family: '微软雅黑';
 }
 .btn:focus{
   outline: none;
@@ -139,7 +157,6 @@ textarea::-webkit-scrollbar-thumb
   margin-bottom: 20px;
 }
 .search-box{
-  width: 600px;
   margin:0 auto;
   position: relative;
 }
@@ -198,15 +215,15 @@ textarea::-webkit-scrollbar-thumb
   line-height: 40px;
   background: #1c94c4;
   width: 100px;
-  margin-left: -6px;
+  margin-left: -8px;
   text-align: center;
   color: #fff;
   cursor: pointer;
 }
 .my-container{
   padding: 80px 90px;
-  padding-bottom: 20px;
-  height: 100%;
+  padding-bottom: 30px;
+  min-height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
@@ -294,6 +311,15 @@ textarea::-webkit-scrollbar-thumb
   -moz-border-radius:5px;
   border-radius:5px;
   cursor: pointer;
+}
+.footer{
+  width: 100%;
+  line-height: 30px;
+  border-top: 1px solid #eee;
+  position: fixed;
+  bottom: 0;
+  color: #889294;
+  background: #fff;
 }
 
 /*重写部分*/

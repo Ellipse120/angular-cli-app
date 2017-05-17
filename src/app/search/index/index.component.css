@@ -54,6 +54,7 @@
   background: #fff;
   cursor: pointer;
   padding: 5px 10px;
+  font-family: '微软雅黑';
 }
 .isActive{
   color: #1c94c4;

@@ -8,19 +8,19 @@ import { Component } from '@angular/core';
 
 export  class NavComponent {
   user = [];
-  loginState = true;
+  loginState = false;
   isLogin = false;
   isUserCenter = false;
 
 
   //  显示登录框
   showLogin(): void {
-    this.loginState = false;
+    this.loginState = true;
   }
 
   //  关闭登录框
   hideLogin(): void {
-    this.loginState = true;
+    this.loginState = false;
   }
 
   //  登录
@@ -28,6 +28,10 @@ export  class NavComponent {
     console.log(user);
     this.isLogin = true;
     this.loginState = true;
+  }
+
+  gotoRegitster() {
+    this.loginState = false
   }
 //  切换下拉列表
   toggle() {

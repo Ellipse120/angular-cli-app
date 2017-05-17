@@ -10,7 +10,7 @@ export class DatalistComponent implements OnInit {
 
 
   state = false;
-  num: number = 0;
+  num: number;
   numc: number = 0;
   count: number = 384354;
   dataList;
