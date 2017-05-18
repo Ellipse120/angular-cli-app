@@ -3,6 +3,7 @@
   width: 100%;
   background: url("../../assets/images/registerbg.png") no-repeat;
   background-size: 100% 100%;
+  padding-top: 100px;
 }
 .register-box{
   width: 700px;
@@ -10,6 +11,7 @@
   margin: 0 auto;
   border:1px solid #dce0e1;
   padding:30px 140px;
+  background: #fff;
 }
 .email{
   width: 100%;

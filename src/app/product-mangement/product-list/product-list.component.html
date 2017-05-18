@@ -53,7 +53,7 @@
       <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
 
       <ngx-datatable
-        style="margin-top: 20px;text-align: center"
+        style="margin-top: 20px;text-align: center;min-width: 1120px"
         class="material"
         [rows]="rows"
         [columnMode]="'force'"
@@ -75,12 +75,42 @@
           [checkboxable]="true">
         </ngx-datatable-column>
         <ngx-datatable-column name="proName"></ngx-datatable-column>
-        <ngx-datatable-column name="userName"></ngx-datatable-column>
+        <ngx-datatable-column [width]="60" name="userName"></ngx-datatable-column>
         <ngx-datatable-column name="userType"></ngx-datatable-column>
-        <ngx-datatable-column name="isMoney"></ngx-datatable-column>
-        <ngx-datatable-column name="state"></ngx-datatable-column>
-        <ngx-datatable-column name="updateTime"></ngx-datatable-column>
+        <ngx-datatable-column [width]="30" name="isMoney"></ngx-datatable-column>
+        <ngx-datatable-column [width]="60" name="state"></ngx-datatable-column>
+        <ngx-datatable-column [width]="60" name="updateTime"></ngx-datatable-column>
+        <ngx-datatable-column name="option">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <a href="javascript:;" class="color-blue"> 启用 </a>
+            <a href="javascript:;" class="color-red"> 禁用 </a>
+            <a href="javascript:;" class="green"> 上传 </a>
+            <a href="javascript:;" class="color-orange" (click)="viewInfo(row)">查看 / 修改 </a>
+
+          </ng-template>
+        </ngx-datatable-column>
       </ngx-datatable>
+    </div>
+  </div>
+</div>
+<div class="info-box" *ngIf="showProInfo">
+  <div class="info-content">
+    <div class="mage-title">
+      <h3>产品信息</h3>
+      <b class="color-blue font18 fork" (click)="closeProInfo()">X</b>
+    </div>
+    <div class="user-content">
+      <span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>
+      <ul class="user-info-list">
+        <li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.proName"  [disabled]="showEdit"></li>
+        <li><span class="user-tag">用户名称</span> <input type="text" [(ngModel)]="proInfo.userName" [disabled]="showEdit"></li>
+        <li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="proInfo.userType" [disabled]="showEdit"></li>
+        <li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.isMoney" [disabled]="showEdit"></li>
+        <li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.state" [disabled]="showEdit"></li>
+        <li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.updateTime" [disabled]="showEdit"></li>
+      </ul>
+
+      <button class="btn save-btn">保存</button>
     </div>
   </div>
 </div>

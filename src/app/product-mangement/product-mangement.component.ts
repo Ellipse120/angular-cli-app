@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductMangementComponent implements OnInit {
 
+  proMangeTag = [
+    {text: '产品管理',children: [
+      {text: '产品管理', path: 'productlist'},
+      {text: '纠错处理', path: 'error'}
+    ]}
+  ]
+
   ngOnInit() {
   }
 

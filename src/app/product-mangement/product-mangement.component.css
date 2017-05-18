@@ -3,7 +3,9 @@
   height: 100%;
 }
 .mangement-left{
-  width: 123px;
+  width: 200px;
+  height: 100%;
+  padding-top: 20px;
   background: #f3f8fa;
   text-align: center;
   height: inherit;
@@ -12,16 +14,21 @@
 }
 .mangement-right{
   width: 100%;
-  padding-left: 130px;
+  padding-left: 220px;
   padding-top: 27px;
 }
 .pro-mage-list{
   margin-top: 15px;
 }
 .pro-mage-list li{
-  line-height: 40px;
+  line-height: 50px;
   cursor: pointer;
   outline: none;
+}
+.pro-mage-list img{
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 .second-list li{
   background: #f3f8fa;
@@ -34,4 +41,11 @@
 .color-lightblue{
   background: #c3e2f0 !important;
 }
-
+.active{
+  background: #39baf6;
+  color: #fff;
+}
+.pro-second-menu{
+  background: #f3f8fa;
+  color: #666;
+}

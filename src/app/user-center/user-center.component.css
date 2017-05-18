@@ -3,7 +3,10 @@
   height: 100%;
 }
 .center-left{
-  width: 203px;
+  width: 200px;
+  height: 100%;
+  padding-top: 20px;
+  background: #f3f8fa;
   float: left;
   text-align: center;
 }
@@ -14,7 +17,7 @@
   width: 100%;
   line-height:50px;
   font-size: 16px;
-  padding:0 30px;
+  padding:0 25px;
   text-align: justify;
   cursor: pointer;
 }
@@ -27,7 +30,7 @@
 }
 .center-right{
   width: 100%;
-  padding-left: 225px;
+  padding-left: 220px;
 }
 .login-history{
   width: 100%;
@@ -52,40 +55,6 @@
   font-size: 16px;
   display: flex;
   justify-content: space-between;
-}
-.edit-btn{
-  cursor: pointer;
-}
-.user-info-list li{
-  line-height: 40px;
-  width: 100%;
-  border-bottom:1px solid #efefef;
-}
-.user-info-list input{
-  border: 2px solid #efefef;
-  line-height: 30px;
-}
-.user-info-list input[disabled]{
-  background: #fff;
-  border: none;
-}
-.user-tag{
-  display: inline-block;
-  width: 156px;
-  background: #f7f7f7;
-  text-align: center;
-  line-height: 40px;
-  margin-right: 40px;
-}
-.save-btn{
-  width: 100px;
-  line-height: 40px;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 5px;
-  background: #39baf6;
-  margin-top: 30px;
-  cursor: pointer;
 }
 .identify{
   width: 100%;

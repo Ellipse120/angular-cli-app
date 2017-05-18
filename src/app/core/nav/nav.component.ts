@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'my-nav',
@@ -11,6 +12,10 @@ export  class NavComponent {
   loginState = false;
   isLogin = false;
   isUserCenter = false;
+
+  constructor(public router:Router){
+
+  }
 
 
   //  显示登录框
@@ -27,11 +32,12 @@ export  class NavComponent {
   userLogin(user) {
     console.log(user);
     this.isLogin = true;
-    this.loginState = true;
+    this.loginState = false;
   }
 
   gotoRegitster() {
-    this.loginState = false
+    this.loginState = false;
+    this.router.navigate(['register'],1);
   }
 //  切换下拉列表
   toggle() {

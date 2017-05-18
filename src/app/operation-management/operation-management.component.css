@@ -3,13 +3,16 @@
   height: 100%;
 }
 .manage-left{
-  width: 203px;
+  width: 200px;
+  height: 100%;
+  padding-top: 20px;
+  background: #f3f8fa;
   float: left;
   text-align: center;
 }
 .manage-right{
   width: 100%;
-  padding-left: 225px;
+  padding-left: 220px;
 }
 .operate-menu{
   width: 100%;
@@ -19,7 +22,7 @@
   width: 100%;
   line-height:50px;
   font-size: 16px;
-  padding:0 30px;
+  padding:0 25px;
   text-align: justify;
   cursor: pointer;
   outline:none;
@@ -37,8 +40,8 @@
   top:50px;
   left:0;
   width: 100% ;
-  background: #fff;
-  color: #000;
+  background: #f3f8fa;
+  color: #666;
   text-align: center;
   outline: none;
 }
@@ -47,21 +50,11 @@
   width: 100%;
   line-height:50px;
 }
-.color-lightblue{
-  background: #c3e2f0 !important;
-}
+
 
 /*用户管理*/
 .user-manage{
   width: 100%;
-}
-.mage-title{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #39baf6;
-  line-height: 50px;
 }
 .content-search{
   width: 320px;
@@ -184,3 +177,8 @@
   color: #004974;
   text-decoration: none;
 }
+
+/*查看用户信息弹框*/
+
+
+

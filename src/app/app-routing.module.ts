@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import {RouterModule,Routes, ActivatedRoute} from '@angular/router';
+import {RouterModule,Routes,Router, ActivatedRoute} from '@angular/router';
 
 
 import {UserCenterComponent} from './user-center/user-center.component';
@@ -16,6 +16,7 @@ import {NameCertifyComponent} from './user-center/name-certify/name-certify.comp
 import {PsdModifyComponent} from './user-center/psd-modify/psd-modify.component';
 import {ProductRoutingModule} from './product-mangement/product-routing.module';
 import {OperationRoutingModule} from './operation-management/operation-routing.module';
+import construct = Reflect.construct;
 
 
 //// 定义用户中心管理嵌套路由
@@ -65,6 +66,7 @@ const appRouters:Routes = [
   //  { provide: LocationStrategy ,useClass: HashLocationStrategy }
   //]
 })
+
 
 export class AppRoutingModule {
 }

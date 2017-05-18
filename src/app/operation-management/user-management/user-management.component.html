@@ -29,7 +29,7 @@
 
   <div class="total-user-list">
     <ngx-datatable
-      style="text-align: center"
+      style="text-align: center;min-width: 1120px"
       class="material"
       [rows]="rows"
       [columnMode]="'force'"
@@ -51,13 +51,40 @@
         [checkboxable]="true">
       </ngx-datatable-column>
       <ngx-datatable-column name="userCount"></ngx-datatable-column>
-      <ngx-datatable-column name="userName"></ngx-datatable-column>
+      <ngx-datatable-column [width]="50" name="userName"></ngx-datatable-column>
       <ngx-datatable-column name="userType"></ngx-datatable-column>
-      <ngx-datatable-column name="userState"></ngx-datatable-column>
-      <ngx-datatable-column name="userPhone"></ngx-datatable-column>
-      <ngx-datatable-column name="option"></ngx-datatable-column>
+      <ngx-datatable-column [width]="60" name="userState"></ngx-datatable-column>
+      <ngx-datatable-column [width]="60" name="userPhone"></ngx-datatable-column>
+      <ngx-datatable-column name="option">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a href="javascript:;" class="color-blue"> 启用 </a>
+          <a href="javascript:;" class="color-red"> 禁用 </a>
+          <a href="javascript:;" class="color-orange" (click)="showInfo(row)">查看</a>
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
 
+  </div>
+</div>
+
+<div class="info-box" *ngIf="showUserInfo">
+  <div class="info-content">
+    <div class="mage-title">
+      <h3>用户信息</h3>
+      <b class="color-blue font18 fork" (click)="closeUser()">X</b>
+    </div>
+    <div class="user-content">
+      <span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>
+        <ul class="user-info-list">
+          <li><span class="user-tag">用户账号</span> <input type="text" [(ngModel)]="userInfo.userCount"  [disabled]="showEdit"></li>
+          <li><span class="user-tag">用户名</span> <input type="text" [(ngModel)]="userInfo.userName" [disabled]="showEdit"></li>
+          <li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="userInfo.userType" [disabled]="showEdit"></li>
+          <li><span class="user-tag">用户状态</span> <input type="text" [(ngModel)]="userInfo.userState" [disabled]="showEdit"></li>
+          <li><span class="user-tag">联系方式</span> <input type="text" [(ngModel)]="userInfo.userPhone" [disabled]="showEdit"></li>
+        </ul>
+
+        <button class="btn save-btn">保存</button>
+      </div>
   </div>
 </div>
 <div class="new-user" *ngIf="newUser">
@@ -91,3 +118,4 @@
     </div>
   </div>
 </div>
+

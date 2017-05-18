@@ -12,7 +12,10 @@ export class UserManagementComponent {
 
   rows = [];
   selected = [];
+  userInfo = [];
   newUser = false;
+  showUserInfo = false;
+  showEdit = true;
 
   constructor(public service:MyServiceService){
     this.service.getUser()
@@ -22,14 +25,26 @@ export class UserManagementComponent {
     })
   }
 
+  // 查看用户信息
+  showInfo(row){
+    JSON.stringify(row);
+    this.showUserInfo = true;
+    this.userInfo = row;
+    console.log(this.userInfo);
+  }
 
   //  增加用户
   addUser() {
     this.newUser = true;
   }
 
+  // 修改用户信息
+  editInfo() {
+    this.showEdit = false
+  }
   closeUser() {
     this.newUser = false;
+    this.showUserInfo = false;
   }
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);

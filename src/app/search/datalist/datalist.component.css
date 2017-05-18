@@ -1,5 +1,7 @@
 .searchMenu{
   width: 200px;
+  height: 100%;
+  background: #f3f8fa;
   text-align: center;
   float: left;
 }

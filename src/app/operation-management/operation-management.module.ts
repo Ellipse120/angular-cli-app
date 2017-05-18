@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { RouterModule , Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 
 
 import {UserManagementComponent} from './user-management/user-management.component';
@@ -17,7 +19,8 @@ import {ProManageComponent} from './pro-manage/pro-manage.component';
   imports: [
     BrowserModule,
     RouterModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    FormsModule
   ]
 })
 

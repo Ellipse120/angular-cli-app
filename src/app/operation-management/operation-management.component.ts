@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OperationManagementComponent implements OnInit {
 
-  index;
+  index = 0;
   operateTag = [
     {text: '用户管理', path: 'userManage'},
     {text: '产品管理',path: 'productlist',children: [

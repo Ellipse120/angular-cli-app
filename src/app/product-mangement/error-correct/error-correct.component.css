@@ -1,11 +1,4 @@
-.mage-title{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #39baf6;
-  line-height: 50px;
-}
+
 .content-search{
   width: 320px;
   height: 30px;

@@ -16,7 +16,10 @@ export class ProductListComponent implements OnInit{
   // 定义table
   rows = [];
   selected = [];
+  proInfo = [];
   import = false;
+  showEdit = true;
+  showProInfo = false;
 
   constructor(public service: MyServiceService) {
     // 获取产品列表数据
@@ -24,12 +27,28 @@ export class ProductListComponent implements OnInit{
       this.rows = data;
       console.log(this.rows)
     });
-
   }
+
   // 录入产品
-    proImport() {
-      this.import = true;
-    }
+  proImport() {
+    this.import = true;
+  }
+
+  // 查看产品信息
+  viewInfo(info) {
+    this.proInfo = info;
+    this.showProInfo = true;
+  }
+
+  // 编辑信息
+  editInfo() {
+    this.showEdit = false;
+  }
+
+  // 关闭信息弹框
+  closeProInfo() {
+    this.showProInfo = false;
+  }
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
 
