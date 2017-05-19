@@ -1,8 +1,11 @@
 <nav class="header">
-  <div class="head-left"></div>
+  <div class="head-left" routerLink="/"></div>
   <div class="head-right">
     <button class="btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>
     <button class="btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>
+    <div class="operate-mage-btn" routerLink="/operation" *ngIf="isLogin">
+      运营中心
+    </div>
     <!--产品管理-->
     <div class="pro-mage-btn" routerLink="/promange" *ngIf="isLogin">
       产品管理

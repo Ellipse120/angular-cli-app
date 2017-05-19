@@ -14,6 +14,8 @@ import {ActivatedRoute} from '@angular/router'
 export class DataDetailComponent {
   @ViewChild('ueditor') ueditor: Ng2Ueditor;
 
+  zanNum = 0;
+  nozanNum = 0;
   id: string;
   showProblem = false;
   full_source = '请输入评论';
@@ -35,6 +37,10 @@ export class DataDetailComponent {
 
   }
 
+//  赞
+  zan() {
+    this.zanNum++;
+  }
 
 //  纠错
   writeProblem() {

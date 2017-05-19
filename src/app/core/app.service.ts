@@ -8,6 +8,9 @@ export class MyServiceService {
 
   private dataListUrl = './assets/data/';
 
+  //private url = 'http://ysl.dev.cjzc.net.cn/' ;
+  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/' ;
+
   // 用户信息
   user = {
     count: '123@qq.com',
@@ -22,6 +25,18 @@ export class MyServiceService {
   };
 
   constructor(public http: Http) {
+
+  }
+
+  //通过标签获取数据
+  getTagDimensions():Promise<any>{
+    //var headers = new Headers({ 'Content-Type': 'application/json' });
+    //var options = new RequestOptions({ headers: headers });
+    return new Promise(resolve => {
+      this.http.get(this.url + 'api/tag/dimension')
+          .toPromise()
+          .then(response => resolve(response.json()))
+    })
   }
 
   // 获得用户列表

@@ -30,6 +30,7 @@
 .dataList{
   width: 100%;
   padding-left:220px;
+  padding-bottom: 30px;
 }
 .dataItem{
   padding:5px;

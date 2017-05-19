@@ -1,7 +1,7 @@
 .header {
   position: absolute;
   width: 100%;
-  padding: 0 120px;
+  padding: 0 90px;
   height: 50px;
   line-height: 50px;
   background: #fff;
@@ -15,10 +15,13 @@
   width: 201px;
   height: 34px;
   float: left;
+  outline: none;
+  cursor: pointer;
   background: url("../../../assets/images/logo.png") no-repeat;
 }
-.header .head-right {
+.head-right {
   float: right;
+  display: flex;
 }
 .header .btn {
   padding: 5px 10px;
@@ -28,7 +31,8 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.pro-mage-btn{
+
+.pro-mage-btn,.operate-mage-btn{
   display: inline-block;
   width: 120px;
   text-align: center;
@@ -37,6 +41,7 @@
   height: 50px;
   cursor: pointer;
   outline: none;
+  border-right: none;
 }
 .user-center-btn {
   width: 120px;
@@ -69,6 +74,7 @@
   color: #1c94c4;
   border: 1px solid #1c94c4;
   cursor: pointer;
+  margin-right: 10px;
 }
 .header .register-btn {
   background: #1c94c4;

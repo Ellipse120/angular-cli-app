@@ -66,8 +66,8 @@
                 <img src="./assets/images/comment.png">
                 <span class="my-comments" (click)="showComment(0)">评论(2)</span>
                 <div class="my-asses">
-                  <span class="green asses-zan"><img src="./assets/images/zan.png"> 0 </span>
-                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> 0 </span>
+                  <span class="green asses-zan"><img (click)="zan()" src="./assets/images/zan.png"> {{zanNum}} </span>
+                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> {{nozanNum}} </span>
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 /*详情页*/
 .detail-left{
   width: 75%;
+  padding-bottom: 50px;
   display: inline-block;
 }
 .detail-right{

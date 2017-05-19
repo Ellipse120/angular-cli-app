@@ -4,17 +4,6 @@
   outline:none;
   padding-left: 10px;
 }
-.search-btn{
-  width: 82px;
-  height: 30px;
-  vertical-align: middle;
-  background-color: #39baf6;
-  margin-left: -5px;
-  cursor: pointer;
-  background-image: url("../../../assets/images/search.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
 .own-prolist{
   margin-top: 20px;
   width: 100%;

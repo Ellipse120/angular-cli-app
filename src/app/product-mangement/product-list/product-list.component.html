@@ -80,12 +80,12 @@
         <ngx-datatable-column [width]="30" name="isMoney"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="state"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="updateTime"></ngx-datatable-column>
-        <ngx-datatable-column name="option">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="option" [width]="220">
+          <ng-template let-row="row" ngx-datatable-cell-template >
             <a href="javascript:;" class="color-blue"> 启用 </a>
             <a href="javascript:;" class="color-red"> 禁用 </a>
-            <a href="javascript:;" class="green"> 上传 </a>
-            <a href="javascript:;" class="color-orange" (click)="viewInfo(row)">查看 / 修改 </a>
+            <a href="javascript:;" class="file">上传<input type="file"></a>
+            <a href="javascript:;" class="color-orange" (click)="viewInfo(row)">查看/修改 </a>
 
           </ng-template>
         </ngx-datatable-column>

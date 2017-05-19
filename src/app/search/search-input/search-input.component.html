@@ -1,9 +1,11 @@
 <!--搜索框-->
 <div class="search">
   <div class="search-box">
-    <input type="text" class="search-input">
-    <div class="searchbtn" routerLink="/datalist">搜索</div>
-    <span class="triangle-down triggle-position" (click)="toggleAdvancedBox()"></span>
+    <div style="display:flex;">
+      <input type="text" class="search-input">
+      <div class="searchbtn" routerLink="/datalist">搜索</div>
+      <span class="triangle-down triggle-position" (click)="toggleAdvancedBox()"></span>
+    </div>
     <div class="advanced-box" [hidden]="ishide">
       <ul>
         <li><span>包含全部检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.allSearchW"></li>

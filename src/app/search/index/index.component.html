@@ -7,7 +7,7 @@
   <search-input></search-input>
   <div class="searchCond">
     <ul class="searchType">
-      <li *ngFor="let item of types;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.text}}</button>
+      <li *ngFor="let item of tagDimensions;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
         <ul class="secondMenu" *ngIf="isActive == i">
           <li *ngFor="let item of item.children" class="second-nav">{{item.text}}</li>
         </ul></li>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MyServiceService} from "../../core/app.service";
 
 @Component({
   selector: 'app-index',
@@ -8,34 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class IndexComponent implements OnInit {
 
   isActive = 0;
-  types = [
-    {
-      text: '对外贸易', children: [
-      {text: '对外贸易-child1'},
-      {text: '对外贸易-child1'},
-      {text: '对外贸易-child1'},
-      {text: '对外贸易-child1'},
-      {text: '对外贸易-child1'},
-      {text: '对外贸易-child1'},
-      {text: '对外贸易-child1'}
+  tagDimensions = [];
 
-    ]
-    },
-    {
-      text: '经济主题', children: [
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-      {text: '经济主题-child1'},
-    ]
-    }
-  ]
+  constructor(public service: MyServiceService) {
 
+    // 获取首页标签数据
+    this.service.getTagDimensions()
+        .then( data => {
+          this.tagDimensions = data;
+          console.log(this.tagDimensions);
+        })
+  }
 
   changeTab(i) {
     this.isActive = i;
