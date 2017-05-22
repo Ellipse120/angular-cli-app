@@ -1,10 +1,9 @@
 .import-form{
   width: 960px;
-  height: 590px;
   margin:0 auto;
   background: #fff;
-  margin-top: 114px;
-  padding:28px;
+  margin-top: 80px;
+  padding:10px 30px;
 }
 .import-title{
   width: 100%;
@@ -27,11 +26,15 @@
 }
 .form-group{
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
-.form-control{
-  border:1px solid #ddd;
-  padding:10px;
+.form-control {
+  border: 1px solid #ddd;
+  padding: 10px;
   outline: none;
+  margin-right: 20px;
+  width: auto;
 }
 textarea{
   width: 600px;
@@ -48,4 +51,39 @@ select{
   background-color: rgba(0, 0, 0, 0.13);
   top:0;
   left: 0;
+}
+.tagDimensions{
+  display: inline-block;
+  width: 600px;
+  text-align: left;
+  list-style-type: none;
+  position: relative;
+  min-height: 200px;
+  margin-top: 20px;
+}
+.tagDimensions li{
+  float: left;
+  cursor: pointer;
+  background: #fff;
+}
+.secondTagDimensions{
+  width: 500px;
+  position: absolute;
+  list-style: none;
+  margin-top: 20px;
+  color: #676767;
+  left:0;
+  top:8px;
+  border:1px solid #d8e5e7;
+}
+.second-nav{
+  padding:5px 10px;
+  margin:5px 10px;
+  background: #f6f9fa;
+}
+.isActive{
+  color: #1c94c4;
+  border:1px solid #d8e5e7;
+  border-bottom: none;
+  padding:5px 10px;
 }

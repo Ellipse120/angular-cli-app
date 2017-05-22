@@ -9,7 +9,7 @@
     <ul class="searchType">
       <li *ngFor="let item of tagDimensions;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
         <ul class="secondMenu" *ngIf="isActive == i">
-          <li *ngFor="let item of item.children" class="second-nav">{{item.text}}</li>
+          <li *ngFor="let itemc of item.items" class="second-nav">{{itemc.name}}</li>
         </ul></li>
     </ul>
   </div>

@@ -33,7 +33,7 @@ export class MyServiceService {
     //var headers = new Headers({ 'Content-Type': 'application/json' });
     //var options = new RequestOptions({ headers: headers });
     return new Promise(resolve => {
-      this.http.get(this.url + 'api/tag/dimension')
+      this.http.get(this.url + 'api/tag/dimension/hierarchy')
           .toPromise()
           .then(response => resolve(response.json()))
     })

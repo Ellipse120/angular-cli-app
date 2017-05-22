@@ -2,11 +2,7 @@
   <div class="detail-left">
     <div class="clearfix">
       <h2>wind万得资讯数据终端</h2>
-      <div class="error-correct" (click)="writeProblem()">纠错</div>
-      <div class="problem" *ngIf="showProblem">
-        <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area"></textarea>
-        <button class="btn error-submit">提交</button>
-      </div>
+
       <div class="data-info">
         <img src="./assets/images/detail1.png" class="firmlogo">
         <ul class="firm-detail">
@@ -31,24 +27,61 @@
       <p>精于数据，以数据为起点，万得资讯紧密跟随金融市场日新月异的发展，不断向新的领域发展，新的产品和服务战略不断在延伸。</p>
     </div>
 
+    <!--纠错处理-->
+      <div class="error-correct" (click)="writeProblem()">纠错</div>
+      <div class="problem" *ngIf="showProblem">
+        <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area"></textarea>
+        <button class="btn error-submit">提交</button>
+      </div>
+
     <div class="write-comment">
-      <h3><img src="./assets/images/write.png">&nbsp;&nbsp;发表评论</h3>
-      <div class="score">
+      <h3><img src="./assets/images/write.png">&nbsp;&nbsp;评论</h3>
+      <div class="score clearfix">
         <span>请点击星级进行评分</span>
-        <ul class="start-score">
-          <li></li> <li></li> <li></li> <li></li> <li></li>
-        </ul>
-        <i class="color-orange">(0分)</i>
+        <div class="scores-item">
+          <span>及时性</span>
+          <ul class="start-score">
+            <li></li> <li></li> <li></li> <li></li> <li></li>
+          </ul>
+          <i class="color-orange">(0分)</i>
+        </div>
+
+        <div class="scores-item">
+          <span>准确性</span>
+          <ul class="start-score">
+            <li></li> <li></li> <li></li> <li></li> <li></li>
+          </ul>
+          <i class="color-orange">(0分)</i>
+        </div>
+
+        <div class="scores-item">
+          <span>规范性</span>
+          <ul class="start-score">
+            <li></li> <li></li> <li></li> <li></li> <li></li>
+          </ul>
+          <i class="color-orange">(0分)</i>
+        </div>
+
+        <div class="scores-item">
+          <span>完整性</span>
+          <ul class="start-score">
+            <li></li> <li></li> <li></li> <li></li> <li></li>
+          </ul>
+          <i class="color-orange">(0分)</i>
+        </div>
+
+
+
       </div>
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
         <ng2-ueditor [(ngModel)]="full_source" [setting]="setting"></ng2-ueditor>
         <div class="push">
-          <label for="checkbox"><input type="checkbox" id="checkbox">匿名</label>
           <button class="btn push-btn">发布</button>
         </div>
       </div>
     </div>
+
 
     <!--评论区域-->
     <div class="total-comment">

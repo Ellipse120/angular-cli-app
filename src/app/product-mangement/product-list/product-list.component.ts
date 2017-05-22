@@ -15,8 +15,11 @@ export class ProductListComponent implements OnInit{
 
   // 定义table
   rows = [];
+  rowIndex;
   selected = [];
   proInfo = [];
+  isOn = [];
+  rowState = true;
   import = false;
   showEdit = true;
   showProInfo = false;
@@ -25,8 +28,15 @@ export class ProductListComponent implements OnInit{
     // 获取产品列表数据
     this.service.fetch((data) => {
       this.rows = data;
-      console.log(this.rows)
+      for(let i=0;i<data.length;i++){
+        this.isOn.push(true);
+      }
     });
+  }
+
+  // 启用或禁用
+  openOrClose(i) {
+    this.isOn[i] = !this.isOn[i];
   }
 
   // 录入产品
@@ -49,8 +59,9 @@ export class ProductListComponent implements OnInit{
   closeProInfo() {
     this.showProInfo = false;
   }
+
+  // 选择每一行触发事件
   onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
 
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
@@ -58,18 +69,6 @@ export class ProductListComponent implements OnInit{
 
   onActivate(event) {
     console.log('Activate Event', event);
-  }
-
-  add() {
-    this.selected.push(this.rows[1], this.rows[3]);
-  }
-
-  update() {
-    this.selected = [ this.rows[1], this.rows[3] ];
-  }
-
-  remove() {
-    this.selected = [];
   }
 
   ngOnInit() {}

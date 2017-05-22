@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule,Routes} from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 
 
 import {ProductListComponent} from './product-list/product-list.component';
@@ -35,7 +37,10 @@ const productRouters:Routes = [
     RouterModule.forChild(productRouters)
   ],
   exports: [
-    RouterModule
+    RouterModule,
+  ],
+  providers: [
+    { provide: LocationStrategy ,useClass: HashLocationStrategy }
   ]
 })
 

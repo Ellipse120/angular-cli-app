@@ -21,7 +21,7 @@
   color: #ffa54e;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .problem{
   width: 450px;
@@ -31,6 +31,7 @@
   background-size:100% 100%;
   padding: 20px;
   position: absolute;
+  z-index: 1000;
 }
 .no-border{
   border:none;
@@ -91,13 +92,21 @@
 .score{
   line-height: 48px;
   background: #f9fbfb;
+  padding:0 20px;
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*margin-bottom: 10px;*/
+}
+.scores-item{
+  display: inline-block;
+  padding:0 20px;
+  float: right;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 .start-score{
   display: inline-block;
-  margin-left: 46px;
+  margin-left: 10px;
   margin-right: 10px;
 }
 .start-score li{

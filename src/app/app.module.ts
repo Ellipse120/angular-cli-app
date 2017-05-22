@@ -41,7 +41,8 @@ import {FooterComponent} from './core/footer/footer.component';
     Ng2UeditorModule,
     ProductMangementModule,
     UserCenterModule,
-    OperationManagementModule
+    OperationManagementModule,
+
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]

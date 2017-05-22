@@ -154,6 +154,10 @@ textarea::-webkit-scrollbar-thumb
   border: none;
 }
 
+.calendar{
+  width: 200px;
+}
+
 .search{
   display: flex;
   align-items: center;
@@ -317,6 +321,13 @@ textarea::-webkit-scrollbar-thumb
   margin-top: 40px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+.btn-none{
+  border:none;
+  background: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-family: '微软雅黑';
 }
 .btn-submit{
   width: 100px;

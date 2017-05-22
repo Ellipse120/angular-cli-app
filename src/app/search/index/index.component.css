@@ -49,13 +49,6 @@
   margin:5px 10px;
   background: #f6f9fa;
 }
-.btn-none{
-  border:none;
-  background: #fff;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-family: '微软雅黑';
-}
 .isActive{
   color: #1c94c4;
   border:1px solid #d8e5e7;

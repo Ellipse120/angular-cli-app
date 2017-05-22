@@ -54,17 +54,17 @@ const appRouters:Routes = [
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRouters),
+    RouterModule.forRoot(appRouters,{useHash: true}),
     ProductRoutingModule,
     OperationRoutingModule
   ],
   exports: [
     RouterModule
-  ]
+  ],
   //使用HashLocationStrategy 会在路径中添加#号
-  //providers: [
-  //  { provide: LocationStrategy ,useClass: HashLocationStrategy }
-  //]
+  providers: [
+    { provide: LocationStrategy ,useClass: HashLocationStrategy }
+  ]
 })
 
 

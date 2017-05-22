@@ -1,7 +1,7 @@
 <div class="promage-nav">
   <div class="mage-title">
     <h3>产品管理</h3>
-    <div>
+    <div style="display:flex;">
       <input type="text" class="content-search" placeholder="名称/简介">
       <button class="btn search-btn"></button>
     </div>
@@ -82,8 +82,7 @@
         <ngx-datatable-column [width]="60" name="updateTime"></ngx-datatable-column>
         <ngx-datatable-column name="option" [width]="220">
           <ng-template let-row="row" ngx-datatable-cell-template >
-            <a href="javascript:;" class="color-blue"> 启用 </a>
-            <a href="javascript:;" class="color-red"> 禁用 </a>
+            <img (click)="openOrClose(row.$$index)" [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' " alt="">
             <a href="javascript:;" class="file">上传<input type="file"></a>
             <a href="javascript:;" class="color-orange" (click)="viewInfo(row)">查看/修改 </a>
 

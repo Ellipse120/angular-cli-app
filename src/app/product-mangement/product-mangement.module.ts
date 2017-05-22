@@ -11,6 +11,7 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {ErrorCorrectComponent} from './error-correct/error-correct.component';
 import {ProductImportComponent} from './product-import/product-import.component';
 import {ProductRoutingModule} from './product-routing.module';
+import {DatepickerModule} from "ngx-date-picker/index";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ProductRoutingModule} from './product-routing.module';
     BrowserModule,
     NgxDatatableModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    DatepickerModule
   ]
 })
 

@@ -20,27 +20,36 @@
                  [(ngModel)]="data.url" #url>
         </div>
         <div class="form-group">
-          <label for="from">数据来源</label>
+          <label for="from" >数据来源</label>
           <select name="dataFrom" id="from" class="form-control" required
             [(ngModel)]="data.from" #from></select>
 
-          <label for="sample">数据样本</label>
-          <select name="sample" id="sample" class="form-control" required
-            [(ngModel)]="data.sample" #sample></select>
-
-          <label for="collect">采集方式</label>
-          <select name="collect" id="collect" class="form-control" required
-            [(ngModel)]="data.collect" #collect></select>
-
-          <label for="service">服务方式</label>
-          <select name="service" id="service" class="form-control" required
-           [(ngModel)]="data.service" #service></select>
+          <label for="type">数据类型</label>
+          <select name="dataFrom" id="type" class="form-control" required
+                  [(ngModel)]="data.type" #type></select>
         </div>
 
         <div class="form-group">
-          <label for="isMoney">是否收费</label>
-          <select name="isMoney" id="isMoney" class="form-control" required
-           [(ngModel)]="data.isMoney" #isMoney></select>
+          <label for="sample">数据样本</label>
+          <input type="file">
+          <!--<a href="javascript:;" class="file" id="sample">上传</a>-->
+        </div>
+
+        <div class="form-group">
+
+          <label for="collect">采集方式</label>
+          <select name="collect" id="collect" class="form-control" required
+                  [(ngModel)]="data.collect" #collect></select>
+
+          <label for="service">服务方式</label>
+          <select name="service" id="service" class="form-control" required
+                  [(ngModel)]="data.service" #service></select>
+        </div>
+
+        <div class="form-group">
+          <label>是否收费</label>
+          <input type="radio" name="isMoney"> 是
+          <input type="radio" name="isMoney"> 否
         </div>
 
         <div class="form-group">
@@ -49,16 +58,20 @@
            [(ngModel)]="data.area" #area></select>
 
           <label>时间范围</label>
-          <select name="timeFrom" id="timeFrom" class="form-control" required
-           [(ngModel)]="data.timeFrom" #timeFrom></select> -
-          <select name="timeTo" id="timeTo" class="form-control" required
-           [(ngModel)]="data.timeTo" #timeTo></select>
+          <ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="timeFrom"></ngx-datepicker> -
+          <ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="timeTo"></ngx-datepicker>
         </div>
 
         <div class="form-group">
-          <label for="labelClassify">标签分类</label>
-          <select name="labelClassify" id="labelClassify" class="form-control" required
-           [(ngModel)]="data.label" #label></select>
+          <label>标签分类</label>
+          <div>
+            <ul class="tagDimensions">
+              <li *ngFor="let item of tagDimensions;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
+                <ul class="secondTagDimensions" *ngIf="isActive == i">
+                  <li *ngFor="let itemc of item.children"  class="second-nav"><input type="checkbox">{{itemc.name}}</li>
+                </ul></li>
+            </ul>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-submit">提交</button>
