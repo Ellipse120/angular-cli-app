@@ -3,7 +3,7 @@
     <h3>用户管理</h3>
     <div style="display: flex;">
       <input type="text" class="content-search" placeholder="名称/简介">
-      <button class="btn search-btn"></button>
+      <button class="ysl-btn search-btn"></button>
     </div>
   </div>
   <div class="total-user-list">
@@ -23,7 +23,7 @@
         <option value="2">审核通过</option>
         <option value="3">审核未通过</option>
       </select>
-      <button class="btn add-user" (click)="addUser()"><img src="./assets/images/pen.png">增加用户</button>
+      <button class="ysl-btn add-user" (click)="addUser()"><img src="./assets/images/pen.png">增加用户</button>
     </div>
   </div>
 
@@ -83,7 +83,7 @@
           <li><span class="user-tag">联系方式</span> <input type="text" [(ngModel)]="userInfo.userPhone" [disabled]="showEdit"></li>
         </ul>
 
-        <button class="btn save-btn">保存</button>
+        <button class="ysl-btn save-btn">保存</button>
       </div>
   </div>
 </div>
@@ -114,7 +114,7 @@
         <li><span>电子邮件</span> <input type="email" class="box-type"></li>
         <li><span>公司地址</span> <input type="text" class="box-type"></li>
       </ul>
-      <button class="btn btn-submit">提交</button>
+      <button class="ysl-btn btn-submit">提交</button>
     </div>
   </div>
 </div>

@@ -1,4 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';/* You can add global styles to this file, and also import other style files */
 html{
   padding:0;
   height: 100%;
@@ -146,16 +148,16 @@ textarea::-webkit-scrollbar-thumb
   visibility: hidden;
   clear: both;
 }
-.btn{
+.ysl-btn{
   border:none;
   font-family: '微软雅黑';
 }
-.btn:focus{
+.ysl-btn:focus{
   border: none;
 }
 
 .calendar{
-  width: 200px;
+  width: 150px;
 }
 
 .search{
@@ -359,11 +361,8 @@ textarea::-webkit-scrollbar-thumb
 .ng2-pagination{
   margin-top: 1rem;
 }
-.pager li{
-  padding: 5px 10px !important;
-  background: #f7f7f7;
-  border:1px solid #eee;
-  margin: 0 10px !important;
+.ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
+  text-align: center;
 }
 .ngx-datatable .datatable-header{
   width: 100% !important;
@@ -371,10 +370,6 @@ textarea::-webkit-scrollbar-thumb
   background: #eee;
   display: flex !important;
   align-items: center;
-  padding-left: 9px;
-}
-.ngx-datatable .datatable-body{
-  padding-left: 6px;
 }
 .datatable-header-inner{
   width: 100% !important;

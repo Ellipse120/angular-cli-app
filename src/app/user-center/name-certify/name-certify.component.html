@@ -10,10 +10,10 @@
       <li><span>姓名</span> <input class="iden-input" type="text" placeholder="请输入真实姓名" [(ngModel)]="iden.name"></li>
       <li><span>手机号</span> <input class="iden-input" type="tel" placeholder="请输入您的手机号" [(ngModel)]="iden.tel"></li>
       <li><span>验证码</span><input class="iden-input" type="text" placeholder="请输入验证码" style="width: 156px" [(ngModel)]="iden.code">
-        <button class="btn iden-code" [disabled]="able && !iden.tel" (click)="sendCode()">{{content}}</button>
+        <button class="ysl-btn iden-code" [disabled]="able && !iden.tel" (click)="sendCode()">{{content}}</button>
       </li>
     </ul>
-    <button class="btn btn-ensure" (click)="perEnsure(indexType)">确认</button>
+    <button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>
   </div>
   <!--认证成功后显示-->
   <div class="iden-success" *ngIf="indexType==0 && perstate">
@@ -32,7 +32,7 @@
       <li><span>手机号</span><input class="iden-input" type="text" placeholder="请输入您的手机号" [(ngModel)]="goviden.tel"></li>
       <li><span>公司官网URL</span> <input class="iden-input" type="tel" placeholder="请输入公司官网URL" [(ngModel)]="goviden.url"></li>
     </ul>
-    <button class="btn btn-ensure" (click)="perEnsure(indexType)">确认</button>
+    <button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>
   </div>
   <!--机构认证成功后显示-->
   <div class="iden-success" *ngIf="indexType==1 && govstate">

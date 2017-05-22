@@ -8,13 +8,11 @@ import { FormsModule } from '@angular/forms';
 
 import {UserManagementComponent} from './user-management/user-management.component';
 import {OperationManagementComponent} from './operation-management.component';
-import {ProManageComponent} from './pro-manage/pro-manage.component';
 
 @NgModule({
   declarations: [
     OperationManagementComponent,
-    UserManagementComponent,
-    ProManageComponent
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

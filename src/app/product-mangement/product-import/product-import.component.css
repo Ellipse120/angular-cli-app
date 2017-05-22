@@ -29,12 +29,11 @@
   display: flex;
   align-items: center;
 }
-.form-control {
+.ysl-form-control {
   border: 1px solid #ddd;
   padding: 10px;
   outline: none;
   margin-right: 20px;
-  width: auto;
 }
 textarea{
   width: 600px;
@@ -58,7 +57,7 @@ select{
   text-align: left;
   list-style-type: none;
   position: relative;
-  min-height: 200px;
+  min-height: 134px;
   margin-top: 20px;
 }
 .tagDimensions li{

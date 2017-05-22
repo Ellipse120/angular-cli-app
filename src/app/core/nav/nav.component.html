@@ -1,8 +1,8 @@
-<nav class="header">
+<nav class="ysl-header">
   <div class="head-left" routerLink="/"></div>
   <div class="head-right">
-    <button class="btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>
-    <button class="btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>
+    <button class="ysl-btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>
+    <button class="ysl-btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>
     <div class="operate-mage-btn" routerLink="/operation" *ngIf="isLogin">
       运营中心
     </div>
@@ -29,7 +29,7 @@
       <label for="auto-login" class="color-gray"><input type="checkbox" id="auto-login"> 下次自动登录</label>
       <a class="forget-psd">忘记密码? </a>
     </div>
-    <button class="login btn" (click)="userLogin(user)">登录</button>
+    <button class="login ysl-btn" (click)="userLogin(user)">登录</button>
     <p class="text-center">还没有账号？ <a href="javascript:;" class="color-blue" (click)="gotoRegitster()" >点击注册</a></p>
   </div>
 </div>

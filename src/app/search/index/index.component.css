@@ -23,7 +23,7 @@
   color: #929292;
 }
 .searchType{
-  width: 600px;
+  width: 800px;
   margin:0 auto;
   margin-top: 40px;
   text-align: left;
@@ -34,24 +34,27 @@
   float: left;
   cursor: pointer;
 }
+.ysl-tab-btn{
+  padding: 15px 25px;
+}
 .secondMenu{
-  width: 500px;
+  width: 100%;
   position: absolute;
   list-style: none;
   margin-top: 20px;
   color: #676767;
+  padding:30px;
   left:0;
-  top:8px;
+  top:30px;
   border:1px solid #d8e5e7;
 }
 .second-nav{
-  padding:5px 10px;
-  margin:5px 10px;
+  margin:5px 15px;
+  padding: 10px;
   background: #f6f9fa;
 }
 .isActive{
   color: #1c94c4;
   border:1px solid #d8e5e7;
   border-bottom: none;
-  padding:5px 10px;
 }

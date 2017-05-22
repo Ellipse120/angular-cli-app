@@ -5,32 +5,32 @@
       <form #dataForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="dataName">名称</label>
-          <input type="text" class="form-control" id="dataName" required name="dataName"
+          <input type="text" class="ysl-form-control" id="dataName" required name="dataName"
                  [(ngModel)]="data.name" #name="ngModel">
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger color-red">名称不能为空</div>
         </div>
         <div class="form-group">
           <label for="summary">简介</label>
-          <textarea id="summary" class="form-control" required name="proSummary"
+          <textarea id="summary" class="ysl-form-control" required name="proSummary"
                  [(ngModel)]="data.summary" #summary></textarea>
         </div>
         <div class="form-group">
           <label for="url">产品官网</label>
-          <input type="text" id="url" class="form-control" required name="url"
+          <input type="text" id="url" class="ysl-form-control" required name="url"
                  [(ngModel)]="data.url" #url>
         </div>
         <div class="form-group">
           <label for="from" >数据来源</label>
-          <select name="dataFrom" id="from" class="form-control" required
+          <select name="dataFrom" id="from" class="ysl-form-control" required
             [(ngModel)]="data.from" #from></select>
 
           <label for="type">数据类型</label>
-          <select name="dataFrom" id="type" class="form-control" required
+          <select name="dataFrom" id="type" class="ysl-form-control" required
                   [(ngModel)]="data.type" #type></select>
         </div>
 
         <div class="form-group">
-          <label for="sample">数据样本</label>
+          <label>数据样本</label>
           <input type="file">
           <!--<a href="javascript:;" class="file" id="sample">上传</a>-->
         </div>
@@ -38,11 +38,11 @@
         <div class="form-group">
 
           <label for="collect">采集方式</label>
-          <select name="collect" id="collect" class="form-control" required
+          <select name="collect" id="collect" class="ysl-form-control" required
                   [(ngModel)]="data.collect" #collect></select>
 
           <label for="service">服务方式</label>
-          <select name="service" id="service" class="form-control" required
+          <select name="service" id="service" class="ysl-form-control" required
                   [(ngModel)]="data.service" #service></select>
         </div>
 
@@ -54,7 +54,7 @@
 
         <div class="form-group">
           <label for="area">区域范围</label>
-          <select name="area" id="area" class="form-control" required
+          <select name="area" id="area" class="ysl-form-control" required
            [(ngModel)]="data.area" #area></select>
 
           <label>时间范围</label>
@@ -66,15 +66,23 @@
           <label>标签分类</label>
           <div>
             <ul class="tagDimensions">
-              <li *ngFor="let item of tagDimensions;let i=index"><button class="btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
+              <li *ngFor="let item of tagDimensions;let i=index"><button class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
                 <ul class="secondTagDimensions" *ngIf="isActive == i">
-                  <li *ngFor="let itemc of item.children"  class="second-nav"><input type="checkbox">{{itemc.name}}</li>
-                </ul></li>
+                  <li *ngFor="let itemc of item.items"  class="second-nav"><input type="checkbox">{{itemc.name}}</li>
+                </ul>
+              </li>
             </ul>
+            <!--<ul>-->
+              <!--<li *ngFor="let item of tagDimensions">-->
+                <!--<ul>-->
+                  <!--<li *ngFor="let itemc of item.items" *ngIf="isActive == i">{{itemc.name}}</li>-->
+                <!--</ul>-->
+              <!--</li>-->
+            <!--</ul>-->
           </div>
         </div>
 
-        <button type="submit" class="btn btn-submit">提交</button>
+        <button type="submit" class="ysl-btn btn-submit">提交</button>
       </form>
     </div>
   </div>

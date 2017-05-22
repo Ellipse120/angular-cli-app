@@ -3,7 +3,7 @@
     <h3>产品管理</h3>
     <div style="display:flex;">
       <input type="text" class="content-search" placeholder="名称/简介">
-      <button class="btn search-btn"></button>
+      <button class="ysl-btn search-btn"></button>
     </div>
   </div>
   <div class="own-prolist">
@@ -29,7 +29,7 @@
         <option value="2">一月内</option>
         <option value="3">三月内</option>
       </select>
-      <button class="btn pro-import" (click)="proImport()"><img src="./assets/images/pen.png">录入产品</button>
+      <button class="ysl-btn pro-import" (click)="proImport()"><img src="./assets/images/pen.png">录入产品</button>
     </div>
 
     <div class="pro-list">
@@ -109,7 +109,7 @@
         <li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.updateTime" [disabled]="showEdit"></li>
       </ul>
 
-      <button class="btn save-btn">保存</button>
+      <button class="ysl-btn save-btn">保存</button>
     </div>
   </div>
 </div>

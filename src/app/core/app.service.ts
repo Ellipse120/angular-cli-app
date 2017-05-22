@@ -9,7 +9,7 @@ export class MyServiceService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/' ;
+  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
 
   // 用户信息
   user = {

@@ -113,8 +113,8 @@
 }
 .base-info-list li{
   width: 100%;
-  line-height: 50px;
   text-align: right;
+  margin-bottom:10px;
 }
 .base-info-list input{
   width: 320px;
@@ -123,8 +123,8 @@
 }
 .gov-info-list li{
   width: 100%;
-  line-height: 50px;
   text-align: right;
+  margin-bottom: 10px;
 }
 .gov-info-list input{
   width: 320px;

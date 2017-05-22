@@ -1,4 +1,4 @@
-.header {
+.ysl-header {
   position: absolute;
   width: 100%;
   padding: 0 90px;
@@ -11,7 +11,7 @@
   align-items: center;
   z-index: 100000;
 }
-.header .head-left {
+.ysl-header .head-left {
   width: 201px;
   height: 34px;
   float: left;
@@ -23,7 +23,7 @@
   float: right;
   display: flex;
 }
-.header .btn {
+.ysl-header .ysl-btn {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
@@ -68,16 +68,22 @@
   background: #39baf6;
   color: #fff;
 }
-.header .login-btn {
+.ysl-header .login-btn {
   background: #fff;
   font-size: 18px;
   color: #1c94c4;
   border: 1px solid #1c94c4;
   cursor: pointer;
   margin-right: 10px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
 }
-.header .register-btn {
+.ysl-header .register-btn {
   background: #1c94c4;
   font-size: 18px;
   color: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
 }
