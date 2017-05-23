@@ -51,6 +51,10 @@ select{
   top:0;
   left: 0;
 }
+.ysl-import-tag{
+  height: 200px;
+  overflow-y: scroll;
+}
 .tagDimensions{
   display: inline-block;
   width: 600px;

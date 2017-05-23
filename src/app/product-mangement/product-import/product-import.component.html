@@ -48,7 +48,7 @@
 
         <div class="form-group">
           <label>是否收费</label>
-          <input type="radio" name="isMoney"> 是
+          <input type="radio" name="isMoney"> 是 &nbsp;&nbsp;
           <input type="radio" name="isMoney"> 否
         </div>
 
@@ -58,31 +58,24 @@
            [(ngModel)]="data.area" #area></select>
 
           <label>时间范围</label>
-          <ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="timeFrom"></ngx-datepicker> -
-          <ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="timeTo"></ngx-datepicker>
+          <ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> -
+          <ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>
         </div>
 
         <div class="form-group">
           <label>标签分类</label>
-          <div>
+          <div class="ysl-import-tag">
             <ul class="tagDimensions">
               <li *ngFor="let item of tagDimensions;let i=index"><button class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
                 <ul class="secondTagDimensions" *ngIf="isActive == i">
-                  <li *ngFor="let itemc of item.items"  class="second-nav"><input type="checkbox">{{itemc.name}}</li>
+                  <li *ngFor="let itemc of item.items"  class="second-nav"><input type="checkbox" [value]="[itemc.name]" (click)="proTagImport(i,item.name)"><span>{{itemc.name}}</span></li>
                 </ul>
               </li>
             </ul>
-            <!--<ul>-->
-              <!--<li *ngFor="let item of tagDimensions">-->
-                <!--<ul>-->
-                  <!--<li *ngFor="let itemc of item.items" *ngIf="isActive == i">{{itemc.name}}</li>-->
-                <!--</ul>-->
-              <!--</li>-->
-            <!--</ul>-->
           </div>
         </div>
 
-        <button type="submit" class="ysl-btn btn-submit">提交</button>
+        <button type="submit" class="ysl-btn btn-submit">保存</button>
       </form>
     </div>
   </div>

@@ -17,6 +17,10 @@ export class SearchInputComponent implements OnInit {
     this.ishide = !this.ishide;
   }
 
+  // 获取是否收费
+  selectMoney(info) {
+    console.log(info)
+  }
   // 提交高级搜索条件
   submitAdvancedSearch() {
     console.log(this.advancedArr);

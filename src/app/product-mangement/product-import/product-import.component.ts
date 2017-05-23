@@ -23,7 +23,6 @@ export class ProductImportComponent implements OnInit {
     this.service.getTagDimensions()
       .then( data => {
         this.tagDimensions = data;
-        console.log(this.tagDimensions);
       })
   }
 

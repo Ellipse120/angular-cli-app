@@ -157,7 +157,8 @@ textarea::-webkit-scrollbar-thumb
 }
 
 .calendar{
-  width: 150px;
+  width: 160px;
+  display: inline-block !important;
 }
 
 .search{
@@ -183,7 +184,7 @@ textarea::-webkit-scrollbar-thumb
 }
 .search-btn{
   width: 82px;
-  height: 31px;
+  height: 30px;
   vertical-align: middle;
   background-color: #39baf6;
   margin-left: -7px;
@@ -191,6 +192,10 @@ textarea::-webkit-scrollbar-thumb
   background-image: url("assets/images/search.png");
   background-repeat: no-repeat;
   background-position: center;
+}
+.ysl-search-box{
+  display: flex;
+  align-items: center;
 }
 .triggle-position{
   position: absolute;
@@ -200,7 +205,6 @@ textarea::-webkit-scrollbar-thumb
 }
 .advanced-box{
   width: 500px;
-  height: 280px;
   text-align: center;
   border:1px solid #d8e5e7;
   border-top:none;
@@ -211,23 +215,35 @@ textarea::-webkit-scrollbar-thumb
   z-index: 1000;
   padding:0 70px;
   padding-top:56px;
+  padding-bottom: 20px;
   font-size: 13px;
   font-family: '微软雅黑';
   color: #2e3e45;
+}
+.advanced-box select{
+  border: 1px solid #d8e5e7;
+  height: 30px;
+  line-height: 30px;
+  width: 150px;
+  padding-left: 10px;
 }
 .advanced-box ul {
   margin-bottom:10px;
 }
 .advanced-box ul li{
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   line-height: 40px;
+}
+.advance-title{
+  width: 100px;
+  text-align: right;
+  display: inline-block;
+  margin-right: 20px;
 }
 .advanced-input{
   width: 222px;
   height: 30px;
-  margin-left: 15px;
   border:1px solid #d8e5e7;
   padding-left:10px;
 }

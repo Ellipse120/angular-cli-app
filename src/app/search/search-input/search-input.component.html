@@ -8,10 +8,30 @@
     </div>
     <div class="advanced-box" [hidden]="ishide">
       <ul>
-        <li><span>包含全部检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.allSearchW"></li>
-        <li><span>包含精确检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.exactWords"></li>
-        <li><span>包含至少一个检索词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.atLeastOne"></li>
-        <li><span>出现检索词的位置</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.wordPosition"></li>
+        <li><span class="advance-title">关键词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.allSearchW"></li>
+        <li><span class="advance-title">来源</span>
+          <select name="" [(ngModel)]="advancedArr.origin">
+            <option value="1">来源</option>
+            <option value="2">个人</option>
+            <option value="3">机构</option>
+          </select>
+        </li>
+        <li><span class="advance-title">是否收费</span>
+          <input type="radio" name="isMoney" value="是" (click)="selectMoney(yes.value)" #yes>是 &nbsp;&nbsp;
+          <input type="radio" name="isMoney" value="否" (click)="selectMoney(no.value)" #no>否
+        </li>
+        <li><span class="advance-title">数据类型</span>
+          <select name="" [(ngModel)]="advancedArr.dataType">
+          </select>
+        </li>
+        <li><span class="advance-title">服务方式</span>
+          <select name="" [(ngModel)]="advancedArr.serviceType">
+          </select>
+        </li>
+        <li><span class="advance-title">采集方式</span>
+          <select name="" [(ngModel)]="advancedArr.collectType">
+          </select>
+        </li>
       </ul>
       <button class="searchbtn ysl-btn" (click)="submitAdvancedSearch()">搜索</button>
     </div>

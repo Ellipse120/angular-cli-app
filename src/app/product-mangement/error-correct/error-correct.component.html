@@ -1,27 +1,18 @@
 <div class="promage-nav">
   <div class="mage-title">
     <h3>产品管理</h3>
-    <div>
+    <div class="ysl-search-box">
       <input type="text" class="content-search" placeholder="名称/简介">
       <button class="ysl-btn search-btn"></button>
     </div>
   </div>
   <div class="own-prolist">
     <div class="selected-filter">
-      <input class="box-type" type="text" placeholder="产品名称">
-      <select class="box-type" name="userType" id="userType">
-        <option value="0">用户名称</option>
-        <option value="1">用户名1</option>
-        <option value="2">用户名2</option>
-        <option value="3">用户名3</option>
-      </select>
+      <input class="box-type" type="text" placeholder="产品名称"> &nbsp;&nbsp;&nbsp;
 
-      <select class="box-type" name="userType" id="updateTime">
-        <option value="0">提交时间</option>
-        <option value="1">一周内</option>
-        <option value="2">一月内</option>
-        <option value="3">三月内</option>
-      </select>
+        <span>提交时间</span>
+        <ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="timeFrom"></ngx-datepicker> -
+        <ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="timeFrom"></ngx-datepicker>
     </div>
 
     <div class="pro-list">
@@ -88,17 +79,9 @@
     <div class="error-content">
       {{error.problem}}
     </div>
-    <h3 style="display: inline-block">修改</h3> <img src="./assets/images/edit.png">
+    <h3 style="display: inline-block">修改链接</h3> <img src="./assets/images/edit.png">
+    <a href="javascript:;">这里是链接</a>
     <div class="error-article">
-      sdgjkdflhgv sd十多个开了房你多高手动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
-      动阀河南加快速度反光闪地方那是多久发货是的佛那十多个动阀河南加快速度反光闪地方那是多久发货是的佛那十多个
     </div>
 
     <button class="ysl-btn btn-submit fr" >提交</button>
