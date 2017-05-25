@@ -1,9 +1,12 @@
 /**
  * Created by Administrator on 2017/5/10.
  */
-import {Component,ViewChild} from '@angular/core';
-import {Ng2Ueditor} from 'ng2-ueditor/src/index';
-import {ActivatedRoute} from '@angular/router'
+import { Component, ViewChild } from '@angular/core';
+import { Ng2Ueditor } from 'ng2-ueditor/src/index';
+import { ActivatedRoute, Params } from '@angular/router'
+
+
+import { MyServiceService } from '../../../core/app.service'
 
 @Component({
   selector: 'data-detail',
@@ -20,6 +23,13 @@ export class DataDetailComponent {
   showProblem = false;
   full_source = '请输入评论';
   isHidden = true;
+  productId;
+  productDetail = {};
+
+  constructor(public route: ActivatedRoute, public service: MyServiceService) {
+    this.productId = this.route.snapshot.params;
+    this.getProductDetail()
+  }
 
   setting = {
     // 这里可以选择自己需要的工具按钮名称,此处仅选择如下几个
@@ -50,5 +60,12 @@ export class DataDetailComponent {
 //  点击评论出现评论框
   showComment() {
     this.isHidden = !this.isHidden;
+  }
+
+  getProductDetail() {
+    this.service.getProductDetail(this.productId.productId)
+      .then(res => {
+        this.productDetail = res;
+      })
   }
 }

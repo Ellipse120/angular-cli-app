@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {MyServiceService} from '../../core/app.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class DatalistComponent implements OnInit {
   num: number;
   numc: number = 0;
   count: number = 384354;
-  dataList;
+  keywordOptions;
+  product = {};
   typeList = [
     {
       text: '时间分类', children: [
@@ -34,8 +36,10 @@ export class DatalistComponent implements OnInit {
     {text: '按照特点排序'}
   ];
 
-  constructor(public service: MyServiceService) {
-    this.getData();
+  constructor(public service: MyServiceService, public route: ActivatedRoute, public router: Router) {
+    this.keywordOptions = this.route.params;
+    this.getProjectList();
+    // this.getData();
   }
 
   // 二级菜单
@@ -47,19 +51,30 @@ export class DatalistComponent implements OnInit {
     this.numc = i;
   }
   // 获取数据
-  getData(): void {
-    this.service
-      .getList()
-      // .then((function(data){this.dataList=data}))
-      .then(dataList => {
-        this.dataList = dataList;
-        console.log(this.dataList);
-      })
-
-  }
+  // getData(): void {
+  //   this.service
+  //     .getList()
+  //     // .then((function(data){this.dataList=data}))
+  //     .then(dataList => {
+  //       this.productList = dataList;
+  //       console.log(this.productList);
+  //     })
+  //
+  // }
 
   ngOnInit() {
 
+  }
+
+  getProjectList() {
+    this.service.productKeywordSearch(this.keywordOptions.value)
+      .then(res => {
+        this.product = res
+      })
+  }
+
+  gotoProductDetail(product) {
+    this.router.navigate(['datadetail', {productId: product.productId}])
   }
 
 }

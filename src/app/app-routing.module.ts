@@ -47,9 +47,9 @@ const appRouters:Routes = [
   {path: 'index', component: IndexComponent},
   {path: 'datalist', component: DatalistComponent},
   {path: 'usercenter', component: UserCenterComponent, children: childUserCenterRoutes},
-  {path: 'datadetail/:id', component: DataDetailComponent},
+  {path: 'datadetail', component: DataDetailComponent},
   {path:'register',component: RegisterComponent},
-  {path: '**', component: IndexComponent}
+  // {path: '**', component: IndexComponent}
 ]
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
 @NgModule({

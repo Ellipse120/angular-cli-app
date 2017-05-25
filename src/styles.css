@@ -256,6 +256,7 @@ textarea::-webkit-scrollbar-thumb
   text-align: center;
   color: #fff;
   cursor: pointer;
+  border: none;
 }
 .my-body{
   position: absolute;
@@ -267,7 +268,6 @@ textarea::-webkit-scrollbar-thumb
   padding: 80px 90px;
   padding-bottom: 30px;
   height:100%;
-
 }
 .login-box{
   position: absolute;

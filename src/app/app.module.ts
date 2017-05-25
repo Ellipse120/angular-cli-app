@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 
@@ -8,6 +8,7 @@ import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-a
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {Ng2PaginationModule} from 'ng2-pagination/index';
+import {DatepickerModule} from "ngx-date-picker/index";
 import {MyServiceService} from './core/app.service';
 import {IndexComponent} from './search/index/index.component';
 import {DatalistComponent} from './search/datalist/datalist.component';
@@ -35,11 +36,13 @@ import {FooterComponent} from './core/footer/footer.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     HttpModule,
     Ng2PaginationModule,
     Ng2UeditorModule,
+    DatepickerModule,
     ProductMangementModule,
     UserCenterModule,
     OperationManagementModule,

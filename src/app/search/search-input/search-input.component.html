@@ -1,11 +1,12 @@
 <!--搜索框-->
 <div class="search">
   <div class="search-box">
-    <div style="display:flex;">
-      <input type="text" class="search-input">
-      <div class="searchbtn" routerLink="/datalist">搜索</div>
+    <form [formGroup]="keyWordForm" style="display:flex;" (ngSubmit)="keywordSubmit(keyWordForm)" novalidate>
+      <input type="text" class="search-input" formControlName="keyword" required>
+      <button class="searchbtn">搜索</button>
+      <!--routerLink="/datalist"-->
       <span class="triangle-down triggle-position" (click)="toggleAdvancedBox()"></span>
-    </div>
+    </form>
     <div class="advanced-box" [hidden]="ishide">
       <ul>
         <li><span class="advance-title">关键词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.allSearchW"></li>
@@ -32,6 +33,18 @@
           <select name="" [(ngModel)]="advancedArr.collectType">
           </select>
         </li>
+        <li><span class="advance-title">数据样本</span>
+          <input type="radio" name="isMoney" value="是" (click)="selectMoney(yes.value)" #yes>是 &nbsp;&nbsp;
+          <input type="radio" name="isMoney" value="否" (click)="selectMoney(no.value)" #no>否
+        </li>
+        <li><span class="advance-title">区域范围</span>
+          <select name="" [(ngModel)]="advancedArr.collectType">
+          </select>
+        </li>
+        <!--<li><span class="advance-title">时间范围</span>-->
+          <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> - -->
+          <!--<ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>-->
+        <!--</li>-->
       </ul>
       <button class="searchbtn ysl-btn" (click)="submitAdvancedSearch()">搜索</button>
     </div>

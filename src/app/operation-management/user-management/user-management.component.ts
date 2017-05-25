@@ -18,9 +18,9 @@ export class UserManagementComponent {
   showEdit = true;
 
   constructor(public service:MyServiceService){
-    this.service.getUser()
+    this.service.getUserList()
     .then(data => {
-      this.rows=data;
+      this.rows = data.items;
       console.log(this.rows)
     })
   }

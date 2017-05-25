@@ -1,13 +1,13 @@
 <div class="data-detail">
   <div class="detail-left">
     <div class="clearfix">
-      <h2>wind万得资讯数据终端</h2>
+      <h2>{{productDetail.name}}</h2>
 
       <div class="data-info">
         <img src="./assets/images/detail1.png" class="firmlogo">
         <ul class="firm-detail">
           <li>数据供应商：万得信息技术股份有限公司</li>
-          <li>官方网址：http//www.wind.com.cn</li>
+          <li>官方网址：<a [href]="productDetail.webSite">{{productDetail.webSite}}</a></li>
           <li>是否收费：<i class="green">是</i></li>
           <li>数据样本：<i class="green">下载</i></li>
           <li>标签：<b class="color-blue">金融业</b> | <b class="color-blue">大数据</b></li>
