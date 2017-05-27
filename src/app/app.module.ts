@@ -14,11 +14,13 @@ import { OperationManagementModule } from './operation-management/operation-mana
 import { AppRoutingModule } from './app-routing.module';
 import { Ng2PaginationModule } from 'ng2-pagination/index';
 
+
 import { AppComponent } from './app.component';
 import { IndexComponent } from './search/index/index.component';
 import { RegisterComponent } from './register/register.component';
 import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -41,7 +43,8 @@ import { FooterComponent } from './core/footer/footer.component';
     DataDetailComponent,
     RegisterComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,9 @@ import { FooterComponent } from './core/footer/footer.component';
     Angular2FontAwesomeModule,
     BrowserAnimationsModule,
     YslMaterialModule
+  ],
+  entryComponents: [
+    LoginComponent
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]

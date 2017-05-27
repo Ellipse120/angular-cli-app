@@ -60,16 +60,4 @@
 }
 
 /*修改*/
-.ysl-label-search-area{
-  margin: 0 auto;
-}
-.ysl-label-searh-nav{
-  display: flex;
-}
-.ysl-label-searh-nav li{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 34px;
-  width: 130px;
-}
+

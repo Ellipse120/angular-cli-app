@@ -6,7 +6,7 @@ html{
 }
 body{
   height:100%;
-  min-width: 1200px;
+  min-width: 620px;
   width: 100%;
   position: relative;
   font-family: '微软雅黑' !important;
@@ -150,7 +150,7 @@ textarea::-webkit-scrollbar-thumb
 
 my-nav{
   display: block;
-  height: 50px;
+  height: 80px;
 }
 app-index{
   display: block;
@@ -183,8 +183,8 @@ app-index{
   position: relative;
 }
 .search-input{
-  line-height: 38px;
-  width: 500px;
+  line-height: 30px;
+  width: 540px;
   font-size: 18px;
   color:#737373 ;
   border:1px solid #d8e5e7;
@@ -260,9 +260,9 @@ app-index{
 }
 .searchbtn{
   display: inline-block;
-  line-height: 40px;
+  line-height: 30px;
   background: #1c94c4;
-  width: 100px;
+  width: 80px;
   margin-left: -8px;
   text-align: center;
   color: #fff;
@@ -433,4 +433,81 @@ app-index{
   border-color: #78c3f3;
   color: #004974;
   text-decoration: none;
+}
+
+app-index .mat-tab-body-content{
+  overflow: visible;
+}
+app-index .mat-tab-label-container{
+  overflow: visible;
+  margin-bottom: 30px;
+}
+app-index .mat-tab-body.mat-tab-body-active{
+  overflow-y: hidden !important;
+}
+app-index .mat-ripple{
+  overflow: visible;
+}
+.ysl-label-search-area{
+  width: 620px;
+  margin: 0 auto;
+  color: #aa9d9d;
+}
+.ysl-label-search-area .mat-tab-labels{
+  justify-content: space-between;
+}
+.ysl-label-search-area .mat-tab-label{
+  min-width: 130px !important;
+  height: 34px !important;
+  border-radius: 32px;
+  padding: 0 14px !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  background-color: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ysl-label-search-area .mat-tab-label:focus{
+  background-color: #fff !important;
+}
+.ysl-label-search-area .mat-tab-label-active{
+  background-color: #fff !important;
+  color: #eb1c1c !important;
+}
+
+.ysl-label-search-area .mat-tab-label:before{
+  content: "";
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  background-color: #ff7800;
+  border-radius: 100%;
+}
+.ysl-label-search-area .mat-tab-label-active:after{
+  content: "";
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border: 10px solid transparent;
+  border-top-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 34px;
+  transform: translate(-50%, 0);
+}
+.ysl-label-searh-cont{
+  display: flex;
+  flex-wrap: wrap;
+}
+.ysl-label-searh-cont li{
+  height: 40px;
+  line-height: 40px;
+  border-radius: 32px;
+  background-color: rgba(246,249,250,0.02);
+  padding: 0 20px;
+  margin: 0 5px 10px 0;
+}
+.ysl-label-search-area .mat-ink-bar{
+  display: none;
 }

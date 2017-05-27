@@ -3,21 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MdDialogModule, MdTabsModule } from '@angular/material';
 
-import { LoginComponent } from '../login/login.component';
-
+const MdList = [
+  BrowserModule,
+  MdDialogModule,
+  MdTabsModule
+]
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
-  imports: [
-    BrowserModule,
-    MdDialogModule,
-    MdTabsModule
-  ],
-  entryComponents: [
-    LoginComponent
-  ]
+  imports: MdList,
+  exports: MdList
 })
 
 export class YslMaterialModule {}
