@@ -2,8 +2,7 @@
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';/* You can add global styles to this file, and also import other style files */
 html{
-  padding:0;
-  height: 100%;
+  font-size: 10px;
 }
 body{
   height:100%;
@@ -148,6 +147,17 @@ textarea::-webkit-scrollbar-thumb
   visibility: hidden;
   clear: both;
 }
+
+my-nav{
+  display: block;
+  height: 50px;
+}
+app-index{
+  display: block;
+  background: url(assets/images/index-bg.jpg) no-repeat left top;
+  background-size: cover;
+}
+
 .ysl-btn{
   border:none;
   font-family: '微软雅黑';
@@ -273,46 +283,8 @@ textarea::-webkit-scrollbar-thumb
 .fork{
   cursor: pointer;
 }
-.user-count{
-  width: 100%;
-  height: 40px;
-  background: url("assets/images/user.png") no-repeat left center;
-  border:1px solid #ddd;
-  margin-top: 30px;
-  background-position-x: 10px;
-  padding: 0 40px;
-}
-.user-psd{
-  width: 100%;
-  height: 40px;
-  border:1px solid #ddd;
-  margin-top: 30px;
-  background: url("assets/images/psd.png") no-repeat left center;
-  background-position-x: 10px;
-  padding: 0 40px;
-}
-.login-state{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-.forget-psd{
-  color: #1c94c4;
-  cursor: pointer;
-}
-.login{
-  width: 100%;
-  height: 40px;
-  -webkit-border-radius:8px;
-  -moz-border-radius:8px;
-  border-radius: 8px;
-  color: #fff;
-  background: #1c94c4;
-  font-size: 18px;
-  margin-top: 40px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
+
+
 .btn-none{
   border:none;
   background: #fff;

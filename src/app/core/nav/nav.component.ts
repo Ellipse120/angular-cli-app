@@ -15,9 +15,8 @@ import { LoginComponent } from "../../login/login.component";
 
 export  class NavComponent {
   user = [];
-  loginState = false;
+  loginState: boolean = false;
   isUserCenter = false;
-  selectedOption: string;
 
   constructor(public router:Router, public dialog: MdDialog){
 
@@ -27,28 +26,14 @@ export  class NavComponent {
   //  显示登录框
   showLogin(): void {
     // this.loginState = true;
-    console.log('login')
-    let dialogRef = this.dialog.open(LoginComponent, {
-      hasBackdrop: true
-    });
+    let dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+      console.log('close', result)
+      this.loginState = result.status;
     });
   }
 
-  //  关闭登录框
-  hideLogin(): void {
-    this.loginState = false;
-  }
 
-  //  登录
-  userLogin(user) {
-    // console.log(user);
-    // this.loginState = false;
-
-
-
-  }
 
   gotoRegitster() {
     this.loginState = false;

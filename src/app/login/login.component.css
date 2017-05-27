@@ -1,3 +1,34 @@
+.user-psd{
+  width: 100%;
+  height: 40px;
+  border:1px solid #ddd;
+  margin-top: 30px;
+  background: url("../../assets/images/psd.png") no-repeat left center;
+  background-position-x: 10px;
+  padding: 0 40px;
+}
+.login-state{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.forget-psd{
+  color: #1c94c4;
+  cursor: pointer;
+}
+.login{
+  width: 100%;
+  height: 40px;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+  border-radius: 8px;
+  color: #fff;
+  background: #1c94c4;
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 .login-box{
   width: 100%;
   height: 100%;
@@ -15,4 +46,13 @@
   align-items: center;
   height: 40px;
   /*border-bottom: 1px solid #dbdcdc;*/
+}
+.user-count{
+  width: 100%;
+  height: 40px;
+  background: url("../../assets/images/user.png") no-repeat left center;
+  border:1px solid #ddd;
+  margin-top: 30px;
+  background-position-x: 10px;
+  padding: 0 40px;
 }

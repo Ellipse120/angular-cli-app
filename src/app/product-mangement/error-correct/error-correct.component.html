@@ -11,8 +11,8 @@
       <input class="box-type" type="text" placeholder="产品名称"> &nbsp;&nbsp;&nbsp;
 
         <span>提交时间</span>
-        <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="timeFrom"></ngx-datepicker> - -->
-        <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="timeFrom"></ngx-datepicker>-->
+        <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions" [(ngModel)]="model"></my-date-picker> -
+        <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions" [(ngModel)]="model"></my-date-picker>
     </div>
 
     <div class="pro-list">

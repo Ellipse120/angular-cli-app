@@ -15,12 +15,13 @@ export class ProductImportComponent implements OnInit {
 
   timeFrom = '';
   timeTo = '';
-  data = [];
+  data = {};
   import = true;
   isActive = 0;
   tagDimensions = [];
+
   private myDatePickerOptions: IMyDpOptions = {
-    dateFormat: 'dd.mm.yyyy'
+    dateFormat: 'yyyy.mm.dd'
   };
 
   private model: Object = { date: { year: 2018, month: 10, day: 9 } };

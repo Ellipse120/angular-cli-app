@@ -61,10 +61,7 @@ const appRouters:Routes = [
   exports: [
     RouterModule
   ],
-  //使用HashLocationStrategy 会在路径中添加#号
-  providers: [
-    { provide: LocationStrategy ,useClass: HashLocationStrategy }
-  ]
+  providers: []
 })
 
 

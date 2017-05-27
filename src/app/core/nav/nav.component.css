@@ -1,11 +1,11 @@
+
 .ysl-header {
   position: absolute;
   width: 100%;
   padding: 0 90px;
-  height: 50px;
+  height: 80px;
   line-height: 50px;
-  background: #fff;
-  border: 1px solid #d8e5e7;
+  border: 1px solid #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,6 @@
 .ysl-header .head-left {
   width: 201px;
   height: 34px;
-  float: left;
   outline: none;
   cursor: pointer;
   background: url("../../../assets/images/logo.png") no-repeat;

@@ -1,5 +1,8 @@
-import { Component,OnInit } from '@angular/core';
-import {MyServiceService} from "../../core/app.service";
+import { Component, OnInit } from '@angular/core';
+
+import { IMyDpOptions } from 'mydatepicker';
+
+import { MyServiceService } from "../../core/app.service";
 
 @Component({
   selector: 'error-correct',
@@ -13,6 +16,13 @@ export class ErrorCorrectComponent implements OnInit {
   selected = [];
   error = [];
   errorEdit = false;
+
+  private myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy.mm.dd'
+  };
+
+  private model: Object = { date: { year: 2018, month: 10, day: 9 } };
+
   columns = [
     {name: 'proName'},
     {name: 'userName'},

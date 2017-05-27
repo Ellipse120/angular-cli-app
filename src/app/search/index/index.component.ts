@@ -3,17 +3,19 @@ import { Router, NavigationExtras } from '@angular/router';
 
 import { MyServiceService } from "../../core/app.service";
 
+
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+  styleUrls: ['./index.component.css'],
 })
 export class IndexComponent implements OnInit {
 
   isActive = 0;
   tagDimensions = [];
 
-  constructor(public service: MyServiceService, public router: Router) {
+  constructor(public service: MyServiceService,
+              public router: Router) {
 
     // 获取首页标签数据
     this.service.getTagDimensions()
@@ -28,6 +30,7 @@ export class IndexComponent implements OnInit {
     console.log(i)
   }
 
+  // 关键字搜索
   keywordSearch(option) {
 
     let navigationExtras: NavigationExtras = {
@@ -36,6 +39,8 @@ export class IndexComponent implements OnInit {
 
     this.router.navigate(['datalist'], navigationExtras)
   }
+
+
 
   ngOnInit() {
   }

@@ -96,9 +96,26 @@ export class MyServiceService {
     return Promise.resolve(this.user);
   }
 
+  // 注册
+  userRegister(mail: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + 'api/user/signup', {contactMail: mail, userType: 1, loginId: 'CB1'})
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
+  // 登录
+  userLogin(user): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // this.http.get()
+    })
+  }
+
+
   // 产品--关键字搜索
   productKeywordSearch(options): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/search?keyword=' + options.keyword + '&offset=' + options.offset  + '&limit=' + options.limit + '&sortBy=' + options.sortBy + '&ascending=' + options.ascending)
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
@@ -114,14 +131,7 @@ export class MyServiceService {
     })
   }
 
-  // 注册
-  userRegister(mail: string): Promise<any> {
-    return new Promise((resolve,reject) => {
-      this.http.post(this.url + 'api/user/signup', {contactMail: mail, userType: 1, loginId: 'CB1'})
-        .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
-  }
+
 
   // 运营中心/用户管理/获取用户列表
   getUserList(): Promise<any> {

@@ -1,17 +1,17 @@
 <nav class="ysl-header">
   <div class="head-left" routerLink="/"></div>
   <div class="head-right">
-    <button class="ysl-btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>
-    <button class="ysl-btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>
-    <div class="operate-mage-btn" routerLink="/operation" *ngIf="isLogin">
+    <button class="ysl-btn login-btn" (click)="showLogin()" *ngIf="!loginState">登录</button>
+    <button class="ysl-btn register-btn" routerLink="/register" *ngIf="!loginState">注册</button>
+    <div class="operate-mage-btn" routerLink="/operation" *ngIf="loginState">
       运营中心
     </div>
     <!--产品管理-->
-    <div class="pro-mage-btn" routerLink="/promange" *ngIf="isLogin">
+    <div class="pro-mage-btn" routerLink="/promange" *ngIf="loginState">
       产品管理
     </div>
     <!--用户中心-->
-    <div class="user-center-btn" *ngIf="isLogin" (click)="toggle()">用户中心
+    <div class="user-center-btn" *ngIf="loginState" (click)="toggle()">用户中心
       <ul class="user-center-list" *ngIf="isUserCenter">
         <li routerLink="/usercenter">个人中心</li>
         <li>退出</li>
