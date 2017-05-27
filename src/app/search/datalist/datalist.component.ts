@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import 'rxjs/add/operator/switchMap'
+
+
 import {MyServiceService} from '../../core/app.service';
 
 @Component({
@@ -14,7 +18,8 @@ export class DatalistComponent implements OnInit {
   num: number;
   numc: number = 0;
   count: number = 384354;
-  keywordOptions;
+  limit;
+  keywordOptions = {};
   product = {};
   typeList = [
     {
@@ -37,9 +42,12 @@ export class DatalistComponent implements OnInit {
   ];
 
   constructor(public service: MyServiceService, public route: ActivatedRoute, public router: Router) {
-    this.keywordOptions = this.route.params;
-    this.getProjectList();
-    // this.getData();
+    this.route.queryParams
+      .subscribe((params) => {
+        this.keywordOptions = Object.assign({},params);
+        this.getProjectList();
+      })
+    this.limit = parseInt(this.keywordOptions['limit'])
   }
 
   // 二级菜单
@@ -66,15 +74,30 @@ export class DatalistComponent implements OnInit {
 
   }
 
+  // 获取产品列表
   getProjectList() {
-    this.service.productKeywordSearch(this.keywordOptions.value)
+    this.service.productKeywordSearch(this.keywordOptions)
       .then(res => {
-        this.product = res
+        this.product = res;
       })
   }
 
-  gotoProductDetail(product) {
+  // 关键词搜索
+  keywordSearch(option) {
+    this.keywordOptions['keyword'] = option.keyword;
+    this.getProjectList()
+  }
+
+  // 进入产品详情
+  toProductDetail(product) {
     this.router.navigate(['datadetail', {productId: product.productId}])
+  }
+
+
+  // 下一页
+  toNextPage(e) {
+    this.keywordOptions['offset'] = parseInt(e) * (parseInt(this.keywordOptions['limit']));
+    this.getProjectList()
   }
 
 }

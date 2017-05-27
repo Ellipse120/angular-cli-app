@@ -4,7 +4,7 @@
     <img src="./assets/images/database.png"><span>数据库</span>
   </div>
   <h2>经济数据库</h2>
-  <search-input></search-input>
+  <search-input (keywordSearch)="keywordSearch($event)"></search-input>
   <div class="searchCond">
     <ul class="searchType">
       <li *ngFor="let item of tagDimensions;let i=index"><button class="ysl-btn btn-none ysl-tab-btn" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>

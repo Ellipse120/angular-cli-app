@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MyServiceService} from "../../core/app.service";
+import { Router, NavigationExtras } from '@angular/router';
+
+import { MyServiceService } from "../../core/app.service";
 
 @Component({
   selector: 'app-index',
@@ -11,7 +13,7 @@ export class IndexComponent implements OnInit {
   isActive = 0;
   tagDimensions = [];
 
-  constructor(public service: MyServiceService) {
+  constructor(public service: MyServiceService, public router: Router) {
 
     // 获取首页标签数据
     this.service.getTagDimensions()
@@ -24,6 +26,15 @@ export class IndexComponent implements OnInit {
   changeTab(i) {
     this.isActive = i;
     console.log(i)
+  }
+
+  keywordSearch(option) {
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {keyword: option.keyword, offset: option.offset, limit: option.limit, sortBy: option.sortBy, ascending: option.ascending}
+    }
+
+    this.router.navigate(['datalist'], navigationExtras)
   }
 
   ngOnInit() {

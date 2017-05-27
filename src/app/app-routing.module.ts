@@ -54,7 +54,7 @@ const appRouters:Routes = [
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRouters,{useHash: true}),
+    RouterModule.forRoot(appRouters),
     ProductRoutingModule,
     OperationRoutingModule
   ],

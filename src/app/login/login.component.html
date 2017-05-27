@@ -1,0 +1,13 @@
+<div class="login-box">
+  <div class="login-form">
+    <p class="login-title font24 color-gray"><span class="font18">登录用户账号</span><span class="fork" (click)="hideLogin()">x</span></p>
+    <input type="text" class="user-count" placeholder="账号">
+    <input type="password" class="user-psd" placeholder="密码">
+    <div class="login-state">
+      <label for="auto-login" class="color-gray"><input type="checkbox" id="auto-login"> 下次自动登录</label>
+      <a class="forget-psd">忘记密码? </a>
+    </div>
+    <button class="login ysl-btn" (click)="userLogin(user)">登录</button>
+    <p class="text-center">还没有账号？ <a href="javascript:;" class="color-blue" (click)="gotoRegitster()" >点击注册</a></p>
+  </div>
+</div>

@@ -1,60 +1,54 @@
 /**
  * Created by Administrator on 2017/5/8.
  */
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router, NavigationExtras } from '@angular/router';
 
 import { MyServiceService } from '../../core/app.service';
 
 @Component({
   selector: 'search-input',
+  outputs: ['keywordSearch'],
   templateUrl: './search-input.component.html'
 })
 
 export class SearchInputComponent implements OnInit {
 
-  keyWordForm: FormGroup;
+  keywordSearch: EventEmitter<any>;
+  keywordSearchForm: FormGroup;
+  advancedSearchForm: FormGroup;
   ishide = true;
-  advancedArr = [];
   data = {
     timeFrom: '',
     timeTo: ''
   };
-  keywordOption = {
-    keyword: '',
-    offset: 0,
-    limit: 10,
-    sortBy: '',
-    ascending: false
-  };
+  keywordSearchOption = {keyword: '', offset: 0, limit: 10, sortBy: '', ascending: false};
+  advancedSearchOption = {};
 
 
   constructor(public fb: FormBuilder, public service: MyServiceService, public router: Router) {
+    this.keywordSearch = new EventEmitter();
     this.createForm();
   }
 
   //关键字搜索
   keywordSubmit(form: any) {
 
-    this.keywordOption.keyword = this.keyWordForm.get('keyword').value;
-    console.log('option', this.keywordOption)
-    this.router.navigate(['datalist', {keyword: this.keywordOption.keyword, offset: this.keywordOption.offset, limit: this.keywordOption.limit, sortBy: this.keywordOption.sortBy, ascending: this.keywordOption.ascending}])
+    this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
+    this.keywordSearch.emit(this.keywordSearchOption)
+
   }
 
   toggleAdvancedBox() {
     this.ishide = !this.ishide;
   }
 
-  // 获取是否收费
-  selectMoney(info) {
-    console.log(info)
-  }
 
 
   // 提交高级搜索条件
-  submitAdvancedSearch() {
-    console.log(this.advancedArr);
+  advancedSearchSubmit() {
+    console.log(this.advancedSearchForm.value);
 
   }
 
@@ -62,9 +56,21 @@ export class SearchInputComponent implements OnInit {
 
   }
 
+  //创建表单
   createForm() {
-    this.keyWordForm = this.fb.group({
-      keyword: [this.keywordOption.keyword, Validators.required]
+    this.keywordSearchForm = this.fb.group({
+      keyword: [this.keywordSearchOption.keyword, Validators.required]
+    })
+
+    this.advancedSearchForm = this.fb.group({
+      keyword: '',
+      source: '',
+      charge: '',
+      dataType: '',
+      serviceMethod: '',
+      collectionMethod: '',
+      dataSamples: '',
+      area: ''
     })
   }
 }

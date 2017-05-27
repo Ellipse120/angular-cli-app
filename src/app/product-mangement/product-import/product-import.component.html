@@ -58,8 +58,8 @@
            [(ngModel)]="data.area" #area></select>
 
           <label>时间范围</label>
-          <ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> -
-          <ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>
+          <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions" [(ngModel)]="model"></my-date-picker> -
+          <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions" [(ngModel)]="model"></my-date-picker>
         </div>
 
         <div class="form-group">

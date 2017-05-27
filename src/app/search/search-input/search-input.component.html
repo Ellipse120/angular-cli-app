@@ -1,52 +1,58 @@
 <!--搜索框-->
 <div class="search">
   <div class="search-box">
-    <form [formGroup]="keyWordForm" style="display:flex;" (ngSubmit)="keywordSubmit(keyWordForm)" novalidate>
+    <form [formGroup]="keywordSearchForm" style="display:flex;" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
       <input type="text" class="search-input" formControlName="keyword" required>
       <button class="searchbtn">搜索</button>
       <!--routerLink="/datalist"-->
       <span class="triangle-down triggle-position" (click)="toggleAdvancedBox()"></span>
     </form>
-    <div class="advanced-box" [hidden]="ishide">
+    <!--高级搜索-->
+    <form [formGroup]="advancedSearchForm" class="advanced-box" [hidden]="ishide" (ngSubmit)="advancedSearchSubmit()">
       <ul>
-        <li><span class="advance-title">关键词</span> <input type="text" class="advanced-input" [(ngModel)]="advancedArr.allSearchW"></li>
-        <li><span class="advance-title">来源</span>
-          <select name="" [(ngModel)]="advancedArr.origin">
+        <li>
+          <span class="advance-title">关键词</span>
+          <input type="text" class="advanced-input" formControlName="keyword"></li>
+        <li>
+          <span class="advance-title">来源</span>
+          <select formControlName="source">
             <option value="1">来源</option>
             <option value="2">个人</option>
             <option value="3">机构</option>
           </select>
         </li>
-        <li><span class="advance-title">是否收费</span>
-          <input type="radio" name="isMoney" value="是" (click)="selectMoney(yes.value)" #yes>是 &nbsp;&nbsp;
-          <input type="radio" name="isMoney" value="否" (click)="selectMoney(no.value)" #no>否
+        <li>
+          <span class="advance-title">是否收费</span>
+          <input type="radio" formControlName="charge" value="1">是 &nbsp;&nbsp;
+          <input type="radio" formControlName="charge" value="0">否
         </li>
-        <li><span class="advance-title">数据类型</span>
-          <select name="" [(ngModel)]="advancedArr.dataType">
-          </select>
+        <li>
+          <span class="advance-title">数据类型</span>
+          <select formControlName="dataType"></select>
         </li>
-        <li><span class="advance-title">服务方式</span>
-          <select name="" [(ngModel)]="advancedArr.serviceType">
-          </select>
+        <li>
+          <span class="advance-title">服务方式</span>
+          <select formControlName="serviceMethod"></select>
         </li>
-        <li><span class="advance-title">采集方式</span>
-          <select name="" [(ngModel)]="advancedArr.collectType">
-          </select>
+        <li>
+          <span class="advance-title">采集方式</span>
+          <select formControlName="collectionMethod"></select>
         </li>
-        <li><span class="advance-title">数据样本</span>
-          <input type="radio" name="isMoney" value="是" (click)="selectMoney(yes.value)" #yes>是 &nbsp;&nbsp;
-          <input type="radio" name="isMoney" value="否" (click)="selectMoney(no.value)" #no>否
+        <li>
+          <span class="advance-title">数据样本</span>
+          <input type="radio" formControlName="dataSamples" value="1">是 &nbsp;&nbsp;
+          <input type="radio" formControlName="dataSamples" value="0">否
         </li>
-        <li><span class="advance-title">区域范围</span>
-          <select name="" [(ngModel)]="advancedArr.collectType">
-          </select>
+        <li>
+          <span class="advance-title">区域范围</span>
+          <select formControlName="area"></select>
         </li>
         <!--<li><span class="advance-title">时间范围</span>-->
           <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> - -->
           <!--<ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>-->
         <!--</li>-->
       </ul>
-      <button class="searchbtn ysl-btn" (click)="submitAdvancedSearch()">搜索</button>
-    </div>
+      <button class="searchbtn ysl-btn">搜索</button>
+    </form>
   </div>
 </div>

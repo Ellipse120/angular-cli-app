@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MdDialog } from '@angular/material';
+
+import { LoginComponent } from "../../login/login.component";
+
+
+
 @Component({
   selector: 'my-nav',
   templateUrl: './nav.component.html',
@@ -10,17 +16,24 @@ import { Router } from '@angular/router';
 export  class NavComponent {
   user = [];
   loginState = false;
-  isLogin = false;
   isUserCenter = false;
+  selectedOption: string;
 
-  constructor(public router:Router){
+  constructor(public router:Router, public dialog: MdDialog){
 
   }
 
 
   //  显示登录框
   showLogin(): void {
-    this.loginState = true;
+    // this.loginState = true;
+    console.log('login')
+    let dialogRef = this.dialog.open(LoginComponent, {
+      hasBackdrop: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+    });
   }
 
   //  关闭登录框
@@ -30,9 +43,11 @@ export  class NavComponent {
 
   //  登录
   userLogin(user) {
-    console.log(user);
-    this.isLogin = true;
-    this.loginState = false;
+    // console.log(user);
+    // this.loginState = false;
+
+
+
   }
 
   gotoRegitster() {
@@ -44,3 +59,5 @@ export  class NavComponent {
     this.isUserCenter = !this.isUserCenter;
   }
 }
+
+

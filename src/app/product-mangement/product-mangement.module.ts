@@ -4,14 +4,17 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {RouterModule,Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import {MyDatePickerModule } from 'mydatepicker';
+import {ProductRoutingModule} from './product-routing.module';
+
 
 import {ProductMangementComponent} from './product-mangement.component';
 import {MyServiceService} from '../core/app.service';
 import {ProductListComponent} from './product-list/product-list.component';
 import {ErrorCorrectComponent} from './error-correct/error-correct.component';
 import {ProductImportComponent} from './product-import/product-import.component';
-import {ProductRoutingModule} from './product-routing.module';
-import {DatepickerModule} from "ngx-date-picker/index";
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import {DatepickerModule} from "ngx-date-picker/index";
     NgxDatatableModule,
     RouterModule,
     FormsModule,
-    DatepickerModule
+    MyDatePickerModule
   ]
 })
 

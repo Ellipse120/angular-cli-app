@@ -1,7 +1,9 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
-import {ProductListComponent} from '../product-list/product-list.component';
-import {MyServiceService} from '../../core/app.service';
+import { IMyDpOptions } from 'mydatepicker';
+
+import { ProductListComponent } from '../product-list/product-list.component';
+import { MyServiceService } from '../../core/app.service';
 
 @Component({
   selector: 'product-import',
@@ -17,6 +19,11 @@ export class ProductImportComponent implements OnInit {
   import = true;
   isActive = 0;
   tagDimensions = [];
+  private myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'dd.mm.yyyy'
+  };
+
+  private model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(public product: ProductListComponent, public service:MyServiceService){
     // 获取首页标签数据
