@@ -22,39 +22,54 @@
   margin-right: 20px;
   color: #929292;
 }
-.searchType{
-  width: 800px;
-  margin:0 auto;
-  margin-top: 40px;
-  text-align: left;
-  list-style-type: none;
-  position: relative;
-}
-.searchType li{
-  float: left;
-  cursor: pointer;
-}
-.ysl-tab-btn{
-  padding: 15px 25px;
-}
-.secondMenu{
-  width: 100%;
-  position: absolute;
-  list-style: none;
-  margin-top: 20px;
-  color: #676767;
-  padding:30px;
-  left:0;
-  top:30px;
-  border:1px solid #d8e5e7;
-}
-.second-nav{
-  margin:5px 15px;
-  padding: 10px;
-  background: #f6f9fa;
-}
+/*.searchType{*/
+  /*width: 800px;*/
+  /*margin:0 auto;*/
+  /*margin-top: 40px;*/
+  /*text-align: left;*/
+  /*list-style-type: none;*/
+  /*position: relative;*/
+/*}*/
+/*.searchType li{*/
+  /*float: left;*/
+  /*cursor: pointer;*/
+/*}*/
+/*.ysl-tab-btn{*/
+  /*padding: 15px 25px;*/
+/*}*/
+/*.secondMenu{*/
+  /*width: 100%;*/
+  /*position: absolute;*/
+  /*list-style: none;*/
+  /*margin-top: 20px;*/
+  /*color: #676767;*/
+  /*padding:30px;*/
+  /*left:0;*/
+  /*top:30px;*/
+  /*border:1px solid #d8e5e7;*/
+/*}*/
+/*.second-nav{*/
+  /*margin:5px 15px;*/
+  /*padding: 10px;*/
+  /*background: #f6f9fa;*/
+/*}*/
 .isActive{
   color: #1c94c4;
   border:1px solid #d8e5e7;
   border-bottom: none;
+}
+
+/*修改*/
+.ysl-label-search-area{
+  margin: 0 auto;
+}
+.ysl-label-searh-nav{
+  display: flex;
+}
+.ysl-label-searh-nav li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  width: 130px;
 }

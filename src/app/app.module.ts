@@ -3,29 +3,29 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
-import { MdDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { Ng2UeditorModule } from 'ng2-ueditor/src/index';
 import { ProductMangementModule } from './product-mangement/product-mangement.module';
-
+import { YslMaterialModule } from './core/ysl-material.module';
+import { UserCenterModule } from './user-center/user-center.module';
+import { OperationManagementModule } from './operation-management/operation-management.module';
 import { AppRoutingModule } from './app-routing.module';
 import { Ng2PaginationModule } from 'ng2-pagination/index';
-import { DatepickerModule } from "ngx-date-picker/index";
+
 import { AppComponent } from './app.component';
 import { IndexComponent } from './search/index/index.component';
 import { RegisterComponent } from './register/register.component';
 import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
-import { UserCenterModule } from './user-center/user-center.module';
-import { OperationManagementModule } from './operation-management/operation-management.module';
+
 
 
 import { MyServiceService } from './core/app.service';
 
 
-import { LoginComponent } from './login/login.component';
+
 import { SearchInputComponent } from './search/search-input/search-input.component';
 import { NavComponent } from './core/nav/nav.component';
 import { FooterComponent } from './core/footer/footer.component';
@@ -41,8 +41,7 @@ import { FooterComponent } from './core/footer/footer.component';
     DataDetailComponent,
     RegisterComponent,
     NavComponent,
-    FooterComponent,
-    LoginComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -53,16 +52,12 @@ import { FooterComponent } from './core/footer/footer.component';
     HttpModule,
     Ng2PaginationModule,
     Ng2UeditorModule,
-    DatepickerModule,
     ProductMangementModule,
     UserCenterModule,
     OperationManagementModule,
     Angular2FontAwesomeModule,
-    MdDialogModule,
-    BrowserAnimationsModule
-  ],
-  entryComponents: [
-    LoginComponent
+    BrowserAnimationsModule,
+    YslMaterialModule
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]

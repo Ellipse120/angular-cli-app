@@ -6,12 +6,32 @@
   </div>
   <h2>经济数据库</h2>
   <search-input (keywordSearch)="keywordSearch($event)"></search-input>
+  <div class="ysl-label-search-area">
+    <ul class="ysl-label-searh-nav">
+      <li *ngFor="let item of tagDimensions;let i=index" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</li>
+    </ul>
+    <ul class="ysl-label-searh-cont" *ngIf="isActive == i">
+      <li *ngFor="let itemc of item.items" class="second-nav">{{itemc.name}}</li>
+    </ul>
+  </div>
+  <!--<md-tab-group>-->
+    <!--<md-tab label="One">-->
+      <!--<h1>Some tab content</h1>-->
+      <!--<p>...</p>-->
+    <!--</md-tab>-->
+    <!--<md-tab label="Two">-->
+      <!--<h1>Some more tab content</h1>-->
+      <!--<p>...</p>-->
+    <!--</md-tab>-->
+  <!--</md-tab-group>-->
   <div class="searchCond">
     <ul class="searchType">
-      <li *ngFor="let item of tagDimensions;let i=index"><button class="ysl-btn btn-none ysl-tab-btn" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
+      <li *ngFor="let item of tagDimensions;let i=index">
+        <button class="ysl-btn btn-none ysl-tab-btn" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
         <ul class="secondMenu" *ngIf="isActive == i">
           <li *ngFor="let itemc of item.items" class="second-nav">{{itemc.name}}</li>
-        </ul></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </div>
