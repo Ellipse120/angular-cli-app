@@ -1,9 +1,9 @@
 <nav class="ysl-header">
   <div class="head-left" routerLink="/"></div>
   <div class="head-right">
-    <button class="ysl-btn login-btn" (click)="showLogin()">登录</button>
+    <button class="ysl-btn login-btn" (click)="showLogin()" *ngIf="!isLogin">登录</button>
     <button class="ysl-btn register-btn" routerLink="/register" *ngIf="!isLogin">注册</button>
-    <div class="operate-mage-btn" routerLink="/operation">
+    <div class="operate-mage-btn" routerLink="/operation" *ngIf="isLogin">
       运营中心
     </div>
     <!--产品管理-->
@@ -11,7 +11,7 @@
       产品管理
     </div>
     <!--用户中心-->
-    <div class="user-center-btn" (click)="toggle()">用户中心
+    <div class="user-center-btn" *ngIf="isLogin" (click)="toggle()">用户中心
       <ul class="user-center-list" *ngIf="isUserCenter">
         <li routerLink="/usercenter">个人中心</li>
         <li>退出</li>
@@ -19,3 +19,4 @@
     </div>
   </div>
 </nav>
+
