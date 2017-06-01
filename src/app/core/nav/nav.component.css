@@ -1,16 +1,13 @@
-
-.ysl-header {
-  position: absolute;
-  width: 100%;
-  padding: 0 90px;
-  height: 80px;
-  line-height: 50px;
-  border: 1px solid #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 100000;
+.container:before,.container:after{
+  display: none;
 }
+.ysl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
 .ysl-header .head-left {
   width: 201px;
   height: 34px;
@@ -19,16 +16,7 @@
   background: url("../../../assets/images/logo.png") no-repeat;
 }
 .head-right {
-  float: right;
   display: flex;
-}
-.ysl-header .ysl-btn {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
 }
 
 .pro-mage-btn,.operate-mage-btn{
@@ -67,22 +55,39 @@
   background: #39baf6;
   color: #fff;
 }
+.ysl-btn{
+  height: 28px;
+  width: 56px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #fff;
+}
 .ysl-header .login-btn {
-  background: #fff;
-  font-size: 18px;
-  color: #1c94c4;
-  border: 1px solid #1c94c4;
-  cursor: pointer;
   margin-right: 10px;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 20px;
+  background-color: transparent;
+  border: 1px solid #fff;
 }
 .ysl-header .register-btn {
   background: #1c94c4;
-  font-size: 18px;
-  color: #fff;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 20px;
+  background-color: rgba(255,255,255,0.3);
 }
+.visible-xs-block .fa-user-o{
+  color: #fff;
+  font-size: 0.75rem;
+}
+.visible-xs-block .btn{
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  height: 1rem;
+  padding: 0;
+  width: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .ysl-header{
+    height: 1.9rem;
+    justify-content: flex-end;
+  }
+}
+
+

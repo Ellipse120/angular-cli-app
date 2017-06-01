@@ -23,9 +23,7 @@ import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.c
 import { LoginComponent } from './login/login.component';
 
 
-
 import { MyServiceService } from './core/app.service';
-
 
 
 import { SearchInputComponent } from './search/search-input/search-input.component';

@@ -13,6 +13,7 @@ export class IndexComponent implements OnInit {
 
   isActive = 0;
   tagDimensions = [];
+  indexContStyle = {};
 
   constructor(public service: MyServiceService,
               public router: Router) {
@@ -38,6 +39,11 @@ export class IndexComponent implements OnInit {
     }
 
     this.router.navigate(['datalist'], navigationExtras)
+  }
+
+  //切换高级搜索
+  showAdvancedBox(isShow) {
+    this.indexContStyle = isShow.isShowAdvancedBox ? {minHeight: '760px'} : {minHeight: 0}
   }
 
 

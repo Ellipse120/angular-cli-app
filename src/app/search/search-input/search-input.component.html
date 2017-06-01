@@ -1,58 +1,66 @@
 <!--搜索框-->
-<div class="search">
-  <div class="search-box">
-    <form [formGroup]="keywordSearchForm" style="display:flex;" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
+<div class="search-box container">
+  <form class="row" [formGroup]="keywordSearchForm" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
+    <div class="ysl-input-group col-xs-10">
       <input type="text" class="search-input" formControlName="keyword" required>
-      <button class="searchbtn">搜索</button>
-      <!--routerLink="/datalist"-->
-      <span class="triangle-down triggle-position" (click)="toggleAdvancedBox()"></span>
-    </form>
-    <!--高级搜索-->
-    <form [formGroup]="advancedSearchForm" class="advanced-box" [hidden]="ishide" (ngSubmit)="advancedSearchSubmit()">
-      <ul>
-        <li>
-          <span class="advance-title">关键词</span>
-          <input type="text" class="advanced-input" formControlName="keyword"></li>
-        <li>
-          <span class="advance-title">来源</span>
-          <select formControlName="source">
-            <option value="1">来源</option>
-            <option value="2">个人</option>
-            <option value="3">机构</option>
-          </select>
-        </li>
-        <li>
-          <span class="advance-title">是否收费</span>
-          <input type="radio" formControlName="charge" value="1">是 &nbsp;&nbsp;
-          <input type="radio" formControlName="charge" value="0">否
-        </li>
-        <li>
-          <span class="advance-title">数据类型</span>
-          <select formControlName="dataType"></select>
-        </li>
-        <li>
-          <span class="advance-title">服务方式</span>
-          <select formControlName="serviceMethod"></select>
-        </li>
-        <li>
-          <span class="advance-title">采集方式</span>
-          <select formControlName="collectionMethod"></select>
-        </li>
-        <li>
-          <span class="advance-title">数据样本</span>
-          <input type="radio" formControlName="dataSamples" value="1">是 &nbsp;&nbsp;
-          <input type="radio" formControlName="dataSamples" value="0">否
-        </li>
-        <li>
-          <span class="advance-title">区域范围</span>
-          <select formControlName="area"></select>
-        </li>
-        <!--<li><span class="advance-title">时间范围</span>-->
-          <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> - -->
-          <!--<ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>-->
-        <!--</li>-->
-      </ul>
-      <button class="searchbtn ysl-btn">搜索</button>
-    </form>
-  </div>
+      <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox()"></span>
+    </div>
+    <button class="searchbtn col-xs-2"><i class="fa fa-search"></i></button>
+    <!--routerLink="/datalist"-->
+  </form>
+  <form [formGroup]="advancedSearchForm" class="advanced-box form-horizontal" *ngIf="isShowAdvancedBox" (ngSubmit)="advancedSearchSubmit()">
+    <div class="form-group">
+      <label class="col-xs-4">关键词</label>
+      <input type="text" class="col-xs-8 advanced-input" formControlName="keyword">
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">来源</label>
+      <select class="col-xs-8" formControlName="source">
+        <option value="1">来源</option>
+        <option value="2">个人</option>
+        <option value="3">机构</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">是否收费</label>
+      <div class="radio-inline col-xs-4">
+        <label><input type="radio" formControlName="charge" value="1">是</label>
+      </div>
+      <div class="radio-inline col-xs-4">
+        <label><input type="radio" formControlName="charge" value="0">否</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">数据类型</label>
+      <select class="col-xs-8" formControlName="dataType"></select>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">服务方式</label>
+      <select class="col-xs-8" formControlName="serviceMethod"></select>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">采集方式</label>
+      <select class="col-xs-8" formControlName="collectionMethod"></select>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">数据样本</label>
+      <div class="radio-inline col-xs-4">
+        <label><input type="radio" formControlName="dataSamples" value="1">是</label>
+      </div>
+      <div class="radio-inline col-xs-4">
+        <label><input type="radio" formControlName="dataSamples" value="0">否</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-4">区域范围</label>
+      <select class="col-xs-8" formControlName="area"></select>
+    </div>
+    <!--<li><span class="advance-title">时间范围</span>-->
+    <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> - -->
+    <!--<ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>-->
+    <!--</li>-->
+    <div class="form-group">
+      <button class="searchbtn ysl-btn col-xs-8 col-xs-offset-4">搜索</button>
+    </div>
+  </form>
 </div>

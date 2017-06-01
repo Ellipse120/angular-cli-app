@@ -1,14 +1,13 @@
 <my-nav></my-nav>
-<div class="indexCon">
-  <div class="totalNum">
-    <img src="./assets/images/factory.png"><span>厂商</span>
-    <img src="./assets/images/database.png"><span>数据库</span>
+<div class="index-cont container" [ngStyle]="indexContStyle">
+  <img src="../../../assets/images/ysl-logo.png" class="logo" alt="">
+  <div class="product-number ysl-text-primary">
+    <i class="product-number-icon"></i>数据产品数量 <span>6123</span>
   </div>
-  <h2>经济数据库</h2>
-  <search-input (keywordSearch)="keywordSearch($event)"></search-input>
+  <search-input (keywordSearch)="keywordSearch($event)" (showAdvancedBox)="showAdvancedBox($event)"></search-input>
   <md-tab-group class="ysl-label-search-area">
     <md-tab label="{{item.name}}" *ngFor="let item of tagDimensions">
-      <ul class="ysl-label-searh-cont">
+      <ul class="ysl-label-search-cont">
         <li *ngFor="let itemc of item.items">{{itemc.name}}</li>
       </ul>
     </md-tab>

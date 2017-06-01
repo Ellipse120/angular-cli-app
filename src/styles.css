@@ -2,11 +2,10 @@
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';/* You can add global styles to this file, and also import other style files */
 html{
-  font-size: 10px;
+  font-size: 20px;
 }
 body{
   height:100%;
-  min-width: 620px;
   width: 100%;
   position: relative;
   font-family: '微软雅黑' !important;
@@ -131,9 +130,9 @@ textarea::-webkit-scrollbar-thumb
 .triangle-down{
   width: 0;
   height: 0;
-  border-left:10px solid transparent;
-  border-right:10px solid transparent;
-  border-top: 16px solid #ddd;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 11px solid #ddd;
 
 }
 /*common style*/
@@ -147,128 +146,69 @@ textarea::-webkit-scrollbar-thumb
   visibility: hidden;
   clear: both;
 }
+.ysl-text-primary{
+  color: #ff4307;
+}
+.ysl-btn{
+  font-family: '微软雅黑';
+  display: flex;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.ysl-btn:focus{
+  border: none;
+}
+.ysl-btn-xs{
+  height: 24px;
+  width: 40px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.ysl-btn-md{
+  height: 36px;
+  padding: 0 21px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.ysl-btn-lg{
+  height: 40px;
+  width: 260px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.ysl-container{
+  width: 100%;
+  padding: 0 18.75%;
+}
 
 my-nav{
   display: block;
-  height: 80px;
 }
 app-index{
   display: block;
   background: url(assets/images/index-bg.jpg) no-repeat left top;
   background-size: cover;
   min-height: 100vh;
+  padding-bottom: 60px;
+  position: relative;
 }
 
-.ysl-btn{
-  border:none;
-  font-family: '微软雅黑';
-}
-.ysl-btn:focus{
-  border: none;
-}
 
 .calendar{
   width: 160px;
   display: inline-block !important;
 }
 
-.search{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.search-box{
-  margin:0 auto;
-  position: relative;
-}
-.search-input{
-  line-height: 30px;
-  width: 540px;
-  font-size: 18px;
-  color:#737373 ;
-  border:1px solid #d8e5e7;
-  padding-left: 10px;
-}
-.search-input:focus{
-  outline: none;
-}
-.search-btn{
-  width: 82px;
-  height: 30px;
-  vertical-align: middle;
-  background-color: #39baf6;
-  margin-left: -7px;
-  cursor: pointer;
-  background-image: url("assets/images/search.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.ysl-search-box{
-  display: flex;
-  align-items: center;
-}
 .triggle-position{
   position: absolute;
-  top:12px;
-  right:115px;
+  right: 15px;
   cursor: pointer;
+  top: 50%;
+  transform: translate(0,-50%);
 }
-.advanced-box{
-  width: 500px;
-  text-align: center;
-  border:1px solid #d8e5e7;
-  border-top:none;
-  position: absolute;
-  top:40px;
-  left:0;
-  background: #fff;
-  z-index: 1000;
-  padding:0 70px;
-  padding-top:56px;
-  padding-bottom: 20px;
-  font-size: 13px;
-  font-family: '微软雅黑';
-  color: #2e3e45;
-}
-.advanced-box select{
-  border: 1px solid #d8e5e7;
-  height: 30px;
-  line-height: 30px;
-  width: 150px;
-  padding-left: 10px;
-}
-.advanced-box ul {
-  margin-bottom:10px;
-}
-.advanced-box ul li{
-  display: flex;
-  align-items: center;
-  line-height: 40px;
-}
-.advance-title{
-  width: 100px;
-  text-align: right;
-  display: inline-block;
-  margin-right: 20px;
-}
-.advanced-input{
-  width: 222px;
-  height: 30px;
-  border:1px solid #d8e5e7;
-  padding-left:10px;
-}
-.searchbtn{
-  display: inline-block;
-  line-height: 30px;
-  background: #1c94c4;
-  width: 80px;
-  margin-left: -8px;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-}
+
 .my-body{
   position: absolute;
   top: 0;
@@ -307,13 +247,17 @@ app-index{
   cursor: pointer;
 }
 .footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  line-height: 30px;
-  border-top: 1px solid #eee;
-  position: fixed;
+  height: 54px;
+  line-height: 22px;
+  position: absolute;
   bottom: 0;
-  color: #889294;
-  background: #fff;
+  color: #6b6976;
+  background: url("assets/images/footer.png") no-repeat center bottom;
+  background-size: cover;
 }
 
 /*重写部分*/
@@ -321,7 +265,7 @@ app-index{
   cursor: pointer !important;
 }
 .ng2-pagination{
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
   text-align: center;
@@ -435,12 +379,15 @@ app-index{
   text-decoration: none;
 }
 
+/*nav*/
+my-nav{
+  background-color: #070224;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  width: 100%;
+}
+/*index*/
 app-index .mat-tab-body-content{
   overflow: visible;
-}
-app-index .mat-tab-label-container{
-  overflow: visible;
-  margin-bottom: 30px;
 }
 app-index .mat-tab-body.mat-tab-body-active{
   overflow-y: hidden !important;
@@ -449,12 +396,16 @@ app-index .mat-ripple{
   overflow: visible;
 }
 .ysl-label-search-area{
-  width: 620px;
+  width: 32.29%;
   margin: 0 auto;
   color: #aa9d9d;
 }
 .ysl-label-search-area .mat-tab-labels{
   justify-content: space-between;
+  height: 52px;
+}
+.ysl-label-search-area .mat-tab-header-pagination{
+  height: 34px;
 }
 .ysl-label-search-area .mat-tab-label{
   min-width: 130px !important;
@@ -475,7 +426,6 @@ app-index .mat-ripple{
   background-color: #fff !important;
   color: #eb1c1c !important;
 }
-
 .ysl-label-search-area .mat-tab-label:before{
   content: "";
   display: inline-block;
@@ -496,13 +446,53 @@ app-index .mat-ripple{
   top: 34px;
   transform: translate(-50%, 0);
 }
-.ysl-label-searh-cont{
+
+
+@media screen and (max-width: 1200px){
+  .ysl-container{
+    padding: 0 5%;
+  }
+}
+@media screen and (max-width: 768px){
+  .ysl-container{
+    padding: 0 16px;
+  }
+  .footer{
+    font-size: 12px;
+  }
+  .ysl-label-search-area{
+    width: 90%;
+  }
+  .ysl-label-search-area .mat-tab-labels{
+    justify-content: flex-start;
+  }
+  .ysl-label-search-area .mat-tab-label{
+    border-radius: 0;
+  }
+  .ysl-label-search-area .mat-tab-label-active:after{
+    display: none;
+  }
+  .ysl-label-search-area .mat-tab-label-container{
+    overflow: scroll;
+  }
+  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar{
+    color: transparent;
+  }
+  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar-corner{
+    color: transparent;
+  }
+}
+
+.ysl-label-search-cont{
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
 }
-.ysl-label-searh-cont li{
+.ysl-label-search-cont li{
+  display: flex;
+  align-items: center;
   height: 40px;
-  line-height: 40px;
+  line-height: 24px;
   border-radius: 32px;
   background-color: rgba(246,249,250,0.02);
   padding: 0 20px;
@@ -511,3 +501,18 @@ app-index .mat-ripple{
 .ysl-label-search-area .mat-ink-bar{
   display: none;
 }
+.ysl-label-search-area .mat-tab-body-wrapper{
+  padding-top: 30px;
+  margin-top: -19px;
+}
+
+/*搜索列表*/
+app-datalist search-input,data-detail search-input{
+  width: 34%;
+}
+app-datalist .search-box,data-detail .search-box{
+  width: 100% !important;
+  margin-bottom: 0 !important;
+}
+
+

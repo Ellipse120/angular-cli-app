@@ -1,26 +1,37 @@
-.indexCon{
+.index-cont{
   width: 100%;
-  padding-top: 200px;
+  padding-top: 3rem;
   text-align: center;
 }
-.indexCon h2{
-  font-size: 28px;
-  color: #1c94c4;
-  font-weight: bold;
-  margin-top: 40px;
+@media screen and (max-width: 768px){
+  .index-cont{
+    padding-top: 1.5rem;
+  }
 }
-.totalNum{
-  width: 200px;
-  margin: 0 auto;
-  text-align: center;
-}
-.totalNum span{
-  font-size: 16px;
+.logo{
   display: inline-block;
+  height: auto;
+  width: 9.3%;
+  min-width: 60px;
+  max-width: 112px;
+  margin-bottom: 40px;
+  background-size: 100%;
+}
+.product-number{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.product-number-icon{
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  margin-right: 10px;
+  background: url(../../../assets/images/data-product-number-icon.png) no-repeat left top;
+}
+.product-number span{
   margin-left: 10px;
-  vertical-align: middle;
-  margin-right: 20px;
-  color: #929292;
 }
 /*.searchType{*/
   /*width: 800px;*/
@@ -60,4 +71,17 @@
 }
 
 /*修改*/
+@media screen and (max-width: 768px){
+  .ysl-label-searh-cont{
+    height: 250px;
+    overflow: scroll;
+  }
+  ::-webkit-scrollbar{
+    color: transparent;
+  }
+  ::-webkit-scrollbar-corner{
+    color: transparent;
+  }
+}
+
 

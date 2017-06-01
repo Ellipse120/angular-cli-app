@@ -1,27 +1,30 @@
 <div class="dataShow">
   <!--搜索框-->
-  <search-input (keywordSearch)="keywordSearch($event)"></search-input>
+  <my-nav [isShowSearch]="isShowSearch" (keywordSearch)="keywordSearch($event)"></my-nav>
   <!--列表页-->
-  <div class="datalistArea clearfix">
+  <div class="data-list-area clearfix container">
     <!--搜索菜单-->
-    <div class="searchMenu">
-      <ul class="menuList">
-        <li *ngFor="let item of typeList;let i = index" (click)="showMenu(i)" class="active">
-          {{item.text}} <img class="tag-arrow" [src]="num == i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">
-          <ul class="menuListTwo" *ngIf="num == i">
-            <li *ngFor="let itemChild of item.children;let n =index" (click)="showSecondMenu(n)" [class.childActive]="numc == n">{{itemChild.text}}</li>
-          </ul>
+    <div class="search-condition">
+      <ul class="search-condition-type" *ngFor="let type of searchCondition; let ind = index">
+        <li class="search-condition-type-item" *ngFor="let item of type.children; let i = index">
+          <p class="readonly" [class.active]="searchConditionIndex == i && searchConditionParentIndex == ind" *ngIf="item.type=='readonly'" (click)="conditionSearch(i, ind)">{{item.text}}</p>
+          <div class="ysl-input-group" *ngIf="item.type=='input'">
+            <input type="text">-<input type="text"><button class="btn">确认</button>
+          </div>
+          <div class="ysl-checkbox-group" *ngIf="item.type=='checkbox'">
+            <label><input type="checkbox"><span></span>{{item.text}}</label>
+          </div>
         </li>
       </ul>
     </div>
-    <div class="dataList">
-      <p>约找到{{product.totalLength}}条数据</p>
+    <div class="data-list">
+      <p>找到约{{product.totalLength}}条结果</p>
       <ul>
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
                                                       currentPage: p,
-                                                      totalItems: product.totalLength}"  class="dataItem">
+                                                      totalItems: product.totalLength}"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
-          <span class="dataContent">{{item.description}}</span>
+          <span class="data-content">{{item.description}}</span>
           <div class="tag">标签1</div> <div class="tag">标签2</div>
         </li>
       </ul>

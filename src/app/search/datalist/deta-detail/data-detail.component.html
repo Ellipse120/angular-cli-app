@@ -1,4 +1,5 @@
-<div class="data-detail">
+<my-nav [isShowSearch]="isShowSearch" (keywordSearch)="keywordSearch($event)"></my-nav>
+<div class="data-detail container">
   <div class="detail-left">
     <div class="clearfix">
       <h2>{{productDetail.name}}</h2>

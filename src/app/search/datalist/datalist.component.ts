@@ -13,32 +13,29 @@ import {MyServiceService} from '../../core/app.service';
 })
 export class DatalistComponent implements OnInit {
 
-
   state = false;
-  num: number;
-  numc: number = 0;
-  count: number = 384354;
   limit;
   keywordOptions = {};
   product = {};
-  typeList = [
-    {
-      text: '时间分类', children: [
-      {text: '时间不限'},
-      {text: '2016-2017年'},
-      {text: '2015-2016年'},
-      {text: '2014-2015年'}
-    ]
-    },
-    {
-      text: '按照关系排序', children: [
-      {text: '从大到小'},
-      {text: '从小到大'},
-      {text: '按价格'},
-      {text: '按名称'}
-    ]
-    },
-    {text: '按照特点排序'}
+  isShowSearch = true;
+  searchConditionParentIndex: number;
+  searchConditionIndex: number;
+  searchCondition = [{
+      type: 'a', children: [
+      {text: '时间不限', value: '', type: 'readonly'},
+      {text: '2017年以来', value: '2017', type: 'readonly'},
+      {text: '2016年以来', value: '2016', type: 'readonly'},
+      {text: '2013年以来', value: '2013', type: 'readonly'},
+      {text: '', value: '', type: 'input'}
+    ]}, {
+      type: 'b', children: [
+      {text: '按相关性排序', value: '', type: 'readonly'},
+      {text: '按日期排序', value: '', type: 'readonly'}
+    ]}, {
+      type: 'c', children: [
+      {text: '包括专利', value: '', type: 'checkbox'},
+      {text: '包括引用', value: '', type: 'checkbox'}
+    ]}
   ];
 
   constructor(public service: MyServiceService, public route: ActivatedRoute, public router: Router) {
@@ -50,14 +47,7 @@ export class DatalistComponent implements OnInit {
     this.limit = parseInt(this.keywordOptions['limit'])
   }
 
-  // 二级菜单
-  showMenu(i) {
-    this.num = i;
-  }
 
-  showSecondMenu(i) {
-    this.numc = i;
-  }
   // 获取数据
   // getData(): void {
   //   this.service
@@ -84,8 +74,15 @@ export class DatalistComponent implements OnInit {
 
   // 关键词搜索
   keywordSearch(option) {
+    console.log('sousuo', option)
     this.keywordOptions['keyword'] = option.keyword;
     this.getProjectList()
+  }
+
+  // 条件搜索
+  conditionSearch(i, ind) {
+    this.searchConditionIndex = i;
+    this.searchConditionParentIndex = ind;
   }
 
   // 进入产品详情

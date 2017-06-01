@@ -17,6 +17,7 @@ import { MyServiceService } from '../../../core/app.service'
 export class DataDetailComponent {
   @ViewChild('ueditor') ueditor: Ng2Ueditor;
 
+  isShowSearch = true;
   zanNum = 0;
   nozanNum = 0;
   id: string;
@@ -62,6 +63,12 @@ export class DataDetailComponent {
     this.isHidden = !this.isHidden;
   }
 
+  // 搜索
+  keywordSearch(data) {
+    console.log('详情页搜索', data)
+  }
+
+  // 获取详情信息
   getProductDetail() {
     this.service.getProductDetail(this.productId.productId)
       .then(res => {

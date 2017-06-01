@@ -1,6 +1,7 @@
-<nav class="ysl-header">
-  <div class="head-left" routerLink="/"></div>
-  <div class="head-right">
+<nav class="ysl-header container">
+  <div class="head-left hidden-xs" routerLink="/"></div>
+  <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>
+  <div class="head-right hidden-xs">
     <button class="ysl-btn login-btn" (click)="showLogin()" *ngIf="!loginState">登录</button>
     <button class="ysl-btn register-btn" routerLink="/register" *ngIf="!loginState">注册</button>
     <div class="operate-mage-btn" routerLink="/operation" *ngIf="loginState">
@@ -17,6 +18,9 @@
         <li>退出</li>
       </ul>
     </div>
+  </div>
+  <div class="visible-xs-block clearfix">
+    <button class="btn" (click)="showLogin()"><i class="fa fa-user-o"></i></button>
   </div>
 </nav>
 
