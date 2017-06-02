@@ -15,23 +15,32 @@ export class ProductImportComponent implements OnInit {
 
   timeFrom = '';
   timeTo = '';
-  data = {};
+  data = {
+    name: '',
+    summary: '',
+    url:  '',
+    from: '',
+    type: '',
+    collect: '',
+    service: '',
+    area: ''
+  };
   import = true;
   isActive = 0;
   tagDimensions = [];
 
-  private myDatePickerOptions: IMyDpOptions = {
+  myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd'
   };
 
-  private model: Object = { date: { year: 2018, month: 10, day: 9 } };
+  model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
-  constructor(public product: ProductListComponent, public service:MyServiceService){
+  constructor(public product: ProductListComponent, public service: MyServiceService){
     // 获取首页标签数据
     this.service.getTagDimensions()
       .then( data => {
         this.tagDimensions = data;
-      })
+      });
   }
 
 
@@ -43,7 +52,7 @@ export class ProductImportComponent implements OnInit {
   // 切换数据类型
   changeTab(i) {
     this.isActive = i;
-    console.log(i)
+    console.log(i);
   }
   onSubmit() {
     console.log(this.data);
