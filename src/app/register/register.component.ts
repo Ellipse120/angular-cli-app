@@ -16,16 +16,19 @@ export class RegisterComponent implements OnInit {
 
   constructor(public service: MyServiceService, public fb: FormBuilder) { }
 
-  submit(form: any): void {
-    console.log('form', form)
+  submit(): void {
+    let formControl = this.registerForm.controls;
+    console.log('form-control', formControl)
     this.email = this.registerForm.value.email;
     console.log('email', this.email)
-    if (!this.email) { return }
-    this.service.userRegister(this.email).then(res => {
-      console.log('注册', res)
-    }, error => {
-      console.log('error', error)
-    })
+
+    // return
+    // if (!this.email) { return }
+    // this.service.userRegister(this.email).then(res => {
+    //   console.log('注册', res)
+    // }, error => {
+    //   console.log('error', error)
+    // })
   }
 
   ngOnInit() {
@@ -34,7 +37,10 @@ export class RegisterComponent implements OnInit {
 
   createForm() {
     this.registerForm = this.fb.group({
-      email: [this.email, Validators.required]
+      email: [this.email, Validators.compose([
+        Validators.required,
+        Validators.pattern('^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+')
+      ])]
     })
   }
 

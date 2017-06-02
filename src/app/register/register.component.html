@@ -1,5 +1,5 @@
 <div class="register">
-  <form [formGroup]="registerForm" class="register-box text-center" (ngSubmit)="submit(registerForm)" novalidate>
+  <form [formGroup]="registerForm" class="register-box text-center" (ngSubmit)="submit()" novalidate>
     <h2 class="color-blue">用户注册</h2>
     <div class="email">
       <input type="email" formControlName="email" placeholder="请输入您的电子邮箱" required>
@@ -7,6 +7,7 @@
     <div class="agreement">
       <input type="checkbox"><span class="color-blue">已阅读用户协议</span>
     </div>
+    <span></span>
     <button class="ysl-btn send-email">发送电子邮件</button>
   </form>
 </div>
