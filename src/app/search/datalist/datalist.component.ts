@@ -16,7 +16,10 @@ export class DatalistComponent implements OnInit {
   state = false;
   limit;
   keywordOptions = {};
-  product = {};
+  product = {
+    items: [],
+    totalLength: 0
+  };
   searchConditionParentIndex: number;
   searchConditionIndex: number;
   searchCondition = [{
@@ -36,14 +39,15 @@ export class DatalistComponent implements OnInit {
       {text: '包括引用', value: '', type: 'checkbox'}
     ]}
   ];
+  p: any;
 
   constructor(public service: MyServiceService, public route: ActivatedRoute, public router: Router) {
     this.route.queryParams
       .subscribe((params) => {
-        this.keywordOptions = Object.assign({},params);
+        this.keywordOptions = Object.assign({}, params);
         this.getProjectList();
       })
-    this.limit = parseInt(this.keywordOptions['limit'])
+    this.limit = parseInt(this.keywordOptions['limit']);
   }
 
 
@@ -68,7 +72,7 @@ export class DatalistComponent implements OnInit {
     this.service.productKeywordSearch(this.keywordOptions)
       .then(res => {
         this.product = res;
-      })
+      });
   }
 
   // 条件搜索
@@ -79,14 +83,14 @@ export class DatalistComponent implements OnInit {
 
   // 进入产品详情
   toProductDetail(product) {
-    this.router.navigate(['datadetail', {productId: product.productId}])
+    this.router.navigate(['datadetail', {productId: product.productId}]);
   }
 
 
   // 下一页
   toNextPage(e) {
     this.keywordOptions['offset'] = parseInt(e) * (parseInt(this.keywordOptions['limit']));
-    this.getProjectList()
+    this.getProjectList();
   }
 
 }
