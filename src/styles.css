@@ -184,17 +184,6 @@ textarea::-webkit-scrollbar-thumb
   padding: 0 18.75%;
 }
 
-my-nav{
-  display: block;
-}
-app-index{
-  display: block;
-  background: url(assets/images/index-bg.jpg) no-repeat left top;
-  background-size: cover;
-  min-height: 100vh;
-  padding-bottom: 60px;
-  position: relative;
-}
 
 
 .calendar{
@@ -380,11 +369,20 @@ app-index{
   text-decoration: none;
 }
 
+
+.outer-wrapper{
+  display: block;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  position: relative;
+}
 /*nav*/
 my-nav{
-  background-color: #070224;
   border-bottom: 1px solid rgba(255,255,255,0.2);
   width: 100%;
+}
+my-nav{
+  display: block;
 }
 /*index*/
 app-index .mat-tab-body-content{

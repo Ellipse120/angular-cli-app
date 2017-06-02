@@ -1,2 +1,4 @@
-<my-nav></my-nav>
-<router-outlet></router-outlet>
+<div class="outer-wrapper" [ngStyle]="outerWrapperStyle">
+  <my-nav [ngStyle]="yslNavStyle"></my-nav>
+  <router-outlet></router-outlet>
+</div>

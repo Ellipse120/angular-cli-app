@@ -51,7 +51,6 @@ export class SearchInputComponent implements OnInit {
   }
 
   toggleAdvancedBox() {
-    console.log('show')
     this.isShowAdvancedBox = !this.isShowAdvancedBox;
     this.showAdvancedBox.emit({isShowAdvancedBox: this.isShowAdvancedBox})
   }
