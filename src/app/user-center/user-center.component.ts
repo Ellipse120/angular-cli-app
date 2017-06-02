@@ -8,7 +8,9 @@ import {MyServiceService} from '../core/app.service';
 })
 export class UserCenterComponent implements OnInit {
 
-  user = {};
+  user = {
+    count: ''
+  };
   index = 0;
   userTag = [
     {text: '个人信息', path: 'userInfo'},

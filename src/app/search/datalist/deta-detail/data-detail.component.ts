@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/5/10.
  */
-import { Component, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Ng2Ueditor } from 'ng2-ueditor/src/index';
 import { ActivatedRoute, Params } from '@angular/router'
 
@@ -14,7 +14,8 @@ import { MyServiceService } from '../../../core/app.service'
   styleUrls:['./data-detail.component.css']
 })
 
-export class DataDetailComponent {
+export class DataDetailComponent implements OnInit{
+
   @ViewChild('ueditor') ueditor: Ng2Ueditor;
 
   isShowSearch = true;
@@ -25,12 +26,10 @@ export class DataDetailComponent {
   full_source = '请输入评论';
   isHidden = true;
   productId;
-  productDetail = {};
-
-  constructor(public route: ActivatedRoute, public service: MyServiceService) {
-    this.productId = this.route.snapshot.params;
-    this.getProductDetail()
-  }
+  productDetail = {
+    name: '',
+    webSite: ''
+  };
 
   setting = {
     // 这里可以选择自己需要的工具按钮名称,此处仅选择如下几个
@@ -47,6 +46,12 @@ export class DataDetailComponent {
     initialFrameWidth: '100%'
 
   }
+
+  constructor(public route: ActivatedRoute, public service: MyServiceService) {
+
+  }
+
+
 
 //  赞
   zan() {
@@ -65,7 +70,7 @@ export class DataDetailComponent {
 
   // 搜索
   keywordSearch(data) {
-    console.log('详情页搜索', data)
+    console.log('详情页搜索', data);
   }
 
   // 获取详情信息
@@ -73,6 +78,12 @@ export class DataDetailComponent {
     this.service.getProductDetail(this.productId.productId)
       .then(res => {
         this.productDetail = res;
-      })
+      });
+  }
+
+
+  ngOnInit(): void {
+    this.productId = this.route.snapshot.params;
+    this.getProductDetail();
   }
 }

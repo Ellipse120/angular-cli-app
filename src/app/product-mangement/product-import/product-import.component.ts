@@ -36,11 +36,7 @@ export class ProductImportComponent implements OnInit {
   model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(public product: ProductListComponent, public service: MyServiceService){
-    // 获取首页标签数据
-    this.service.getTagDimensions()
-      .then( data => {
-        this.tagDimensions = data;
-      });
+
   }
 
 
@@ -57,5 +53,11 @@ export class ProductImportComponent implements OnInit {
   onSubmit() {
     console.log(this.data);
   }
-  ngOnInit() {}
+  ngOnInit() {
+    // 获取首页标签数据
+    this.service.getTagDimensions()
+      .then( data => {
+        this.tagDimensions = data;
+      });
+  }
 }

@@ -7,7 +7,7 @@ import {MyServiceService} from '../../core/app.service';
   styleUrls: ['../user-center.component.css']
 })
 
-export class UserInfoComponent implements OnInit{
+export class UserInfoComponent implements OnInit {
 
   user = {
     count: '',
