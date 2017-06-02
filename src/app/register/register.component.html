@@ -7,7 +7,7 @@
     <div class="agreement">
       <input type="checkbox"><span class="color-blue">已阅读用户协议</span>
     </div>
-    <span></span>
+    <span *ngIf="formErrorTip.email.length > 0">{{formErrorTip.email}}</span>
     <button class="ysl-btn send-email">发送电子邮件</button>
   </form>
 </div>

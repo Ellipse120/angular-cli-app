@@ -13,15 +13,25 @@ export class RegisterComponent implements OnInit {
 
   email: string;
   registerForm: FormGroup;
+  formErrorTip = {
+    email: ''
+  }
 
   constructor(public service: MyServiceService, public fb: FormBuilder) { }
 
   submit(): void {
-    let formControl = this.registerForm.controls;
-    console.log('form-control', formControl)
+    let emailControl = this.registerForm.get('email');
+    console.log('form-control', emailControl)
     this.email = this.registerForm.value.email;
     console.log('email', this.email)
 
+    if (emailControl.errors && emailControl.errors.required) {
+      this.formErrorTip.email = '请填写邮箱'
+    } else if (emailControl.errors && emailControl.errors.pattern) {
+      this.formErrorTip.email = '请填写正确格式的邮箱'
+    } else {
+      this.formErrorTip.email = ''
+    }
     // return
     // if (!this.email) { return }
     // this.service.userRegister(this.email).then(res => {
