@@ -2,22 +2,21 @@
   <div class="head-left hidden-xs" routerLink="/"></div>
   <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>
   <div class="head-right hidden-xs">
-    <button class="ysl-btn login-btn" (click)="showLogin()" *ngIf="!loginState">登录</button>
-    <button class="ysl-btn register-btn" routerLink="/register" *ngIf="!loginState">注册</button>
-    <div class="operate-mage-btn" routerLink="/operation" *ngIf="loginState">
-      运营中心
+    <div class="before-login"  *ngIf="!loginState">
+      <button class="ysl-btn login-btn" (click)="showLogin()">登录</button>
+      <button class="ysl-btn register-btn" routerLink="/register">注册</button>
     </div>
-    <!--产品管理-->
-    <div class="pro-mage-btn" routerLink="/promange" *ngIf="loginState">
-      产品管理
-    </div>
-    <!--用户中心-->
-    <div class="user-center-btn" *ngIf="loginState" (click)="toggle()">用户中心
-      <ul class="user-center-list" *ngIf="isUserCenter">
-        <li routerLink="/usercenter">个人中心</li>
-        <li>退出</li>
-      </ul>
-    </div>
+    <ul class="after-login" *ngIf="loginState">
+      <li class="ysl-nav-item"><span routerLink="/operation">运营中心</span></li>
+      <li class="ysl-nav-item"><span routerLink="/promange">产品管理</span></li>
+      <li class="ysl-nav-item">
+        <span>用户中心<i class="fa fa-angle-down"></i></span>
+        <ul class="ysl-subnav">
+          <li routerLink="/usercenter">个人中心</li>
+          <li>退出</li>
+        </ul>
+      </li>
+    </ul>
   </div>
   <div class="visible-xs-block clearfix">
     <button class="btn" (click)="showLogin()"><i class="fa fa-user-o"></i></button>

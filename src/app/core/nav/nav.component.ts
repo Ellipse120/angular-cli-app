@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { MdDialog } from '@angular/material';
 
@@ -15,19 +16,23 @@ import { LoginComponent } from "../../login/login.component";
 })
 
 export class NavComponent implements OnInit {
-  @Input() isShowSearch;
 
   keywordSearch: EventEmitter<any>;
+  isShowSearch = false;
   user = [];
+  path: string;
   loginState: boolean = false;
-  isUserCenter = false;
 
-  constructor(public router:Router, public dialog: MdDialog){
+  constructor(public router:Router,
+              public dialog: MdDialog,
+              public location: Location){
     this.keywordSearch = new EventEmitter()
   }
 
   ngOnInit() {
-
+    this.path = this.location.path(false);
+    this.isShowSearch = this.path.includes('/index') ? false : true;
+    console.log('isSearch', this.path)
   }
 
 
@@ -49,11 +54,6 @@ export class NavComponent implements OnInit {
   // 搜索
   keywordSubmit(data) {
     this.keywordSearch.emit(data)
-  }
-
-  //  切换下拉列表
-  toggle() {
-    this.isUserCenter = !this.isUserCenter;
   }
 }
 

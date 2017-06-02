@@ -3,12 +3,12 @@
   <form class="row" [formGroup]="keywordSearchForm" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
     <div class="ysl-input-group col-xs-10">
       <input type="text" class="search-input" formControlName="keyword" required>
-      <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox()"></span>
+      <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox();$event.stopPropagation()"></span>
     </div>
     <button class="searchbtn col-xs-2"><i class="fa fa-search"></i></button>
     <!--routerLink="/datalist"-->
   </form>
-  <form [formGroup]="advancedSearchForm" class="advanced-box form-horizontal" *ngIf="isShowAdvancedBox" (ngSubmit)="advancedSearchSubmit()">
+  <form [formGroup]="advancedSearchForm" class="advanced-box form-horizontal" *ngIf="isShowAdvancedBox" (ngSubmit)="advancedSearchSubmit()" (click)="$event.stopPropagation()" novalidate>
     <div class="form-group">
       <label class="col-xs-4">关键词</label>
       <input type="text" class="col-xs-8 advanced-input" formControlName="keyword">

@@ -1,12 +1,7 @@
 .container{
-  width: 32.29%;
+  width: 53%;
 }
-@media screen and (max-width: 768px){
-  .container{
-    width: 90%;
-  }
-}
-  .search-box{
+.search-box{
   margin:0 auto;
   position: relative;
   margin-bottom: 30px;
@@ -82,4 +77,10 @@
 }
 .radio-inline{
   margin-left: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    width: 90%;
+  }
 }

@@ -9,6 +9,7 @@ body{
   width: 100%;
   position: relative;
   font-family: '微软雅黑' !important;
+  overflow-y: scroll;
 }
 *{
   margin:0;
@@ -396,7 +397,7 @@ app-index .mat-ripple{
   overflow: visible;
 }
 .ysl-label-search-area{
-  width: 32.29%;
+  width: 53%;
   margin: 0 auto;
   color: #aa9d9d;
 }

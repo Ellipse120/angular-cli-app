@@ -17,44 +17,63 @@
 }
 .head-right {
   display: flex;
+  height: 100%;
 }
-
-.pro-mage-btn,.operate-mage-btn{
-  display: inline-block;
-  width: 120px;
-  text-align: center;
-  background: #fff;
-  border: 1px solid #d8e5e7;
-  height: 50px;
-  cursor: pointer;
-  outline: none;
-  border-right: none;
+.before-login{
+  display: flex;
+  align-items: center;
 }
-.user-center-btn {
-  width: 120px;
-  display: inline-block;
-  cursor: pointer;
-  background: #fff;
-  border: 1px solid #d8e5e7;
-  height: 50px;
-  background: url("../../../assets/images/arrowdown.png") no-repeat right center;
-  background-position-x: 98px ;
-  position: relative;
-  text-align: center;
+.after-login{
+  display: flex;
+  height: 100%;
 }
-.user-center-list{
-  position: absolute;
+.ysl-subnav{
+  display: none;
   width: 100%;
-  top:48px;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  overflow: hidden;
 }
-.user-center-list li{
-  border:1px solid #d8e5e7;
-  background: #fff;
-}
-.user-center-list li:hover{
-  background: #39baf6;
+.ysl-subnav li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
   color: #fff;
 }
+.ysl-subnav li:hover{
+  color: rgba(255,255,255,0.7)
+}
+.ysl-nav-item{
+  display: flex;
+  width: 120px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+.ysl-nav-item span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+}
+.ysl-nav-item span:hover{
+  color: rgba(255,255,255,0.7)
+}
+.ysl-nav-item .fa-angle-down{
+  margin-left: 10px;
+}
+.ysl-nav-item:hover .ysl-subnav{
+  display: block;
+}
+
 .ysl-btn{
   height: 28px;
   width: 56px;

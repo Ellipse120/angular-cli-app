@@ -37,6 +37,9 @@ export class SearchInputComponent implements OnInit {
     this.keywordSearch = new EventEmitter();
     this.showAdvancedBox = new EventEmitter();
     this.createForm();
+    document.addEventListener('click', () => {
+      this.isShowAdvancedBox = false;
+    }, false)
   }
 
   //关键字搜索
@@ -80,4 +83,5 @@ export class SearchInputComponent implements OnInit {
       area: ''
     })
   }
+
 }

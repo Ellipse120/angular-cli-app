@@ -17,7 +17,6 @@ export class DatalistComponent implements OnInit {
   limit;
   keywordOptions = {};
   product = {};
-  isShowSearch = true;
   searchConditionParentIndex: number;
   searchConditionIndex: number;
   searchCondition = [{
@@ -70,13 +69,6 @@ export class DatalistComponent implements OnInit {
       .then(res => {
         this.product = res;
       })
-  }
-
-  // 关键词搜索
-  keywordSearch(option) {
-    console.log('sousuo', option)
-    this.keywordOptions['keyword'] = option.keyword;
-    this.getProjectList()
   }
 
   // 条件搜索
