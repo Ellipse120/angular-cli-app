@@ -9,7 +9,11 @@ import {MyServiceService} from "../../core/app.service";
 
 export class PsdModifyComponent implements OnInit{
 
-  modify = [];
+  modify = {
+    old: '',
+    new: '',
+    new2: ''
+  };
   constructor(public uservice: MyServiceService) {
 
   }

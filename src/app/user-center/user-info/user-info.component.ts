@@ -9,7 +9,17 @@ import {MyServiceService} from '../../core/app.service';
 
 export class UserInfoComponent implements OnInit{
 
-  user = [];
+  user = {
+    count: '',
+    username: '',
+    truename: '',
+    sex: '',
+    birthday: '',
+    address: '',
+    phone: '',
+    job: '',
+    logintime: ''
+  };
   showEdit = true;
   able = false;
   constructor(public uservice: MyServiceService) {
@@ -20,7 +30,7 @@ export class UserInfoComponent implements OnInit{
   getUserInfo() {
     this.uservice
       .getUserInfo()
-      .then(user => {this.user = user; console.log(this.user)});
+      .then(user => {this.user = user; console.log(this.user); });
   }
 
   // 编辑用户信息

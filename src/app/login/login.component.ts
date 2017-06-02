@@ -24,13 +24,17 @@ export class LoginComponent  {
     this.loginForm = this.fb.group({
       userAccount: [''],
       userPassword: ['']
-    })
+    });
   }
 
   // 提交登录
   loginSubmit() {
     console.log('登录', this.loginForm.value)
-    this.dialogRef.close({status: true})
+    this.dialogRef.close({status: true});
+  }
+
+  gotoRegitster(){
+    // todo
   }
 }
 

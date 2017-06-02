@@ -17,11 +17,11 @@ export class ErrorCorrectComponent implements OnInit {
   error = [];
   errorEdit = false;
 
-  private myDatePickerOptions: IMyDpOptions = {
+  myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd'
   };
 
-  private model: Object = { date: { year: 2018, month: 10, day: 9 } };
+  model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
   columns = [
     {name: 'proName'},
@@ -34,8 +34,8 @@ export class ErrorCorrectComponent implements OnInit {
   constructor(public service: MyServiceService) {
     this.service.getError(data => {
       this.rows = data;
-      console.log(this.rows)
-    })
+      console.log(this.rows);
+    });
   }
 
   closeError() {
@@ -53,12 +53,12 @@ export class ErrorCorrectComponent implements OnInit {
     this.selected.push(selected)
     console.log(this.selected);
 
-    //this.selected.splice(0, this.selected.length);
-    //this.selected.push(...selected);
+    // this.selected.splice(0, this.selected.length);
+    // this.selected.push(...selected);
   }
 
   onActivate(event) {
-    //console.log('Activate Event', event.value);
+    // console.log('Activate Event', event.value);
   }
 
   add() {
@@ -73,12 +73,12 @@ export class ErrorCorrectComponent implements OnInit {
     this.selected = [];
   }
 //  this.service
-//.getList()
+// .getList()
 //  // .then((function(data){this.dataList=data}))
-//.then(dataList => {
+// .then(dataList => {
 //  this.dataList = dataList;
 //  console.log(this.dataList);
-//})
+// })
   // 获取纠错数据
 
 
