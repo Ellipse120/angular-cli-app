@@ -508,10 +508,10 @@ app-index .mat-ripple{
 }
 
 /*搜索列表*/
-app-datalist search-input,data-detail search-input{
+my-nav search-input{
   width: 34%;
 }
-app-datalist .search-box,data-detail .search-box{
+my-nav .search-box{
   width: 100% !important;
   margin-bottom: 0 !important;
 }

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MdDialog } from '@angular/material';
@@ -20,19 +20,22 @@ export class NavComponent implements OnInit {
   keywordSearch: EventEmitter<any>;
   isShowSearch = false;
   user = [];
-  path: string;
   loginState: boolean = false;
 
-  constructor(public router:Router,
+  constructor(public router: Router,
               public dialog: MdDialog,
-              public location: Location){
-    this.keywordSearch = new EventEmitter()
+              public location: Location) {
+    this.keywordSearch = new EventEmitter();
+
+    let subscription = this.router.events.subscribe(e => {
+      if(e instanceof NavigationStart) {
+        console.log('url', e.url)
+        this.isShowSearch = e.url.includes('/index') ? false : true;
+      }
+    })
   }
 
   ngOnInit() {
-    this.path = this.location.path(false);
-    this.isShowSearch = this.path.includes('/index') ? false : true;
-    console.log('isSearch', this.path)
   }
 
 
