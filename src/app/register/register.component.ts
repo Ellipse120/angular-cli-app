@@ -13,32 +13,46 @@ export class RegisterComponent implements OnInit {
 
   email: string;
   registerForm: FormGroup;
-  formErrorTip = {
-    email: ''
+  isSubmit: boolean;
+  formErrors = {
+    email: '',
+    agreement: ''
+  }
+  validationMessages = {
+    email: {
+      required: '请输入邮箱',
+      pattern: '邮箱格式不正确'
+    },
+    agreement: {
+      required: '请仔细阅读用户协议并同意'
+    }
   }
 
   constructor(public service: MyServiceService, public fb: FormBuilder) { }
 
   submit(): void {
-    let emailControl = this.registerForm.get('email');
-    console.log('form-control', emailControl)
-    this.email = this.registerForm.value.email;
-    console.log('email', this.email)
+    if (!this.registerForm) { return }
+    console.log('registerForm', this.registerForm)
+    this.isSubmit = true;
+    const form = this.registerForm;
 
-    if (emailControl.errors && emailControl.errors.required) {
-      this.formErrorTip.email = '请填写邮箱'
-    } else if (emailControl.errors && emailControl.errors.pattern) {
-      this.formErrorTip.email = '请填写正确格式的邮箱'
-    } else {
-      this.formErrorTip.email = ''
+    for (const field in this.formErrors) {
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const err in control.errors) {
+          this.formErrors[field] += messages[err] + ''
+        }
+      }
     }
-    // return
-    // if (!this.email) { return }
-    // this.service.userRegister(this.email).then(res => {
-    //   console.log('注册', res)
-    // }, error => {
-    //   console.log('error', error)
-    // })
+    if (form.invalid) { return }
+    this.service.userRegister(this.email).then(res => {
+      console.log('注册', res)
+    }, error => {
+      console.log('error', error)
+    })
   }
 
   ngOnInit() {
@@ -46,11 +60,13 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
+    const emailExp = /((([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?/
     this.registerForm = this.fb.group({
       email: [this.email, Validators.compose([
         Validators.required,
-        Validators.pattern('^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+')
-      ])]
+        Validators.pattern(emailExp)
+      ])],
+      agreement: ['', Validators.required]
     })
   }
 

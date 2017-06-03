@@ -71,7 +71,7 @@
 
 /*修改*/
 @media screen and (max-width: 768px){
-  .ysl-label-searh-cont{
+  .ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
   }
