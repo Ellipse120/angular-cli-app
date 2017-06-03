@@ -27,7 +27,7 @@ export class SearchInputComponent implements OnInit {
     timeFrom: '',
     timeTo: ''
   };
-  keywordSearchOption = {keyword: '', offset: 0, limit: 10, sortBy: '', ascending: false};
+  keywordSearchOption = {keyword: ''};
   advancedSearchOption = {};
 
 

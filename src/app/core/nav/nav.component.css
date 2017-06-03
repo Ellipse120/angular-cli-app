@@ -5,15 +5,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 2.222rem;
 }
 
 .ysl-header .head-left {
-  width: 201px;
-  height: 34px;
+  width: 5.583rem;
+  height: 0.944rem;
   outline: none;
   cursor: pointer;
-  background: url("../../../assets/images/logo.png") no-repeat;
+  background: url("../../../assets/images/logo.png") no-repeat left top/cover;
 }
 .head-right {
   display: flex;
@@ -104,8 +104,13 @@
 }
 @media screen and (max-width: 768px) {
   .ysl-header{
-    height: 1.9rem;
-    justify-content: flex-end;
+    justify-content: space-between;
+  }
+  .head-right{
+    display: none;
+  }
+  .visible-xs-block{
+    display: block !important;
   }
 }
 

@@ -4,7 +4,7 @@
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';/* You can add global styles to this file, and also import other style files */
 html{
-  font-size: 20px;
+  font-size: 36px;
 }
 body{
   height:100%;
@@ -102,8 +102,6 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  /*在选择框最右侧显示小箭头的图片*/
-  background: url("assets/images/selectarrow.png") no-repeat right center;
   /*background-position: 100;*/
   padding-right: 20px !important;
 
@@ -416,6 +414,14 @@ my-nav{
 my-nav{
   display: block;
 }
+my-nav search-input{
+  width: 34%;
+  min-width: 212px;
+}
+my-nav .search-box{
+  width: 100% !important;
+  margin-bottom: 0 !important;
+}
 /*index*/
 app-index .mat-tab-body-content{
   overflow: visible;
@@ -485,6 +491,9 @@ app-index .mat-ripple{
   }
 }
 @media screen and (max-width: 768px){
+  html{
+    font-size: 20px;
+  }
   .ysl-container{
     padding: 0 16px;
   }
@@ -492,7 +501,7 @@ app-index .mat-ripple{
     font-size: 12px;
   }
   .ysl-label-search-area{
-    width: 90%;
+    width: 100%;
   }
   .ysl-label-search-area .mat-tab-labels{
     justify-content: flex-start;
@@ -528,6 +537,7 @@ app-index .mat-ripple{
   background-color: rgba(246,249,250,0.02);
   padding: 0 20px;
   margin: 0 5px 10px 0;
+  cursor: pointer;
 }
 .ysl-label-search-area .mat-ink-bar{
   display: none;
@@ -537,13 +547,6 @@ app-index .mat-ripple{
   margin-top: -19px;
 }
 
-/*搜索列表*/
-my-nav search-input{
-  width: 34%;
-}
-my-nav .search-box{
-  width: 100% !important;
-  margin-bottom: 0 !important;
-}
+
 
 

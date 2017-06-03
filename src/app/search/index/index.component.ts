@@ -11,43 +11,46 @@ import { MyServiceService } from "../../core/app.service";
 })
 export class IndexComponent implements OnInit {
 
-  isActive = 0;
   tagDimensions = [];
   indexContStyle = {};
+  searchOption;
 
   constructor(public service: MyServiceService,
               public router: Router) {
-
+    this.searchOption = { offset: 0, limit: 10, sortBy: '', ascending: false}
     // 获取首页标签数据
     this.service.getTagDimensions()
-        .then( data => {
+        .then(data => {
           this.tagDimensions = data;
           console.log(this.tagDimensions);
         })
   }
 
-  changeTab(i) {
-    this.isActive = i;
-    console.log(i)
-  }
-
   // 关键字搜索
   keywordSearch(option) {
-
-    let navigationExtras: NavigationExtras = {
-      queryParams: {keyword: option.keyword, offset: option.offset, limit: option.limit, sortBy: option.sortBy, ascending: option.ascending}
-    }
-
-    this.router.navigate(['datalist'], navigationExtras)
+    this.searchOption.keyword = option.keyword;
+    this.toDataList()
   }
 
-  //切换高级搜索
+  // 标签搜索
+  tagSearch(tag) {
+    this.searchOption.tagId = tag;
+    this.toDataList()
+  }
+
+  // 切换高级搜索
   showAdvancedBox(isShow) {
     this.indexContStyle = isShow.isShowAdvancedBox ? {minHeight: '760px'} : {minHeight: 0}
   }
 
+  // 搜索跳转页面
+  toDataList() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: this.searchOption
+    }
 
-
+    this.router.navigate(['datalist'], navigationExtras)
+  }
   ngOnInit() {
   }
 

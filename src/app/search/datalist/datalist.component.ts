@@ -15,7 +15,7 @@ export class DatalistComponent implements OnInit {
 
   state = false;
   limit;
-  keywordOptions = {};
+  searchOptions = {};
   product = {
     items: [],
     totalLength: 0
@@ -44,12 +44,12 @@ export class DatalistComponent implements OnInit {
   constructor(public service: MyServiceService, public route: ActivatedRoute, public router: Router) {
     this.route.queryParams
       .subscribe((params) => {
-        this.keywordOptions = Object.assign({}, params);
+        this.searchOptions = Object.assign({}, params);
+        console.log('params', this.searchOptions)
         this.getProjectList();
       })
-    this.limit = parseInt(this.keywordOptions['limit']);
+    this.limit = parseInt(this.searchOptions['limit']);
   }
-
 
   // 获取数据
   // getData(): void {
@@ -69,7 +69,7 @@ export class DatalistComponent implements OnInit {
 
   // 获取产品列表
   getProjectList() {
-    this.service.productKeywordSearch(this.keywordOptions)
+    this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
       });
@@ -86,10 +86,9 @@ export class DatalistComponent implements OnInit {
     this.router.navigate(['datadetail', {productId: product.productId}]);
   }
 
-
   // 下一页
   toNextPage(e) {
-    this.keywordOptions['offset'] = parseInt(e) * (parseInt(this.keywordOptions['limit']));
+    this.searchOptions['offset'] = parseInt(e) * (parseInt(this.searchOptions['limit']));
     this.getProjectList();
   }
 

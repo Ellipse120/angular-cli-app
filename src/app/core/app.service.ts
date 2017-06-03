@@ -108,15 +108,16 @@ export class MyServiceService {
   // 登录
   userLogin(user): Promise<any> {
     return new Promise((resolve, reject) => {
-      // this.http.get()
+      // this.http.post(this.url + 'api/auth/login')
     })
   }
-
 
   // 产品--关键字搜索
   productKeywordSearch(options): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + 'api/product/search?keyword=' + options.keyword + '&offset=' + options.offset  + '&limit=' + options.limit + '&sortBy=' + options.sortBy + '&ascending=' + options.ascending)
+      this.http.get(this.url + 'api/product/search', {
+        params: options
+      })
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
       })
@@ -130,7 +131,6 @@ export class MyServiceService {
         .then(response => resolve(response.json()), error => reject(error))
     })
   }
-
 
 
   // 运营中心/用户管理/获取用户列表

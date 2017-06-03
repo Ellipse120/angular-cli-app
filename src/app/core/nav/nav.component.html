@@ -1,5 +1,6 @@
 <nav class="ysl-header container">
-  <div class="head-left hidden-xs" routerLink="/index"></div>
+  <div routerLink="/index"></div>
+  <!--class="head-left"-->
   <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>
   <div class="head-right hidden-xs">
     <div class="before-login" *ngIf="!loginState">
@@ -20,6 +21,10 @@
   </div>
   <div class="visible-xs-block clearfix">
     <button class="btn" (click)="showLogin()"><i class="fa fa-user-o"></i></button>
+    <ul class="after-login-xs" *ngIf="loginState">
+      <li>登录</li>
+      <li>注册</li>
+    </ul>
   </div>
 </nav>
 

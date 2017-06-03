@@ -1,16 +1,11 @@
 .index-cont{
-  padding-top: 3rem;
+  padding-top: 1.667rem;
   text-align: center;
-}
-@media screen and (max-width: 768px){
-  .index-cont{
-    padding-top: 1.5rem;
-  }
 }
 .logo{
   display: inline-block;
   height: auto;
-  width: 9.3%;
+  width: 3.111rem;
   min-width: 60px;
   max-width: 112px;
   margin-bottom: 40px;

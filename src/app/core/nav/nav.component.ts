@@ -26,13 +26,7 @@ export class NavComponent implements OnInit {
               public dialog: MdDialog,
               public location: Location) {
     this.keywordSearch = new EventEmitter();
-
-    let subscription = this.router.events.subscribe(e => {
-      if(e instanceof NavigationStart) {
-        console.log('url', e.url)
-        this.isShowSearch = e.url.includes('/index') ? false : true;
-      }
-    })
+    this.setNavStyle();
   }
 
   ngOnInit() {
@@ -57,6 +51,15 @@ export class NavComponent implements OnInit {
   // 搜索
   keywordSubmit(data) {
     this.keywordSearch.emit(data)
+  }
+
+  setNavStyle() {
+    let subscription = this.router.events.subscribe(e => {
+      if(e instanceof NavigationStart) {
+        console.log('url', e.url)
+        this.isShowSearch = (e.url.includes('/index') || e.url.includes('/register')) ? false : true;
+      }
+    })
   }
 }
 

@@ -6,10 +6,14 @@
   position: relative;
   margin-bottom: 30px;
 }
-.search-input{
+form{
   height: 30px;
   line-height: 30px;
-  font-size: 18px;
+}
+.search-input{
+  height: 100%;
+  line-height: 100%;
+  font-size: 0.5rem;
   color: #737373 ;
   border: 1px solid #d8e5e7;
   padding-left: 10px;
@@ -20,6 +24,8 @@
 .ysl-input-group{
   position: relative;
   padding: 0;
+  height: 30px;
+  line-height: 30px;
 }
 .ysl-input-group input{
   width: 100%;
@@ -33,8 +39,8 @@
 }
 .searchbtn{
   display: inline-block;
-  height: 30px;
-  line-height: 30px;
+  height: 100%;
+  line-height: 100%;
   background: #ff4307;
   text-align: center;
   color: #fff;
@@ -51,8 +57,7 @@
   left:0;
   background: #fff;
   z-index: 1000;
-  padding:0 70px;
-  padding-top:12px;
+  padding: 12px 1.944rem;
   padding-bottom: 10px;
   font-size: 13px;
   font-family: '微软雅黑';
@@ -73,14 +78,30 @@
   line-height: 30px;
 }
 .form-group label{
+  font-size: 0.389rem;
   font-weight: normal;
 }
 .radio-inline{
   margin-left: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .container{
-    width: 90%;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .form-group{
+    margin-right: 0;
+  }
+  .advanced-box{
+    padding: 12px 10px;
   }
 }
+@media screen and (max-width: 768px) {
+  .container{
+    width: 100%;
+  }
+  .form-group{
+    margin-right: 0;
+  }
+  .advanced-box{
+    padding: 12px 10px;
+  }
+}
+
