@@ -1,13 +1,25 @@
-<div class="register">
+<div class="register container">
   <form [formGroup]="registerForm" class="register-box text-center" (ngSubmit)="submit()" novalidate>
-    <h2 class="color-blue">用户注册</h2>
-    <div class="email">
-      <input type="email" formControlName="email" placeholder="请输入您的电子邮箱" required>
+    <h2 class="color-blue register-title">用户注册</h2>
+    <div class="form-group email">
+      <label class="sr-only"></label>
+      <div class="input-group col-xs-12">
+        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+        <input type="email" class="form-control" formControlName="email" placeholder="请输入您的电子邮箱" required>
+      </div>
     </div>
-    <div class="agreement">
-      <input type="checkbox"><span class="color-blue">已阅读用户协议</span>
+    <div class="form-group clearfix agreement">
+      <label class="sr-only"></label>
+      <div class="ysl-checkbox-group col-xs-12">
+        <label><input type="checkbox"><span></span>已阅读</label><a class="color-blue">《用户协议》</a>
+      </div>
     </div>
-    <span *ngIf="formErrorTip.email.length > 0">{{formErrorTip.email}}</span>
-    <button class="ysl-btn send-email">发送电子邮件</button>
+    <div class="form-group" *ngIf="formErrorTip.email.length > 0">
+      <span>{{formErrorTip.email}}</span>
+    </div>
+    <div class="form-group">
+      <label class="sr-only"></label>
+      <button class="btn btn-lg btn-block submit-btn">发送电子邮件</button>
+    </div>
   </form>
 </div>

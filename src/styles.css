@@ -152,6 +152,9 @@ textarea::-webkit-scrollbar-thumb
 .ysl-text-primary{
   color: #ff4307;
 }
+.btn:focus,.btn:active{
+  outline: none;
+}
 .ysl-btn{
   font-family: '微软雅黑';
   display: flex;
@@ -180,6 +183,33 @@ textarea::-webkit-scrollbar-thumb
   width: 260px;
   border-radius: 4px;
   font-size: 16px;
+}
+.ysl-checkbox-group{
+  padding-left: 10px;
+}
+.ysl-checkbox-group label{
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+}
+.ysl-checkbox-group input{
+  display: none;
+}
+.ysl-checkbox-group input+span{
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  border: 1px solid #d8e5e7;
+  position: relative;
+  margin-right: 8px;
+}
+.ysl-checkbox-group [type=checkbox]:checked+span:after{
+  content: "√";
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .ysl-container{
   width: 100%;
