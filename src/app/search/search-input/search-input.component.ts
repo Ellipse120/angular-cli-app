@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 
 import { MyServiceService } from '../../core/app.service';
+import {SearchService} from "../search.service";
 
 @Component({
   selector: 'search-input',
@@ -30,12 +31,13 @@ export class SearchInputComponent implements OnInit {
   keywordSearchOption = {keyword: ''};
   advancedSearchOption = {};
 
-
   constructor(public fb: FormBuilder,
               public service: MyServiceService,
-              public router: Router) {
+              public router: Router,
+              public eventEmit: SearchService) {
     this.keywordSearch = new EventEmitter();
     this.showAdvancedBox = new EventEmitter();
+    this.keywordSearchOption.keyword = this.eventEmit.keyword ?　this.eventEmit.keyword : '';
     this.createForm();
     document.addEventListener('click', () => {
       this.isShowAdvancedBox = false;
@@ -44,10 +46,8 @@ export class SearchInputComponent implements OnInit {
 
   //关键字搜索
   keywordSubmit(form: any) {
-
     this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
     this.keywordSearch.emit(this.keywordSearchOption)
-
   }
 
   toggleAdvancedBox() {
@@ -55,13 +55,10 @@ export class SearchInputComponent implements OnInit {
     this.showAdvancedBox.emit({isShowAdvancedBox: this.isShowAdvancedBox})
   }
 
-
-
   // 提交高级搜索
   advancedSearchSubmit() {
     console.log(this.advancedSearchForm.value);
   }
-
 
   ngOnInit() {
   }

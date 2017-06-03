@@ -5,6 +5,7 @@ import 'rxjs/add/operator/switchMap'
 
 
 import {MyServiceService} from '../../core/app.service';
+import {SearchService} from "../search.service";
 
 @Component({
   selector: 'app-datalist',
@@ -15,7 +16,7 @@ export class DatalistComponent implements OnInit {
 
   state = false;
   limit;
-  searchOptions = {};
+  searchOptions;
   product = {
     items: [],
     totalLength: 0
@@ -41,30 +42,21 @@ export class DatalistComponent implements OnInit {
   ];
   p: any;
 
-  constructor(public service: MyServiceService, public route: ActivatedRoute, public router: Router) {
+  constructor(private service: MyServiceService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private eventEmit: SearchService) {
     this.route.queryParams
       .subscribe((params) => {
         this.searchOptions = Object.assign({}, params);
-        console.log('params', this.searchOptions)
+        this.eventEmit.keyword = params.keyword;
         this.getProjectList();
       })
     this.limit = parseInt(this.searchOptions['limit']);
+    this.keywordSearch()
   }
 
-  // 获取数据
-  // getData(): void {
-  //   this.service
-  //     .getList()
-  //     // .then((function(data){this.dataList=data}))
-  //     .then(dataList => {
-  //       this.productList = dataList;
-  //       console.log(this.productList);
-  //     })
-  //
-  // }
-
   ngOnInit() {
-
   }
 
   // 获取产品列表
@@ -73,6 +65,18 @@ export class DatalistComponent implements OnInit {
       .then(res => {
         this.product = res;
       });
+  }
+
+  // 关键字搜索
+  keywordSearch() {
+    this.eventEmit.keywordSearch.subscribe(e => {
+      this.eventEmit.keyword = e.keyword;
+      this.searchOptions.keyword = e.keyword;
+      this.getProjectList()
+      // 关键字搜索
+      console.log('emit', e)
+
+    })
   }
 
   // 条件搜索

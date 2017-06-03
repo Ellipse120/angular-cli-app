@@ -23,7 +23,9 @@
                                                       totalItems: product.totalLength}"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
           <span class="data-content">{{item.description}}</span>
-          <div class="tag">标签1</div> <div class="tag">标签2</div>
+          <ul class="product-item-tags">
+            <li class="product-item-tag" *ngFor="let t of item.tags">{{t.name}}</li>
+          </ul>
         </li>
       </ul>
       <pagination-controls (pageChange)="toNextPage($event);"></pagination-controls>

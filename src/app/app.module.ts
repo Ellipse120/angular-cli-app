@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 import { Ng2UeditorModule } from 'ng2-ueditor/src/index';
 import { ProductMangementModule } from './product-mangement/product-mangement.module';
 import { YslMaterialModule } from './core/ysl-material.module';
@@ -14,7 +13,12 @@ import { OperationManagementModule } from './operation-management/operation-mana
 import { AppRoutingModule } from './app-routing.module';
 import { Ng2PaginationModule } from 'ng2-pagination/index';
 
+import { MyServiceService } from './core/app.service';
+import { SearchService } from "./search/search.service";
 
+import { SearchInputComponent } from './search/search-input/search-input.component';
+import { NavComponent } from './core/nav/nav.component';
+import { FooterComponent } from './core/footer/footer.component';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './search/index/index.component';
 import { RegisterComponent } from './register/register.component';
@@ -22,13 +26,6 @@ import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
 import { LoginComponent } from './login/login.component';
 
-
-import { MyServiceService } from './core/app.service';
-
-
-import { SearchInputComponent } from './search/search-input/search-input.component';
-import { NavComponent } from './core/nav/nav.component';
-import { FooterComponent } from './core/footer/footer.component';
 
 
 
@@ -63,7 +60,7 @@ import { FooterComponent } from './core/footer/footer.component';
   entryComponents: [
     LoginComponent
   ],
-  providers: [MyServiceService],
+  providers: [MyServiceService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
