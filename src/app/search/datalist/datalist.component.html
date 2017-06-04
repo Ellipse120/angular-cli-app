@@ -1,8 +1,9 @@
-<div class="dataShow">
+<div class="dataShow container">
   <!--列表页-->
-  <div class="data-list-area clearfix container">
+  <div class="search-condition-xs visible-xs-block"><span class="fa fa-filter ysl-text-dark-blue"></span></div>
+  <div class="data-list-area clearfix">
     <!--搜索菜单-->
-    <div class="search-condition">
+    <div class="search-condition hidden-xs">
       <ul class="search-condition-type" *ngFor="let type of searchCondition; let ind = index">
         <li class="search-condition-type-item" *ngFor="let item of type.children; let i = index">
           <p class="readonly" [class.active]="searchConditionIndex == i && searchConditionParentIndex == ind" *ngIf="item.type=='readonly'" (click)="conditionSearch(i, ind)">{{item.text}}</p>
@@ -16,7 +17,7 @@
       </ul>
     </div>
     <div class="data-list">
-      <p>找到约{{product.totalLength}}条结果</p>
+      <p class="find-result">找到约{{product.totalLength}}条结果</p>
       <ul>
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
                                                       currentPage: p,
