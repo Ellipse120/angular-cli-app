@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
 import { MyServiceService } from "../../core/app.service";
+import {SearchService} from "../search.service";
 
 
 @Component({
@@ -10,13 +11,14 @@ import { MyServiceService } from "../../core/app.service";
   styleUrls: ['./index.component.css'],
 })
 export class IndexComponent implements OnInit {
-
   tagDimensions = [];
   indexContStyle = {};
   searchOption;
 
   constructor(public service: MyServiceService,
-              public router: Router) {
+              public router: Router,
+              private eventEmit: SearchService) {
+    this.eventEmit.keyword = '';
     this.searchOption = { offset: 0, limit: 10, sortBy: '', ascending: false}
     // 获取首页标签数据
     this.service.getTagDimensions()

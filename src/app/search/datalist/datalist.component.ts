@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap'
 
-
 import {MyServiceService} from '../../core/app.service';
 import {SearchService} from "../search.service";
 
@@ -73,9 +72,6 @@ export class DatalistComponent implements OnInit {
       this.eventEmit.keyword = e.keyword;
       this.searchOptions.keyword = e.keyword;
       this.getProjectList()
-      // 关键字搜索
-      console.log('emit', e)
-
     })
   }
 

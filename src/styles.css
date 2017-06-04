@@ -2,7 +2,8 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
-@import '~@swimlane/ngx-datatable/release/assets/icons.css';/* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import "~bootstrap/dist/css/bootstrap.css";/* You can add global styles to this file, and also import other style files */
 html{
   font-size: 36px;
 }
@@ -147,8 +148,11 @@ textarea::-webkit-scrollbar-thumb
   visibility: hidden;
   clear: both;
 }
-.ysl-text-primary{
+.ysl-text-orange{
   color: #ff4307;
+}
+.ysl-text-dark-blue{
+  color: #070224;
 }
 .btn:focus,.btn:active{
   outline: none;
@@ -484,45 +488,6 @@ app-index .mat-ripple{
   transform: translate(-50%, 0);
 }
 
-
-@media screen and (max-width: 1200px){
-  .ysl-container{
-    padding: 0 5%;
-  }
-}
-@media screen and (max-width: 768px){
-  html{
-    font-size: 20px;
-  }
-  .ysl-container{
-    padding: 0 16px;
-  }
-  .footer{
-    font-size: 12px;
-  }
-  .ysl-label-search-area{
-    width: 100%;
-  }
-  .ysl-label-search-area .mat-tab-labels{
-    justify-content: flex-start;
-  }
-  .ysl-label-search-area .mat-tab-label{
-    border-radius: 0;
-  }
-  .ysl-label-search-area .mat-tab-label-active:after{
-    display: none;
-  }
-  .ysl-label-search-area .mat-tab-label-container{
-    overflow: scroll;
-  }
-  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar{
-    color: transparent;
-  }
-  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar-corner{
-    color: transparent;
-  }
-}
-
 .ysl-label-search-cont{
   display: flex;
   flex-wrap: wrap;
@@ -546,7 +511,44 @@ app-index .mat-ripple{
   padding-top: 30px;
   margin-top: -19px;
 }
-
+@media screen and (max-width: 1200px){
+  .ysl-container{
+    padding: 0 5%;
+  }
+}
+@media screen and (max-width: 768px){
+  html{
+    font-size: 20px;
+  }
+  .ysl-container{
+    padding: 0 16px;
+  }
+  .footer{
+    font-size: 12px;
+  }
+  .ysl-label-search-area{
+    width: 100%;
+  }
+  .ysl-label-search-area .mat-tab-labels{
+    justify-content: flex-start;
+    overflow-y: hidden;
+  }
+  .ysl-label-search-area .mat-tab-label{
+    border-radius: 0;
+  }
+  .ysl-label-search-area .mat-tab-label-active:after{
+    display: none;
+  }
+  .ysl-label-search-area .mat-tab-label-container{
+    overflow: scroll;
+  }
+  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar{
+    color: transparent;
+  }
+  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar-corner{
+    color: transparent;
+  }
+}
 
 
 

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MdDialogModule, MdTabsModule } from '@angular/material';
+import {MdDialogModule, MdTabsModule, MdMenuModule} from '@angular/material';
 
 const MdList = [
   BrowserModule,
   MdDialogModule,
-  MdTabsModule
+  MdTabsModule,
+  MdMenuModule
 ]
 
 @NgModule({

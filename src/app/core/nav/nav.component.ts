@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Location } from '@angular/common';
-import { MdDialog } from '@angular/material';
+import {MdDialog, MdMenuTrigger} from '@angular/material';
 
 import { LoginComponent } from "../../login/login.component";
 import {SearchService} from "../../search/search.service";
@@ -16,6 +16,7 @@ import {SearchService} from "../../search/search.service";
 
 export class NavComponent implements OnInit {
 
+  @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
   isShowSearch = false;
   user = [];
   loginState: boolean = false;
@@ -30,6 +31,10 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+  someMethod(elem) {
+    console.log(elem)
+    this.trigger.openMenu();
+  }
   //  显示登录框
   showLogin(): void {
     let dialogRef = this.dialog.open(LoginComponent);
@@ -53,7 +58,6 @@ export class NavComponent implements OnInit {
   setNavStyle() {
     let subscription = this.router.events.subscribe(e => {
       if(e instanceof NavigationStart) {
-        console.log('url', e.url)
         this.isShowSearch = (e.url.includes('/index') || e.url.includes('/register')) ? false : true;
       }
     })

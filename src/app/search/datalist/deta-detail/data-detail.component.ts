@@ -26,10 +26,10 @@ export class DataDetailComponent implements OnInit{
   full_source = '请输入评论';
   isHidden = true;
   productId;
-  productDetail = {
-    name: '',
-    webSite: ''
-  };
+  productDetail;
+  score;
+  averageScore: Array<any>;
+  stars: Array<number>;
 
   setting = {
     // 这里可以选择自己需要的工具按钮名称,此处仅选择如下几个
@@ -44,14 +44,19 @@ export class DataDetailComponent implements OnInit{
     initialFrameHeight: 250,
     //  默认的编辑器的宽度
     initialFrameWidth: '100%'
-
   }
 
   constructor(public route: ActivatedRoute, public service: MyServiceService) {
-
+    this.productDetail = {name: ''};
+    this.stars =  Array(5).fill(1).map((x, i) => i);
+    this.averageScore = this.stars;
+    this.score = [
+      {title: '准确性', stars: this.stars, score: 0, curr: -1},
+      {title: '及时性', stars: this.stars, score: 0, curr: -1},
+      {title: '完整性', stars: this.stars, score: 0, curr: -1},
+      {title: '规范性', stars: this.stars, score: 0, curr: -1}
+    ]
   }
-
-
 
 //  赞
   zan() {
@@ -78,9 +83,29 @@ export class DataDetailComponent implements OnInit{
     this.service.getProductDetail(this.productId.productId)
       .then(res => {
         this.productDetail = res;
+        this.productDetail.premium = this.productDetail.premium ? '是' : '否';
+        console.log('time', this.timeToDate(this.productDetail.createdOn));
       });
   }
 
+  // 评价
+  productScore(parentInd, ind) {
+    this.score.forEach((item, i) => {
+      if (i == parentInd) {
+        item.curr = ind;
+        item.score = ind + 1
+      }
+    })
+  }
+
+  // 处理时间
+  timeToDate(time) {
+    let date =  new Date(time);
+    Date.prototype.toLocaleString = function() {
+      return this.getFullYear() + '-' + (this.getMonth() + 1) + '-' + this.getDate();
+    };
+    return date.toLocaleString();
+  }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.params;

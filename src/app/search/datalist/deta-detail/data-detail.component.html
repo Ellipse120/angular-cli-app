@@ -1,30 +1,22 @@
 <div class="data-detail container">
   <div class="detail-left">
     <div class="clearfix">
-      <h2>{{productDetail.name}}</h2>
-
+      <h2 class="product-name">{{productDetail.name}}</h2>
       <div class="data-info">
         <img src="./assets/images/detail1.png" class="firmlogo">
         <ul class="firm-detail">
-          <li>数据供应商：万得信息技术股份有限公司</li>
-          <li>官方网址：<a [href]="productDetail.webSite">{{productDetail.webSite}}</a></li>
-          <li>是否收费：<i class="green">是</i></li>
+          <li>数据供应商：{{productDetail.orgName}}</li>
+          <li>官方网址：<a [href]="productDetail.orgWebSite">{{productDetail.orgWebSite}}</a></li>
+          <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
           <li>数据样本：<i class="green">下载</i></li>
-          <li>标签：<b class="color-blue">金融业</b> | <b class="color-blue">大数据</b></li>
+          <li class="tag-box">标签：<ul class="product-tag"><li *ngFor="let item of productDetail.tags;let last = last"><span class="tag-name color-blue">{{item.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li></ul></li>
         </ul>
       </div>
     </div>
 
     <div class="product-introduce">
       <h3 class="mb20">产品简介</h3>
-      <p>在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库，
-        数据内容涵盖股票、基金、债券、外汇、保险、期货、金融衍生品、现货交易、宏观经济、财经新闻等领域，新的信息内容
-        在第一时间进行更新以满足机构投资者的需求。
-      </p>
-      <p>同时国内多数知名的金融学术研究机构和权威的监管机构也是Wind资讯的客户，大量中英文媒体、研究报告、学术论文等经常引用Wind资讯提供的数据。</p>
-      <p>针对金融业的投资机构、研究机构、学术机构、监管部门机构等不同类型客户的需求，Wind资讯开发了一系列围绕信息检索、数据提取与分析、投资组合
-        管理应用等领域的专业分析软件与应用工具。通过这些终端工具，用户可以7x24x365从Wind资讯获取到及时、准确、完整的财经数据、信息和各种分析结果。</p>
-      <p>精于数据，以数据为起点，万得资讯紧密跟随金融市场日新月异的发展，不断向新的领域发展，新的产品和服务战略不断在延伸。</p>
+      <p>{{productDetail.description}}</p>
     </div>
 
     <!--纠错处理-->
@@ -36,42 +28,17 @@
 
     <div class="write-comment">
       <h3><img src="./assets/images/write.png">&nbsp;&nbsp;评论</h3>
-      <div class="score clearfix">
-        <span>请点击星级进行评分</span>
-        <div class="scores-item">
-          <span>及时性</span>
-          <ul class="start-score">
-            <li></li> <li></li> <li></li> <li></li> <li></li>
-          </ul>
-          <i class="color-orange">(0分)</i>
+      <div class="score clearfix row">
+        <span class="col-md-3 col-xs-12">请点击星级进行评分</span>
+        <div class="score-type col-md-9 col-xs-12">
+          <div class="scores-item col-md-6 col-xs-12" *ngFor="let t of score; let parentInd = index">
+            <span>{{t.title}}</span>
+            <ul class="start-score">
+              <li *ngFor="let s of t.stars; let i = index" [class.active]="i <= t.curr" (click)="productScore(parentInd, i)"></li>
+            </ul>
+            <i class="color-orange">({{t.score}}分)</i>
+          </div>
         </div>
-
-        <div class="scores-item">
-          <span>准确性</span>
-          <ul class="start-score">
-            <li></li> <li></li> <li></li> <li></li> <li></li>
-          </ul>
-          <i class="color-orange">(0分)</i>
-        </div>
-
-        <div class="scores-item">
-          <span>规范性</span>
-          <ul class="start-score">
-            <li></li> <li></li> <li></li> <li></li> <li></li>
-          </ul>
-          <i class="color-orange">(0分)</i>
-        </div>
-
-        <div class="scores-item">
-          <span>完整性</span>
-          <ul class="start-score">
-            <li></li> <li></li> <li></li> <li></li> <li></li>
-          </ul>
-          <i class="color-orange">(0分)</i>
-        </div>
-
-
-
       </div>
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
@@ -190,9 +157,9 @@
     <p>评分</p>
     <div class="star-score">
       <ul class="stars-list clearfix">
-        <li></li> <li></li> <li></li> <li></li> <li></li>
+        <li *ngFor="let s of averageScore; let i = index;"><span [class.all-star]="((i+1) < productDetail.averageScore) || ((i+1) == productDetail.averageScore)" [class.half-star]="(i+1)>productDetail.averageScore && i < productDetail.averageScore"></span></li>
       </ul>
-      <i class="color-orange">(5分)</i>
+      <i class="color-orange">({{productDetail.averageScore}}分)</i>
     </div>
 
     <div class="current-info font14">

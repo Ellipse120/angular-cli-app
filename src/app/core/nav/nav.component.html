@@ -20,11 +20,18 @@
     </ul>
   </div>
   <div class="visible-xs-block clearfix">
-    <button class="btn" (click)="showLogin()"><i class="fa fa-user-o"></i></button>
-    <ul class="after-login-xs" *ngIf="loginState">
-      <li>登录</li>
-      <li>注册</li>
-    </ul>
+    <button class="btn" [mdMenuTriggerFor]="afterLoginXs" (click)="someMethod(afterLoginXs)"><i class="fa fa-user-o"></i></button>
+    <md-menu #afterLoginXs="mdMenu" yPosition="above" xPosition="after">
+      <ul class="after-login-xs" *ngIf="loginState">
+        <li (click)="showLogin()">登录</li>
+        <li>注册</li>
+      </ul>
+      <ul class="after-login-xs" *ngIf="!loginState">
+        <li (click)="showLogin()">个人中心</li>
+        <li>退出</li>
+      </ul>
+    </md-menu>
+
   </div>
 </nav>
 
