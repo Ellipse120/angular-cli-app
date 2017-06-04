@@ -3,14 +3,9 @@
   padding-top: 30px;
 }
 .detail-left{
-  width: 75%;
   padding-bottom: 50px;
-  display: inline-block;
 }
 .detail-right{
-  width: 25%;
-  display: inline-block;
-  float: right;
   padding-left: 20px;
 }
 .error-correct{
@@ -70,6 +65,11 @@
 }
 .firmlogo{
   float: left;
+  width: 4.361rem;
+  height: 3.194rem;
+}
+.firmlogo img{
+  width: 100%;
 }
 .firm-detail{
   width: 100%;
@@ -311,4 +311,24 @@ textarea:-ms-input-placeholder{
 }
 textarea::-webkit-input-placeholder{
   color: #999;
+}
+
+@media screen and (max-width: 992px) {
+  .detail-right,.detail-left{
+    float: none;
+    padding: 0 0 50px 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .firmlogo{
+    display: block;
+    float: none;
+  }
+  .firm-detail{
+    width: 100%;
+    padding: 0 15px;
+  }
+  .firm-detail li{
+    width: 100%;
+  }
 }

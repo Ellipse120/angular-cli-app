@@ -1,9 +1,9 @@
 <div class="data-detail container">
-  <div class="detail-left">
+  <div class="detail-left col-lg-9 col-xs-12">
     <div class="clearfix">
       <h2 class="product-name">{{productDetail.name}}</h2>
-      <div class="data-info">
-        <img src="./assets/images/detail1.png" class="firmlogo">
+      <div class="data-info clear row">
+        <span class="firmlogo"><img src="./assets/images/detail1.png"></span>
         <ul class="firm-detail">
           <li>数据供应商：{{productDetail.orgName}}</li>
           <li>官方网址：<a [href]="productDetail.orgWebSite">{{productDetail.orgWebSite}}</a></li>
@@ -31,7 +31,7 @@
       <div class="score clearfix row">
         <span class="col-md-3 col-xs-12">请点击星级进行评分</span>
         <div class="score-type col-md-9 col-xs-12">
-          <div class="scores-item col-md-6 col-xs-12" *ngFor="let t of score; let parentInd = index">
+          <div class="scores-item col-sm-6 col-xs-12" *ngFor="let t of score; let parentInd = index">
             <span>{{t.title}}</span>
             <ul class="start-score">
               <li *ngFor="let s of t.stars; let i = index" [class.active]="i <= t.curr" (click)="productScore(parentInd, i)"></li>
@@ -151,7 +151,7 @@
   </div>
 
 
-  <div class="detail-right">
+  <div class="detail-right col-lg-3 col-xs-12">
     <p>评分</p>
     <div class="star-score">
       <ul class="stars-list clearfix">
