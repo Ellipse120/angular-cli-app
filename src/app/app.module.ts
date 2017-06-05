@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Ng2UeditorModule } from 'ng2-ueditor/src/index';
@@ -53,7 +52,6 @@ import { LoginComponent } from './login/login.component';
     ProductMangementModule,
     UserCenterModule,
     OperationManagementModule,
-    Angular2FontAwesomeModule,
     BrowserAnimationsModule,
     YslMaterialModule
   ],
