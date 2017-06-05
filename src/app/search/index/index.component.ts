@@ -19,13 +19,17 @@ export class IndexComponent implements OnInit {
               public router: Router,
               private eventEmit: SearchService) {
     this.eventEmit.keyword = '';
-    this.searchOption = { offset: 0, limit: 10, sortBy: '', ascending: false}
-    // 获取首页标签数据
+    this.searchOption = { offset: 0, limit: 10, sortBy: '', ascending: false};
+    this.getTags()
+  }
+
+  // 获取首页标签数据
+  getTags() {
     this.service.getTagDimensions()
-        .then(data => {
-          this.tagDimensions = data;
-          console.log(this.tagDimensions);
-        })
+      .then(data => {
+        this.tagDimensions = data;
+        console.log(this.tagDimensions);
+      })
   }
 
   // 关键字搜索

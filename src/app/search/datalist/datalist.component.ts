@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Router, ActivatedRoute, Params, NavigationExtras} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap'
 
@@ -39,23 +39,22 @@ export class DatalistComponent implements OnInit {
       {text: '包括引用', value: '', type: 'checkbox'}
     ]}
   ];
-  p: any;
+  currPage: any;
 
   constructor(private service: MyServiceService,
               private route: ActivatedRoute,
               private router: Router,
-              private eventEmit: SearchService) {
+              private eventEmit: SearchService) {}
+  ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {
         this.searchOptions = Object.assign({}, params);
         this.eventEmit.keyword = params.keyword;
+        this.currPage = params.offset ? (params.offset/params.limit) : 1;
         this.getProjectList();
       })
     this.limit = parseInt(this.searchOptions['limit']);
     this.keywordSearch()
-  }
-
-  ngOnInit() {
   }
 
   // 获取产品列表
@@ -89,7 +88,10 @@ export class DatalistComponent implements OnInit {
   // 下一页
   toNextPage(e) {
     this.searchOptions['offset'] = parseInt(e) * (parseInt(this.searchOptions['limit']));
-    this.getProjectList();
+    let navigationExtras: NavigationExtras = {
+      queryParams: this.searchOptions
+    }
+    this.router.navigate(['datalist'], navigationExtras)
   }
 
 }

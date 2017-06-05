@@ -20,7 +20,7 @@
       <p class="find-result">找到约{{product.totalLength}}条结果</p>
       <ul>
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
-                                                      currentPage: p,
+                                                      currentPage: currPage,
                                                       totalItems: product.totalLength}"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
           <span class="data-content">{{item.description}}</span>
@@ -29,7 +29,10 @@
           </ul>
         </li>
       </ul>
-      <pagination-controls (pageChange)="toNextPage($event);"></pagination-controls>
+      <pagination-controls (pageChange)="toNextPage($event);"
+                           autoHide="true"
+                           previousLabel="上一页"
+                           nextLabel="下一页"></pagination-controls>
     </div>
   </div>
 </div>

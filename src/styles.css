@@ -285,10 +285,10 @@ textarea::-webkit-scrollbar-thumb
 }
 
 /*重写部分*/
-.ng2-pagination li{
+.ngx-pagination li{
   cursor: pointer !important;
 }
-.ng2-pagination{
+.ngx-pagination{
   margin-top: 0.5rem;
 }
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
