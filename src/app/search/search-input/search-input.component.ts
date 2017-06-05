@@ -24,6 +24,12 @@ export class SearchInputComponent implements OnInit {
   keywordSearchForm: FormGroup;
   advancedSearchForm: FormGroup;
   isShowAdvancedBox = false;
+  advanceInfo = {
+    data_category: [],
+    data_source: [],
+    data_collection: [],
+    data_service: []
+  };
   data = {
     timeFrom: '',
     timeTo: ''
@@ -37,6 +43,9 @@ export class SearchInputComponent implements OnInit {
               public eventEmit: SearchService) {
     this.keywordSearch = new EventEmitter();
     this.showAdvancedBox = new EventEmitter();
+  }
+
+  ngOnInit() {
     this.keywordSearchOption.keyword = this.eventEmit.keyword ?　this.eventEmit.keyword : '';
     this.createForm();
     document.addEventListener('click', () => {
@@ -52,15 +61,31 @@ export class SearchInputComponent implements OnInit {
 
   toggleAdvancedBox() {
     this.isShowAdvancedBox = !this.isShowAdvancedBox;
-    this.showAdvancedBox.emit({isShowAdvancedBox: this.isShowAdvancedBox})
+    this.showAdvancedBox.emit({isShowAdvancedBox: this.isShowAdvancedBox});
+    this.getAdvancedInfo();
+  }
+
+  // 获取高级搜索字段
+  getAdvancedInfo() {
+    this.service.getAdvancedSearchInfo()
+      .then((res) => {
+        let data: any = res;
+        let advanced = this.advanceInfo;
+
+        for (const type in advanced) {
+          data.forEach((item) => {
+            if (item.categoryCode == type) {
+              this.advanceInfo[type].push(item)
+            }
+          })
+        }
+        console.log('after', this.advanceInfo)
+      })
   }
 
   // 提交高级搜索
   advancedSearchSubmit() {
     console.log(this.advancedSearchForm.value);
-  }
-
-  ngOnInit() {
   }
 
   //创建表单

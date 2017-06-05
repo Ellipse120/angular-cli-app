@@ -15,40 +15,56 @@
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">来源</label>
-      <select class="col-xs-7 col-sm-8" formControlName="source">
-        <option value="1">来源</option>
-        <option value="2">个人</option>
-        <option value="3">机构</option>
-      </select>
+      <div class="col-xs-7 col-sm-8 ysl-select-group">
+        <select class="col-xs-12" formControlName="source">
+          <option *ngFor="let s of advanceInfo.data_source" [value]="s.entryCode">{{s.entryValue}}</option>
+        </select>
+        <span class="triangle-down"></span>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">是否收费</label>
       <div class="radio-inline col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="charge" value="1">是</label>
+        <label><input type="radio" formControlName="charge" [value]="true">是</label>
       </div>
       <div class="radio-inline col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="charge" value="0">否</label>
+        <label><input type="radio" formControlName="charge" [value]="false">否</label>
       </div>
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">数据类型</label>
-      <select class="col-xs-7 col-sm-8" formControlName="dataType"></select>
+      <div class="col-xs-7 col-sm-8 ysl-select-group">
+        <select class="col-xs-12" formControlName="dataType">
+          <option *ngFor="let c of advanceInfo.data_category" [value]="c.entryCode">{{c.entryValue}}</option>
+        </select>
+        <span class="triangle-down"></span>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">服务方式</label>
-      <select class="col-xs-7 col-sm-8" formControlName="serviceMethod"></select>
+      <div class="col-xs-7 col-sm-8 ysl-select-group">
+        <select class="col-xs-12" formControlName="serviceMethod">
+          <option *ngFor="let d of advanceInfo.data_service" [value]="d.entryCode">{{d.entryValue}}</option>
+        </select>
+        <span class="triangle-down"></span>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">采集方式</label>
-      <select class="col-xs-7 col-sm-8" formControlName="collectionMethod"></select>
+      <div class="col-xs-7 col-sm-8 ysl-select-group">
+        <select class="col-xs-12" formControlName="collectionMethod">
+          <option *ngFor="let d of advanceInfo.data_collection" [value]="d.entryCode">{{d.entryValue}}</option>
+        </select>
+        <span class="triangle-down"></span>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">数据样本</label>
       <div class="radio-inline  col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="dataSamples" value="1">是</label>
+        <label><input type="radio" formControlName="dataSamples" [value]="true">是</label>
       </div>
       <div class="radio-inline  col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="dataSamples" value="0">否</label>
+        <label><input type="radio" formControlName="dataSamples" [value]="false">否</label>
       </div>
     </div>
     <div class="form-group">

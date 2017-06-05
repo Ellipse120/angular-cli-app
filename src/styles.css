@@ -135,7 +135,6 @@ textarea::-webkit-scrollbar-thumb
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 11px solid #ddd;
-
 }
 /*common style*/
 .clearfix{
@@ -217,6 +216,22 @@ textarea::-webkit-scrollbar-thumb
   width: 100%;
   padding: 0 18.75%;
 }
+.ysl-select-group{
+  padding: 0;
+  position: relative;
+}
+.ysl-select-group select{
+  background-color: transparent;
+  position: relative;
+  z-index: 20;
+}
+.ysl-select-group .triangle-down{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 
 
 

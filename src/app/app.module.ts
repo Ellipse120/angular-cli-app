@@ -24,6 +24,7 @@ import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
 import { LoginComponent } from './login/login.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {YslMenuDirective} from "./core/Directive/ysl-menu-directive";
 
 
 
@@ -38,7 +39,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     RegisterComponent,
     NavComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    YslMenuDirective
   ],
   imports: [
     BrowserModule,

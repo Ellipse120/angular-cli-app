@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise'
 
 // 此处的@Injectable是一个装饰器
@@ -10,7 +10,7 @@ export class MyServiceService {
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
   private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  // private url = 'http://localhost:1337/192.168.19.12:8085/';
+  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   //REPLACE
 
   // 用户信息
@@ -99,7 +99,7 @@ export class MyServiceService {
   // 注册
   userRegister(mail: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(this.url + 'api/user/signup', {contactMail: mail, userType: 1, loginId: 'CB1'})
+      this.http.post(this.url + 'api/user/signup', {contactMail: mail, userType: 1, loginId: mail})
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
     })
@@ -107,12 +107,28 @@ export class MyServiceService {
 
   // 登录
   userLogin(user): Promise<any> {
+    let data = JSON.stringify(user);
     return new Promise((resolve, reject) => {
-      // this.http.post(this.url + 'api/auth/login')
+      this.http.post(this.url + 'api/authentication/login', data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
     })
   }
 
-  // 产品--关键字搜索
+  // 获取高级搜索字段
+  getAdvancedSearchInfo() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/dict/data_category,data_source,data_collection,data_service')
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
+  // 产品--搜索
   productKeywordSearch(options): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/search', {

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MdDialogRef } from "@angular/material";
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import {MyServiceService} from "../core/app.service";
 
 
 @Component({
@@ -12,29 +14,68 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 export class LoginComponent  {
 
   loginForm: FormGroup;
-
-  constructor(
-    public dialogRef: MdDialogRef<LoginComponent>, public fb: FormBuilder) {
-    this.createForm();
+  isLoginSubmit = false;
+  loginFormError = {
+    userAccount: '',
+    userPassword: ''
+  }
+  loginErrorMess = {
+    userAccount: {
+      required: '账号不能为空'
+    },
+    userPassword: {
+      required: '密码不能为空'
+    }
   }
 
-
-  // 创建表单
-  createForm() {
-    this.loginForm = this.fb.group({
-      userAccount: [''],
-      userPassword: ['']
-    });
+  constructor(
+    public dialogRef: MdDialogRef<LoginComponent>,
+    public fb: FormBuilder, public httpServer: MyServiceService) {
+    this.createForm();
   }
 
   // 提交登录
   loginSubmit() {
-    console.log('登录', this.loginForm.value)
-    this.dialogRef.close({status: true});
+    // this.dialogRef.close({status: true});
+    if (!this.loginForm) { return }
+    this.isLoginSubmit = true;
+    const form = this.loginForm;
+
+    for (const field in this.loginFormError) {
+      this.loginFormError[field] = '';
+      const control = form.get(field);
+
+      if (control && control.invalid) {
+        const message = this.loginErrorMess[field];
+        for (const error in control.errors) {
+          this.loginFormError[field] += message[error] + ''
+        }
+      }
+    }
+    if (form.invalid) { return }
+
+    const submitTime = new Date();
+    let submitData = {
+      loginId: form.value['userAccount'],
+      passcode: form.value['userPassword'],
+      oneTimeCode: submitTime.getTime()
+    };
+    this.httpServer.userLogin(submitData)
+      .then((res) => {
+        console.log('登录成功', res)
+      })
   }
 
   gotoRegitster(){
     // todo
+  }
+
+  // 创建表单
+  createForm() {
+    this.loginForm = this.fb.group({
+      userAccount: ['', Validators.required],
+      userPassword: ['', Validators.required]
+    });
   }
 }
 

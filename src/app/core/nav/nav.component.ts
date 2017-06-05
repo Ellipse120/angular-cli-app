@@ -58,7 +58,7 @@ export class NavComponent implements OnInit {
   setNavStyle() {
     let subscription = this.router.events.subscribe(e => {
       if(e instanceof NavigationStart) {
-        this.isShowSearch = (e.url.includes('/index') || e.url.includes('/register')) ? false : true;
+        this.isShowSearch = (e.url.includes('/index') || e.url.includes('/register'))  || e.url == '/' ? false : true;
       }
     })
   }
