@@ -18,6 +18,7 @@ export class DatalistComponent implements OnInit {
   searchOptions;
   product = {
     items: [],
+    request: {},
     totalLength: 0
   };
   searchConditionParentIndex: number;
@@ -45,6 +46,7 @@ export class DatalistComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private eventEmit: SearchService) {}
+
   ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {

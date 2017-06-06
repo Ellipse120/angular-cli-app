@@ -60,6 +60,9 @@ img{
 .font18{
   font-size: 18px;
 }
+.font16{
+  font-size: 16px;
+}
 .font14{
   font-size: 14px;
 }
@@ -317,8 +320,19 @@ textarea::-webkit-scrollbar-thumb
 .ngx-pagination li{
   cursor: pointer !important;
 }
+.ngx-pagination li:not(.pagination-previous):not(.pagination-next) a{
+  padding: 0.1875rem 0.45rem;
+}
 .ngx-pagination{
   margin-top: 0.5rem;
+  display: flex;
+}
+.ngx-pagination .current{
+  background-color: #ff4307 !important;
+  padding: 0.1875rem 0.45rem !important;
+}
+.pagination-previous a:before,.pagination-next a:after{
+  display: none !important;
 }
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
   text-align: center;

@@ -14,17 +14,27 @@ export class IndexComponent implements OnInit {
   tagDimensions = [];
   indexContStyle = {};
   searchOption;
+  activeProductCount;
 
   constructor(public service: MyServiceService,
               public router: Router,
-              private eventEmit: SearchService) {
+              private eventEmit: SearchService) {}
+
+  ngOnInit() {
     this.eventEmit.keyword = '';
     this.searchOption = { offset: 0, limit: 10, sortBy: '', ascending: false};
     this.getTags()
+    this.getQuantity()
   }
 
   // 获取可用产品数量、供应商数量
-
+  getQuantity() {
+    this.service.getIndexQuantity()
+      .then(res => {
+        this.activeProductCount = res['activeProductCount'];
+        console.log('provider', res)
+      })
+  }
 
   // 获取首页标签数据
   getTags() {
@@ -59,8 +69,6 @@ export class IndexComponent implements OnInit {
     }
 
     this.router.navigate(['datalist'], navigationExtras)
-  }
-  ngOnInit() {
   }
 
 }

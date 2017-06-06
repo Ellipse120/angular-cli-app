@@ -1,5 +1,5 @@
 .data-list-area{
-  margin-top: 0.833rem;
+  margin-top: 18px;
   display: flex;
 }
 .search-condition-xs{
@@ -67,6 +67,8 @@
 }
 .find-result{
   margin-bottom: 0;
+  color: #666;
+  font-size: 12px;
 }
 .data-list{
   flex: 1;
@@ -74,11 +76,11 @@
   padding-bottom: 30px;
 }
 .data-item{
-  padding-bottom: 0.556rem;
+  padding-bottom: 20px;
   border-bottom: 1px solid #d8e5e7;
 }
 .data-item h3{
-  margin-top: 0.556rem;
+  margin-top: 20px;
   margin-bottom: 0;
   font-size: 18px;
 }
@@ -87,8 +89,9 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  line-height: 30px;
+  line-height: 24px;
   font-size: 13px;
+  margin: 5px 0;
 }
 .tag-arrow{
   position: absolute;
@@ -97,12 +100,12 @@
 }
 .product-item-tag{
   display: inline-block;
-  line-height: 20px;
+  line-height: 18px;
   border:1px solid #b7e9ff;
   text-align: center;
   font-size: 12px;
   color: #288dec;
-  padding: 0 14px;
+  padding: 0 10px;
   margin-right: 10px;
 }
 @media screen and (max-width: 768px) {
