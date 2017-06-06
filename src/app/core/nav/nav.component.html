@@ -1,5 +1,5 @@
 <nav class="ysl-header container">
-  <div routerLink="/index"></div>
+  <div class="head-left" routerLink="/index"></div>
   <!--class="head-left"-->
   <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>
   <div class="head-right hidden-xs">
@@ -8,8 +8,8 @@
       <button class="ysl-btn register-btn" routerLink="/register">注册</button>
     </div>
     <ul class="after-login" *ngIf="loginState">
-      <li class="ysl-nav-item"><span routerLink="/operation">运营中心</span></li>
-      <li class="ysl-nav-item"><span routerLink="/promange">产品管理</span></li>
+      <li class="ysl-nav-item" *ngIf="loginInfo.userType == '30'"><span routerLink="/operation">运营中心</span></li>
+      <li class="ysl-nav-item" *ngIf="loginInfo.userType == '20'"><span routerLink="/promange">产品管理</span></li>
       <li class="ysl-nav-item">
         <span>用户中心<i class="fa fa-angle-down"></i></span>
         <ul class="ysl-subnav">

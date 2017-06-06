@@ -19,29 +19,33 @@ export class NavComponent implements OnInit {
   @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
   isShowSearch = false;
   user = [];
-  loginState: boolean = false;
+  loginState = false;
+  loginInfo;
 
   constructor(public router: Router,
               public dialog: MdDialog,
               public location: Location,
               public eventEmit: SearchService) {
-    this.setNavStyle();
   }
 
   ngOnInit() {
+    this.setNavStyle();
   }
 
   someMethod(elem) {
     console.log(elem)
     this.trigger.openMenu();
   }
+
   //  显示登录框
   showLogin(): void {
     let dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return }
+      this.loginState = true;
+      this.loginInfo = result;
       console.log('close', result)
-      this.loginState = result.status;
+      // this.loginState = result.status;
     });
   }
 
@@ -55,6 +59,7 @@ export class NavComponent implements OnInit {
     this.eventEmit.keywordSearch.emit(data)
   }
 
+  // 设置搜索框显示隐藏
   setNavStyle() {
     let subscription = this.router.events.subscribe(e => {
       if(e instanceof NavigationStart) {
