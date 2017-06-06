@@ -32,7 +32,6 @@ export class ProductImportComponent implements OnInit {
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd'
   };
-
   model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(public product: ProductListComponent, public service: MyServiceService){
@@ -50,9 +49,11 @@ export class ProductImportComponent implements OnInit {
     this.isActive = i;
     console.log(i);
   }
+
   onSubmit() {
     console.log(this.data);
   }
+
   ngOnInit() {
     // 获取首页标签数据
     this.service.getTagDimensions()

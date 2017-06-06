@@ -36,7 +36,6 @@ export class LoginComponent  {
 
   // 提交登录
   loginSubmit() {
-    // this.dialogRef.close({status: true});
     if (!this.loginForm) { return }
     this.isLoginSubmit = true;
     const form = this.loginForm;
@@ -62,6 +61,7 @@ export class LoginComponent  {
     };
     this.httpServer.userLogin(submitData)
       .then((res) => {
+        this.dialogRef.close({userLoginInfo: res});
         console.log('登录成功', res)
       })
   }

@@ -16,7 +16,7 @@
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">来源</label>
       <div class="col-xs-7 col-sm-8 ysl-select-group">
-        <select class="col-xs-12" formControlName="source">
+        <select class="col-xs-12" formControlName="dataSource">
           <option *ngFor="let s of advanceInfo.data_source" [value]="s.entryCode">{{s.entryValue}}</option>
         </select>
         <span class="triangle-down"></span>
@@ -25,16 +25,16 @@
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">是否收费</label>
       <div class="radio-inline col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="charge" [value]="true">是</label>
+        <label><input type="radio" formControlName="premium" [value]="true">是</label>
       </div>
       <div class="radio-inline col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="charge" [value]="false">否</label>
+        <label><input type="radio" formControlName="premium" [value]="false">否</label>
       </div>
     </div>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">数据类型</label>
       <div class="col-xs-7 col-sm-8 ysl-select-group">
-        <select class="col-xs-12" formControlName="dataType">
+        <select class="col-xs-12" formControlName="dataCategory">
           <option *ngFor="let c of advanceInfo.data_category" [value]="c.entryCode">{{c.entryValue}}</option>
         </select>
         <span class="triangle-down"></span>
@@ -61,15 +61,18 @@
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">数据样本</label>
       <div class="radio-inline  col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="dataSamples" [value]="true">是</label>
+        <label><input type="radio" formControlName="sampleFileProvided" [value]="true">是</label>
       </div>
       <div class="radio-inline  col-xs-3 col-sm-4">
-        <label><input type="radio" formControlName="dataSamples" [value]="false">否</label>
+        <label><input type="radio" formControlName="sampleFileProvided" [value]="false">否</label>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-xs-5 col-sm-4">区域范围</label>
-      <select class="col-xs-7 col-sm-8" formControlName="area"></select>
+      <label class="col-xs-5 col-sm-4">时间范围</label>
+      <div class="ysl-time-group col-xs-7 col-sm-8">
+        <my-date-picker class="calendar" name="dataSince" [options]="myDatePickerOptions" formControlName="dataSince"></my-date-picker> -
+        <my-date-picker class="calendar" name="dataUntil" [options]="myDatePickerOptions" formControlName="dataUntil"></my-date-picker>
+      </div>
     </div>
     <!--<li><span class="advance-title">时间范围</span>-->
     <!--<ngx-datepicker class="calendar" name="timeFrom" [(ngModel)]="data.timeFrom"></ngx-datepicker> - -->

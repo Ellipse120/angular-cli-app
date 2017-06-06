@@ -9,8 +9,8 @@ export class MyServiceService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  // private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   //REPLACE
 
   // 用户信息
@@ -30,7 +30,11 @@ export class MyServiceService {
 
   }
 
-  //通过标签获取数据
+  // index
+  // 获取供应商数量、可用产品产品
+
+
+  // 获取标签
   getTagDimensions():Promise<any>{
     //var headers = new Headers({ 'Content-Type': 'application/json' });
     //var options = new RequestOptions({ headers: headers });

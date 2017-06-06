@@ -234,11 +234,25 @@ textarea::-webkit-scrollbar-thumb
 
 
 
-
+/*日期选择器*/
 .calendar{
   width: 160px;
   display: inline-block !important;
 }
+.search-box .mydp{
+  border-radius: 0;
+  border-color: #d8e5e7;
+}
+.search-box .mydp input{
+  height: 28px !important;
+}
+.search-box .selbtngroup{
+  height: 28px !important;
+}
+.search-box .btnpicker{
+  border-radius: 0;
+}
+
 
 .triggle-position{
   position: absolute;

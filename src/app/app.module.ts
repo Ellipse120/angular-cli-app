@@ -10,6 +10,7 @@ import { YslMaterialModule } from './core/ysl-material.module';
 import { UserCenterModule } from './user-center/user-center.module';
 import { OperationManagementModule } from './operation-management/operation-management.module';
 import { AppRoutingModule } from './app-routing.module';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { MyServiceService } from './core/app.service';
 import { SearchService } from "./search/search.service";
@@ -23,8 +24,8 @@ import { RegisterComponent } from './register/register.component';
 import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
 import { LoginComponent } from './login/login.component';
-import {NgxPaginationModule} from 'ngx-pagination';
-import {YslMenuDirective} from "./core/Directive/ysl-menu-directive";
+import { NgxPaginationModule } from 'ngx-pagination';
+import { YslMenuDirective } from "./core/Directive/ysl-menu-directive";
 
 
 
@@ -51,6 +52,7 @@ import {YslMenuDirective} from "./core/Directive/ysl-menu-directive";
     HttpModule,
     NgxPaginationModule,
     Ng2UeditorModule,
+    MyDatePickerModule,
     ProductMangementModule,
     UserCenterModule,
     OperationManagementModule,

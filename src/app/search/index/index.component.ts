@@ -23,6 +23,9 @@ export class IndexComponent implements OnInit {
     this.getTags()
   }
 
+  // 获取可用产品数量、供应商数量
+
+
   // 获取首页标签数据
   getTags() {
     this.service.getTagDimensions()
@@ -46,7 +49,7 @@ export class IndexComponent implements OnInit {
 
   // 切换高级搜索
   showAdvancedBox(isShow) {
-    this.indexContStyle = isShow.isShowAdvancedBox ? {minHeight: '760px'} : {minHeight: 0}
+    this.indexContStyle = isShow.isShowAdvancedBox ? {minHeight: '977px'} : {minHeight: 0}
   }
 
   // 搜索跳转页面
