@@ -2,11 +2,11 @@
  * Created by Administrator on 2017/5/10.
  */
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Ng2Ueditor } from 'ng2-ueditor/src/index';
 import { ActivatedRoute, Params } from '@angular/router'
 
 
 import { MyServiceService } from '../../../core/app.service'
+import {UEditorComponent} from "ngx-ueditor";
 
 @Component({
   selector: 'data-detail',
@@ -16,14 +16,12 @@ import { MyServiceService } from '../../../core/app.service'
 
 export class DataDetailComponent implements OnInit{
 
-  @ViewChild('ueditor') ueditor: Ng2Ueditor;
-
   isShowSearch = true;
   zanNum = 0;
   nozanNum = 0;
   id: string;
   showProblem = false;
-  full_source = '请输入评论';
+  commentRemark = '';
   isHidden = true;
   productId;
   productDetail;
@@ -51,10 +49,10 @@ export class DataDetailComponent implements OnInit{
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
     this.score = [
-      {title: '准确性', stars: this.stars, score: 0, curr: -1},
-      {title: '及时性', stars: this.stars, score: 0, curr: -1},
-      {title: '完整性', stars: this.stars, score: 0, curr: -1},
-      {title: '规范性', stars: this.stars, score: 0, curr: -1}
+      {title: '准确性', key: 'scoreOnAccuracy', stars: this.stars, score: 0, curr: -1},
+      {title: '及时性', key: 'scoreOnTimeliness', stars: this.stars, score: 0, curr: -1},
+      {title: '完整性', key: 'scoreOnIntegrity', stars: this.stars, score: 0, curr: -1},
+      {title: '规范性', key: 'scoreOnNormalization', stars: this.stars, score: 0, curr: -1}
     ]
   }
 
@@ -84,11 +82,12 @@ export class DataDetailComponent implements OnInit{
       .then(res => {
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
+        this.productDetail.modifiedOn = this.timeToDate(this.productDetail.modifiedOn);
         console.log('time', this.timeToDate(this.productDetail.createdOn));
       });
   }
 
-  // 评价
+  // 评价星星
   productScore(parentInd, ind) {
     this.score.forEach((item, i) => {
       if (i == parentInd) {
@@ -98,11 +97,24 @@ export class DataDetailComponent implements OnInit{
     })
   }
 
+  // 发表评价
+  sendComment() {
+    if (!this.score[0].score || !this.score[1].score || !this.score[2].score || !this.score[3].score) { return }
+    let score = {}
+    this.score.forEach(item => {
+      score[item.key] = item.score
+    })
+    if (this.commentRemark) {
+      score['remark'] = this.commentRemark;
+    }
+    console.log('score', score)
+  }
+
   // 处理时间
   timeToDate(time) {
     let date =  new Date(time);
     Date.prototype.toLocaleString = function() {
-      return this.getFullYear() + '-' + (this.getMonth() + 1) + '-' + this.getDate();
+      return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDate();
     };
     return date.toLocaleString();
   }

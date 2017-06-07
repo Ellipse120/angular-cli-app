@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Ng2UeditorModule } from 'ng2-ueditor/src/index';
 import { ProductMangementModule } from './product-mangement/product-mangement.module';
 import { YslMaterialModule } from './core/ysl-material.module';
 import { UserCenterModule } from './user-center/user-center.module';
@@ -25,10 +24,16 @@ import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
 import { LoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { YslMenuDirective } from "./core/Directive/ysl-menu-directive";
+import { YslMenuDirective } from './core/Directive/ysl-menu-directive';
+import { UEditorModule } from 'ngx-ueditor';
 
 
-
+let ueditorPath = {
+  path: 'assets/ueditor/',
+  options: {
+    themePath: '/assets/ueditor/themes/'
+  }
+}
 
 @NgModule({
   declarations: [
@@ -51,13 +56,13 @@ import { YslMenuDirective } from "./core/Directive/ysl-menu-directive";
     AppRoutingModule,
     HttpModule,
     NgxPaginationModule,
-    Ng2UeditorModule,
     MyDatePickerModule,
     ProductMangementModule,
     UserCenterModule,
     OperationManagementModule,
     BrowserAnimationsModule,
-    YslMaterialModule
+    YslMaterialModule,
+    UEditorModule.forRoot(ueditorPath)
   ],
   entryComponents: [
     LoginComponent

@@ -42,12 +42,12 @@
       </div>
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
-        <ng2-ueditor [(ngModel)]="full_source" [setting]="setting"></ng2-ueditor>
+        <ueditor [(ngModel)]="commentRemark" [config]="setting"></ueditor>
         <div class="push">
           <div class="ysl-checkbox-group">
             <label><input type="checkbox"><span></span>匿名</label>
           </div>
-          <button class="ysl-btn push-btn">发布</button>
+          <button class="ysl-btn push-btn" (click)="sendComment()">发布</button>
         </div>
       </div>
     </div>
@@ -166,10 +166,10 @@
     <div class="current-info font14">
       <p>词条信息</p>
       <ul class="mt10">
-        <li><span>创建者：</span> <span class="color-blue">网名</span></li>
+        <li><span>创建者：</span> <span class="color-blue">{{productDetail.creator}}</span></li>
         <li><span>编辑次数：</span> <span class="color-blue">20次</span></li>
-        <li><span>词条浏览：</span> <span>12343次</span></li>
-        <li><span>最近更新：</span> <span>2017.03.04</span></li>
+        <li><span>词条浏览：</span> <span>{{productDetail.viewedCount}}次</span></li>
+        <li><span>最近更新：</span> <span>{{productDetail.modifiedOn}}</span></li>
       </ul>
     </div>
 
