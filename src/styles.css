@@ -93,6 +93,10 @@ img{
 .text-center{
   text-align: center;
 }
+.text-underline:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
 .fl{
   float: left;
 }
@@ -233,6 +237,9 @@ textarea::-webkit-scrollbar-thumb
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
+}
+.ysl-menu-cont{
+  display: none;
 }
 
 

@@ -6,7 +6,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 
 
 import { MyServiceService } from '../../../core/app.service'
-import {UEditorComponent} from "ngx-ueditor";
+import { UEditorComponent } from 'ngx-ueditor';
 
 @Component({
   selector: 'data-detail',
@@ -20,8 +20,8 @@ export class DataDetailComponent implements OnInit{
   zanNum = 0;
   nozanNum = 0;
   id: string;
-  showProblem = false;
   commentRemark = '';
+  errataRemark: string;
   isHidden = true;
   productParams;
   productDetail;
@@ -43,8 +43,18 @@ export class DataDetailComponent implements OnInit{
     //  默认的编辑器的宽度
     initialFrameWidth: '100%'
   }
+  popupConfig: any = {
+    inSelector:'fallDown',
+    outSelector:'rollOut',
+    title:'angular2 layer',
+    align:'top',
+    parent: this,
+    // dialogComponent: DialogComponent,
+    closeAble: false
+  }
 
-  constructor(public route: ActivatedRoute, public service: MyServiceService) {
+  constructor(public route: ActivatedRoute,
+              public service: MyServiceService) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -56,17 +66,28 @@ export class DataDetailComponent implements OnInit{
     ]
   }
 
-//  赞
+  ngOnInit(): void {
+    this.productParams = this.route.snapshot.params;
+    this.getProductDetail();
+  }
+
+  // 赞
   zan() {
     this.zanNum++;
   }
 
-//  纠错
-  writeProblem() {
-    this.showProblem = !this.showProblem;
+  // 纠错
+  submitErrata() {
+    if (!this.errataRemark) { return }
+    let option = {productId: this.productParams.productId, data: {userId: this.productDetail.userId, status: this.productDetail.status, comment: this.errataRemark}};
+    console.log('remark', option)
+    this.service.createProductErrata(option)
+      .then(res => {
+        console.log('纠错成功', res)
+      })
   }
 
-//  点击评论出现评论框
+  // 点击评论出现评论框
   showComment() {
     this.isHidden = !this.isHidden;
   }
@@ -85,6 +106,15 @@ export class DataDetailComponent implements OnInit{
         this.productDetail.modifiedOn = this.timeToDate(this.productDetail.modifiedOn);
         console.log('time', this.timeToDate(this.productDetail.createdOn));
       });
+  }
+
+  // 下载数据样本
+  downloadSampleFile() {
+    console.log('样本')
+    this.service.downloadSampleFile(this.productDetail.productId)
+      .then(res => {
+        console.log('下载成功', res)
+      })
   }
 
   // 评价星星
@@ -123,10 +153,5 @@ export class DataDetailComponent implements OnInit{
       return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDate();
     };
     return date.toLocaleString();
-  }
-
-  ngOnInit(): void {
-    this.productParams = this.route.snapshot.params;
-    this.getProductDetail();
   }
 }

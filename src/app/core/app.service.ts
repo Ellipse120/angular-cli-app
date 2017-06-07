@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise'
+// import reject = Q.reject;
 
 // 此处的@Injectable是一个装饰器
 @Injectable()
@@ -11,7 +12,7 @@ export class MyServiceService {
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
   // private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
   private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
-  //REPLACE
+  // REPLACE
 
   // 用户信息
   user = {
@@ -101,6 +102,7 @@ export class MyServiceService {
 
     )
   }
+
   // 获得用户信息
   getUserInfo(): Promise<any> {
     return Promise.resolve(this.user);
@@ -150,9 +152,32 @@ export class MyServiceService {
   }
 
   // 产品--详情
-  getProductDetail(projectId: string): Promise<any> {
+  getProductDetail(productId: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + 'api/product/' + projectId)
+      this.http.get(this.url + 'api/product/' + productId)
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
+  // 样本下载
+  downloadSampleFile(productId) {
+  return new Promise((resolve, reject) => {
+    this.http.get(this.url + 'api/product/' + productId +'/file/content')
+      .toPromise()
+      .then(response => resolve(response.json()), error => reject(error))
+  })
+  }
+
+  // 产品纠错
+  createProductErrata(option):Promise<any> {
+    return new Promise((resolve, reject) => {
+      let data = JSON.stringify(option.data);
+      this.http.post(this.url + 'api/product/' + option.productId + '/errata', data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
     })
@@ -160,9 +185,9 @@ export class MyServiceService {
 
   // 产品评价
   addProductComment(option): Promise<any> {
-    console.log('option', option)
+    let data = JSON.stringify(option.data);
     return new Promise((resolve, reject) => {
-      this.http.post(this.url + 'api/product/' + option.productId + '/comment', option.data, {
+      this.http.post(this.url + 'api/product/' + option.productId + '/comment', data, {
         headers: new Headers({
           'Content-Type': 'application/json'
         })

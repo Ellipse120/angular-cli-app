@@ -8,7 +8,7 @@
           <li>数据供应商：{{productDetail.orgName}}</li>
           <li>官方网址：<a [href]="productDetail.orgWebSite">{{productDetail.orgWebSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
-          <li>数据样本：<i class="green">下载</i></li>
+          <li>数据样本：<i class="green text-underline" (click)="downloadSampleFile()">下载</i></li>
           <li class="tag-box">标签：<ul class="product-tag"><li *ngFor="let item of productDetail.tags;let last = last"><span class="tag-name color-blue">{{item.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li></ul></li>
         </ul>
       </div>
@@ -20,11 +20,15 @@
     </div>
 
     <!--纠错处理-->
-      <div class="error-correct" (click)="writeProblem()">纠错</div>
-      <div class="problem" *ngIf="showProblem">
-        <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area"></textarea>
-        <button class="ysl-btn error-submit">提交</button>
+    <div yslMenu class="add-product-errata">
+      <button class="errata-btn btn ysl-menu-btn">纠错</button>
+      <div class="errata-write ysl-menu-cont">
+        <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area" [(ngModel)]="errataRemark"></textarea>
+        <button class="ysl-btn error-submit ysl-menu-close" (click)="submitErrata()">提交</button>
       </div>
+    </div>
+      <div class="error-correct" ></div>
+
 
     <div class="write-comment">
       <h5><img src="./assets/images/write.png">&nbsp;&nbsp;发表评论</h5>

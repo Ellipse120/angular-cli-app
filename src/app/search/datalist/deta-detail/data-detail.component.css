@@ -8,9 +8,8 @@
 .detail-right{
   padding-left: 20px;
 }
-.error-correct{
+.errata-btn{
   width: 60px;
-  line-height: 30px;
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
@@ -21,7 +20,7 @@
   cursor: pointer;
   margin-bottom: 20px;
 }
-.problem{
+.errata-write{
   width: 450px;
   height: 135px;
   background: url("../../../../assets/images/errorbox.png") no-repeat;
