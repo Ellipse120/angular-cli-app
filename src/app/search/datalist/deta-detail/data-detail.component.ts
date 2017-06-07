@@ -23,7 +23,7 @@ export class DataDetailComponent implements OnInit{
   showProblem = false;
   commentRemark = '';
   isHidden = true;
-  productId;
+  productParams;
   productDetail;
   score;
   averageScore: Array<any>;
@@ -78,7 +78,7 @@ export class DataDetailComponent implements OnInit{
 
   // 获取详情信息
   getProductDetail() {
-    this.service.getProductDetail(this.productId.productId)
+    this.service.getProductDetail(this.productParams.productId)
       .then(res => {
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
@@ -100,14 +100,20 @@ export class DataDetailComponent implements OnInit{
   // 发表评价
   sendComment() {
     if (!this.score[0].score || !this.score[1].score || !this.score[2].score || !this.score[3].score) { return }
-    let score = {}
+    let score = {productId: this.productParams.productId, data: {}}
     this.score.forEach(item => {
-      score[item.key] = item.score
+      score.data[item.key] = item.score
     })
     if (this.commentRemark) {
-      score['remark'] = this.commentRemark;
+      score.data['remark'] = this.commentRemark;
     }
-    console.log('score', score)
+    this.service.addProductComment(score)
+      .then(res => {
+        console.log('评价', res)
+      })
+
+    // todo
+    // 匿名
   }
 
   // 处理时间
@@ -120,7 +126,7 @@ export class DataDetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productId = this.route.snapshot.params;
+    this.productParams = this.route.snapshot.params;
     this.getProductDetail();
   }
 }

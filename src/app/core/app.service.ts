@@ -40,7 +40,6 @@ export class MyServiceService {
     })
   }
 
-
   // 获取标签
   getTagDimensions():Promise<any>{
     //var headers = new Headers({ 'Content-Type': 'application/json' });
@@ -159,6 +158,19 @@ export class MyServiceService {
     })
   }
 
+  // 产品评价
+  addProductComment(option): Promise<any> {
+    console.log('option', option)
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + 'api/product/' + option.productId + '/comment', option.data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(response => resolve(response.json()))
+    })
+  }
 
   // 运营中心/用户管理/获取用户列表
   getUserList(): Promise<any> {
