@@ -1,24 +1,34 @@
-import { Directive, ElementRef, OnInit, HostListener, Renderer, EventEmitter  } from '@angular/core';
+import { Directive, ElementRef, OnInit, HostListener, Renderer  } from '@angular/core';
+import {YslMenuService} from "./ysl-menu.service";
+// import Promise = Q.Promise;
 
 @Directive({
-  selector: '[yslMenu]'
+  selector: '[yslMenu]',
+  providers: [YslMenuService]
 })
 
 export class YslMenuDirective implements OnInit{
 
-  closeMenuCont: EventEmitter<any>;
   yslMenuBtn: any;
   yslMenuCont: any;
   closeBtn: any;
-  constructor(private elem: ElementRef, private renderer: Renderer) {}
+  constructor(private elem: ElementRef,
+              private renderer: Renderer) {}
 
   ngOnInit() {
-    this.closeMenuCont = new EventEmitter();
     let wrapper = this.elem.nativeElement;
     this.yslMenuBtn = wrapper.querySelector('.ysl-menu-btn');
     this.yslMenuCont = wrapper.querySelector('.ysl-menu-cont');
     this.closeBtn = wrapper.querySelector('.ysl-menu-close');
     this.yslMenuBtn.addEventListener('click', (event) => {
+      // if (wrapper.contains(this.yslMenuCont) || this.yslMenuCont.style.display == 'none') {
+      //   console.log('containes', wrapper.contains(this.yslMenuCont))
+      //   this.elem.nativeElement.removeChild(this.yslMenuCont)
+      // } else {
+      //   console.log('false')
+      //   this.elem.nativeElement.appendChild(this.yslMenuCont)
+      //   this.yslMenuCont.style.display = 'block';
+      // }
       if (this.yslMenuCont.style.display == 'block') {
         this.yslMenuCont.style.display = 'none';
       } else {
@@ -27,17 +37,22 @@ export class YslMenuDirective implements OnInit{
     }, false)
   }
 
+  // remove() {
+  //   let wrapper = this.elem.nativeElement;
+  //   return new Promise((resolve, reject) => {
+  //     let removeCont = wrapper.removeChild(this.yslMenuCont);
+  //     if (removeCont) { resolve() }
+  //   })
+  // }
+
   @HostListener('document:click', ['$event'])
   onClick(btn: Event) {
     if (this.yslMenuBtn == event.target || this.yslMenuCont == event.target || this.yslMenuCont.contains(event.target)) {
-      this.yslMenuCont.style.display = 'block'
+      this.yslMenuCont.style.display = 'block';
+      // this.elem.nativeElement.appendChild(this.yslMenuCont)
     } else {
       this.yslMenuCont.style.display = 'none'
+      // this.elem.nativeElement.removeChild(this.yslMenuCont)
     }
-    // if (this.elem.nativeElement.contains(event.target)) {
-    //   this.yslMenuCont.style.display = 'block'
-    // } else {
-    //   this.yslMenuCont.style.display = 'none'
-    // }
   }
 }

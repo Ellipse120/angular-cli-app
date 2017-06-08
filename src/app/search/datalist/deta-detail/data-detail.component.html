@@ -58,20 +58,27 @@
 
 
     <!--评论区域-->
-    <div class="total-comment">
-      <p class="color-gray font18">3个评论</p>
-      <ul class="user-comment-list">
-        <li>
-          <div class="user-comment">
-            <p class="font16">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
+    <div class="comment-wrapper">
+      <p class="color-gray font18">{{productComment.totalLength}}个评论</p>
+      <ul class="comment-list">
+        <li *ngFor="let c of productComment['items']">
+          <div class="comment-item">
+            <h5 class="comment-name">用户名</h5>
+            <div class="score-summary">
+              <ul class="stars-list clearfix">
+                <li *ngFor="let s of averageScore; let i = index;"><span [class.all-star]="((i+1) < c.averageScore) || ((i+1) == c.averageScore)" [class.half-star]="(i+1)>c.averageScore && i < c.averageScore"></span></li>
+              </ul>
+              <p class="score-text"><span>及时性：{{c.scoreOnTimeliness}}</span><span>准确性：{{c.scoreOnAccuracy}}</span><span>规范性：{{c.scoreOnNormalization}}</span><span>完整性：{{c.scoreOnIntegrity}}</span></p>
+            </div>
+            <p class="font16">{{c.remark}}</p>
             <div class="user-info">
               <div>
                 <span class="font12 color-blue">用户名</span> <span class="user-level">LV5</span>
-                <span class="font12 color-blue"><i class="line">|</i>&nbsp;&nbsp;&nbsp;&nbsp;发布于4分钟前</span>
+                <span class="font12 color-blue"><i class="line">|</i>&nbsp;&nbsp;&nbsp;&nbsp;发布于{{c.modifiedOn}}</span>
               </div>
               <div>
                 <img src="./assets/images/comment.png">
-                <span class="my-comments" (click)="showComment()">评论(2)</span>
+                <span class="my-comments" (click)="c.secondComment = !c.secondComment">评论(2)</span>
                 <div class="my-asses">
                   <span class="green asses-zan"><img (click)="zan()" src="./assets/images/zan.png"> {{zanNum}} </span>
                   <span class="asses-nozan"><img src="./assets/images/nozan.png"> {{nozanNum}} </span>
@@ -79,7 +86,7 @@
               </div>
             </div>
             <!--用户的二级评论-->
-            <div class="second-comment" [hidden]="isHidden">
+            <div class="second-comment" *ngIf="c.secondComment">
               <textarea name="second-comment" class="comment-area" placeholder="请输入内容..."></textarea>
               <button class="ysl-btn push-btn">发布</button>
               <ul class="second-comment-list">
@@ -102,54 +109,6 @@
 
                 </li>
               </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="user-comment">
-            <p class="font16">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
-            <div class="user-info">
-              <div>
-                <span class="font12 color-blue">用户名</span> <span class="user-level">LV5</span>
-                <span class="font12 color-blue"><i class="line">|</i>&nbsp;&nbsp;&nbsp;&nbsp;发布于4分钟前</span>
-              </div>
-              <div>
-                <img src="./assets/images/comment.png">
-                <span class="my-comments" (click)="showComment()">评论(2)</span>
-                <div class="my-asses">
-                  <span class="green asses-zan"><img src="./assets/images/zan.png"> 0 </span>
-                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> 0 </span>
-                </div>
-              </div>
-            </div>
-            <!--用户的二级评论-->
-            <div class="second-comment" [hidden]="isHidden">
-              <textarea name="second-comment" class="comment-area" placeholder="请输入内容..."></textarea>
-              <button class="ysl-btn push-btn">发布</button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="user-comment">
-            <p class="font16">在金融财经数据领域，Wind资讯已建成国内最完整、最准确的以金融证券数据为核心一流的大型金融工程和财经数据仓库</p>
-            <div class="user-info">
-              <div>
-                <span class="font12 color-blue">用户名</span> <span class="user-level">LV5</span>
-                <span class="font12 color-blue"><i class="line">|</i>&nbsp;&nbsp;&nbsp;&nbsp;发布于4分钟前</span>
-              </div>
-              <div>
-                <img src="./assets/images/comment.png">
-                <span class="my-comments" (click)="showComment()">评论(2)</span>
-                <div class="my-asses">
-                  <span class="green asses-zan"><img src="./assets/images/zan.png"> 0 </span>
-                  <span class="asses-nozan"><img src="./assets/images/nozan.png"> 0 </span>
-                </div>
-              </div>
-            </div>
-            <!--用户的二级评论-->
-            <div class="second-comment" [hidden]="isHidden">
-              <textarea name="second-comment" class="comment-area" placeholder="请输入内容..."></textarea>
-              <button class="ysl-btn push-btn">发布</button>
             </div>
           </div>
         </li>

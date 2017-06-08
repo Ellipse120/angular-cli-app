@@ -172,15 +172,15 @@
   cursor: pointer;
   margin-left: 10px;
 }
-.total-comment{
+.comment-wrapper{
   padding-top: 20px;
   border-top: 1px solid #ddd;
   margin-top: 30px;
 }
-.total-comment .font18{
+.comment-wrapper .font18{
   color: #5a717f;
 }
-.user-comment{
+.comment-item{
   margin-top: 40px;
 }
 .user-info{
@@ -289,13 +289,13 @@ textarea:-ms-input-placeholder{
   display: inline-block;
   height: 100%;
   width: 100%;
-  background: url("../../../../assets/images/score-stars.png") no-repeat left bottom;
+  background: url("../../../../assets/images/score-stars.png") no-repeat left bottom/100% auto;
 }
 .stars-list .all-star{
-  background: url("../../../../assets/images/score-stars.png") no-repeat left top;
+  background-position: left top;
 }
 .stars-list .half-star{
-  background: url("../../../../assets/images/score-stars.png") no-repeat left -19px;
+  background-position: left -19px;
 }
 .star-score{
   width: 100%;
@@ -306,6 +306,31 @@ textarea:-ms-input-placeholder{
   margin-top: 20px;
   padding-bottom: 20px;
 }
+.score-summary{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.score-summary li{
+  width: 15px;
+  height: 15px;
+}
+.score-summary .half-star{
+  background-position: left -15px;
+}
+.score-summary .score-text{
+  margin-bottom: 0;
+  margin-left: 10px;
+  color: #999;
+  font-size: 12px;
+}
+.score-summary .score-text span{
+  margin-left: 10px;
+}
+.score-summary .score-text span:first-of-type{
+  margin-left: 0;
+}
+
 .current-info{
   margin-top: 30px;
   color: #666;

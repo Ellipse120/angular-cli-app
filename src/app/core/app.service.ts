@@ -10,8 +10,8 @@ export class MyServiceService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  // private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
 
   // 用户信息
@@ -192,6 +192,15 @@ export class MyServiceService {
           'Content-Type': 'application/json'
         })
       })
+        .toPromise()
+        .then(response => resolve(response.json()))
+    })
+  }
+
+  // 获取产品评论
+  getProductComment(option): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/' + option.productId + '/comment')
         .toPromise()
         .then(response => resolve(response.json()))
     })
