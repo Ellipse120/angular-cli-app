@@ -10,22 +10,9 @@ export class MyServiceService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  // private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
-
-  // 用户信息
-  user = {
-    count: '123@qq.com',
-    username: 'wangming',
-    truename: '王明',
-    sex: '男',
-    birthday: '1996-3-14',
-    address: '上海',
-    phone: 1234254325,
-    job: 'web',
-    logintime: '2017.03.05'
-  };
 
   constructor(public http: Http) {
 
@@ -101,11 +88,6 @@ export class MyServiceService {
     }
 
     )
-  }
-
-  // 获得用户信息
-  getUserInfo(): Promise<any> {
-    return Promise.resolve(this.user);
   }
 
   // 注册

@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { YslMenuDirective } from './core/Directive/ysl-menu-directive';
 import { UEditorModule } from 'ngx-ueditor';
+import {CookieModule} from "ngx-cookie";
 
 
 let ueditorPath = {
@@ -62,6 +63,7 @@ let ueditorPath = {
     OperationManagementModule,
     BrowserAnimationsModule,
     YslMaterialModule,
+    CookieModule.forRoot(),
     UEditorModule.forRoot(ueditorPath)
   ],
   entryComponents: [

@@ -12,7 +12,7 @@
         <span *ngIf="loginFormError.userAccount">{{loginFormError.userAccount}}</span>
         <span *ngIf="!loginFormError.userAccount && loginFormError.userPassword">{{loginFormError.userPassword}}</span>
       </div>
-      <button class="login ysl-btn">登录</button>
+      <button class="login ysl-btn">{{loginMess}}</button>
       <p class="text-center">还没有账号？ <a href="javascript:;" class="color-blue" (click)="gotoRegitster()" >点击注册</a></p>
     </form>
   </div>

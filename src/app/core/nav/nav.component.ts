@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { Location } from '@angular/common';
 import {MdDialog, MdMenuTrigger} from '@angular/material';
 
-import { LoginComponent } from "../../login/login.component";
-import {SearchService} from "../../search/search.service";
-import {MyServiceService} from "../app.service";
+import { LoginComponent } from '../../login/login.component';
+import {SearchService} from '../../search/search.service';
+import {MyServiceService} from '../app.service';
+import {CookieService} from 'ngx-cookie';
 
 
 @Component({
@@ -20,19 +20,18 @@ export class NavComponent implements OnInit {
   @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
   isShowSearch = false;
   user = [];
-  loginState = false;
+  loginState: any;
   loginInfo = {userType: ''};
 
   constructor(private router: Router,
               private dialog: MdDialog,
-              private location: Location,
               private eventEmit: SearchService,
-              private httpService: MyServiceService) {
+              private httpService: MyServiceService,
+              private cookie: CookieService ) {
   }
 
   ngOnInit() {
-    const loginStatus = window.localStorage['ysl-login-status'];
-    this.loginState = loginStatus ? true : false;
+    this.loginState = this.cookie.getObject('yslUserInfo');
     this.setNavStyle();
   }
 
@@ -46,14 +45,13 @@ export class NavComponent implements OnInit {
     let dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return }
-      window.localStorage['user-token'] = result.userLoginInfo.token;
-      this.loginState = true;
-      this.loginInfo = result;
+      this.loginInfo = result.userLoginInfo;
+      this.cookie.putObject('yslUserInfo', this.loginInfo);
+      console.log('login', this.loginInfo)
     });
   }
 
   gotoRegitster() {
-    this.loginState = false;
     this.router.navigate(['register'],1);
   }
 
@@ -67,9 +65,7 @@ export class NavComponent implements OnInit {
     const token = window.localStorage['user-token'];
     this.httpService.logout(token)
       .then(res => {
-        this.loginState = false;
-        window.localStorage.removeItem('ysl-login-status');
-        window.localStorage.removeItem('user-token');
+        this.cookie.remove('yslUserInfo')
       })
   }
 
