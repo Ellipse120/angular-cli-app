@@ -5,6 +5,7 @@ import {MdDialog, MdMenuTrigger} from '@angular/material';
 
 import { LoginComponent } from "../../login/login.component";
 import {SearchService} from "../../search/search.service";
+import {MyServiceService} from "../app.service";
 
 
 @Component({
@@ -20,15 +21,18 @@ export class NavComponent implements OnInit {
   isShowSearch = false;
   user = [];
   loginState = false;
-  loginInfo;
+  loginInfo = {userType: ''};
 
-  constructor(public router: Router,
-              public dialog: MdDialog,
-              public location: Location,
-              public eventEmit: SearchService) {
+  constructor(private router: Router,
+              private dialog: MdDialog,
+              private location: Location,
+              private eventEmit: SearchService,
+              private httpService: MyServiceService) {
   }
 
   ngOnInit() {
+    const loginStatus = window.localStorage['ysl-login-status'];
+    this.loginState = loginStatus ? true : false;
     this.setNavStyle();
   }
 
@@ -42,10 +46,9 @@ export class NavComponent implements OnInit {
     let dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return }
+      window.localStorage['user-token'] = result.userLoginInfo.token;
       this.loginState = true;
       this.loginInfo = result;
-      console.log('close', result)
-      // this.loginState = result.status;
     });
   }
 
@@ -57,6 +60,17 @@ export class NavComponent implements OnInit {
   // 搜索
   keywordSubmit(data) {
     this.eventEmit.keywordSearch.emit(data)
+  }
+
+  // 退出
+  logout() {
+    const token = window.localStorage['user-token'];
+    this.httpService.logout(token)
+      .then(res => {
+        this.loginState = false;
+        window.localStorage.removeItem('ysl-login-status');
+        window.localStorage.removeItem('user-token');
+      })
   }
 
   // 设置搜索框显示隐藏

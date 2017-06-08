@@ -14,7 +14,7 @@
         <span>用户中心<i class="fa fa-angle-down"></i></span>
         <ul class="ysl-subnav">
           <li routerLink="/usercenter">个人中心</li>
-          <li>退出</li>
+          <li (click)="logout()">退出</li>
         </ul>
       </li>
     </ul>
@@ -27,8 +27,8 @@
         <li>注册</li>
       </ul>
       <ul class="after-login-xs" *ngIf="!loginState">
-        <li (click)="showLogin()">个人中心</li>
-        <li>退出</li>
+        <li routerLink="/usercenter">个人中心</li>
+        <li (click)="logout()">退出</li>
       </ul>
     </md-menu>
 

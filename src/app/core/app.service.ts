@@ -10,8 +10,8 @@ export class MyServiceService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  // private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
 
   // 用户信息
@@ -128,6 +128,19 @@ export class MyServiceService {
       })
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
+  // 退出
+  logout(token) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/authentication/logout', {
+        headers: new Headers({
+          'token': token
+        })
+      })
+        .toPromise()
+        .then(response => resolve(response), error => reject(error))
     })
   }
 

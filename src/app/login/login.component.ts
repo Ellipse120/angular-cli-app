@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MdDialogRef } from "@angular/material";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import {MyServiceService} from "../core/app.service";
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isLoginSubmit = false;
@@ -32,6 +32,9 @@ export class LoginComponent  {
     public dialogRef: MdDialogRef<LoginComponent>,
     public fb: FormBuilder, public httpServer: MyServiceService) {
     this.createForm();
+  }
+
+  ngOnInit() {
   }
 
   // 提交登录
@@ -62,6 +65,7 @@ export class LoginComponent  {
     this.httpServer.userLogin(submitData)
       .then((res) => {
         this.dialogRef.close({userLoginInfo: res});
+        window.localStorage['ysl-login-status'] = true;
         console.log('登录成功', res)
       })
   }

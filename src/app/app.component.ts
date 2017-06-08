@@ -15,7 +15,6 @@ export class AppComponent {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
         if (e.url.includes('/index') || e.url == '/') {
-          console.log('index')
           this.outerWrapperStyle = {
             background: 'url(assets/images/index-bg.jpg) no-repeat left top/cover'
           }
@@ -23,7 +22,6 @@ export class AppComponent {
             backgroundColor : 'transparent'
           }
         } else {
-          console.log('初加载', e.url)
           this.outerWrapperStyle = {
             background: '#fff'
           };
