@@ -52,7 +52,7 @@ export class DatalistComponent implements OnInit {
       .subscribe((params) => {
         this.searchOptions = Object.assign({}, params);
         this.eventEmit.keyword = params.keyword;
-        this.currPage = params.offset ? (params.offset/params.limit) : 1;
+        this.currPage = params.offset ? ((params.offset/params.limit) + 1) : 1;
         this.getProjectList();
       })
     this.limit = parseInt(this.searchOptions['limit']);
@@ -89,6 +89,7 @@ export class DatalistComponent implements OnInit {
 
   // 下一页
   toNextPage(e) {
+    console.log('currPage', e)
     this.searchOptions['offset'] = (parseInt(e) - 1) * (parseInt(this.searchOptions['limit']));
     let navigationExtras: NavigationExtras = {
       queryParams: this.searchOptions
