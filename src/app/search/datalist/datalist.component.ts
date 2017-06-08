@@ -89,7 +89,7 @@ export class DatalistComponent implements OnInit {
 
   // 下一页
   toNextPage(e) {
-    this.searchOptions['offset'] = parseInt(e) * (parseInt(this.searchOptions['limit']));
+    this.searchOptions['offset'] = (parseInt(e) - 1) * (parseInt(this.searchOptions['limit']));
     let navigationExtras: NavigationExtras = {
       queryParams: this.searchOptions
     }
