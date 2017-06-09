@@ -5,9 +5,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router'
 
 
-import { MyServiceService } from '../../../core/app.service'
+import { YslHttpService } from '../../../core/ysl-http.service'
 import { UEditorComponent } from 'ngx-ueditor';
 import {YslMenuService} from "../../../core/Directive/ysl-menu.service";
+import {YslCommonService} from "../../../core/ysl-common.service";
 
 
 @Component({
@@ -48,8 +49,9 @@ export class DataDetailComponent implements OnInit{
   }
 
   constructor(public route: ActivatedRoute,
-              public service: MyServiceService,
-              private yslMenu: YslMenuService) {
+              public service: YslHttpService,
+              private yslMenu: YslMenuService,
+              private commonService: YslCommonService) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -83,8 +85,8 @@ export class DataDetailComponent implements OnInit{
       .then(res => {
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
-        this.productDetail.modifiedOn = this.timeToDate(this.productDetail.modifiedOn);
-        console.log('time', this.timeToDate(this.productDetail.createdOn));
+        this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
+        console.log('time', this.commonService.getDateForDay(this.productDetail.createdOn));
       });
   }
 
@@ -153,19 +155,10 @@ export class DataDetailComponent implements OnInit{
           } else if (timeDis < 86400000*3) {
             item.modifiedOn = (new Date(item.modifiedOn)).getDay() + '天前';
           } else {
-            item.modifiedOn = this.timeToDate(item.modifiedOn)
+            item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
           }
         })
         this.productComment = res;
       })
-  }
-
-  // 处理时间
-  timeToDate(time) {
-    let date =  new Date(time);
-    Date.prototype.toLocaleString = function() {
-      return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDate();
-    };
-    return date.toLocaleString();
   }
 }

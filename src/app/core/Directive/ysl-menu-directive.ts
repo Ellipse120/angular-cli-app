@@ -47,6 +47,11 @@ export class YslMenuDirective implements OnInit{
 
   @HostListener('document:click', ['$event'])
   onClick(btn: Event) {
+    // if (window.Node && Node.prototype && !Node.prototype.contains){
+    //   Node.prototype.contains = function (arg) {
+    //     return !!(this.compareDocumentPosition(arg) & 16)
+    //   }
+    // }
     if (this.yslMenuBtn == event.target || this.yslMenuCont == event.target || this.yslMenuCont.contains(event.target)) {
       this.yslMenuCont.style.display = 'block';
       // this.elem.nativeElement.appendChild(this.yslMenuCont)

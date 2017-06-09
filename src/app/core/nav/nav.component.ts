@@ -4,7 +4,7 @@ import {MdDialog, MdMenuTrigger} from '@angular/material';
 
 import { LoginComponent } from '../../login/login.component';
 import {SearchService} from '../../search/search.service';
-import {MyServiceService} from '../app.service';
+import {YslHttpService} from '../ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 
 
@@ -12,7 +12,8 @@ import {CookieService} from 'ngx-cookie';
   selector: 'my-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
-  outputs: ['keywordSearch']
+  outputs: ['keywordSearch'],
+  providers: [SearchService]
 })
 
 export class NavComponent implements OnInit {
@@ -26,7 +27,7 @@ export class NavComponent implements OnInit {
   constructor(private router: Router,
               private dialog: MdDialog,
               private eventEmit: SearchService,
-              private httpService: MyServiceService,
+              private httpService: YslHttpService,
               private cookie: CookieService ) {
   }
 

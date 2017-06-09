@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise'
 
 // 此处的@Injectable是一个装饰器
 @Injectable()
-export class MyServiceService {
+export class YslHttpService {
 
   private dataListUrl = './assets/data/';
 
@@ -214,6 +214,21 @@ export class MyServiceService {
   getProductComment(option): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/' + option.productId + '/comment')
+        .toPromise()
+        .then(response => resolve(response.json()))
+    })
+  }
+
+  // 个人中心
+
+  // 编辑信息
+  updateUser(option): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.url + 'api/user/' + option.userId, option.data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
         .toPromise()
         .then(response => resolve(response.json()))
     })

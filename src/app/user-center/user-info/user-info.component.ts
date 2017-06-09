@@ -1,7 +1,8 @@
 import {Component , OnInit} from '@angular/core';
-import {MyServiceService} from '../../core/app.service';
+import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from "ngx-cookie";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   selector: 'user-info',
@@ -13,26 +14,30 @@ export class UserInfoComponent implements OnInit {
 
   editForm: FormGroup;
   showSave = false;
+  viewInfo: any;
   userInfo = [
     {label: '账号', formControlName: 'loginId', model: '', edit: false},
     {label: '姓名', formControlName: 'userName', model: '', edit: false},
     {label: '联系方式', formControlName: 'contactMail', model: '', edit: false}
   ];
-  constructor(public httpService: MyServiceService,
+  constructor(private httpService: YslHttpService,
               private cookie: CookieService,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private commonService: YslCommonService) {}
 
   ngOnInit() {
-    let user = this.cookie.getObject('yslUserInfo');
-    this.userInfo.forEach(item => {
-      for (const key in user) {
+    this.viewInfo = this.cookie.getObject('yslUserInfo');
+    this.userInfo.forEach(item => {         // 初始化个人信息
+      for (const key in this.viewInfo) {
         if (item.formControlName == key) {
-          item.model = user[key];
-          console.log('key', user[key])
+          item.model = this.viewInfo[key];
+        } else if (item.formControlName == 'userName') {
+          item.model = this.viewInfo['name']
         }
       }
-    })
-    console.log('user', user)
+    });
+    this.viewInfo['loginTime'] = this.commonService.getDateForDay(this.viewInfo['loginTime']);
+    console.log('user', this.viewInfo);
     this.createForm();
   }
 
@@ -40,17 +45,23 @@ export class UserInfoComponent implements OnInit {
   ableEdit() {
     this.showSave = true;
     this.userInfo.forEach(item => {
-      item.edit = true;
+      if (item.formControlName == 'loginId') {
+        item.edit = false;
+      } else {
+        item.edit = true;
+      }
     })
   }
 
   // 提交修改资料
   infoEditSubmit() {
-    console.log('user', this.editForm.value)
+    console.log('user', this.editForm.value);
+    if (!this.editForm) { return }
+    this.showSave = false;
 
     // 修改成功后对模板的修改
     this.userInfo.forEach(item => {
-      item.edit = false
+      item.edit = false;
       for (const key in this.editForm.value) {
         if (item.formControlName == key) {
           item.model = this.editForm.value[key];
@@ -61,10 +72,19 @@ export class UserInfoComponent implements OnInit {
 
   // 创建表单
   createForm() {
-    this.editForm = this.fb.group({
+    let controls = {
       loginId: '',
       userName: '',
       contactMail: ''
+    };
+    this.userInfo.forEach(item => {
+      for (const key in controls) {
+        if (item.formControlName == key) {
+          controls[key] = item.model;
+        }
+      }
     })
+    this.editForm = this.fb.group(controls);
+
   }
 }

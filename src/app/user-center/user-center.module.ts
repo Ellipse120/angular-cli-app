@@ -8,7 +8,7 @@ import {UserCenterComponent} from './user-center.component';
 import {UserInfoComponent} from './user-info/user-info.component';
 import {PsdModifyComponent} from './psd-modify/psd-modify.component';
 import {NameCertifyComponent} from './name-certify/name-certify.component';
-import {MyServiceService} from '../core/app.service';
+import {YslHttpService} from '../core/ysl-http.service';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import {MyServiceService} from '../core/app.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [MyServiceService]
+  providers: [YslHttpService]
 })
 
 export class UserCenterModule {

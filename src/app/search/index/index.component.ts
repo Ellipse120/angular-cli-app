@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { MyServiceService } from "../../core/app.service";
+import { YslHttpService } from "../../core/ysl-http.service";
 import {SearchService} from "../search.service";
 
 
@@ -9,6 +9,7 @@ import {SearchService} from "../search.service";
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css'],
+  providers: [SearchService]
 })
 export class IndexComponent implements OnInit {
   tagDimensions = [];
@@ -16,7 +17,7 @@ export class IndexComponent implements OnInit {
   searchOption;
   activeProductCount;
 
-  constructor(public service: MyServiceService,
+  constructor(public service: YslHttpService,
               public router: Router,
               private eventEmit: SearchService) {}
 

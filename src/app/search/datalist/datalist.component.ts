@@ -3,13 +3,15 @@ import {Router, ActivatedRoute, Params, NavigationExtras} from '@angular/router'
 
 import 'rxjs/add/operator/switchMap'
 
-import {MyServiceService} from '../../core/app.service';
+import {YslHttpService} from '../../core/ysl-http.service';
 import {SearchService} from "../search.service";
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   selector: 'app-datalist',
   templateUrl: './datalist.component.html',
-  styleUrls: ['./datalist.component.css']
+  styleUrls: ['./datalist.component.css'],
+  providers: [SearchService, YslCommonService]
 })
 export class DatalistComponent implements OnInit {
 
@@ -42,7 +44,7 @@ export class DatalistComponent implements OnInit {
   ];
   currPage: any;
 
-  constructor(private service: MyServiceService,
+  constructor(private service: YslHttpService,
               private route: ActivatedRoute,
               private router: Router,
               private eventEmit: SearchService) {}

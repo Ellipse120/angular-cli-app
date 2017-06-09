@@ -3,7 +3,7 @@ import { Component, OnInit} from '@angular/core';
 import { IMyDpOptions } from 'mydatepicker';
 
 import { ProductListComponent } from '../product-list/product-list.component';
-import { MyServiceService } from '../../core/app.service';
+import { YslHttpService } from '../../core/ysl-http.service';
 
 @Component({
   selector: 'product-import',
@@ -34,7 +34,7 @@ export class ProductImportComponent implements OnInit {
   };
   model: Object = { date: { year: 2018, month: 10, day: 9 } };
 
-  constructor(public product: ProductListComponent, public service: MyServiceService){
+  constructor(public product: ProductListComponent, public service: YslHttpService){
 
   }
 

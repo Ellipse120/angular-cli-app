@@ -5,7 +5,7 @@ import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, NavigationExtras} from '@angular/router';
 
-import { MyServiceService } from '../../core/app.service';
+import { YslHttpService } from '../../core/ysl-http.service';
 import { IMyDpOptions } from "mydatepicker";
 
 import {SearchService} from "../search.service";
@@ -45,7 +45,7 @@ export class SearchInputComponent implements OnInit {
   advancedSearchOption = {};
 
   constructor(public fb: FormBuilder,
-              public service: MyServiceService,
+              public service: YslHttpService,
               public router: Router,
               public searchService: SearchService) {
     this.keywordSearch = new EventEmitter();

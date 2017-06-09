@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MyServiceService} from "../../core/app.service";
+import {YslHttpService} from "../../core/ysl-http.service";
 
 @Component({
   selector: 'user-management',
@@ -17,7 +17,7 @@ export class UserManagementComponent {
   showUserInfo = false;
   showEdit = true;
 
-  constructor(public service:MyServiceService){
+  constructor(public service:YslHttpService){
     this.service.getUserList()
     .then(data => {
       this.rows = data.items;

@@ -11,8 +11,7 @@ import { OperationManagementModule } from './operation-management/operation-mana
 import { AppRoutingModule } from './app-routing.module';
 import { MyDatePickerModule } from 'mydatepicker';
 
-import { MyServiceService } from './core/app.service';
-import { SearchService } from "./search/search.service";
+import { YslHttpService } from './core/ysl-http.service';
 
 import { SearchInputComponent } from './search/search-input/search-input.component';
 import { NavComponent } from './core/nav/nav.component';
@@ -27,6 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { YslMenuDirective } from './core/Directive/ysl-menu-directive';
 import { UEditorModule } from 'ngx-ueditor';
 import {CookieModule} from "ngx-cookie";
+import {YslCommonService} from "./core/ysl-common.service";
 
 
 let ueditorPath = {
@@ -69,7 +69,10 @@ let ueditorPath = {
   entryComponents: [
     LoginComponent
   ],
-  providers: [MyServiceService, SearchService],
+  providers: [
+    YslHttpService,
+    YslCommonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

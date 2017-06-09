@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IMyDpOptions } from 'mydatepicker';
 
-import { MyServiceService } from "../../core/app.service";
+import { YslHttpService } from "../../core/ysl-http.service";
 
 @Component({
   selector: 'error-correct',
@@ -31,7 +31,7 @@ export class ErrorCorrectComponent implements OnInit {
     {name: 'option'}
   ]
 
-  constructor(public service: MyServiceService) {
+  constructor(public service: YslHttpService) {
     this.service.getError(data => {
       this.rows = data;
       console.log(this.rows);

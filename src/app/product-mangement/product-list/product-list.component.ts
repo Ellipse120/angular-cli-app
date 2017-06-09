@@ -1,7 +1,7 @@
 import { Component,OnInit} from '@angular/core';
 
 
-import {MyServiceService} from '../../core/app.service';
+import {YslHttpService} from '../../core/ysl-http.service';
 import {ProductImportComponent} from '../product-import/product-import.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class ProductListComponent implements OnInit{
   showEdit = true;
   showProInfo = false;
 
-  constructor(public service: MyServiceService) {
+  constructor(public service: YslHttpService) {
     // 获取产品列表数据
     this.service.fetch((data) => {
       this.rows = data;

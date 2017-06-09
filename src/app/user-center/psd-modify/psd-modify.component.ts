@@ -1,5 +1,5 @@
 import {Component , OnInit} from '@angular/core';
-import {MyServiceService} from "../../core/app.service";
+import {YslHttpService} from "../../core/ysl-http.service";
 
 @Component({
   selector: 'psd-modify',
@@ -14,7 +14,7 @@ export class PsdModifyComponent implements OnInit{
     new: '',
     new2: ''
   };
-  constructor(public uservice: MyServiceService) {
+  constructor(public httpService: YslHttpService) {
 
   }
 

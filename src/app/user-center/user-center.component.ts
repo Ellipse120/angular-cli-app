@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MyServiceService} from '../core/app.service';
+import {YslHttpService} from '../core/ysl-http.service';
 
 @Component({
   selector: 'app-user-center',
@@ -18,13 +18,13 @@ export class UserCenterComponent implements OnInit {
     {text: '修改密码', path: 'psdModify'}
   ];
 
-  constructor(public uservice: MyServiceService) {
+  constructor(public httpService: YslHttpService) {
 
   }
 
   // 获取用户信息
   getUserInfo() {
-    this.uservice
+    this.httpService
       .getUserInfo()
       .then(user => this.user = user);
   }

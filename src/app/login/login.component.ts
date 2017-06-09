@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { MdDialogRef } from "@angular/material";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import {MyServiceService} from '../core/app.service';
+import {YslHttpService} from '../core/ysl-http.service';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public dialogRef: MdDialogRef<LoginComponent>,
     public fb: FormBuilder,
-    public httpServer: MyServiceService,) {
+    public httpServer: YslHttpService,) {
     this.createForm();
   }
 

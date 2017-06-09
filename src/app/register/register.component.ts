@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import {MyServiceService} from "../core/app.service";
+import {YslHttpService} from "../core/ysl-http.service";
 
 
 @Component({
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  constructor(public service: MyServiceService, public fb: FormBuilder) { }
+  constructor(public service: YslHttpService, public fb: FormBuilder) { }
 
   submit(): void {
     if (!this.registerForm) { return }

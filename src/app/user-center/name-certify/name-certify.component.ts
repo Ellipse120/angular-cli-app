@@ -1,5 +1,5 @@
 import {Component , OnInit} from '@angular/core';
-import {MyServiceService} from "../../core/app.service";
+import {YslHttpService} from "../../core/ysl-http.service";
 
 @Component({
   selector: 'name-certify',
@@ -24,7 +24,7 @@ export class NameCertifyComponent implements OnInit{
     {type: '机构认证'}
   ];
 
-  constructor(public uservice: MyServiceService) {
+  constructor(public httpService: YslHttpService) {
 
   }
 
