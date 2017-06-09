@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 @Component({
@@ -6,12 +6,18 @@ import { Router, NavigationStart } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   outerWrapperStyle = {};
   yslNavStyle = {};
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.setStyle();
+  }
+
+  setStyle() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
         if (e.url.includes('/index') || e.url == '/') {

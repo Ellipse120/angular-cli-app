@@ -220,7 +220,6 @@ export class YslHttpService {
   }
 
   // 个人中心
-
   // 编辑信息
   updateUser(option): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -230,7 +229,7 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(response.json()))
+        .then(response => resolve(), error => reject())
     })
   }
 

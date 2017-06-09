@@ -57,17 +57,25 @@ export class UserInfoComponent implements OnInit {
   infoEditSubmit() {
     console.log('user', this.editForm.value);
     if (!this.editForm) { return }
-    this.showSave = false;
-
-    // 修改成功后对模板的修改
-    this.userInfo.forEach(item => {
-      item.edit = false;
-      for (const key in this.editForm.value) {
-        if (item.formControlName == key) {
-          item.model = this.editForm.value[key];
-        }
-      }
-    })
+    let data = this.editForm.value;
+    let option = {userId: '', data: {}};
+    data.id = this.viewInfo.id;
+    option.userId = data.id;
+    option.data = data;
+    this.httpService.updateUser(option)
+      .then(res => {
+        console.log('修改成功', res)
+        this.showSave = false;
+        // 修改成功后对模板的修改
+        this.userInfo.forEach(item => {
+          item.edit = false;
+          for (const key in this.editForm.value) {
+            if (item.formControlName == key) {
+              item.model = this.editForm.value[key];
+            }
+          }
+        })
+      })
   }
 
   // 创建表单

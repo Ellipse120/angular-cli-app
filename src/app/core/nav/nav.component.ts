@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import {Router, NavigationStart} from '@angular/router';
+import { Location } from '@angular/common';
+
 import {MdDialog, MdMenuTrigger} from '@angular/material';
 
 import { LoginComponent } from '../../login/login.component';
@@ -28,7 +30,8 @@ export class NavComponent implements OnInit {
               private dialog: MdDialog,
               private eventEmit: SearchService,
               private httpService: YslHttpService,
-              private cookie: CookieService ) {
+              private cookie: CookieService,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -66,8 +69,12 @@ export class NavComponent implements OnInit {
     const token = window.localStorage['user-token'];
     this.httpService.logout(token)
       .then(res => {
+        const path = this.location.path();
         this.cookie.remove('yslUserInfo');
         this.loginState = false;
+        if (!path.includes('/datalist') || !path.includes('/datadetail')) {
+          this.router.navigate(['index'])
+        }
       })
   }
 
