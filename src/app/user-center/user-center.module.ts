@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RouterModule,Routes} from '@angular/router';
 
 
@@ -22,7 +22,8 @@ import {MyServiceService} from '../core/app.service';
   imports: [
     BrowserModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MyServiceService]
 })

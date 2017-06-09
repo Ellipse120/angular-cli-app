@@ -18,12 +18,9 @@ export class UserCenterComponent implements OnInit {
     {text: '修改密码', path: 'psdModify'}
   ];
 
-
   constructor(public uservice: MyServiceService) {
 
   }
-
-
 
   // 获取用户信息
   getUserInfo() {
@@ -32,11 +29,9 @@ export class UserCenterComponent implements OnInit {
       .then(user => this.user = user);
   }
 
-
   // 切换
   tab(index) {
     this.index = index;
-
     console.log(index);
   };
 

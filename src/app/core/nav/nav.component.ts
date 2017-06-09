@@ -31,7 +31,7 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginState = this.cookie.getObject('yslUserInfo');
+    this.loginState = this.cookie.getObject('yslUserInfo') ? true : false;
     this.setNavStyle();
   }
 
@@ -47,7 +47,7 @@ export class NavComponent implements OnInit {
       if (!result) { return }
       this.loginInfo = result.userLoginInfo;
       this.cookie.putObject('yslUserInfo', this.loginInfo);
-      console.log('login', this.loginInfo)
+      this.loginState = true;
     });
   }
 
@@ -65,7 +65,8 @@ export class NavComponent implements OnInit {
     const token = window.localStorage['user-token'];
     this.httpService.logout(token)
       .then(res => {
-        this.cookie.remove('yslUserInfo')
+        this.cookie.remove('yslUserInfo');
+        this.loginState = false;
       })
   }
 

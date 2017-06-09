@@ -30,7 +30,7 @@ export class DataDetailComponent implements OnInit{
   score;
   averageScore: Array<any>;
   stars: Array<number>;
-  productComment = {items: []};
+  productComment = {items: [], totalLength: ''};
 
   setting = {
     // 这里可以选择自己需要的工具按钮名称,此处仅选择如下几个

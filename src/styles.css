@@ -383,11 +383,15 @@ textarea::-webkit-scrollbar-thumb
   border-bottom: 1px solid #39baf6;
   line-height: 50px;
 }
-.user-info-list li{
-  line-height: 40px;
+.user-info-list .info-item{
+  display: flex;
+  align-items: center;
   width: 100%;
   text-align: left;
   border-bottom:1px solid #efefef;
+}
+.user-info-list .info-item p{
+  margin-bottom: 0;
 }
 .user-info-list input{
   border: 2px solid #efefef;
