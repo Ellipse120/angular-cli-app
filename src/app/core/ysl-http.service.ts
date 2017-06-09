@@ -233,6 +233,19 @@ export class YslHttpService {
     })
   }
 
+  // 修改密码
+  updatePass(option): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.url + 'api/user/' + option.userId + '/passcode', option.data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(response => resolve(), error => reject())
+    })
+  }
+
   // 运营中心/用户管理/获取用户列表
   getUserList(): Promise<any> {
     return new Promise((resolve, reject) => {

@@ -1,9 +1,22 @@
 <div class="modify-psd">
-  <p>修改密码</p>
-  <ul class="type-ul">
-    <li><span>原密码</span> <input class="psd-input" type="text" placeholder="请输入您的原密码" [(ngModel)]="modify.old"></li>
-    <li><span>新密码</span> <input class="psd-input" type="tel" placeholder="请输入您的新密码" [(ngModel)]="modify.new"></li>
-    <li><span>确认新密码</span><input class="psd-input" type="text" placeholder="请再次输入新密码" [(ngModel)]="modify.new2"></li>
-  </ul>
-  <button class="ysl-btn btn-ensure">确认</button>
+  <h1 class="user-title">修改密码</h1>
+  <form class="form-horizontal" [formGroup]="modifyForm" (ngSubmit)="modifySubmit()" novalidate>
+    <div class="form-group">
+      <label class="col-xs-3">原密码</label>
+      <input type="password" class="col-xs-9" placeholder="请输入您的原密码" formControlName="oldPass">
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3">新密码</label>
+      <input type="password" class="col-xs-9" placeholder="请输入您的新密码" formControlName="newPass" required>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3">确认新密码</label>
+      <input type="password" class="col-xs-9" placeholder="请再次输入新密码" formControlName="confirmPass" required>
+    </div>
+    <!--<div><span>原密码</span> <input class="psd-input" type="password" placeholder="请输入您的原密码" [(ngModel)]="modify.old"></div>-->
+    <!--<li><span>新密码</span> <input class="psd-input" type="password" placeholder="请输入您的新密码" [(ngModel)]="modify.new"></li>-->
+    <!--<li><span>确认新密码</span><input class="psd-input" type="password" placeholder="请再次输入新密码" [(ngModel)]="modify.new2"></li>-->
+    <button class="ysl-btn btn-ensure">确认</button>
+  </form>
+
 </div>
