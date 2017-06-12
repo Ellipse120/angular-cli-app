@@ -19,7 +19,7 @@ export class IndexComponent implements OnInit {
 
   constructor(public service: YslHttpService,
               public router: Router,
-              private eventEmit: SearchService) {}
+              public eventEmit: SearchService) {}
 
   ngOnInit() {
     this.eventEmit.keyword = '';

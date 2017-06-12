@@ -5,13 +5,11 @@ import 'rxjs/add/operator/switchMap'
 
 import {YslHttpService} from '../../core/ysl-http.service';
 import {SearchService} from "../search.service";
-import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   selector: 'app-datalist',
   templateUrl: './datalist.component.html',
-  styleUrls: ['./datalist.component.css'],
-  providers: [SearchService, YslCommonService]
+  styleUrls: ['./datalist.component.css']
 })
 export class DatalistComponent implements OnInit {
 
@@ -47,14 +45,8 @@ export class DatalistComponent implements OnInit {
   constructor(private service: YslHttpService,
               private route: ActivatedRoute,
               private router: Router,
-              private eventEmit: SearchService) {
-    this.eventEmit.keywordSearch.subscribe(e => {
-      console.log('keyword', this.eventEmit.keyword)
-      this.eventEmit.keyword = e.keyword;
-      this.searchOptions.keyword = e.keyword;
-      this.getProjectList()
-    })
-    console.log('contr', SearchService);
+              public eventEmit: SearchService) {
+
     // this.keywordSearch()
   }
 
@@ -67,6 +59,7 @@ export class DatalistComponent implements OnInit {
         this.getProjectList();
       })
     this.limit = parseInt(this.searchOptions['limit']);
+    this.keywordSearch();
   }
 
   // 获取产品列表
@@ -79,7 +72,11 @@ export class DatalistComponent implements OnInit {
 
   // 关键字搜索
   keywordSearch() {
-
+    this.eventEmit.keywordSearch.subscribe(e => {
+      this.eventEmit.keyword = e.keyword;
+      this.searchOptions.keyword = e.keyword;
+      this.getProjectList()
+    })
   }
 
   // 条件搜索

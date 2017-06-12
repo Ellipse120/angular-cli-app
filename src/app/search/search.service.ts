@@ -4,7 +4,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class SearchService {
   public advancedKeys: any;
   public keyword: string;
-  public keywordSearch: EventEmitter<any> = new EventEmitter();
+  public keywordSearch: EventEmitter<any> = new EventEmitter<any>();
   constructor() {
     this.keyword = ''
   }

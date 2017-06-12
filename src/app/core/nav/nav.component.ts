@@ -14,8 +14,7 @@ import {CookieService} from 'ngx-cookie';
   selector: 'my-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
-  outputs: ['keywordSearch'],
-  providers: [SearchService]
+  outputs: ['keywordSearch']
 })
 
 export class NavComponent implements OnInit {
@@ -28,7 +27,7 @@ export class NavComponent implements OnInit {
 
   constructor(private router: Router,
               private dialog: MdDialog,
-              private eventEmit: SearchService,
+              public eventEmit: SearchService,
               private httpService: YslHttpService,
               private cookie: CookieService,
               private location: Location) {}
@@ -60,8 +59,8 @@ export class NavComponent implements OnInit {
 
   // 搜索
   keywordSubmit(data) {
-    this.eventEmit.keywordSearch.emit(data)
-    console.log(data)
+    this.eventEmit.keywordSearch.emit(data);
+    console.log()
   }
 
   // 退出

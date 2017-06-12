@@ -50,10 +50,11 @@ export class SearchInputComponent implements OnInit {
               public searchService: SearchService) {
     this.keywordSearch = new EventEmitter();
     this.showAdvancedBox = new EventEmitter();
+    this.keywordSearchOption.keyword = this.searchService.keyword ?　this.searchService.keyword : '';
   }
 
   ngOnInit() {
-    this.keywordSearchOption.keyword = this.searchService.keyword ?　this.searchService.keyword : '';
+
     this.createForm();
     document.addEventListener('click', () => {
       this.isShowAdvancedBox = false;
@@ -64,6 +65,7 @@ export class SearchInputComponent implements OnInit {
   keywordSubmit(form: any) {
     this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
     this.keywordSearch.emit(this.keywordSearchOption)
+    this.searchService.keywordSearch.emit(this.keywordSearchOption);
   }
 
   toggleAdvancedBox() {
