@@ -13,10 +13,19 @@
       <label class="col-xs-3">确认新密码</label>
       <input type="password" class="col-xs-9" placeholder="请再次输入新密码" formControlName="confirmPass" required>
     </div>
+    <div class="form-group" *ngIf="isSubmit && modifyForm.invalid">
+      <label class="sr-only"></label>
+      <span class="col-xs-9" *ngIf="formError.newPass">{{formError.newPass}}</span>
+      <span class="col-xs-9" *ngIf="formError.confirmPass && !formError.newPass">{{formError.confirmPass}}</span>
+    </div>
+    <div class="form-group">
+      <label class="sr-only"></label>
+      <button class="ysl-btn btn-ensure col-xs-9 col-xs-offset-3">确认</button>
+    </div>
     <!--<div><span>原密码</span> <input class="psd-input" type="password" placeholder="请输入您的原密码" [(ngModel)]="modify.old"></div>-->
     <!--<li><span>新密码</span> <input class="psd-input" type="password" placeholder="请输入您的新密码" [(ngModel)]="modify.new"></li>-->
     <!--<li><span>确认新密码</span><input class="psd-input" type="password" placeholder="请再次输入新密码" [(ngModel)]="modify.new2"></li>-->
-    <button class="ysl-btn btn-ensure">确认</button>
+
   </form>
 
 </div>

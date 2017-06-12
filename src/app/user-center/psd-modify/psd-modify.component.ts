@@ -13,6 +13,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class PsdModifyComponent implements OnInit{
 
   modifyForm: FormGroup;
+  isSubmit = false;
   formError = {
     newPass: '',
     confirmPass: ''
@@ -20,11 +21,14 @@ export class PsdModifyComponent implements OnInit{
   formErrorMess = {
     newPass: {
       required: '新密码不能为空',
-      pattern: '密码格式不正确'
+      pattern: '密码格式不正确',
+      minlength: '密码长度不能小于6',
+      maxlength: '密码长度不得超过12'
     },
     confirmPass: {
-      require: '密码不能为空'
-    }
+      required: '密码不能为空'
+    },
+    oldPass: {}
   }
   constructor(private httpService: YslHttpService, private fb: FormBuilder) {}
 
@@ -35,7 +39,19 @@ export class PsdModifyComponent implements OnInit{
   // 修改密码
   modifySubmit() {
     if (!this.modifyForm) { return }
+    this.isSubmit = true;
     const form = this.modifyForm;
+    console.log('form', form)
+    for (const field in this.formError) {
+      this.formError[field] = '';
+      const control = form.controls[field]
+      if (control && control.errors && !control.valid) {
+        const mess = this.formErrorMess[field];
+        for (const err in control.errors) {
+          this.formError[field] += mess[err] + '';
+        }
+      }
+    }
     // this.httpService.updatePass({userId: 87})
     //   .then(res => {
     //     console.log('修改成功', this.modifyForm.value)
@@ -45,7 +61,12 @@ export class PsdModifyComponent implements OnInit{
   createForm() {
     this.modifyForm = this.fb.group({
       oldPass: [''],
-      newPass: ['', Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]*$')],
+      newPass: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]*$'),
+        Validators.minLength(6),
+        Validators.maxLength(12)
+      ])],
       confirmPass: ['', Validators.required]
     })
   }
