@@ -54,7 +54,6 @@ export class SearchInputComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.createForm();
     document.addEventListener('click', () => {
       this.isShowAdvancedBox = false;
@@ -65,7 +64,6 @@ export class SearchInputComponent implements OnInit {
   keywordSubmit(form: any) {
     this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
     this.keywordSearch.emit(this.keywordSearchOption)
-    this.searchService.keywordSearch.emit(this.keywordSearchOption);
   }
 
   toggleAdvancedBox() {

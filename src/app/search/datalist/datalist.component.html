@@ -4,20 +4,30 @@
   <div class="data-list-area clearfix">
     <!--搜索菜单-->
     <div class="search-condition hidden-xs">
-      <ul class="search-condition-type" *ngFor="let type of searchCondition; let ind = index">
+      <ul class="search-condition-type" *ngFor="let type of searchCondition;">
         <li class="search-condition-type-item" *ngFor="let item of type.children; let i = index">
-          <p class="readonly" [class.active]="searchConditionIndex == i && searchConditionParentIndex == ind" *ngIf="item.type=='readonly'" (click)="conditionSearch(i, ind)">{{item.text}}</p>
+          <p class="readonly" [class.active]="searchConditionIndex == i" *ngIf="item.type=='readonly'" (click)="conditionSearch(i)">{{item.text}}</p>
           <div class="ysl-input-group" *ngIf="item.type=='input'">
             <input type="text">-<input type="text"><button class="btn">确认</button>
           </div>
-          <div class="ysl-checkbox-group" *ngIf="item.type=='checkbox'">
-            <label><input type="checkbox"><span></span>{{item.text}}</label>
-          </div>
+        </li>
+      </ul>
+      <ul class="search-condition-type" *ngIf="tagSortList.length">
+        <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
+          <p class="readonly" (click)="sortByTag(t, ind)" [class.active]="currSortTag == ind">{{t.name}}</p>
         </li>
       </ul>
     </div>
     <div class="data-list">
-      <p class="find-result">找到{{product.totalLength}}条结果</p>
+      <div class="find-result">
+        <span class="result">找到{{product.totalLength}}条结果</span>
+        <div class="filter">
+          <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
+          <ul class="sort-list">
+            <li *ngFor="let item of sortList; let i = index" [class.active]="item === currSortItem" (click)="productSort(i)">{{item.text}}</li>
+          </ul>
+        </div>
+      </div>
       <ul>
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
                                                       currentPage: currPage,

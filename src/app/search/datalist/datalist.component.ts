@@ -21,8 +21,9 @@ export class DatalistComponent implements OnInit {
     request: {},
     totalLength: 0
   };
-  searchConditionParentIndex: number;
   searchConditionIndex: number;
+  currSortTag: number;
+  tagSortList = [];
   searchCondition = [{
       type: 'a', children: [
       {text: '时间不限', value: '', type: 'readonly'},
@@ -30,25 +31,16 @@ export class DatalistComponent implements OnInit {
       {text: '2016年以来', value: '2016', type: 'readonly'},
       {text: '2013年以来', value: '2013', type: 'readonly'},
       {text: '', value: '', type: 'input'}
-    ]}, {
-      type: 'b', children: [
-      {text: '按相关性排序', value: '', type: 'readonly'},
-      {text: '按日期排序', value: '', type: 'readonly'}
-    ]}, {
-      type: 'c', children: [
-      {text: '包括专利', value: '', type: 'checkbox'},
-      {text: '包括引用', value: '', type: 'checkbox'}
     ]}
   ];
+  sortList = [{text: '按日期排序', id: ''}, {text: '按相关性排序', id: ''}];
+  currSortItem = this.sortList[0];
   currPage: any;
 
   constructor(private service: YslHttpService,
               private route: ActivatedRoute,
               private router: Router,
-              public eventEmit: SearchService) {
-
-    // this.keywordSearch()
-  }
+              public eventEmit: SearchService) {}
 
   ngOnInit() {
     this.route.queryParams
@@ -67,7 +59,28 @@ export class DatalistComponent implements OnInit {
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
+        // this.product.items[0].tags = [{name: 'test', id: '1'}, {name: 'test2', id: '2'}, {name: 'test', id: '1'}];
+        // this.product.items[1].tags = [{name: 'test', id: '1'}, {name: 'test4', id: '4'}, {name: 'test5', id: '5'}];
+        this.tagUnique();
       });
+  }
+
+  // 标签搜索去重
+  tagUnique() {
+    let unique = {};
+    this.product['items'].forEach(item => {
+      item.tags.forEach(tag => {
+        unique[JSON.stringify(tag)] = tag
+      })
+    });
+    this.tagSortList = Object.keys(unique).map(function(u){return JSON.parse(u) });
+  }
+
+  // 标签搜索
+  sortByTag(item, ind) {
+    this.currSortTag = ind;
+    this.searchOptions.tagId = item.id;
+    this.getProjectList()
   }
 
   // 关键字搜索
@@ -80,9 +93,13 @@ export class DatalistComponent implements OnInit {
   }
 
   // 条件搜索
-  conditionSearch(i, ind) {
+  conditionSearch(i) {
     this.searchConditionIndex = i;
-    this.searchConditionParentIndex = ind;
+  }
+
+  // 排序
+  productSort(ind) {
+    this.currSortItem = this.sortList[ind]
   }
 
   // 进入产品详情
