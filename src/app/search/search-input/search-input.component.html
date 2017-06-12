@@ -1,6 +1,6 @@
 <!--搜索框-->
 <div class="search-box container">
-  <form class="row" [formGroup]="keywordSearchForm" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
+  <form class="row keyword-search" [formGroup]="keywordSearchForm" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
     <div class="ysl-input-group col-xs-10">
       <input type="text" class="search-input" formControlName="keyword" required>
       <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox();$event.stopPropagation()"></span>

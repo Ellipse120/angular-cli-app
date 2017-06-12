@@ -45,6 +45,9 @@ p{
 img{
   vertical-align: middle;
 }
+i{
+  font-style: normal;
+}
 .mb20{
   margin-bottom: 20px;
 }
@@ -319,8 +322,8 @@ textarea::-webkit-scrollbar-thumb
   position: absolute;
   bottom: 0;
   color: #6b6976;
-  background: url("assets/images/footer.png") no-repeat center bottom;
-  background-size: cover;
+  /*background: url("assets/images/footer.png") no-repeat center bottom;*/
+  /*background-size: cover;*/
 }
 
 /*重写部分*/
@@ -466,7 +469,7 @@ textarea::-webkit-scrollbar-thumb
 }
 /*nav*/
 my-nav{
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  /*border-bottom: 1px solid rgba(255,255,255,0.2);*/
   width: 100%;
 }
 my-nav{
@@ -493,11 +496,11 @@ app-index .mat-ripple{
 .ysl-label-search-area{
   width: 53%;
   margin: 0 auto;
-  color: #aa9d9d;
+  color: #bdbaba;
 }
 .ysl-label-search-area .mat-tab-labels{
-  justify-content: space-between;
   height: 52px;
+  justify-content: space-between;
 }
 .ysl-label-search-area .mat-tab-header-pagination{
   height: 34px;
@@ -513,21 +516,28 @@ app-index .mat-ripple{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-right: 5px;
+}
+.ysl-label-search-area .mat-tab-label:last-of-type{
+  margin-right: 0;
 }
 .ysl-label-search-area .mat-tab-label:focus{
   background-color: #fff !important;
 }
 .ysl-label-search-area .mat-tab-label-active{
   background-color: #fff !important;
-  color: #eb1c1c !important;
+  color: #ff7800 !important;
 }
 .ysl-label-search-area .mat-tab-label:before{
   content: "";
   display: inline-block;
   height: 8px;
   width: 8px;
-  background-color: #ff7800;
+  background-color: #fff;
   border-radius: 100%;
+}
+.ysl-label-search-area .mat-tab-label-active:before{
+  background-color: #ff7800;
 }
 .ysl-label-search-area .mat-tab-label-active:after{
   content: "";
@@ -553,10 +563,13 @@ app-index .mat-ripple{
   height: 40px;
   line-height: 24px;
   border-radius: 32px;
-  background-color: rgba(246,249,250,0.02);
+  background-color: rgba(246,249,250,0.05);
   padding: 0 20px;
   margin: 0 5px 10px 0;
   cursor: pointer;
+}
+.ysl-label-search-cont li:hover{
+  color: #fff;
 }
 .ysl-label-search-area .mat-ink-bar{
   display: none;
@@ -584,7 +597,7 @@ app-index .mat-ripple{
     width: 100%;
   }
   .ysl-label-search-area .mat-tab-labels{
-    justify-content: flex-start;
+    justify-content: space-between;
     overflow-y: hidden;
   }
   .ysl-label-search-area .mat-tab-label{

@@ -16,13 +16,14 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  color: #fff;
 }
 .product-number-icon{
   display: inline-block;
   height: 14px;
   width: 14px;
   margin-right: 10px;
-  background: url(../../../assets/images/data-product-number-icon.png) no-repeat left top;
+  background: url(../../../assets/images/product-number-icon.png) no-repeat left top;
 }
 .product-number span{
   margin-left: 10px;

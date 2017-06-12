@@ -1,27 +1,29 @@
 .container:before,.container:after{
   display: none;
 }
-.ysl-header {
+.ysl-header{
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 2.222rem;
 }
 
-.ysl-header .head-left {
+.ysl-header .head-left{
   width: 5.583rem;
   height: 0.944rem;
   outline: none;
   cursor: pointer;
   background: url("../../../assets/images/logo.png") no-repeat left top/cover;
 }
-.head-right {
+.head-right{
   display: flex;
   height: 100%;
 }
 .before-login{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  color: #fff;
 }
 .after-login{
   display: flex;
@@ -82,14 +84,14 @@
   border-radius: 4px;
   color: #fff;
 }
-.ysl-header .login-btn {
-  margin-right: 10px;
+.ysl-header .login-btn{
   background-color: transparent;
-  border: 1px solid #fff;
 }
 .ysl-header .register-btn {
-  background: #1c94c4;
-  background-color: rgba(255,255,255,0.3);
+  background-color: transparent;
+}
+.ysl-header .login-btn:hover,.ysl-header .register-btn:hover{
+  text-decoration: underline;
 }
 .visible-xs-block .fa-user-o{
   color: #fff;

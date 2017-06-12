@@ -22,10 +22,11 @@ export class AppComponent implements OnInit {
       if (e instanceof NavigationStart) {
         if (e.url.includes('/index') || e.url == '/') {
           this.outerWrapperStyle = {
-            background: 'url(assets/images/index-bg.jpg) no-repeat left top/cover'
+            // background: 'url(assets/images/index-bg.jpg) no-repeat left top/cover'
+            backgroundColor: '#242424'
           }
           this.yslNavStyle = {
-            backgroundColor : 'transparent'
+            backgroundColor : 'rgba(0,0,0,0.3)'
           }
         } else {
           this.outerWrapperStyle = {

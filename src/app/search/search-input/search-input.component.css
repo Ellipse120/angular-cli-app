@@ -1,14 +1,24 @@
 .container{
   width: 53%;
 }
+.keyword-search{
+  height: 45px;
+  line-height: 45px;
+}
+.ysl-input-group{
+  height: 100%;
+  line-height: 100%;
+  position: relative;
+  padding: 0;
+}
 .search-box{
   margin:0 auto;
   position: relative;
   margin-bottom: 30px;
 }
 .search-input{
-  height: 30px;
-  line-height: 30px;
+  height: 100%;
+  line-height: 100%;
   font-size: 0.5rem;
   color: #737373 ;
   border: 1px solid #d8e5e7;
@@ -17,26 +27,16 @@
 .search-input:focus{
   outline: none;
 }
-.ysl-input-group{
-  position: relative;
-  padding: 0;
-  height: 30px;
-  line-height: 30px;
-}
 .ysl-input-group input{
   width: 100%;
 }
-.search .fa-search{
-  font-size: 19px;
-}
-.ysl-search-box{
-  display: flex;
-  align-items: center;
+.fa-search{
+  font-size: 20px;
 }
 .searchbtn{
   display: inline-block;
-  height: 30px;
-  line-height: 30px;
+  height: 100%;
+  line-height: 100%;
   background: #ff4307;
   text-align: center;
   color: #fff;

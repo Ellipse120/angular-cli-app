@@ -4,7 +4,7 @@
   <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>
   <div class="head-right hidden-xs">
     <div class="before-login" *ngIf="!loginState">
-      <button class="ysl-btn login-btn" (click)="showLogin()">登录</button>
+      <button class="ysl-btn login-btn" (click)="showLogin()">登录</button><i>|</i>
       <button class="ysl-btn register-btn" routerLink="/register">注册</button>
     </div>
     <ul class="after-login" *ngIf="loginState">
