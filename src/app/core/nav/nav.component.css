@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 2.222rem;
+  height: 60px;
 }
 
 .ysl-header .head-left{
@@ -13,7 +13,7 @@
   height: 0.944rem;
   outline: none;
   cursor: pointer;
-  background: url("../../../assets/images/logo.png") no-repeat left top/cover;
+  background: url("../../../assets/images/logo.png") no-repeat left top/auto 100%;
 }
 .head-right{
   display: flex;

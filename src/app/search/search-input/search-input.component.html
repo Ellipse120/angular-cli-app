@@ -1,11 +1,11 @@
 <!--搜索框-->
 <div class="search-box container">
   <form class="row keyword-search" [formGroup]="keywordSearchForm" (ngSubmit)="keywordSubmit(keywordSearchForm)" novalidate>
-    <div class="ysl-input-group col-xs-10">
-      <input type="text" class="search-input" formControlName="keyword" required>
+    <div class="ysl-input-group col-xs-11">
+      <input type="text" class="search-input" placeholder="输入您要查找的数据产品的关键词或标签" formControlName="keyword" required>
       <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox();$event.stopPropagation()"></span>
     </div>
-    <button class="searchbtn col-xs-2"><i class="fa fa-search"></i></button>
+    <button class="searchbtn col-xs-1"><i class="fa fa-search"></i></button>
     <!--routerLink="/datalist"-->
   </form>
   <form [formGroup]="advancedSearchForm" class="advanced-box form-horizontal" *ngIf="isShowAdvancedBox" (ngSubmit)="advancedSearchSubmit()" (click)="$event.stopPropagation()" novalidate>

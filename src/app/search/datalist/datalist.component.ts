@@ -71,6 +71,7 @@ export class DatalistComponent implements OnInit {
 
   // 关键字搜索
   keywordSearch() {
+    console.log('keyword', this.eventEmit.keyword)
     this.eventEmit.keywordSearch.subscribe(e => {
       this.eventEmit.keyword = e.keyword;
       this.searchOptions.keyword = e.keyword;
