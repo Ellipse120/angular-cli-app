@@ -47,7 +47,16 @@ export class DatalistComponent implements OnInit {
   constructor(private service: YslHttpService,
               private route: ActivatedRoute,
               private router: Router,
-              private eventEmit: SearchService) {}
+              private eventEmit: SearchService) {
+    this.eventEmit.keywordSearch.subscribe(e => {
+      console.log('keyword', this.eventEmit.keyword)
+      this.eventEmit.keyword = e.keyword;
+      this.searchOptions.keyword = e.keyword;
+      this.getProjectList()
+    })
+    console.log('contr', SearchService);
+    // this.keywordSearch()
+  }
 
   ngOnInit() {
     this.route.queryParams
@@ -58,7 +67,6 @@ export class DatalistComponent implements OnInit {
         this.getProjectList();
       })
     this.limit = parseInt(this.searchOptions['limit']);
-    this.keywordSearch()
   }
 
   // 获取产品列表
@@ -71,12 +79,7 @@ export class DatalistComponent implements OnInit {
 
   // 关键字搜索
   keywordSearch() {
-    console.log('keyword', this.eventEmit.keyword)
-    this.eventEmit.keywordSearch.subscribe(e => {
-      this.eventEmit.keyword = e.keyword;
-      this.searchOptions.keyword = e.keyword;
-      this.getProjectList()
-    })
+
   }
 
   // 条件搜索

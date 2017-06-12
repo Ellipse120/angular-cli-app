@@ -17,7 +17,7 @@
       </ul>
     </div>
     <div class="data-list">
-      <p class="find-result">找到约{{product.totalLength}}条结果</p>
+      <p class="find-result">找到{{product.totalLength}}条结果</p>
       <ul>
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
                                                       currentPage: currPage,
@@ -25,7 +25,7 @@
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
           <span class="data-content">{{item.description}}</span>
           <ul class="product-item-tags">
-            <li class="product-item-tag" *ngFor="let t of item.tags">{{t.name}}</li>
+            <li class="product-item-tag" *ngFor="let t of item.tags"><i class="fa fa-tag"></i>{{t.name}}</li>
           </ul>
         </li>
       </ul>

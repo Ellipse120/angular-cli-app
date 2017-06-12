@@ -31,8 +31,7 @@ export class NavComponent implements OnInit {
               private eventEmit: SearchService,
               private httpService: YslHttpService,
               private cookie: CookieService,
-              private location: Location) {
-  }
+              private location: Location) {}
 
   ngOnInit() {
     this.loginState = this.cookie.getObject('yslUserInfo') ? true : false;
@@ -61,7 +60,8 @@ export class NavComponent implements OnInit {
 
   // 搜索
   keywordSubmit(data) {
-    this.eventEmit.keyword = data;
+    this.eventEmit.keywordSearch.emit(data)
+    console.log(data)
   }
 
   // 退出

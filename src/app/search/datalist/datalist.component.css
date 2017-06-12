@@ -101,12 +101,18 @@
 .product-item-tag{
   display: inline-block;
   line-height: 18px;
-  border:1px solid #b7e9ff;
   text-align: center;
   font-size: 12px;
   color: #288dec;
   padding: 0 10px;
   margin-right: 10px;
+  cursor: pointer;
+}
+.product-item-tag .fa{
+  margin-right: 5px;
+}
+.product-item-tag:hover{
+  text-decoration: underline;
 }
 @media screen and (max-width: 768px) {
   .data-list{
