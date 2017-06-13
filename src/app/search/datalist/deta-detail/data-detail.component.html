@@ -61,9 +61,9 @@
         <li *ngFor="let c of productComment['items']">
           <div class="comment-item">
             <h5 class="comment-name">用户名</h5>
-            <div class="score-summary">
+            <div class="score-summary" *ngIf="c.averageScore">
               <ul class="stars-list clearfix">
-                <li *ngFor="let s of averageScore; let i = index;"><span [class.all-star]="((i+1) < c.averageScore) || ((i+1) == c.averageScore)" [class.half-star]="(i+1)>c.averageScore && i < c.averageScore"></span></li>
+                <li *ngFor="let s of averageScore; let i = index;"><i class="fa" [class.fa-star-o]="(i+1)>c.averageScore" [class.fa-star]="((i+1) < c.averageScore) || ((i+1) == c.averageScore)" [class.fa-star-half-o]="(i+1)>c.averageScore && i < c.averageScore"></i></li>
               </ul>
               <p class="score-text"><span>及时性：{{c.scoreOnTimeliness}}</span><span>准确性：{{c.scoreOnAccuracy}}</span><span>规范性：{{c.scoreOnNormalization}}</span><span>完整性：{{c.scoreOnIntegrity}}</span></p>
             </div>

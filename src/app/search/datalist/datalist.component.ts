@@ -105,15 +105,14 @@ export class DatalistComponent implements OnInit {
   }
 
   productSearchByYear() {
-    console.log('form', this.yearSearchForm)
-    if (!this.yearSearchForm && this.yearSearchForm.invalid) { return }
+    const thisYear = (new Date()).getFullYear();
     let data = {dataSince: '', dataUntil: ''};
     let form = this.yearSearchForm;
-    const thisYear = (new Date()).getFullYear();
+    if (this.yearSearchForm.invalid) { return }
     for (let key in data) {
-      if (form[key] || (form.value[key] <= thisYear)) {
-        data[key] = form.value[key] + '/01/01';
-        console.log('year', data)
+      if (form.value[key] && (parseInt(form.value[key]) <= thisYear) && (parseInt(form.value[key]) >= 1970)) {
+        data[key] = new Date(form.value[key] + '/01/01').getTime();
+        console.log('date', data)
       }
     }
   }

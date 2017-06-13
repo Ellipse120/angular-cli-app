@@ -7,7 +7,7 @@ export class YslCommonService {
   getDateForDay(time) {
     let date =  new Date(time);
     Date.prototype.toLocaleString = function() {
-      return this.getFullYear() + '.0' + (this.getMonth() + 1) + '.0' + this.getDate();
+      return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDate();
     };
     return date.toLocaleString();
   }

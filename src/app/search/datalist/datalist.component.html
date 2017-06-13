@@ -8,7 +8,7 @@
         <li class="search-condition-type-item" *ngFor="let item of type.children; let i = index">
           <p class="readonly" [class.active]="searchConditionIndex == i" *ngIf="item.type=='readonly'" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
           <form [formGroup]="yearSearchForm" class="ysl-input-group" *ngIf="item.type=='input'" (ngSubmit)="productSearchByYear()" novalidate>
-            <input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil"><button class="btn">确认</button>
+            <input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>
           </form>
         </li>
       </ul>
