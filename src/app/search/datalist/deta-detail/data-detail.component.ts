@@ -70,7 +70,6 @@ export class DataDetailComponent implements OnInit{
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
         this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
-        console.log('time', this.commonService.getDateForDay(this.productDetail.createdOn));
       });
   }
 
@@ -122,7 +121,7 @@ export class DataDetailComponent implements OnInit{
 
   // 获取产品评论
   getComment() {
-    this.service.getProductComment({productId: 32})
+    this.service.getProductComment({productId: 32, data: {limit: 5, offset: 0}})
       .then(res => {
         if (!res.items) { return }
         let items: any = res.items;

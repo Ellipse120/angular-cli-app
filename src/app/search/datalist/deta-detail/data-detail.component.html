@@ -46,7 +46,7 @@
       </div>
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
-        <textarea [(ngModel)]="commentRemark"></textarea>
+        <textarea [(ngModel)]="commentRemark" placeholder="请输入您的评价..."></textarea>
         <div class="push">
           <button class="ysl-btn push-btn" (click)="sendComment()">发布</button>
         </div>
@@ -117,10 +117,11 @@
   <div class="detail-right col-lg-3 col-xs-12">
     <p>评分</p>
     <div class="star-score">
-      <ul class="stars-list clearfix">
-        <li *ngFor="let s of averageScore; let i = index;"><span [class.all-star]="((i+1) < productDetail.averageScore) || ((i+1) == productDetail.averageScore)" [class.half-star]="(i+1)>productDetail.averageScore && i < productDetail.averageScore"></span></li>
+      <span *ngIf="!productDetail.averageScore">暂无评分</span>
+      <ul class="stars-list clearfix" *ngIf="productDetail.averageScore">
+        <li *ngFor="let s of averageScore; let i = index;"><i class="fa" [class.fa-star-o]="(i+1)>productDetail.averageScore" [class.fa-star]="((i+1) < productDetail.averageScore) || ((i+1) == productDetail.averageScore)" [class.fa-star-half-o]="(i+1)>productDetail.averageScore && i < productDetail.averageScore"></i></li>
       </ul>
-      <i class="color-orange">({{productDetail.averageScore}}分)</i>
+      <i class="color-orange" *ngIf="productDetail.averageScore">({{productDetail.averageScore}}分)</i>
     </div>
 
     <div class="current-info font14">

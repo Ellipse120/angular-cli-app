@@ -292,17 +292,9 @@ textarea:-ms-input-placeholder{
   float: left;
   margin-right: 5px;
 }
-.stars-list span{
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  background: url("../../../../assets/images/score-stars.png") no-repeat left bottom/100% auto;
-}
-.stars-list .all-star{
-  background-position: left top;
-}
-.stars-list .half-star{
-  background-position: left -19px;
+.stars-list .fa{
+  font-size: 16px;
+  color: rgb(255,165,78);
 }
 .star-score{
   width: 100%;
@@ -389,6 +381,11 @@ textarea::-webkit-input-placeholder{
 .comment-content h4{
   font-size: 14px;
   color: #59717f !important;
+}
+.comment-content textarea{
+  height: 106px;
+  width: 100%;
+  border-color: #ccc;
 }
 
 @media screen and (max-width: 992px) {
