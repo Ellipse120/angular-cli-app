@@ -61,6 +61,18 @@
   display: flex;
   justify-content: space-between;
 }
+.search-condition-type-item .ysl-input-group input{
+  font-size: 12px;
+}
+.search-condition-type-item .ysl-input-group input::-moz-placeholder{
+  color: #999;
+}
+.search-condition-type-item .ysl-input-group input:-ms-input-placeholder{
+  color: #999;
+}
+.search-condition-type-item .ysl-input-group input::-webkit-input-placeholder{
+  color: #999;
+}
 .search-condition-type-item input:not([type=checkbox]){
   height: 20px;
   line-height: 20px;

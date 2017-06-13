@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
 
   outerWrapperStyle = {};
   yslNavStyle = {};
+  yslFooterStyle = {};
 
   constructor(private router: Router) {}
 
@@ -28,12 +29,18 @@ export class AppComponent implements OnInit {
           this.yslNavStyle = {
             backgroundColor : 'rgba(0,0,0,0.3)'
           }
+          this.yslFooterStyle = {
+            backgroundColor: 'transparent'
+          }
         } else {
           this.outerWrapperStyle = {
             background: '#fff'
           };
           this.yslNavStyle = {
             backgroundColor: '#070224'
+          }
+          this.yslFooterStyle = {
+            backgroundColor: '#252626'
           }
         }
       }

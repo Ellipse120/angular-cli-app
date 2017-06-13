@@ -50,7 +50,6 @@ export class DataDetailComponent implements OnInit{
   ngOnInit(): void {
     this.productParams = this.route.snapshot.params;
     this.getProductDetail();
-    this.getComment();
   }
 
   // 赞
@@ -70,6 +69,7 @@ export class DataDetailComponent implements OnInit{
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
         this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
+        this.getComment();
       });
   }
 
@@ -121,7 +121,7 @@ export class DataDetailComponent implements OnInit{
 
   // 获取产品评论
   getComment() {
-    this.service.getProductComment({productId: 32, data: {limit: 5, offset: 0}})
+    this.service.getProductComment({productId: this.productDetail.productId, data: {limit: 5, offset: 0}})
       .then(res => {
         if (!res.items) { return }
         let items: any = res.items;

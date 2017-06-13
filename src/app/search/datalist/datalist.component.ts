@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router, ActivatedRoute, Params, NavigationExtras} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap'
@@ -13,6 +14,7 @@ import {SearchService} from "../search.service";
 })
 export class DatalistComponent implements OnInit {
 
+  yearSearchForm: FormGroup;
   state = false;
   limit;
   searchOptions;
@@ -22,7 +24,7 @@ export class DatalistComponent implements OnInit {
     totalLength: 0
   };
   searchConditionIndex: number;
-  currSortTag: number;
+  currSortTag: string;
   tagSortList = [];
   searchCondition = [{
       type: 'a', children: [
@@ -40,7 +42,8 @@ export class DatalistComponent implements OnInit {
   constructor(private service: YslHttpService,
               private route: ActivatedRoute,
               private router: Router,
-              public eventEmit: SearchService) {}
+              public eventEmit: SearchService,
+              private fb: FormBuilder) {}
 
   ngOnInit() {
     this.route.queryParams
@@ -52,6 +55,7 @@ export class DatalistComponent implements OnInit {
       })
     this.limit = parseInt(this.searchOptions['limit']);
     this.keywordSearch();
+    this.createForm();
   }
 
   // 获取产品列表
@@ -78,8 +82,8 @@ export class DatalistComponent implements OnInit {
   }
 
   // 标签搜索
-  sortByTag(item, ind) {
-    this.currSortTag = ind;
+  sortByTag(item) {
+    this.currSortTag = item.name;
     this.searchOptions.tagId = item.id;
     this.getProjectList();
   }
@@ -93,24 +97,36 @@ export class DatalistComponent implements OnInit {
     })
   }
 
-  // 条件搜索
+  // 时间条件搜索
   conditionSearch(i, item) {
     this.searchConditionIndex = i;
     this.searchOptions.dataSince = item.value ? (new Date(item.value)).getTime() : undefined;
     this.getProjectList();
+  }
 
+  productSearchByYear() {
+    console.log('form', this.yearSearchForm)
+    if (!this.yearSearchForm && this.yearSearchForm.invalid) { return }
+    let data = {dataSince: '', dataUntil: ''};
+    let form = this.yearSearchForm;
+    const thisYear = (new Date()).getFullYear();
+    for (let key in data) {
+      if (form[key] || (form.value[key] <= thisYear)) {
+        data[key] = form.value[key] + '/01/01';
+        console.log('year', data)
+      }
+    }
   }
 
   cancelFilter() {
     this.searchOptions.tagId = undefined;
-    this.currSortTag = -1;
+    this.currSortTag = '';
     this.getProjectList();
   }
 
   // 排序
   productSort(item) {
     this.currSortItem = item;
-    console.log('排序', item);
     this.searchOptions.sortBy = item.value;
     this.getProjectList();
   }
@@ -122,12 +138,25 @@ export class DatalistComponent implements OnInit {
 
   // 下一页
   toNextPage(e) {
-    console.log('currPage', e)
     this.searchOptions['offset'] = (parseInt(e) - 1) * (parseInt(this.searchOptions['limit']));
     let navigationExtras: NavigationExtras = {
       queryParams: this.searchOptions
     }
     this.router.navigate(['datalist'], navigationExtras)
+  }
+
+  createForm() {
+    let exp = /[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}/;
+    this.yearSearchForm = this.fb.group({
+      dataSince: ['', Validators.compose([
+        Validators.minLength(4),
+        Validators.pattern(exp)
+      ])],
+      dataUntil: ['', Validators.compose([
+        Validators.minLength(4),
+        Validators.pattern(exp)
+      ])]
+    })
   }
 
 }

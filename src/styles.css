@@ -312,18 +312,40 @@ textarea::-webkit-scrollbar-thumb
   border-radius:5px;
   cursor: pointer;
 }
-.footer{
+footer{
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 54px;
+  height: 66px;
   line-height: 22px;
   position: absolute;
   bottom: 0;
-  color: #6b6976;
-  /*background: url("assets/images/footer.png") no-repeat center bottom;*/
-  /*background-size: cover;*/
+  color: #a79f9f;
+}
+.footer .container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer ul{
+  display: flex;
+}
+.footer li{
+  height: 12px;
+  line-height: 12px;
+  border-right: 1px solid #a79f9f;
+  padding: 0 6px;
+}
+.footer li:last-of-type{
+  border-right: 0;
+}
+.footer a{
+  color: #a79f9f;
+}
+.footer p{
+  margin-bottom: 0;
+  line-height: 14px;
 }
 
 /*重写部分*/
