@@ -4,24 +4,24 @@
       <h3 class="product-name">{{productDetail.name}}</h3>
       <div class="data-info clear row">
         <span class="firmlogo"><img src="./assets/images/detail1.png"></span>
-        <ul class="firm-detail">
+        <ul class="firm-detail clearfix">
           <li>数据供应商：{{productDetail.orgName}}</li>
           <li>官方网址：<a [href]="productDetail.orgWebSite">{{productDetail.orgWebSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
-          <li>数据样本：<i class="green text-underline" (click)="downloadSampleFile()">下载</i></li>
-          <li class="tag-box">标签：<ul class="product-tag"><li *ngFor="let item of productDetail.tags;let last = last"><span class="tag-name color-blue">{{item.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li></ul></li>
+          <li>数据样本：<i class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</i><span *ngIf="!productDetail.sampleFilePath">无</span></li>
+          <li class="tag-box">标签：<ul class="product-tag"><li *ngFor="let item of productDetail.tags;let last = last"><span class="tag-name color-blue">{{item.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li></ul><span *ngIf="!productDetail.tags">无</span></li>
         </ul>
       </div>
     </div>
 
     <div class="product-introduce">
-      <h4 class="mb20">产品简介</h4>
+      <h4 class="mb20 font16">产品简介</h4>
       <p>{{productDetail.description}}</p>
     </div>
 
     <!--纠错处理-->
     <div yslMenu class="add-product-errata">
-      <button class="errata-btn btn ysl-menu-btn">纠错</button>
+      <button class="errata-btn btn ysl-menu-btn">我要纠错</button>
       <div class="errata-write ysl-menu-cont">
         <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area" [(ngModel)]="errataRemark"></textarea>
         <button class="ysl-btn error-submit ysl-menu-close" (click)="submitErrata()">提交</button>
@@ -38,7 +38,7 @@
           <div class="scores-item col-sm-6 col-xs-12" *ngFor="let t of score; let parentInd = index">
             <span>{{t.title}}</span>
             <ul class="start-score">
-              <li *ngFor="let s of t.stars; let i = index" [class.active]="i <= t.curr" (click)="productScore(parentInd, i)"></li>
+              <li *ngFor="let s of t.stars; let i = index"><i class="fa" [class.fa-star-o]="i > t.curr" [class.fa-star]="i <= t.curr" (click)="productScore(parentInd, i)"></i></li>
             </ul>
             <i class="color-orange">( {{t.score}}分 )</i>
           </div>
@@ -46,11 +46,8 @@
       </div>
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
-        <ueditor [(ngModel)]="commentRemark" [config]="setting"></ueditor>
+        <textarea [(ngModel)]="commentRemark"></textarea>
         <div class="push">
-          <div class="ysl-checkbox-group">
-            <label><input type="checkbox"><span></span>匿名</label>
-          </div>
           <button class="ysl-btn push-btn" (click)="sendComment()">发布</button>
         </div>
       </div>
@@ -59,7 +56,7 @@
 
     <!--评论区域-->
     <div class="comment-wrapper">
-      <p class="color-gray font18">{{productComment.totalLength}}个评论</p>
+      <p class="color-gray font18"><span *ngIf="productComment.totalLength">{{productComment.totalLength}}个评论</span><span *ngIf="!productComment.totalLength">暂无评论</span></p>
       <ul class="comment-list">
         <li *ngFor="let c of productComment['items']">
           <div class="comment-item">
@@ -127,11 +124,10 @@
     </div>
 
     <div class="current-info font14">
-      <p>词条信息</p>
+      <p>产品信息</p>
       <ul class="mt10">
         <li><span>创建者：</span> <span class="color-blue">{{productDetail.creator}}</span></li>
-        <li><span>编辑次数：</span> <span class="color-blue">20次</span></li>
-        <li><span>词条浏览：</span> <span>{{productDetail.viewedCount}}次</span></li>
+        <li><span>浏览次数：</span> <span>{{productDetail.viewedCount}}次</span></li>
         <li><span>最近更新：</span> <span>{{productDetail.modifiedOn}}</span></li>
       </ul>
     </div>

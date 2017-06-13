@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
   isShowSearch = false;
   user = [];
   loginState: any;
-  loginInfo = {userType: ''};
+  loginInfo: any;
 
   constructor(private router: Router,
               private dialog: MdDialog,
@@ -33,8 +33,15 @@ export class NavComponent implements OnInit {
               private location: Location) {}
 
   ngOnInit() {
-    this.loginState = this.cookie.getObject('yslUserInfo') ? true : false;
+    if (this.cookie.getObject('yslUserInfo')) {
+      this.loginState = true;
+      this.loginInfo = this.cookie.getObject('yslUserInfo');
+    } else {
+      this.loginState = false;
+      this.loginInfo = {userType: ''}
+    }
     this.setNavStyle();
+    console.log('login')
   }
 
   someMethod(elem) {

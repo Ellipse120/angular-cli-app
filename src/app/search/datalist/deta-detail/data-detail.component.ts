@@ -6,7 +6,6 @@ import { ActivatedRoute, Params } from '@angular/router'
 
 
 import { YslHttpService } from '../../../core/ysl-http.service'
-import { UEditorComponent } from 'ngx-ueditor';
 import {YslMenuService} from "../../../core/Directive/ysl-menu.service";
 import {YslCommonService} from "../../../core/ysl-common.service";
 
@@ -32,21 +31,6 @@ export class DataDetailComponent implements OnInit{
   averageScore: Array<any>;
   stars: Array<number>;
   productComment = {items: [], totalLength: ''};
-
-  setting = {
-    // 这里可以选择自己需要的工具按钮名称,此处仅选择如下几个
-    toolbars: [['insertimage', 'Undo', 'Redo', 'Bold', 'forecolor', 'emotion']],
-    // focus时自动清空初始化的内容
-    autoClearinitialContent: false,
-    //  关闭字数统计
-    wordCount: false,
-    //  关闭elementPath
-    elementPathEnabled: false,
-    //  默认的编辑区域高度
-    initialFrameHeight: 250,
-    //  默认的编辑器的宽度
-    initialFrameWidth: '100%'
-  }
 
   constructor(public route: ActivatedRoute,
               public service: YslHttpService,
@@ -134,17 +118,15 @@ export class DataDetailComponent implements OnInit{
       .then(res => {
         console.log('评价', res)
       })
-
-    // todo
-    // 匿名
   }
 
   // 获取产品评论
   getComment() {
     this.service.getProductComment({productId: 32})
       .then(res => {
-        let data: any = res;
-        data.items.forEach(item => {
+        if (!res.items) { return }
+        let items: any = res.items;
+        items.forEach(item => {
           let timeDis = (new Date).getTime() - item.modifiedOn;
           item.averageScore = (item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4;
           item.secondComment = false;
