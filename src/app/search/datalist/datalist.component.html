@@ -6,7 +6,7 @@
     <div class="search-condition hidden-xs">
       <ul class="search-condition-type" *ngFor="let type of searchCondition;">
         <li class="search-condition-type-item" *ngFor="let item of type.children; let i = index">
-          <p class="readonly" [class.active]="searchConditionIndex == i" *ngIf="item.type=='readonly'" (click)="conditionSearch(i)">{{item.text}}</p>
+          <p class="readonly" [class.active]="searchConditionIndex == i" *ngIf="item.type=='readonly'" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
           <div class="ysl-input-group" *ngIf="item.type=='input'">
             <input type="text">-<input type="text"><button class="btn">确认</button>
           </div>
@@ -14,7 +14,7 @@
       </ul>
       <ul class="search-condition-type" *ngIf="tagSortList.length">
         <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
-          <p class="readonly" (click)="sortByTag(t, ind)" [class.active]="currSortTag == ind">{{t.name}}</p>
+          <p class="readonly" (click)="sortByTag(t, ind)" [class.active]="currSortTag == ind"><span>{{t.name}}</span><i class="cancel-filter fa fa-close" *ngIf="currSortTag == ind" (click)="cancelFilter(); $event.stopPropagation();"></i></p>
         </li>
       </ul>
     </div>
@@ -24,7 +24,7 @@
         <div class="filter">
           <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
           <ul class="sort-list">
-            <li *ngFor="let item of sortList; let i = index" [class.active]="item === currSortItem" (click)="productSort(i)">{{item.text}}</li>
+            <li *ngFor="let item of sortList; let i = index" [class.active]="item === currSortItem" (click)="productSort(item)">{{item.text}}</li>
           </ul>
         </div>
       </div>

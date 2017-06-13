@@ -26,14 +26,14 @@ export class DatalistComponent implements OnInit {
   tagSortList = [];
   searchCondition = [{
       type: 'a', children: [
-      {text: '时间不限', value: '', type: 'readonly'},
-      {text: '2017年以来', value: '2017', type: 'readonly'},
-      {text: '2016年以来', value: '2016', type: 'readonly'},
-      {text: '2013年以来', value: '2013', type: 'readonly'},
+      {text: '时间不限', value: undefined, type: 'readonly'},
+      {text: '2017年以来', value: '2017/01/01', type: 'readonly'},
+      {text: '2016年以来', value: '2016/01/01', type: 'readonly'},
+      {text: '2013年以来', value: '2013/01/01', type: 'readonly'},
       {text: '', value: '', type: 'input'}
     ]}
   ];
-  sortList = [{text: '按日期排序', id: ''}, {text: '按相关性排序', id: ''}];
+  sortList = [{text: '按日期排序', value: 'modified_on'}, {text: '按相关性排序', value: 'viewed_count'}];
   currSortItem = this.sortList[0];
   currPage: any;
 
@@ -56,6 +56,7 @@ export class DatalistComponent implements OnInit {
 
   // 获取产品列表
   getProjectList() {
+    if (!this.searchOptions.keyword) { this.searchOptions.keyword = undefined}
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
@@ -80,7 +81,7 @@ export class DatalistComponent implements OnInit {
   sortByTag(item, ind) {
     this.currSortTag = ind;
     this.searchOptions.tagId = item.id;
-    this.getProjectList()
+    this.getProjectList();
   }
 
   // 关键字搜索
@@ -93,13 +94,25 @@ export class DatalistComponent implements OnInit {
   }
 
   // 条件搜索
-  conditionSearch(i) {
+  conditionSearch(i, item) {
     this.searchConditionIndex = i;
+    this.searchOptions.dataSince = item.value ? (new Date(item.value)).getTime() : undefined;
+    this.getProjectList();
+
+  }
+
+  cancelFilter() {
+    this.searchOptions.tagId = undefined;
+    this.currSortTag = -1;
+    this.getProjectList();
   }
 
   // 排序
-  productSort(ind) {
-    this.currSortItem = this.sortList[ind]
+  productSort(item) {
+    this.currSortItem = item;
+    console.log('排序', item);
+    this.searchOptions.sortBy = item.value;
+    this.getProjectList();
   }
 
   // 进入产品详情
