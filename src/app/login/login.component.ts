@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
 import { MdDialogRef } from "@angular/material";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {YslHttpService} from '../core/ysl-http.service';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -32,7 +34,9 @@ export class LoginComponent implements OnInit {
   constructor(
     public dialogRef: MdDialogRef<LoginComponent>,
     public fb: FormBuilder,
-    public httpServer: YslHttpService,) {
+    public httpServer: YslHttpService,
+    private location: Location,
+    private router: Router) {
     this.createForm();
   }
 
@@ -42,7 +46,6 @@ export class LoginComponent implements OnInit {
   // 提交登录
   loginSubmit() {
     if (!this.loginForm) { return }
-    this.loginMess = '登录中....';
     this.isLoginSubmit = true;
     const form = this.loginForm;
 
@@ -58,7 +61,7 @@ export class LoginComponent implements OnInit {
       }
     }
     if (form.invalid) { return }
-
+    this.loginMess = '登录中....';
     const submitTime = new Date();
     let submitData = {
       loginId: form.value['userAccount'],
@@ -68,6 +71,10 @@ export class LoginComponent implements OnInit {
     this.httpServer.userLogin(submitData)
       .then((res) => {
         this.dialogRef.close({userLoginInfo: res});
+        const path = this.location.path();
+        if (path.includes('/register')) {
+          this.router.navigate(['index'])
+        }
       })
   }
 

@@ -41,7 +41,6 @@ export class NavComponent implements OnInit {
       this.loginInfo = {userType: ''}
     }
     this.setNavStyle();
-    console.log('login')
   }
 
   someMethod(elem) {

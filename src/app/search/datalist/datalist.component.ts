@@ -26,6 +26,7 @@ export class DatalistComponent implements OnInit {
   searchConditionIndex: number;
   currSortTag: string;
   tagSortList = [];
+  isShowPeriod = true;
   searchCondition = [{
       type: 'a', children: [
       {text: '时间不限', value: undefined, type: 'readonly'},
@@ -104,16 +105,35 @@ export class DatalistComponent implements OnInit {
     this.getProjectList();
   }
 
+  // 时间段搜索
   productSearchByYear() {
     const thisYear = (new Date()).getFullYear();
-    let data = {dataSince: '', dataUntil: ''};
     let form = this.yearSearchForm;
-    if (this.yearSearchForm.invalid) { return }
-    for (let key in data) {
-      if (form.value[key] && (parseInt(form.value[key]) <= thisYear) && (parseInt(form.value[key]) >= 1970)) {
-        data[key] = new Date(form.value[key] + '/01/01').getTime();
-        console.log('date', data)
+    let values = form.value;
+    if (form.invalid) { return }
+    for (let key in values) {
+      if (values[key] && (parseInt(values[key]) <= thisYear) && (parseInt(values[key]) >= 1970)) {
+        this.searchOptions[key] = new Date(form.value[key] + '/01/01').getTime();
+      } else {
+        this.searchOptions[key] = undefined;
       }
+    }
+    let [since, until] = [this.searchOptions['dataSince'], this.searchOptions['dataUntil']];
+    if (since || until) {
+      // let item = {text: '', value: '', type: 'readonly'};
+      // let [sinceText, untilText] = [((new Date(since)).getFullYear()).toString(), ((new Date(until)).getFullYear()).toString()];
+      // if (since && until){
+      //   item.text = sinceText + '-' + untilText;
+      // } else if (until) {
+      //   item.text = untilText + '年以前';
+      // } else {
+      //   item.text = sinceText + '年以来';
+      // }
+      this.service.productKeywordSearch(this.searchOptions)
+        .then(res => {
+          // searchCondition children
+          let len = this.searchCondition[0]['children'].length;
+        })
     }
   }
 
