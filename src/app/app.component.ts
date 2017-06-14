@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
             backgroundColor: '#242424'
           }
           this.yslNavStyle = {
-            backgroundColor : 'rgba(0,0,0,0.3)'
+            background : 'rgba(0,0,0,0.3)'
           }
           this.yslFooterStyle = {
             backgroundColor: 'transparent'
@@ -37,10 +37,10 @@ export class AppComponent implements OnInit {
             background: '#fff'
           };
           this.yslNavStyle = {
-            backgroundColor: '#070224'
+            background: 'linear-gradient(#323232, #3d3d3d, #414141)'
           }
           this.yslFooterStyle = {
-            backgroundColor: '#252626'
+            backgroundColor: '#333'
           }
         }
       }

@@ -2,12 +2,13 @@
  * Created by Administrator on 2017/5/10.
  */
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router'
+import {ActivatedRoute, Params, Router} from '@angular/router'
 
 
 import { YslHttpService } from '../../../core/ysl-http.service'
 import {YslMenuService} from "../../../core/Directive/ysl-menu.service";
 import {YslCommonService} from "../../../core/ysl-common.service";
+import {CookieService} from "ngx-cookie";
 
 
 @Component({
@@ -20,22 +21,26 @@ import {YslCommonService} from "../../../core/ysl-common.service";
 export class DataDetailComponent implements OnInit{
 
   isShowSearch = true;
-  zanNum = 0;
-  nozanNum = 0;
   id: string;
   commentRemark = '';
   errataRemark: string;
   productParams;
   productDetail;
+  relatedProductList = [];
+  isThumbsUp: boolean;
+  favoredCount: number;
   score;
   averageScore: Array<any>;
   stars: Array<number>;
+  replyCommentCont: string;
   productComment = {items: [], totalLength: ''};
 
   constructor(public route: ActivatedRoute,
               public service: YslHttpService,
               private yslMenu: YslMenuService,
-              private commonService: YslCommonService) {
+              private commonService: YslCommonService,
+              private router: Router,
+              private cookie: CookieService) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -52,11 +57,6 @@ export class DataDetailComponent implements OnInit{
     this.getProductDetail();
   }
 
-  // 赞
-  zan() {
-    this.zanNum++;
-  }
-
   // 搜索
   keywordSearch(data) {
     console.log('详情页搜索', data);
@@ -69,16 +69,44 @@ export class DataDetailComponent implements OnInit{
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
         this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
+        this.isThumbsUp = this.productDetail.favor;
+        this.favoredCount = this.productDetail.favoredCount;
+        this.getRelatedProducts();
         this.getComment();
       });
   }
 
   // 下载数据样本
   downloadSampleFile() {
-    console.log('样本')
     this.service.downloadSampleFile(this.productDetail.productId)
       .then(res => {
         console.log('下载成功', res)
+      })
+  }
+
+  // 获取相关产品
+  getRelatedProducts() {
+    let option = {type: 'organization', productId: this.productDetail.productId};
+    this.service.getRelatedProducts(option)
+      .then(res => {
+        console.log('相关产品', res)
+        this.relatedProductList = res['items'];
+      })
+  }
+
+  relatedProductDetail(item) {
+    console.log('item', item)
+    this.router.navigate(['datadetail', {productId: item.productId}]);
+  }
+
+  // 点赞
+  thumbsUp() {
+    this.isThumbsUp = !this.isThumbsUp;
+    const userId = this.cookie.getObject('yslUserInfo')['id'];
+    let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': userId}};
+    this.service.createProductFavor(option)
+      .then(res => {
+        this.favoredCount = res['favoredCount']
       })
   }
 
@@ -129,6 +157,7 @@ export class DataDetailComponent implements OnInit{
           let timeDis = (new Date).getTime() - item.modifiedOn;
           item.averageScore = (item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4;
           item.secondComment = false;
+          // item.replyRemark = '';
           if (timeDis < 3600000) {
             item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
           } else if (timeDis < 86400000) {
@@ -141,5 +170,26 @@ export class DataDetailComponent implements OnInit{
         })
         this.productComment = res;
       })
+  }
+
+  showReply(ind) {
+    let isShow = this.productComment['items'][ind]['secondComment'];
+    console.log('form', this.productComment)
+    if (isShow) {
+      // this.productComment['items']
+    }
+    this.productComment['items']['secondComment'] = !this.productComment['items']['secondComment']
+
+  }
+  // 回复评论
+  replyComment(common, ind) {
+    console.log('common', common, ind)
+    if (!this.replyCommentCont) { return };
+    let option = {productId: this.productDetail.productId, data: {remark: this.replyCommentCont, replyTo: common.id}};
+    // productComment['items'] secondComment
+    // this.service.addProductComment(option)
+    //   .then(res => {
+    //     console.log('reply', res)
+    //   })
   }
 }

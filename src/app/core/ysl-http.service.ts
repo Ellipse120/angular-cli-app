@@ -182,6 +182,31 @@ export class YslHttpService {
   })
   }
 
+  // 获取相关产品
+  getRelatedProducts(option) {
+    // type: tag, organization
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/related/' + option.type + '/' + option.productId)
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
+  // 产品点赞
+  createProductFavor(option) {
+    return new Promise((resolve, reject) => {
+      let data = JSON.stringify(option.data);
+      console.log('api', data)
+      this.http.post(this.url + 'api/product/' + option.productId + '/favor/' + option.status, data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
   // 产品纠错
   createProductErrata(option):Promise<any> {
     return new Promise((resolve, reject) => {
