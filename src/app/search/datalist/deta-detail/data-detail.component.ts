@@ -22,6 +22,7 @@ export class DataDetailComponent implements OnInit{
 
   isShowSearch = true;
   id: string;
+  userId;
   commentRemark = '';
   errataRemark: string;
   productParams;
@@ -54,6 +55,7 @@ export class DataDetailComponent implements OnInit{
 
   ngOnInit(): void {
     this.productParams = this.route.snapshot.params;
+    this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.getProductDetail();
   }
 
@@ -102,8 +104,7 @@ export class DataDetailComponent implements OnInit{
   // 点赞
   thumbsUp() {
     this.isThumbsUp = !this.isThumbsUp;
-    const userId = this.cookie.getObject('yslUserInfo')['id'];
-    let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': userId}};
+    let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': this.userId}};
     this.service.createProductFavor(option)
       .then(res => {
         this.favoredCount = res['favoredCount']
@@ -123,7 +124,7 @@ export class DataDetailComponent implements OnInit{
   // 纠错
   submitErrata() {
     if (!this.errataRemark) { return }
-    let option = {productId: this.productParams.productId, data: {userId: this.productDetail.userId, status: this.productDetail.status, comment: this.errataRemark}};
+    let option = {productId: this.productParams.productId, data: {userId: this.userId, status: this.productDetail.status, comment: this.errataRemark}};
     console.log('remark', option)
     this.service.createProductErrata(option)
       .then(res => {
@@ -134,7 +135,7 @@ export class DataDetailComponent implements OnInit{
   // 发表评价
   sendComment() {
     if (!this.score[0].score || !this.score[1].score || !this.score[2].score || !this.score[3].score) { return }
-    let score = {productId: this.productParams.productId, data: {}}
+    let score = {productId: this.productParams.productId, data: {userId: this.userId}}
     this.score.forEach(item => {
       score.data[item.key] = item.score
     })
@@ -144,6 +145,7 @@ export class DataDetailComponent implements OnInit{
     this.service.addProductComment(score)
       .then(res => {
         console.log('评价', res)
+        this.getProductDetail();
       })
   }
 
@@ -156,8 +158,7 @@ export class DataDetailComponent implements OnInit{
         items.forEach(item => {
           let timeDis = (new Date).getTime() - item.modifiedOn;
           item.averageScore = (item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4;
-          item.secondComment = false;
-          // item.replyRemark = '';
+          item.showSecond = false;
           if (timeDis < 3600000) {
             item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
           } else if (timeDis < 86400000) {
@@ -173,23 +174,33 @@ export class DataDetailComponent implements OnInit{
   }
 
   showReply(ind) {
-    let isShow = this.productComment['items'][ind]['secondComment'];
+    let isShow = this.productComment['items'][ind]['showSecond'];
     console.log('form', this.productComment)
-    if (isShow) {
-      // this.productComment['items']
-    }
-    this.productComment['items']['secondComment'] = !this.productComment['items']['secondComment']
-
+    this.productComment['items'].forEach(item => {
+      if (isShow) {
+        item.showSecond = false;
+        this.productComment['items'][ind]['showSecond'] = true
+      } else {
+        item.showSecond = false;
+      }
+    })
+    this.productComment['items'][ind]['showSecond'] = !this.productComment['items'][ind]['showSecond']
   }
+
   // 回复评论
   replyComment(common, ind) {
-    console.log('common', common, ind)
     if (!this.replyCommentCont) { return };
-    let option = {productId: this.productDetail.productId, data: {remark: this.replyCommentCont, replyTo: common.id}};
+    let option = {productId: this.productDetail.productId, data: {remark: this.replyCommentCont, replyTo: common.id, userId: this.userId}};
     // productComment['items'] secondComment
-    // this.service.addProductComment(option)
-    //   .then(res => {
-    //     console.log('reply', res)
-    //   })
+    this.service.addProductComment(option)
+      .then(res => {
+        this.productComment['items'][ind]['showSecond'] = false;
+        this.getProductDetail();
+      })
+  }
+
+  // 处理评论时间
+  handleCommentTime() {
+
   }
 }

@@ -6,7 +6,7 @@
         <span class="firmlogo"><img src="./assets/images/detail1.png"></span>
         <ul class="firm-detail clearfix">
           <li>数据供应商：{{productDetail.orgName}}</li>
-          <li>官方网址：<a [href]="productDetail.orgWebSite">{{productDetail.orgWebSite}}</a></li>
+          <li>官方网址：<a [href]="productDetail.orgWebSite" target="_blank">{{productDetail.orgWebSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
           <li>数据样本：<i class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</i><span *ngIf="!productDetail.sampleFilePath">无</span></li>
           <li class="tag-box">标签：<ul class="product-tag"><li *ngFor="let item of productDetail.tags;let last = last"><span class="tag-name color-blue">{{item.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li></ul><span *ngIf="!productDetail.tags">无</span></li>
@@ -80,7 +80,7 @@
               </div>
             </div>
             <!--用户的二级评论-->
-            <div class="second-comment" *ngIf="c.secondComment">
+            <div class="second-comment" *ngIf="c.showSecond">
               <textarea name="second-comment" class="comment-area" placeholder="请输入内容..." [(ngModel)]="replyCommentCont"></textarea>
               <button class="ysl-btn push-btn" (click)="replyComment(c, ind)">发布</button>
               <ul class="second-comment-list" *ngIf="false">

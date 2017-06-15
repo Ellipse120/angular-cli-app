@@ -155,13 +155,32 @@
   top: 17px;
   right: 10px;
 }
+.product-item-tags{
+  height: 23px;
+  overflow: hidden;
+  cursor: default;
+  position: relative;
+}
+.product-item-tags.open{
+  height: auto;
+}
+.product-item-tags .fa-angle{
+  position: absolute;
+  right: 0;
+  top: 2px;
+  font-size: 16px;
+  cursor: pointer;
+}
 .product-item-tag{
   display: inline-block;
   line-height: 18px;
   text-align: center;
   font-size: 12px;
   color: #288dec;
-  padding: 0 10px;
+  width: 6em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-right: 10px;
 }
 .product-item-tag .fa{

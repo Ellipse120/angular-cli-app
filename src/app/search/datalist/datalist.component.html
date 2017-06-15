@@ -7,9 +7,9 @@
       <ul class="search-condition-type" *ngFor="let type of searchCondition;">
         <li class="search-condition-type-item" *ngFor="let item of type.children; let i = index">
           <p class="readonly" [class.active]="searchConditionIndex == i" *ngIf="item.type=='readonly'" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
-          <!--<form [formGroup]="yearSearchForm" class="ysl-input-group" *ngIf="item.type=='input'" (ngSubmit)="productSearchByYear()" novalidate>-->
-            <!--<input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>-->
-          <!--</form>-->
+          <form [formGroup]="yearSearchForm" class="ysl-input-group" *ngIf="item.type=='input'" (ngSubmit)="productSearchByYear()" novalidate>
+            <input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>
+          </form>
         </li>
       </ul>
       <ul class="search-condition-type" *ngIf="tagSortList.length">
@@ -25,7 +25,7 @@
         <div class="filter">
           <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
           <ul class="sort-list">
-            <li *ngFor="let item of sortList; let i = index" [class.active]="item === currSortItem" (click)="productSort(item)">{{item.text}}</li>
+            <li *ngFor="let item of sortList; let i = index" [class.active]="item == currSortItem" (click)="productSort(item)">{{item.text}}</li>
           </ul>
         </div>
       </div>
@@ -35,9 +35,12 @@
                                                       totalItems: product.totalLength}"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
           <span class="data-content">{{item.description}}</span>
-          <ul class="product-item-tags">
-            <li class="product-item-tag" *ngFor="let t of item.tags"><i class="fa fa-tag"></i>{{t.name}}</li>
-          </ul>
+          <div class="product-item-tags" [class.open]="item.tagOpen">
+            <ul>
+              <li class="product-item-tag" *ngFor="let t of item.tags"><i class="fa fa-tag"></i>{{t.name}}</li>
+            </ul>
+            <i class="fa fa-angle color-blue" [class.fa-angle-down]="!item.tagOpen"  [class.fa-angle-up]="item.tagOpen" (click)="item.tagOpen = !item.tagOpen"></i>
+          </div>
         </li>
       </ul>
       <pagination-controls (pageChange)="toNextPage($event);"

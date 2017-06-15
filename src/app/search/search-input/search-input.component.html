@@ -5,7 +5,7 @@
       <input type="text" class="search-input" placeholder="输入您要查找的数据产品的关键词或标签" formControlName="keyword" required>
       <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox();$event.stopPropagation()"></span>
     </div>
-    <a class="searchbtn col-md-1 col-xs-2" routerLink="/datalist" [target]="urlTarget" [queryParams]="{search: (keywordSearchForm.value | json)}"><i class="fa fa-search"></i></a>
+    <a class="searchbtn col-md-1 col-xs-2" routerLink="/datalist" [queryParams]="{search: (keywordSearchForm.value | json)}"><i class="fa fa-search"></i></a>
     <!--routerLink="/datalist"-->
   </form>
   <form [formGroup]="advancedSearchForm" class="advanced-box form-horizontal" *ngIf="isShowAdvancedBox" (ngSubmit)="advancedSearchSubmit()" (click)="$event.stopPropagation()" novalidate>
@@ -79,7 +79,7 @@
     <!--<ngx-datepicker class="calendar" name="timeTo" [(ngModel)]="data.timeTo"></ngx-datepicker>-->
     <!--</li>-->
     <div class="form-group">
-      <a class="searchbtn ysl-btn col-xs-7 col-sm-8 col-xs-offset-5 col-sm-offset-4" routerLink="/datalist" [target]="urlTarget" [queryParams]="{search: (advancedSearchForm.value | json)}">搜索</a>
+      <a class="searchbtn ysl-btn col-xs-7 col-sm-8 col-xs-offset-5 col-sm-offset-4" routerLink="/datalist" [queryParams]="{search: (advancedSearchForm.value | json)}">搜索</a>
     </div>
   </form>
 </div>

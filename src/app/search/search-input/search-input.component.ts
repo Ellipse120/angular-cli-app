@@ -62,16 +62,6 @@ export class SearchInputComponent implements OnInit {
     document.addEventListener('click', () => {
       this.isShowAdvancedBox = false;
     }, false)
-    this.urlTarget = path.includes('/datalist') ? '_self' : '_blank';
-
-    for (const key in this.advancedSearchForm.value) {
-      if (this.advancedSearchForm.value[key]) {
-        if (this.advancedSearchForm.value[key] instanceof Object) {
-          this.advancedSearchForm[key] = this.advancedSearchForm.value[key].epoc;
-          console.log('date', this.advancedSearchForm.value[key])
-        }
-      }
-    }
   }
 
   //关键字搜索

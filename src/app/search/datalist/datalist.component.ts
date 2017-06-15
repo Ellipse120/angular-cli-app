@@ -79,6 +79,9 @@ export class DatalistComponent implements OnInit {
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
+        this.product['items'].forEach(item => {
+          item.tagOpen = false;
+        })
         // this.product.items[0].tags = [{name: 'test', id: '1'}, {name: 'test2', id: '2'}, {name: 'test', id: '1'}];
         // this.product.items[1].tags = [{name: 'test', id: '1'}, {name: 'test4', id: '4'}, {name: 'test5', id: '5'}];
         this.tagUnique();
