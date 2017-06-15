@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/5/8.
  */
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, NavigationExtras} from '@angular/router';
 
@@ -26,6 +27,7 @@ export class SearchInputComponent implements OnInit {
   keywordSearchForm: FormGroup;
   advancedSearchForm: FormGroup;
   isShowAdvancedBox = false;
+  urlTarget = '';
   advanceInfo = {
     data_category: [],
     data_source: [],
@@ -47,17 +49,29 @@ export class SearchInputComponent implements OnInit {
   constructor(public fb: FormBuilder,
               public service: YslHttpService,
               public router: Router,
-              public searchService: SearchService) {
+              public searchService: SearchService,
+              private location: Location) {
     this.keywordSearch = new EventEmitter();
     this.showAdvancedBox = new EventEmitter();
     this.keywordSearchOption.keyword = this.searchService.keyword ?　this.searchService.keyword : '';
   }
 
   ngOnInit() {
+    let path = this.location.path();
     this.createForm();
     document.addEventListener('click', () => {
       this.isShowAdvancedBox = false;
     }, false)
+    this.urlTarget = path.includes('/datalist') ? '_self' : '_blank';
+
+    for (const key in this.advancedSearchForm.value) {
+      if (this.advancedSearchForm.value[key]) {
+        if (this.advancedSearchForm.value[key] instanceof Object) {
+          this.advancedSearchForm[key] = this.advancedSearchForm.value[key].epoc;
+          console.log('date', this.advancedSearchForm.value[key])
+        }
+      }
+    }
   }
 
   //关键字搜索
@@ -100,6 +114,7 @@ export class SearchInputComponent implements OnInit {
       if (form.value[key]) {
         if (form.value[key] instanceof Object) {
           data[key] = form.value[key].epoc;
+          console.log('date', form.value[key])
         } else {
           data[key] = form.value[key];
         }

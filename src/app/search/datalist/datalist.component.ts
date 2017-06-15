@@ -17,7 +17,10 @@ export class DatalistComponent implements OnInit {
   yearSearchForm: FormGroup;
   state = false;
   limit;
-  searchOptions;
+  searchOptions = {
+    limit: 10,
+    offset: 0
+  };
   product = {
     items: [],
     request: {},
@@ -49,19 +52,30 @@ export class DatalistComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {
-        this.searchOptions = Object.assign({}, params);
-        this.eventEmit.keyword = params.keyword;
-        this.currPage = params.offset ? ((params.offset/params.limit) + 1) : 1;
+        // let param = Object.assign({}, params);
+        let param = JSON.parse(params['search'])
+        for (let k in param) {
+          if (param[k] && (param[k] != 'null') && (param[k] != '')) {
+            this.searchOptions[k] = param[k];
+            if (param[k] instanceof Object) {
+              this.searchOptions[k] = param[k].epoc;
+            }
+          }
+        }
+        console.log('options test', this.searchOptions, param);
+        // this.searchOptions = Object.assign({}, params);
+        this.eventEmit.keyword = this.searchOptions['keyword'];
+        this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
         this.getProjectList();
       })
-    this.limit = parseInt(this.searchOptions['limit']);
+    this.limit = this.searchOptions['limit'];
     this.keywordSearch();
     this.createForm();
   }
 
   // 获取产品列表
   getProjectList() {
-    if (!this.searchOptions.keyword) { this.searchOptions.keyword = undefined}
+    if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined}
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
@@ -85,7 +99,7 @@ export class DatalistComponent implements OnInit {
   // 标签搜索
   sortByTag(item) {
     this.currSortTag = item.name;
-    this.searchOptions.tagId = item.id;
+    this.searchOptions['tagId'] = item.id;
     this.getProjectList();
   }
 
@@ -93,7 +107,7 @@ export class DatalistComponent implements OnInit {
   keywordSearch() {
     this.eventEmit.keywordSearch.subscribe(e => {
       this.eventEmit.keyword = e.keyword;
-      this.searchOptions.keyword = e.keyword;
+      this.searchOptions['keyword'] = e.keyword;
       this.getProjectList()
     })
   }
@@ -101,7 +115,7 @@ export class DatalistComponent implements OnInit {
   // 时间条件搜索
   conditionSearch(i, item) {
     this.searchConditionIndex = i;
-    this.searchOptions.dataSince = item.value ? (new Date(item.value)).getTime() : undefined;
+    this.searchOptions['dataSince'] = item.value ? (new Date(item.value)).getTime() : undefined;
     this.getProjectList();
   }
 
@@ -138,7 +152,7 @@ export class DatalistComponent implements OnInit {
   }
 
   cancelFilter() {
-    this.searchOptions.tagId = undefined;
+    this.searchOptions['tagId'] = undefined;
     this.currSortTag = '';
     this.getProjectList();
   }
@@ -146,7 +160,7 @@ export class DatalistComponent implements OnInit {
   // 排序
   productSort(item) {
     this.currSortItem = item;
-    this.searchOptions.sortBy = item.value;
+    this.searchOptions['sortBy'] = item.value;
     this.getProjectList();
   }
 
@@ -157,9 +171,9 @@ export class DatalistComponent implements OnInit {
 
   // 下一页
   toNextPage(e) {
-    this.searchOptions['offset'] = (parseInt(e) - 1) * (parseInt(this.searchOptions['limit']));
+    this.searchOptions['offset'] = (e - 1) * (this.searchOptions['limit']);
     let navigationExtras: NavigationExtras = {
-      queryParams: this.searchOptions
+      queryParams: {search: JSON.stringify(this.searchOptions)}
     }
     this.router.navigate(['datalist'], navigationExtras)
   }
