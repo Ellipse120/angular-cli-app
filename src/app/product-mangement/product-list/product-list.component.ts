@@ -3,6 +3,8 @@ import { Component,OnInit} from '@angular/core';
 
 import {YslHttpService} from '../../core/ysl-http.service';
 import {ProductImportComponent} from '../product-import/product-import.component';
+import {YslCommonService} from "../../core/ysl-common.service";
+import {ProductListService} from "./product-list.service";
 
 @Component({
   selector: 'product-list',
@@ -23,15 +25,59 @@ export class ProductListComponent implements OnInit{
   import = false;
   showEdit = true;
   showProInfo = false;
+  dataItems;
 
-  constructor(public service: YslHttpService) {
+  constructor(public service: YslHttpService,
+              private productListService: ProductListService,
+              private commonService: YslCommonService) {
     // 获取产品列表数据
-    this.service.fetch((data) => {
-      this.rows = data;
-      for(let i=0;i<data.length;i++){
+    // this.service.fetch((data) => {
+    //   this.rows = data;
+    //   for(let i=0;i<data.length;i++){
+    //     this.isOn.push(true);
+    //   }
+    // });
+
+    this.productListService.fetch((data) => {
+      this.dataItems = data.items;
+      this.rows = this.dataItems;
+      for (let i = 0; i < data.totalLength; i++) {
+        switch (this.dataItems[i].userType) {
+          case  1:
+            this.dataItems[i].userType = "未认证的个人用户";
+            break;
+          case  2:
+            this.dataItems[i].userType = "未认证的机构用户";
+            break;
+          case  10:
+            this.dataItems[i].userType = "认证的个人用户";
+            break;
+          case  20:
+            this.dataItems[i].userType = "认证的机构用户";
+            break;
+          case  30:
+            this.dataItems[i].userType = "运营方用户";
+            break;
+        }
+
+        switch (this.dataItems[i].status) {
+          case 2:
+            this.dataItems[i].status = "激活";
+            break;
+          case 1:
+            this.dataItems[i].status = "注册";
+            break;
+          case 3:
+            this.dataItems[i].status = "禁用";
+            break;
+        }
+        this.dataItems[i].premium = this.dataItems[i].premium ? "是" : "否";
+        this.dataItems[i].modifiedOn = this.commonService.getDateForDay(this.dataItems[i].modifiedOn);
         this.isOn.push(true);
       }
     });
+
+
   }
 
   // 启用或禁用

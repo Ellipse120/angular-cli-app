@@ -28,6 +28,7 @@ import { UEditorModule } from 'ngx-ueditor';
 import {CookieModule} from "ngx-cookie";
 import {YslCommonService} from "./core/ysl-common.service";
 import {SearchService} from "./search/search.service";
+import {ProductListService} from "./product-mangement/product-list/product-list.service";
 
 
 let ueditorPath = {
@@ -73,7 +74,8 @@ let ueditorPath = {
   providers: [
     YslHttpService,
     YslCommonService,
-    SearchService
+    SearchService,
+    ProductListService
   ],
   bootstrap: [AppComponent]
 })

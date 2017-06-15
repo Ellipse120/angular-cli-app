@@ -1,0 +1,30 @@
+.ngx-datatable.material .datatable-checkbox {
+  padding: 0;
+}
+
+.ngx-datatable.material .datatable-checkbox input:checked:before {
+  height: .22rem;
+}
+
+.ngx-datatable.material .datatable-checkbox input:before {
+  height: .44rem;
+  width: .44rem;
+}
+
+.ngx-datatable.material .datatable-checkbox input:after {
+  height: .44rem;
+  width: .44rem;
+}
+
+.ngx-datatable.material .datatable-header .datatable-header-cell {
+  padding: .22rem .22rem;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+  text-align: center;
+  padding: 0 0 0 .22rem;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell div {
+  margin-top: 10px;
+}
