@@ -8,7 +8,7 @@ import {Http} from "@angular/http";
 @Injectable()
 export class ProductListService {
 
-  private myConstant = {
+  private productConstant = {
     productListApi: 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/api/product'
   };
 
@@ -17,7 +17,7 @@ export class ProductListService {
 
   getProductList(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.myConstant.productListApi)
+      this.http.get(this.productConstant.productListApi)
         .toPromise()
         .then(res => resolve(res.json()))
         .catch(this.handleError)
@@ -26,7 +26,7 @@ export class ProductListService {
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', this.myConstant.productListApi);
+    req.open('GET', this.productConstant.productListApi);
 
     req.onload = () => {
       cb(JSON.parse(req.response));

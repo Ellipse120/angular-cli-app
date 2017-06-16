@@ -1,8 +1,4 @@
-import { Component,OnInit} from '@angular/core';
-
-
-import {YslHttpService} from '../../core/ysl-http.service';
-import {ProductImportComponent} from '../product-import/product-import.component';
+import {Component, OnInit} from "@angular/core";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {ProductListService} from "./product-list.service";
 
@@ -12,7 +8,7 @@ import {ProductListService} from "./product-list.service";
   styleUrls: ['./product-list.component.css']
 })
 
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
 
 
   // 定义table
@@ -25,20 +21,20 @@ export class ProductListComponent implements OnInit{
   import = false;
   showEdit = true;
   showProInfo = false;
-  dataItems;
+  dataItems = [];
+  messages: any = {
+    emptyMessage: " 无数据 ",
 
-  constructor(public service: YslHttpService,
-              private productListService: ProductListService,
+    totalMessage: " 总数",
+
+    selectedMessage: " 条选中"
+  };
+
+  constructor(private productListService: ProductListService,
               private commonService: YslCommonService) {
-    // 获取产品列表数据
-    // this.service.fetch((data) => {
-    //   this.rows = data;
-    //   for(let i=0;i<data.length;i++){
-    //     this.isOn.push(true);
-    //   }
-    // });
 
-    this.productListService.fetch((data) => {
+    this.productListService.getProductList().then((data) => {
+      this.dataItems = data.items;
       this.dataItems = data.items;
       this.rows = this.dataItems;
       for (let i = 0; i < data.totalLength; i++) {
@@ -77,7 +73,6 @@ export class ProductListComponent implements OnInit{
       }
     });
 
-
   }
 
   // 启用或禁用
@@ -107,7 +102,7 @@ export class ProductListComponent implements OnInit{
   }
 
   // 选择每一行触发事件
-  onSelect({ selected }) {
+  onSelect({selected}) {
 
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
@@ -117,5 +112,6 @@ export class ProductListComponent implements OnInit{
     console.log('Activate Event', event);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }
