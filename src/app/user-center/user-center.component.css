@@ -100,7 +100,6 @@
   background: #39baf6;
   cursor: pointer;
   margin-top: 20px;
-  margin-left: 84px;
 }
 .iden-success{
   text-align: center;
@@ -118,11 +117,45 @@
   margin-left: 20px;
 }
 
+/*重写*/
+.edit-form .form-group{
+  height: 34px;
+  line-height: 34px;
+}
+.edit-form input:not([type=checkbox]):not([type=radio]){
+  height: 100%;
+  line-height: 100%;
+}
+.edit-form label{
+  font-weight: normal;
+  text-align: right;
+}
+.edit-form .col-xs-8{
+  padding: 0;
+}
 /*修改密码*/
+.modify-psd .edit-form{
+  padding-top: 40px
+}
 .form-horizontal{
-  width: 45%;
+  width: 60%;
 }
 .modify-psd .form-group{
   height: 44px;
   margin-right: 0;
+}
+
+/*认证*/
+.identify .input-group{
+  display: flex;
+  padding: 0 15px;
+}
+.identify .input-group input{
+  flex: 1;
+}
+.identify .input-group-addon{
+  width: 84px;
+  height: 33px;
+  line-height: 33px;
+  padding: 0;
 }

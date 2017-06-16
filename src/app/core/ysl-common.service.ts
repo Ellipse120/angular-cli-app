@@ -4,10 +4,10 @@ import {CookieService} from "ngx-cookie";
 @Injectable()
 export class YslCommonService {
 
-  userId: string;
+  userInfo: any;
 
   constructor(private cookie: CookieService) {
-    this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : '';
+    this.userInfo = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo') : null;
   }
 
   // 处理时间戳-天

@@ -1,17 +1,23 @@
 <div class="modify-psd">
   <h1 class="user-title">修改密码</h1>
-  <form class="form-horizontal" [formGroup]="modifyForm" (ngSubmit)="modifySubmit()" novalidate>
+  <form class="form-horizontal edit-form" [formGroup]="modifyForm" (ngSubmit)="modifySubmit()" novalidate>
     <div class="form-group">
       <label class="col-xs-3">原密码</label>
-      <input type="password" class="col-xs-9" placeholder="请输入您的原密码" formControlName="oldPass" required>
+      <div class="col-xs-9">
+        <input type="password" class="form-control" placeholder="请输入您的原密码" formControlName="oldPass" required>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-xs-3">新密码</label>
-      <input type="password" class="col-xs-9" placeholder="请输入您的新密码" formControlName="newPass" required>
+      <div class="col-xs-9">
+        <input type="password" class="form-control" placeholder="请输入您的新密码" formControlName="newPass" required>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-xs-3">确认新密码</label>
-      <input type="password" class="col-xs-9" placeholder="请再次输入新密码" formControlName="confirmPass" required>
+      <div class="col-xs-9">
+        <input type="password" class="form-control" placeholder="请再次输入新密码" formControlName="confirmPass" required>
+      </div>
     </div>
     <div class="form-group" *ngIf="isSubmit && modifyForm.invalid">
       <label class="sr-only"></label>

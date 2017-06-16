@@ -10,8 +10,8 @@ export class YslHttpService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  // private url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
 
   // 用户信息
@@ -245,6 +245,15 @@ export class YslHttpService {
   }
 
   // 个人中心
+  // 获取个人信息
+  getUserInfo(userId) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/user/' + userId)
+        .toPromise()
+        .then(response => resolve(response.json()))
+    })
+  }
+
   // 编辑信息
   updateUser(option): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -262,6 +271,32 @@ export class YslHttpService {
   updatePass(option): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.put(this.url + 'api/user/' + option.userId + '/passcode', option.data, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(response => resolve(), error => reject())
+    })
+  }
+
+  // 个人中心/认证/个人
+  verifyIndividual(option) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.url + 'api/user/individual/verify', option, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(response => resolve(), error => reject())
+    })
+  }
+
+  // 个人中心/认证/组织
+  verifyOrganization(option) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.url + 'api/user/organization/verify', option, {
         headers: new Headers({
           'Content-Type': 'application/json'
         })

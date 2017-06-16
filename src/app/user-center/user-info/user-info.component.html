@@ -6,6 +6,10 @@
     <div class="user-title"><span>个人信息</span> <span class="edit-btn" (click)="ableEdit()"><img src="./assets/images/edit.png">&nbsp;&nbsp;编辑</span></div>
     <div>
       <form [formGroup]="editForm" class="user-info-list" (ngSubmit)="infoEditSubmit()">
+        <div class="info-item">
+          <span class="user-tag">账号</span>
+          <p><span>{{viewInfo.loginId}}</span></p>
+        </div>
         <div class="info-item" *ngFor="let i of userInfo">
           <span class="user-tag">{{i.label}}</span>
           <p><input type="text" [formControlName]="i.formControlName" *ngIf="i.edit"><span *ngIf="!i.edit">{{i.model}}</span></p>

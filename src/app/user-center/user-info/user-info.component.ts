@@ -16,7 +16,6 @@ export class UserInfoComponent implements OnInit {
   showSave = false;
   viewInfo: any;
   userInfo = [
-    {label: '账号', formControlName: 'loginId', model: '', edit: false},
     {label: '姓名', formControlName: 'userName', model: '', edit: false},
     {label: '联系方式', formControlName: 'contactMail', model: '', edit: false}
   ];
@@ -64,24 +63,25 @@ export class UserInfoComponent implements OnInit {
     option.data = data;
     this.httpService.updateUser(option)
       .then(res => {
-        console.log('修改成功', res)
+        let userInfo = this.viewInfo;
         this.showSave = false;
         // 修改成功后对模板的修改
         this.userInfo.forEach(item => {
           item.edit = false;
           for (const key in this.editForm.value) {
+            userInfo[key] = this.editForm.value[key];
             if (item.formControlName == key) {
               item.model = this.editForm.value[key];
             }
           }
         })
+        this.cookie.putObject('yslUserInfo', userInfo);
       })
   }
 
   // 创建表单
   createForm() {
     let controls = {
-      loginId: '',
       userName: '',
       contactMail: ''
     };

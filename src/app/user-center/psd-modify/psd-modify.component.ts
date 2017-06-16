@@ -16,6 +16,7 @@ import {CookieService} from "ngx-cookie";
 export class PsdModifyComponent implements OnInit{
 
   modifyForm: FormGroup;
+  userInfo: any;
   isSubmit = false;
   isInconsistent: boolean;
   formError = {
@@ -44,6 +45,7 @@ export class PsdModifyComponent implements OnInit{
               private cookie: CookieService) {}
 
   ngOnInit() {
+    this.userInfo = this.commonService.userInfo;
     this.createForm();
   }
 
@@ -66,7 +68,7 @@ export class PsdModifyComponent implements OnInit{
     console.log('form', form, formValue['newPass'] != formValue['confirmPass'])
     console.log('form invalid', form.invalid)
     if (form.invalid || this.isInconsistent) { return }
-    this.httpService.updatePass({userId: this.commonService.userId, data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
+    this.httpService.updatePass({userId: this.userInfo['userId'], data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
       .then(res => {
         this.cookie.remove('yslUserInfo');
         this.router.navigate(['index']);
