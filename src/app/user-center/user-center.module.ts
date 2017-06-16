@@ -4,6 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RouterModule,Routes} from '@angular/router';
 
 
+
+
+
+
 import {UserCenterComponent} from './user-center.component';
 import {UserInfoComponent} from './user-info/user-info.component';
 import {PsdModifyComponent} from './psd-modify/psd-modify.component';

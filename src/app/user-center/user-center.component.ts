@@ -25,7 +25,7 @@ export class UserCenterComponent implements OnInit {
   // 获取用户信息
   getUserInfo() {
     this.httpService
-      .getUserInfo()
+      .getUserList()
       .then(user => this.user = user);
   }
 

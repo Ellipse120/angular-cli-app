@@ -104,9 +104,9 @@ export class YslHttpService {
   }
 
   // 获得用户信息
-  getUserInfo(): Promise<any> {
-    return Promise.resolve(this.user);
-  }
+  // getUserList(): Promise<any> {
+  //   return Promise.resolve(this.user);
+  // }
 
   // 注册
   userRegister(mail: string): Promise<any> {
