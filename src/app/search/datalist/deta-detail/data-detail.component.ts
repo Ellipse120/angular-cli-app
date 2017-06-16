@@ -2,7 +2,8 @@
  * Created by Administrator on 2017/5/10.
  */
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router'
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Location } from '@angular/common';
 
 
 import { YslHttpService } from '../../../core/ysl-http.service'
@@ -36,12 +37,13 @@ export class DataDetailComponent implements OnInit{
   replyCommentCont: string;
   productComment = {items: [], totalLength: ''};
 
-  constructor(public route: ActivatedRoute,
-              public service: YslHttpService,
+  constructor(private route: ActivatedRoute,
+              private service: YslHttpService,
               private yslMenu: YslMenuService,
               private commonService: YslCommonService,
               private router: Router,
-              private cookie: CookieService) {
+              private cookie: CookieService,
+              private location: Location) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -98,7 +100,8 @@ export class DataDetailComponent implements OnInit{
 
   relatedProductDetail(item) {
     console.log('item', item)
-    this.router.navigate(['datadetail', {productId: item.productId}]);
+    this.router.navigate(['/datadetail', {productId: item.productId}]);
+    window.location.reload();
   }
 
   // 点赞
