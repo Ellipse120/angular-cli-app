@@ -519,7 +519,6 @@ app-index .mat-ripple{
 .ysl-label-search-area{
   width: 53%;
   margin: 0 auto;
-  color: #bdbaba;
 }
 .ysl-label-search-area .mat-tab-labels{
   height: 52px;
@@ -591,7 +590,11 @@ app-index .mat-ripple{
   margin: 0 5px 10px 0;
   cursor: pointer;
 }
-.ysl-label-search-cont li:hover{
+.ysl-label-search-cont a{
+  color: #bdbaba;
+}
+.ysl-label-search-cont a:hover{
+  text-decoration: none;
   color: #fff;
 }
 .ysl-label-search-area .mat-ink-bar{

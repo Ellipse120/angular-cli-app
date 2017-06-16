@@ -53,10 +53,10 @@ export class IndexComponent implements OnInit {
   }
 
   // 标签搜索
-  tagSearch(tag) {
-    this.searchOption.tagId = tag;
-    this.toDataList()
-  }
+  // tagSearch(tag) {
+  //   this.searchOption.tagId = tag;
+  //   this.toDataList()
+  // }
 
   // 切换高级搜索
   showAdvancedBox(isShow) {

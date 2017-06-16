@@ -7,7 +7,7 @@
   <md-tab-group class="ysl-label-search-area">
     <md-tab label="{{item.name}}" *ngFor="let item of tagDimensions">
       <ul class="ysl-label-search-cont">
-        <li *ngFor="let itemc of item.items" (click)="tagSearch(itemc.id)">{{itemc.name}}</li>
+        <li *ngFor="let itemc of item.items" (click)="tagSearch(itemc.id)"><a routerLink="/datalist" [queryParams]="{search: ({tagId: itemc.id} | json)}">{{itemc.name}}</a></li>
       </ul>
     </md-tab>
   </md-tab-group>
