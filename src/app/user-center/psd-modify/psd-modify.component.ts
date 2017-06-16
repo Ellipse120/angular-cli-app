@@ -1,8 +1,11 @@
 import {Component , OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 
 import {YslHttpService} from "../../core/ysl-http.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {YslCommonService} from "../../core/ysl-common.service";
+import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'psd-modify',
@@ -14,9 +17,11 @@ export class PsdModifyComponent implements OnInit{
 
   modifyForm: FormGroup;
   isSubmit = false;
+  isInconsistent: boolean;
   formError = {
     newPass: '',
-    confirmPass: ''
+    confirmPass: '',
+    oldPass: ''
   };
   formErrorMess = {
     newPass: {
@@ -28,9 +33,15 @@ export class PsdModifyComponent implements OnInit{
     confirmPass: {
       required: '密码不能为空'
     },
-    oldPass: {}
+    oldPass: {
+      required: '请输入原密码'
+    }
   }
-  constructor(private httpService: YslHttpService, private fb: FormBuilder) {}
+  constructor(private httpService: YslHttpService,
+              private fb: FormBuilder,
+              private router: Router,
+              private commonService: YslCommonService,
+              private cookie: CookieService) {}
 
   ngOnInit() {
     this.createForm();
@@ -38,13 +49,13 @@ export class PsdModifyComponent implements OnInit{
 
   // 修改密码
   modifySubmit() {
-    if (!this.modifyForm) { return }
-    this.isSubmit = true;
     const form = this.modifyForm;
-    console.log('form', form)
+    const formValue = form.value;
+    this.isSubmit = true;
+    this.isInconsistent = (formValue['newPass'] != formValue['confirmPass']) ? true : false;
     for (const field in this.formError) {
       this.formError[field] = '';
-      const control = form.controls[field]
+      const control = form.controls[field];
       if (control && control.errors && !control.valid) {
         const mess = this.formErrorMess[field];
         for (const err in control.errors) {
@@ -52,15 +63,20 @@ export class PsdModifyComponent implements OnInit{
         }
       }
     }
-    // this.httpService.updatePass({userId: 87})
-    //   .then(res => {
-    //     console.log('修改成功', this.modifyForm.value)
-    //   })
+    console.log('form', form, formValue['newPass'] != formValue['confirmPass'])
+    console.log('form invalid', form.invalid)
+    if (form.invalid || this.isInconsistent) { return }
+    this.httpService.updatePass({userId: this.commonService.userId, data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
+      .then(res => {
+        this.cookie.remove('yslUserInfo');
+        this.router.navigate(['index']);
+        window.location.reload();
+      })
   }
   // 创建表单
   createForm() {
     this.modifyForm = this.fb.group({
-      oldPass: [''],
+      oldPass: ['', Validators.required],
       newPass: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]*$'),
