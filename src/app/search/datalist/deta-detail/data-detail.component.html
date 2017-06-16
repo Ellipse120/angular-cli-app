@@ -21,7 +21,7 @@
 
     <!--纠错处理-->
     <div yslMenu class="add-product-errata">
-      <button class="zan-btn btn" [class.thumb-up]="isThumbsUp" (click)="thumbsUp()"><i class="fa fa-thumbs-up"></i> <i *ngIf="productDetail.favoredCount">({{favoredCount}})</i></button>
+      <button class="zan-btn btn" [class.thumb-up]="isThumbsUp" (click)="thumbsUp()"><i class="fa fa-thumbs-up"></i> <i *ngIf="favoredCount">({{favoredCount}})</i></button>
       <button class="errata-btn btn ysl-menu-btn">我要纠错</button>
       <div class="errata-write ysl-menu-cont">
         <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area" [(ngModel)]="errataRemark"></textarea>
@@ -57,7 +57,7 @@
 
     <!--评论区域-->
     <div class="comment-wrapper">
-      <p class="color-gray font18"><span *ngIf="productComment.totalLength">{{productComment.totalLength}}个评论</span><span *ngIf="!productComment.totalLength">暂无评论</span></p>
+      <p class="color-gray font18"><span *ngIf="productComment.totalLength">{{productComment.totalLength}}个评论</span><span class="no-comment" *ngIf="!productComment.totalLength">暂无评论</span></p>
       <ul class="comment-list">
         <li *ngFor="let c of productComment['items']; let ind = index;">
           <div class="comment-item">
