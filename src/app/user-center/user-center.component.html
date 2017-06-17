@@ -2,11 +2,7 @@
   <div class="center-left">
     <img src="./assets/images/userpic.png"><br>
     <span>{{user.count}}</span>
-    <ul class="user-menu">
-      <li *ngFor="let item of userTag;let i = index" (click)="tab(i)" [routerLink]="[item.path]" class="menu-item" [class.active]="index == i">
-        {{item.text}} <img class="user-arrow" [src]="index==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">
-      </li>
-    </ul>
+    <ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar>
   </div>
   <div class="center-right">
     <router-outlet></router-outlet>
