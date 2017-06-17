@@ -506,6 +506,9 @@ my-nav .search-box{
   width: 100% !important;
   margin-bottom: 0 !important;
 }
+my-nav .searchbtn{
+  justify-content: center;
+}
 /*index*/
 app-index .mat-tab-body-content{
   overflow: visible;
@@ -616,6 +619,9 @@ app-index .mat-ripple{
   .footer{
     font-size: 12px;
   }
+  my-nav search-input{
+    width: 90%;
+  }
   .ysl-label-search-area{
     width: 100%;
   }
@@ -632,10 +638,10 @@ app-index .mat-ripple{
   .ysl-label-search-area .mat-tab-label-container{
     overflow: scroll;
   }
-  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar{
+  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar,.mat-tab-labels::-webkit-scrollbar{
     color: transparent;
   }
-  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar-corner{
+  .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar-corner,.mat-tab-labels::-webkit-scrollbar-corner{
     color: transparent;
   }
 }

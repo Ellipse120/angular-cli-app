@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
                   <li><a href="">服务协议</a></li>
                   <li><a href="">隐私协议</a></li>
                   </ul>
-                  <p>版权所有 : 长江众创 Copyright@2010 All Rights Reserved 沪ICP备 12029257号</p>
+                  <p>版权所有 : 长江众创 Copyright@2010 All Rights Reserved 版本 1.0</p>
              </div></div>`
 })
 

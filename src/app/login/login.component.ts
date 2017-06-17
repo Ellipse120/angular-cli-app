@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {YslHttpService} from '../core/ysl-http.service';
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie";
 
 
 @Component({
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isLoginSubmit = false;
+  isRem: boolean;             //记住账号
+  loginId: string;
   loginMess = '登录';
   loginFormError = {
     userAccount: '',
@@ -32,27 +35,33 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    public dialogRef: MdDialogRef<LoginComponent>,
-    public fb: FormBuilder,
-    public httpServer: YslHttpService,
+    private dialogRef: MdDialogRef<LoginComponent>,
+    private fb: FormBuilder,
+    private httpServer: YslHttpService,
     private location: Location,
-    private router: Router) {
-    this.createForm();
-  }
+    private router: Router,
+    private cookie: CookieService) {}
 
   ngOnInit() {
+    if (this.cookie.get('userAccount')) {
+      this.loginId = this.cookie.get('userAccount');
+      this.isRem = true;
+    } else {
+      this.loginId = '';
+      this.isRem = false;
+    }
+    this.createForm();
   }
 
   // 提交登录
   loginSubmit() {
+    console.log('reme', this.loginForm);
     if (!this.loginForm) { return }
     this.isLoginSubmit = true;
     const form = this.loginForm;
-
     for (const field in this.loginFormError) {
       this.loginFormError[field] = '';
       const control = form.get(field);
-
       if (control && control.invalid) {
         const message = this.loginErrorMess[field];
         for (const error in control.errors) {
@@ -70,6 +79,8 @@ export class LoginComponent implements OnInit {
     };
     this.httpServer.userLogin(submitData)
       .then((res) => {
+        console.log('user id', res)
+        if (form.value['isRem']) { this.cookie.put('userAccount', res['loginId'])}
         this.dialogRef.close({userLoginInfo: res});
         const path = this.location.path();
         if (path.includes('/register')) {
@@ -85,8 +96,9 @@ export class LoginComponent implements OnInit {
   // 创建表单
   createForm() {
     this.loginForm = this.fb.group({
-      userAccount: ['', Validators.required],
-      userPassword: ['', Validators.required]
+      userAccount: [this.loginId, Validators.required],
+      userPassword: ['', Validators.required],
+      isRem: this.isRem
     });
   }
 }

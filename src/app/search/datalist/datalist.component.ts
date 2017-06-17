@@ -30,14 +30,15 @@ export class DatalistComponent implements OnInit {
   currSortTag: string;
   tagSortList = [];
   isShowPeriod = true;
-  searchCondition = {
-      type: 'a', children: [
-      {text: '时间不限', value: undefined},
-      {text: '2017年以来', value: '2017/01/01'},
-      {text: '2016年以来', value: '2016/01/01'},
-      {text: '2013年以来', value: '2013/01/01'}
-    ]};
-  sortList = [{text: '按日期排序', value: 'modified_on'}, {text: '按相关性排序', value: 'viewed_count'}];
+  searchCondition = [];
+// {
+//   type: 'a', children: [
+//   {text: '时间不限', value: undefined},
+//   {text: '2017年以来', value: '2017/01/01'},
+//   {text: '2016年以来', value: '2016/01/01'},
+//   {text: '2013年以来', value: '2013/01/01'}
+//   ]};
+  sortList = [{text: '按日期排序', value: 'modifiedOn'}, {text: '按热度排序', value: 'viewedCount'}];
   currSortItem = this.sortList[0];
   currPage: any;
 
@@ -59,7 +60,7 @@ export class DatalistComponent implements OnInit {
         this.eventEmit.keyword = this.searchOptions['keyword'];
         this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
         this.getProjectList();
-      })
+      });
     this.limit = this.searchOptions['limit'];
     this.keywordSearch();
     this.createForm();
@@ -73,10 +74,15 @@ export class DatalistComponent implements OnInit {
         this.product = res;
         this.product['items'].forEach(item => {
           item.tagOpen = false;
+        });
+        this.product['dateFacets'].forEach((item, ind) => {
+          this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
         })
+        this.tagSortList = this.product['tagFacets'];
+        this.searchCondition.unshift({text: '时间不限', value: undefined});
         // this.product.items[0].tags = [{name: 'test', id: '1'}, {name: 'test2', id: '2'}, {name: 'test', id: '1'}];
         // this.product.items[1].tags = [{name: 'test', id: '1'}, {name: 'test4', id: '4'}, {name: 'test5', id: '5'}];
-        this.tagUnique();
+        // this.tagUnique();
       });
   }
 
@@ -141,7 +147,7 @@ export class DatalistComponent implements OnInit {
       this.service.productKeywordSearch(this.searchOptions)
         .then(res => {
           // searchCondition children
-          let len = this.searchCondition[0]['children'].length;
+          // let len = this.searchCondition[0]['children'].length;
         })
     }
   }

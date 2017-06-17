@@ -402,7 +402,7 @@ textarea::-webkit-input-placeholder{
 }
 @media screen and (max-width: 768px) {
   .firmlogo{
-    display: block;
+    display: flex;
     float: none;
   }
   .firm-detail{

@@ -58,6 +58,7 @@
   text-decoration: none;
 }
 .keyword-search .searchbtn{
+  justify-content: space-around;
   height: 100%;
   line-height: 100%;
 }

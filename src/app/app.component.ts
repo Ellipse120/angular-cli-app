@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
             background : 'rgba(0,0,0,0.3)'
           }
           this.yslFooterStyle = {
-            backgroundColor: 'transparent'
+            backgroundColor: 'rgba(0,0,0,0.3)'
           }
         } else {
           this.outerWrapperStyle = {

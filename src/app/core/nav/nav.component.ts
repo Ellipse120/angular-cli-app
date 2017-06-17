@@ -45,13 +45,12 @@ export class NavComponent implements OnInit {
   }
 
   someMethod(elem) {
-    console.log(elem)
     this.trigger.openMenu();
   }
 
   //  显示登录框
   showLogin(): void {
-    let dialogRef = this.dialog.open(LoginComponent);
+    let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return }
       this.loginInfo = result.userLoginInfo;
@@ -67,7 +66,6 @@ export class NavComponent implements OnInit {
   // 搜索
   keywordSubmit(data) {
     this.eventEmit.keywordSearch.emit(data);
-    console.log()
   }
 
   // 退出

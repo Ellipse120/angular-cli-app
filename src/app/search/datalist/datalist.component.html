@@ -4,22 +4,33 @@
   <div class="data-list-area clearfix">
     <!--搜索菜单-->
     <div class="search-condition hidden-xs">
-      <ul class="search-condition-type">
-        <li class="search-condition-type-item" *ngFor="let item of searchCondition.children; let i = index">
-          <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
-        </li>
-        <li class="search-condition-type-item">
-          <form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>
-            <input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>
-          </form>
-        </li>
-      </ul>
-      <ul class="search-condition-type" *ngIf="tagSortList.length">
-        <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
-          <p class="readonly" *ngIf="currSortTag != t.name" (click)="sortByTag(t)"><span>{{t.name}}</span></p>
-          <p class="readonly active" *ngIf="currSortTag == t.name"><span>{{t.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter();"></i></p>
-        </li>
-      </ul>
+      <div class="search-condition-type">
+        <p class="search-condition-title">时间</p>
+        <ul>
+          <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
+            <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
+          </li>
+          <li class="search-condition-type-item">
+            <form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>
+              <input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <div class="search-condition-type sort-by-tag">
+        <p class="search-condition-title">标签</p>
+        <ul *ngIf="tagSortList.length">
+          <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
+            <span class="search-condition-parent">{{t.name}}</span>
+            <ul class="search-condition-sub">
+              <li *ngFor="let c of t.items">
+                <p class="readonly" *ngIf="currSortTag != c.name" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
+                <p class="readonly active" *ngIf="currSortTag == c.name"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter();"></i></p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="data-list">
       <div class="find-result">
