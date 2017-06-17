@@ -16,6 +16,9 @@
   text-align: center;
   color: #999;
 }
+.search-condition-title .fa{
+  margin-right: 5px;
+}
 .search-condition-type:after{
   content: "";
   display: inline-block;

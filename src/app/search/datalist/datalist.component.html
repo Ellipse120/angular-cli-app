@@ -5,7 +5,7 @@
     <!--搜索菜单-->
     <div class="search-condition hidden-xs">
       <div class="search-condition-type">
-        <p class="search-condition-title">时间</p>
+        <p class="search-condition-title"><i class="fa fa-calendar" aria-hidden="true"></i>时间</p>
         <ul>
           <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
             <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
@@ -18,7 +18,7 @@
         </ul>
       </div>
       <div class="search-condition-type sort-by-tag">
-        <p class="search-condition-title">标签</p>
+        <p class="search-condition-title"><i class="fa fa-tag" aria-hidden="true"></i>标签</p>
         <ul *ngIf="tagSortList.length">
           <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
             <span class="search-condition-parent">{{t.name}}</span>
@@ -56,10 +56,14 @@
           </div>
         </li>
       </ul>
-      <pagination-controls (pageChange)="toNextPage($event);"
+      <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"
                            autoHide="true"
                            previousLabel="上一页"
                            nextLabel="下一页"></pagination-controls>
+      <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+                           autoHide="true"
+                           previousLabel="<"
+                           nextLabel=">"></pagination-controls>
     </div>
   </div>
 </div>

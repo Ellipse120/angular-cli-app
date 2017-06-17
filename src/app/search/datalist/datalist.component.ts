@@ -49,6 +49,7 @@ export class DatalistComponent implements OnInit {
               private fb: FormBuilder) {}
 
   ngOnInit() {
+    console.log('test')
     this.route.queryParams
       .subscribe((params) => {
         let param = Object.assign({}, params);
@@ -72,12 +73,15 @@ export class DatalistComponent implements OnInit {
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
+        this.searchCondition = [];
         this.product['items'].forEach(item => {
           item.tagOpen = false;
         });
         this.product['dateFacets'].forEach((item, ind) => {
           this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
         })
+        console.log('date list test', this.searchCondition);
+        console.log('date list service', this.product['dateFacets']);
         this.tagSortList = this.product['tagFacets'];
         this.searchCondition.unshift({text: '时间不限', value: undefined});
         // this.product.items[0].tags = [{name: 'test', id: '1'}, {name: 'test2', id: '2'}, {name: 'test', id: '1'}];

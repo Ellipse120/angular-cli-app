@@ -367,6 +367,12 @@ footer{
 .pagination-previous a:before,.pagination-next a:after{
   display: none !important;
 }
+.ngx-pagination .pagination-previous a::before, .ngx-pagination .pagination-previous.disabled::before{
+  display: none !important;
+}
+.ngx-pagination .pagination-previous a::after, .ngx-pagination .pagination-previous.disabled::after{
+  display: none !important;
+}
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
   text-align: center;
 }

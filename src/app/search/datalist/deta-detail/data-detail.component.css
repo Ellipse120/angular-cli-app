@@ -8,19 +8,21 @@
 .detail-right{
   padding-left: 20px;
 }
+.add-product-errata{
+  display: flex;
+  justify-content: flex-end;
+}
 .errata-btn,.zan-btn{
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
-  background: #ffeddf;
+  background: #fff;
   text-align: center;
   color: #ffa54e;
   font-size: 14px;
   cursor: pointer;
-  margin-bottom: 20px;
 }
 .zan-btn{
-  border: 1px solid #d8e5e7;
   background-color: #fff;
   color: #a6b8c4;
 }
@@ -121,12 +123,12 @@
   color: #666;
   background: url("../../../../assets/images/linebottom.png") no-repeat bottom center;
   background-size: 100%;
-  padding-bottom: 40px;
-  margin-bottom: 45px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .product-introduce p{
   text-indent: 2em;
-  margin-bottom: 44px;
+  margin-bottom: 20px;
 }
 .score{
   line-height: 48px;
@@ -203,9 +205,6 @@
   font-size: 14px;
   color: #999;
 }
-.comment-item{
-  margin-top: 40px;
-}
 .user-info{
   margin-top: 20px;
   display: flex;
@@ -244,10 +243,10 @@
   margin-right: 4px;
 }
 .second-comment{
-  margin-top: 34px;
+  margin-top: 5px;
   width: 100%;
   background: #f9fbfb;
-  padding: 20px;
+  padding: 5px 10px;
 }
 .second-comment .reply{
   display: flex;
@@ -278,10 +277,16 @@ textarea::-webkit-input-placeholder{
 textarea:-ms-input-placeholder{
   color: #ddd;
 }
+.comment-list li{
+  border-bottom: 1px solid #eee;
+}
+.comment-list li:last-of-type{
+  border-bottom: none;
+}
 .second-comment-list li{
   width: 100%;
   line-height: 34px;
-  border-top: 1px solid #d8e5e7;
+  border-top: 1px solid #eee;
   color: #666;
 }
 .second-comment-list li:first-of-type{
