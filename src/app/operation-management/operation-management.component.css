@@ -14,42 +14,6 @@
   width: 100%;
   padding-left: 220px;
 }
-.operate-menu{
-  width: 100%;
-  margin-top: 20px;
-}
-.menu-item{
-  width: 100%;
-  line-height:50px;
-  font-size: 16px;
-  padding:0 25px;
-  text-align: justify;
-  cursor: pointer;
-  outline:none;
-  position: relative;
-}
-.user-arrow{
-  margin-left: 66px;
-}
-.active{
-  background: #39baf6;
-  color: #fff;
-}
-.operate-second-menu{
-  position: absolute;
-  top:50px;
-  left:0;
-  width: 100% ;
-  background: #f3f8fa;
-  color: #666;
-  text-align: center;
-  outline: none;
-}
-.operate-second-menu li{
-  outline: none;
-  width: 100%;
-  line-height:50px;
-}
 
 
 /*用户管理*/

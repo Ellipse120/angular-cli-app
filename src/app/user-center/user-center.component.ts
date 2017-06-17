@@ -22,7 +22,7 @@ export class UserCenterComponent implements OnInit {
 
   }
 
-  // 获取用户信息
+  获取用户信息
   getUserInfo() {
     this.httpService
       .getUserList()

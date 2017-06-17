@@ -309,7 +309,7 @@ export class YslHttpService {
   // 运营中心/用户管理/获取用户列表
   getUserList(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + 'api/user/userList')
+      this.http.get(this.url + 'api/user')
         .toPromise()
         .then(response => resolve(response.json()))
     })

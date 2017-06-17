@@ -21,7 +21,6 @@ export class UserManagementComponent {
     this.service.getUserList()
     .then(data => {
       this.rows = data.items;
-      console.log(this.rows)
     })
   }
 
@@ -30,7 +29,6 @@ export class UserManagementComponent {
     JSON.stringify(row);
     this.showUserInfo = true;
     this.userInfo = row;
-    console.log(this.userInfo);
   }
 
   //  增加用户
@@ -47,7 +45,7 @@ export class UserManagementComponent {
     this.showUserInfo = false;
   }
   onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
+    // console.log('Select Event', selected, this.selected);
 
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);

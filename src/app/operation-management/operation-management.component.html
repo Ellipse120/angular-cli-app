@@ -2,14 +2,15 @@
   <div class="manage-left">
     <img src="./assets/images/userpic.png"><br>
     <span></span>
-    <ul class="operate-menu">
-      <li *ngFor="let item of operateTag;let i = index" (click)="tab(i)" [routerLink]="[item.path]" class="menu-item" routerLinkActive="active">
-        {{item.text}} <img class="user-arrow" [src]="index==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">
-        <ul class="operate-second-menu" *ngIf="index == 1">
-          <li *ngFor="let itemc of item.children;" (click)="prePropagation($event)" routerLinkActive="bg-lightblue" [routerLink]="[itemc.path]">{{itemc.text}}</li>
-        </ul>
-      </li>
-    </ul>
+    <ysl-sidebar [ysl-sides]="operateTag"></ysl-sidebar>
+    <!--<ul class="operate-menu">-->
+      <!--<li *ngFor="let item of operateTag;let i = index" [routerLink]="[item.path]" class="menu-item" routerLinkActive="active">-->
+        <!--{{item.text}} <img class="user-arrow" [src]="currSideIndex==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">-->
+        <!--<ul class="operate-second-menu" *ngIf="(currSideIndex == i) && item.children">-->
+          <!--<li *ngFor="let itemc of item.children; let ind = index;" [class.bg-lightblue]="currSideChild == ind" (click)="$event.stopPropagation();" [routerLink]="[itemc.path]">{{itemc.text}}</li>-->
+        <!--</ul>-->
+      <!--</li>-->
+    <!--</ul>-->
   </div>
 
   <div class="manage-right">

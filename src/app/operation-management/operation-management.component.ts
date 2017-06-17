@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-operation-management',
@@ -8,7 +9,8 @@ import {Router, NavigationStart} from '@angular/router';
 })
 export class OperationManagementComponent implements OnInit {
 
-  index = 0;
+  currSideIndex: number;
+  currSideChild: number;
   operateTag = [
     {text: '用户管理', path: 'userManage'},
     {text: '产品管理',path: 'productlist',children: [
@@ -17,28 +19,8 @@ export class OperationManagementComponent implements OnInit {
     ]}
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   ngOnInit() {
-    console.log('operation root')
-    this.handlePath();
   }
-
-  tab(i) {
-    this.index = i;
-  }
-
-  prePropagation(event) {
-    console.log('hello')
-    event.stopPropagation();
-  }
-
-  handlePath() {
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationStart) {
-        console.log('path', e.url)
-      }
-    })
-  }
-
 }
