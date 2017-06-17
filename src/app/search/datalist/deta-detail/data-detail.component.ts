@@ -21,7 +21,6 @@ import {CookieService} from "ngx-cookie";
 
 export class DataDetailComponent implements OnInit{
 
-  isShowSearch = true;
   id: string;
   userId;
   commentRemark = '';
@@ -98,6 +97,7 @@ export class DataDetailComponent implements OnInit{
       })
   }
 
+  // 查看相关产品详情
   relatedProductDetail(item) {
     console.log('item', item)
     this.router.navigate(['/datadetail', {productId: item.productId}]);
@@ -106,6 +106,7 @@ export class DataDetailComponent implements OnInit{
 
   // 点赞
   thumbsUp() {
+    if (!this.userId) { return }
     this.isThumbsUp = !this.isThumbsUp;
     let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': this.userId}};
     this.service.createProductFavor(option)
@@ -126,7 +127,7 @@ export class DataDetailComponent implements OnInit{
 
   // 纠错
   submitErrata() {
-    if (!this.errataRemark) { return }
+    if ((!this.errataRemark) || (!this.userId)) { return }
     let option = {productId: this.productParams.productId, data: {userId: this.userId, status: this.productDetail.status, comment: this.errataRemark}};
     console.log('remark', option)
     this.service.createProductErrata(option)
@@ -137,19 +138,21 @@ export class DataDetailComponent implements OnInit{
 
   // 发表评价
   sendComment() {
-    if (!this.score[0].score || !this.score[1].score || !this.score[2].score || !this.score[3].score) { return }
-    let score = {productId: this.productParams.productId, data: {userId: this.userId}}
+    if (!this.userId || (!this.commentRemark)) { return }
+    for (let i = 0; i < this.score.length; i ++) {
+      if (!this.score[i].score) { return }
+    }
+    let score = {productId: this.productParams.productId, data: {userId: this.userId}};
     this.score.forEach(item => {
       score.data[item.key] = item.score
     })
     if (this.commentRemark) {
       score.data['remark'] = this.commentRemark;
     }
-    this.service.addProductComment(score)
-      .then(res => {
-        console.log('评价', res)
-        this.getProductDetail();
-      })
+    // this.service.addProductComment(score)
+    //   .then(res => {
+    //     this.getProductDetail();
+    //   })
   }
 
   // 获取产品评论
@@ -159,18 +162,24 @@ export class DataDetailComponent implements OnInit{
         if (!res.items) { return }
         let items: any = res.items;
         items.forEach(item => {
-          let timeDis = (new Date).getTime() - item.modifiedOn;
+          item.modifiedOn = this.commonService.getDateForTime(item.modifiedOn);
+          if (item['items']) {
+            item['items'].forEach(reply => {
+              reply.modifiedOn = this.commonService.getDateForTime(reply.modifiedOn);
+            })
+          }
+          // let timeDis = (new Date).getTime() - item.modifiedOn;
           item.averageScore = (item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4;
           item.showSecond = false;
-          if (timeDis < 3600000) {
-            item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
-          } else if (timeDis < 86400000) {
-            item.modifiedOn = (new Date(item.modifiedOn)).getHours() + '小时前';
-          } else if (timeDis < 86400000*3) {
-            item.modifiedOn = (new Date(item.modifiedOn)).getDay() + '天前';
-          } else {
-            item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
-          }
+          // if (timeDis < 3600000) {
+          //   item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
+          // } else if (timeDis < 86400000) {
+          //   item.modifiedOn = (new Date(item.modifiedOn)).getHours() + '小时前';
+          // } else if (timeDis < 86400000*3) {
+          //   item.modifiedOn = (new Date(item.modifiedOn)).getDay() + '天前';
+          // } else {
+          //   item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
+          // }
         })
         this.productComment = res;
       })
@@ -192,18 +201,12 @@ export class DataDetailComponent implements OnInit{
 
   // 回复评论
   replyComment(common, ind) {
-    if (!this.replyCommentCont) { return };
+    if (!this.replyCommentCont || (!this.userId)) { return }
     let option = {productId: this.productDetail.productId, data: {remark: this.replyCommentCont, replyTo: common.id, userId: this.userId}};
-    // productComment['items'] secondComment
     this.service.addProductComment(option)
       .then(res => {
         this.productComment['items'][ind]['showSecond'] = false;
         this.getProductDetail();
       })
-  }
-
-  // 处理评论时间
-  handleCommentTime() {
-
   }
 }

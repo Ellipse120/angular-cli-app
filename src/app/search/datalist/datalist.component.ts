@@ -30,15 +30,13 @@ export class DatalistComponent implements OnInit {
   currSortTag: string;
   tagSortList = [];
   isShowPeriod = true;
-  searchCondition = [{
+  searchCondition = {
       type: 'a', children: [
-      {text: '时间不限', value: undefined, type: 'readonly'},
-      {text: '2017年以来', value: '2017/01/01', type: 'readonly'},
-      {text: '2016年以来', value: '2016/01/01', type: 'readonly'},
-      {text: '2013年以来', value: '2013/01/01', type: 'readonly'},
-      {text: '', value: '', type: 'input'}
-    ]}
-  ];
+      {text: '时间不限', value: undefined},
+      {text: '2017年以来', value: '2017/01/01'},
+      {text: '2016年以来', value: '2016/01/01'},
+      {text: '2013年以来', value: '2013/01/01'}
+    ]};
   sortList = [{text: '按日期排序', value: 'modified_on'}, {text: '按相关性排序', value: 'viewed_count'}];
   currSortItem = this.sortList[0];
   currPage: any;
@@ -52,18 +50,12 @@ export class DatalistComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {
-        // let param = Object.assign({}, params);
-        let param = JSON.parse(params['search'])
+        let param = Object.assign({}, params);
         for (let k in param) {
           if (param[k] && (param[k] != 'null') && (param[k] != '')) {
             this.searchOptions[k] = param[k];
-            if (param[k] instanceof Object) {
-              this.searchOptions[k] = param[k].epoc;
-            }
           }
         }
-        console.log('options test', this.searchOptions, param);
-        // this.searchOptions = Object.assign({}, params);
         this.eventEmit.keyword = this.searchOptions['keyword'];
         this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
         this.getProjectList();
@@ -176,7 +168,7 @@ export class DatalistComponent implements OnInit {
   toNextPage(e) {
     this.searchOptions['offset'] = (e - 1) * (this.searchOptions['limit']);
     let navigationExtras: NavigationExtras = {
-      queryParams: {search: JSON.stringify(this.searchOptions)}
+      queryParams: this.searchOptions
     }
     this.router.navigate(['datalist'], navigationExtras)
   }

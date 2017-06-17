@@ -65,9 +65,13 @@ export class SearchInputComponent implements OnInit {
   }
 
   //关键字搜索
-  keywordSubmit(form: any) {
-    this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
-    this.keywordSearch.emit(this.keywordSearchOption)
+  keywordSubmit() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: this.keywordSearchForm.value
+    }
+    this.router.navigate(['datalist'], navigationExtras);
+    // this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
+    // this.keywordSearch.emit(this.keywordSearchOption)
   }
 
   toggleAdvancedBox() {
@@ -91,7 +95,6 @@ export class SearchInputComponent implements OnInit {
           })
         }
         this.searchService.advancedKeys = this.advanceInfo;
-        console.log('after', this.advanceInfo)
       })
   }
 
@@ -99,7 +102,7 @@ export class SearchInputComponent implements OnInit {
   advancedSearchSubmit() {
     if (!this.advancedSearchForm) { return }
     let form = this.advancedSearchForm;
-    let data = { offset: 0, limit: 10, sortBy: '', ascending: false};
+    let data = {};
     for (const key in form.value) {
       if (form.value[key]) {
         if (form.value[key] instanceof Object) {

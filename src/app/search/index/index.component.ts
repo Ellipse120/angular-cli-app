@@ -14,7 +14,7 @@ import {SearchService} from "../search.service";
 export class IndexComponent implements OnInit {
   tagDimensions = [];
   indexContStyle = {};
-  searchOption;
+  searchOption = {tagId: ''};
   activeProductCount;
 
   constructor(public service: YslHttpService,
@@ -23,7 +23,6 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.eventEmit.keyword = '';
-    this.searchOption = { offset: 0, limit: 10, sortBy: '', ascending: false};
     this.getTags()
     this.getQuantity()
   }
@@ -33,7 +32,6 @@ export class IndexComponent implements OnInit {
     this.service.getIndexQuantity()
       .then(res => {
         this.activeProductCount = res['activeProductCount'];
-        console.log('provider', res)
       })
   }
 
@@ -42,21 +40,14 @@ export class IndexComponent implements OnInit {
     this.service.getTagDimensions()
       .then(data => {
         this.tagDimensions = data;
-        console.log(this.tagDimensions);
       })
   }
 
-  // 关键字搜索
-  keywordSearch(option) {
-    this.searchOption.keyword = option.keyword;
+  // 标签搜索
+  tagSearch(tag) {
+    this.searchOption['tagId'] = tag.id;
     this.toDataList()
   }
-
-  // 标签搜索
-  // tagSearch(tag) {
-  //   this.searchOption.tagId = tag;
-  //   this.toDataList()
-  // }
 
   // 切换高级搜索
   showAdvancedBox(isShow) {
@@ -67,7 +58,7 @@ export class IndexComponent implements OnInit {
   toDataList() {
     let navigationExtras: NavigationExtras = {
       queryParams: this.searchOption
-    }
+    };
 
     this.router.navigate(['datalist'], navigationExtras)
   }

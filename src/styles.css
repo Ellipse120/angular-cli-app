@@ -589,12 +589,9 @@ app-index .mat-ripple{
   padding: 0 20px;
   margin: 0 5px 10px 0;
   cursor: pointer;
-}
-.ysl-label-search-cont a{
   color: #bdbaba;
 }
-.ysl-label-search-cont a:hover{
-  text-decoration: none;
+.ysl-label-search-cont li:hover{
   color: #fff;
 }
 .ysl-label-search-area .mat-ink-bar{
