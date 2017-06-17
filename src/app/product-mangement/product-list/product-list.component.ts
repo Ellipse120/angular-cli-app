@@ -29,11 +29,13 @@ export class ProductListComponent implements OnInit {
 
     selectedMessage: " 条选中"
   };
+  isFinished = true;
 
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService) {
 
     this.productListService.getProductList().then((data) => {
+      this.isFinished = false;
       this.dataItems = data.items;
       this.dataItems = data.items;
       this.rows = this.dataItems;

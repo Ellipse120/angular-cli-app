@@ -1,32 +1,47 @@
 <div class="proimport-box">
+  <div class="import-cover">
   <div class="import-form">
     <div class="import-title"><h4>产品录入</h4> <span class="fork" (click)="close()">X</span></div>
     <div class="content-form">
       <form #dataForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="dataName">名称</label>
-          <input type="text" class="ysl-form-control" id="dataName" required name="dataName"
+          <label for="name">名称</label>
+          <input type="text" class="ysl-form-control" id="name" required name="name"
                  [(ngModel)]="data.name" #name="ngModel">
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger color-red">名称不能为空</div>
         </div>
         <div class="form-group">
-          <label for="summary">简介</label>
-          <textarea id="summary" class="ysl-form-control" required name="proSummary"
-                 [(ngModel)]="data.summary" #summary></textarea>
+          <label for="description">简介</label>
+          <textarea id="description" class="ysl-form-control" required name="description"
+                    [(ngModel)]="data.description" #description></textarea>
         </div>
         <div class="form-group">
-          <label for="url">产品官网</label>
-          <input type="text" id="url" class="ysl-form-control" required name="url"
-                 [(ngModel)]="data.url" #url>
+          <label for="webSite">产品官网</label>
+          <input type="text" id="webSite" class="ysl-form-control" required name="webSite"
+                 [(ngModel)]="data.webSite" #orgWebSite>
         </div>
         <div class="form-group">
-          <label for="from" >数据来源</label>
-          <select name="dataFrom" id="from" class="ysl-form-control" required
-            [(ngModel)]="data.from" #from></select>
+          <label for="source">数据来源</label>
+          <select name="dataSource" id="source" class="ysl-form-control" required
+                  [(ngModel)]="data.dataSource" #source>
+            <option value="1">{{dataSourceMap.centerGov}}</option>
+            <option value="2">{{dataSourceMap.localGov}}</option>
+            <option value="3">{{dataSourceMap.industryAssociation}}</option>
+            <option value="4">{{dataSourceMap.thirdPartyOrganization}}</option>
+            <option value="5">{{dataSourceMap.internationalOrganization}}</option>
+            <option value="6">{{dataSourceMap.multiChannelAggregation}}</option>
+            <option value="7">{{dataSourceMap.company}}</option>
+            <option value="8">{{dataSourceMap.individual}}</option>
+          </select>
 
-          <label for="type">数据类型</label>
-          <select name="dataFrom" id="type" class="ysl-form-control" required
-                  [(ngModel)]="data.type" #type></select>
+          <label for="dataCategory">数据类型</label>
+          <select name="dataCategory" id="dataCategory" class="ysl-form-control" required
+                  [(ngModel)]="data.dataCategory" #category>
+            <option value="1">{{dataCategoryMap.dashboard}}</option>
+            <option value="2">{{dataCategoryMap.cross}}</option>
+            <option value="3">{{dataCategoryMap.timeseries}}</option>
+            <option value="4">{{dataCategoryMap.hybrid}}</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -37,38 +52,58 @@
 
         <div class="form-group">
 
-          <label for="collect">采集方式</label>
-          <select name="collect" id="collect" class="ysl-form-control" required
-                  [(ngModel)]="data.collect" #collect></select>
+          <label for="collection">采集方式</label>
+          <select name="collection" id="collection" class="ysl-form-control" required
+                  [(ngModel)]="data.collectionMethod" #collect>
+            <option value="1">{{dataCollectionMap.declaration}}</option>
+            <option value="2">{{dataCollectionMap.survey}}</option>
+            <option value="3">{{dataCollectionMap.research}}</option>
+            <option value="4">{{dataCollectionMap.deal}}</option>
+            <option value="5">{{dataCollectionMap.compilation}}</option>
+          </select>
 
           <label for="service">服务方式</label>
           <select name="service" id="service" class="ysl-form-control" required
-                  [(ngModel)]="data.service" #service></select>
+                  [(ngModel)]="data.serviceMethod" #serviceMethod>
+            <option value="1">{{dataServiceMap.api}}</option>
+            <option value="2">{{dataServiceMap.file}}</option>
+            <option value="3">{{dataServiceMap.client}}</option>
+            <option value="4">{{dataServiceMap.web}}</option>
+          </select>
         </div>
 
         <div class="form-group">
           <label>是否收费</label>
-          <input type="radio" name="isMoney"> 是 &nbsp;&nbsp;
-          <input type="radio" name="isMoney"> 否
+          <label *ngFor="let item of radioItems">
+            <input type="radio" name="options" (click)="item==='是' ? data.premium = 'true' :data.premium='false' ">{{item}}
+          </label>
         </div>
 
         <div class="form-group">
           <label for="area">区域范围</label>
           <select name="area" id="area" class="ysl-form-control" required
-           [(ngModel)]="data.area" #area></select>
+                  [(ngModel)]="data.area" #area></select>
 
           <label>时间范围</label>
-          <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions" [(ngModel)]="model"></my-date-picker> -
-          <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions" [(ngModel)]="model"></my-date-picker>
+          <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
+                       [(ngModel)]="timeFrom"   (dateChanged)="onDateChanged($event)"></my-date-picker>
+          -
+          <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions"
+                          [(ngModel)]="timeTo" (dateChanged)="onDateChanged($event)"></my-date-picker>
         </div>
 
         <div class="form-group">
           <label>标签分类</label>
           <div class="ysl-import-tag">
             <ul class="tagDimensions">
-              <li *ngFor="let item of tagDimensions;let i=index"><button class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">{{item.name}}</button>
+              <li *ngFor="let item of tagDimensions;let i=index">
+                <button class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">
+                  {{item.name}}
+                </button>
                 <ul class="secondTagDimensions" *ngIf="isActive == i">
-                  <li *ngFor="let itemc of item.items"  class="second-nav"><input type="checkbox" [value]="[itemc.name]" (click)="proTagImport(i,item.name)"><span>{{itemc.name}}</span></li>
+                  <li *ngFor="let itemc of item.items" class="second-nav"><input type="checkbox" [value]="[itemc.name]"
+                                                                                 (click)="proTagImport(i,item.name)"><span>{{itemc.name}}</span>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -78,5 +113,6 @@
         <button type="submit" class="ysl-btn btn-submit">保存</button>
       </form>
     </div>
+  </div>
   </div>
 </div>

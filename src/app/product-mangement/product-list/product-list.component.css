@@ -13,6 +13,10 @@
   border:1px solid #ddd;
   outline: none;
 }
+.proimport-box{
+  position: absolute;
+  z-index: 10;
+}
 .pro-import{
   padding:10px;
   color: #fff;
