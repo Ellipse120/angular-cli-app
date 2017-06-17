@@ -5,6 +5,7 @@ import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {ProductListComponent} from '../product-list/product-list.component';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {ProductListService} from "../product-list/product-list.service";
+import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'product-import',
@@ -14,8 +15,6 @@ import {ProductListService} from "../product-list/product-list.service";
 
 export class ProductImportComponent implements OnInit {
 
-  timeFrom = '';
-  timeTo = '';
   data = {
     userId: '',
     name: '',
@@ -27,8 +26,9 @@ export class ProductImportComponent implements OnInit {
     serviceMethod: '',
     area: '',
     premium: '',
-    timeFrom1: '',
-    timeTo1: ''
+    dataSince: '',
+    dataUntil: '',
+    tags: []
   };
   import = true;
   isActive = 0;
@@ -68,41 +68,53 @@ export class ProductImportComponent implements OnInit {
     dateFormat: 'yyyy.mm.dd'
   };
   model: Object = {date: {year: 2018, month: 10, day: 9}};
+  userInfo;
 
   constructor(public product: ProductListComponent,
               public service: YslHttpService,
-              private productListService: ProductListService) {
-  }
-
-
-  // 关闭弹框
-  close() {
-    this.product.import = false;
-  }
-
-  // 切换数据类型
-  changeTab(i) {
-    this.isActive = i;
-    console.log(i);
-  }
-
-  onDateChanged(event: IMyDateModel) {
-    this.data.timeFrom1 = '' + event.epoc;
-    this.data.timeTo1 = '' + event.epoc;
-  }
-
-  onSubmit() {
-    this.productListService.doProductImport(this.data)
-      .then(res => {
-        console.log(res);
-      });
+              private productListService: ProductListService,
+              private cookie: CookieService) {
   }
 
   ngOnInit() {
+    this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     // 获取首页标签数据
     this.service.getTagDimensions()
       .then(data => {
         this.tagDimensions = data;
       });
   }
+
+// 关闭弹框
+  close() {
+    this.product.import = false;
+  }
+
+// 切换数据类型
+  changeTab(i) {
+    this.isActive = i;
+    console.log(i);
+  }
+
+  onDateFromChanged(event: IMyDateModel) {
+    this.data.dataSince = '' + event.epoc * 1000;
+  }
+
+  onDateToChanged(event: IMyDateModel) {
+    this.data.dataUntil = '' + event.epoc * 1000;
+  }
+
+  proTagImport(tagId) {
+    this.data.tags.push({id: tagId});
+  }
+
+  onSubmit() {
+    this.data.userId = this.userInfo;
+    this.productListService.doProductImport(this.data)
+      .then(res => {
+        this.close();
+        window.location.reload();
+      });
+  }
+
 }
