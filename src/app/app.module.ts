@@ -23,12 +23,14 @@ import { DatalistComponent } from './search/datalist/datalist.component';
 import { DataDetailComponent } from './search/datalist/deta-detail/data-detail.component';
 import { LoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { YslMenuDirective } from './core/Directive/ysl-menu-directive';
+import { YslMenuDirective } from './core/Directive/ysl-menu.directive';
 import { UEditorModule } from 'ngx-ueditor';
 import {CookieModule} from "ngx-cookie";
 import {YslCommonService} from "./core/ysl-common.service";
 import {SearchService} from "./search/search.service";
 import {ProductListService} from "./product-mangement/product-list/product-list.service";
+import {YslPopupDirective} from "./core/Directive/ysl-popup.directive";
+import {SearchAdvancedComponent} from "./search/search-input/searc-advanced.component";
 
 
 let ueditorPath = {
@@ -49,7 +51,9 @@ let ueditorPath = {
     NavComponent,
     FooterComponent,
     LoginComponent,
-    YslMenuDirective
+    YslMenuDirective,
+    YslPopupDirective,
+    SearchAdvancedComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,8 @@ let ueditorPath = {
     UEditorModule.forRoot(ueditorPath)
   ],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    SearchAdvancedComponent
   ],
   providers: [
     YslHttpService,

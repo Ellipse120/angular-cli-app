@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
 
 
 import { YslHttpService } from '../../../core/ysl-http.service'
-import {YslMenuService} from "../../../core/Directive/ysl-menu.service";
 import {YslCommonService} from "../../../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
 
@@ -15,8 +14,7 @@ import {CookieService} from "ngx-cookie";
 @Component({
   selector: 'data-detail',
   templateUrl: './data-detail.component.html',
-  styleUrls:['./data-detail.component.css'],
-  providers: [YslMenuService]
+  styleUrls:['./data-detail.component.css']
 })
 
 export class DataDetailComponent implements OnInit{
@@ -38,7 +36,6 @@ export class DataDetailComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               private service: YslHttpService,
-              private yslMenu: YslMenuService,
               private commonService: YslCommonService,
               private router: Router,
               private cookie: CookieService,

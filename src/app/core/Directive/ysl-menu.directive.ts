@@ -1,10 +1,8 @@
 import { Directive, ElementRef, OnInit, HostListener, Renderer  } from '@angular/core';
-import {YslMenuService} from "./ysl-menu.service";
 // import Promise = Q.Promise;
 
 @Directive({
-  selector: '[yslMenu]',
-  providers: [YslMenuService]
+  selector: '[yslMenu]'
 })
 
 export class YslMenuDirective implements OnInit{

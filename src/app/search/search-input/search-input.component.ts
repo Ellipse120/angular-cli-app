@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/5/8.
  */
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import {Component, OnInit, EventEmitter, Input, ViewChild} from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, NavigationExtras} from '@angular/router';
@@ -10,6 +10,8 @@ import { YslHttpService } from '../../core/ysl-http.service';
 import { IMyDpOptions } from "mydatepicker";
 
 import {SearchService} from "../search.service";
+import {YslPopupDirective} from "../../core/Directive/ysl-popup.directive";
+import {SearchAdvancedComponent} from "./searc-advanced.component";
 
 
 @Component({
@@ -21,6 +23,8 @@ import {SearchService} from "../search.service";
 
 export class SearchInputComponent implements OnInit {
 
+  @ViewChild(YslPopupDirective)
+  private yslPopup: YslPopupDirective;
   @Input() hideAdvancedSearch;
   keywordSearch: EventEmitter<any>;
   showAdvancedBox: EventEmitter<any>;
@@ -64,6 +68,10 @@ export class SearchInputComponent implements OnInit {
     }, false)
   }
 
+
+  toggleA() {
+    this.yslPopup.toggle(SearchAdvancedComponent)
+  }
   //关键字搜索
   keywordSubmit() {
     let navigationExtras: NavigationExtras = {

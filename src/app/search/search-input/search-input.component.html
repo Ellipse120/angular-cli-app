@@ -8,6 +8,8 @@
     <button class="searchbtn col-md-1 col-xs-2"><i class="fa fa-search"></i></button>
     <!--routerLink="/datalist"-->
   </form>
+  <!--<button (click)="toggleA()">test</button>-->
+  <!--<div ysl-popup></div>-->
   <form [formGroup]="advancedSearchForm" class="advanced-box form-horizontal" *ngIf="isShowAdvancedBox" (ngSubmit)="advancedSearchSubmit()" (click)="$event.stopPropagation()" novalidate>
     <div class="form-group">
       <label class="col-xs-5 col-sm-4">关键词</label>
