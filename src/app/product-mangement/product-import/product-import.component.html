@@ -101,7 +101,7 @@
                   <li *ngFor="let itemc of item.items" class="second-nav">
                     <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" (click)="proTagImport(itemc.id)">
                     <!--<label [for]="[itemc.id]">{{itemc.name}}</label>-->
-                    <span>{{itemc.name}}</span>
+                    <span>&nbsp;{{itemc.name}}</span>
                   </li>
                 </ul>
               </li>
