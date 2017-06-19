@@ -11,10 +11,10 @@
       <li class="ysl-nav-item" *ngIf="loginInfo.userType == '30'"><span routerLink="/operation">运营中心</span></li>
       <li class="ysl-nav-item" *ngIf="loginInfo.userType == '20'"><span routerLink="/promange">产品管理</span></li>
       <li class="ysl-nav-item">
-        <span>用户中心<i class="fa fa-angle-down"></i></span>
+        <span>{{loginInfo.name}}<i class="fa fa-angle-down"></i></span>
         <ul class="ysl-subnav" [ngStyle]="subnavStyle">
-          <li routerLink="/usercenter">个人中心</li>
-          <li (click)="logout()">退出</li>
+          <li routerLink="/usercenter"><i class="fa fa-user-o"></i>个人中心</li>
+          <li (click)="logout()"><i class="fa fa-sign-out"></i>安全退出</li>
         </ul>
       </li>
     </ul>

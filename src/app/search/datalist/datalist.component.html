@@ -10,11 +10,11 @@
           <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
             <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
           </li>
-          <li class="search-condition-type-item">
-            <form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>
-              <input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>
-            </form>
-          </li>
+          <!--<li class="search-condition-type-item">-->
+            <!--<form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>-->
+              <!--<input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>-->
+            <!--</form>-->
+          <!--</li>-->
         </ul>
       </div>
       <div class="search-condition-type sort-by-tag">
@@ -34,7 +34,7 @@
     </div>
     <div class="data-list">
       <div class="find-result">
-        <span class="result">找到{{product.totalLength}}条结果</span>
+        <span class="result">一共找到{{product.totalLength}}个符合条件的数据产品</span>
         <div class="filter">
           <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
           <ul class="sort-list">

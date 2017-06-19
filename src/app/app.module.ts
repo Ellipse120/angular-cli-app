@@ -28,7 +28,7 @@ import {CookieModule} from "ngx-cookie";
 import {YslCommonService} from "./core/ysl-common.service";
 import {SearchService} from "./search/search.service";
 import {ProductListService} from "./product-mangement/product-list/product-list.service";
-import {YslPopupDirective} from "./core/Directive/ysl-popup.directive";
+import {YslPopupDirective} from "./core/directive/ysl-popup.directive";
 import {SearchAdvancedComponent} from "./search/search-input/search-advanced/search-advanced.component";
 import {ProductErrataComponent} from "./search/datalist/data-detail/product-errata.component";
 

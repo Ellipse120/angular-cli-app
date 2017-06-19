@@ -1,26 +1,30 @@
 <div class="register container">
   <form [formGroup]="registerForm" class="register-box text-center" (ngSubmit)="submit()" novalidate>
     <h2 class="color-blue register-title">用户注册</h2>
-    <div class="form-group email">
-      <label class="sr-only"></label>
-      <div class="input-group col-xs-12">
-        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-        <input type="email" class="form-control" formControlName="email" placeholder="请输入您的电子邮箱" required>
+    <div class="register-cont" *ngIf="!registerSuccess">
+      <div class="form-group email">
+        <label class="sr-only"></label>
+        <div class="input-group col-xs-12">
+          <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+          <input type="email" class="form-control" formControlName="email" placeholder="请输入您的电子邮箱" required>
+        </div>
+      </div>
+      <div class="form-group clearfix agreement">
+        <label class="sr-only"></label>
+        <div class="ysl-checkbox-group col-xs-12">
+          <label><input type="checkbox" formControlName="agreement" required><span></span>已阅读</label><a class="color-blue">《用户协议》</a>
+        </div>
+      </div>
+      <div class="form-group ysl-text-primary ysl-error-tip" *ngIf="registerForm.invalid && isSubmit">
+        <span *ngIf="formErrors.email">{{formErrors.email}}</span>
+        <span *ngIf="!formErrors.email && formErrors.agreement">{{formErrors.agreement}}</span>
+      </div>
+      <p class="ysl-error-tip" *ngIf="registerForm.valid && registerError">注册失败</p>
+      <div class="form-group">
+        <label class="sr-only"></label>
+        <button class="btn btn-lg btn-block submit-btn">发送激活邮件</button>
       </div>
     </div>
-    <div class="form-group clearfix agreement">
-      <label class="sr-only"></label>
-      <div class="ysl-checkbox-group col-xs-12">
-        <label><input type="checkbox" formControlName="agreement" required><span></span>已阅读</label><a class="color-blue">《用户协议》</a>
-      </div>
-    </div>
-    <div class="form-group ysl-text-primary" *ngIf="registerForm.invalid && isSubmit">
-      <span *ngIf="formErrors.email">{{formErrors.email}}</span>
-      <span *ngIf="!formErrors.email && formErrors.agreement">{{formErrors.agreement}}</span>
-    </div>
-    <div class="form-group">
-      <label class="sr-only"></label>
-      <button class="btn btn-lg btn-block submit-btn">发送激活邮件</button>
-    </div>
+    <div class="register-success" *ngIf="registerSuccess">注册成功，请查收邮件并激活</div>
   </form>
 </div>

@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import { YslHttpService } from '../../../core/ysl-http.service'
 import {YslCommonService} from "../../../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
-import {YslPopupDirective} from "../../../core/Directive/ysl-popup.directive";
+import {YslPopupDirective} from "../../../core/directive/ysl-popup.directive";
 import {ProductErrataComponent} from "./product-errata.component";
 import {SearchService} from "../../search.service";
 

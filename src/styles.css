@@ -242,8 +242,9 @@ textarea::-webkit-scrollbar-thumb
   top: 50%;
   transform: translateY(-50%);
 }
-.ysl-menu-cont{
-  display: none;
+.ysl-error-tip{
+  text-align: center;
+  color: #ff4307;
 }
 
 

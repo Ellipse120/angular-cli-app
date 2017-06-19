@@ -10,7 +10,7 @@ import { YslHttpService } from '../../core/ysl-http.service';
 import { IMyDpOptions } from "mydatepicker";
 
 import {SearchService} from "../search.service";
-import {YslPopupDirective} from "../../core/Directive/ysl-popup.directive";
+import {YslPopupDirective} from "../../core/directive/ysl-popup.directive";
 import {SearchAdvancedComponent} from "./search-advanced/search-advanced.component";
 
 

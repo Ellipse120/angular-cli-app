@@ -12,6 +12,8 @@ import {YslHttpService} from "../core/ysl-http.service";
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  registerError: boolean;
+  registerSuccess: boolean;
   isSubmit: boolean;
   formErrors = {
     email: '',
@@ -50,8 +52,10 @@ export class RegisterComponent implements OnInit {
     let email = this.registerForm.value['email'];
     this.service.userRegister(email).then(res => {
       console.log('注册', res)
+      this.registerSuccess = true;
     }, error => {
-      console.log('error', error)
+      this.registerError = true;
+      console.log('error c', error)
     })
   }
 
