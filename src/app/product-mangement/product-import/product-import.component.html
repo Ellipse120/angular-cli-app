@@ -3,7 +3,7 @@
   <div class="import-form">
     <div class="import-title"><h4>产品录入</h4> <span class="fork" (click)="close()">X</span></div>
     <div class="content-form">
-      <form #dataForm="ngForm" (ngSubmit)="onSubmit()">
+      <form #dataForm="ngForm">
         <div class="form-group">
           <label for="name">名称</label>
           <input type="text" class="ysl-form-control" id="name" required name="name"
@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <button type="submit" class="ysl-btn btn-submit">保存</button>
+        <button type="submit" class="ysl-btn btn-submit" (click)="onSubmit()">保存</button>
       </form>
     </div>
   </div>
