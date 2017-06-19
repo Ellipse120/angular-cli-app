@@ -6,7 +6,7 @@ import {RouterModule,Routes,Router, ActivatedRoute} from '@angular/router';
 import {UserCenterComponent} from './user-center/user-center.component';
 import {IndexComponent} from './search/index/index.component';
 import {DatalistComponent} from './search/datalist/datalist.component';
-import {DataDetailComponent} from './search/datalist/deta-detail/data-detail.component';
+import {DataDetailComponent} from './search/datalist/data-detail/data-detail.component';
 import {RegisterComponent} from './register/register.component';
 import {ProductMangementComponent} from './product-mangement/product-mangement.component';
 import {ProductListComponent} from './product-mangement/product-list/product-list.component';
