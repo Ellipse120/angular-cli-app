@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
     };
     this.httpServer.userLogin(submitData)
       .then((res) => {
+        this.cookie.remove('x-access-token');
         console.log('user id', res)
         if (form.value['isRem']) {
           // ae5125977d4a40269ce1abde1ad89951

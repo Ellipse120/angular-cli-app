@@ -75,6 +75,7 @@ export class NavComponent implements OnInit {
       .then(res => {
         const path = this.location.path();
         this.cookie.remove('yslUserInfo');
+        this.cookie.remove('x-access-token');
         this.loginState = false;
         if (!path.includes('/datalist') || !path.includes('/datadetail')) {
           this.router.navigate(['index'])
