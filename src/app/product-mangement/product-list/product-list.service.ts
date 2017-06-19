@@ -30,7 +30,7 @@ export class ProductListService {
 
   doProductImport(option) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.yslHttpservice.url, option, {
+      this.http.post(this.yslHttpservice.url + 'api/product', option, {
         headers: new Headers({
           'Content-Type': 'application/json'
         })
