@@ -60,3 +60,6 @@
   background-position-x: 10px;
   padding: 0 40px;
 }
+.register-link{
+  cursor: pointer;
+}
