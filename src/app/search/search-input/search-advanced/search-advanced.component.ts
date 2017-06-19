@@ -3,6 +3,7 @@ import {YslHttpService} from "../../../core/ysl-http.service";
 import {SearchService} from "../../search.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router, NavigationExtras} from "@angular/router";
+import {IMyDpOptions} from "mydatepicker";
 
 @Component({
   templateUrl: `./search-advanced.component.html`,
@@ -18,6 +19,11 @@ export class SearchAdvancedComponent implements OnInit{
     data_source: [],
     data_collection: [],
     data_service: []
+  };
+  myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy.mm.dd',
+    inline: false,
+    showClearDateBtn: false
   };
 
   constructor(private httpService: YslHttpService,
