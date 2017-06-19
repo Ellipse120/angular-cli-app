@@ -45,6 +45,7 @@
   justify-content: space-between;
   align-items: center;
   height: 40px;
+  border-bottom: 1px solid #333;
   /*border-bottom: 1px solid #dbdcdc;*/
 }
 .fa-close{
