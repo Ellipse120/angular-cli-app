@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+
 import {YslCommonService} from "../../core/ysl-common.service";
 import {ProductListService} from "./product-list.service";
 
@@ -9,7 +10,6 @@ import {ProductListService} from "./product-list.service";
 })
 
 export class ProductListComponent implements OnInit {
-
 
   // 定义table
   rows = [];
@@ -33,46 +33,59 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService) {
+    this.getProductList();
+  }
 
+  getProductList() {
     this.productListService.getProductList().then((data) => {
       this.isFinished = false;
       this.dataItems = data.items;
-      this.dataItems = data.items;
       this.rows = this.dataItems;
-      for (let i = 0; i < data.totalLength; i++) {
-        switch (this.dataItems[i].userType) {
-          case  1:
-            this.dataItems[i].userType = "未认证的个人用户";
+
+      this.dataItems.forEach(item => {
+        switch ('' + item.userType) {
+          case  '1': {
+            item.userType = "未认证的个人用户";
             break;
-          case  2:
-            this.dataItems[i].userType = "未认证的机构用户";
+          }
+          case  '2': {
+            item.userType = "未认证的机构用户";
             break;
-          case  10:
-            this.dataItems[i].userType = "认证的个人用户";
+          }
+          case  '10': {
+            item.userType = "认证的个人用户";
             break;
-          case  20:
-            this.dataItems[i].userType = "认证的机构用户";
+          }
+          case  '20': {
+            item.userType = "认证的机构用户";
             break;
-          case  30:
-            this.dataItems[i].userType = "运营方用户";
+          }
+          case  '30': {
+            item.userType = "运营方用户";
+            break;
+          }
+          default: {
+            break;
+          }
+        }
+
+        switch ('' + item.status) {
+          case '2':
+            item.status = "激活";
+            break;
+          case '1':
+            item.status = "注册";
+            break;
+          case '3':
+            item.status = "禁用";
             break;
         }
 
-        switch (this.dataItems[i].status) {
-          case 2:
-            this.dataItems[i].status = "激活";
-            break;
-          case 1:
-            this.dataItems[i].status = "注册";
-            break;
-          case 3:
-            this.dataItems[i].status = "禁用";
-            break;
-        }
-        this.dataItems[i].premium = this.dataItems[i].premium ? "是" : "否";
-        this.dataItems[i].modifiedOn = this.commonService.getDateForDay(this.dataItems[i].modifiedOn);
+        item.premium = item.premium ? "是" : "否";
+        item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn);
         this.isOn.push(true);
-      }
+      });
+
     });
 
   }
@@ -96,6 +109,15 @@ export class ProductListComponent implements OnInit {
   // 编辑信息
   editInfo() {
     this.showEdit = false;
+  }
+
+  updateProduct() {
+    this.productListService.doProductUpdate(this.proInfo)
+      .then(res => {
+        this.closeProInfo();
+        this.showEdit = false;
+        this.getProductList();
+      });
   }
 
   // 关闭信息弹框

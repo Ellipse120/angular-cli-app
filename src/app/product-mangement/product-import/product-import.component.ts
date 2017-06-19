@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 
@@ -70,6 +70,9 @@ export class ProductImportComponent implements OnInit {
   model: Object = {date: {year: 2018, month: 10, day: 9}};
   userInfo;
 
+  @ViewChild(ProductListComponent)
+  private productListComponent: ProductListComponent;
+
   constructor(public product: ProductListComponent,
               public service: YslHttpService,
               private productListService: ProductListService,
@@ -111,9 +114,9 @@ export class ProductImportComponent implements OnInit {
   onSubmit() {
     this.data.userId = this.userInfo;
     this.productListService.doProductImport(this.data)
-      .then(res => {
+      .then(() => {
         this.close();
-        window.location.reload();
+        this.productListComponent.getProductList();
       });
   }
 

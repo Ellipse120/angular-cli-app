@@ -1,24 +1,23 @@
 /**
  * Created by Lusai on 6/13/17.
  */
-
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
+import {YslHttpService} from "../../core/ysl-http.service";
 
 @Injectable()
 export class ProductListService {
 
   private productConstant = {
-    listApi: 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/api/product',
-    importApi: 'http://localhost:1337/192.168.19.20:8080/ysl-ws/api/product'
+    devApi: 'http://localhost:1337/192.168.19.20:8080/ysl-ws/api/product'
   };
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private yslHttpservice: YslHttpService) {
   }
 
   getProductList(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.productConstant.listApi)
+      this.http.get(this.yslHttpservice.url + 'api/product')
         .toPromise()
         .then(res => resolve(res.json()))
         .catch(this.handleError)
@@ -27,7 +26,7 @@ export class ProductListService {
 
   doProductImport(option) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.productConstant.listApi, option, {
+      this.http.post(this.yslHttpservice.url + 'api/product', option, {
         headers: new Headers({
           'Content-Type': 'application/json'
         })
@@ -37,15 +36,16 @@ export class ProductListService {
     })
   }
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', this.productConstant.listApi);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
+  doProductUpdate(option) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.yslHttpservice.url + 'api/product/' + option.productId, option, {
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+        .toPromise()
+        .then(res => resolve(res), error => reject(error))
+    })
   }
 
   private handleError(error: any): Promise<any> {

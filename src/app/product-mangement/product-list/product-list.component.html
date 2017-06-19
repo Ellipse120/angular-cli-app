@@ -102,15 +102,16 @@
     <div class="user-content">
       <span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>
       <ul class="user-info-list">
-        <li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.proName"  [disabled]="showEdit"></li>
+        <li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.name"  [disabled]="showEdit"></li>
         <li><span class="user-tag">用户名称</span> <input type="text" [(ngModel)]="proInfo.userName" [disabled]="showEdit"></li>
         <li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="proInfo.userType" [disabled]="showEdit"></li>
-        <li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.isMoney" [disabled]="showEdit"></li>
-        <li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.state" [disabled]="showEdit"></li>
-        <li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.updateTime" [disabled]="showEdit"></li>
+        <li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.premium" [disabled]="showEdit"></li>
+        <li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.status" [disabled]="showEdit"></li>
+        <li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.modifiedOn" [disabled]="showEdit"></li>
       </ul>
 
-      <button class="ysl-btn save-btn">保存</button>
+
+      <button class="ysl-btn save-btn" (click)="updateProduct()">保存</button>
     </div>
   </div>
 </div>
