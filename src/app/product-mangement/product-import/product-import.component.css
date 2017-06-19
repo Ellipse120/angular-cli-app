@@ -1,10 +1,34 @@
-.import-form{
-  width: 960px;
-  margin:0 auto;
-  background: #fff;
-  padding:10px 30px;
+.import-body {
+  height: 680px;
+  overflow: scroll;
 }
-.import-title{
+
+.product {
+  border-radius: 5px;
+}
+
+.pro-name:before {
+  content: "* ";
+  color: red;
+  font-size: 100%;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+.alert {
+  padding: 5px;
+  margin-bottom: 0;
+}
+
+.import-form {
+  margin: 0;
+  background: #fff;
+  padding: 10px 30px;
+}
+
+.import-title {
   width: 100%;
   height: 30px;
   display: flex;
@@ -12,29 +36,33 @@
   align-items: center;
   border-bottom: 1px solid #eee;
 }
-.content-form{
+
+.content-form {
   margin-top: 20px;
   width: 100%;
 }
-.content-form label{
+
+.content-form label {
   width: 60px;
   display: inline-block;
   font-size: 14px;
   text-align: right;
   margin-right: 20px;
 }
-.form-group{
-  /*margin-bottom: 20px;*/
+
+.form-group {
   display: flex;
   align-items: center;
 }
+
 .ysl-form-control {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 5px;
   outline: none;
   margin-right: 20px;
 }
-textarea{
+
+textarea {
   width: 600px;
   height: 60px;
   vertical-align: middle;
@@ -44,15 +72,16 @@ textarea{
 
 }
 
-select{
+select {
   width: 120px;
 }
-.proimport-box{
+
+.proimport-box {
   position: fixed;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.13);
-  top:0;
+  top: 0;
   left: 0;
   display: flex;
   align-items: center;
@@ -60,18 +89,12 @@ select{
   z-index: 100;
 }
 
-.import-cover{
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 960px;
-  height: 500px;
-}
-
-.ysl-import-tag{
+.ysl-import-tag {
   height: 200px;
   overflow-y: auto;
 }
-.tagDimensions{
+
+.tagDimensions {
   display: inline-block;
   width: 600px;
   text-align: left;
@@ -80,30 +103,33 @@ select{
   min-height: 134px;
   margin-top: 20px;
 }
-.tagDimensions li{
+
+.tagDimensions li {
   float: left;
   cursor: pointer;
   background: #fff;
 }
-.secondTagDimensions{
+
+.secondTagDimensions {
   width: 500px;
   position: absolute;
   list-style: none;
   margin-top: 20px;
   color: #676767;
-  left:0;
-  top:8px;
-  /*border:1px solid #d8e5e7;*/
-  border:none;
+  left: 0;
+  top: 8px;
+  border: none;
 }
-.second-nav{
-  padding:3px 5px;
-  margin:2px 5px;
+
+.second-nav {
+  padding: 3px 5px;
+  margin: 2px 5px;
   background: #f6f9fa;
 }
-.isActive{
+
+.isActive {
   color: #1c94c4;
-  border:1px solid #d8e5e7;
+  border: 1px solid #d8e5e7;
   border-bottom: none;
-  padding:5px 10px;
+  padding: 5px 10px;
 }
