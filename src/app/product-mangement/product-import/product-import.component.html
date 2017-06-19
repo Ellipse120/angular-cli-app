@@ -98,8 +98,10 @@
                   {{item.name}}
                 </button>
                 <ul class="secondTagDimensions" *ngIf="isActive == i">
-                  <li *ngFor="let itemc of item.items" class="second-nav"><input type="checkbox" [value]="[itemc.name]"
-                                                                                 (click)="proTagImport(itemc.id)"><span>{{itemc.name}}</span>
+                  <li *ngFor="let itemc of item.items" class="second-nav">
+                    <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" (click)="proTagImport(itemc.id)">
+                    <!--<label [for]="[itemc.id]">{{itemc.name}}</label>-->
+                    <span>{{itemc.name}}</span>
                   </li>
                 </ul>
               </li>
