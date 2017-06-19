@@ -11,7 +11,7 @@ export class YslHttpService {
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
   public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  // private url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  // public url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
 
   // 用户信息

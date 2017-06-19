@@ -71,14 +71,32 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.tag-box{
+.tag-area{
   width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tag-title{
+  width: 9em;
+  color: #999;
 }
 .product-tag{
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
 }
 .product-tag li{
   display: inline-block;
+}
+.product-tag>li{
+  display: flex;
+  margin-top: 5px;
+}
+.product-tag .tag-primary{
+  width: 10em;
+}
+.product-tag ul{
+  flex: 1;
 }
 .tag-dividing-line{
   margin: 0 10px;

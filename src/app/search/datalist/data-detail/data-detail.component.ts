@@ -65,20 +65,58 @@ export class DataDetailComponent implements OnInit{
 
   // 搜索
   keywordSearch(data) {
-    console.log('详情页搜索', data);
+    console.log('详情页搜索 data', data);
   }
 
   // 获取详情信息
   getProductDetail() {
+    this.searchService.getAdvancedInfo();
+    let advancedKey = this.searchService.advancedKeys;
+    console.log('advancedKey', advancedKey);
     this.service.getProductDetail(this.productParams.productId)
       .then(res => {
         this.productDetail = res;
         this.productDetail.premium = this.productDetail.premium ? '是' : '否';
         this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
+        for (const key in advancedKey) {
+          switch (key) {
+            case 'data_category':
+              advancedKey[key].forEach(item => {
+                if (this.productDetail['dataCategory'] ==item.entryCode) {
+                  this.productDetail['dataCategory'] = item.entryValue;
+                }
+              })
+                  break;
+            case 'data_collection':
+              advancedKey[key].forEach(item => {
+                if (this.productDetail['collectionMethod'] == item.entryCode) {
+                  this.productDetail['collectionMethod'] = item.entryValue;
+                }
+              })
+              break;
+            case 'data_service':
+              advancedKey[key].forEach(item => {
+                if (this.productDetail['serviceMethod'] == item.entryCode) {
+                  this.productDetail['serviceMethod'] = item.entryValue;
+                }
+              })
+              break;
+            case 'data_source':
+              advancedKey[key].forEach(item => {
+                if (this.productDetail['dataSource'] == item.entryCode) {
+                  this.productDetail['dataSource'] = item.entryValue;
+                }
+              })
+              break;
+          }
+        }
+        this.productDetail['dataSince'] = this.commonService.getDateForDay(this.productDetail['dataSince']);
+        this.productDetail['dataUntil'] = this.commonService.getDateForDay(this.productDetail['dataUntil']);
         this.isThumbsUp = this.productDetail.favor;
         this.favoredCount = this.productDetail.favoredCount;
         this.getRelatedProducts();
         this.getComment();
+        console.log('day', this.commonService.getDateForDay(this.productDetail['dataUntil']))
       });
   }
 
@@ -95,7 +133,6 @@ export class DataDetailComponent implements OnInit{
     let option = {type: 'organization', productId: this.productDetail.productId};
     this.service.getRelatedProducts(option)
       .then(res => {
-        console.log('相关产品', res)
         this.relatedProductList = res['items'];
       })
   }
