@@ -146,10 +146,11 @@ export class DataDetailComponent implements OnInit{
     if (this.commentRemark) {
       score.data['remark'] = this.commentRemark;
     }
-    // this.service.addProductComment(score)
-    //   .then(res => {
-    //     this.getProductDetail();
-    //   })
+    console.log('comment pass')
+    this.service.addProductComment(score)
+      .then(res => {
+        this.getProductDetail();
+      })
   }
 
   // 获取产品评论

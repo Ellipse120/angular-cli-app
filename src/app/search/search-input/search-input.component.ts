@@ -68,9 +68,11 @@ export class SearchInputComponent implements OnInit {
     }, false)
   }
 
-
   toggleA() {
     this.yslPopup.toggle(SearchAdvancedComponent)
+      .then(data => {
+        console.log('input search', data)
+      })
   }
   //关键字搜索
   keywordSubmit() {
