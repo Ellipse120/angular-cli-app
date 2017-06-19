@@ -62,6 +62,7 @@
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
         <textarea [(ngModel)]="commentRemark" placeholder="请输入您的评价..."></textarea>
+        <p class="ysl-error-tip text-right" *ngIf="commentError">{{commentError}}</p>
         <div class="push">
           <button class="ysl-btn push-btn" (click)="sendComment()">发布</button>
         </div>

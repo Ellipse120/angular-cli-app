@@ -29,6 +29,7 @@ export class DataDetailComponent implements OnInit{
   id: string;
   userId;
   commentRemark = '';
+  commentError = '';
   errataPopupOpt: any;
   productParams;
   productDetail;
@@ -124,6 +125,7 @@ export class DataDetailComponent implements OnInit{
             }
             this.productDetail['dataSince'] = this.productDetail['dataSince'] ? this.commonService.getDateForDay(this.productDetail['dataSince']): null;
             this.productDetail['dataUntil'] = this.productDetail['dataUntil'] ? this.commonService.getDateForDay(this.productDetail['dataUntil']): null;
+            this.productDetail.averageScore = this.productDetail.averageScore ? (this.productDetail.averageScore).toFixed(1) : undefined;
 
             this.isThumbsUp = this.productDetail.favor;
             this.favoredCount = this.productDetail.favoredCount;
@@ -197,10 +199,17 @@ export class DataDetailComponent implements OnInit{
 
   // 发表评价
   sendComment() {
-    if (!this.userId) { this.showLogin(); }
-    if (!this.commentRemark) { return }
+    this.commentError = '';
+    if (!this.userId) { this.showLogin(); return }
+    if (!this.commentRemark) {
+      this.commentError = '请填写评语';
+      return;
+    }
     for (let i = 0; i < this.score.length; i ++) {
-      if (!this.score[i].score) { return }
+      if (!this.score[i].score) {
+        this.commentError = '请打分';
+        return
+      }
     }
     let score = {productId: this.productParams.productId, data: {userId: this.userId}};
     this.score.forEach(item => {
@@ -230,7 +239,7 @@ export class DataDetailComponent implements OnInit{
             })
           }
           // let timeDis = (new Date).getTime() - item.modifiedOn;
-          item.averageScore = (item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4;
+          item.averageScore = ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4).toFixed(1);
           item.showSecond = false;
           // if (timeDis < 3600000) {
           //   item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
@@ -283,6 +292,7 @@ export class DataDetailComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return }
       this.cookie.putObject('yslUserInfo', result.userLoginInfo);
+      this.getProductDetail(this.productParams.productId);
     });
   }
 }
