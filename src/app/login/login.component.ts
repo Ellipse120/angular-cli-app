@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   isRem: boolean;             //记住账号
   loginId: string;
   loginMess = '登录';
+  loginFailed: string;
   loginFormError = {
     userAccount: '',
     userPassword: ''
@@ -55,7 +56,6 @@ export class LoginComponent implements OnInit {
 
   // 提交登录
   loginSubmit() {
-    console.log('reme', this.loginForm);
     if (!this.loginForm) { return }
     this.isLoginSubmit = true;
     const form = this.loginForm;
@@ -86,6 +86,9 @@ export class LoginComponent implements OnInit {
         if (path.includes('/register')) {
           this.router.navigate(['index'])
         }
+      }, error => {
+        this.loginMess = '登录';
+        this.loginFailed = '登录失败';
       })
   }
 
