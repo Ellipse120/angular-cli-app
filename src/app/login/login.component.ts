@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private dialogRef: MdDialogRef<LoginComponent>,
+    public dialogRef: MdDialogRef<LoginComponent>,
     private fb: FormBuilder,
     private httpServer: YslHttpService,
     private location: Location,
