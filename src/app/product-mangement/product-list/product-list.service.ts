@@ -21,7 +21,7 @@ export class ProductListService {
 
   getProductList(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.yslHttpservice.url + 'api/product/' + this.userId)
+      this.http.get(this.yslHttpservice.url + 'api/product?userId=' + this.userId)
         .toPromise()
         .then(res => resolve(res.json()))
         .catch(this.handleError)
