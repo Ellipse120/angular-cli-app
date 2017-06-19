@@ -79,12 +79,18 @@ export class LoginComponent implements OnInit {
     };
     this.httpServer.userLogin(submitData)
       .then((res) => {
+        this.cookie.remove('x-access-token');
         console.log('user id', res)
-        if (form.value['isRem']) { this.cookie.put('userAccount', res['loginId'])}
+        if (form.value['isRem']) {
+          // ae5125977d4a40269ce1abde1ad89951
+          this.cookie.put('userAccount', res['loginId']);
+
+        }
+        this.cookie.put('x-access-token', res['token']);
         this.dialogRef.close({userLoginInfo: res});
         const path = this.location.path();
         if (path.includes('/register')) {
-          this.router.navigate(['index'])
+          this.router.navigate(['index']);
         }
       }, error => {
         this.loginMess = '登录';
@@ -93,7 +99,8 @@ export class LoginComponent implements OnInit {
   }
 
   gotoRegitster(){
-    // todo
+    this.dialogRef.close();
+    this.router.navigate(['register'])
   }
 
   // 创建表单

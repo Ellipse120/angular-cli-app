@@ -9,11 +9,11 @@
           <li>官方网址：<a [href]="productDetail.orgWebSite" target="_blank">{{productDetail.orgWebSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
           <li>数据样本：<i class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</i><span *ngIf="!productDetail.sampleFilePath">无</span></li>
-          <li>数据类型：<i class="green" *ngIf="productDetail.dataCategory">{{productDetail['dataCategory']}}</i><span *ngIf="!productDetail.dataCategory">无</span></li>
-          <li>采集方式：<i class="green" *ngIf="productDetail.collectionMethod">{{productDetail['collectionMethod']}}</i><span *ngIf="!productDetail.collectionMethod">无</span></li>
-          <li>服务方式：<i class="green" *ngIf="productDetail.serviceMethod">{{productDetail['serviceMethod']}}</i><span *ngIf="!productDetail.serviceMethod">无</span></li>
-          <li>数据来源：<i class="green" *ngIf="productDetail.dataSource">{{productDetail['dataSource']}}</i><span *ngIf="!productDetail.dataSource">无</span></li>
-          <li>时间范围：<i class="green">{{productDetail['dataUntil']}}&nbsp;-&nbsp;{{productDetail['dataUntil']}}</i></li>
+          <li>数据类型：<i *ngIf="productDetail.dataCategory">{{productDetail['dataCategory']}}</i><span *ngIf="!productDetail.dataCategory">无</span></li>
+          <li>采集方式：<i *ngIf="productDetail.collectionMethod">{{productDetail['collectionMethod']}}</i><span *ngIf="!productDetail.collectionMethod">无</span></li>
+          <li>服务方式：<i *ngIf="productDetail.serviceMethod">{{productDetail['serviceMethod']}}</i><span *ngIf="!productDetail.serviceMethod">无</span></li>
+          <li>数据来源：<i *ngIf="productDetail.dataSource">{{productDetail['dataSource']}}</i><span *ngIf="!productDetail.dataSource">无</span></li>
+          <li>时间范围：<i *ngIf="productDetail.dataSince && productDetail.dataUntil">{{productDetail['dataSince']}}&nbsp;-&nbsp;{{productDetail['dataUntil']}}</i><i *ngIf="!(productDetail.dataSince && productDetail.dataUntil)">无</i></li>
           <!--<li class="tag-box">标签：<ul class="product-tag" *ngIf="productDetail['tags']?.length"><li *ngFor="let item of productDetail.tags;let last = last"><span class="tag-name color-blue">{{item.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li></ul><span *ngIf="!productDetail['tags']?.length">无</span></li>-->
         </ul>
       </div>
@@ -21,7 +21,7 @@
         <span class="tag-title"><i class="fa fa-tag"></i>&nbsp;标签</span>
         <ul class="product-tag" *ngIf="productDetail['tags']?.length">
           <li *ngFor="let item of productDetail.tags;">
-            <span class="tag-primary">{{item.name}}</span>
+            <span class="tag-primary">{{item.name}} &nbsp;<i class="fa fa-caret-right"></i></span>
             <ul>
               <li class="tag-sub tag-name" *ngFor="let itemc of item.items;let last = last"><span class="tag-name color-blue">{{itemc.name}}</span><span class="tag-dividing-line" *ngIf="!last">|</span></li>
             </ul>
@@ -38,7 +38,7 @@
 
     <!--纠错处理-->
     <div yslMenu class="add-product-errata">
-      <button class="zan-btn btn" [class.thumb-up]="isThumbsUp" (click)="thumbsUp()"><i class="fa fa-thumbs-up"></i> <i *ngIf="favoredCount">({{favoredCount}})</i>点赞</button>
+      <button class="zan-btn btn" [class.thumb-up]="isThumbsUp" (click)="thumbsUp()"><i class="fa fa-thumbs-up"></i> <i *ngIf="favoredCount">{{favoredCount}}</i>点赞</button>
       <button class="errata-btn btn" (click)="createErrata();$event.stopPropagation()"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;我要纠错</button>
       <div class="errata-edit-cont" ysl-popup></div>
     </div>
@@ -62,6 +62,7 @@
       <div class="comment-content">
         <h4 class="color-gray">评论内容</h4>
         <textarea [(ngModel)]="commentRemark" placeholder="请输入您的评价..."></textarea>
+        <p class="ysl-error-tip text-right" *ngIf="commentError">{{commentError}}</p>
         <div class="push">
           <button class="ysl-btn push-btn" (click)="sendComment()">发布</button>
         </div>
