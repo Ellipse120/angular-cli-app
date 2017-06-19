@@ -75,16 +75,12 @@
         <div class="form-group">
           <label>是否收费</label>
           <label *ngFor="let item of radioItems">
-            <input type="radio" name="options" (click)="item==='是' ? data.premium = 'true' :data.premium='false' ">{{item}}
+            <input type="radio" name="options" (click)="item==='是' ? data.premium = 'true' :data.premium='false' ">&nbsp;&nbsp;{{item}}
           </label>
 
         </div>
 
         <div class="form-group">
-          <label for="area">区域范围</label>
-          <select name="area" id="area" class="ysl-form-control" required
-                  [(ngModel)]="data.area" #area></select>
-
           <label>时间范围</label>
           <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
                         (dateChanged)="onDateFromChanged($event)"></my-date-picker>

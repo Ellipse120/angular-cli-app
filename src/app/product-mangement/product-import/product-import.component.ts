@@ -70,12 +70,10 @@ export class ProductImportComponent implements OnInit {
   model: Object = {date: {year: 2018, month: 10, day: 9}};
   userInfo;
 
-  @ViewChild(ProductListComponent)
-  private productListComponent: ProductListComponent;
-
   constructor(public service: YslHttpService,
               private productListService: ProductListService,
-              private cookie: CookieService) {
+              private cookie: CookieService,
+              private product: ProductListComponent) {
   }
 
   ngOnInit() {
@@ -89,13 +87,12 @@ export class ProductImportComponent implements OnInit {
 
 // 关闭弹框
   close() {
-    this.productListComponent.import = false;
+    this.product.import = false;
   }
 
 // 切换数据类型
   changeTab(i) {
     this.isActive = i;
-    console.log(i);
   }
 
   onDateFromChanged(event: IMyDateModel) {
@@ -113,9 +110,9 @@ export class ProductImportComponent implements OnInit {
   onSubmit() {
     this.data.userId = this.userInfo;
     this.productListService.doProductImport(this.data)
-      .then(() => {
+      .then(res => {
         this.close();
-        this.productListComponent.getProductList();
+        this.product.getProductList();
       });
   }
 

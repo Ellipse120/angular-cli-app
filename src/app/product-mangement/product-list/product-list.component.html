@@ -1,6 +1,6 @@
 <div class="promage-nav">
   <div class="mage-title">
-    <h3>产品列表</h3>
+    <div style="margin: 10px 0; font-size: .5rem; line-height: 0" >产品列表</div>
     <div class="ysl-search-box">
       <input type="text" class="content-search" placeholder="名称/简介">
       <button class="ysl-btn search-btn"></button>
@@ -82,11 +82,11 @@
         <ngx-datatable-column [width]="30" name="是否收费" prop="premium"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="状态" prop="status"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="更新时间" prop="modifiedOn"></ngx-datatable-column>
-        <ngx-datatable-column name="操作" prop="option" [width]="220">
+        <ngx-datatable-column name="操作" prop="option" [width]="160">
           <ng-template let-row="row" ngx-datatable-cell-template >
             <img style="width: 20px" (click)="openOrClose(row.$$index)" [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' " alt="">
             <a href="javascript:;" class="file">上传<input type="file"></a>
-            <a href="javascript:;" class="color-orange" (click)="viewInfo(row)">查看/修改 </a>
+            <a href="javascript:;" class="color-orange" (click)="viewInfo(row)">修改 </a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
