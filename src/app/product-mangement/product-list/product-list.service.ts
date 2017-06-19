@@ -5,6 +5,7 @@ import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {YslHttpService} from "../../core/ysl-http.service";
 import {CookieService} from "ngx-cookie";
+import {isUndefined} from "util";
 
 @Injectable()
 export class ProductListService {
@@ -21,10 +22,15 @@ export class ProductListService {
 
   getProductList(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.yslHttpservice.url + 'api/product?userId=' + this.userId)
-        .toPromise()
-        .then(res => resolve(res.json()))
-        .catch(this.handleError)
+      if (!isUndefined(this.userId)){
+        this.http.get(this.yslHttpservice.url + 'api/product?userId=' + this.userId)
+          .toPromise()
+          .then(res => resolve(res.json()))
+          .catch(this.handleError)
+      } else {
+        alert('请先登陆');
+        return;
+      }
     });
   }
 
