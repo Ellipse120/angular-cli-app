@@ -1,7 +1,7 @@
 <div>
   <div class="login-box">
+    <p class="login-title font24 color-gray"><span class="font18">用户登录</span><i class="fa fa-close font18" (click)="dialogRef.close()"></i></p>
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginSubmit()" novalidate>
-      <p class="login-title font24 color-gray"><span class="font18">用户登录</span><i class="fa fa-close font18" (click)="dialogRef.close()"></i></p>
       <input type="text" class="user-count" placeholder="帐号" formControlName="userAccount" required>
       <input type="password" class="user-psd" placeholder="密码" formControlName="userPassword" required>
       <div class="login-state">
