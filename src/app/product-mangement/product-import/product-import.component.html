@@ -45,12 +45,6 @@
         </div>
 
         <div class="form-group">
-          <label>数据样本</label>
-          <input type="file">
-          <!--<a href="javascript:;" class="file" id="sample">上传</a>-->
-        </div>
-
-        <div class="form-group">
 
           <label for="collection">采集方式</label>
           <select name="collection" id="collection" class="ysl-form-control" required
@@ -73,6 +67,12 @@
         </div>
 
         <div class="form-group">
+          <label>数据样本</label>
+          <input type="file" value="上传文件" class="upload-file">
+          <!--<a href="javascript:;" class="file" id="sample">上传</a>-->
+        </div>
+
+        <div class="form-group">
           <label>是否收费</label>
           <label *ngFor="let item of radioItems">
             <input type="radio" name="options" (click)="item==='是' ? data.premium = 'true' :data.premium='false' ">&nbsp;&nbsp;{{item}}
@@ -84,7 +84,7 @@
           <label>时间范围</label>
           <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
                         (dateChanged)="onDateFromChanged($event)"></my-date-picker>
-          -
+          &nbsp; - &nbsp;
           <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions"
                           (dateChanged)="onDateToChanged($event)"></my-date-picker>
         </div>
