@@ -73,8 +73,7 @@ export class ProductImportComponent implements OnInit {
   @ViewChild(ProductListComponent)
   private productListComponent: ProductListComponent;
 
-  constructor(public product: ProductListComponent,
-              public service: YslHttpService,
+  constructor(public service: YslHttpService,
               private productListService: ProductListService,
               private cookie: CookieService) {
   }
@@ -90,7 +89,7 @@ export class ProductImportComponent implements OnInit {
 
 // 关闭弹框
   close() {
-    this.product.import = false;
+    this.productListComponent.import = false;
   }
 
 // 切换数据类型
