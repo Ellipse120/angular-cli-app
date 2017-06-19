@@ -3,6 +3,7 @@
  */
 import {Directive, ViewContainerRef, ComponentFactoryResolver, ElementRef, ViewChild,
     HostListener} from "@angular/core";
+import {Input} from "@angular/core/src/metadata/directives";
 
 @Directive({
     selector: '[ysl-popup]'
@@ -21,44 +22,30 @@ export class YslPopupDirective {
     toggle(tpl) {
       return new Promise(resolve => {
         this.popupComponentFactory = this._cfr.resolveComponentFactory(tpl);
-        if (!this.isOpen) {
-          this.popupComponentRef = this._vcr.createComponent(this.popupComponentFactory);
-          setTimeout(() => {
+        setTimeout(() => {
+          if (!this.isOpen) {
+            this.popupComponentRef = this._vcr.createComponent(this.popupComponentFactory);
             this.isOpen = true;
-          })
-        } else {
-          this._vcr.clear();
-          setTimeout(() => {
+          } else {
+            this._vcr.clear();
             this.isOpen = false;
+          }
+          this.popupComponentRef.instance.popupClose.subscribe((e) => {
+            this.isOpen = false;
+            this.popupComponentRef.destroy(e);
+            resolve(e)
           })
-        }
-        this.popupComponentRef.instance.popupClose.subscribe((e) => {
-          this.isOpen = false;
-          this.popupComponentRef.destroy(e);
-          resolve(e)
         })
-        // setTimeout(() => {
-        //   this.isOpen = !this.isOpen;
-        //   console.log('boolean inner', this.isOpen)
-        //   this.popupComponentFactory = this._cfr.resolveComponentFactory(tpl);
-        //   if (this.isOpen) {
-        //     this.popupComponentRef = this._vcr.createComponent(this.popupComponentFactory);
-        //   } else {
-        //     this._vcr.clear();
-        //   }
-        //   this.popupComponentRef.instance.popupClose.subscribe((e) => {
-        //     this.isOpen = false;
-        //     this.popupComponentRef.destroy(e);
-        //     resolve(e)
-        //   })
-        // })
       })
     }
 
     @HostListener('document:click', ['$event'])
     onClick(btn: Event) {
-      // if (this._el.nativeElement.contains(event.target)) { return }
-      // this._vcr.clear();
-      // this.isOpen = false;
+      // console.log('dir contains', this._el.nativeElement.nextElementSibling.contains(event.target))
+      // console.log('parent next', this._el.nativeElement.nextElementSibling)
+      // console.log('target -------------', event.target)
+      if (!this.isOpen || this._el.nativeElement.nextElementSibling.contains(event.target)) { return }
+      this._vcr.clear();
+      this.isOpen = false;
     }
 }

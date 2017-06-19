@@ -1,6 +1,7 @@
 .index-cont{
   padding-top: 3rem;
   text-align: center;
+  min-height: 815px;
 }
 .logo{
   display: inline-block;

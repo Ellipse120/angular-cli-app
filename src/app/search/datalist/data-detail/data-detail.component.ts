@@ -9,6 +9,9 @@ import { Location } from '@angular/common';
 import { YslHttpService } from '../../../core/ysl-http.service'
 import {YslCommonService} from "../../../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
+import {YslPopupDirective} from "../../../core/Directive/ysl-popup.directive";
+import {ProductErrataComponent} from "./product-errata.component";
+import {SearchService} from "../../search.service";
 
 
 @Component({
@@ -19,10 +22,12 @@ import {CookieService} from "ngx-cookie";
 
 export class DataDetailComponent implements OnInit{
 
+  @ViewChild(YslPopupDirective)
+  private yslPopup: YslPopupDirective;
   id: string;
   userId;
   commentRemark = '';
-  errataRemark: string;
+  errataPopupOpt: any;
   productParams;
   productDetail;
   relatedProductList = [];
@@ -39,7 +44,8 @@ export class DataDetailComponent implements OnInit{
               private commonService: YslCommonService,
               private router: Router,
               private cookie: CookieService,
-              private location: Location) {
+              private location: Location,
+              private searchService: SearchService) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -123,13 +129,11 @@ export class DataDetailComponent implements OnInit{
   }
 
   // 纠错
-  submitErrata() {
-    if ((!this.errataRemark) || (!this.userId)) { return }
-    let option = {productId: this.productParams.productId, data: {userId: this.userId, status: this.productDetail.status, comment: this.errataRemark}};
-    console.log('remark', option)
-    this.service.createProductErrata(option)
-      .then(res => {
-        console.log('纠错成功', res)
+  createErrata() {
+    this.searchService.errataInfo = {productId: this.productParams.productId, userId: this.userId, status: this.productDetail.status};
+    this.yslPopup.toggle(ProductErrataComponent)
+      .then(data => {
+        console.log('errata', data)
       })
   }
 

@@ -11,7 +11,7 @@ import { IMyDpOptions } from "mydatepicker";
 
 import {SearchService} from "../search.service";
 import {YslPopupDirective} from "../../core/Directive/ysl-popup.directive";
-import {SearchAdvancedComponent} from "./searc-advanced.component";
+import {SearchAdvancedComponent} from "./search-advanced/search-advanced.component";
 
 
 @Component({
@@ -29,15 +29,7 @@ export class SearchInputComponent implements OnInit {
   keywordSearch: EventEmitter<any>;
   showAdvancedBox: EventEmitter<any>;
   keywordSearchForm: FormGroup;
-  advancedSearchForm: FormGroup;
-  isShowAdvancedBox = false;
   urlTarget = '';
-  advanceInfo = {
-    data_category: [],
-    data_source: [],
-    data_collection: [],
-    data_service: []
-  };
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd',
     inline: false,
@@ -63,17 +55,8 @@ export class SearchInputComponent implements OnInit {
   ngOnInit() {
     let path = this.location.path();
     this.createForm();
-    document.addEventListener('click', () => {
-      this.isShowAdvancedBox = false;
-    }, false)
   }
 
-  toggleA() {
-    this.yslPopup.toggle(SearchAdvancedComponent)
-      .then(data => {
-        console.log('input search', data)
-      })
-  }
   //关键字搜索
   keywordSubmit() {
     let navigationExtras: NavigationExtras = {
@@ -85,49 +68,10 @@ export class SearchInputComponent implements OnInit {
   }
 
   toggleAdvancedBox() {
-    this.isShowAdvancedBox = !this.isShowAdvancedBox;
-    this.showAdvancedBox.emit({isShowAdvancedBox: this.isShowAdvancedBox});
-    this.getAdvancedInfo();
-  }
-
-  // 获取高级搜索字段
-  getAdvancedInfo() {
-    this.service.getAdvancedSearchInfo()
-      .then((res) => {
-        let data: any = res;
-        let advanced = this.advanceInfo;
-
-        for (const type in advanced) {
-          data.forEach((item) => {
-            if (item.categoryCode == type) {
-              this.advanceInfo[type].push(item)
-            }
-          })
-        }
-        this.searchService.advancedKeys = this.advanceInfo;
-      })
-  }
-
-  // 提交高级搜索
-  advancedSearchSubmit() {
-    if (!this.advancedSearchForm) { return }
-    let form = this.advancedSearchForm;
-    let data = {};
-    for (const key in form.value) {
-      if (form.value[key]) {
-        if (form.value[key] instanceof Object) {
-          data[key] = form.value[key].epoc;
-          console.log('date', form.value[key])
-        } else {
-          data[key] = form.value[key];
-        }
-      }
-    }
-
-    let navigationExtras: NavigationExtras = {
-      queryParams: data
-    }
-    this.router.navigate(['datalist'], navigationExtras)
+    this.yslPopup.toggle(SearchAdvancedComponent);
+    // this.isShowAdvancedBox = !this.isShowAdvancedBox;
+    // this.showAdvancedBox.emit({isShowAdvancedBox: this.isShowAdvancedBox});
+    // this.getAdvancedInfo();
   }
 
   //创建表单
@@ -135,35 +79,5 @@ export class SearchInputComponent implements OnInit {
     this.keywordSearchForm = this.fb.group({
       keyword: [this.keywordSearchOption.keyword, Validators.required]
     });
-    this.advancedSearchForm = this.fb.group({
-      keyword: '',
-      dataSource: '',
-      premium: '',
-      dataCategory: '',
-      serviceMethod: '',
-      collectionMethod: '',
-      sampleFileProvided: '',
-      dataSince: null,
-      dataUntil: null
-    })
   }
-
-  // my-date-picker
-  setDate(): void {
-    // Set today date using the setValue function
-    let date = new Date();
-    this.keywordSearchForm.setValue({dataSince: {
-      date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()}
-    }});
-    this.keywordSearchForm.setValue({dataUntil: {
-      date: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()}
-    }});
-  }
-
 }

@@ -11,6 +11,7 @@
 .add-product-errata{
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
 .errata-btn,.zan-btn{
   -webkit-border-radius:10px;
@@ -28,41 +29,6 @@
 }
 .thumb-up{
   color: #40bf52;
-}
-.errata-write{
-  width: 450px;
-  height: 135px;
-  background: url("../../../../assets/images/errorbox.png") no-repeat;
-  -webkit-background-size:100% 100%;
-  background-size:100% 100%;
-  padding: 20px;
-  position: absolute;
-  z-index: 1000;
-}
-.no-border{
-  border:none;
-  outline: none;
-  width: 100%;
-}
-.error-area{
-  min-height: 70px;
-  font-family: '微软雅黑';
-  font-size: 12px;
-  line-height: 24px;
-}
-.error-submit{
-  width: 50px;
-  line-height: 20px;
-  background: #39baf6;
-  text-align: center;
-  color: #fff;
-  position: absolute;
-  bottom: 20px;
-  right:20px;
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  border-radius:5px;
-  cursor: pointer;
 }
 .write-comment h5{
   font-size: 16px;
