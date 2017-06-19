@@ -99,7 +99,8 @@ export class LoginComponent implements OnInit {
   }
 
   gotoRegitster(){
-    // todo
+    this.dialogRef.close();
+    this.router.navigate(['register'])
   }
 
   // 创建表单

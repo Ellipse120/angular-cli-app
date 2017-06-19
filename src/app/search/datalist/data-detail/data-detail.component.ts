@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/5/10.
  */
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router, NavigationStart} from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -12,6 +12,8 @@ import {CookieService} from "ngx-cookie";
 import {YslPopupDirective} from "../../../core/directive/ysl-popup.directive";
 import {ProductErrataComponent} from "./product-errata.component";
 import {SearchService} from "../../search.service";
+import {LoginComponent} from "../../../login/login.component";
+import {MdDialog} from "@angular/material";
 
 
 @Component({
@@ -45,7 +47,8 @@ export class DataDetailComponent implements OnInit{
               private router: Router,
               private cookie: CookieService,
               private location: Location,
-              private searchService: SearchService) {
+              private searchService: SearchService,
+              private dialog: MdDialog) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -60,7 +63,16 @@ export class DataDetailComponent implements OnInit{
   ngOnInit(): void {
     this.productParams = this.route.snapshot.params;
     this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    this.getProductDetail();
+    this.getProductDetail(this.productParams.productId);
+    this.router.events.subscribe(e => {
+      console.log('outer event re', e)
+      if (e instanceof NavigationStart) {
+        this.getProductDetail(this.productParams.productId)
+        window.scroll(0,0);
+        console.log('product detail', e)
+      }
+    })
+    window.scroll(0, 0);
   }
 
   // 搜索
@@ -69,55 +81,56 @@ export class DataDetailComponent implements OnInit{
   }
 
   // 获取详情信息
-  getProductDetail() {
-    this.searchService.getAdvancedInfo();
-    let advancedKey = this.searchService.advancedKeys;
-    console.log('advancedKey', advancedKey);
-    this.service.getProductDetail(this.productParams.productId)
-      .then(res => {
-        this.productDetail = res;
-        this.productDetail.premium = this.productDetail.premium ? '是' : '否';
-        this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
-        for (const key in advancedKey) {
-          switch (key) {
-            case 'data_category':
-              advancedKey[key].forEach(item => {
-                if (this.productDetail['dataCategory'] ==item.entryCode) {
-                  this.productDetail['dataCategory'] = item.entryValue;
-                }
-              })
+  getProductDetail(productId) {
+    this.searchService.getAdvancedInfo()
+      .then(data => {
+        let advancedKey = data;
+        this.service.getProductDetail(productId)
+          .then(res => {
+            this.productDetail = res;
+            this.productDetail.premium = this.productDetail.premium ? '是' : '否';
+            this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
+            for (const key in advancedKey) {
+              switch (key) {
+                case 'data_category':
+                  advancedKey[key].forEach(item => {
+                    if (this.productDetail['dataCategory'] ==item.entryCode) {
+                      this.productDetail['dataCategory'] = item.entryValue;
+                    }
+                  })
                   break;
-            case 'data_collection':
-              advancedKey[key].forEach(item => {
-                if (this.productDetail['collectionMethod'] == item.entryCode) {
-                  this.productDetail['collectionMethod'] = item.entryValue;
-                }
-              })
-              break;
-            case 'data_service':
-              advancedKey[key].forEach(item => {
-                if (this.productDetail['serviceMethod'] == item.entryCode) {
-                  this.productDetail['serviceMethod'] = item.entryValue;
-                }
-              })
-              break;
-            case 'data_source':
-              advancedKey[key].forEach(item => {
-                if (this.productDetail['dataSource'] == item.entryCode) {
-                  this.productDetail['dataSource'] = item.entryValue;
-                }
-              })
-              break;
-          }
-        }
-        this.productDetail['dataSince'] = this.commonService.getDateForDay(this.productDetail['dataSince']);
-        this.productDetail['dataUntil'] = this.commonService.getDateForDay(this.productDetail['dataUntil']);
-        this.isThumbsUp = this.productDetail.favor;
-        this.favoredCount = this.productDetail.favoredCount;
-        this.getRelatedProducts();
-        this.getComment();
-        console.log('day', this.commonService.getDateForDay(this.productDetail['dataUntil']))
-      });
+                case 'data_collection':
+                  advancedKey[key].forEach(item => {
+                    if (this.productDetail['collectionMethod'] == item.entryCode) {
+                      this.productDetail['collectionMethod'] = item.entryValue;
+                    }
+                  })
+                  break;
+                case 'data_service':
+                  advancedKey[key].forEach(item => {
+                    if (this.productDetail['serviceMethod'] == item.entryCode) {
+                      this.productDetail['serviceMethod'] = item.entryValue;
+                    }
+                  })
+                  break;
+                case 'data_source':
+                  advancedKey[key].forEach(item => {
+                    if (this.productDetail['dataSource'] == item.entryCode) {
+                      this.productDetail['dataSource'] = item.entryValue;
+                    }
+                  })
+                  break;
+              }
+            }
+            this.productDetail['dataSince'] = this.productDetail['dataSince'] ? this.commonService.getDateForDay(this.productDetail['dataSince']): null;
+            this.productDetail['dataUntil'] = this.productDetail['dataUntil'] ? this.commonService.getDateForDay(this.productDetail['dataUntil']): null;
+
+            this.isThumbsUp = this.productDetail.favor;
+            this.favoredCount = this.productDetail.favoredCount;
+            this.getRelatedProducts();
+            this.getComment();
+          });
+      })
   }
 
   // 下载数据样本
@@ -139,14 +152,18 @@ export class DataDetailComponent implements OnInit{
 
   // 查看相关产品详情
   relatedProductDetail(item) {
-    console.log('item', item)
+    console.log('related', item)
     this.router.navigate(['/datadetail', {productId: item.productId}]);
-    window.location.reload();
+    this.getProductDetail(item.productId);
+    window.scroll(0,0)
   }
 
   // 点赞
   thumbsUp() {
-    if (!this.userId) { return }
+    if (!this.userId) {
+      this.showLogin();
+      return
+    }
     this.isThumbsUp = !this.isThumbsUp;
     let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': this.userId}};
     this.service.createProductFavor(option)
@@ -167,6 +184,10 @@ export class DataDetailComponent implements OnInit{
 
   // 纠错
   createErrata() {
+    if (!this.userId) {
+      this.showLogin();
+      return
+    }
     this.searchService.errataInfo = {productId: this.productParams.productId, userId: this.userId, status: this.productDetail.status};
     this.yslPopup.toggle(ProductErrataComponent)
       .then(data => {
@@ -176,7 +197,8 @@ export class DataDetailComponent implements OnInit{
 
   // 发表评价
   sendComment() {
-    if (!this.userId || (!this.commentRemark)) { return }
+    if (!this.userId) { this.showLogin(); }
+    if (!this.commentRemark) { return }
     for (let i = 0; i < this.score.length; i ++) {
       if (!this.score[i].score) { return }
     }
@@ -190,7 +212,7 @@ export class DataDetailComponent implements OnInit{
     console.log('comment pass')
     this.service.addProductComment(score)
       .then(res => {
-        this.getProductDetail();
+        this.getProductDetail(this.productParams.productId);
       })
   }
 
@@ -225,6 +247,10 @@ export class DataDetailComponent implements OnInit{
   }
 
   showReply(ind) {
+    if (!this.userId) {
+      this.showLogin();
+      return
+    }
     let isShow = this.productComment['items'][ind]['showSecond'];
     console.log('form', this.productComment)
     this.productComment['items'].forEach(item => {
@@ -240,12 +266,23 @@ export class DataDetailComponent implements OnInit{
 
   // 回复评论
   replyComment(common, ind) {
-    if (!this.replyCommentCont || (!this.userId)) { return }
+    if (!this.userId) { this.showLogin(); }
+    if (!this.replyCommentCont) { return }
     let option = {productId: this.productDetail.productId, data: {remark: this.replyCommentCont, replyTo: common.id, userId: this.userId}};
     this.service.addProductComment(option)
       .then(res => {
         this.productComment['items'][ind]['showSecond'] = false;
-        this.getProductDetail();
+        this.getProductDetail(this.productDetail.productId);
       })
+  }
+
+  // 未登录处理
+  //  显示登录框
+  showLogin(): void {
+    let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) { return }
+      this.cookie.putObject('yslUserInfo', result.userLoginInfo);
+    });
   }
 }

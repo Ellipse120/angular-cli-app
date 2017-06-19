@@ -22,19 +22,22 @@ export class SearchService implements OnInit{
   }
 
   getAdvancedInfo() {
-    this.httpService.getAdvancedSearchInfo()
-      .then((res) => {
-        let data: any = res;
-        let advanced = this.advancedKeys;
+    return new Promise(resolve => {
+      this.httpService.getAdvancedSearchInfo()
+        .then((res) => {
+          let data: any = res;
+          let advanced = this.advancedKeys;
 
-        for (const type in advanced) {
-          data.forEach((item) => {
-            if (item.categoryCode == type) {
-              this.advancedKeys[type].push(item)
-            }
-          })
-        }
-        // this.searchService.advancedKeys = this.advanceInfo;
-      })
+          for (const type in advanced) {
+            data.forEach((item) => {
+              if (item.categoryCode == type) {
+                this.advancedKeys[type].push(item)
+              }
+            })
+          }
+          resolve(this.advancedKeys)
+          // this.searchService.advancedKeys = this.advanceInfo;
+        })
+    })
   }
 }
