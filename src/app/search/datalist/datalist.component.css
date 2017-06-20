@@ -219,6 +219,12 @@
   margin-right: 5px;
 }
 @media screen and (max-width: 768px) {
+  .data-list-area{
+    padding-left: 15px;
+  }
+  .search-condition-type{
+    margin-left: 15px;
+  }
   .data-list{
     padding-left: 0;
   }

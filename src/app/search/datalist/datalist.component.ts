@@ -127,6 +127,7 @@ export class DatalistComponent implements OnInit {
     this.searchConditionIndex = i;
     this.searchOptions['dataSince'] = item.value ? (new Date(item.value)).getTime() : undefined;
     this.getProjectList();
+    this.sideNav.close();
   }
 
   // 时间段搜索
