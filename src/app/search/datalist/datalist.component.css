@@ -2,10 +2,6 @@
   margin-top: 18px;
   display: flex;
 }
-.search-condition-xs{
-  margin-top: 16px;
-  font-size: 20px;
-}
 .search-condition-type{
   width: 150px;
   padding-bottom: 10px;
@@ -118,20 +114,25 @@
   border-radius: 0;
 }
 .find-result{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
   margin-bottom: 0;
   color: #666;
   font-size: 12px;
 }
 .find-result .filter{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.find-result .fa-filter{
+  font-size: 14px;
+}
+.find-result .sort-by-date{
   position: relative;
   width: 110px;
   height: 24px;
   cursor: pointer;
 }
-.find-result .filter:hover .sort-list{
+.find-result .sort-by-date:hover .sort-list{
   display: block;
 }
 .find-result .fa{

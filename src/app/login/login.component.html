@@ -1,9 +1,9 @@
 <div>
   <div class="login-box">
     <p class="login-title font24 color-gray"><span class="font18">用户登录</span><i class="fa fa-close font18" (click)="dialogRef.close()"></i></p>
-    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginSubmit()" novalidate>
-      <input type="text" class="user-count" placeholder="帐号" formControlName="userAccount" required>
-      <input type="password" class="user-psd" placeholder="密码" formControlName="userPassword" required>
+    <form class="login-form form-horizontal" [formGroup]="loginForm" (ngSubmit)="loginSubmit()" novalidate>
+      <input type="text" class="user-count form-control" placeholder="帐号" formControlName="userAccount" required>
+      <input type="password" class="user-psd form-control" placeholder="密码" formControlName="userPassword" required>
       <div class="login-state">
         <label for="auto-login" class="color-gray"><input type="checkbox" id="auto-login" formControlName="isRem"> 记住帐号</label>
         <a class="forget-psd">忘记密码? </a>
@@ -13,7 +13,7 @@
         <span *ngIf="!loginFormError.userAccount && loginFormError.userPassword">{{loginFormError.userPassword}}</span>
       </div>
       <P class="error-group ysl-error-tip" *ngIf="loginForm.valid && loginFailed">{{loginFailed}}</P>
-      <button class="login ysl-btn">{{loginMess}}</button>
+      <button class="login ysl-btn col-xs-12">{{loginMess}}</button>
       <p class="text-center register-link">还没有帐号？ <a class="color-blue" (click)="gotoRegitster()" >点击注册</a></p>
     </form>
   </div>

@@ -390,6 +390,25 @@ footer{
 .ngx-datatable.fixed-row .datatable-scroll{
   width: 100% !important;
 }
+.dataShow .mat-sidenav,.dataShow .mat-sidenav-content{
+  height: calc(100vh - 60px);
+}
+.dataShow .mat-sidenav{
+  margin-left: -15px;
+  padding: 0 15px;
+}
+.mat-sidenav-container{
+  z-index: 2;
+}
+.mat-sidenav-container .mat-sidenav-content{
+  margin-right: -15px;
+}
+.mat-sidenav-container .mat-sidenav-content::-webkit-scrollbar{
+  color: transparent;
+}
+.mat-sidenav-container .mat-sidenav-content::-webkit-scrollbar-corner{
+  color: transparent;
+}
 
 /*用户信息查看*/
 .info-box{

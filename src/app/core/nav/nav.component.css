@@ -123,12 +123,43 @@
   padding: 0;
   width: 1.2rem;
 }
+.phone-area{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.phone-nav{
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  z-index: 10;
+}
+.phone-nav ul{
+  margin-bottom: 0;
+}
+.phone-nav li{
+  height: 36px;
+  line-height: 36px;
+  color: #fff;
+  cursor: pointer;
+  padding-right: 15px;
+}
+.after-login-xs{
+  padding-left: 12px;
+}
+.phone-nav li:hover{
+  color: rgba(255,255,255,0.7);
+}
+.phone-area:hover .phone-nav{
+  display: block;
+}
 @media screen and (max-width: 768px) {
   .head-right{
     display: none;
   }
-  .visible-xs-block{
-    display: block !important;
+  .phone-area{
+    display: flex !important;
   }
 }
 

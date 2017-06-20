@@ -1,6 +1,34 @@
-<div class="dataShow container">
+<md-sidenav-container class="dataShow container">
   <!--列表页-->
-  <div class="search-condition-xs visible-xs-block"><span class="fa fa-filter ysl-text-dark-blue"></span></div>
+  <md-sidenav #yslSideNav>
+    <div class="search-condition-type">
+      <p class="search-condition-title"><i class="fa fa-calendar" aria-hidden="true"></i>时间</p>
+      <ul>
+        <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
+          <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
+        </li>
+        <!--<li class="search-condition-type-item">-->
+        <!--<form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>-->
+        <!--<input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>-->
+        <!--</form>-->
+        <!--</li>-->
+      </ul>
+    </div>
+    <div class="search-condition-type sort-by-tag">
+      <p class="search-condition-title"><i class="fa fa-tag" aria-hidden="true"></i>标签</p>
+      <ul *ngIf="tagSortList.length">
+        <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
+          <span class="search-condition-parent">{{t.name}}</span>
+          <ul class="search-condition-sub">
+            <li *ngFor="let c of t.items">
+              <p class="readonly" *ngIf="currSortTag != c.name" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
+              <p class="readonly active" *ngIf="currSortTag == c.name"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter();"></i></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </md-sidenav>
   <div class="data-list-area clearfix">
     <!--搜索菜单-->
     <div class="search-condition hidden-xs">
@@ -34,12 +62,15 @@
     </div>
     <div class="data-list">
       <div class="find-result">
-        <span class="result">一共找到{{product.totalLength}}个符合条件的数据产品</span>
+        <p class="result">一共找到{{product.totalLength}}个符合条件的数据产品</p>
         <div class="filter">
-          <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
-          <ul class="sort-list">
-            <li *ngFor="let item of sortList; let i = index" [class.active]="item == currSortItem" (click)="productSort(item)">{{item.text}}</li>
-          </ul>
+          <span class="visible-xs-block fa fa-filter" (click)="openSideNav()"></span>
+          <div class="sort-by-date">
+            <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
+            <ul class="sort-list">
+              <li *ngFor="let item of sortList; let i = index" [class.active]="item == currSortItem" (click)="productSort(item)">{{item.text}}</li>
+            </ul>
+          </div>
         </div>
       </div>
       <ul>
@@ -66,4 +97,4 @@
                            nextLabel=">"></pagination-controls>
     </div>
   </div>
-</div>
+</md-sidenav-container>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router, ActivatedRoute, Params, NavigationExtras} from '@angular/router';
 
@@ -14,6 +14,7 @@ import {SearchService} from "../search.service";
 })
 export class DatalistComponent implements OnInit {
 
+  @ViewChild('yslSideNav') sideNav;
   yearSearchForm: FormGroup;
   state = false;
   limit;
@@ -67,6 +68,11 @@ export class DatalistComponent implements OnInit {
     this.createForm();
   }
 
+  // 侧边栏
+  openSideNav() {
+    this.sideNav.open()
+  }
+
   // 获取产品列表
   getProjectList() {
     if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined}
@@ -80,8 +86,6 @@ export class DatalistComponent implements OnInit {
         this.product['dateFacets'].forEach((item, ind) => {
           this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
         })
-        console.log('date list test', this.searchCondition);
-        console.log('date list service', this.product['dateFacets']);
         this.tagSortList = this.product['tagFacets'];
         this.searchCondition.unshift({text: '时间不限', value: undefined});
         // this.product.items[0].tags = [{name: 'test', id: '1'}, {name: 'test2', id: '2'}, {name: 'test', id: '1'}];
@@ -106,6 +110,7 @@ export class DatalistComponent implements OnInit {
     this.currSortTag = item.name;
     this.searchOptions['tagId'] = item.id;
     this.getProjectList();
+    this.sideNav.close();
   }
 
   // 关键字搜索
@@ -160,6 +165,7 @@ export class DatalistComponent implements OnInit {
     this.searchOptions['tagId'] = undefined;
     this.currSortTag = '';
     this.getProjectList();
+    this.sideNav.close();
   }
 
   // 排序

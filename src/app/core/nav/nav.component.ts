@@ -2,12 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
 import { Location } from '@angular/common';
 
-import {MdDialog, MdMenuTrigger} from '@angular/material';
+import {MdDialog} from '@angular/material';
 
 import { LoginComponent } from '../../login/login.component';
 import {SearchService} from '../../search/search.service';
 import {YslHttpService} from '../ysl-http.service';
 import {CookieService} from 'ngx-cookie';
+import {YslPopupDirective} from "../directive/ysl-popup.directive";
 
 
 @Component({
@@ -19,7 +20,6 @@ import {CookieService} from 'ngx-cookie';
 
 export class NavComponent implements OnInit {
 
-  @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
   isShowSearch = false;
   user = [];
   loginState: any;
@@ -46,10 +46,6 @@ export class NavComponent implements OnInit {
     this.eventEmit.loginEvent.subscribe(() => {
       this.showLogin();
     })
-  }
-
-  someMethod(elem) {
-    this.trigger.openMenu();
   }
 
   //  显示登录框

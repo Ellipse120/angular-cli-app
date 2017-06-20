@@ -1,6 +1,6 @@
 /*详情页*/
 .container{
-  padding: 30px 0 60px;
+  padding: 30px 15px 60px;
 }
 .detail-left{
   padding-bottom: 50px;
@@ -40,7 +40,7 @@
 }
 .data-info{
   width: 100%;
-  padding: 30px 15px 0 15px;
+  padding-top: 30px;
 }
 .firmlogo{
   display: flex;
@@ -390,6 +390,15 @@ textarea::-webkit-input-placeholder{
   .firmlogo{
     display: flex;
     float: none;
+  }
+  .product-tag li{
+    flex-direction: column;
+  }
+  .product-tag .tag-primary{
+    margin-bottom: 5px;
+  }
+  .product-tag .tag-primary .fa-caret-right{
+    transform: rotate(90deg);
   }
   .firm-detail{
     width: 100%;

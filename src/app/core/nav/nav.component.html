@@ -19,19 +19,20 @@
       </li>
     </ul>
   </div>
-  <div class="visible-xs-block clearfix">
-    <button class="btn" [mdMenuTriggerFor]="afterLoginXs" (click)="someMethod(afterLoginXs)"><i class="fa fa-user-o"></i></button>
-    <md-menu #afterLoginXs="mdMenu" yPosition="above" xPosition="after">
-      <ul class="after-login-xs" *ngIf="loginState">
+  <div class="visible-xs-block clearfix phone-area">
+    <button class="btn phone-user"><i class="fa fa-user-o"></i></button>
+    <div class="phone-nav">
+      <ul class="after-login-xs" *ngIf="!loginState">
         <li (click)="showLogin()">登录</li>
         <li>注册</li>
       </ul>
-      <ul class="after-login-xs" *ngIf="!loginState">
+      <ul class="after-login-xs" *ngIf="loginState" [ngStyle]="subnavStyle">
+        <li *ngIf="loginInfo.userType == '30'" routerLink="/operation">运营中心</li>
+        <li *ngIf="loginInfo.userType == '20'" routerLink="/promange">产品管理</li>
         <li routerLink="/usercenter">个人中心</li>
-        <li (click)="logout()">退出</li>
+        <li (click)="logout()">安全退出</li>
       </ul>
-    </md-menu>
-
+    </div>
   </div>
 </nav>
 

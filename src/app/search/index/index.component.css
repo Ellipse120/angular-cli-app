@@ -69,10 +69,13 @@
 }
 
 /*修改*/
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1200px){
   .ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
+  }
+  .ysl-logo{
+    height: 120px;
   }
   ::-webkit-scrollbar{
     color: transparent;
@@ -81,13 +84,16 @@
     color: transparent;
   }
 }
-@media screen and (max-width: 1200px){
+@media screen and (max-width: 768px){
   .ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
   }
   .ysl-logo{
-    height: 120px;
+    height: 86px;
+  }
+  .logo{
+    margin-bottom: 25px;
   }
   ::-webkit-scrollbar{
     color: transparent;
