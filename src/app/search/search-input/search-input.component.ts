@@ -30,6 +30,7 @@ export class SearchInputComponent implements OnInit {
   showAdvancedBox: EventEmitter<any>;
   keywordSearchForm: FormGroup;
   urlTarget = '';
+  isShowAdvancedBox: boolean;
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd',
     inline: false,
@@ -61,7 +62,7 @@ export class SearchInputComponent implements OnInit {
   keywordSubmit() {
     let navigationExtras: NavigationExtras = {
       queryParams: this.keywordSearchForm.value
-    }
+    };
     this.router.navigate(['datalist'], navigationExtras);
     // this.keywordSearchOption.keyword = this.keywordSearchForm.get('keyword').value;
     // this.keywordSearch.emit(this.keywordSearchOption)

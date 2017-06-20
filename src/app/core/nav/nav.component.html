@@ -1,4 +1,4 @@
-<nav class="ysl-header container">
+<nav class="ysl-header container" [ngStyle]="headerStyle">
   <div class="head-left hidden-xs" routerLink="/index"></div>
   <!--class="head-left"-->
   <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>

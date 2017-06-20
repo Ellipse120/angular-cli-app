@@ -50,9 +50,10 @@ export class IndexComponent implements OnInit {
   }
 
   // 切换高级搜索
-  showAdvancedBox(isShow) {
-    this.indexContStyle = isShow.isShowAdvancedBox ? {minHeight: '977px'} : {minHeight: 0}
-  }
+  // showAdvancedBox(isShow) {
+  //   console.log('toggle style')
+  //   this.indexContStyle = isShow.isShowAdvancedBox ? {minHeight: '977px'} : {minHeight: 0}
+  // }
 
   // 搜索跳转页面
   toDataList() {

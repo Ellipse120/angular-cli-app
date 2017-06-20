@@ -4,7 +4,6 @@
 .ysl-header{
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 60px;
 }
 
@@ -125,14 +124,17 @@
   width: 1.2rem;
 }
 @media screen and (max-width: 768px) {
-  .ysl-header{
-    justify-content: space-between;
-  }
   .head-right{
     display: none;
   }
   .visible-xs-block{
     display: block !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .ysl-header{
+    justify-content: space-between !important;
   }
 }
 

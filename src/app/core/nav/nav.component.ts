@@ -24,7 +24,8 @@ export class NavComponent implements OnInit {
   user = [];
   loginState: any;
   loginInfo: any;
-  subnavStyle: {};
+  subnavStyle =  {};
+  headerStyle = {};
 
   constructor(private router: Router,
               private dialog: MdDialog,
@@ -89,8 +90,10 @@ export class NavComponent implements OnInit {
       if(e instanceof NavigationStart) {
         this.isShowSearch = (e.url.includes('/index') || e.url.includes('/register'))  || e.url == '/' ? false : true;
         if (e.url.includes('/index') || e.url == '/') {
+          this.headerStyle = {justifyContent: 'flex-end'};
           this.subnavStyle = {background: 'rgba(0,0,0,0.3)'}
         } else {
+          this.headerStyle = {justifyContent: 'space-between'};
           this.subnavStyle = {background: '#3f3f3f'}
         }
       }
