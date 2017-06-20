@@ -22,7 +22,7 @@
   <div class="visible-xs-block clearfix phone-area">
     <button class="btn phone-user"><i class="fa fa-user-o"></i></button>
     <div class="phone-nav">
-      <ul class="after-login-xs" *ngIf="!loginState">
+      <ul class="after-login-xs" *ngIf="!loginState" [ngStyle]="subnavStyle">
         <li (click)="showLogin()">登录</li>
         <li>注册</li>
       </ul>

@@ -121,7 +121,7 @@
 .find-result .filter{
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .find-result .fa-filter{
   font-size: 14px;
@@ -221,5 +221,8 @@
 @media screen and (max-width: 768px) {
   .data-list{
     padding-left: 0;
+  }
+  .find-result .filter{
+    justify-content: space-between;
   }
 }
