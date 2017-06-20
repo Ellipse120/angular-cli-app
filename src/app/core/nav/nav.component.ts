@@ -43,6 +43,9 @@ export class NavComponent implements OnInit {
       this.loginInfo = {userType: ''}
     }
     this.setNavStyle();
+    this.eventEmit.loginEvent.subscribe(() => {
+      this.showLogin();
+    })
   }
 
   someMethod(elem) {
@@ -56,6 +59,7 @@ export class NavComponent implements OnInit {
       if (!result) { return }
       this.loginInfo = result.userLoginInfo;
       this.cookie.putObject('yslUserInfo', this.loginInfo);
+      this.eventEmit.loginSuccessEvent.emit();
       this.loginState = true;
     });
   }

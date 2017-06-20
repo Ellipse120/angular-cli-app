@@ -12,8 +12,6 @@ import {CookieService} from "ngx-cookie";
 import {YslPopupDirective} from "../../../core/directive/ysl-popup.directive";
 import {ProductErrataComponent} from "./product-errata.component";
 import {SearchService} from "../../search.service";
-import {LoginComponent} from "../../../login/login.component";
-import {MdDialog} from "@angular/material";
 
 
 @Component({
@@ -48,8 +46,7 @@ export class DataDetailComponent implements OnInit{
               private router: Router,
               private cookie: CookieService,
               private location: Location,
-              private searchService: SearchService,
-              private dialog: MdDialog) {
+              private searchService: SearchService) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -62,18 +59,25 @@ export class DataDetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.getUserId();
     this.productParams = this.route.snapshot.params;
-    this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.getProductDetail(this.productParams.productId);
+    this.searchService.loginSuccessEvent.subscribe(() => {
+      this.getUserId();
+    })
     this.router.events.subscribe(e => {
-      console.log('outer event re', e)
       if (e instanceof NavigationStart) {
         this.getProductDetail(this.productParams.productId)
         window.scroll(0,0);
-        console.log('product detail', e)
       }
-    })
+    });
     window.scroll(0, 0);
+  }
+
+  // 获取用户ID
+  getUserId() {
+    this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    console.log('get user id func', this.cookie.getObject('yslUserInfo'), this.userId)
   }
 
   // 搜索
@@ -288,11 +292,6 @@ export class DataDetailComponent implements OnInit{
   // 未登录处理
   //  显示登录框
   showLogin(): void {
-    let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) { return }
-      this.cookie.putObject('yslUserInfo', result.userLoginInfo);
-      this.getProductDetail(this.productParams.productId);
-    });
+    this.searchService.loginEvent.emit();
   }
 }

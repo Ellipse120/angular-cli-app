@@ -6,6 +6,8 @@ export class SearchService implements OnInit{
 
   public keyword: string;
   public keywordSearch: EventEmitter<any> = new EventEmitter<any>();
+  public loginEvent = new EventEmitter<any>();      // 详情页未登录评论等操作响应登录事件
+  public loginSuccessEvent = new EventEmitter<any>();     // 登录成功后返回给详情页响应
   public errataInfo: any;
   public advancedKeys = {
     data_category: [],

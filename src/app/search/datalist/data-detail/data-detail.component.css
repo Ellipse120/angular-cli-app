@@ -235,7 +235,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border-bottom: 1px solid #d8e5e7;
   padding-bottom: 20px;
   margin: 10px 10px 0 10px;
 }
@@ -261,10 +260,10 @@ textarea::-webkit-input-placeholder{
 textarea:-ms-input-placeholder{
   color: #ddd;
 }
-.comment-list li{
+.comment-list>li{
   border-bottom: 1px solid #eee;
 }
-.comment-list li:last-of-type{
+.comment-list>li:last-of-type{
   border-bottom: none;
 }
 .second-comment-list li{
@@ -273,9 +272,6 @@ textarea:-ms-input-placeholder{
   border-top: 1px solid #eee;
   color: #666;
   margin: 0 10px;
-}
-.second-comment-list li:first-of-type{
-  border-top: none;
 }
 .stars-list{
   margin: 0;

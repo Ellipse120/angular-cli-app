@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {YslHttpService} from '../core/ysl-http.service';
 import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie";
+import {SearchService} from "../search/search.service";
 
 
 @Component({
@@ -80,11 +81,9 @@ export class LoginComponent implements OnInit {
     this.httpServer.userLogin(submitData)
       .then((res) => {
         this.cookie.remove('x-access-token');
-        console.log('user id', res)
         if (form.value['isRem']) {
           // ae5125977d4a40269ce1abde1ad89951
           this.cookie.put('userAccount', res['loginId']);
-
         }
         this.cookie.put('x-access-token', res['token']);
         this.dialogRef.close({userLoginInfo: res});

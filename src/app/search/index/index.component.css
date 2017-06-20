@@ -3,10 +3,16 @@
   text-align: center;
   min-height: 600px;
 }
+.ysl-logo{
+  height: 166px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
 .logo{
   display: inline-block;
   height: auto;
-  width: 3.111rem;
+  width: 112px;
   min-width: 60px;
   max-width: 112px;
   margin-bottom: 40px;
@@ -67,6 +73,21 @@
   .ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
+  }
+  ::-webkit-scrollbar{
+    color: transparent;
+  }
+  ::-webkit-scrollbar-corner{
+    color: transparent;
+  }
+}
+@media screen and (max-width: 1200px){
+  .ysl-label-search-cont{
+    height: 250px;
+    overflow: scroll;
+  }
+  .ysl-logo{
+    height: 120px;
   }
   ::-webkit-scrollbar{
     color: transparent;
