@@ -407,4 +407,24 @@ textarea::-webkit-input-placeholder{
   .firm-detail li{
     width: 100%;
   }
+  .score-summary{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .score-summary .score-text{
+    margin-left: 0;
+  }
+  .stars-list{
+    margin-bottom: 5px;
+  }
+  .user-info{
+    flex-direction: column;
+  }
+  .reply-comment{
+    margin-right: 0;
+  }
+  .reply-comment p{
+    text-align: right;
+    margin: 5px 0 0;
+  }
 }
