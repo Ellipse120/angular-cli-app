@@ -3,7 +3,7 @@ import {Router, NavigationStart} from "@angular/router";
 
 @Component({
   selector: 'footer',
-  template: `<div class="text-center footer"><div class="container" [ngStyle]="yslFooterStyle">
+  template: `<div class="text-center footer"><div class="container">
                   <ul>
                   <li><a href="http://www.cjzc.net.cn/" target="_blank">关于我们</a></li>
                   <li><a href="">服务协议</a></li>

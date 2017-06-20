@@ -5,7 +5,7 @@
   <div class="product-number">
     <i class="fa fa-line-chart"></i>数据产品数量 <span>{{activeProductCount}}</span>
   </div>
-  <search-input (showAdvancedBox)="showAdvancedBox($event)"></search-input>
+  <search-input></search-input>
   <md-tab-group class="ysl-label-search-area">
     <md-tab label="{{item.name}}" *ngFor="let item of tagDimensions">
       <ul class="ysl-label-search-cont">
