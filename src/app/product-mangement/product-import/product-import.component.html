@@ -1,6 +1,6 @@
 <div class="proimport-box">
     <div class="import-form">
-      <div class="import-title"><h4>{{productTitle}}</h4> <span class="fork" (click)="dialogRef.close()">X</span></div>
+      <div class="import-title"><h4>{{productTitle}}</h4> <span class="fa fa-close" (click)="dialogRef.close()"></span></div>
 
       <div class="import-body">
         <div class="content-form">
@@ -92,7 +92,7 @@
                     </button>
                     <ul class="secondTagDimensions" *ngIf="isActive == i">
                       <li *ngFor="let itemc of item.items" class="second-nav">
-                        <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]"
+                        <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkTag(itemc.id)"
                                (click)="proTagImport(itemc.id)">
                         <label [for]="[itemc.id]">{{itemc.name}}</label>
                       </li>

@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 
-import {IMyDateModel, IMyDpOptions} from "mydatepicker";
+import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 
-import {YslHttpService} from "../../core/ysl-http.service";
-import {ProductListService} from "../product-list/product-list.service";
-import {CookieService} from "ngx-cookie";
-import {MdDialogRef} from "@angular/material";
+import {YslHttpService} from '../../core/ysl-http.service';
+import {ProductListService} from '../product-list/product-list.service';
+import {CookieService} from 'ngx-cookie';
+import {MdDialogRef} from '@angular/material';
 
 @Component({
   selector: 'product-import',
@@ -34,33 +34,33 @@ export class ProductImportComponent implements OnInit {
   isActive = 0;
   tagDimensions = [];
   dataSources = [
-    {value: '1', viewValue: '中央政府机构'},
-    {value: '2', viewValue: '地方政府机构'},
-    {value: '3', viewValue: '行业协会'},
-    {value: '4', viewValue: '第三方机构'},
-    {value: '5', viewValue: '国际组织'},
-    {value: '6', viewValue: '多渠道综合'},
-    {value: '7', viewValue: '企业'},
-    {value: '8', viewValue: '个人'}
+    {value: 1, viewValue: '中央政府机构'},
+    {value: 2, viewValue: '地方政府机构'},
+    {value: 3, viewValue: '行业协会'},
+    {value: 4, viewValue: '第三方机构'},
+    {value: 5, viewValue: '国际组织'},
+    {value: 6, viewValue: '多渠道综合'},
+    {value: 7, viewValue: '企业'},
+    {value: 8, viewValue: '个人'}
   ];
   dataCategories = [
-    {value: '1', viewValue: '面板数据'},
-    {value: '2', viewValue: '截面数据'},
-    {value: '3', viewValue: '时间序列数据'},
-    {value: '4', viewValue: '混合数据'}
+    {value: 1, viewValue: '面板数据'},
+    {value: 2, viewValue: '截面数据'},
+    {value: 3, viewValue: '时间序列数据'},
+    {value: 4, viewValue: '混合数据'}
   ];
   dataCollections = [
-    {value: '1', viewValue: '单位申报'},
-    {value: '2', viewValue: '抽样调查'},
-    {value: '3', viewValue: '调研访问'},
-    {value: '4', viewValue: '市场交易'},
-    {value: '5', viewValue: '统计整理'}
+    {value: 1, viewValue: '单位申报'},
+    {value: 2, viewValue: '抽样调查'},
+    {value: 3, viewValue: '调研访问'},
+    {value: 4, viewValue: '市场交易'},
+    {value: 5, viewValue: '统计整理'}
   ];
   dataServices = [
-    {value: '1', viewValue: 'API调用'},
-    {value: '2', viewValue: '数据文件'},
-    {value: '3', viewValue: '应用程序'},
-    {value: '4', viewValue: '网页应用'},
+    {value: 1, viewValue: 'API调用'},
+    {value: 2, viewValue: '数据文件'},
+    {value: 3, viewValue: '应用程序'},
+    {value: 4, viewValue: '网页应用'},
   ];
 
   radioItems = [
@@ -93,12 +93,12 @@ export class ProductImportComponent implements OnInit {
 
   userInfo;
   productTitle = '产品录入';
-  isProImport: boolean = true;
+  isProImport = true;
 
   constructor(public service: YslHttpService,
               private productListService: ProductListService,
               private cookie: CookieService,
-              public dialogRef: MdDialogRef<ProductImportComponent>,) {
+              public dialogRef: MdDialogRef<ProductImportComponent>) {
   }
 
   ngOnInit() {
@@ -146,4 +146,21 @@ export class ProductImportComponent implements OnInit {
 
   }
 
+  /**
+   * 检查标签 checked 状态
+   * @param id
+   * @returns {boolean}
+   */
+  checkTag(id) {
+    // console.log("checkTag:{}",id,this.data.tags)
+    let ret = false;
+    this.data.tags.forEach(tag => {
+      if (tag.id == id) {
+        // console.log("tag match:{}",tag,id)
+        ret = true;
+      }
+    });
+    return ret;
+  }
 }
+

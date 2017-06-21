@@ -184,7 +184,7 @@ export class ProductListComponent implements OnInit {
     dialogRef.componentInstance.productTitle = productTitle;
     dialogRef.componentInstance.isProImport = false;
     dialogRef.componentInstance.data = info;
-
+    console.log(" dialogRef.componentInstance.data", dialogRef.componentInstance.data)
     dialogRef.afterClosed().subscribe(res => {
       this.getProductList();
     });
