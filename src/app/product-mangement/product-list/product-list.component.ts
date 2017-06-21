@@ -47,10 +47,7 @@ export class ProductListComponent implements OnInit {
     this.userId = this.cookie.getObject('yslUserInfo');
 
     this.getProductList();
-    // this.service.fetch(data => {
-    //   this.rows = data;
-    //   console.log(this.rows);
-    // });
+
   }
 
   getProductList() {
