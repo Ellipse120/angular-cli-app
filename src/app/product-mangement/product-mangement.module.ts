@@ -5,15 +5,12 @@ import {RouterModule,Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import {MyDatePickerModule } from 'mydatepicker';
-import {ProductRoutingModule} from './product-routing.module';
-
 
 import {ProductMangementComponent} from './product-mangement.component';
-import {YslHttpService} from '../core/ysl-http.service';
 import {ProductListComponent} from './product-list/product-list.component';
 import {ErrorCorrectComponent} from './error-correct/error-correct.component';
 import {ProductImportComponent} from './product-import/product-import.component';
-
+import {YslMaterialModule} from '../core/ysl-material.module';
 
 
 @NgModule({
@@ -22,14 +19,17 @@ import {ProductImportComponent} from './product-import/product-import.component'
     ProductListComponent,
     ErrorCorrectComponent,
     ProductImportComponent
-
   ],
   imports: [
     BrowserModule,
     NgxDatatableModule,
     RouterModule,
     FormsModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    YslMaterialModule
+  ],
+  entryComponents: [
+    ProductImportComponent
   ]
 })
 

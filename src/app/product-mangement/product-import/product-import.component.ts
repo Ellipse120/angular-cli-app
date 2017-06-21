@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 
-import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
+import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 
-import {ProductListComponent} from '../product-list/product-list.component';
-import {YslHttpService} from '../../core/ysl-http.service';
+import {YslHttpService} from "../../core/ysl-http.service";
 import {ProductListService} from "../product-list/product-list.service";
 import {CookieService} from "ngx-cookie";
+import {MdDialogRef} from "@angular/material";
 
 @Component({
   selector: 'product-import',
@@ -26,54 +26,79 @@ export class ProductImportComponent implements OnInit {
     serviceMethod: '',
     area: '',
     premium: '',
-    dataSince: '',
-    dataUntil: '',
+    dataSince: '' + Date.now(),
+    dataUntil: '' + Date.now(),
     tags: []
   };
   import = true;
   isActive = 0;
   tagDimensions = [];
-  dataSourceMap = {
-    'centerGov': '中央政府机构',
-    'localGov': '地方政府机构',
-    'industryAssociation': '行业协会',
-    'thirdPartyOrganization': '第三方机构',
-    'internationalOrganization': '国际组织',
-    'multiChannelAggregation': '多渠道综合',
-    'company': '企业',
-    'individual': '个人'
-  };
-  dataCategoryMap = {
-    'dashboard': '面板数据',
-    'cross': '截面数据',
-    'timeseries': '时间序列数据',
-    'hybrid': '混合数据'
-  };
-  dataCollectionMap = {
-    'declaration': '单位申报',
-    'survey': '抽样调查',
-    'research': '调研访问',
-    'deal': '市场交易',
-    'compilation': '统计整理'
-  };
-  dataServiceMap = {
-    'api': 'API调用',
-    'file': '数据文件',
-    'client': '应用程序',
-    'web': '网页应用'
-  };
-  radioItems = '是 否'.split(' ');
+  dataSources = [
+    {value: '1', viewValue: '中央政府机构'},
+    {value: '2', viewValue: '地方政府机构'},
+    {value: '3', viewValue: '行业协会'},
+    {value: '4', viewValue: '第三方机构'},
+    {value: '5', viewValue: '国际组织'},
+    {value: '6', viewValue: '多渠道综合'},
+    {value: '7', viewValue: '企业'},
+    {value: '8', viewValue: '个人'}
+  ];
+  dataCategories = [
+    {value: '1', viewValue: '面板数据'},
+    {value: '2', viewValue: '截面数据'},
+    {value: '3', viewValue: '时间序列数据'},
+    {value: '4', viewValue: '混合数据'}
+  ];
+  dataCollections = [
+    {value: '1', viewValue: '单位申报'},
+    {value: '2', viewValue: '抽样调查'},
+    {value: '3', viewValue: '调研访问'},
+    {value: '4', viewValue: '市场交易'},
+    {value: '5', viewValue: '统计整理'}
+  ];
+  dataServices = [
+    {value: '1', viewValue: 'API调用'},
+    {value: '2', viewValue: '数据文件'},
+    {value: '3', viewValue: '应用程序'},
+    {value: '4', viewValue: '网页应用'},
+  ];
+
+  radioItems = [
+    {value: 'true', viewValue: '是'},
+    {value: 'false', viewValue: '否'}
+  ];
 
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd'
   };
-  model: Object = {date: {year: 2018, month: 10, day: 9}};
+
+  model: Object = {date: {year: 2017, month: 6, day: 22}};
+
+  today: Date = new Date();
+  timeFrom: Object = {
+    date: {
+      year: this.today.getFullYear(),
+      month: this.today.getMonth() + 1,
+      day: this.today.getDay()
+    }
+  };
+
+  timeTo: Object = {
+    date: {
+      year: this.today.getFullYear(),
+      month: this.today.getMonth() + 1,
+      day: this.today.getDay()
+    }
+  };
+
   userInfo;
+  productTitle = '产品录入';
+  isProImport: boolean = true;
 
   constructor(public service: YslHttpService,
               private productListService: ProductListService,
               private cookie: CookieService,
-              private product: ProductListComponent) {
+              public dialogRef: MdDialogRef<ProductImportComponent>,) {
   }
 
   ngOnInit() {
@@ -83,11 +108,7 @@ export class ProductImportComponent implements OnInit {
       .then(data => {
         this.tagDimensions = data;
       });
-  }
 
-// 关闭弹框
-  close() {
-    this.product.import = false;
   }
 
 // 切换数据类型
@@ -109,11 +130,20 @@ export class ProductImportComponent implements OnInit {
 
   onSubmit() {
     this.data.userId = this.userInfo;
-    this.productListService.doProductImport(this.data)
-      .then(res => {
-        this.close();
-        this.product.getProductList();
-      });
+    if (this.isProImport) {
+      this.productListService.doProductImport(this.data)
+        .then(res => {
+          this.data = null;
+          this.dialogRef.close();
+        });
+    } else {
+      this.productListService.doProductUpdate(this.data)
+        .then(res => {
+          this.data = null;
+          this.dialogRef.close();
+        });
+    }
+
   }
 
 }

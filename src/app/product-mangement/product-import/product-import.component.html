@@ -1,94 +1,85 @@
 <div class="proimport-box">
-  <div class="import-cover">
     <div class="import-form">
-      <div class="import-title"><h4>产品录入</h4> <span class="fork" (click)="close()">X</span></div>
+      <div class="import-title"><h4>{{productTitle}}</h4> <span class="fork" (click)="dialogRef.close()">X</span></div>
 
       <div class="import-body">
         <div class="content-form">
-          <form #dataForm="ngForm">
+          <form (ngSubmit)="onSubmit()" #proForm="ngForm">
             <div class="form-group">
-              <label for="name" class="pro-name">名称</label>
-              <input type="text" class="ysl-form-control product" id="name" required name="name"
-                     [(ngModel)]="data.name" #name="ngModel">
-              <div [hidden]="name.valid || name.pristine" class="alert alert-danger color-red">名称不能为空</div>
+              <md-input-container>
+                <input mdInput placeholder="名字" style="width: 676px" required class="select-flex" [(ngModel)]="data.name" name="name">
+              </md-input-container>
+
             </div>
             <div class="form-group">
-              <label for="description">简介</label>
-              <textarea id="description" class="ysl-form-control product" required name="description"
+              <textarea id="description" class="ysl-form-control product" placeholder="简介" required name="description"
                         [(ngModel)]="data.description" #description></textarea>
             </div>
             <div class="form-group">
-              <label for="webSite">产品官网</label>
-              <input type="text" id="webSite" class="ysl-form-control product" required name="webSite"
-                     [(ngModel)]="data.webSite" #orgWebSite>
+              <md-input-container>
+                <input mdInput placeholder="官网" style="width: 676px" [(ngModel)]="data.webSite" name="webSite">
+              </md-input-container>
             </div>
-            <div class="form-group">
-              <label for="source">数据来源</label>
-              <select name="dataSource" id="source" class="ysl-form-control" required
-                      [(ngModel)]="data.dataSource" #source>
-                <option value="1">{{dataSourceMap.centerGov}}</option>
-                <option value="2">{{dataSourceMap.localGov}}</option>
-                <option value="3">{{dataSourceMap.industryAssociation}}</option>
-                <option value="4">{{dataSourceMap.thirdPartyOrganization}}</option>
-                <option value="5">{{dataSourceMap.internationalOrganization}}</option>
-                <option value="6">{{dataSourceMap.multiChannelAggregation}}</option>
-                <option value="7">{{dataSourceMap.company}}</option>
-                <option value="8">{{dataSourceMap.individual}}</option>
-              </select>
+            <div class="form-group select-flex">
+              <div>
+              <md-select placeholder="数据来源" [(ngModel)]="data.dataSource" name="dataSource">
+                <md-option *ngFor="let dataSource of dataSources" [value]="dataSource.value">
+                  {{dataSource.viewValue}}
+                </md-option>
+              </md-select>
+              </div>
 
-              <label for="dataCategory">数据类型</label>
-              <select name="dataCategory" id="dataCategory" class="ysl-form-control" required
-                      [(ngModel)]="data.dataCategory" #category>
-                <option value="1">{{dataCategoryMap.dashboard}}</option>
-                <option value="2">{{dataCategoryMap.cross}}</option>
-                <option value="3">{{dataCategoryMap.timeseries}}</option>
-                <option value="4">{{dataCategoryMap.hybrid}}</option>
-              </select>
-            </div>
+              <div>
+              <md-select placeholder="数据类型" [(ngModel)]="data.dataCategory" name="dataCategory">
+                <md-option *ngFor="let dataCategory of dataCategories" [value]="dataCategory.value">
+                  {{dataCategory.viewValue}}
+                </md-option>
+              </md-select>
+              </div>
 
-            <div class="form-group">
+              <div>
+                <md-select placeholder="采集方式" [(ngModel)]="data.collectionMethod" name="dataCollection">
+                  <md-option *ngFor="let dataCollection of dataCollections" [value]="dataCollection.value">
+                    {{dataCollection.viewValue}}
+                  </md-option>
+                </md-select>
+              </div>
 
-              <label for="collection">采集方式</label>
-              <select name="collection" id="collection" class="ysl-form-control" required
-                      [(ngModel)]="data.collectionMethod" #collect>
-                <option value="1">{{dataCollectionMap.declaration}}</option>
-                <option value="2">{{dataCollectionMap.survey}}</option>
-                <option value="3">{{dataCollectionMap.research}}</option>
-                <option value="4">{{dataCollectionMap.deal}}</option>
-                <option value="5">{{dataCollectionMap.compilation}}</option>
-              </select>
+              <div>
+              <md-select placeholder="服务方式" [(ngModel)]="data.serviceMethod" name="dataService">
+                <md-option *ngFor="let dataService of dataServices" [value]="dataService.value">
+                  {{dataService.viewValue}}
+                </md-option>
+              </md-select>
+              </div>
 
-              <label for="service">服务方式</label>
-              <select name="service" id="service" class="ysl-form-control" required
-                      [(ngModel)]="data.serviceMethod" #serviceMethod>
-                <option value="1">{{dataServiceMap.api}}</option>
-                <option value="2">{{dataServiceMap.file}}</option>
-                <option value="3">{{dataServiceMap.client}}</option>
-                <option value="4">{{dataServiceMap.web}}</option>
-              </select>
             </div>
 
             <div class="form-group">
               <label>数据样本</label>
-              <input type="file" value="上传文件" class="upload-file">
+              <input id="upload" type="file">
+              <label for="upload">
+                <span> 上传文件&hellip;</span>
+              </label>
               <!--<a href="javascript:;" class="file" id="sample">上传</a>-->
             </div>
 
             <div class="form-group">
               <label>是否收费</label>
-              <label *ngFor="let item of radioItems">
-                <input type="radio" name="options" (click)="item==='是' ? data.premium = 'true' :data.premium='false' ">&nbsp;&nbsp;{{item}}
-              </label>
-
+              <md-radio-group [(ngModel)]="data.premium" name="premium">
+                <md-radio-button *ngFor="let item of radioItems" [value]="item.value">
+                  {{item.viewValue}}&nbsp;&nbsp;
+                </md-radio-button>
+              </md-radio-group>
             </div>
 
             <div class="form-group">
               <label>时间范围</label>
               <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
-                              (dateChanged)="onDateFromChanged($event)"></my-date-picker>
-              &nbsp; - &nbsp;
+                          [(ngModel)]="timeFrom"  (dateChanged)="onDateFromChanged($event)"></my-date-picker>
+              &nbsp; &minus;	 &nbsp;
               <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions"
-                              (dateChanged)="onDateToChanged($event)"></my-date-picker>
+                              [(ngModel)]="timeTo" (dateChanged)="onDateToChanged($event)"></my-date-picker>
             </div>
 
             <div class="form-group">
@@ -103,8 +94,7 @@
                       <li *ngFor="let itemc of item.items" class="second-nav">
                         <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]"
                                (click)="proTagImport(itemc.id)">
-                        <!--<label [for]="[itemc.id]">{{itemc.name}}</label>-->
-                        <span>&nbsp;{{itemc.name}}</span>
+                        <label [for]="[itemc.id]">{{itemc.name}}</label>
                       </li>
                     </ul>
                   </li>
@@ -112,11 +102,10 @@
               </div>
             </div>
 
-            <button type="submit" class="ysl-btn btn-submit" (click)="onSubmit()">保存</button>
+            <button type="submit" class="ysl-btn btn-submit" [disabled]="!proForm.form.valid">保存</button>
           </form>
         </div>
       </div>
 
-    </div>
   </div>
 </div>

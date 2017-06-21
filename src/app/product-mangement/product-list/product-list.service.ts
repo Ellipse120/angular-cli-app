@@ -15,7 +15,8 @@ export class ProductListService {
   };
   userId;
 
-  constructor(private http: Http, private yslHttpservice: YslHttpService,
+  constructor(private http: Http,
+              private yslHttpservice: YslHttpService,
               private cookie: CookieService) {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
   }
@@ -27,9 +28,6 @@ export class ProductListService {
           .toPromise()
           .then(res => resolve(res.json()))
           .catch(this.handleError)
-      } else {
-        alert('请先登陆');
-        return;
       }
     });
   }
