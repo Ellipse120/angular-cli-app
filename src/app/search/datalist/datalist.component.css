@@ -37,9 +37,6 @@
   align-items: flex-start;
   cursor: pointer;
 }
-.sort-by-tag .search-condition-type-item{
-  margin-top: 8px;
-}
 .search-condition-type-item:first-of-type{
   margin-top: 0;
 }
@@ -56,6 +53,13 @@
  .search-condition-parent{
    color: #999;
    margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+ }
+ .search-condition-open{
+
  }
  .readonly span{
    display: block;

@@ -10,6 +10,7 @@ import { UserCenterModule } from './user-center/user-center.module';
 import { OperationManagementModule } from './operation-management/operation-management.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MyDatePickerModule } from 'mydatepicker';
+import {SqueezeBoxModule} from 'squeezebox';
 
 import { YslHttpService } from './core/ysl-http.service';
 
@@ -69,6 +70,7 @@ let ueditorPath = {
     OperationManagementModule,
     BrowserAnimationsModule,
     YslMaterialModule,
+    SqueezeBoxModule,
     CookieModule.forRoot(),
     UEditorModule.forRoot(ueditorPath)
   ],
