@@ -133,6 +133,9 @@ export class DatalistComponent implements OnInit {
   }
 
   cancelFilter(item) {
+    this.currSortTagParent.forEach((p, pInd) => {
+      if (item.parentId == p) { this.currSortTagParent.splice(pInd, 1)}
+    })
     this.currSortTag.forEach((tag, ind) => {
       if (item.id == tag.id) { this.currSortTag.splice(ind, 1)}
     });

@@ -16,6 +16,7 @@ export class NameCertifyComponent implements OnInit{
   individualForm: FormGroup;
   organizationForm: FormGroup;
   userInfo: any;
+  userId: any;
   indexType = 0;
   timer;
   num = 59;
@@ -29,9 +30,17 @@ export class NameCertifyComponent implements OnInit{
               private cookie: CookieService) {}
 
   ngOnInit() {
-    this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo') : null;
-    console.log('userInfo from verify', this.userInfo);
+    this.getUserInfo();
     this.createForm();
+  }
+
+  getUserInfo() {
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.userInfo = res;
+        console.log('userInfo from get', this.userInfo);
+      });
   }
 
   // 获取验证码
@@ -53,14 +62,15 @@ export class NameCertifyComponent implements OnInit{
   submitIndividual() {
     if (this.individualForm.invalid) { return }
     let form = this.individualForm;
-    console.log('userId', this.userInfo['id'])
-    let option = {userId: this.userInfo['id'], name: form.value['name']};
+    console.log('userId', this.userId)
+    let option = {userId: this.userId, name: form.value['name']};
     this.httpService.verifyIndividual(option)
       .then(res => {
-        let userInfo = this.userInfo;
-        userInfo['userType'] = parseInt(userInfo['userType'] + '0');
-        this.cookie.putObject('yslUserInfo', userInfo);
-        window.location.reload();
+        // let userInfo = this.userInfo;
+        // userInfo['userType'] = parseInt(userInfo['userType'] + '0');
+        // this.cookie.putObject('yslUserInfo', userInfo);
+        this.getUserInfo();
+        // window.location.reload();
         console.log('认证成功 ', res)
       })
   }
@@ -69,16 +79,17 @@ export class NameCertifyComponent implements OnInit{
   submitOrganization() {
     if (this.organizationForm.invalid) { return }
     let form = this.organizationForm;
-    let option = {userId: this.userInfo['id']};
+    let option = {userId: this.userId};
     for (let key in form.value) {
       option[key] = form.value[key];
     }
     this.httpService.verifyOrganization(option)
       .then(res => {
-        let userInfo = this.userInfo;
-        userInfo['userType'] = parseInt(userInfo['userType'] + '0');
-        this.cookie.putObject('yslUserInfo', userInfo);
-        window.location.reload();
+        // let userInfo = this.userInfo;
+        // userInfo['userType'] = parseInt(userInfo['userType'] + '0');
+        // this.cookie.putObject('yslUserInfo', userInfo);
+        this.getUserInfo();
+        // window.location.reload();
         console.log('组织认证 ', res)
       })
   }
@@ -93,7 +104,7 @@ export class NameCertifyComponent implements OnInit{
       name: ['', Validators.required],
       tel: [''],
       validCode: ['']
-    })
+    });
 
     this.organizationForm = this.fb.group({
       name: ['', Validators.required],

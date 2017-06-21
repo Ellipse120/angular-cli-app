@@ -431,6 +431,9 @@ footer{
 .dataShow squeezebox{
   width: 100%;
 }
+.squeezebox .sb-item .sb-item-body{
+  transition: none;
+}
 
 /*用户信息查看*/
 .info-box{

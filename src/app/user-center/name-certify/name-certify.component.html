@@ -1,9 +1,9 @@
 <!--认证-->
-<div class="identify" [ngSwitch]="userInfo.userType">
+<div class="identify" [ngSwitch]="userInfo?.userType">
   <div class="iden-type">
     <ul class="clearfix">
-      <li class="select-type" *ngIf="(userInfo.userType == 1) || (userInfo.userType == 10)">个人认证</li>
-      <li class="select-type" *ngIf="(userInfo.userType == 2) || (userInfo.userType == 20)">机构认证</li>
+      <li class="select-type" *ngIf="(userInfo?.userType == 1) || (userInfo?.userType == 10)">个人认证</li>
+      <li class="select-type" *ngIf="(userInfo?.userType == 2) || (userInfo?.userType == 20)">机构认证</li>
     </ul>
   </div>
   <div class="iden-content" *ngSwitchCase="1">
