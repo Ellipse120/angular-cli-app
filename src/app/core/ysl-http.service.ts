@@ -10,8 +10,8 @@ export class YslHttpService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
-  // public url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
+  // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  public url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
 
   // 用户信息
@@ -168,6 +168,15 @@ export class YslHttpService {
   getProductDetail(productId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/' + productId)
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
+  // 获取用户是否点赞收藏/userproperties/{productId}/{userId}
+  getProductUserProp(productId, userId) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/userproperties/' + productId + '/' + userId, {withCredentials: true})
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
     })
