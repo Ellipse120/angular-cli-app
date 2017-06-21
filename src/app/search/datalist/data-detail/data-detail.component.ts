@@ -139,6 +139,7 @@ export class DataDetailComponent implements OnInit{
 
   // 获取产品是否点赞收藏
   getUserProp() {
+    if (!this.userId) { return }
     this.service.getProductUserProp(this.productParams.productId, this.userId)
       .then(res => {
         console.log('favor', res)
