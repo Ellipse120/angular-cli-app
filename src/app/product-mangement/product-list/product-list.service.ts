@@ -24,7 +24,7 @@ export class ProductListService {
   getProductList(): Promise<any> {
     return new Promise(resolve => {
       if (!isUndefined(this.userId)){
-        this.http.get(this.yslHttpservice.url + 'api/product?userId=' + this.userId)
+        this.http.get(this.yslHttpservice.url + 'api/product?userId=' + this.userId +'&limit=150&offset=5')
           .toPromise()
           .then(res => resolve(res.json()))
           .catch(this.handleError)
