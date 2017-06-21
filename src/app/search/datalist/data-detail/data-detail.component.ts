@@ -67,7 +67,7 @@ export class DataDetailComponent implements OnInit{
     })
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
-        this.getProductDetail(this.productParams.productId)
+        // this.getProductDetail(this.productParams.productId);
         window.scroll(0,0);
       }
     });
@@ -77,7 +77,6 @@ export class DataDetailComponent implements OnInit{
   // 获取用户ID
   getUserId() {
     this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    console.log('get user id func', this.cookie.getObject('yslUserInfo'), this.userId)
   }
 
   // 搜索
@@ -92,6 +91,7 @@ export class DataDetailComponent implements OnInit{
         let advancedKey = data;
         this.service.getProductDetail(productId)
           .then(res => {
+            this.getUserProp();
             this.productDetail = res;
             this.productDetail.premium = this.productDetail.premium ? '是' : '否';
             this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
@@ -130,12 +130,20 @@ export class DataDetailComponent implements OnInit{
             this.productDetail['dataSince'] = this.productDetail['dataSince'] ? this.commonService.getDateForDay(this.productDetail['dataSince']): null;
             this.productDetail['dataUntil'] = this.productDetail['dataUntil'] ? this.commonService.getDateForDay(this.productDetail['dataUntil']): null;
             this.productDetail.averageScore = this.productDetail.averageScore ? (this.productDetail.averageScore).toFixed(1) : undefined;
-
-            this.isThumbsUp = this.productDetail.favor;
             this.favoredCount = this.productDetail.favoredCount;
             this.getRelatedProducts();
             this.getComment();
           });
+      })
+  }
+
+  // 获取产品是否点赞收藏
+  getUserProp() {
+    if (!this.userId) { return }
+    this.service.getProductUserProp(this.productParams.productId, this.userId)
+      .then(res => {
+        console.log('favor', res)
+        this.isThumbsUp = res['productFavor'];
       })
   }
 
@@ -174,7 +182,8 @@ export class DataDetailComponent implements OnInit{
     let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': this.userId}};
     this.service.createProductFavor(option)
       .then(res => {
-        this.favoredCount = res['favoredCount']
+        this.favoredCount = res['favoredCount'];
+        this.isThumbsUp = res['favor']
       })
   }
 

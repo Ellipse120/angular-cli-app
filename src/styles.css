@@ -1,5 +1,6 @@
 @import '~font-awesome/css/font-awesome.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~squeezebox/styles.css';
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
@@ -408,6 +409,30 @@ footer{
 }
 .mat-sidenav-container .mat-sidenav-content::-webkit-scrollbar-corner{
   color: transparent;
+}
+.squeezebox .sb-item .sb-item-head a .toggle-icon{
+  display: none;
+}
+.squeezebox sb-item:first-child .sb-item{
+  border: none;
+}
+.squeezebox .sb-item{
+  border: none;
+}
+.squeezebox .sb-item-head a{
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.squeezebox .sb-item-head a:hover{
+  text-decoration: none;
+}
+.dataShow squeezebox{
+  width: 100%;
+}
+.squeezebox .sb-item .sb-item-body{
+  transition: none;
 }
 
 /*用户信息查看*/

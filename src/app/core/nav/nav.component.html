@@ -24,7 +24,7 @@
     <div class="phone-nav">
       <ul class="after-login-xs" *ngIf="!loginState" [ngStyle]="subnavStyle">
         <li (click)="showLogin()">登录</li>
-        <li>注册</li>
+        <li routerLink="/register">注册</li>
       </ul>
       <ul class="after-login-xs" *ngIf="loginState" [ngStyle]="subnavStyle">
         <li *ngIf="loginInfo.userType == '30'" routerLink="/operation">运营中心</li>
