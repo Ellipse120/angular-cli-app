@@ -12,6 +12,7 @@ import {CookieService} from "ngx-cookie";
 import {YslPopupDirective} from "../../../core/directive/ysl-popup.directive";
 import {ProductErrataComponent} from "./product-errata.component";
 import {SearchService} from "../../search.service";
+import {MdSnackBar} from "@angular/material";
 
 
 @Component({
@@ -48,8 +49,8 @@ export class DataDetailComponent implements OnInit{
               private commonService: YslCommonService,
               private router: Router,
               private cookie: CookieService,
-              private location: Location,
-              private searchService: SearchService) {
+              private searchService: SearchService,
+              public snackBar: MdSnackBar) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -237,7 +238,11 @@ export class DataDetailComponent implements OnInit{
     console.log('comment pass')
     this.service.addProductComment(score)
       .then(res => {
-        this.getProductDetail(this.productParams.productId);
+        this.snackBar.open('评论成功', '', {
+          duration: 3000
+        });
+        this.productComment['items'] = [];
+        this.getComment();
       })
   }
 
@@ -271,6 +276,7 @@ export class DataDetailComponent implements OnInit{
         this.productComment['totalLength'] = res['totalLength'];
         res['items'].forEach(com => {
           if (!com.remark) { com.remark = '该用户未写评语'}
+          if (!com.userName) { com.userName = '匿名'}
           this.productComment['items'].push(com);
         });
         this.isMoreComment = (parseInt(this.productComment.totalLength) > ((this.currCommentPage + 1) * this.commentPagination['limit'])) ? true : false;
