@@ -28,6 +28,9 @@ export class DataDetailComponent implements OnInit{
   userId;
   commentRemark = '';
   commentError = '';
+  currCommentPage = 0;
+  isMoreComment: boolean;
+  commentPagination = {limit: 5, offset: 0};
   errataPopupOpt: any;
   productParams;
   productDetail;
@@ -214,10 +217,10 @@ export class DataDetailComponent implements OnInit{
   sendComment() {
     this.commentError = '';
     if (!this.userId) { this.showLogin(); return }
-    if (!this.commentRemark) {
-      this.commentError = '请填写评语';
-      return;
-    }
+    // if (!this.commentRemark) {
+    //   this.commentError = '请填写评语';
+    //   return;
+    // }
     for (let i = 0; i < this.score.length; i ++) {
       if (!this.score[i].score) {
         this.commentError = '请打分';
@@ -240,7 +243,8 @@ export class DataDetailComponent implements OnInit{
 
   // 获取产品评论
   getComment() {
-    this.service.getProductComment({productId: this.productDetail.productId, data: {limit: 5, offset: 0}})
+    console.log('curr page', this.currCommentPage)
+    this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination})
       .then(res => {
         if (!res.items) { return }
         let items: any = res.items;
@@ -264,8 +268,23 @@ export class DataDetailComponent implements OnInit{
           //   item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
           // }
         })
-        this.productComment = res;
+        this.productComment['totalLength'] = res['totalLength'];
+        res['items'].forEach(com => {
+          if (!com.remark) { com.remark = '该用户未写评语'}
+          this.productComment['items'].push(com);
+        });
+        this.isMoreComment = (parseInt(this.productComment.totalLength) > ((this.currCommentPage + 1) * this.commentPagination['limit'])) ? true : false;
       })
+  }
+
+  // 加载更多评论
+  loadMoreComment() {
+    let page = Math.ceil(parseInt(this.productComment['totalLength'])/this.commentPagination.limit);
+    if ((this.currCommentPage + 1) < page) {
+      this.currCommentPage ++;
+      this.commentPagination['offset'] = this.currCommentPage * this.commentPagination['limit'];
+      this.getComment();
+    }
   }
 
   showReply(ind) {

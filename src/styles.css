@@ -197,6 +197,9 @@ textarea::-webkit-scrollbar-thumb
   border-radius: 4px;
   font-size: 16px;
 }
+.ysl-pointer{
+  cursor: pointer;
+}
 .ysl-checkbox-group{
   padding-left: 10px;
 }

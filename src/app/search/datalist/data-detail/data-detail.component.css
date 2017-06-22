@@ -379,7 +379,9 @@ textarea::-webkit-input-placeholder{
   width: 100%;
   border-color: #ccc;
 }
-
+.load-more{
+  margin-top: 10px;
+}
 @media screen and (max-width: 992px) {
   .detail-right,.detail-left{
     float: none;
