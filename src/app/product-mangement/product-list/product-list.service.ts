@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {YslHttpService} from "../../core/ysl-http.service";
 import {CookieService} from "ngx-cookie";
-import {isUndefined} from "util";
+import {isNullOrUndefined} from "util";
 
 @Injectable()
 export class ProductListService {
@@ -13,7 +13,7 @@ export class ProductListService {
   private productConstant = {
     devApi: 'http://localhost:1337/192.168.19.20:8080/ysl-ws/api/product'
   };
-  userId;
+  userId: any;
 
   constructor(private http: Http,
               private yslHttpservice: YslHttpService,
@@ -21,10 +21,12 @@ export class ProductListService {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
   }
 
-  getProductList(): Promise<any> {
+  getProductList(option): Promise<any> {
     return new Promise(resolve => {
-      if (!isUndefined(this.userId)){
-        this.http.get(this.yslHttpservice.url + 'api/product?userId=' + this.userId +'&limit=150&offset=5')
+      if (!isNullOrUndefined(this.userId)){
+        this.http.get(this.yslHttpservice.url + 'api/product', {
+          params: option
+        })
           .toPromise()
           .then(res => resolve(res.json()))
           .catch(this.handleError)

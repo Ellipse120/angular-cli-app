@@ -1,6 +1,6 @@
 <div class="promage-nav">
   <div class="mage-title">
-    <div style="margin: 10px 0; font-size: .5rem; line-height: 0" >产品列表</div>
+    <div style="margin: 10px 0; font-size: .5rem; line-height: 0">产品列表</div>
     <div class="ysl-search-box">
       <input type="text" class="content-search" placeholder="名称/简介">
       <button class="ysl-btn search-btn"></button>
@@ -34,20 +34,20 @@
 
     <div class="pro-list">
       <!--<ul>-->
-        <!--<li class="pro-list-nav"><span class="all-select">全选</span> <span class="pro-name">产品名称</span>-->
-          <!--<span>用户名称</span> <span class="user-type">用户类型</span> <span class="isMoney">是否收费</span>-->
-          <!--<span class="user-state">状态</span> <span class="update-time">更新时间</span> <span class="option">操作</span>-->
-        <!--</li>-->
+      <!--<li class="pro-list-nav"><span class="all-select">全选</span> <span class="pro-name">产品名称</span>-->
+      <!--<span>用户名称</span> <span class="user-type">用户类型</span> <span class="isMoney">是否收费</span>-->
+      <!--<span class="user-state">状态</span> <span class="update-time">更新时间</span> <span class="option">操作</span>-->
+      <!--</li>-->
 
-        <!--<li *ngFor="let item of proList | paginate: {itemsPerPage: 10, currentPage: p}" class="pro-item">-->
-          <!--<input type="checkbox"> <span>{{item.proName}}</span> <span>{{item.userName}}</span>-->
-          <!--<span>{{item.userType}}</span> <span>{{item.isMoney}}</span> <span>{{item.state}}</span> <span>{{item.updateTime}}</span>-->
-          <!--<span>-->
-            <!--<a href="javascript:;" class="color-blue">启用</a> <a href="javascript:;" class="color-red">禁用</a>-->
-            <!--<a href="javascript:;" class="green">上传</a> <a href="javascript:;" class="color-orange">查看 /</a>-->
-            <!--<a href="javascript:;" class="color-orange">修改</a>-->
-          <!--</span>-->
-        <!--</li>-->
+      <!--<li *ngFor="let item of proList | paginate: {itemsPerPage: 10, currentPage: p}" class="pro-item">-->
+      <!--<input type="checkbox"> <span>{{item.proName}}</span> <span>{{item.userName}}</span>-->
+      <!--<span>{{item.userType}}</span> <span>{{item.isMoney}}</span> <span>{{item.state}}</span> <span>{{item.updateTime}}</span>-->
+      <!--<span>-->
+      <!--<a href="javascript:;" class="color-blue">启用</a> <a href="javascript:;" class="color-red">禁用</a>-->
+      <!--<a href="javascript:;" class="green">上传</a> <a href="javascript:;" class="color-orange">查看 /</a>-->
+      <!--<a href="javascript:;" class="color-orange">修改</a>-->
+      <!--</span>-->
+      <!--</li>-->
       <!--</ul>-->
       <!--分页处理-->
       <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
@@ -60,12 +60,16 @@
         [headerHeight]="50"
         [footerHeight]="50"
         [rowHeight]="40"
-        [limit]="10"
+        [externalPaging]="true"
+        [count]="count"
+        [limit]="pagingOption.limit"
+        [offset]="pagingOption.offset"
         [loadingIndicator]="isFinished"
         [messages]="messages"
         [selectionType]="'checkbox'"
         (activate)="onActivate($event)"
-        (select)='onSelect($event)'>
+        (select)='onSelect($event)'
+        (page)="setProductsPage($event)">
         <ngx-datatable-column
           class="striped"
           [width]="30"
@@ -73,7 +77,7 @@
           [canAutoResize]="false"
           [draggable]="false"
           [resizeable]="true"
-          [headerCheckboxable]="true"
+          [headerCheckboxable]="false"
           [checkboxable]="true">
         </ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="名字" prop="name"></ngx-datatable-column>
@@ -83,11 +87,13 @@
         <ngx-datatable-column [width]="60" name="状态" prop="status"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="更新时间" prop="modifiedOn"></ngx-datatable-column>
         <ngx-datatable-column name="操作" prop="option" [width]="60">
-          <ng-template let-row="row" ngx-datatable-cell-template >
-            <img style="width: 20px" (click)="openOrClose(row.$$index)" [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' " alt="">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <img style="width: 20px" (click)="openOrClose(row.$$index)"
+                 [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' " alt="">
             <a href="javascript:;" class="file">上传<input type="file"></a>
             <!--<a href="javascript:;" style="text-decoration: none;" class="color-orange" (click)="viewInfo(row)">&nbsp;修改 </a>-->
-            <a href="javascript:;" style="text-decoration: none;margin-right: 10px" class="color-orange" (click)="editProduct(row)">&nbsp;查看&frasl;修改&nbsp;</a>
+            <a href="javascript:;" style="text-decoration: none;margin-right: 10px" class="color-orange"
+               (click)="editProduct(row)">&nbsp;查看&frasl;修改&nbsp;</a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -96,28 +102,33 @@
 </div>
 
 
-<div class="info-box" *ngIf="showProInfo">
-  <div class="info-content">
-    <div class="mage-title">
-      <h3>产品信息</h3>
-      <b class="color-blue font18 fork" (click)="closeProInfo()">X</b>
-    </div>
-    <div class="user-content">
-      <span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>
-      <ul class="user-info-list">
-        <li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.name"  [disabled]="showEdit"></li>
-        <li><span class="user-tag">用户名称</span> <input type="text" [(ngModel)]="proInfo.userName" [disabled]="showEdit"></li>
-        <li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="proInfo.userType" [disabled]="showEdit"></li>
-        <li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.premium" [disabled]="showEdit"></li>
-        <li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.status" [disabled]="showEdit"></li>
-        <li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.modifiedOn" [disabled]="showEdit"></li>
-      </ul>
+<!--<div class="info-box" *ngIf="showProInfo">-->
+  <!--<div class="info-content">-->
+    <!--<div class="mage-title">-->
+      <!--<h3>产品信息</h3>-->
+      <!--<b class="color-blue font18 fork" (click)="closeProInfo()">X</b>-->
+    <!--</div>-->
+    <!--<div class="user-content">-->
+      <!--<span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>-->
+      <!--<ul class="user-info-list">-->
+        <!--<li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.name" [disabled]="showEdit"></li>-->
+        <!--<li><span class="user-tag">用户名称</span> <input type="text" [(ngModel)]="proInfo.userName" [disabled]="showEdit">-->
+        <!--</li>-->
+        <!--<li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="proInfo.userType" [disabled]="showEdit">-->
+        <!--</li>-->
+        <!--<li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.premium" [disabled]="showEdit">-->
+        <!--</li>-->
+        <!--<li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.status" [disabled]="showEdit">-->
+        <!--</li>-->
+        <!--<li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.modifiedOn"-->
+                                                      <!--[disabled]="showEdit"></li>-->
+      <!--</ul>-->
 
 
-      <button class="ysl-btn save-btn" (click)="updateProduct()">保存</button>
-    </div>
-  </div>
-</div>
+      <!--<button class="ysl-btn save-btn" (click)="updateProduct()">保存</button>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 <div *ngIf="import">
   <product-import></product-import>
 </div>

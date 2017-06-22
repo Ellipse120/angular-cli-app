@@ -36,7 +36,14 @@ export class ProductListComponent implements OnInit {
     selectedMessage: " 条选中"
   };
   isFinished = true;
-  userId;
+  userInfo: any;
+  pagingOption: any = {
+    userId: 0,
+    limit: 10,
+    offset: 0
+  };
+
+  count = 0;
 
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService,
@@ -44,18 +51,20 @@ export class ProductListComponent implements OnInit {
               private cookie: CookieService,
               private service: YslHttpService) {
 
-    this.userId = this.cookie.getObject('yslUserInfo');
+    this.userInfo = this.cookie.getObject('yslUserInfo');
 
-    this.getProductList();
+    this.getProducts();
 
   }
 
-  getProductList() {
-    if (!isNullOrUndefined(this.userId)) {
-      this.productListService.getProductList().then((data) => {
+  getProducts() {
+    if (!isNullOrUndefined(this.userInfo)) {
+      this.pagingOption.userId = this.userInfo.id;
+      this.productListService.getProductList(this.pagingOption).then((data) => {
         this.isFinished = false;
         this.dataItems = data.items;
         this.rows = this.dataItems;
+        this.count = data.totalLength;
 
         this.dataItems.forEach(item => {
           switch ('' + item.userType) {
@@ -175,7 +184,7 @@ export class ProductListComponent implements OnInit {
       }
     }
 
-    let productTitle = '产品编辑';
+    let productTitle = '产品修改';
 
     let dialogRef = this.dialog.open(ProductImportComponent, {data: {info, productTitle}, disableClose: true});
     dialogRef.componentInstance.productTitle = productTitle;
@@ -183,24 +192,24 @@ export class ProductListComponent implements OnInit {
     dialogRef.componentInstance.data = info;
 
     dialogRef.afterClosed().subscribe(res => {
-      this.getProductList();
+      this.getProducts();
     });
 
   }
 
-  updateProduct() {
-    this.productListService.doProductUpdate(this.proInfo)
-      .then(res => {
-        this.closeProInfo();
-        this.showEdit = false;
-        this.getProductList();
-      });
-  }
+  // updateProduct() {
+  //   this.productListService.doProductUpdate(this.proInfo)
+  //     .then(res => {
+  //       this.closeProInfo();
+  //       this.showEdit = false;
+  //       this.getProductList();
+  //     });
+  // }
 
   // 关闭信息弹框
-  closeProInfo() {
-    this.showProInfo = false;
-  }
+  // closeProInfo() {
+  //   this.showProInfo = false;
+  // }
 
   // 选择每一行触发事件
   onSelect({selected}) {
@@ -209,26 +218,19 @@ export class ProductListComponent implements OnInit {
   }
 
   onActivate(event) {
-    console.log('Activate Event', event);
+    // console.log('Activate Event', event);
   }
 
   importProduct(): void {
-    if (!isNullOrUndefined(this.userId)) {
+    if (!isNullOrUndefined(this.userInfo)) {
       let dialogRef = this.dialog.open(ProductImportComponent, {disableClose: true});
       dialogRef.afterClosed().subscribe(result => {
-        this.getProductList();
+        this.getProducts();
       });
     } else {
       this.showLoginComp();
     }
-
-    // let dialogRef = this.dialog.open(ProductImportComponent);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.productListService.getProductList();
-    // });
-
   }
-
 
   showLoginComp() {
     let dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
@@ -237,8 +239,14 @@ export class ProductListComponent implements OnInit {
         return;
       }
       this.cookie.putObject('yslUserInfo', result.userLoginInfo);
-      this.getProductList();
+      this.getProducts();
     });
+  }
+
+  setProductsPage(pageInfo) {
+    this.pagingOption.offset = pageInfo.offset;
+    this.pagingOption.userId = this.userInfo.id;
+    this.getProducts();
   }
 
   ngOnInit() {
