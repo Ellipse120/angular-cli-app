@@ -32,6 +32,8 @@ import {ProductListService} from "./product-mangement/product-list/product-list.
 import {YslPopupDirective} from "./core/directive/ysl-popup.directive";
 import {SearchAdvancedComponent} from "./search/search-input/search-advanced/search-advanced.component";
 import {ProductErrataComponent} from "./search/datalist/data-detail/product-errata.component";
+import {ServiceAgreementComponent} from "./statement/service-agreement.component";
+import {YslPrivacyComponent} from "./statement/privacy.component";
 
 
 let ueditorPath = {
@@ -49,6 +51,8 @@ let ueditorPath = {
     SearchInputComponent,
     DataDetailComponent,
     RegisterComponent,
+    ServiceAgreementComponent,
+    YslPrivacyComponent,
     NavComponent,
     FooterComponent,
     LoginComponent,

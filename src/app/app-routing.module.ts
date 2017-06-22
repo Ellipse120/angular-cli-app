@@ -8,15 +8,14 @@ import {IndexComponent} from './search/index/index.component';
 import {DatalistComponent} from './search/datalist/datalist.component';
 import {DataDetailComponent} from './search/datalist/data-detail/data-detail.component';
 import {RegisterComponent} from './register/register.component';
-import {ProductMangementComponent} from './product-mangement/product-mangement.component';
-import {ProductListComponent} from './product-mangement/product-list/product-list.component';
-import {ErrorCorrectComponent} from './product-mangement/error-correct/error-correct.component';
 import {UserInfoComponent} from './user-center/user-info/user-info.component';
 import {NameCertifyComponent} from './user-center/name-certify/name-certify.component';
 import {PsdModifyComponent} from './user-center/psd-modify/psd-modify.component';
 import {ProductRoutingModule} from './product-mangement/product-routing.module';
 import {OperationRoutingModule} from './operation-management/operation-routing.module';
 import construct = Reflect.construct;
+import {YslPrivacyComponent} from "./statement/privacy.component";
+import {ServiceAgreementComponent} from "./statement/service-agreement.component";
 
 
 //// 定义用户中心管理嵌套路由
@@ -49,7 +48,9 @@ const appRouters:Routes = [
   {path: 'usercenter', component: UserCenterComponent, children: childUserCenterRoutes},
   {path: 'datadetail', component: DataDetailComponent},
   {path:'register',component: RegisterComponent},
-  // {path: '**', component: IndexComponent}
+  {path:'privacy',component: YslPrivacyComponent},
+  {path:'service',component: ServiceAgreementComponent},
+  {path: '**', component: IndexComponent}
 ]
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
 @NgModule({

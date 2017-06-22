@@ -675,7 +675,10 @@ app-index .mat-ripple{
     margin-bottom: 0;
   }
   my-nav search-input{
-    width: 90%;
+    width: 75%;
+  }
+  my-nav search-input .keyword-search .search-input{
+    padding-right: 10px;
   }
   .ysl-label-search-area{
     width: 100%;
