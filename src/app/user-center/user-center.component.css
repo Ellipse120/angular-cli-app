@@ -162,6 +162,9 @@
   line-height: 33px;
   padding: 0;
 }
+.ysl-error-tip{
+  text-align: left;
+}
 
 @media screen and (max-width: 992px){
   .form-horizontal{
