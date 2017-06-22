@@ -670,6 +670,10 @@ app-index .mat-ripple{
   .footer{
     font-size: 12px;
   }
+  .footer ul{
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
   my-nav search-input{
     width: 90%;
   }

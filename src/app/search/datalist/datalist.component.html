@@ -18,13 +18,19 @@
       <p class="search-condition-title"><i class="fa fa-tag" aria-hidden="true"></i>标签</p>
       <ul *ngIf="tagSortList.length">
         <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
-          <span class="search-condition-parent">{{t.name}}</span>
-          <ul class="search-condition-sub">
-            <li *ngFor="let c of t.items">
-              <p class="readonly" *ngIf="currSortTag != c.name" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
-              <p class="readonly active" *ngIf="currSortTag == c.name"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter();"></i></p>
-            </li>
-          </ul>
+          <squeezebox>
+            <sb-item [collapsed]="t.collapsed">
+              <sb-item-head>{{t.name}}<i class="fa fa-angle-down" aria-hidden="true"></i></sb-item-head>
+              <sb-item-body>
+                <ul class="search-condition-sub">
+                  <li *ngFor="let c of t.items; let i = index;">
+                    <p class="readonly" *ngIf="!c?.currentTag" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
+                    <p class="readonly active" *ngIf="c?.currentTag"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter(c);"></i></p>
+                  </li>
+                </ul>
+              </sb-item-body>
+            </sb-item>
+          </squeezebox>
         </li>
       </ul>
     </div>

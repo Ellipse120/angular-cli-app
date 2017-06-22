@@ -9,7 +9,7 @@ import {Router, NavigationStart} from "@angular/router";
                   <li><a href="">服务协议</a></li>
                   <li><a href="">隐私协议</a></li>
                   </ul>
-                  <p>版权所有 : 长江众创 Copyright@2010 All Rights Reserved 版本 1.0</p>
+                  <p>版权所有 : 长江众创 Copyright@2010 All Rights Reserved 版本 1.0.1</p>
              </div></div>`
 })
 
