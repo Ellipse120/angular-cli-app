@@ -2,36 +2,36 @@
   <h1 class="user-title">修改密码</h1>
   <form class="form-horizontal edit-form" [formGroup]="modifyForm" (ngSubmit)="modifySubmit()" novalidate>
     <div class="form-group">
-      <label class="col-xs-3">原密码</label>
-      <div class="col-xs-9">
+      <label class="col-sm-3 col-xs-12">原密码</label>
+      <div class="col-sm-9 col-xs-12">
         <input type="password" class="form-control" placeholder="请输入您的原密码" formControlName="oldPass" required>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-xs-3">新密码</label>
-      <div class="col-xs-9">
+      <label class="col-sm-3 col-xs-12">新密码</label>
+      <div class="col-sm-9 col-xs-12">
         <input type="password" class="form-control" placeholder="请输入您的新密码" formControlName="newPass" required>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-xs-3">确认新密码</label>
-      <div class="col-xs-9">
+      <label class="col-sm-3 col-xs-12">确认新密码</label>
+      <div class="col-sm-9 col-xs-12">
         <input type="password" class="form-control" placeholder="请再次输入新密码" formControlName="confirmPass" required>
       </div>
     </div>
     <div class="form-group" *ngIf="isSubmit && modifyForm.invalid">
       <label class="sr-only"></label>
-      <span class="col-xs-9" *ngIf="formError.oldPass">{{formError.oldPass}}</span>
-      <span class="col-xs-9" *ngIf="!formError.oldPass && formError.newPass">{{formError.newPass}}</span>
-      <span class="col-xs-9" *ngIf="formError.confirmPass && !formError.newPass && !formError.oldPass">{{formError.confirmPass}}</span>
+      <span class="col-sm-9 col-xs-12" *ngIf="formError.oldPass">{{formError.oldPass}}</span>
+      <span class="col-sm-9 col-xs-12" *ngIf="!formError.oldPass && formError.newPass">{{formError.newPass}}</span>
+      <span class="col-sm-9 col-xs-12" *ngIf="formError.confirmPass && !formError.newPass && !formError.oldPass">{{formError.confirmPass}}</span>
     </div>
     <div class="form-group" *ngIf="modifyForm.valid && isInconsistent">
       <label class="sr-only"></label>
-      <span class="col-xs-9">两次密码不一致</span>
+      <span class="col-sm-9 col-xs-12">两次密码不一致</span>
     </div>
     <div class="form-group">
       <label class="sr-only"></label>
-      <button class="ysl-btn btn-ensure col-xs-9 col-xs-offset-3">确认</button>
+      <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
     </div>
     <!--<div><span>原密码</span> <input class="psd-input" type="password" placeholder="请输入您的原密码" [(ngModel)]="modify.old"></div>-->
     <!--<li><span>新密码</span> <input class="psd-input" type="password" placeholder="请输入您的新密码" [(ngModel)]="modify.new"></li>-->

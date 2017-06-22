@@ -23,16 +23,16 @@ export class UserCenterComponent implements OnInit {
   constructor(private httpService: YslHttpService, private cookie: CookieService) {}
 
   ngOnInit() {
-    this.getUserList();
-    this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo') : null;
-    let userType = this.userInfo['userType'];
-    if (userType == 30) {
-      this.userTag.forEach((item, ind) => {
-        if (item.text == '实名认证') {
-          this.userTag.splice(ind, 1)
-        }
-      })
-    }
+    // this.getUserList();
+    // this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo') : null;
+    // let userType = this.userInfo['userType'];
+    // if (userType == 30) {
+    //   this.userTag.forEach((item, ind) => {
+    //     if (item.text == '实名认证') {
+    //       this.userTag.splice(ind, 1)
+    //     }
+    //   })
+    // }
   }
 
   // 获取用户信息

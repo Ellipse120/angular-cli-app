@@ -6,7 +6,7 @@
         <span class="firmlogo"><img [src]="productDetail?.logoFilePath ? './assets/images/detail1.png' : './assets/images/product-logo-default.png'"></span>
         <ul class="firm-detail clearfix">
           <li>数据供应商：{{productDetail.orgName}}</li>
-          <li>官方网址：<a [href]="productDetail.orgWebSite" target="_blank">{{productDetail.orgWebSite}}</a></li>
+          <li>官方网址：<a [href]="productDetail.webSite" target="_blank">{{productDetail.webSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
           <li>数据样本：<i class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</i><span *ngIf="!productDetail.sampleFilePath">无</span></li>
           <li>数据类型：<i *ngIf="productDetail.dataCategory">{{productDetail['dataCategory']}}</i><span *ngIf="!productDetail.dataCategory">无</span></li>

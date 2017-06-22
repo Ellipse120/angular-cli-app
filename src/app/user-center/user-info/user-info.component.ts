@@ -15,6 +15,7 @@ export class UserInfoComponent implements OnInit {
   editForm: FormGroup;
   showSave = false;
   viewInfo: any;
+  userId: any;
   userInfo = [
     {label: '姓名', formControlName: 'userName', model: '', edit: false},
     {label: '联系方式', formControlName: 'contactMail', model: '', edit: false}
@@ -25,74 +26,68 @@ export class UserInfoComponent implements OnInit {
               private commonService: YslCommonService) {}
 
   ngOnInit() {
-    this.viewInfo = this.cookie.getObject('yslUserInfo');
-    this.userInfo.forEach(item => {         // 初始化个人信息
-      for (const key in this.viewInfo) {
-        if (item.formControlName == key) {
-          item.model = this.viewInfo[key];
-        } else if (item.formControlName == 'userName') {
-          item.model = this.viewInfo['name']
-        }
-      }
-    });
-    this.viewInfo['loginTime'] = this.commonService.getDateForDay(this.viewInfo['loginTime']);
-    console.log('user', this.viewInfo);
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.getViewInfo();
     this.createForm();
+  }
+
+  getViewInfo() {
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.viewInfo = res;
+        this.userInfo.forEach(item => {         // 初始化个人信息
+          for (const key in this.viewInfo) {
+            if (item.formControlName == key) {
+              item.model = this.viewInfo[key];
+            }
+          }
+        });
+        this.viewInfo['lastLogonTime'] = this.commonService.getDateForDay(this.viewInfo['lastLogonTime']);
+      })
   }
 
   // 编辑用户信息
   ableEdit() {
+    let controls = {
+      userName: '',
+      contactMail: ''
+    };
     this.showSave = true;
     this.userInfo.forEach(item => {
-      if (item.formControlName == 'loginId') {
-        item.edit = false;
-      } else {
-        item.edit = true;
+      for(let key in controls) {
+        if (item.formControlName == key) {
+          controls[key] = item.model;
+          item.edit = true;
+        }
       }
-    })
+    });
+    this.editForm.patchValue(controls);
   }
 
   // 提交修改资料
   infoEditSubmit() {
-    console.log('user', this.editForm.value);
     if (!this.editForm) { return }
     let data = this.editForm.value;
     let option = {userId: '', data: {}};
-    data.id = this.viewInfo.id;
-    option.userId = data.id;
+    data.id = this.userId;
+    option.userId = this.userId;
     option.data = data;
     this.httpService.updateUser(option)
       .then(res => {
-        let userInfo = this.viewInfo;
         this.showSave = false;
         // 修改成功后对模板的修改
+        this.getViewInfo();
         this.userInfo.forEach(item => {
           item.edit = false;
-          for (const key in this.editForm.value) {
-            userInfo[key] = this.editForm.value[key];
-            if (item.formControlName == key) {
-              item.model = this.editForm.value[key];
-            }
-          }
         })
-        this.cookie.putObject('yslUserInfo', userInfo);
       })
   }
 
   // 创建表单
   createForm() {
-    let controls = {
+    this.editForm = this.fb.group({
       userName: '',
       contactMail: ''
-    };
-    this.userInfo.forEach(item => {
-      for (const key in controls) {
-        if (item.formControlName == key) {
-          controls[key] = item.model;
-        }
-      }
-    })
-    this.editForm = this.fb.group(controls);
-
+    });
   }
 }

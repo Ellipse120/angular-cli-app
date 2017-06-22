@@ -17,13 +17,14 @@ export class NameCertifyComponent implements OnInit{
   organizationForm: FormGroup;
   userInfo: any;
   userId: any;
-  indexType = 0;
+  CurrTab = 0;
   timer;
   num = 59;
   able = true;
   content = '发送验证码';
   modify = [];
   goviden = [];
+  userTypeTabs = ['个人认证', '机构认证'];
 
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class NameCertifyComponent implements OnInit{
     this.createForm();
   }
 
+  // 获取用户信息
   getUserInfo() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.httpService.getUserInfo(this.userId)
@@ -77,6 +79,7 @@ export class NameCertifyComponent implements OnInit{
 
   // 提交组织认证
   submitOrganization() {
+    console.log('org test', this.organizationForm);
     if (this.organizationForm.invalid) { return }
     let form = this.organizationForm;
     let option = {userId: this.userId};
@@ -94,8 +97,9 @@ export class NameCertifyComponent implements OnInit{
       })
   }
 
-  tabType(i) {
-    this.indexType = i;
+  // 切换tab
+  switchTab(i) {
+    this.CurrTab = i;
   }
 
   // 创建表单
