@@ -4,6 +4,7 @@
 .ysl-header{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 60px;
 }
 
@@ -13,6 +14,11 @@
   outline: none;
   cursor: pointer;
   background: url("../../../assets/images/logo.png") no-repeat left top/auto 100%;
+}
+.fa-home{
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
 }
 .head-right{
   display: flex;

@@ -10,6 +10,7 @@ import { UserCenterModule } from './user-center/user-center.module';
 import { OperationManagementModule } from './operation-management/operation-management.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MyDatePickerModule } from 'mydatepicker';
+import {SqueezeBoxModule} from 'squeezebox';
 
 import { YslHttpService } from './core/ysl-http.service';
 
@@ -31,6 +32,8 @@ import {ProductListService} from "./product-mangement/product-list/product-list.
 import {YslPopupDirective} from "./core/directive/ysl-popup.directive";
 import {SearchAdvancedComponent} from "./search/search-input/search-advanced/search-advanced.component";
 import {ProductErrataComponent} from "./search/datalist/data-detail/product-errata.component";
+import {ServiceAgreementComponent} from "./statement/service-agreement.component";
+import {YslPrivacyComponent} from "./statement/privacy.component";
 
 
 let ueditorPath = {
@@ -48,6 +51,8 @@ let ueditorPath = {
     SearchInputComponent,
     DataDetailComponent,
     RegisterComponent,
+    ServiceAgreementComponent,
+    YslPrivacyComponent,
     NavComponent,
     FooterComponent,
     LoginComponent,
@@ -69,6 +74,7 @@ let ueditorPath = {
     OperationManagementModule,
     BrowserAnimationsModule,
     YslMaterialModule,
+    SqueezeBoxModule,
     CookieModule.forRoot(),
     UEditorModule.forRoot(ueditorPath)
   ],

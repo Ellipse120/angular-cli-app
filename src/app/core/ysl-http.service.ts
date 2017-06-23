@@ -173,6 +173,15 @@ export class YslHttpService {
     })
   }
 
+  // 获取用户是否点赞收藏/userproperties/{productId}/{userId}
+  getProductUserProp(productId, userId) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/userproperties/' + productId + '/' + userId, {withCredentials: true})
+        .toPromise()
+        .then(response => resolve(response.json()), error => reject(error))
+    })
+  }
+
   // 样本下载
   downloadSampleFile(productId) {
   return new Promise((resolve, reject) => {

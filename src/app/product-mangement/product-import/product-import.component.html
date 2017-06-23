@@ -1,7 +1,10 @@
 <div class="proimport-box">
     <div class="import-form">
-      <div class="import-title"><h4>{{productTitle}}</h4> <span class="fa fa-close" (click)="dialogRef.close()"></span></div>
+      <div class="import-title">
+        <div md-dialog-title>{{productTitle}}</div> <span class="fa fa-close" (click)="dialogRef.close()"></span>
+      </div>
 
+      <md-dialog-content>
       <div class="import-body">
         <div class="content-form">
           <form (ngSubmit)="onSubmit()" #proForm="ngForm">
@@ -12,7 +15,7 @@
 
             </div>
             <div class="form-group">
-              <textarea id="description" class="ysl-form-control product" placeholder="简介" required name="description"
+              <textarea id="description" class="ysl-form-control product" placeholder="简介" name="description"
                         [(ngModel)]="data.description" #description></textarea>
             </div>
             <div class="form-group">
@@ -87,7 +90,7 @@
               <div class="ysl-import-tag">
                 <ul class="tagDimensions">
                   <li *ngFor="let item of tagDimensions;let i=index">
-                    <button class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">
+                    <button type="button" class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">
                       {{item.name}}
                     </button>
                     <ul class="secondTagDimensions" *ngIf="isActive == i">
@@ -106,6 +109,7 @@
           </form>
         </div>
       </div>
+      </md-dialog-content>
 
   </div>
 </div>

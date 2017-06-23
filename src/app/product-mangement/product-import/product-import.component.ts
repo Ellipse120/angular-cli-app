@@ -133,13 +133,11 @@ export class ProductImportComponent implements OnInit {
     if (this.isProImport) {
       this.productListService.doProductImport(this.data)
         .then(res => {
-          this.data = null;
           this.dialogRef.close();
         });
     } else {
       this.productListService.doProductUpdate(this.data)
         .then(res => {
-          this.data = null;
           this.dialogRef.close();
         });
     }
@@ -152,11 +150,9 @@ export class ProductImportComponent implements OnInit {
    * @returns {boolean}
    */
   checkTag(id) {
-    // console.log("checkTag:{}",id,this.data.tags)
     let ret = false;
     this.data.tags.forEach(tag => {
       if (tag.id == id) {
-        // console.log("tag match:{}",tag,id)
         ret = true;
       }
     });

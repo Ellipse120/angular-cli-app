@@ -1,5 +1,6 @@
 @import '~font-awesome/css/font-awesome.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~squeezebox/styles.css';
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
@@ -195,6 +196,9 @@ textarea::-webkit-scrollbar-thumb
   width: 260px;
   border-radius: 4px;
   font-size: 16px;
+}
+.ysl-pointer{
+  cursor: pointer;
 }
 .ysl-checkbox-group{
   padding-left: 10px;
@@ -408,6 +412,30 @@ footer{
 }
 .mat-sidenav-container .mat-sidenav-content::-webkit-scrollbar-corner{
   color: transparent;
+}
+.squeezebox .sb-item .sb-item-head a .toggle-icon{
+  display: none;
+}
+.squeezebox sb-item:first-child .sb-item{
+  border: none;
+}
+.squeezebox .sb-item{
+  border: none;
+}
+.squeezebox .sb-item-head a{
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.squeezebox .sb-item-head a:hover{
+  text-decoration: none;
+}
+.dataShow squeezebox{
+  width: 100%;
+}
+.squeezebox .sb-item .sb-item-body{
+  transition: none;
 }
 
 /*用户信息查看*/
@@ -645,8 +673,15 @@ app-index .mat-ripple{
   .footer{
     font-size: 12px;
   }
+  .footer ul{
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
   my-nav search-input{
-    width: 90%;
+    width: 75%;
+  }
+  my-nav search-input .keyword-search .search-input{
+    padding-right: 10px;
   }
   .ysl-label-search-area{
     width: 100%;

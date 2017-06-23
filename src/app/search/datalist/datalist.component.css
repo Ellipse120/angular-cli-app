@@ -37,9 +37,6 @@
   align-items: flex-start;
   cursor: pointer;
 }
-.sort-by-tag .search-condition-type-item{
-  margin-top: 8px;
-}
 .search-condition-type-item:first-of-type{
   margin-top: 0;
 }
@@ -56,6 +53,10 @@
  .search-condition-parent{
    color: #999;
    margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
  }
  .readonly span{
    display: block;
@@ -75,7 +76,8 @@
   background-color: #f6f9fa;
 }
 .search-condition-type-item .active span{
-  background-color: yellow;
+  background-color: #288dec;
+  color: #fff;
 }
 .search-condition-type-item .readonly:hover{
   background-color: #f6f9fa;

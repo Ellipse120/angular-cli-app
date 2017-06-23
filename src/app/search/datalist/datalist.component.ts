@@ -28,17 +28,11 @@ export class DatalistComponent implements OnInit {
     totalLength: 0
   };
   searchConditionIndex: number;
-  currSortTag: string;
-  tagSortList = [];
+  currSortTagParent = [];
+  currSortTag = [];
+  tagSortList = [{}];
   isShowPeriod = true;
   searchCondition = [];
-// {
-//   type: 'a', children: [
-//   {text: '时间不限', value: undefined},
-//   {text: '2017年以来', value: '2017/01/01'},
-//   {text: '2016年以来', value: '2016/01/01'},
-//   {text: '2013年以来', value: '2013/01/01'}
-//   ]};
   sortList = [{text: '按日期排序', value: 'modifiedOn'}, {text: '按热度排序', value: 'viewedCount'}];
   currSortItem = this.sortList[0];
   currPage: any;
@@ -50,7 +44,6 @@ export class DatalistComponent implements OnInit {
               private fb: FormBuilder) {}
 
   ngOnInit() {
-    console.log('test')
     this.route.queryParams
       .subscribe((params) => {
         let param = Object.assign({}, params);
@@ -79,19 +72,27 @@ export class DatalistComponent implements OnInit {
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
-        this.searchCondition = [];
-        this.product['items'].forEach(item => {
-          item.tagOpen = false;
-        });
-        this.product['dateFacets'].forEach((item, ind) => {
-          this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
-        })
-        this.tagSortList = this.product['tagFacets'];
-        this.searchCondition.unshift({text: '时间不限', value: undefined});
-        // this.product.items[0].tags = [{name: 'test', id: '1'}, {name: 'test2', id: '2'}, {name: 'test', id: '1'}];
-        // this.product.items[1].tags = [{name: 'test', id: '1'}, {name: 'test4', id: '4'}, {name: 'test5', id: '5'}];
-        // this.tagUnique();
+        this.handleDataList();
       });
+  }
+
+  // 解析产品列表数据
+  handleDataList() {
+    this.searchCondition = [];
+    this.product['dateFacets'].forEach((item, ind) => {
+      this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
+    })
+    this.tagSortList = this.product['tagFacets'];
+    this.tagSortList.forEach(tag => {
+      this.currSortTag.forEach(curr => {
+        tag['items'].forEach((_item, _ind) => {
+          if (curr.id == _item.id) {
+            tag['items'][_ind].currentTag = true;
+          }
+        })
+      })
+    })
+    this.searchCondition.unshift({text: '时间不限', value: undefined});
   }
 
   // 标签搜索去重
@@ -107,10 +108,38 @@ export class DatalistComponent implements OnInit {
 
   // 标签搜索
   sortByTag(item) {
-    this.currSortTag = item.name;
-    this.searchOptions['tagId'] = item.id;
+    if (this.currSortTagParent.indexOf(item.parentId) <= -1) {
+      this.currSortTagParent.push(item.parentId);
+      this.currSortTag.push(item)
+    } else {
+      this.currSortTag.forEach((tag, ind) => {
+        if (item.parentId == tag.parentId) {
+          this.currSortTag.splice(ind, 1);
+          this.currSortTag.push(item)
+        }
+      })
+    }
+    this.tagParams()
+  }
+
+  tagParams() {
+    let tagS = '';
+    this.currSortTag.forEach(tag => {
+      tagS += tag.id + ','
+    })
+    this.searchOptions['tagId'] = tagS.substring(0, tagS.length - 1);
     this.getProjectList();
     this.sideNav.close();
+  }
+
+  cancelFilter(item) {
+    this.currSortTagParent.forEach((p, pInd) => {
+      if (item.parentId == p) { this.currSortTagParent.splice(pInd, 1)}
+    })
+    this.currSortTag.forEach((tag, ind) => {
+      if (item.id == tag.id) { this.currSortTag.splice(ind, 1)}
+    });
+    this.tagParams()
   }
 
   // 关键字搜索
@@ -160,13 +189,6 @@ export class DatalistComponent implements OnInit {
           // let len = this.searchCondition[0]['children'].length;
         })
     }
-  }
-
-  cancelFilter() {
-    this.searchOptions['tagId'] = undefined;
-    this.currSortTag = '';
-    this.getProjectList();
-    this.sideNav.close();
   }
 
   // 排序

@@ -1,5 +1,6 @@
-<nav class="ysl-header container" [ngStyle]="headerStyle">
+<nav class="ysl-header container">
   <div class="head-left hidden-xs" routerLink="/index"></div>
+  <i class="fa fa-home visible-xs" routerLink="/index"></i>
   <!--class="head-left"-->
   <search-input *ngIf="isShowSearch" [hideAdvancedSearch]="true" (keywordSearch)="keywordSubmit($event)"></search-input>
   <div class="head-right hidden-xs">
@@ -24,7 +25,7 @@
     <div class="phone-nav">
       <ul class="after-login-xs" *ngIf="!loginState" [ngStyle]="subnavStyle">
         <li (click)="showLogin()">登录</li>
-        <li>注册</li>
+        <li routerLink="/register">注册</li>
       </ul>
       <ul class="after-login-xs" *ngIf="loginState" [ngStyle]="subnavStyle">
         <li *ngIf="loginInfo.userType == '30'" routerLink="/operation">运营中心</li>

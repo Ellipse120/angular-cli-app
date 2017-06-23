@@ -12,6 +12,7 @@ import {CookieService} from "ngx-cookie";
 import {YslPopupDirective} from "../../../core/directive/ysl-popup.directive";
 import {ProductErrataComponent} from "./product-errata.component";
 import {SearchService} from "../../search.service";
+import {MdSnackBar} from "@angular/material";
 
 
 @Component({
@@ -28,6 +29,9 @@ export class DataDetailComponent implements OnInit{
   userId;
   commentRemark = '';
   commentError = '';
+  currCommentPage = 0;
+  isMoreComment: boolean;
+  commentPagination = {limit: 5, offset: 0};
   errataPopupOpt: any;
   productParams;
   productDetail;
@@ -45,8 +49,8 @@ export class DataDetailComponent implements OnInit{
               private commonService: YslCommonService,
               private router: Router,
               private cookie: CookieService,
-              private location: Location,
-              private searchService: SearchService) {
+              private searchService: SearchService,
+              public snackBar: MdSnackBar) {
     this.productDetail = {name: ''};
     this.stars =  Array(5).fill(1).map((x, i) => i);
     this.averageScore = this.stars;
@@ -67,7 +71,7 @@ export class DataDetailComponent implements OnInit{
     })
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
-        this.getProductDetail(this.productParams.productId)
+        // this.getProductDetail(this.productParams.productId);
         window.scroll(0,0);
       }
     });
@@ -77,7 +81,6 @@ export class DataDetailComponent implements OnInit{
   // 获取用户ID
   getUserId() {
     this.userId = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    console.log('get user id func', this.cookie.getObject('yslUserInfo'), this.userId)
   }
 
   // 搜索
@@ -92,6 +95,7 @@ export class DataDetailComponent implements OnInit{
         let advancedKey = data;
         this.service.getProductDetail(productId)
           .then(res => {
+            this.getUserProp();
             this.productDetail = res;
             this.productDetail.premium = this.productDetail.premium ? '是' : '否';
             this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
@@ -130,12 +134,20 @@ export class DataDetailComponent implements OnInit{
             this.productDetail['dataSince'] = this.productDetail['dataSince'] ? this.commonService.getDateForDay(this.productDetail['dataSince']): null;
             this.productDetail['dataUntil'] = this.productDetail['dataUntil'] ? this.commonService.getDateForDay(this.productDetail['dataUntil']): null;
             this.productDetail.averageScore = this.productDetail.averageScore ? (this.productDetail.averageScore).toFixed(1) : undefined;
-
-            this.isThumbsUp = this.productDetail.favor;
             this.favoredCount = this.productDetail.favoredCount;
             this.getRelatedProducts();
             this.getComment();
           });
+      })
+  }
+
+  // 获取产品是否点赞收藏
+  getUserProp() {
+    if (!this.userId) { return }
+    this.service.getProductUserProp(this.productParams.productId, this.userId)
+      .then(res => {
+        console.log('favor', res)
+        this.isThumbsUp = res['productFavor'];
       })
   }
 
@@ -174,7 +186,8 @@ export class DataDetailComponent implements OnInit{
     let option = {productId: this.productDetail.productId, status: this.isThumbsUp, data: {'userId': this.userId}};
     this.service.createProductFavor(option)
       .then(res => {
-        this.favoredCount = res['favoredCount']
+        this.favoredCount = res['favoredCount'];
+        this.isThumbsUp = res['favor']
       })
   }
 
@@ -205,10 +218,10 @@ export class DataDetailComponent implements OnInit{
   sendComment() {
     this.commentError = '';
     if (!this.userId) { this.showLogin(); return }
-    if (!this.commentRemark) {
-      this.commentError = '请填写评语';
-      return;
-    }
+    // if (!this.commentRemark) {
+    //   this.commentError = '请填写评语';
+    //   return;
+    // }
     for (let i = 0; i < this.score.length; i ++) {
       if (!this.score[i].score) {
         this.commentError = '请打分';
@@ -225,13 +238,18 @@ export class DataDetailComponent implements OnInit{
     console.log('comment pass')
     this.service.addProductComment(score)
       .then(res => {
-        this.getProductDetail(this.productParams.productId);
+        this.snackBar.open('评论成功', '', {
+          duration: 3000
+        });
+        this.productComment['items'] = [];
+        this.getComment();
       })
   }
 
   // 获取产品评论
   getComment() {
-    this.service.getProductComment({productId: this.productDetail.productId, data: {limit: 5, offset: 0}})
+    console.log('curr page', this.currCommentPage)
+    this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination})
       .then(res => {
         if (!res.items) { return }
         let items: any = res.items;
@@ -255,8 +273,24 @@ export class DataDetailComponent implements OnInit{
           //   item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
           // }
         })
-        this.productComment = res;
+        this.productComment['totalLength'] = res['totalLength'];
+        res['items'].forEach(com => {
+          if (!com.remark) { com.remark = '该用户未写评语'}
+          if (!com.userName) { com.userName = '匿名'}
+          this.productComment['items'].push(com);
+        });
+        this.isMoreComment = (parseInt(this.productComment.totalLength) > ((this.currCommentPage + 1) * this.commentPagination['limit'])) ? true : false;
       })
+  }
+
+  // 加载更多评论
+  loadMoreComment() {
+    let page = Math.ceil(parseInt(this.productComment['totalLength'])/this.commentPagination.limit);
+    if ((this.currCommentPage + 1) < page) {
+      this.currCommentPage ++;
+      this.commentPagination['offset'] = this.currCommentPage * this.commentPagination['limit'];
+      this.getComment();
+    }
   }
 
   showReply(ind) {

@@ -1,48 +1,96 @@
 <!--认证-->
-<div class="identify" [ngSwitch]="userInfo.userType">
+<div class="identify" *ngIf="(userInfo?.userType == 1) || (userInfo?.userType == 2)">
   <div class="iden-type">
     <ul class="clearfix">
-      <li class="select-type" *ngIf="(userInfo.userType == 1) || (userInfo.userType == 10)">个人认证</li>
-      <li class="select-type" *ngIf="(userInfo.userType == 2) || (userInfo.userType == 20)">机构认证</li>
+      <li *ngFor="let t of userTypeTabs; let i = index;" [class.select-type]="CurrTab == i" (click)="switchTab(i)">{{t}}</li>
     </ul>
   </div>
-  <div class="iden-content" *ngSwitchCase="1">
+  <!--个人认证-->
+  <div class="iden-content" *ngIf="CurrTab == 0">
     <form class="form-horizontal edit-form" [formGroup]="individualForm" (ngSubmit)="submitIndividual()" novalidate>
       <div class="form-group">
-        <label class="col-xs-3">姓名</label>
-        <div class="col-xs-9">
+        <label class="col-sm-3 col-xs-12">姓名</label>
+        <div class="col-sm-9 col-xs-12">
           <input type="text" class="form-control" placeholder="请输入真实姓名" formControlName="name" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-xs-3">手机号</label>
-        <div class="col-xs-9">
+        <label class="col-sm-3 col-xs-12">手机号</label>
+        <div class="col-sm-9 col-xs-12">
           <input type="text" class="form-control" placeholder="请输入您的手机号">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-xs-3">验证码</label>
-        <div class="input-group col-xs-9">
+        <label class="col-sm-3 col-xs-12">验证码</label>
+        <div class="input-group col-sm-9 col-xs-12">
           <input type="text" class="form-control" placeholder="请输入验证码">
           <button class="input-group-addon">{{content}}</button>
         </div>
       </div>
       <div class="form-group">
         <label class="sr-only"></label>
-        <button class="ysl-btn btn-ensure col-xs-offset-3 col-xs-9">确认</button>
+        <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
       </div>
     </form>
     <!--<ul class="type-ul">-->
-      <!--<li><span>姓名</span> <input class="iden-input" type="text" placeholder="请输入真实姓名" [(ngModel)]="iden.name"></li>-->
-      <!--<li><span>手机号</span> <input class="iden-input" type="tel" placeholder="请输入您的手机号" [(ngModel)]="iden.tel"></li>-->
-      <!--<li><span>验证码</span><input class="iden-input" type="text" placeholder="请输入验证码" style="width: 156px" [(ngModel)]="iden.code">-->
-        <!--<button class="ysl-btn iden-code" [disabled]="able && !iden.tel" (click)="sendCode()">{{content}}</button>-->
-      <!--</li>-->
+    <!--<li><span>姓名</span> <input class="iden-input" type="text" placeholder="请输入真实姓名" [(ngModel)]="iden.name"></li>-->
+    <!--<li><span>手机号</span> <input class="iden-input" type="tel" placeholder="请输入您的手机号" [(ngModel)]="iden.tel"></li>-->
+    <!--<li><span>验证码</span><input class="iden-input" type="text" placeholder="请输入验证码" style="width: 156px" [(ngModel)]="iden.code">-->
+    <!--<button class="ysl-btn iden-code" [disabled]="able && !iden.tel" (click)="sendCode()">{{content}}</button>-->
+    <!--</li>-->
     <!--</ul>-->
     <!--<button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>-->
   </div>
+  <!--组织认证-->
+  <div class="gov-content" *ngIf="CurrTab == 1">
+    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization()" novalidate>
+      <div class="form-group">
+        <label class="col-sm-3 col-xs-12">机构名称</label>
+        <div class="col-sm-9 col-xs-12">
+          <input type="text" class="form-control" placeholder="请输入机构名称" formControlName="name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 col-xs-12">姓名</label>
+        <div class="col-sm-9 col-xs-12">
+          <input type="text" class="form-control" placeholder="请输入您的真实姓名" formControlName="contactName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 col-xs-12">手机号</label>
+        <div class="col-sm-9 col-xs-12">
+          <input type="text" class="form-control" placeholder="请输入您的手机号" formControlName="contactPhone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 col-xs-12">公司官网URL</label>
+        <div class="col-sm-9 col-xs-12">
+          <input type="text" class="form-control" placeholder="请输入公司官网URL" formControlName="webSite">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only"></label>
+        <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
+      </div>
+    </form>
+    <!--<ul class="type-ul" style="width: 410px">-->
+    <!--<li><span>机构名称</span> <input class="iden-input" type="text" placeholder="请输入机构名称" [(ngModel)]="goviden.firm"></li>-->
+    <!--<li><span>姓名</span> <input class="iden-input" type="tel" placeholder="请输入您的真实姓名" [(ngModel)]="goviden.name"></li>-->
+    <!--<li><span>手机号</span><input class="iden-input" type="text" placeholder="请输入您的手机号" [(ngModel)]="goviden.tel"></li>-->
+    <!--<li><span>公司官网URL</span> <input class="iden-input" type="tel" placeholder="请输入公司官网URL" [(ngModel)]="goviden.url"></li>-->
+    <!--</ul>-->
+    <!--<button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>-->
+  </div>
+</div>
+<div class="identify" *ngIf="(userInfo?.userType == 10) || (userInfo?.userType == 20)">
+  <div class="iden-type">
+    <ul class="clearfix">
+      <li class="select-type" *ngIf="(userInfo?.userType == 1) || (userInfo?.userType == 10)">个人认证</li>
+      <li class="select-type" *ngIf="(userInfo?.userType == 2) || (userInfo?.userType == 20)">机构认证</li>
+    </ul>
+  </div>
   <!--认证成功后显示-->
-  <div class="iden-success" *ngSwitchCase="10">
+  <div class="iden-success" *ngIf="(userInfo?.userType == 10)">
     <div class="iden-tip">
       <img src="./assets/images/pidensucc.png"><br>
       <span>恭喜，您的实名认证已通过</span>
@@ -51,47 +99,9 @@
     <p>姓名：{{userInfo.name}}</p>
     <p>手机号：</p>
   </div>
-  <div class="gov-content" *ngSwitchCase="2">
-    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization()" novalidate>
-      <div class="form-group">
-        <label class="col-xs-3">机构名称</label>
-        <div class="col-xs-9">
-          <input type="text" class="form-control" placeholder="请输入机构名称" formControlName="name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-xs-3">姓名</label>
-        <div class="col-xs-9">
-          <input type="text" class="form-control" placeholder="请输入您的真实姓名" formControlName="contactName">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-xs-3">手机号</label>
-        <div class="col-xs-9">
-          <input type="text" class="form-control" placeholder="请输入您的手机号" formControlName="contactPhone">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-xs-3">公司官网URL</label>
-        <div class="col-xs-9">
-          <input type="text" class="form-control" placeholder="请输入公司官网URL" formControlName="webSite">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="sr-only"></label>
-        <button class="ysl-btn btn-ensure col-xs-offset-3 col-xs-9">确认</button>
-      </div>
-    </form>
-    <!--<ul class="type-ul" style="width: 410px">-->
-      <!--<li><span>机构名称</span> <input class="iden-input" type="text" placeholder="请输入机构名称" [(ngModel)]="goviden.firm"></li>-->
-      <!--<li><span>姓名</span> <input class="iden-input" type="tel" placeholder="请输入您的真实姓名" [(ngModel)]="goviden.name"></li>-->
-      <!--<li><span>手机号</span><input class="iden-input" type="text" placeholder="请输入您的手机号" [(ngModel)]="goviden.tel"></li>-->
-      <!--<li><span>公司官网URL</span> <input class="iden-input" type="tel" placeholder="请输入公司官网URL" [(ngModel)]="goviden.url"></li>-->
-    <!--</ul>-->
-    <!--<button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>-->
-  </div>
+
   <!--机构认证成功后显示-->
-  <div class="iden-success" *ngSwitchCase="20">
+  <div class="iden-success" *ngIf="(userInfo?.userType == 20)">
     <div class="iden-tip">
       <img src="./assets/images/gidensucc.png"><br>
       <span>恭喜，您的实名认证已通过审核</span>

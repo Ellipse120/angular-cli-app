@@ -6,7 +6,7 @@
         <span class="firmlogo"><img [src]="productDetail?.logoFilePath ? './assets/images/detail1.png' : './assets/images/product-logo-default.png'"></span>
         <ul class="firm-detail clearfix">
           <li>数据供应商：{{productDetail.orgName}}</li>
-          <li>官方网址：<a [href]="productDetail.orgWebSite" target="_blank">{{productDetail.orgWebSite}}</a></li>
+          <li>官方网址：<a [href]="productDetail.webSite" target="_blank">{{productDetail.webSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
           <li>数据样本：<i class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</i><span *ngIf="!productDetail.sampleFilePath">无</span></li>
           <li>数据类型：<i *ngIf="productDetail.dataCategory">{{productDetail['dataCategory']}}</i><span *ngIf="!productDetail.dataCategory">无</span></li>
@@ -113,6 +113,7 @@
           </div>
         </li>
       </ul>
+      <p class="load-more text-right" *ngIf="isMoreComment"><a class="color-blue ysl-pointer" (click)="loadMoreComment()">查看更多》</a></p>
     </div>
   </div>
 
@@ -128,18 +129,20 @@
     </div>
 
     <div class="current-info font14">
-      <p>产品信息</p>
+      <p>相关信息</p>
       <ul class="mt10">
         <li><span>创建者：</span> <span class="color-blue">{{productDetail.creator}}</span></li>
+        <li><span>联系人：</span> <span>{{productDetail.userName}}</span></li>
         <li><span>浏览次数：</span> <span>{{productDetail.viewedCount}}次</span></li>
         <li><span>最近更新：</span> <span>{{productDetail.modifiedOn}}</span></li>
+        <li><span>联系邮箱：</span> <span>{{productDetail.contactMail}}</span></li>
       </ul>
     </div>
 
     <div class="relative-pro">
       <p>相关产品</p>
-      <p *ngIf="!relatedProductList">暂无相关产品</p>
-      <ul class="relative-pro-list font12" *ngIf="relatedProductList">
+      <p *ngIf="!relatedProductList['items']?.length">暂无相关产品</p>
+      <ul class="relative-pro-list font12" *ngIf="relatedProductList['items']?.length">
         <li *ngFor="let item of relatedProductList">
           <p class="color-blue" (click)="relatedProductDetail(item)">{{item.name}}</p>
           <span>{{item.description}}</span></li>
