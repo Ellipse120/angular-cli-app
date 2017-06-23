@@ -34,6 +34,7 @@ import {SearchAdvancedComponent} from "./search/search-input/search-advanced/sea
 import {ProductErrataComponent} from "./search/datalist/data-detail/product-errata.component";
 import {ServiceAgreementComponent} from "./statement/service-agreement.component";
 import {YslPrivacyComponent} from "./statement/privacy.component";
+import {YslLoadingComponent} from "./core/loading/loading.component";
 
 
 let ueditorPath = {
@@ -53,6 +54,7 @@ let ueditorPath = {
     RegisterComponent,
     ServiceAgreementComponent,
     YslPrivacyComponent,
+    YslLoadingComponent,
     NavComponent,
     FooterComponent,
     LoginComponent,

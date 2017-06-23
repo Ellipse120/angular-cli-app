@@ -17,6 +17,7 @@ export class DatalistComponent implements OnInit {
   @ViewChild('yslSideNav') sideNav;
   yearSearchForm: FormGroup;
   state = false;
+  isShowLoading: boolean = true;
   limit;
   searchOptions = {
     limit: 10,
@@ -68,6 +69,7 @@ export class DatalistComponent implements OnInit {
 
   // 获取产品列表
   getProjectList() {
+    this.isShowLoading = true;
     if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined}
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
@@ -83,7 +85,6 @@ export class DatalistComponent implements OnInit {
     if (keyword && (keywordHis.indexOf(keyword) <= -1)) {
       keywordHis.push(keyword);
     }
-    console.log('keyword_his', keywordHis)
     this.searchCondition = [];
     this.product['dateFacets'].forEach((item, ind) => {
       this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
@@ -99,7 +100,8 @@ export class DatalistComponent implements OnInit {
       })
     });
     this.searchCondition.unshift({text: '时间不限', value: undefined});
-    window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis))
+    window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis));
+    this.isShowLoading = false;
   }
 
   // 标签搜索去重
