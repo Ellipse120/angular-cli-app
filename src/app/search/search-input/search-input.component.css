@@ -109,6 +109,39 @@
 .calendar{
   width: 100%;
 }
+.search-history{
+  position: absolute;
+  width: 83.33%;
+  top: 44px;
+  color: #333;
+  background-color: #fff;
+  z-index: 3;
+  border: 1px solid #d8e5e7;
+}
+.search-history ul{
+  width: 100%;
+  margin-bottom: 0;
+}
+.search-history li{
+  height: 28px;
+  line-height: 28px;
+  text-align: left;
+  padding-left: 10px;
+}
+.search-history .close-history{
+  border-top: 1px solid #d8e5e7;
+  text-align: right;
+}
+.search-history .close-history span{
+  display: inline-block;
+  height: 100%;
+  padding: 0 10px;
+  border-left: 1px solid #d8e5e7;
+  cursor: pointer;
+}
+.search-history li:not(.close-history):hover, .search-history .close-history span:hover{
+  background-color: #d8e5e7;
+}
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .form-group{
@@ -119,7 +152,7 @@
   }
 }
 @media screen and (min-width: 992px){
-  .advanced-box{
+  .advanced-box, .search-history{
     width: 91.66666667%;
   }
 }

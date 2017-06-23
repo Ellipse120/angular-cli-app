@@ -1,4 +1,4 @@
-<md-sidenav-container class="dataShow visible-xs">
+<md-sidenav-container class="dataShow visible-sm visible-xs">
   <!--列表页-->
   <md-sidenav #yslSideNav>
     <div class="search-condition-type">
@@ -41,7 +41,7 @@
       <div class="find-result">
         <p class="result">一共找到{{product.totalLength}}个符合条件的数据产品</p>
         <div class="filter">
-          <span class="visible-xs-block fa fa-filter" (click)="openSideNav()"></span>
+          <span class="visible-sm-block visible-xs-block fa fa-filter" (click)="openSideNav()"></span>
           <div class="sort-by-date">
             <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
             <ul class="sort-list">
@@ -76,7 +76,7 @@
   </div>
 </md-sidenav-container>
 <!--电脑屏幕-->
-<div class="dataShow container hidden-xs">
+<div class="dataShow container hidden-sm hidden-xs">
   <div class="data-list-area clearfix">
     <!--搜索菜单-->
     <div class="search-condition hidden-xs">

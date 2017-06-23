@@ -131,7 +131,7 @@
     <div class="current-info font14">
       <p>相关信息</p>
       <ul class="mt10">
-        <li><span>创建者：</span> <span class="color-blue">{{productDetail.creator}}</span></li>
+        <li><span>创建者：</span> <span>{{productDetail.creator}}</span></li>
         <li><span>联系人：</span> <span>{{productDetail.userName}}</span></li>
         <li><span>浏览次数：</span> <span>{{productDetail.viewedCount}}次</span></li>
         <li><span>最近更新：</span> <span>{{productDetail.modifiedOn}}</span></li>
@@ -144,7 +144,7 @@
       <p *ngIf="!relatedProductList['items']?.length">暂无相关产品</p>
       <ul class="relative-pro-list font12" *ngIf="relatedProductList['items']?.length">
         <li *ngFor="let item of relatedProductList">
-          <p class="color-blue" (click)="relatedProductDetail(item)">{{item.name}}</p>
+          <p (click)="relatedProductDetail(item)"><a>{{item.name}}</a></p>
           <span>{{item.description}}</span></li>
       </ul>
     </div>

@@ -63,7 +63,7 @@ export class DatalistComponent implements OnInit {
 
   // 侧边栏
   openSideNav() {
-    this.sideNav.open()
+    this.sideNav.open();
   }
 
   // 获取产品列表
@@ -78,6 +78,12 @@ export class DatalistComponent implements OnInit {
 
   // 解析产品列表数据
   handleDataList() {
+    let keyword = this.searchOptions['keyword'];
+    let keywordHis = window.localStorage.getItem('keyword_group') ? JSON.parse(window.localStorage.getItem('keyword_group')) : [];
+    if (keyword && (keywordHis.indexOf(keyword) <= -1)) {
+      keywordHis.push(keyword);
+    }
+    console.log('keyword_his', keywordHis)
     this.searchCondition = [];
     this.product['dateFacets'].forEach((item, ind) => {
       this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
@@ -91,8 +97,9 @@ export class DatalistComponent implements OnInit {
           }
         })
       })
-    })
+    });
     this.searchCondition.unshift({text: '时间不限', value: undefined});
+    window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis))
   }
 
   // 标签搜索去重
