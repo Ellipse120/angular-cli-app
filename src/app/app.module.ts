@@ -35,6 +35,7 @@ import {ProductErrataComponent} from "./search/datalist/data-detail/product-erra
 import {ServiceAgreementComponent} from "./statement/service-agreement.component";
 import {YslPrivacyComponent} from "./statement/privacy.component";
 import {YslLoadingComponent} from "./core/loading/loading.component";
+import {SearchHistoryComponent} from "./search/search-input/search-history.component";
 
 
 let ueditorPath = {
@@ -60,6 +61,7 @@ let ueditorPath = {
     LoginComponent,
     YslPopupDirective,
     SearchAdvancedComponent,
+    SearchHistoryComponent,
     ProductErrataComponent
   ],
   imports: [
@@ -83,7 +85,8 @@ let ueditorPath = {
   entryComponents: [
     LoginComponent,
     SearchAdvancedComponent,
-    ProductErrataComponent
+    ProductErrataComponent,
+    SearchHistoryComponent
   ],
   providers: [
     YslHttpService,

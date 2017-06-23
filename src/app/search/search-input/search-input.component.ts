@@ -12,6 +12,7 @@ import { IMyDpOptions } from "mydatepicker";
 import {SearchService} from "../search.service";
 import {YslPopupDirective} from "../../core/directive/ysl-popup.directive";
 import {SearchAdvancedComponent} from "./search-advanced/search-advanced.component";
+import {SearchHistoryComponent} from "./search-history.component";
 
 @Component({
   selector: 'search-input',
@@ -28,8 +29,6 @@ export class SearchInputComponent implements OnInit {
   keywordSearch: EventEmitter<any>;
   showAdvancedBox: EventEmitter<any>;
   keywordSearchForm: FormGroup;
-  isFocus: boolean;
-  searchHistory = [];
   urlTarget = '';
   isShowAdvancedBox: boolean;
   myDatePickerOptions: IMyDpOptions = {
@@ -56,30 +55,11 @@ export class SearchInputComponent implements OnInit {
 
   ngOnInit() {
     let path = this.location.path();
-    this.getSearchHistory();
     this.createForm();
-    document.addEventListener('click', () => {
-      this.isFocus = false;
-    }, false)
   }
 
-  // 获取搜索历史
-  getSearchHistory() {
-    this.searchHistory = window.localStorage.getItem('keyword_group') ? JSON.parse(window.localStorage.getItem('keyword_group')) : [];
-  }
-
-  // 清除搜索历史
-  clearSearchHistory() {
-    window.localStorage.removeItem('keyword_group');
-    this.getSearchHistory();
-  }
-
-  // 按历史关键字搜索
-  searchByHistory(key) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {keyword: key}
-    };
-    this.router.navigate(['datalist'], navigationExtras);
+  showSearchHistory() {
+    this.yslPopup.toggle(SearchHistoryComponent)
   }
 
   //关键字搜索

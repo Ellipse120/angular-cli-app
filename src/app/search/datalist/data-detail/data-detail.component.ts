@@ -31,6 +31,7 @@ export class DataDetailComponent implements OnInit{
   commentError = '';
   currCommentPage = 0;
   isMoreComment: boolean;
+  isShowCommentLoading: boolean;
   commentPagination = {limit: 5, offset: 0};
   errataPopupOpt: any;
   productParams;
@@ -248,7 +249,7 @@ export class DataDetailComponent implements OnInit{
 
   // 获取产品评论
   getComment() {
-    console.log('curr page', this.currCommentPage)
+    this.isShowCommentLoading = true;
     this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination})
       .then(res => {
         if (!res.items) { return }
@@ -280,6 +281,7 @@ export class DataDetailComponent implements OnInit{
           this.productComment['items'].push(com);
         });
         this.isMoreComment = (parseInt(this.productComment.totalLength) > ((this.currCommentPage + 1) * this.commentPagination['limit'])) ? true : false;
+        this.isShowCommentLoading = false;
       })
   }
 

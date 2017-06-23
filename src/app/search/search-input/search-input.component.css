@@ -78,6 +78,9 @@
   font-family: '微软雅黑';
   color: #2e3e45;
 }
+.advanced-box .form-group{
+  margin-bottom: 5px;
+}
 .advanced-box select{
   border: 1px solid #d8e5e7;
   height: 30px;
@@ -113,6 +116,7 @@
   position: absolute;
   width: 83.33%;
   top: 44px;
+  left: 0;
   color: #333;
   background-color: #fff;
   z-index: 3;

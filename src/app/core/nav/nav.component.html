@@ -12,7 +12,7 @@
       <li class="ysl-nav-item" *ngIf="loginInfo.userType == '30'"><span routerLink="/operation">运营中心</span></li>
       <li class="ysl-nav-item" *ngIf="loginInfo.userType == '20'"><span routerLink="/promange">产品管理</span></li>
       <li class="ysl-nav-item">
-        <span>{{loginInfo.name}}<i class="fa fa-angle-down"></i></span>
+        <span><i *ngIf="loginInfo.name">{{loginInfo.name}}</i><i *ngIf="!loginInfo.name && loginInfo.loginId">{{loginInfo.loginId}}</i><i class="fa fa-angle-down"></i></span>
         <ul class="ysl-subnav" [ngStyle]="subnavStyle">
           <li routerLink="/usercenter"><i class="fa fa-user-o"></i>个人中心</li>
           <li (click)="logout()"><i class="fa fa-sign-out"></i>安全退出</li>

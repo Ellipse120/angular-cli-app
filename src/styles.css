@@ -438,6 +438,15 @@ footer{
   transition: none;
 }
 
+/*产品详情*/
+.data-detail .comment-wrapper .spinner{
+  margin: 10px auto;
+}
+
+.data-detail .comment-wrapper .container1>div,.data-detail .comment-wrapper .container2>div,.data-detail .comment-wrapper .container3>div{
+  background-color: #39baf6 !important;
+}
+
 /*用户信息查看*/
 .info-box{
   position: absolute;
