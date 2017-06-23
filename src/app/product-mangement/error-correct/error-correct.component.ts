@@ -2,10 +2,19 @@ import { Component, OnInit } from '@angular/core';
 
 import { IMyDpOptions } from 'mydatepicker';
 
-import { YslHttpService } from "../../core/ysl-http.service";
+import { YslHttpService } from '../../core/ysl-http.service';
+import {ProductErrorService} from './product-error.service';
+import {CookieService} from 'ngx-cookie';
+import {MdDialog} from '@angular/material';
+import {isNullOrUndefined} from 'util';
+import {LoginComponent} from '../../login/login.component';
+import {ConfirmDialogComponent} from "../../core/commons/confirm-dialog.component";
+import {YslCommonService} from "../../core/ysl-common.service";
+
+const USER_COOKIE = 'yslUserInfo';
 
 @Component({
-  selector: 'error-correct',
+  selector: 'app-error-correct',
   templateUrl: './error-correct.component.html',
   styleUrls: ['./error-correct.component.css']
 })
@@ -29,28 +38,44 @@ export class ErrorCorrectComponent implements OnInit {
     {name: 'problem'},
     {name: 'submitTime'},
     {name: 'option'}
-  ]
+  ];
 
-  constructor(public service: YslHttpService) {
-    this.service.getError(data => {
-      this.rows = data;
-      console.log(this.rows);
-    });
+
+  user: any;
+  constructor(public service: ProductErrorService,
+              private commonService: YslCommonService,
+              private dialog: MdDialog,
+              private cookie: CookieService) {
+
   }
 
   closeError() {
     this.errorEdit = false;
   }
 
-
+  /**
+   * 修改产品
+   * @param content
+   */
   modifyError(content) {
     console.log(content);
     this.error = content;
     this.errorEdit = true;
   }
 
+  modifyStatus(row) {
+    console.log('row:', row);
+
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: '确认改变纠错状态',
+        message: '确定要将当前纠错信状态改变为已修改吗?'
+      }
+    });
+  }
+
   onSelect({ selected }) {
-    this.selected.push(selected)
+    this.selected.push(selected);
     console.log(this.selected);
 
     // this.selected.splice(0, this.selected.length);
@@ -72,16 +97,41 @@ export class ErrorCorrectComponent implements OnInit {
   remove() {
     this.selected = [];
   }
-//  this.service
-// .getList()
-//  // .then((function(data){this.dataList=data}))
-// .then(dataList => {
-//  this.dataList = dataList;
-//  console.log(this.dataList);
-// })
-  // 获取纠错数据
 
+  ngOnInit() {
 
+    this.user  =  this.cookie.getObject(USER_COOKIE);
 
-  ngOnInit() {}
+    console.log('userInfo:', this.user);
+
+   if (isNullOrUndefined(this.user)) {
+     this.showLoginComp();
+   } else {
+     this.listError();
+   }
+
+  }
+
+  listError() {
+    this.service.list().subscribe(data => {
+      console.log('data:', data);
+      var total = data.totalLength;
+      var items = data.items;
+      items.forEach(item => {
+        item.submitTime = this.commonService.getDateForDay(item.submitTime);
+      })
+      this.rows = items;
+    });
+  }
+
+  showLoginComp() {
+    const dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
+    dialogLog.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+      this.cookie.putObject('yslUserInfo', result.userLoginInfo);
+      this.listError();
+    });
+  }
 }

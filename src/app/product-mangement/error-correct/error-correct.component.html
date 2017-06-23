@@ -36,7 +36,7 @@
       <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
 
       <ngx-datatable
-        style="text-align: center;margin-top: 20px;min-width: 1120px"
+        style="margin-top: 20px;"
         class="material"
         [rows]="rows "
         [columnMode]="'force'"
@@ -47,23 +47,14 @@
         [selectionType]="'checkbox'"
         (activate)="onActivate($event)"
         (select)='onSelect($event)'>
-        <ngx-datatable-column
-          class="striped"
-          [width]="30"
-          [sortable]="false"
-          [canAutoResize]="false"
-          [draggable]="false"
-          [resizeable]="false"
-          [headerCheckboxable]="true"
-          [checkboxable]="true">
-        </ngx-datatable-column>
-        <ngx-datatable-column name="proName" class="text-center"></ngx-datatable-column>
-        <ngx-datatable-column [width]="60" name="userName" class="text-center"></ngx-datatable-column>
-        <ngx-datatable-column name="problem" class="text-center"></ngx-datatable-column>
-        <ngx-datatable-column name="submitTime" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="产品名称" prop="productName"></ngx-datatable-column>
+        <ngx-datatable-column [width]="60" name="提交用户" prop="userName" ></ngx-datatable-column>
+        <ngx-datatable-column prop="comment" name="修改说明" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column name="提交时间" prop="submitTime" class="text-center"></ngx-datatable-column>
         <ngx-datatable-column name="option">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <a href="javascript:;" class="color-orange" (click)="modifyError(row)">查看 / 修改</a>
+            <button md-button (click)="modifyStatus(row)">确认修改</button>
+            <a href="javascript:;" class="color-orange" (click)="modifyError(row)">修改产品</a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

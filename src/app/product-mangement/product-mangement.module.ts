@@ -11,6 +11,8 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {ErrorCorrectComponent} from './error-correct/error-correct.component';
 import {ProductImportComponent} from './product-import/product-import.component';
 import {YslMaterialModule} from '../core/ysl-material.module';
+import {ProductErrorService} from "./error-correct/product-error.service";
+import {CommonsUtilsModule} from "../core/commons/commons-utils.module";
 
 
 @NgModule({
@@ -26,10 +28,14 @@ import {YslMaterialModule} from '../core/ysl-material.module';
     RouterModule,
     FormsModule,
     MyDatePickerModule,
-    YslMaterialModule
+    YslMaterialModule,
+    CommonsUtilsModule
   ],
   entryComponents: [
     ProductImportComponent
+  ],
+  providers: [
+    ProductErrorService
   ]
 })
 
