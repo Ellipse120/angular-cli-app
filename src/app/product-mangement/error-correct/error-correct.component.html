@@ -1,10 +1,7 @@
 <div class="promage-nav">
   <div class="mage-title">
-    <div style="margin: 10px 0; font-size: .5rem; line-height: 0" >纠错处理</div>
-    <div class="ysl-search-box">
-      <input type="text" class="content-search" placeholder="名称/简介">
-      <button class="ysl-btn search-btn"></button>
-    </div>
+    <div style="margin: 10px 0; font-size: .5rem; margin-top: 5px;" >纠错处理</div>
+
   </div>
   <div class="own-prolist">
     <div class="selected-filter">
@@ -49,12 +46,15 @@
         (select)='onSelect($event)'>
         <ngx-datatable-column name="产品名称" prop="productName"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="提交用户" prop="userName" ></ngx-datatable-column>
-        <ngx-datatable-column prop="comment" name="修改说明" class="text-center"></ngx-datatable-column>
         <ngx-datatable-column name="提交时间" prop="submitTime" class="text-center"></ngx-datatable-column>
-        <ngx-datatable-column name="option">
+        <ngx-datatable-column name="状态" prop="statusText" class="text-center"></ngx-datatable-column>
+        <ngx-datatable-column prop="comment" name="修改说明" class="text-center"></ngx-datatable-column>
+
+        <ngx-datatable-column name="操作">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <button md-button (click)="modifyStatus(row)">确认修改</button>
-            <a href="javascript:;" class="color-orange" (click)="modifyError(row)">修改产品</a>
+            <button *ngIf="row.status == 2" md-button (click)="modifyStatus(row)">确认修改</button>
+            <button *ngIf="row.status == 2" md-button (click)="modifyError(row)" class="color-orange">修改产品</button>
+
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

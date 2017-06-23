@@ -10,6 +10,8 @@ import {isNullOrUndefined} from 'util';
 import {LoginComponent} from '../../login/login.component';
 import {ConfirmDialogComponent} from "../../core/commons/confirm-dialog.component";
 import {YslCommonService} from "../../core/ysl-common.service";
+import {ProductService} from "../service/product.service";
+import {ProductImportComponent} from "../product-import/product-import.component";
 
 const USER_COOKIE = 'yslUserInfo';
 
@@ -44,6 +46,7 @@ export class ErrorCorrectComponent implements OnInit {
   user: any;
   constructor(public service: ProductErrorService,
               private commonService: YslCommonService,
+              private productService: ProductService,
               private dialog: MdDialog,
               private cookie: CookieService) {
 
@@ -57,10 +60,25 @@ export class ErrorCorrectComponent implements OnInit {
    * 修改产品
    * @param content
    */
-  modifyError(content) {
-    console.log(content);
-    this.error = content;
-    this.errorEdit = true;
+  modifyError(row) {
+    console.log(row);
+    this.productService.get(row.productId)
+      .subscribe(data => {
+        console.log('data:', data);
+
+
+        const dialogRef = this.dialog.open(ProductImportComponent, {data: {
+          'data': data,
+          'productTitle': data['name']
+        }, disableClose: true});
+        dialogRef.componentInstance.productTitle = data['name'];
+        dialogRef.componentInstance.isProImport = false;
+        dialogRef.componentInstance.data = data;
+
+        dialogRef.afterClosed().subscribe(res => {
+
+        });
+      });
   }
 
   modifyStatus(row) {
@@ -71,11 +89,20 @@ export class ErrorCorrectComponent implements OnInit {
         title: '确认改变纠错状态',
         message: '确定要将当前纠错信状态改变为已修改吗?'
       }
+    }).afterClosed().subscribe(result => {
+      if (result === 'OK') {
+          this.service.status(row.id, '3')
+            .subscribe(data => {
+                console.log('处理完成');
+
+                this.listError();
+            });
+      }
     });
   }
 
   onSelect({ selected }) {
-    this.selected.push(selected);
+    // this.selected.push(selected);
     console.log(this.selected);
 
     // this.selected.splice(0, this.selected.length);
@@ -113,12 +140,21 @@ export class ErrorCorrectComponent implements OnInit {
   }
 
   listError() {
-    this.service.list().subscribe(data => {
+    var params = {};
+    if (this.user['userType'] === 20) {
+      params['userName'] = this.user['name'];
+    }
+    this.service.list(params).subscribe(data => {
       console.log('data:', data);
-      var total = data.totalLength;
-      var items = data.items;
+      let total = data.totalLength;
+      let items = data.items;
       items.forEach(item => {
         item.submitTime = this.commonService.getDateForDay(item.submitTime);
+        if (item.status === 2) {
+          item.statusText = '未修改';
+        } else {
+          item.statusText = '已修改';
+        }
       })
       this.rows = items;
     });

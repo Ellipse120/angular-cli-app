@@ -13,6 +13,7 @@ import {ProductImportComponent} from './product-import/product-import.component'
 import {YslMaterialModule} from '../core/ysl-material.module';
 import {ProductErrorService} from "./error-correct/product-error.service";
 import {CommonsUtilsModule} from "../core/commons/commons-utils.module";
+import {ProductService} from "./service/product.service";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {CommonsUtilsModule} from "../core/commons/commons-utils.module";
     ProductImportComponent
   ],
   providers: [
-    ProductErrorService
+    ProductErrorService,
+    ProductService
   ]
 })
 

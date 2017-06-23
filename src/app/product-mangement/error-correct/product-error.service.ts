@@ -34,14 +34,15 @@ export class ProductErrorService {
    * @returns {Observable<Response>}
    */
   status(errataId, status) {
-    return this.http.get(
-      this.apiPre + 'api/product/`errataId`/status/`status`',
+    return this.http.put(
+      this.apiPre + `api/product/errata/${errataId}/status/${status}`,
+      null,
       {
         headers: new Headers({
           'Content-Type': 'application/json'
         })
       }
-    ).map(resp => resp.json());
+    ).map(resp => resp.text());
   }
 
 
