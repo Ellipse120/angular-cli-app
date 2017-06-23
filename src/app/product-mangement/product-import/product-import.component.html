@@ -10,9 +10,9 @@
           <form (ngSubmit)="onSubmit()" #proForm="ngForm">
             <div class="form-group">
               <md-input-container>
-                <input mdInput placeholder="名字" style="width: 676px" required class="select-flex" [(ngModel)]="data.name" name="name">
+                <input mdInput placeholder="名称" style="width: 676px" required [pattern]="pattern" class="select-flex" [(ngModel)]="data.name" name="name">
+                <md-error>名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
               </md-input-container>
-
             </div>
             <div class="form-group">
               <textarea id="description" class="ysl-form-control product" placeholder="简介" name="description"
@@ -76,7 +76,7 @@
               </md-radio-group>
             </div>
 
-            <div class="form-group">
+            <div class="form-group date-range">
               <label>时间范围</label>
               <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
                           [(ngModel)]="timeFrom"  (dateChanged)="onDateFromChanged($event)"></my-date-picker>
@@ -105,7 +105,9 @@
               </div>
             </div>
 
-            <button type="submit" class="ysl-btn btn-submit" [disabled]="!proForm.form.valid">保存</button>
+            <div class="form-group">
+              <button type="submit" class="ysl-btn btn-submit" [disabled]="!proForm.form.valid">保存</button>
+            </div>
           </form>
         </div>
       </div>

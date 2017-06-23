@@ -1,5 +1,14 @@
+.secondTagDimensions {
+  overflow: auto;
+  padding-top: 0;
+}
+
+.selected-filter {
+  margin-bottom: 0;
+}
+
 .pro-list .ngx-datatable{
-  min-width: 0;
+  min-width: 0 !important;
 }
 .ngx-datatable.material .datatable-checkbox {
   padding: 0;
@@ -33,7 +42,7 @@
 }
 
 .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
-  text-align: center;
+  /*text-align: center;*/
   padding: 0 0 0 .22rem;
 }
 

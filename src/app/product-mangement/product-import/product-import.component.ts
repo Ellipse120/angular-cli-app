@@ -94,6 +94,7 @@ export class ProductImportComponent implements OnInit {
   userInfo;
   productTitle = '产品录入';
   isProImport = true;
+  pattern ='[^,，.。;；]+$';
 
   constructor(public service: YslHttpService,
               private productListService: ProductListService,

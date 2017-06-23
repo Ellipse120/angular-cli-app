@@ -8,27 +8,49 @@
   </div>
   <div class="own-prolist">
     <div class="selected-filter">
-      <input class="box-type" type="text" placeholder="用户名称">
-      <select class="box-type" name="userType" id="userType">
-        <option value="0">用户类型</option>
-        <option value="1">注册用户</option>
-        <option value="2">已认证个人用户</option>
-        <option value="3">已认证机构用户</option>
-      </select>
+      <md-input-container>
+        <input mdInput type="text" placeholder="用户名" (keyup)="nameFilter($event)">
+      </md-input-container>
+      <!--<select class="box-type" name="userType" id="userType">-->
+      <!--<option value="0">用户类型</option>-->
+      <!--<option value="1">注册用户</option>-->
+      <!--<option value="2">已认证个人用户</option>-->
+      <!--<option value="3">已认证机构用户</option>-->
+      <!--</select>-->
 
-      <select class="box-type" name="userType" id="userState">
-        <option value="0">状态</option>
-        <option value="1">进行中</option>
-        <option value="2">审核通过</option>
-        <option value="3">审核未通过</option>
-      </select>
+      <!--<select class="box-type" name="userType" id="userState">-->
+      <!--<option value="0">状态</option>-->
+      <!--<option value="1">进行中</option>-->
+      <!--<option value="2">审核通过</option>-->
+      <!--<option value="3">审核未通过</option>-->
+      <!--</select>-->
 
-      <select class="box-type" name="userType" id="updateTime">
-        <option value="0">更新时间</option>
-        <option value="1">一周内</option>
-        <option value="2">一月内</option>
-        <option value="3">三月内</option>
-      </select>
+      <!--<select class="box-type" name="userType" id="updateTime">-->
+      <!--<option value="0">更新时间</option>-->
+      <!--<option value="1">一周内</option>-->
+      <!--<option value="2">一月内</option>-->
+      <!--<option value="3">三月内</option>-->
+      <!--</select>-->
+
+      <md-select placeholder="用户类型" [ngModel]="" (change)="userTypeValueChange($event)" [floatPlaceholder]="xxx">
+        <md-option *ngFor="let item of userTypes" [value]="item.value">
+          {{item.viewValue}}
+        </md-option>
+      </md-select>
+      <md-select placeholder="状态">
+        <md-option>
+          111
+        </md-option>
+        <md-option>
+          222
+        </md-option>
+      </md-select>
+      <md-select placeholder="更新时间">
+        <md-option>
+
+        </md-option>
+      </md-select>
+
       <button class="ysl-btn pro-import" (click)="importProduct()"><img src="./assets/images/pen.png">录入产品</button>
     </div>
 
@@ -61,6 +83,7 @@
         [footerHeight]="50"
         [rowHeight]="40"
         [externalPaging]="true"
+        [externalSorting]="true"
         [count]="count"
         [limit]="pagingOption.limit"
         [offset]="pagingOption.offset"
@@ -68,8 +91,9 @@
         [messages]="messages"
         [selectionType]="'checkbox'"
         (activate)="onActivate($event)"
-        (select)='onSelect($event)'
-        (page)="setProductsPage($event)">
+        (select)="onSelect($event)"
+        (page)="setProductsPage($event)"
+        (sort)="doProductsSort($event)">
         <ngx-datatable-column
           class="striped"
           [width]="30"
@@ -80,7 +104,7 @@
           [headerCheckboxable]="false"
           [checkboxable]="true">
         </ngx-datatable-column>
-        <ngx-datatable-column [width]="60" name="名字" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column [width]="60"  name="名字" prop="name"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="用户名" prop="userName"></ngx-datatable-column>
         <ngx-datatable-column [width]="60" name="用户类型" prop="userType"></ngx-datatable-column>
         <ngx-datatable-column [width]="30" name="是否收费" prop="premium"></ngx-datatable-column>
@@ -90,7 +114,7 @@
           <ng-template let-row="row" ngx-datatable-cell-template>
             <img style="width: 20px" (click)="openOrClose(row.$$index)"
                  [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' " alt="">
-            <a href="javascript:;" class="file">上传<input type="file"></a>
+            <label href="javascript:;" class="file">上传<input type="file"></label>
             <!--<a href="javascript:;" style="text-decoration: none;" class="color-orange" (click)="viewInfo(row)">&nbsp;修改 </a>-->
             <a href="javascript:;" style="text-decoration: none;margin-right: 10px" class="color-orange"
                (click)="editProduct(row)">&nbsp;查看&frasl;修改&nbsp;</a>
@@ -103,31 +127,31 @@
 
 
 <!--<div class="info-box" *ngIf="showProInfo">-->
-  <!--<div class="info-content">-->
-    <!--<div class="mage-title">-->
-      <!--<h3>产品信息</h3>-->
-      <!--<b class="color-blue font18 fork" (click)="closeProInfo()">X</b>-->
-    <!--</div>-->
-    <!--<div class="user-content">-->
-      <!--<span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>-->
-      <!--<ul class="user-info-list">-->
-        <!--<li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.name" [disabled]="showEdit"></li>-->
-        <!--<li><span class="user-tag">用户名称</span> <input type="text" [(ngModel)]="proInfo.userName" [disabled]="showEdit">-->
-        <!--</li>-->
-        <!--<li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="proInfo.userType" [disabled]="showEdit">-->
-        <!--</li>-->
-        <!--<li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.premium" [disabled]="showEdit">-->
-        <!--</li>-->
-        <!--<li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.status" [disabled]="showEdit">-->
-        <!--</li>-->
-        <!--<li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.modifiedOn"-->
-                                                      <!--[disabled]="showEdit"></li>-->
-      <!--</ul>-->
+<!--<div class="info-content">-->
+<!--<div class="mage-title">-->
+<!--<h3>产品信息</h3>-->
+<!--<b class="color-blue font18 fork" (click)="closeProInfo()">X</b>-->
+<!--</div>-->
+<!--<div class="user-content">-->
+<!--<span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>-->
+<!--<ul class="user-info-list">-->
+<!--<li><span class="user-tag">项目名称</span> <input type="text" [(ngModel)]="proInfo.name" [disabled]="showEdit"></li>-->
+<!--<li><span class="user-tag">用户名称</span> <input type="text" [(ngModel)]="proInfo.userName" [disabled]="showEdit">-->
+<!--</li>-->
+<!--<li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="proInfo.userType" [disabled]="showEdit">-->
+<!--</li>-->
+<!--<li><span class="user-tag">是否收费</span> <input type="text" [(ngModel)]="proInfo.premium" [disabled]="showEdit">-->
+<!--</li>-->
+<!--<li><span class="user-tag">产品状态</span> <input type="text" [(ngModel)]="proInfo.status" [disabled]="showEdit">-->
+<!--</li>-->
+<!--<li><span class="user-tag">更新时间</span> <input type="text" [(ngModel)]="proInfo.modifiedOn"-->
+<!--[disabled]="showEdit"></li>-->
+<!--</ul>-->
 
 
-      <!--<button class="ysl-btn save-btn" (click)="updateProduct()">保存</button>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<button class="ysl-btn save-btn" (click)="updateProduct()">保存</button>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 <div *ngIf="import">
   <product-import></product-import>

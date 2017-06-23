@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   selected = [];
   proInfo = [];
   isOn = [];
+  temp = [];
   rowState = true;
   import = false;
   showEdit = true;
@@ -40,10 +41,20 @@ export class ProductListComponent implements OnInit {
   pagingOption: any = {
     userId: 0,
     limit: 10,
-    offset: 0
+    offset: 0,
+    sortBy: '',
+    ascending: true
   };
 
   count = 0;
+  xxx = false;
+  userTypes = [
+    {value: '1', viewValue: '未认证的个人用户'},
+    {value: '2', viewValue: '未认证的机构用户'},
+    {value: '10', viewValue: '认证的个人用户'},
+    {value: '20', viewValue: '认证的机构用户'},
+    {value: '30', viewValue: '运营方用户'},
+  ];
 
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService,
@@ -64,6 +75,9 @@ export class ProductListComponent implements OnInit {
         this.isFinished = false;
         this.dataItems = data.items;
         this.rows = this.dataItems;
+
+        this.temp = [...data.items];
+
         this.count = data.totalLength;
 
         this.dataItems.forEach(item => {
@@ -247,6 +261,45 @@ export class ProductListComponent implements OnInit {
     this.pagingOption.offset = pageInfo.offset;
     this.pagingOption.userId = this.userInfo.id;
     this.getProducts();
+  }
+
+  // TODO: 后台asscending加上后 测试结果
+  doProductsSort(event) {
+    this.pagingOption.sortBy = event.column.prop;
+    this.pagingOption.ascending = (event.newValue === 'asc');
+    this.getProducts();
+
+    // const sort = event.sorts[0];
+    // const tmp = this.temp.sort((a,b) => {
+    //   return a[sort.prop].localeCompare(b[sort.prop]) * (sort.dir === 'desc' ? -1 : 1);
+    // })
+    // this.isOn = tmp;
+  }
+
+  // TODO 目前是页面过滤 要改为 server端过滤结果
+  nameFilter(event) {
+    const val = event.target.value;
+
+    const tmp = this.temp.filter(function (d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    this.rows = tmp;
+
+    this.pagingOption.offset = 0;
+  }
+
+  // TODO 目前是页面过滤 要改为 server端过滤结果
+  userTypeValueChange(event) {
+    const val = event.source.selected._element.nativeElement.innerText;
+
+    const tmp = this.temp.filter(function (d) {
+      return d.userType.toLowerCase().indexOf(val) !== -1;
+    });
+
+    this.rows = tmp;
+
+    this.pagingOption.offset = 0;
   }
 
   ngOnInit() {
