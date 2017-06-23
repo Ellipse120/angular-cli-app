@@ -21,6 +21,7 @@ import {YslPopupDirective} from "../directive/ysl-popup.directive";
 export class NavComponent implements OnInit {
 
   isShowSearch = false;
+  isShowPhoneNav = false;
   user = [];
   loginState: any;
   loginInfo: any;
@@ -44,7 +45,13 @@ export class NavComponent implements OnInit {
     this.setNavStyle();
     this.eventEmit.loginEvent.subscribe(() => {
       this.showLogin();
-    })
+    });
+    document.addEventListener('click', () => { this.isShowPhoneNav = false }, false)
+  }
+
+  showPhoneNav(e) {
+    e.stopPropagation();
+    this.isShowPhoneNav = !this.isShowPhoneNav;
   }
 
   //  显示登录框
@@ -57,10 +64,6 @@ export class NavComponent implements OnInit {
       this.eventEmit.loginSuccessEvent.emit();
       this.loginState = true;
     });
-  }
-
-  gotoRegitster() {
-    this.router.navigate(['register'],1);
   }
 
   // 搜索

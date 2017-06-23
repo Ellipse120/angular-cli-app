@@ -1,4 +1,4 @@
-<div class="data-detail container">
+<div class="data-detail container" *ngIf="!isShowLoading">
   <div class="detail-left col-lg-9 col-xs-12">
     <div class="clearfix">
       <h3 class="product-name">{{productDetail.name}}</h3>
@@ -151,3 +151,4 @@
     </div>
   </div>
 </div>
+<ysl-loading *ngIf="isShowLoading"></ysl-loading>

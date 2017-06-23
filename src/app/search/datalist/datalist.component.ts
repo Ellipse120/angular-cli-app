@@ -17,7 +17,8 @@ export class DatalistComponent implements OnInit {
   @ViewChild('yslSideNav') sideNav;
   yearSearchForm: FormGroup;
   state = false;
-  isShowLoading: boolean = true;
+  isShowLoading: boolean = false;
+  isShowSide: boolean;
   limit;
   searchOptions = {
     limit: 10,
@@ -32,7 +33,6 @@ export class DatalistComponent implements OnInit {
   currSortTagParent = [];
   currSortTag = [];
   tagSortList = [{}];
-  isShowPeriod = true;
   searchCondition = [];
   sortList = [{text: '按日期排序', value: 'modifiedOn'}, {text: '按热度排序', value: 'viewedCount'}];
   currSortItem = this.sortList[0];
@@ -64,7 +64,8 @@ export class DatalistComponent implements OnInit {
 
   // 侧边栏
   openSideNav() {
-    this.sideNav.open();
+    // this.sideNav.open();
+    this.isShowSide = true;
   }
 
   // 获取产品列表
@@ -74,6 +75,7 @@ export class DatalistComponent implements OnInit {
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
+        this.isShowLoading = false;
         this.handleDataList();
       });
   }
@@ -101,7 +103,6 @@ export class DatalistComponent implements OnInit {
     });
     this.searchCondition.unshift({text: '时间不限', value: undefined});
     window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis));
-    this.isShowLoading = false;
   }
 
   // 标签搜索去重
@@ -138,7 +139,8 @@ export class DatalistComponent implements OnInit {
     })
     this.searchOptions['tagId'] = tagS.substring(0, tagS.length - 1);
     this.getProjectList();
-    this.sideNav.close();
+    this.isShowSide = false;
+    // this.sideNav.close();
   }
 
   cancelFilter(item) {
@@ -165,7 +167,8 @@ export class DatalistComponent implements OnInit {
     this.searchConditionIndex = i;
     this.searchOptions['dataSince'] = item.value ? (new Date(item.value)).getTime() : undefined;
     this.getProjectList();
-    this.sideNav.close();
+    this.isShowSide = false;
+    // this.sideNav.close();
   }
 
   // 时间段搜索

@@ -27,13 +27,13 @@ export class DataDetailComponent implements OnInit{
   private yslPopup: YslPopupDirective;
   id: string;
   userId;
+  isShowLoading: boolean;
   commentRemark = '';
   commentError = '';
   currCommentPage = 0;
   isMoreComment: boolean;
   isShowCommentLoading: boolean;
   commentPagination = {limit: 5, offset: 0};
-  errataPopupOpt: any;
   productParams;
   productDetail;
   relatedProductList = [];
@@ -91,6 +91,7 @@ export class DataDetailComponent implements OnInit{
 
   // 获取详情信息
   getProductDetail(productId) {
+    this.isShowLoading = true;
     this.searchService.getAdvancedInfo()
       .then(data => {
         let advancedKey = data;
@@ -138,6 +139,7 @@ export class DataDetailComponent implements OnInit{
             this.favoredCount = this.productDetail.favoredCount;
             this.getRelatedProducts();
             this.getComment();
+            this.isShowLoading = false;
           });
       })
   }
