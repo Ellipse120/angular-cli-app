@@ -10,17 +10,20 @@
           <form (ngSubmit)="onSubmit()" #proForm="ngForm">
             <div class="form-group">
               <md-input-container>
-                <input mdInput placeholder="名称" style="width: 676px" required [pattern]="pattern" class="select-flex" [(ngModel)]="data.name" name="name">
+                <input mdInput placeholder="名称" type="text" maxlength="32" style="width: 676px" required [pattern]="pattern" class="select-flex" [(ngModel)]="data.name" name="name">
                 <md-error>名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
               </md-input-container>
             </div>
             <div class="form-group">
-              <textarea id="description" class="ysl-form-control product" placeholder="简介" name="description"
-                        [(ngModel)]="data.description" #description></textarea>
+              <md-input-container>
+                <textarea mdInput rows="3" maxlength="512" style="width: 676px"  md-select-on-focus id="description" placeholder="简介" name="description"
+                          [(ngModel)]="data.description"  #description></textarea>
+                <md-hint align="end">{{description.value.length}} / 512</md-hint>
+              </md-input-container>
             </div>
             <div class="form-group">
-              <md-input-container>
-                <input mdInput placeholder="官网" style="width: 676px" [(ngModel)]="data.webSite" name="webSite">
+              <md-input-container hintLabel="" color="primary" floatPlaceholder="auto">
+                <input mdInput placeholder="官网" type="url" maxlength="256" style="width: 676px" [(ngModel)]="data.webSite" name="webSite">
               </md-input-container>
             </div>
             <div class="form-group select-flex">
