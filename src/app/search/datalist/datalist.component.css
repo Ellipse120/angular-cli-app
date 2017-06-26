@@ -258,6 +258,10 @@
   overflow-y: scroll;
   padding-right: 15px;
 }
+.not-found{
+  font-size: 16px;
+  margin-top: 60px;
+}
 
 
 @media screen and (max-width: 768px) {

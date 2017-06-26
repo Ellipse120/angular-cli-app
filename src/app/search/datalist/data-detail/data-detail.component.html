@@ -3,7 +3,7 @@
     <div class="clearfix">
       <h3 class="product-name">{{productDetail.name}}</h3>
       <div class="data-info clear row">
-        <span class="firmlogo"><img [src]="productDetail?.logoFilePath ? './assets/images/detail1.png' : './assets/images/product-logo-default.png'"></span>
+        <span class="firmlogo"><img [src]="productDetail?.logoFilePath ? productDetail.logoFilePath : './assets/images/product-logo-default.png'"></span>
         <ul class="firm-detail clearfix">
           <li>数据供应商：{{productDetail.orgName}}</li>
           <li>官方网址：<a [href]="productDetail.webSite" target="_blank">{{productDetail.webSite}}</a></li>

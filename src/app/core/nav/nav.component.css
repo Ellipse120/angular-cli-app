@@ -10,10 +10,10 @@
 
 .ysl-header .head-left{
   width: 200px;
-  height: 34px;
+  height: 30px;
   outline: none;
   cursor: pointer;
-  background: url("../../../assets/images/logo.png") no-repeat left top/auto 100%;
+  background: url("../../../assets/images/header-logo.png") no-repeat left top/auto 100%;
 }
 .fa-home{
   color: #fff;

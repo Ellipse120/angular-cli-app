@@ -77,7 +77,7 @@
 </md-sidenav-container>
 <!--电脑屏幕-->
 <ysl-loading *ngIf="isShowLoading"></ysl-loading>
-<div class="dataShow container" [class.o-hidden]="isShowSide" *ngIf="!isShowLoading">
+<div class="dataShow container" [class.o-hidden]="isShowSide" *ngIf="!isShowLoading && product.items?.length">
   <div class="ysl-side-nav" [class.ysl-side-nav-open]="isShowSide">
     <div class="ysl-side-overly" (click)="isShowSide = false"></div>
     <div class="ysl-side-cont">
@@ -198,3 +198,4 @@
     </div>
   </div>
 </div>
+<div class="not-found container" *ngIf="!isShowLoading && !product.items?.length"><p class="text-center">暂未找到您要查询的数据产品</p></div>

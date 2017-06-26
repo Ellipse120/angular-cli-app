@@ -336,6 +336,7 @@ footer{
 }
 .footer ul{
   display: flex;
+  margin-bottom: 0;
 }
 .footer li{
   height: 12px;
@@ -352,6 +353,17 @@ footer{
 .footer p{
   margin-bottom: 0;
   line-height: 14px;
+}
+.footer-top{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.footer .logo{
+  display: inline-block;
+  height: 20px;
+  width: 100px;
+  background: url(assets/images/cjzc-logo.png) no-repeat left top/auto 100%;
 }
 
 /*重写部分*/
@@ -376,6 +388,9 @@ footer{
   display: none !important;
 }
 .ngx-pagination .pagination-previous a::after, .ngx-pagination .pagination-previous.disabled::after{
+  display: none !important;
+}
+.ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after{
   display: none !important;
 }
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
@@ -681,10 +696,6 @@ app-index .mat-ripple{
   }
   .footer{
     font-size: 12px;
-  }
-  .footer ul{
-    margin-top: 5px;
-    margin-bottom: 0;
   }
   my-nav search-input{
     width: 75%;

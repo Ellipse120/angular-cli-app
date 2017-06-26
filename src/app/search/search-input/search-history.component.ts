@@ -33,6 +33,7 @@ export class SearchHistoryComponent implements OnInit{
       queryParams: {keyword: key}
     };
     this.router.navigate(['datalist'], navigationExtras);
+    this.popupClose.emit();
   }
 
 
