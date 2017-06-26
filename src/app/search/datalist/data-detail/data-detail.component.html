@@ -113,7 +113,7 @@
           </div>
         </li>
       </ul>
-      <ysl-loading *ngIf="isShowCommentLoading"></ysl-loading>
+      <ysl-loading *ngIf="isShowCommentLoading && productComment.totalLength"></ysl-loading>
       <p class="load-more text-right" *ngIf="isMoreComment"><a class="color-blue ysl-pointer" (click)="loadMoreComment()">查看更多》</a></p>
     </div>
   </div>
