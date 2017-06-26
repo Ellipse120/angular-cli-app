@@ -302,6 +302,12 @@ export class ProductListComponent implements OnInit {
     this.pagingOption.offset = 0;
   }
 
+  getCellNameClass({row, column, value}) {
+    return {
+      'is-name-left': true
+    }
+  }
+
   ngOnInit() {
   }
 }

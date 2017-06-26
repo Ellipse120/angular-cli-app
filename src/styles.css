@@ -379,7 +379,7 @@ footer{
   display: none !important;
 }
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after{
-  text-align: center;
+  /*text-align: center;*/
 }
 .ngx-datatable .datatable-header{
   width: 100% !important;
