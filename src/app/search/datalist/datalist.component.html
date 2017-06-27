@@ -117,7 +117,7 @@
   </div>
   <div class="data-list-area clearfix">
     <!--搜索菜单-->
-    <div class="search-condition hidden-sm hidden-xs">
+    <div class="search-condition hidden-xs">
     <!--高级字段筛选-->
     <squeezebox class="search-condition-type" *ngFor="let d of advancedFilter">
       <sb-item [collapsed]="false">
@@ -162,7 +162,7 @@
           <li *ngFor="let t of selectedTagFilterA">{{t.parent}}: <span>{{t.name}}</span><i class="remove-tag" (click)="cancelTagFilter(t)">x</i></li>
         </ul>
         <div class="filter" *ngIf="product.items?.length">
-          <span class="visible-sm-block visible-xs-block fa fa-navicon" (click)="openSideNav()"></span>
+          <span class="visible-xs-block fa fa-navicon" (click)="openSideNav()"></span>
           <div class="sort-by-date">
             <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
             <ul class="sort-list">

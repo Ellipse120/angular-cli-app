@@ -291,9 +291,6 @@
 
 
 @media screen and (max-width: 768px) {
-  .search-condition-type{
-    margin-left: 15px;
-  }
   .data-list{
     padding-left: 0;
   }
@@ -302,12 +299,6 @@
   }
 }
 @media screen and (max-width: 992px) {
-  .search-condition-type{
-    margin-left: 15px;
-  }
-  .data-list{
-    padding-left: 0;
-  }
   .find-result .filter{
     justify-content: space-between;
   }
