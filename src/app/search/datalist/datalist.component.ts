@@ -85,7 +85,7 @@ export class DatalistComponent implements OnInit {
   // 获取产品列表
   getProductList() {
     this.isShowLoading = true;
-    if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined}
+    if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined; }
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;

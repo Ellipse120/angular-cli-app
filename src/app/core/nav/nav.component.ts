@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
   isShowPhoneNav = false;
   user = [];
   loginState: any;
+  userId: string;
   loginInfo: any;
   subnavStyle =  {};
 
@@ -37,18 +38,25 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     if (this.cookie.getObject('yslUserInfo')) {
       this.loginState = true;
-      this.loginInfo = this.cookie.getObject('yslUserInfo');
+      this.userId = this.cookie.getObject('yslUserInfo')['id'];
     } else {
       this.loginState = false;
-      this.loginInfo = {userType: ''}
+      this.userId = undefined;
     }
     this.setNavStyle();
+    this.getUserInfo();
     this.eventEmit.loginEvent.subscribe(() => {
       this.showLogin();
     });
     document.addEventListener('click', () => { this.isShowPhoneNav = false }, false)
   }
 
+  getUserInfo() {
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.loginInfo = res;
+      })
+  }
   showPhoneNav(e) {
     e.stopPropagation();
     this.isShowPhoneNav = !this.isShowPhoneNav;

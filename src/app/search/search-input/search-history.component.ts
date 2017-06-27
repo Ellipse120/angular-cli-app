@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit} from "@angular/core";
 import {NavigationExtras, Router} from "@angular/router";
+import {SearchService} from "../search.service";
 
 @Component({
   template: `
@@ -17,7 +18,7 @@ export class SearchHistoryComponent implements OnInit{
   popupClose = new EventEmitter<any>();
   searchHistory = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private eventEmit: SearchService) {}
   ngOnInit() {
     this.getSearchHistory();
   }
@@ -29,6 +30,7 @@ export class SearchHistoryComponent implements OnInit{
 
   // 按历史关键字搜索
   searchByHistory(key) {
+    this.eventEmit.changeKeyword.emit(key);
     let navigationExtras: NavigationExtras = {
       queryParams: {keyword: key}
     };

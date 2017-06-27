@@ -55,6 +55,9 @@ export class SearchInputComponent implements OnInit {
 
   ngOnInit() {
     let path = this.location.path();
+    this.searchService.changeKeyword.subscribe(e => {
+      this.keywordSearchForm.controls['keyword'].setValue(e)
+    });
     this.createForm();
   }
 
@@ -82,7 +85,7 @@ export class SearchInputComponent implements OnInit {
   //创建表单
   createForm() {
     this.keywordSearchForm = this.fb.group({
-      keyword: [this.keywordSearchOption.keyword, Validators.required]
+      keyword: [this.keywordSearchOption.keyword]
     });
   }
 }

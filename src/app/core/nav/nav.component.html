@@ -9,10 +9,10 @@
       <button class="ysl-btn register-btn" routerLink="/register">注册</button>
     </div>
     <ul class="after-login" *ngIf="loginState">
-      <li class="ysl-nav-item" *ngIf="loginInfo.userType == '30'"><span routerLink="/operation">运营中心</span></li>
-      <li class="ysl-nav-item" *ngIf="loginInfo.userType == '20'"><span routerLink="/promange">产品管理</span></li>
+      <li class="ysl-nav-item" *ngIf="loginInfo?.userType == '30'"><span routerLink="/operation">运营中心</span></li>
+      <li class="ysl-nav-item" *ngIf="loginInfo?.userType == '20'"><span routerLink="/promange">产品管理</span></li>
       <li class="ysl-nav-item">
-        <span><i *ngIf="loginInfo.name">{{loginInfo.name}}</i><i *ngIf="!loginInfo.name && loginInfo.loginId">{{loginInfo.loginId}}</i><i class="fa fa-angle-down"></i></span>
+        <span><i *ngIf="loginInfo?.userName">{{loginInfo?.userName}}</i><i *ngIf="!loginInfo?.userName && loginInfo?.loginId">{{loginInfo?.loginId}}</i><i class="fa fa-angle-down"></i></span>
         <ul class="ysl-subnav" [ngStyle]="subnavStyle">
           <li routerLink="/usercenter"><i class="fa fa-user-o"></i>个人中心</li>
           <li (click)="logout()"><i class="fa fa-sign-out"></i>安全退出</li>
@@ -28,8 +28,8 @@
         <li routerLink="/register">注册</li>
       </ul>
       <ul class="after-login-xs" *ngIf="loginState" [ngStyle]="subnavStyle">
-        <li *ngIf="loginInfo.userType == '30'" routerLink="/operation">运营中心</li>
-        <li *ngIf="loginInfo.userType == '20'" routerLink="/promange">产品管理</li>
+        <li *ngIf="loginInfo?.userType == '30'" routerLink="/operation">运营中心</li>
+        <li *ngIf="loginInfo?.userType == '20'" routerLink="/promange">产品管理</li>
         <li routerLink="/usercenter">个人中心</li>
         <li (click)="logout()">安全退出</li>
       </ul>
