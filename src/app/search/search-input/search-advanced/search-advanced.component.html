@@ -4,7 +4,7 @@
     <input type="text" class="col-xs-7 col-sm-8 advanced-input" formControlName="keyword">
   </div>
   <div class="form-group">
-    <label class="col-xs-5 col-sm-4">来源</label>
+    <label class="col-xs-5 col-sm-4">数据来源</label>
     <div class="col-xs-7 col-sm-8 ysl-select-group">
       <select class="col-xs-12" formControlName="dataSource">
         <option *ngFor="let s of advanceInfo.data_source" [value]="s.entryCode">{{s.entryValue}}</option>

@@ -142,8 +142,8 @@
 
     <div class="relative-pro">
       <p>相关产品</p>
-      <p *ngIf="!relatedProductList['items']?.length">暂无相关产品</p>
-      <ul class="relative-pro-list font12" *ngIf="relatedProductList['items']?.length">
+      <p *ngIf="!relatedProductList?.length">暂无相关产品</p>
+      <ul class="relative-pro-list font12" *ngIf="relatedProductList?.length">
         <li *ngFor="let item of relatedProductList">
           <p (click)="relatedProductDetail(item)"><a>{{item.name}}</a></p>
           <span>{{item.description}}</span></li>

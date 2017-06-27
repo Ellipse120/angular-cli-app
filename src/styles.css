@@ -451,6 +451,10 @@ footer{
 }
 .squeezebox .sb-item .sb-item-body{
   transition: none;
+  height: auto !important;
+}
+.squeezebox .is-collapsed .sb-item-body{
+  height: 0 !important;
 }
 
 /*产品详情*/

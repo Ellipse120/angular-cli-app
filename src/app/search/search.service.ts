@@ -27,6 +27,12 @@ export class SearchService implements OnInit{
     return new Promise(resolve => {
       this.httpService.getAdvancedSearchInfo()
         .then((res) => {
+          this.advancedKeys = {
+            data_category: [],
+            data_source: [],
+            data_collection: [],
+            data_service: []
+          };
           let data: any = res;
           let advanced = this.advancedKeys;
 
