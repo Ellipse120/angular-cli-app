@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap'
 
 import {YslHttpService} from '../../core/ysl-http.service';
 import {SearchService} from "../search.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-datalist',
@@ -29,11 +30,23 @@ export class DatalistComponent implements OnInit {
     request: {},
     totalLength: 0
   };
-  searchConditionIndex: number;
-  currSortTagParent = [];
-  currSortTag = [];
-  tagSortList = [{}];
-  searchCondition = [];
+  advancedFilter = [
+    {type: 'data_category', title: '数据类型', apiKey: 'dataCategory', child: []},
+    {type: 'data_collection', title: '采集方式', apiKey: 'collectionMethod', child: []},
+    {type: 'data_service', title: '服务类型', apiKey: 'serviceMethod', child: []},
+    {type: 'data_source', title: '数据来源', apiKey: 'dataSource', child: []},
+    {type: 'date_facets', title: '时间', apiKey: 'dataSince', child: []}
+  ];
+  selectAdvanced = [];
+  advancedKey = [
+    {label: 'data_category', text: '数据类型', data: []},
+    {label: 'data_collection', text: '采集方式', data: []},
+    {label: 'data_service', text: '服务方式', data: []},
+    {label: 'data_source', text: '数据来源', data: []}
+  ];
+  tagsFilter = [{title: '', value: '', child: []}];
+  selectedTagFilterO = {};
+  selectedTagFilterA = [];
   sortList = [{text: '按日期排序', value: 'modifiedOn'}, {text: '按热度排序', value: 'viewedCount'}];
   currSortItem = this.sortList[0];
   currPage: any;
@@ -55,11 +68,12 @@ export class DatalistComponent implements OnInit {
         }
         this.eventEmit.keyword = this.searchOptions['keyword'];
         this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
-        this.getProjectList();
+        this.getProductList();
       });
     this.limit = this.searchOptions['limit'];
     this.keywordSearch();
     this.createForm();
+    this.handleAdvancedKey();
   }
 
   // 侧边栏
@@ -69,7 +83,7 @@ export class DatalistComponent implements OnInit {
   }
 
   // 获取产品列表
-  getProjectList() {
+  getProductList() {
     this.isShowLoading = true;
     if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined}
     this.service.productKeywordSearch(this.searchOptions)
@@ -82,75 +96,174 @@ export class DatalistComponent implements OnInit {
 
   // 解析产品列表数据
   handleDataList() {
+    this.selectAdvanced = [];
     let keyword = this.searchOptions['keyword'];
     let keywordHis = window.localStorage.getItem('keyword_group') ? JSON.parse(window.localStorage.getItem('keyword_group')) : [];
     if (keyword && (keywordHis.indexOf(keyword) <= -1)) {
       keywordHis.push(keyword);
     }
-    this.searchCondition = [];
-    this.product['dateFacets'].forEach((item, ind) => {
-      this.searchCondition[ind] = {text: (new Date(item)).getFullYear() + '年以来', value: item}
-    })
-    this.tagSortList = this.product['tagFacets'];
-    this.tagSortList.forEach(tag => {
-      this.currSortTag.forEach(curr => {
-        tag['items'].forEach((_item, _ind) => {
-          if (curr.id == _item.id) {
-            tag['items'][_ind].currentTag = true;
+    // 时间筛选
+    if (this.product['dateFacets'].length) {
+      let arr = [];
+      this.advancedFilter.forEach(d => {
+        this.product['dateFacets'].forEach((item, ind) => {
+          if (d.apiKey == 'dataSince') {
+            arr[ind] = {type: 'date_facets', title: (new Date(item)).getFullYear() + '年以来', value: item, parent: '时间', selected: false};
+            d.child = arr;
+          }
+        });
+      });
+    }
+    // 高级搜索字段筛选
+    this.advancedFilter.forEach(item => {
+      let filter = this.searchOptions[item.apiKey];
+      if (!isNullOrUndefined(filter)) {
+        item['child'].forEach(c => {
+          if (c.value == filter) {
+            c.selected = true;
+            this.selectAdvanced.push(c);
+          } else {
+            c.selected = false;
+          }
+        })
+      }
+    });
+    // 标签筛选
+    this.tagsFilter = this.product['tagFacets'].length ? this.product['tagFacets'] : [];
+    this.tagsFilter.forEach(p => {
+      if (!p['items']) { return }
+      p['items'].forEach(c => {
+        c.parent = p['name'];
+        this.selectedTagFilterA.forEach(selected => {
+          if (selected.id == c.id) {
+            c['selected'] = true;
           }
         })
       })
     });
-    this.searchCondition.unshift({text: '时间不限', value: undefined});
     window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis));
+  }
+
+  // 高级搜索字段处理
+  handleAdvancedKey() {
+    this.eventEmit.getAdvancedInfo().then(() => {
+      let advancedKeys = this.eventEmit.advancedKeys;
+      for (let key in advancedKeys) {
+        this.advancedFilter.forEach(t => {
+          if (t.type == key) {
+            advancedKeys[key].forEach((child, i) => {
+              t.child[i] = {type: key, title: child.entryValue, value: child.entryCode, parent: t.title, selected: false};
+            })
+          }
+        })
+      }
+    });
+  }
+
+  // 高级搜索字段搜索
+  searchByAd(item) {
+    switch (item.type) {
+      case 'data_category':
+        this.searchOptions['dataCategory'] = item['value'];
+        break;
+      case 'data_collection':
+        this.searchOptions['collectionMethod'] = item['value'];
+        break;
+      case 'data_service':
+        this.searchOptions['serviceMethod'] = item['value'];
+        break;
+      case 'data_source':
+        this.searchOptions['dataSource'] = item['value'];
+        break;
+      case 'date_facets':
+        this.searchOptions['dataSince'] = item['value'];
+        break;
+    }
+    this.getProductList();
+    this.isShowSide = false;
+  }
+
+  // 取消高级字段筛选
+  cancelAdvancedFilter(item) {
+    console.log('cancel', item)
+    this.selectAdvanced.forEach((f, ind) => {
+      if (f === item) {
+        this.selectAdvanced.splice(ind, 1);
+      }
+    });
+    this.advancedFilter.forEach(i => {
+      if (item.type == i.type){
+        i.child.forEach(c => {
+          if (item.value == c.value) { c.selected = false }
+        })
+      }
+    });
+    switch (item.type) {
+      case 'data_category':
+        this.searchOptions['dataCategory'] = undefined;
+        break;
+      case 'data_collection':
+        this.searchOptions['collectionMethod'] = undefined;
+        break;
+      case 'data_service':
+        this.searchOptions['serviceMethod'] = undefined;
+        break;
+      case 'data_source':
+        this.searchOptions['dataSource'] = undefined;
+        break;
+      case 'date_facets':
+        this.searchOptions['dataSince'] = undefined;
+        break;
+    }
+    this.getProductList();
   }
 
   // 标签搜索去重
   tagUnique() {
     let unique = {};
-    this.product['items'].forEach(item => {
-      item.tags.forEach(tag => {
-        unique[JSON.stringify(tag)] = tag
-      })
-    });
-    this.tagSortList = Object.keys(unique).map(function(u){return JSON.parse(u) });
+    if (this.product['items'].length) {
+      this.product['items'].forEach(item => {
+        item.tags.forEach(tag => {
+          unique[JSON.stringify(tag)] = tag
+        })
+      });
+    }
+    this.tagsFilter = Object.keys(unique).map(function(u){return JSON.parse(u) });
   }
 
   // 标签搜索
-  sortByTag(item) {
-    if (this.currSortTagParent.indexOf(item.parentId) <= -1) {
-      this.currSortTagParent.push(item.parentId);
-      this.currSortTag.push(item)
-    } else {
-      this.currSortTag.forEach((tag, ind) => {
-        if (item.parentId == tag.parentId) {
-          this.currSortTag.splice(ind, 1);
-          this.currSortTag.push(item)
-        }
-      })
+  searchByTag(item) {
+    // 设置选中的标签
+    if(!this.selectedTagFilterO[item.id]){
+      this.selectedTagFilterO[item.id] = item;
+      this.selectedTagFilterA.push(item);
+      this.tagParams();
+      this.isShowSide = false;
     }
-    this.tagParams()
   }
 
+  /**
+   * 构建 标签查询参数并调用搜索接口
+   */
   tagParams() {
     let tagS = '';
-    this.currSortTag.forEach(tag => {
-      tagS += tag.id + ','
-    })
+    for (let key in this.selectedTagFilterO) {
+      tagS += key + ',';
+    }
     this.searchOptions['tagId'] = tagS.substring(0, tagS.length - 1);
-    this.getProjectList();
+    this.getProductList();
     this.isShowSide = false;
     // this.sideNav.close();
   }
 
-  cancelFilter(item) {
-    this.currSortTagParent.forEach((p, pInd) => {
-      if (item.parentId == p) { this.currSortTagParent.splice(pInd, 1)}
+  cancelTagFilter(item) {
+    delete this.selectedTagFilterO[item.id];
+    this.selectedTagFilterA.forEach((tag ,ind) => {
+      if (tag == item) {
+        this.selectedTagFilterA.splice(ind, 1);
+      }
     });
-    this.currSortTag.forEach((tag, ind) => {
-      if (item.id == tag.id) { this.currSortTag.splice(ind, 1)}
-    });
-    this.tagParams()
+    this.tagParams();
   }
 
   // 关键字搜索
@@ -158,15 +271,14 @@ export class DatalistComponent implements OnInit {
     this.eventEmit.keywordSearch.subscribe(e => {
       this.eventEmit.keyword = e.keyword;
       this.searchOptions['keyword'] = e.keyword;
-      this.getProjectList()
+      this.getProductList()
     })
   }
 
   // 时间条件搜索
-  conditionSearch(i, item) {
-    this.searchConditionIndex = i;
+  searchByTime(i, item) {
     this.searchOptions['dataSince'] = item.value ? (new Date(item.value)).getTime() : undefined;
-    this.getProjectList();
+    this.getProductList();
     this.isShowSide = false;
     // this.sideNav.close();
   }
@@ -207,7 +319,7 @@ export class DatalistComponent implements OnInit {
   productSort(item) {
     this.currSortItem = item;
     this.searchOptions['sortBy'] = item.value;
-    this.getProjectList();
+    this.getProductList();
   }
 
   // 进入产品详情

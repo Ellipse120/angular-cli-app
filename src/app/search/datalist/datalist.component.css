@@ -123,13 +123,38 @@
   color: #666;
   font-size: 12px;
 }
+.find-result .curr-tag-list{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+.find-result .curr-tag-list li{
+  border: 1px solid #288dec;
+  color: #288dec;
+  padding: 0 4px;
+  padding-right: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  position: relative;
+}
+.find-result .curr-tag-list .remove-tag{
+  color: #288dec;
+  position: absolute;
+  right: 4px;
+  top: -1px;
+  cursor: pointer;
+}
+.find-result .curr-tag-list .remove-tag:hover{
+  color: #ff4307;
+}
 .find-result .filter{
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
 }
-.find-result .fa-filter{
+.find-result .fa-navicon{
   font-size: 14px;
+  cursor: pointer;
 }
 .find-result .sort-by-date{
   position: relative;
@@ -256,6 +281,7 @@
   z-index: 4;
   background-color: #fff;
   overflow-y: scroll;
+  padding-left: 15px;
   padding-right: 15px;
 }
 .not-found{
@@ -265,9 +291,6 @@
 
 
 @media screen and (max-width: 768px) {
-  .data-list-area{
-    padding-left: 15px;
-  }
   .search-condition-type{
     margin-left: 15px;
   }
@@ -279,9 +302,6 @@
   }
 }
 @media screen and (max-width: 992px) {
-  .data-list-area{
-    padding-left: 15px;
-  }
   .search-condition-type{
     margin-left: 15px;
   }

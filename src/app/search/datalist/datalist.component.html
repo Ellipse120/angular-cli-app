@@ -4,9 +4,9 @@
     <div class="search-condition-type">
       <p class="search-condition-title"><i class="fa fa-calendar" aria-hidden="true"></i>时间</p>
       <ul>
-        <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
-          <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
-        </li>
+        <!--<li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">-->
+          <!--<p class="readonly" (click)="searchByTime(i, item)"><span>{{item.text}}</span></p>-->
+        <!--</li>-->
         <!--<li class="search-condition-type-item">-->
         <!--<form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>-->
         <!--<input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>-->
@@ -16,16 +16,16 @@
     </div>
     <div class="search-condition-type sort-by-tag">
       <p class="search-condition-title"><i class="fa fa-tag" aria-hidden="true"></i>标签</p>
-      <ul *ngIf="tagSortList.length">
-        <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
+      <ul *ngIf="tagsFilter.length">
+        <li class="search-condition-type-item" *ngFor="let t of tagsFilter; let ind = index">
           <squeezebox>
             <sb-item [collapsed]="t.collapsed">
-              <sb-item-head>{{t.name}}<i class="fa fa-angle-down" aria-hidden="true"></i></sb-item-head>
+              <sb-item-head>{{t.name}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
               <sb-item-body>
                 <ul class="search-condition-sub">
                   <li *ngFor="let c of t.items; let i = index;">
-                    <p class="readonly" *ngIf="!c?.currentTag" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
-                    <p class="readonly active" *ngIf="c?.currentTag"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter(c);"></i></p>
+                    <p class="readonly" *ngIf="!c?.currentTag" (click)="searchByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
+                    <p class="readonly active" *ngIf="c?.currentTag"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelTagFilter(c);"></i></p>
                   </li>
                 </ul>
               </sb-item-body>
@@ -75,96 +75,94 @@
     </div>
   </div>
 </md-sidenav-container>
-<!--电脑屏幕-->
+<!--上面是material sidenav-->
+<!--loading-->
 <ysl-loading *ngIf="isShowLoading"></ysl-loading>
-<div class="dataShow container" [class.o-hidden]="isShowSide" *ngIf="!isShowLoading && product.items?.length">
+<!--content-->
+<div class="dataShow container" [class.o-hidden]="isShowSide" *ngIf="!isShowLoading">
+  <!--sidenav-->
   <div class="ysl-side-nav" [class.ysl-side-nav-open]="isShowSide">
     <div class="ysl-side-overly" (click)="isShowSide = false"></div>
     <div class="ysl-side-cont">
-      <div class="search-condition-type">
-        <p class="search-condition-title"><i class="fa fa-calendar" aria-hidden="true"></i>时间</p>
-        <ul>
-          <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
-            <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
-          </li>
-          <!--<li class="search-condition-type-item">-->
-          <!--<form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>-->
-          <!--<input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>-->
-          <!--</form>-->
-          <!--</li>-->
-        </ul>
-      </div>
-      <div class="search-condition-type sort-by-tag">
-        <p class="search-condition-title"><i class="fa fa-tag" aria-hidden="true"></i>标签</p>
-        <ul *ngIf="tagSortList.length">
-          <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
-            <squeezebox>
-              <sb-item [collapsed]="t.collapsed">
-                <sb-item-head>{{t.name}}<i class="fa fa-angle-down" aria-hidden="true"></i></sb-item-head>
-                <sb-item-body>
-                  <ul class="search-condition-sub">
-                    <li *ngFor="let c of t.items; let i = index;">
-                      <p class="readonly" *ngIf="!c?.currentTag" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
-                      <p class="readonly active" *ngIf="c?.currentTag"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter(c);"></i></p>
-                    </li>
-                  </ul>
-                </sb-item-body>
-              </sb-item>
-            </squeezebox>
-          </li>
-        </ul>
+      <!--高级字段筛选-->
+      <!--高级字段筛选-->
+      <squeezebox class="search-condition-type" *ngFor="let d of advancedFilter">
+        <sb-item [collapsed]="false">
+          <sb-item-head class="search-condition-title">{{d.title}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+          <sb-item-body>
+            <ul>
+              <li class="search-condition-type-item" *ngFor="let i of d.child; let i = index">
+                <p class="readonly" (click)="searchByAd(i)" [class.active]="i?.selected"><span>{{i?.title}}</span></p>
+              </li>
+            </ul>
+          </sb-item-body>
+        </sb-item>
+      </squeezebox>
+      <!--标签筛选-->
+      <div *ngFor="let t of tagsFilter">
+        <squeezebox class="search-condition-type" *ngIf="t.items">
+          <sb-item [collapsed]="false">
+            <sb-item-head class="search-condition-title">{{t.name}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+            <sb-item-body>
+              <ul>
+                <li class="search-condition-type-item" *ngFor="let c of t.items; let i = index">
+                  <p class="readonly" (click)="searchByTag(c)" [class.active]="c.selected"><span>{{c.name}}</span></p>
+                </li>
+              </ul>
+            </sb-item-body>
+          </sb-item>
+        </squeezebox>
       </div>
     </div>
   </div>
   <div class="data-list-area clearfix">
     <!--搜索菜单-->
     <div class="search-condition hidden-sm hidden-xs">
-      <div class="search-condition-type">
-        <p class="search-condition-title"><i class="fa fa-calendar" aria-hidden="true"></i>时间</p>
-        <ul>
-          <li class="search-condition-type-item" *ngFor="let item of searchCondition; let i = index">
-            <p class="readonly" [class.active]="searchConditionIndex == i" (click)="conditionSearch(i, item)"><span>{{item.text}}</span></p>
-          </li>
-          <!--<li class="search-condition-type-item">-->
-          <!--<form [formGroup]="yearSearchForm" class="ysl-input-group" (ngSubmit)="productSearchByYear()" novalidate>-->
-          <!--<input type="text" placeholder="年" maxlength="4" formControlName="dataSince">-<input type="text" placeholder="年" formControlName="dataUntil" maxlength="4"><button class="btn">确认</button>-->
-          <!--</form>-->
-          <!--</li>-->
-        </ul>
-      </div>
-      <div class="search-condition-type sort-by-tag">
-        <p class="search-condition-title"><i class="fa fa-tag" aria-hidden="true"></i>标签</p>
-        <ul *ngIf="tagSortList.length">
-          <li class="search-condition-type-item" *ngFor="let t of tagSortList; let ind = index">
-            <squeezebox>
-              <sb-item [collapsed]="t.collapsed">
-                <sb-item-head>{{t.name}}<i class="fa fa-angle-down" aria-hidden="true"></i></sb-item-head>
-                <sb-item-body>
-                  <ul class="search-condition-sub">
-                    <li *ngFor="let c of t.items; let i = index;">
-                      <p class="readonly" *ngIf="!c?.currentTag" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>
-                      <p class="readonly active" *ngIf="c?.currentTag"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter(c);"></i></p>
-                    </li>
-                  </ul>
-                </sb-item-body>
-              </sb-item>
-            </squeezebox>
-            <!--<span class="search-condition-parent" (click)="t.openChild = !t.openChild">{{t.name}}<i class="fa fa-angle-down" aria-hidden="true"></i></span>-->
-            <!--<ul class="search-condition-sub" [class.search-condition-open]="t.openChild">-->
-              <!--<li *ngFor="let c of t.items">-->
-                <!--<p class="readonly" *ngIf="currSortTag != c.name" (click)="sortByTag(c)"><span [title]="c.name">{{c.name}}</span></p>-->
-                <!--<p class="readonly active" *ngIf="currSortTag == c.name"><span [title]="c.name">{{c.name}}</span><i class="cancel-filter fa fa-close" (click)="cancelFilter();"></i></p>-->
-              <!--</li>-->
-            <!--</ul>-->
-          </li>
-        </ul>
-      </div>
-    </div>
+    <!--高级字段筛选-->
+    <squeezebox class="search-condition-type" *ngFor="let d of advancedFilter">
+      <sb-item [collapsed]="false">
+        <sb-item-head class="search-condition-title">{{d.title}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+        <sb-item-body>
+          <ul>
+            <li class="search-condition-type-item" *ngFor="let i of d.child; let i = index">
+              <p class="readonly" (click)="searchByAd(i)" [class.active]="i?.selected"><span>{{i?.title}}</span></p>
+            </li>
+          </ul>
+        </sb-item-body>
+      </sb-item>
+    </squeezebox>
+    <!--标签筛选-->
+      <squeezebox class="search-condition-type" *ngIf="this.product['tagFacets']?.length">
+        <sb-item [collapsed]="false">
+          <sb-item-head class="search-condition-title">标签<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+          <sb-item-body *ngFor="let t of tagsFilter">
+              <squeezebox class="search-condition-type" *ngIf="t.items">
+                <sb-item [collapsed]="false">
+                  <sb-item-head class="search-condition-title">{{t.name}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+                  <sb-item-body>
+                    <ul>
+                      <li class="search-condition-type-item" *ngFor="let c of t.items; let i = index">
+                        <p class="readonly" (click)="searchByTag(c)" [class.active]="c.selected"><span>{{c.name}}</span></p>
+                      </li>
+                    </ul>
+                  </sb-item-body>
+                </sb-item>
+              </squeezebox>
+          </sb-item-body>
+        </sb-item>
+      </squeezebox>
+  </div>
     <div class="data-list">
       <div class="find-result">
         <p class="result">一共找到{{product.totalLength}}个符合条件的数据产品</p>
-        <div class="filter">
-          <span class="visible-sm-block visible-xs-block fa fa-filter" (click)="openSideNav()"></span>
+        <ul class="curr-tag-list">
+          <li *ngFor="let t of selectAdvanced; let ind = index;">{{t.parent}}: <span>{{t.title}}</span><i class="remove-tag" (click)="cancelAdvancedFilter(t)">x</i></li>
+        </ul>
+        <ul class="curr-tag-list">
+          <li *ngFor="let t of selectedTagFilterA">{{t.parent}}: <span>{{t.name}}</span><i class="remove-tag" (click)="cancelTagFilter(t)">x</i></li>
+        </ul>
+        <div class="filter" *ngIf="product.items?.length">
+          <span class="visible-sm-block visible-xs-block fa fa-navicon" (click)="openSideNav()"></span>
           <div class="sort-by-date">
             <i class="fa fa-sort-amount-desc"></i><span>{{currSortItem.text}}</span>
             <ul class="sort-list">
@@ -173,7 +171,7 @@
           </div>
         </div>
       </div>
-      <ul>
+      <ul *ngIf="product.items?.length">
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
                                                       currentPage: currPage,
                                                       totalItems: product.totalLength}"  class="data-item">
@@ -187,15 +185,15 @@
           </div>
         </li>
       </ul>
-      <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"
+      <pagination-controls class="hidden-xs" *ngIf="product.items?.length" (pageChange)="toNextPage($event);"
                            autoHide="true"
                            previousLabel="上一页"
                            nextLabel="下一页"></pagination-controls>
-      <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+      <pagination-controls class="visible-xs-block" *ngIf="product.items?.length" (pageChange)="toNextPage($event);"
                            autoHide="true"
                            previousLabel="<"
                            nextLabel=">"></pagination-controls>
+      <div class="not-found" *ngIf="!product.items?.length"><p class="text-center">暂未找到您要查询的数据产品</p></div>
     </div>
   </div>
 </div>
-<div class="not-found container" *ngIf="!isShowLoading && !product.items?.length"><p class="text-center">暂未找到您要查询的数据产品</p></div>

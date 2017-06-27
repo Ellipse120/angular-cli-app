@@ -456,6 +456,9 @@ footer{
 .squeezebox .is-collapsed .sb-item-body{
   height: 0 !important;
 }
+.squeezebox .is-collapsed .fa-angle-up{
+  transform: rotate(180deg);
+}
 
 /*产品详情*/
 .data-detail .comment-wrapper .spinner{
