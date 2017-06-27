@@ -13,6 +13,9 @@
   border:1px solid #ddd;
   outline: none;
 }
+.product-filter {
+  font-size: 20px;
+}
 .proimport-box{
   position: absolute;
   z-index: 10;
