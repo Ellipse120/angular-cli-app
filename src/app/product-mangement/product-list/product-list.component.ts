@@ -31,9 +31,7 @@ export class ProductListComponent implements OnInit {
   dataItems = [];
   messages: any = {
     emptyMessage: " 无数据 ",
-
     totalMessage: " 总数",
-
     selectedMessage: " 条选中"
   };
   isFinished = true;
@@ -45,15 +43,27 @@ export class ProductListComponent implements OnInit {
     sortBy: '',
     ascending: true
   };
+  pageNumber = 0;
+  filterOption: any = {
+    userName: '',
+    userType: '',
+    status: '',
+    modifiedOn: ''
+  };
 
   count = 0;
-  xxx = false;
   userTypes = [
     {value: '1', viewValue: '未认证的个人用户'},
     {value: '2', viewValue: '未认证的机构用户'},
     {value: '10', viewValue: '认证的个人用户'},
     {value: '20', viewValue: '认证的机构用户'},
     {value: '30', viewValue: '运营方用户'},
+  ];
+
+  status = [
+    {value: '1', viewValue: '注册'},
+    {value: '2', viewValue: '激活'},
+    {value: '3', viewValue: '禁用'},
   ];
 
   constructor(private productListService: ProductListService,
@@ -258,28 +268,20 @@ export class ProductListComponent implements OnInit {
   }
 
   setProductsPage(pageInfo) {
-    this.pagingOption.offset = pageInfo.offset;
+    this.pageNumber = pageInfo.offset;
+    this.pagingOption.offset = (pageInfo.offset) * 10;
     this.pagingOption.userId = this.userInfo.id;
     this.getProducts();
   }
 
-  // TODO: 后台asscending加上后 测试结果
   doProductsSort(event) {
     this.pagingOption.sortBy = event.column.prop;
     this.pagingOption.ascending = (event.newValue === 'asc');
     this.getProducts();
-
-    // const sort = event.sorts[0];
-    // const tmp = this.temp.sort((a,b) => {
-    //   return a[sort.prop].localeCompare(b[sort.prop]) * (sort.dir === 'desc' ? -1 : 1);
-    // })
-    // this.isOn = tmp;
   }
 
-  // TODO 目前是页面过滤 要改为 server端过滤结果
   nameFilter(event) {
     const val = event.target.value;
-
     const tmp = this.temp.filter(function (d) {
       return d.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
@@ -289,7 +291,6 @@ export class ProductListComponent implements OnInit {
     this.pagingOption.offset = 0;
   }
 
-  // TODO 目前是页面过滤 要改为 server端过滤结果
   userTypeValueChange(event) {
     const val = event.source.selected._element.nativeElement.innerText;
 
@@ -300,6 +301,12 @@ export class ProductListComponent implements OnInit {
     this.rows = tmp;
 
     this.pagingOption.offset = 0;
+  }
+
+  // TODO API好了以后待测
+  doFilter() {
+    let a = this.filterOption;
+
   }
 
   getCellNameClass({row, column, value}) {

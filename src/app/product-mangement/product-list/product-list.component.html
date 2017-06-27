@@ -9,7 +9,7 @@
   <div class="own-prolist">
     <div class="selected-filter">
       <md-input-container>
-        <input mdInput type="text" placeholder="用户名" (keyup)="nameFilter($event)">
+        <input mdInput type="text" placeholder="用户名" [(ngModel)]="filterOption.userName">
       </md-input-container>
       <!--<select class="box-type" name="userType" id="userType">-->
       <!--<option value="0">用户类型</option>-->
@@ -32,25 +32,21 @@
       <!--<option value="3">三月内</option>-->
       <!--</select>-->
 
-      <md-select placeholder="用户类型" [ngModel]="" (change)="userTypeValueChange($event)" [floatPlaceholder]="xxx">
+      <md-select placeholder="用户类型" [(ngModel)]="filterOption.userType">
         <md-option *ngFor="let item of userTypes" [value]="item.value">
           {{item.viewValue}}
         </md-option>
       </md-select>
-      <md-select placeholder="状态">
-        <md-option>
-          111
-        </md-option>
-        <md-option>
-          222
-        </md-option>
+      <md-select placeholder="状态" [(ngModel)]="filterOption.status">
+        <md-option *ngFor="let item of status" [value]="item.value">{{item.viewValue}}</md-option>
       </md-select>
-      <md-select placeholder="更新时间">
-        <md-option>
-
-        </md-option>
+      <md-select placeholder="更新时间" [(ngModel)]="filterOption.modifiedOn">
+        <md-option [value]="1">一周内</md-option>
+        <md-option [value]="2">一月内</md-option>
+        <md-option [value]="3">三月内</md-option>
       </md-select>
 
+      <button class="ysl-btn product-filter" md-button (click)="doFilter()"><i class="fa fa-search product-filter" aria-hidden="true"></i></button>
       <button class="ysl-btn pro-import" (click)="importProduct()"><img src="./assets/images/pen.png">录入产品</button>
     </div>
 
@@ -86,7 +82,7 @@
         [externalSorting]="true"
         [count]="count"
         [limit]="pagingOption.limit"
-        [offset]="pagingOption.offset"
+        [offset]="pageNumber"
         [loadingIndicator]="isFinished"
         [messages]="messages"
         [selectionType]="'checkbox'"
@@ -104,7 +100,7 @@
           [headerCheckboxable]="false"
           [checkboxable]="true">
         </ngx-datatable-column>
-        <ngx-datatable-column [canAutoResize]="true"  [width]="60" headerClass="is-name" [cellClass]="getCellNameClass"  name="名称" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column [canAutoResize]="true" [width]="60" headerClass="is-name" [cellClass]="getCellNameClass"  name="名称" prop="name"></ngx-datatable-column>
         <ngx-datatable-column [canAutoResize]="true" [width]="60" name="用户名" prop="userName"></ngx-datatable-column>
         <ngx-datatable-column [canAutoResize]="true" [width]="60" name="用户类型" prop="userType"></ngx-datatable-column>
         <ngx-datatable-column [canAutoResize]="true" [width]="20" name="是否收费" prop="premium"></ngx-datatable-column>

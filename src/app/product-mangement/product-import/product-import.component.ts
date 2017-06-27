@@ -33,35 +33,10 @@ export class ProductImportComponent implements OnInit {
   import = true;
   isActive = 0;
   tagDimensions = [];
-  dataSources = [
-    {value: 1, viewValue: '中央政府机构'},
-    {value: 2, viewValue: '地方政府机构'},
-    {value: 3, viewValue: '行业协会'},
-    {value: 4, viewValue: '第三方机构'},
-    {value: 5, viewValue: '国际组织'},
-    {value: 6, viewValue: '多渠道综合'},
-    {value: 7, viewValue: '企业'},
-    {value: 8, viewValue: '个人'}
-  ];
-  dataCategories = [
-    {value: 1, viewValue: '面板数据'},
-    {value: 2, viewValue: '截面数据'},
-    {value: 3, viewValue: '时间序列数据'},
-    {value: 4, viewValue: '混合数据'}
-  ];
-  dataCollections = [
-    {value: 1, viewValue: '单位申报'},
-    {value: 2, viewValue: '抽样调查'},
-    {value: 3, viewValue: '调研访问'},
-    {value: 4, viewValue: '市场交易'},
-    {value: 5, viewValue: '统计整理'}
-  ];
-  dataServices = [
-    {value: 1, viewValue: 'API调用'},
-    {value: 2, viewValue: '数据文件'},
-    {value: 3, viewValue: '应用程序'},
-    {value: 4, viewValue: '网页应用'},
-  ];
+  dataSources = [];
+  dataCategories = [];
+  dataCollections = [];
+  dataServices = [];
 
   radioItems = [
     {value: 'true', viewValue: '是'},
@@ -109,6 +84,8 @@ export class ProductImportComponent implements OnInit {
       .then(data => {
         this.tagDimensions = data;
       });
+
+    this.getSelectionOption();
 
   }
 
@@ -158,6 +135,34 @@ export class ProductImportComponent implements OnInit {
       }
     });
     return ret;
+  }
+
+  getSelectionOption() {
+    this.service.getAdvancedSearchInfo()
+      .then((res) => {
+        let options: any = res;
+
+        options.forEach(option => {
+          switch (option.categoryCode) {
+            case 'data_category': {
+              this.dataCategories.push({value:+option.entryCode, viewValue: option.entryValue});
+              break;
+            }
+            case 'data_source': {
+              this.dataSources.push({value:+option.entryCode, viewValue: option.entryValue});
+              break;
+            }
+            case 'data_collection': {
+              this.dataCollections.push({value:+option.entryCode, viewValue: option.entryValue});
+              break;
+            }
+            case 'data_service': {
+              this.dataServices.push({value:+option.entryCode, viewValue: option.entryValue});
+              break;
+            }
+          }
+        });
+      });
   }
 }
 
