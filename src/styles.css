@@ -168,6 +168,9 @@ textarea::-webkit-scrollbar-thumb
 .btn:focus,.btn:active{
   outline: none;
 }
+.disabled{
+  cursor: not-allowed !important;
+}
 .ysl-btn{
   font-family: '微软雅黑';
   display: flex;
@@ -427,6 +430,9 @@ footer{
 }
 .mat-sidenav-container .mat-sidenav-content::-webkit-scrollbar-corner{
   color: transparent;
+}
+.index-cont .mat-ripple-element{
+  display: none !important;
 }
 .squeezebox .sb-item .sb-item-head a .toggle-icon{
   display: none;

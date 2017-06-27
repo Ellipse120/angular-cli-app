@@ -24,7 +24,7 @@
         <label class="col-sm-3 col-xs-12">验证码</label>
         <div class="input-group col-sm-9 col-xs-12">
           <input type="text" class="form-control" placeholder="请输入验证码">
-          <button class="input-group-addon" (click)="getValidateCode()" [disabled]="isBtnDisabled">{{btnContent}}</button>
+          <button class="input-group-addon" [class.disabled]="isBtnDisabled" (click)="getValidateCode()" [disabled]="isBtnDisabled">{{btnContent}}</button>
         </div>
       </div>
       <div class="form-group">

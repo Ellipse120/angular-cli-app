@@ -46,7 +46,6 @@ export class NameCertifyComponent implements OnInit{
 
   // 获取验证码
   getValidateCode() {
-    console.log('countDown')
     this.timer = setInterval(() => {
       this.btnContent = this.countNum + 's后重新发送';
       this.countNum--;
