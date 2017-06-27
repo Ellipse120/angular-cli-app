@@ -19,9 +19,9 @@ export class NameCertifyComponent implements OnInit{
   userId: any;
   CurrTab = 0;
   timer;
-  num = 59;
-  able = true;
-  content = '发送验证码';
+  countNum = 59;
+  isBtnDisabled = false;
+  btnContent = '发送验证码';
   modify = [];
   goviden = [];
   userTypeTabs = ['个人认证', '机构认证'];
@@ -41,21 +41,21 @@ export class NameCertifyComponent implements OnInit{
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.userInfo = res;
-        console.log('userInfo from get', this.userInfo);
       });
   }
 
   // 获取验证码
-  sendCode() {
+  getValidateCode() {
+    console.log('countDown')
     this.timer = setInterval(() => {
-      this.content = this.num + 's后重新发送';
-      this.num--;
-      this.able = true;
-      if (this.num <= 0) {
+      this.btnContent = this.countNum + 's后重新发送';
+      this.countNum--;
+      this.isBtnDisabled = true;
+      if (this.countNum <= 0) {
         clearInterval(this.timer);
-        this.num = 59;
-        this.content = '发送验证码';
-        this.able = false;
+        this.countNum = 59;
+        this.btnContent = '发送验证码';
+        this.isBtnDisabled = false;
       }
     }, 1000)
   }

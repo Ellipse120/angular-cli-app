@@ -16,7 +16,7 @@ export class UserCenterComponent implements OnInit {
   userInfo: any;
   userTag = [
     {text: '个人信息', path: 'userInfo'},
-    {text: '实名认证', path: 'nameCertify'},
+    {text: '手机绑定', path: 'nameCertify'},
     {text: '修改密码', path: 'psdModify'}
   ];
 
