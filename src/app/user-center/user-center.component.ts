@@ -15,9 +15,11 @@ export class UserCenterComponent implements OnInit {
   };
   userInfo: any;
   userTag = [
-    {text: '个人信息', path: 'userInfo'},
-    {text: '手机绑定', path: 'nameCertify'},
-    {text: '修改密码', path: 'psdModify'}
+    {text: '产品管理', path: 'productManagement'},
+    {text: '评论', path: 'comment'},
+    {text: '收藏', path: 'likes'},
+    {text: '赞', path: 'favorite'},
+    {text: '个人资料', path: 'userInfo'}
   ];
 
   constructor(private httpService: YslHttpService, private cookie: CookieService) {}

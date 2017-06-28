@@ -37,10 +37,7 @@ const productRouters:Routes = [
     RouterModule.forChild(productRouters)
   ],
   exports: [
-    RouterModule,
-  ],
-  providers: [
-    { provide: LocationStrategy ,useClass: HashLocationStrategy }
+    RouterModule
   ]
 })
 

@@ -10,13 +10,12 @@ import {Router, NavigationStart} from "@angular/router";
   selector: 'ysl-sidebar',
   template: `<ul class="ysl-sidebar-nav">
       <li *ngFor="let item of yslSides;let i = index" [routerLink]="[item.path]" class="ysl-sidebar-item" routerLinkActive="active">
-        {{item.text}} <img class="user-arrow" [src]="currSideIndex==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">
+        <span class="primary-nav">{{item.text}}</span>
         <ul class="ysl-sidebar-sub" *ngIf="(currSideIndex == i) && item.children">
           <li *ngFor="let itemc of item.children; let ind = index;" [class.bg-lightblue]="currSideChild == ind" (click)="$event.stopPropagation();" [routerLink]="[itemc.path]">{{itemc.text}}</li>
         </ul>
       </li>
-    </ul>`,
-  styleUrls: ['./sidebar.component.css']
+    </ul>`
 })
 
 export class YslSidebarComponent implements OnInit {
@@ -35,7 +34,6 @@ export class YslSidebarComponent implements OnInit {
       this.yslSides.forEach((item, index) => {
         if (path.includes(item.path)) {
           this.currSideIndex = index;
-          console.log('parent index path', this.currSideIndex)
         }
         if (item['children']) {
           item['children'].forEach((child, ind) => {

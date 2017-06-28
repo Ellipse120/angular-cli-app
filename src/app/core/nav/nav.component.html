@@ -14,7 +14,7 @@
       <li class="ysl-nav-item">
         <span><i *ngIf="loginInfo?.userName">{{loginInfo?.userName}}</i><i *ngIf="!loginInfo?.userName && loginInfo?.loginId">{{loginInfo?.loginId}}</i><i class="fa fa-angle-down"></i></span>
         <ul class="ysl-subnav" [ngStyle]="subnavStyle">
-          <li routerLink="/usercenter"><i class="fa fa-user-o"></i>个人中心</li>
+          <li routerLink="/userCenter"><i class="fa fa-user-o"></i>个人中心</li>
           <li (click)="logout()"><i class="fa fa-sign-out"></i>安全退出</li>
         </ul>
       </li>
@@ -30,7 +30,7 @@
       <ul class="after-login-xs" *ngIf="loginState" [ngStyle]="subnavStyle">
         <li *ngIf="loginInfo?.userType == '30'" routerLink="/operation">运营中心</li>
         <li *ngIf="loginInfo?.userType == '20'" routerLink="/promange">产品管理</li>
-        <li routerLink="/usercenter">个人中心</li>
+        <li routerLink="/userCenter">个人中心</li>
         <li (click)="logout()">安全退出</li>
       </ul>
     </div>

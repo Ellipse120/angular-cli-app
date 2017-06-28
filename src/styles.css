@@ -16,7 +16,7 @@ body{
   font-family: '微软雅黑' !important;
   overflow-y: scroll;
 }
-*{
+p,div,section,ul,ol,li,input,textarea,select,a,i,span,img{
   margin:0;
   padding:0;
   box-sizing: border-box;
@@ -59,20 +59,32 @@ i{
 .mt10{
   margin-top: 10px;
 }
-.font24{
-  font-size: 24px;
-}
-.font18{
-  font-size: 18px;
-}
-.font16{
-  font-size: 16px;
+.font12{
+  font-size: 12px;
 }
 .font14{
   font-size: 14px;
 }
-.font12{
-  font-size: 12px;
+.font16{
+  font-size: 16px;
+}
+.font18{
+  font-size: 18px;
+}
+.font20{
+  font-size: 20px;
+}
+.font24{
+  font-size: 24px;
+}
+.text-color-dark{
+  color: #333;
+}
+.text-color-middle{
+  color: #666;
+}
+.text-color-light{
+  color: #999;
 }
 .color-blue{
   color: #39baf6;
@@ -321,6 +333,74 @@ textarea::-webkit-scrollbar-thumb
   border-radius:5px;
   cursor: pointer;
 }
+
+/*个人中心nav*/
+.ysl-sidebar-nav{
+  display: flex;
+  width: auto;
+  margin-bottom: 0;
+}
+.outer-nav .ysl-sidebar-nav{
+  justify-content: center;
+}
+.inner-nav .ysl-sidebar-nav{
+  border-bottom: 1px solid #39baf6;
+  padding: 0 50px;
+}
+.ysl-sidebar-item{
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  cursor: pointer;
+}
+.outer-nav .ysl-sidebar-item{
+  width: 129px;
+  font-size: 18px;
+  position: relative;
+  background-color: #fff;
+  border-top: 1px solid #b8c4ce;
+  border-bottom: 1px solid #b8c4ce;
+  border-right: 1px dashed #b8c4ce;
+}
+.inner-nav .ysl-sidebar-item{
+  width: 100px;
+  font-size: 16px;
+}
+.outer-nav .ysl-sidebar-item:first-of-type{
+  border-left: 1px solid #b8c4ce;
+}
+.outer-nav .ysl-sidebar-item:last-of-type{
+  border-right: 1px solid #b8c4ce;
+}
+.ysl-sidebar-item .primary-nav{
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+.outer-nav .active .primary-nav{
+  color: #39baf6;
+  border-bottom: 3px solid #39baf6;
+}
+.inner-nav .active .primary-nav{
+  color: #39baf6;
+  border-bottom: 2px solid #39baf6;
+}
+.outer-nav .ysl-sidebar-sub{
+  position: absolute;
+  top:50px;
+  left:0;
+  width: 100% ;
+  background: #f3f8fa;
+  color: #666;
+  text-align: center;
+  outline: none;
+}
+.outer-nav .ysl-sidebar-sub li{
+  outline: none;
+  width: 100%;
+  line-height:50px;
+}
+
 footer{
   display: flex;
   align-items: center;
@@ -695,6 +775,17 @@ app-index .mat-ripple{
   padding-top: 30px;
   margin-top: -19px;
 }
+
+/*个人中心公用*/
+.user-center-cont{
+  padding: 15px 40px 40px;
+  background-color: #fff;
+}
+.user-center .inner-cont{
+  margin-top: 20px;
+  padding: 40px 50px;
+  background-color: #f9fbfb;
+}
 @media screen and (max-width: 1200px){
   .ysl-container{
     padding: 0 5%;
@@ -737,6 +828,9 @@ app-index .mat-ripple{
   }
   .ysl-label-search-area .mat-tab-label-container::-webkit-scrollbar-corner,.mat-tab-labels::-webkit-scrollbar-corner{
     color: transparent;
+  }
+  .user-center .inner-cont{
+    padding: 40px 20px;
   }
 }
 

@@ -1,31 +1,40 @@
 .user-center{
-  margin-top: 40px;
+  background-color: #f7f7f7;
+  padding-bottom: 60px;
 }
-.center-left{
-  width: 200px;
-  height: 100%;
-  padding-top: 20px;
-  background: #f3f8fa;
-  float: left;
-  text-align: center;
+.banner{
+  height: 200px;
+  border-bottom: 1px solid #ddd;
 }
-.user-menu{
-  margin-top: 20px;
+.user-base-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -69px auto 40px;
 }
-.menu-item{
-  width: 100%;
-  line-height:50px;
-  font-size: 16px;
-  padding:0 25px;
-  text-align: justify;
-  cursor: pointer;
+.user-base-info .profile-picture{
+  display: inline-block;
+  height: 138px;
+  width: 138px;
+  border-radius: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin: 0 auto 20px;
 }
-.user-arrow{
-  margin-left: 66px;
+.user-base-info .des{
+  display: flex;
+  align-items: center;
 }
-.active{
-  background: #39baf6;
-  color: #fff;
+.user-base-info .des span{
+  margin-right: 5px;
+}
+.user-base-info .fa-edit{
+  display: block;
+  font-size: 18px;
+  margin-bottom: -3px;
+}
+.user-nav{
+  margin-bottom: 40px;
 }
 .center-right{
   width: 100%;
@@ -102,7 +111,6 @@
   font-size: 16px;
   background: #39baf6;
   cursor: pointer;
-  margin-top: 20px;
 }
 .iden-success{
   text-align: center;
@@ -137,9 +145,6 @@
   padding: 0;
 }
 /*修改密码*/
-.modify-psd .edit-form{
-  padding-top: 40px
-}
 .form-horizontal{
   width: 60%;
 }

@@ -9,7 +9,7 @@ import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'psd-modify',
-  templateUrl: './psd-modify.component.html',
+  templateUrl: 'psd-modify.component.html',
   styleUrls: ['../user-center.component.css']
 })
 

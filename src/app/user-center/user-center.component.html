@@ -1,10 +1,24 @@
-<div class="user-center container">
-  <div class="center-left">
-    <img src="./assets/images/userpic.png"><br>
-    <span>{{user.count}}</span>
-    <ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar>
+<div class="user-center">
+  <div class="banner"></div>
+  <div class="user-base-info container">
+    <span class="profile-picture">
+      <img src="" alt="">
+    </span>
+    <div class="user-des">
+      <p class="user-name font24 text-center">用户名</p>
+      <p class="des"><span class="font16 text-color-middle">个性签名个性签名个性签名</span><i class="fa fa-edit color-blue"></i></p>
+    </div>
   </div>
-  <div class="center-right">
+  <div class="user-nav container outer-nav"><ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar></div>
+  <div class="user-cont container">
     <router-outlet></router-outlet>
   </div>
+  <!--<div class="center-left">-->
+    <!--<img src="./assets/images/userpic.png"><br>-->
+    <!--<span>{{user.count}}</span>-->
+    <!--<ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar>-->
+  <!--</div>-->
+  <!--<div class="center-right">-->
+    <!--<router-outlet></router-outlet>-->
+  <!--</div>-->
 </div>

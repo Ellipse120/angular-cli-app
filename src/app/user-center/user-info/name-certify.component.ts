@@ -4,10 +4,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {resource} from "selenium-webdriver/http";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'name-certify',
-  templateUrl: './name-certify.component.html',
+  templateUrl: 'name-certify.component.html',
   styleUrls: ['../user-center.component.css']
 })
 
@@ -44,7 +45,8 @@ export class NameCertifyComponent implements OnInit{
 
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
-              private cookie: CookieService) {}
+              private cookie: CookieService,
+              public snackBar: MdSnackBar) {}
 
   ngOnInit() {
     this.getUserInfo();
@@ -81,7 +83,9 @@ export class NameCertifyComponent implements OnInit{
 
     this.httpService.getValidateCode(form.value['tel'])
       .then(res => {
-        console.log('验证码发送成功')
+        // this.snackBar.open('验证码发送成功', '', {
+        //   duration: 3000
+        // });
       })
   }
 
@@ -100,7 +104,7 @@ export class NameCertifyComponent implements OnInit{
       }
     }
     if (this.individualForm.invalid) { return }
-    let option = {userId: this.userId, name: form.value['name']};
+    let option = {userId: this.userId, name: form.value['name'], userContactPhone: form.value['tel'], smsCode: form.value['validCode']};
     this.httpService.verifyIndividual(option)
       .then(res => {
         // let userInfo = this.userInfo;
