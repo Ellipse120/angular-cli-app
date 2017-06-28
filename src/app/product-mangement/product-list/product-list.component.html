@@ -9,7 +9,7 @@
   <div class="own-prolist">
     <div class="selected-filter">
       <md-input-container>
-        <input mdInput type="text" placeholder="用户名" [(ngModel)]="filterOption.userName">
+        <input mdInput type="text" placeholder="用户名" [(ngModel)]="pagingOption.userName">
       </md-input-container>
       <!--<select class="box-type" name="userType" id="userType">-->
       <!--<option value="0">用户类型</option>-->
@@ -32,18 +32,16 @@
       <!--<option value="3">三月内</option>-->
       <!--</select>-->
 
-      <md-select placeholder="用户类型" [(ngModel)]="filterOption.userType">
+      <md-select placeholder="用户类型" [(ngModel)]="pagingOption.userType">
         <md-option *ngFor="let item of userTypes" [value]="item.value">
           {{item.viewValue}}
         </md-option>
       </md-select>
-      <md-select placeholder="状态" [(ngModel)]="filterOption.status">
+      <md-select placeholder="状态" [(ngModel)]="pagingOption.status">
         <md-option *ngFor="let item of status" [value]="item.value">{{item.viewValue}}</md-option>
       </md-select>
-      <md-select placeholder="更新时间" [(ngModel)]="filterOption.modifiedOn">
-        <md-option [value]="1">一周内</md-option>
-        <md-option [value]="2">一月内</md-option>
-        <md-option [value]="3">三月内</md-option>
+      <md-select placeholder="更新时间" [(ngModel)]="pagingOption.startModifiedOn">
+        <md-option *ngFor="let item of modifiedDates" [value]="item.value">{{item.viewValue}}</md-option>
       </md-select>
 
       <button class="ysl-btn product-filter" md-button (click)="doFilter()"><i class="fa fa-search product-filter" aria-hidden="true"></i></button>

@@ -41,29 +41,33 @@ export class ProductListComponent implements OnInit {
     limit: 10,
     offset: 0,
     sortBy: '',
-    ascending: true
-  };
-  pageNumber = 0;
-  filterOption: any = {
+    ascending: true,
     userName: '',
     userType: '',
     status: '',
-    modifiedOn: ''
+    startModifiedOn: ''
   };
+  pageNumber = 0;
 
   count = 0;
   userTypes = [
-    {value: '1', viewValue: '未认证的个人用户'},
-    {value: '2', viewValue: '未认证的机构用户'},
-    {value: '10', viewValue: '认证的个人用户'},
-    {value: '20', viewValue: '认证的机构用户'},
-    {value: '30', viewValue: '运营方用户'},
+    {value: 1, viewValue: '未认证的个人用户'},
+    {value: 2, viewValue: '未认证的机构用户'},
+    {value: 10, viewValue: '认证的个人用户'},
+    {value: 20, viewValue: '认证的机构用户'},
+    {value: 30, viewValue: '运营方用户'}
   ];
 
   status = [
-    {value: '1', viewValue: '注册'},
-    {value: '2', viewValue: '激活'},
-    {value: '3', viewValue: '禁用'},
+    {value: 1, viewValue: '注册'},
+    {value: 2, viewValue: '激活'},
+    {value: 3, viewValue: '禁用'}
+  ];
+
+  modifiedDates = [
+    {value: 1, viewValue: '一周内'},
+    {value: 2, viewValue: '一个月内'},
+    {value: 3, viewValue: '三个月内'}
   ];
 
   constructor(private productListService: ProductListService,
@@ -280,33 +284,27 @@ export class ProductListComponent implements OnInit {
     this.getProducts();
   }
 
-  nameFilter(event) {
-    const val = event.target.value;
-    const tmp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    this.rows = tmp;
-
-    this.pagingOption.offset = 0;
-  }
-
-  userTypeValueChange(event) {
-    const val = event.source.selected._element.nativeElement.innerText;
-
-    const tmp = this.temp.filter(function (d) {
-      return d.userType.toLowerCase().indexOf(val) !== -1;
-    });
-
-    this.rows = tmp;
-
-    this.pagingOption.offset = 0;
-  }
-
-  // TODO API好了以后待测
   doFilter() {
-    let a = this.filterOption;
+    switch (this.pagingOption.startModifiedOn) {
+      case 1: {
+        this.pagingOption.startModifiedOn = Date.now() - 7*24*60*60*1000;
+        break;
+      }
+      case 2: {
+        this.pagingOption.startModifiedOn = new Date().setMonth((new Date().getMonth() - 1 ));
+        break;
+      }
+      case 3: {
+        this.pagingOption.startModifiedOn = new Date().setMonth((new Date().getMonth() - 3 ));
+        break;
+      }
+    }
 
+    this.getProducts();
+    this.pagingOption.userName = '';
+    this.pagingOption.userType = '';
+    this.pagingOption.status = '';
+    this.pagingOption.startModifiedOn = '';
   }
 
   getCellNameClass({row, column, value}) {
