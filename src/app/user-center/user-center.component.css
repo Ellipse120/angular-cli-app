@@ -162,7 +162,9 @@
   line-height: 33px;
   padding: 0;
 }
-.ysl-error-tip{
+.identify .iden-content .ysl-error-tip{
+  height: 20px;
+  line-height: 20px;
   text-align: left;
 }
 

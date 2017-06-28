@@ -25,6 +25,22 @@ export class NameCertifyComponent implements OnInit{
   modify = [];
   goviden = [];
   userTypeTabs = ['个人认证', '机构认证'];
+  individualFormError = {
+    name: '',
+    tel: '',
+    validCode: ''
+  };
+  individualFormErrorMess = {
+    name: {
+      required: '请输入姓名'
+    },
+    tel: {
+      required: '请输入手机号'
+    },
+    validCode: {
+      required: '请输入验证码'
+    }
+  };
 
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
@@ -46,6 +62,11 @@ export class NameCertifyComponent implements OnInit{
 
   // 获取验证码
   getValidateCode() {
+    let form = this.individualForm;
+    if (form.controls['tel'].invalid) {
+      this.individualFormError.tel = '请输入手机号';
+      return;
+    }
     this.timer = setInterval(() => {
       this.btnContent = this.countNum + 's后重新发送';
       this.countNum--;
@@ -56,14 +77,29 @@ export class NameCertifyComponent implements OnInit{
         this.btnContent = '发送验证码';
         this.isBtnDisabled = false;
       }
-    }, 1000)
+    }, 1000);
+
+    this.httpService.getValidateCode(form.value['tel'])
+      .then(res => {
+        console.log('验证码发送成功')
+      })
   }
 
   // 提交个人认证
   submitIndividual() {
-    if (this.individualForm.invalid) { return }
+    console.log('form', this.individualForm)
     let form = this.individualForm;
-    console.log('userId', this.userId)
+    for (let mess in this.individualFormError) {
+      this.individualFormError[mess] = '';
+      let control = form.get(mess);
+      if (control && control.errors) {
+        let message = this.individualFormErrorMess[mess];
+        for (let error in control.errors) {
+          this.individualFormError[mess] += message[error] + ''
+        }
+      }
+    }
+    if (this.individualForm.invalid) { return }
     let option = {userId: this.userId, name: form.value['name']};
     this.httpService.verifyIndividual(option)
       .then(res => {
@@ -72,13 +108,11 @@ export class NameCertifyComponent implements OnInit{
         // this.cookie.putObject('yslUserInfo', userInfo);
         this.getUserInfo();
         // window.location.reload();
-        console.log('认证成功 ', res)
       })
   }
 
   // 提交组织认证
   submitOrganization() {
-    console.log('org test', this.organizationForm);
     if (this.organizationForm.invalid) { return }
     let form = this.organizationForm;
     let option = {userId: this.userId};
@@ -92,7 +126,6 @@ export class NameCertifyComponent implements OnInit{
         // this.cookie.putObject('yslUserInfo', userInfo);
         this.getUserInfo();
         // window.location.reload();
-        console.log('组织认证 ', res)
       })
   }
 
@@ -105,8 +138,8 @@ export class NameCertifyComponent implements OnInit{
   createForm() {
     this.individualForm = this.fb.group({
       name: ['', Validators.required],
-      tel: [''],
-      validCode: ['']
+      tel: ['', Validators.required],
+      validCode: ['', Validators.required]
     });
 
     this.organizationForm = this.fb.group({

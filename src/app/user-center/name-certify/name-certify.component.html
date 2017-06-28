@@ -7,29 +7,38 @@
   </div>
   <!--个人认证-->
   <div class="iden-content" *ngIf="CurrTab == 0">
-    <form class="form-horizontal edit-form" [formGroup]="individualForm" (ngSubmit)="submitIndividual()" novalidate>
+    <form class="form-horizontal edit-form" [formGroup]="individualForm" novalidate>
       <div class="form-group">
         <label class="col-sm-3 col-xs-12">姓名</label>
         <div class="col-sm-9 col-xs-12">
           <input type="text" class="form-control" placeholder="请输入真实姓名" formControlName="name" required>
         </div>
       </div>
+      <div class="form-group ysl-error-tip" *ngIf="individualFormError.name && individualForm.controls['name'].invalid">
+        <p class="col-sm-9 col-xs-12 col-sm-offset-3">{{individualFormError.name}}</p>
+      </div>
       <div class="form-group">
         <label class="col-sm-3 col-xs-12">手机号</label>
         <div class="col-sm-9 col-xs-12">
-          <input type="text" class="form-control" placeholder="请输入您的手机号">
+          <input type="text" class="form-control" formControlName="tel" placeholder="请输入您的手机号">
         </div>
+      </div>
+      <div class="form-group ysl-error-tip" *ngIf="individualFormError.tel && individualForm.controls['tel'].invalid">
+        <p class="col-sm-9 col-xs-12 col-sm-offset-3">{{individualFormError.tel}}</p>
       </div>
       <div class="form-group">
         <label class="col-sm-3 col-xs-12">验证码</label>
         <div class="input-group col-sm-9 col-xs-12">
-          <input type="text" class="form-control" placeholder="请输入验证码">
+          <input type="text" class="form-control" formControlName="validCode" placeholder="请输入验证码">
           <button class="input-group-addon" [class.disabled]="isBtnDisabled" (click)="getValidateCode()" [disabled]="isBtnDisabled">{{btnContent}}</button>
         </div>
       </div>
+      <div class="form-group ysl-error-tip" *ngIf="individualFormError.validCode && individualForm.controls['validCode'].invalid">
+        <p class="col-sm-9 col-xs-12 col-sm-offset-3">{{individualFormError.validCode}}</p>
+      </div>
       <div class="form-group">
         <label class="sr-only"></label>
-        <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
+        <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure" (click)="submitIndividual()">确认</button></div>
       </div>
     </form>
     <!--<ul class="type-ul">-->
