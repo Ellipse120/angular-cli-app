@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   loginFormError = {
     userAccount: '',
     userPassword: ''
-  }
+  };
   loginErrorMess = {
     userAccount: {
       required: '账号不能为空'
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     userPassword: {
       required: '密码不能为空'
     }
-  }
+  };
 
   constructor(
     public dialogRef: MdDialogRef<LoginComponent>,

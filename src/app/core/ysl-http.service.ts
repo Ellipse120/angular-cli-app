@@ -10,7 +10,7 @@ export class YslHttpService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  public url = 'http://192.168.19.11:1337/192.168.19.20:8080/ysl-ws/' ;
   // public url = 'http://localhost:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
 
@@ -286,6 +286,15 @@ export class YslHttpService {
       })
         .toPromise()
         .then(response => resolve(), error => reject())
+    })
+  }
+
+  // 个人中心/认证/手机验证码
+  getValidateCode(phone) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/authentication/sms', {params: {phone: phone}})
+        .toPromise()
+        .then(res => resolve(), error => reject())
     })
   }
 
