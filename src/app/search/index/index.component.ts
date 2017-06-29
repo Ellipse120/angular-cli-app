@@ -14,7 +14,7 @@ import {SearchService} from "../search.service";
 export class IndexComponent implements OnInit {
   tagDimensions = [];
   indexContStyle = {};
-  searchOption = {tagId: ''};
+  searchOption = {tagId: '', tagName: '', tagParent: ''};
   activeProductCount;
 
   constructor(public service: YslHttpService,
@@ -44,8 +44,11 @@ export class IndexComponent implements OnInit {
   }
 
   // 标签搜索
-  tagSearch(tag) {
+  tagSearch(tag, parentTag) {
+    console.log('tag', tag, parentTag)
     this.searchOption['tagId'] = tag.id;
+    this.searchOption['tagName'] = tag.name;
+    this.searchOption['tagParent'] = parentTag.name;
     this.toDataList()
   }
 

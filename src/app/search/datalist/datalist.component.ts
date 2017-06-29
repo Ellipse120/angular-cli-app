@@ -68,7 +68,11 @@ export class DatalistComponent implements OnInit {
         }
         this.eventEmit.keyword = this.searchOptions['keyword'];
         this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
-        this.getProductList();
+        if (this.searchOptions['tagId']) {
+          this.searchByTag({id: this.searchOptions['tagId'], name: params['tagName'], parent: params['tagParent']})
+        } else {
+          this.getProductList();
+        }
       });
     this.limit = this.searchOptions['limit'];
     this.keywordSearch();
@@ -185,7 +189,6 @@ export class DatalistComponent implements OnInit {
 
   // 取消高级字段筛选
   cancelAdvancedFilter(item) {
-    console.log('cancel', item)
     this.selectAdvanced.forEach((f, ind) => {
       if (f === item) {
         this.selectAdvanced.splice(ind, 1);

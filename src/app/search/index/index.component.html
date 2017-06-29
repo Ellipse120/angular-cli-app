@@ -9,7 +9,7 @@
   <md-tab-group class="ysl-label-search-area">
     <md-tab label="{{item.name}}" *ngFor="let item of tagDimensions">
       <ul class="ysl-label-search-cont">
-        <li *ngFor="let itemc of item.items" (click)="tagSearch(itemc)">{{itemc.name}}</li>
+        <li *ngFor="let itemc of item.items" (click)="tagSearch(itemc, item)">{{itemc.name}}</li>
       </ul>
     </md-tab>
   </md-tab-group>
