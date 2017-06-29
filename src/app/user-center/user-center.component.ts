@@ -10,10 +10,6 @@ import {CookieService} from "ngx-cookie";
 })
 export class UserCenterComponent implements OnInit {
 
-  user = {
-    count: ''
-  };
-  userInfo: any;
   userTag = [
     {text: '产品管理', path: 'productManagement'},
     {text: '评论', path: 'comment'},
@@ -25,22 +21,5 @@ export class UserCenterComponent implements OnInit {
   constructor(private httpService: YslHttpService, private cookie: CookieService) {}
 
   ngOnInit() {
-    // this.getUserList();
-    // this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo') : null;
-    // let userType = this.userInfo['userType'];
-    // if (userType == 30) {
-    //   this.userTag.forEach((item, ind) => {
-    //     if (item.text == '实名认证') {
-    //       this.userTag.splice(ind, 1)
-    //     }
-    //   })
-    // }
-  }
-
-  // 获取用户信息
-  getUserList() {
-    this.httpService
-      .getUserList()
-      .then(user => this.user = user);
   }
 }

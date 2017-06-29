@@ -9,7 +9,7 @@ import {MdSnackBar} from "@angular/material";
 @Component({
   selector: 'name-certify',
   templateUrl: 'name-certify.component.html',
-  styleUrls: ['../user-center.component.css']
+  styleUrls: ['./user-info.component.css']
 })
 
 export class NameCertifyComponent implements OnInit{

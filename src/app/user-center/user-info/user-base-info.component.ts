@@ -7,13 +7,12 @@ import {YslCommonService} from "../../core/ysl-common.service";
 @Component({
   selector: 'user-info',
   templateUrl: './user-base-info.component.html',
-  styleUrls: ['../user-center.component.css']
+  styleUrls: ['./user-info.component.css']
 })
 
 export class UserBaseInfoComponent implements OnInit {
 
   editForm: FormGroup;
-  showSave = false;
   viewInfo: any;
   userId: any;
   userInfo = [
@@ -47,25 +46,25 @@ export class UserBaseInfoComponent implements OnInit {
   }
 
   // 编辑用户信息
-  ableEdit() {
+  ableEdit(info) {
     let controls = {
       userName: '',
       contactMail: ''
     };
-    this.showSave = true;
     this.userInfo.forEach(item => {
+      if (item == info) {
+        item.edit = true;
+      }
       for(let key in controls) {
-        if (item.formControlName == key) {
-          controls[key] = item.model;
-          item.edit = true;
-        }
+        controls[item.formControlName] = item.model;
       }
     });
     this.editForm.patchValue(controls);
   }
 
   // 提交修改资料
-  infoEditSubmit() {
+  infoEditSubmit(info) {
+    console.log('info', info)
     if (!this.editForm) { return }
     let data = this.editForm.value;
     let option = {userId: '', data: {}};
@@ -74,12 +73,11 @@ export class UserBaseInfoComponent implements OnInit {
     option.data = data;
     this.httpService.updateUser(option)
       .then(res => {
-        this.showSave = false;
         // 修改成功后对模板的修改
-        this.getViewInfo();
         this.userInfo.forEach(item => {
-          item.edit = false;
-        })
+          if (item == info) { item.edit = false }
+        });
+        this.getViewInfo();
       })
   }
 

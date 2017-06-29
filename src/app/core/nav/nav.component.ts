@@ -48,15 +48,21 @@ export class NavComponent implements OnInit {
     this.eventEmit.loginEvent.subscribe(() => {
       this.showLogin();
     });
+    this.eventEmit.logoutEvent.subscribe(() => {
+      this.logout();
+    });
     document.addEventListener('click', () => { this.isShowPhoneNav = false }, false)
   }
 
   getUserInfo() {
+    if (!this.userId) { return }
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.loginInfo = res;
       })
   }
+
+  // 小屏个人中心等导航
   showPhoneNav(e) {
     e.stopPropagation();
     this.isShowPhoneNav = !this.isShowPhoneNav;

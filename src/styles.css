@@ -580,45 +580,6 @@ footer{
   border-bottom: 1px solid #39baf6;
   line-height: 50px;
 }
-.user-info-list .info-item{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  text-align: left;
-  border-bottom:1px solid #efefef;
-}
-.user-info-list .info-item p{
-  margin-bottom: 0;
-}
-.user-info-list input{
-  border: 2px solid #efefef;
-  line-height: 30px;
-}
-.user-info-list input[disabled]{
-  background: #fff;
-  border: none;
-}
-.user-tag{
-  display: inline-block;
-  width: 156px;
-  background: #f7f7f7;
-  text-align: center;
-  line-height: 40px;
-  margin-right: 40px;
-}
-.edit-btn{
-  cursor: pointer;
-}
-.save-btn{
-  width: 100px;
-  line-height: 40px;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 5px;
-  background: #39baf6;
-  margin-top: 30px;
-  cursor: pointer;
-}
 .user-content{
   width: 100%;
   margin-top: 20px;

@@ -6,17 +6,19 @@ import {YslHttpService} from "../../core/ysl-http.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
+import {MdSnackBar} from "@angular/material";
+import {SearchService} from "../../search/search.service";
 
 @Component({
   selector: 'psd-modify',
   templateUrl: 'psd-modify.component.html',
-  styleUrls: ['../user-center.component.css']
+  styleUrls: ['./user-info.component.css']
 })
 
 export class PsdModifyComponent implements OnInit{
 
   modifyForm: FormGroup;
-  userInfo: any;
+  userId: any;
   isSubmit = false;
   isInconsistent: boolean;
   formError = {
@@ -42,10 +44,12 @@ export class PsdModifyComponent implements OnInit{
               private fb: FormBuilder,
               private router: Router,
               private commonService: YslCommonService,
-              private cookie: CookieService) {}
+              private cookie: CookieService,
+              public snackBar: MdSnackBar,
+              private searchService: SearchService) {}
 
   ngOnInit() {
-    this.userInfo = this.commonService.userInfo;
+    this.userId = this.cookie.getObject('yslUserInfo')['id'];
     this.createForm();
   }
 
@@ -65,14 +69,13 @@ export class PsdModifyComponent implements OnInit{
         }
       }
     }
-    console.log('form', form, formValue['newPass'] != formValue['confirmPass'])
-    console.log('form invalid', form.invalid)
     if (form.invalid || this.isInconsistent) { return }
-    this.httpService.updatePass({userId: this.userInfo['userId'], data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
+    this.httpService.updatePass({userId: this.userId, data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
       .then(res => {
-        this.cookie.remove('yslUserInfo');
-        this.router.navigate(['index']);
-        window.location.reload();
+        this.snackBar.open('密码修改成功，请重新登录', '', {
+          duration: 1000
+        });
+        setTimeout(() => { this.searchService.logoutEvent.emit(); }, 1000)
       })
   }
   // 创建表单

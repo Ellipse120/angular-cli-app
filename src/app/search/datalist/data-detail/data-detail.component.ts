@@ -241,7 +241,7 @@ export class DataDetailComponent implements OnInit{
     console.log('comment pass')
     this.service.addProductComment(score)
       .then(res => {
-        this.snackBar.open('评论成功', '', {
+        this.snackBar.open('修改成功，请重新登录', '', {
           duration: 3000
         });
         this.productComment['items'] = [];
