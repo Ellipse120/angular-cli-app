@@ -15,6 +15,10 @@
   margin: 0 0 0 .22rem;
 }
 
+.ngx-datatable.material .datatable-footer .datatable-pager {
+  text-align: left;
+}
+
 .is-name {
   /*background-color: #6ce26c;*/
 }

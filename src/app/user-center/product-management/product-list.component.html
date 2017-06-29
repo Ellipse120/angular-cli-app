@@ -1,1 +1,81 @@
-<div class="inner-cont">产品列表</div>
+<!--<div class="inner-cont">产品列表</div>-->
+<div class="selected-filter">
+  <md-input-container>
+    <input mdInput type="text" placeholder="用户名" [(ngModel)]="pagingOption.userName">
+  </md-input-container>
+
+  <md-select placeholder="用户类型" [(ngModel)]="pagingOption.userType">
+    <md-option *ngFor="let item of userTypes" [value]="item.value">
+      {{item.viewValue}}
+    </md-option>
+  </md-select>
+  <md-select placeholder="状态" [(ngModel)]="pagingOption.status">
+    <md-option *ngFor="let item of status" [value]="item.value">{{item.viewValue}}</md-option>
+  </md-select>
+  <md-select placeholder="更新时间" [(ngModel)]="pagingOption.startModifiedOn">
+    <md-option *ngFor="let item of modifiedDates" [value]="item.value">{{item.viewValue}}</md-option>
+  </md-select>
+
+  <button class="ysl-btn product-filter" style="background-color: #39baf6; color: #fff" md-button (click)="doFilter()"><i class="fa fa-search product-filter" aria-hidden="true"></i>&nbsp;搜索</button>
+  <button class="" style="background-color: #39baf6; color: #fff;position: relative" md-button (click)="importProduct()"><i class="fa fa-edit"></i>&nbsp;录入产品</button>
+</div>
+
+<div class="pro-list">
+
+  <ngx-datatable
+    style="margin-top: 20px;text-align: center;min-width: 1120px"
+    class="material"
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="40"
+    [externalPaging]="true"
+    [externalSorting]="true"
+    [count]="count"
+    [limit]="pagingOption.limit"
+    [offset]="pageNumber"
+    [loadingIndicator]="isFinished"
+    [messages]="messages"
+    (activate)="onActivate($event)"
+    (page)="setProductsPage($event)"
+    (sort)="doProductsSort($event)">
+    <ngx-datatable-column
+      class="striped"
+      [width]="30"
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="false"
+      [resizeable]="true">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <strong>{{row.$$index + 1}}</strong>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [canAutoResize]="true" [width]="60" headerClass="is-name" [cellClass]="getCellNameClass"  name="名称" prop="name">
+      <ng-template let-row="row" let-value="name" ngx-datatable-cell-template>
+        <a [innerHTML]="row['name']" style="cursor: pointer;" (click)="doViewProductDetail(row)"></a>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="查看次数" prop="viewedCount" [width]="10">
+      <ng-template let-row="row" let-value="viewedCount" ngx-datatable-cell-template>
+        <span><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<i [innerHTML]="row['viewedCount'] || 0"></i></span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="收藏次数" prop="favoredCount" [width]="10">
+      <ng-template let-row="row" let-value="favoredCount" ngx-datatable-cell-template>
+        <span><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;<i [innerHTML]="row['favoredCount'] || 0"></i></span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="点赞次数" prop="favoredCount" [width]="10">
+      <ng-template let-row="row" let-value="favoredCount" ngx-datatable-cell-template>
+        <span><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;&nbsp;<i [innerHTML]="row['favoredCount'] || 0"></i></span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [canAutoResize]="true" name="操作" prop="option" [width]="20">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <a href="javascript:;" style="text-decoration: none;margin-right: 10px" class="color-blue"
+           (click)="editProduct(row)">修改</a>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

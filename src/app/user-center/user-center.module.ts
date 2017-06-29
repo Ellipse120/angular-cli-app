@@ -17,6 +17,9 @@ import {ProductCommentComponent} from "./comment/comment.component";
 import {ProductListComponent} from "./product-management/product-list.component";
 import {ProductErrataComponent} from "./product-management/product-errata.component";
 import {organizationInfoComponent} from "./user-info/organization-info.component";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {YslMaterialModule} from "../core/ysl-material.module";
+import {MyDatePickerModule} from "mydatepicker";
 
 
 @NgModule({
@@ -39,7 +42,11 @@ import {organizationInfoComponent} from "./user-info/organization-info.component
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    OperationManagementModule
+    OperationManagementModule,
+    YslMaterialModule,
+    NgxDatatableModule,
+    MyDatePickerModule
+
   ],
   providers: [YslHttpService]
 })
