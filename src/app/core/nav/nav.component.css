@@ -60,7 +60,6 @@
 }
 .ysl-nav-item{
   display: flex;
-  width: 120px;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -73,7 +72,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100%;
+  padding: 0 15px;
+  min-width: 120px;
   color: #fff;
   position: relative;
 }

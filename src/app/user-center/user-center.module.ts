@@ -16,6 +16,7 @@ import {ThumbsUpComponent} from "./thumbs-up/thumbs-up.component";
 import {ProductCommentComponent} from "./comment/comment.component";
 import {ProductListComponent} from "./product-management/product-list.component";
 import {ProductErrataComponent} from "./product-management/product-errata.component";
+import {organizationInfoComponent} from "./user-info/organization-info.component";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {ProductErrataComponent} from "./product-management/product-errata.compon
     ThumbsUpComponent,
     ProductCommentComponent,
     ProductListComponent,
-    ProductErrataComponent
+    ProductErrataComponent,
+    organizationInfoComponent
   ],
   imports: [
     BrowserModule,

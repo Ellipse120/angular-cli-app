@@ -1,10 +1,10 @@
 <!--认证-->
-<div class="identify" *ngIf="(userInfo?.userType == 1) || (userInfo?.userType == 2)">
-  <div class="iden-type">
-    <ul class="clearfix">
-      <li *ngFor="let t of userTypeTabs; let i = index;" [class.select-type]="CurrTab == i" (click)="switchTab(i)">{{t}}</li>
-    </ul>
-  </div>
+<div class="identify inner-cont" *ngIf="!(userInfo?.userType == 10) || !(userInfo?.userType == 2)">
+  <!--<div class="iden-type">-->
+    <!--<ul class="clearfix">-->
+      <!--<li *ngFor="let t of userTypeTabs; let i = index;" [class.select-type]="CurrTab == i" (click)="switchTab(i)">{{t}}</li>-->
+    <!--</ul>-->
+  <!--</div>-->
   <!--个人认证-->
   <div class="iden-content" *ngIf="CurrTab == 0">
     <form class="form-horizontal edit-form" [formGroup]="individualForm" novalidate>
@@ -82,42 +82,6 @@
         <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
       </div>
     </form>
-    <!--<ul class="type-ul" style="width: 410px">-->
-    <!--<li><span>机构名称</span> <input class="iden-input" type="text" placeholder="请输入机构名称" [(ngModel)]="goviden.firm"></li>-->
-    <!--<li><span>姓名</span> <input class="iden-input" type="tel" placeholder="请输入您的真实姓名" [(ngModel)]="goviden.name"></li>-->
-    <!--<li><span>手机号</span><input class="iden-input" type="text" placeholder="请输入您的手机号" [(ngModel)]="goviden.tel"></li>-->
-    <!--<li><span>公司官网URL</span> <input class="iden-input" type="tel" placeholder="请输入公司官网URL" [(ngModel)]="goviden.url"></li>-->
-    <!--</ul>-->
-    <!--<button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>-->
   </div>
 </div>
-<div class="identify" *ngIf="(userInfo?.userType == 10) || (userInfo?.userType == 20)">
-  <div class="iden-type">
-    <ul class="clearfix">
-      <li class="select-type" *ngIf="(userInfo?.userType == 1) || (userInfo?.userType == 10)">个人认证</li>
-      <li class="select-type" *ngIf="(userInfo?.userType == 2) || (userInfo?.userType == 20)">机构认证</li>
-    </ul>
-  </div>
-  <!--认证成功后显示-->
-  <div class="iden-success" *ngIf="(userInfo?.userType == 10)">
-    <div class="iden-tip">
-      <img src="./assets/images/pidensucc.png"><br>
-      <span>恭喜，您的实名认证已通过</span>
-    </div>
-    <p>认证身份：个人</p>
-    <p>姓名：{{userInfo.name}}</p>
-    <p>手机号：</p>
-  </div>
-
-  <!--机构认证成功后显示-->
-  <div class="iden-success" *ngIf="(userInfo?.userType == 20)">
-    <div class="iden-tip">
-      <img src="./assets/images/gidensucc.png"><br>
-      <span>恭喜，您的实名认证已通过审核</span>
-    </div>
-    <p>机构名称：{{goviden.firm}}</p>
-    <p>用户姓名：{{goviden.name}}</p>
-    <p>手机号：{{goviden.tel}}</p>
-    <p>公司官网URL：{{goviden.tel}}</p>
-  </div>
-</div>
+<div class="user-verify-info inner-cont" *ngIf="(userInfo?.userType == 10) || (userInfo?.userType == 2)">你已绑定手机号</div>

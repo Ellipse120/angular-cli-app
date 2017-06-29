@@ -12,17 +12,20 @@ import {YslCommonService} from "../../core/ysl-common.service";
 
 export class UserInfoComponent implements OnInit {
 
+  userId: any;
   userTag = [
     {text: '个人信息', path: 'userBaseInfo'},
+    {text: '组织信息', path: 'organizationInfo'},
     {text: '修改密码', path: 'userPsdModify'},
     {text: '手机绑定', path: 'userVerify'}
   ];
+
   constructor(private httpService: YslHttpService,
               private cookie: CookieService,
               private fb: FormBuilder,
               private commonService: YslCommonService) {}
 
   ngOnInit() {
-
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
   }
 }

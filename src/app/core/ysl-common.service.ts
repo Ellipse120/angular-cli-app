@@ -1,13 +1,14 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable, OnInit, EventEmitter} from "@angular/core";
 import {CookieService} from "ngx-cookie";
+import {YslHttpService} from "./ysl-http.service";
 
 @Injectable()
 export class YslCommonService {
 
+  userId: any;
   userInfo: any;
 
-  constructor(private cookie: CookieService) {
-    this.userInfo = this.cookie.getObject('yslUserInfo') ?　this.cookie.getObject('yslUserInfo') : null;
+  constructor(private cookie: CookieService, private httpService: YslHttpService) {
   }
 
   // 处理时间戳-天

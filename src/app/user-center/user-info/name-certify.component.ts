@@ -15,7 +15,6 @@ import {MdSnackBar} from "@angular/material";
 export class NameCertifyComponent implements OnInit{
 
   individualForm: FormGroup;
-  organizationForm: FormGroup;
   userInfo: any;
   userId: any;
   CurrTab = 0;
@@ -24,7 +23,6 @@ export class NameCertifyComponent implements OnInit{
   isBtnDisabled = false;
   btnContent = '发送验证码';
   modify = [];
-  goviden = [];
   userTypeTabs = ['个人认证', '机构认证'];
   individualFormError = {
     name: '',
@@ -91,7 +89,6 @@ export class NameCertifyComponent implements OnInit{
 
   // 提交个人认证
   submitIndividual() {
-    console.log('form', this.individualForm)
     let form = this.individualForm;
     for (let mess in this.individualFormError) {
       this.individualFormError[mess] = '';
@@ -115,24 +112,6 @@ export class NameCertifyComponent implements OnInit{
       })
   }
 
-  // 提交组织认证
-  submitOrganization() {
-    if (this.organizationForm.invalid) { return }
-    let form = this.organizationForm;
-    let option = {userId: this.userId};
-    for (let key in form.value) {
-      option[key] = form.value[key];
-    }
-    this.httpService.verifyOrganization(option)
-      .then(res => {
-        // let userInfo = this.userInfo;
-        // userInfo['userType'] = parseInt(userInfo['userType'] + '0');
-        // this.cookie.putObject('yslUserInfo', userInfo);
-        this.getUserInfo();
-        // window.location.reload();
-      })
-  }
-
   // 切换tab
   switchTab(i) {
     this.CurrTab = i;
@@ -145,12 +124,5 @@ export class NameCertifyComponent implements OnInit{
       tel: ['', Validators.required],
       validCode: ['', Validators.required]
     });
-
-    this.organizationForm = this.fb.group({
-      name: ['', Validators.required],
-      contactName: ['', Validators.required],
-      contactPhone: ['', Validators.required],
-      webSite: ['', Validators.required]
-    })
   }
 }
