@@ -5,6 +5,7 @@ import {YslHttpService} from "./ysl-http.service";
 @Injectable()
 export class YslCommonService {
 
+
   userId: any;
   userInfo: any;
 

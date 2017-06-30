@@ -1,5 +1,6 @@
 <div class="organization-info inner-cont">
-  <div class="before-verify" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">
+  <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
+  <div class="before-verify" *ngIf="userInfo?.userType == '10'">
     <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization()" novalidate>
       <div class="form-group">
         <label class="col-sm-3 col-xs-12">机构名称</label>
@@ -60,7 +61,7 @@
         </div>
         <div class="info-item row">
           <span class="user-tag col-xs-3">公司官网URL</span>
-          <p class="col-xs-9"><span>{{userInfo?.website}}</span></p>
+          <p class="col-xs-9"><span>{{userInfo?.webSite}}</span></p>
         </div>
       </form>
     </div>

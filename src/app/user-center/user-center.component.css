@@ -21,8 +21,17 @@
   width: 138px;
   border-radius: 100%;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 3px solid #fff;
   margin: 0 auto 20px;
+  overflow: hidden;
+  position: relative;
+}
+.user-center-info .profile-picture img{
+  width: 130%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
 }
 .user-center-info .des{
   display: flex;
