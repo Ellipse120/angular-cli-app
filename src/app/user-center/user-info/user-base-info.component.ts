@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {Subscription} from "rxjs";
 
+declare var $: any;
 @Component({
   selector: 'user-info',
   templateUrl: './user-base-info.component.html',
@@ -30,7 +31,6 @@ export class UserBaseInfoComponent implements OnInit,OnDestroy {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.createForm();
     this.getViewInfo();
-
   }
 
   getViewInfo() {

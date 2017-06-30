@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
+declare var $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

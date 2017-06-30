@@ -4,11 +4,13 @@ import {YslCommonService} from "../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
 import {Router, NavigationEnd} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FileUploader} from "ng2-file-upload";
 
 @Component({
   selector: 'app-user-center',
   templateUrl: './user-center.component.html',
-  styleUrls: ['./user-center.component.css']
+  styleUrls: ['./user-center.component.css'],
+
 })
 export class UserCenterComponent implements OnInit {
 
@@ -30,6 +32,9 @@ export class UserCenterComponent implements OnInit {
     {text: '赞', path: 'favorite'},
     {text: '个人资料', path: 'userInfo'}
   ];
+  public uploader:FileUploader = new FileUploader({url: ''});
+  public hasBaseDropZoneOver:boolean = false;
+  public hasAnotherDropZoneOver:boolean = false;
 
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
@@ -81,13 +86,30 @@ export class UserCenterComponent implements OnInit {
 
   // 发布签名
   updateUserDes() {
-    if (this.userDesForm.invalid) { return };
+    if (this.userDesForm.invalid) { return }
     let data = {id: this.userId, selfIntroduction: this.userDesForm.value['selfIntroduction']};
     this.httpService.updateUser(data)
       .then(res => {
         this.isEditable = false;
         this.updateUserInfo();
       })
+  }
+
+  // 上传文件
+  // 定义事件，选择文件
+  selectedFileOnChanged(event:any) {
+    console.log('上传', event.target.value);
+    this.uploadFile()
+  }
+
+  // 定义事件，上传文件
+  uploadFile() {
+    this.uploader.queue[0].onSuccess = function (response, status, headers) {
+      if (status == 200) {
+        let tempRes = JSON.parse(response);
+      }
+    };
+    this.uploader.queue[0].upload();
   }
 
   createForm() {

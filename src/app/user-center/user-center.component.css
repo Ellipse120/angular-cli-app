@@ -28,6 +28,17 @@
   margin: 0 auto 20px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
+}
+.user-center-info .profile-picture [type=file]{
+  width: 106%;
+  height: 106%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 0;
+  cursor: pointer;
 }
 .user-center-info .profile-picture img{
   width: 130%;
