@@ -3,6 +3,7 @@ import {YslHttpService} from '../core/ysl-http.service';
 import {YslCommonService} from "../core/ysl-common.service";
 import {CookieService} from "ngx-cookie";
 import {Router, NavigationEnd} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-user-center',
@@ -11,8 +12,17 @@ import {Router, NavigationEnd} from "@angular/router";
 })
 export class UserCenterComponent implements OnInit {
 
+  userDesForm: FormGroup;
   userId: any;
   userInfo: any;
+  selfIntroduction: string;
+  isEditable: boolean = false;
+  userDesFormError = {
+    selfIntroduction: {
+      required: '请输入您的个性签名',
+      maxlength: '字数不得超过100字'
+    }
+  };
   userTag = [
     {text: '产品管理', path: 'productManagement'},
     {text: '评论', path: 'comment'},
@@ -22,12 +32,14 @@ export class UserCenterComponent implements OnInit {
   ];
 
   constructor(private httpService: YslHttpService,
+              private fb: FormBuilder,
               private cookie: CookieService,
               private router: Router,
               private commonService: YslCommonService) {}
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.createForm();
     this.getUserInfo();
     this.updateUserInfo();
   }
@@ -45,6 +57,7 @@ export class UserCenterComponent implements OnInit {
     })
   }
 
+  // 被修改信息时更新视图
   updateUserInfo() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
@@ -58,5 +71,31 @@ export class UserCenterComponent implements OnInit {
       .then(res => {
         this.commonService.updateUserInfo(res);
       })
+  }
+
+  // 编辑个性签名
+  editDes() {
+    this.isEditable = true;
+    this.userDesForm.patchValue({selfIntroduction: this.userInfo['selfIntroduction']});
+  }
+
+  // 发布签名
+  updateUserDes() {
+    if (this.userDesForm.invalid) { return };
+    let data = {id: this.userId, selfIntroduction: this.userDesForm.value['selfIntroduction']};
+    this.httpService.updateUser(data)
+      .then(res => {
+        this.isEditable = false;
+        this.updateUserInfo();
+      })
+  }
+
+  createForm() {
+    this.userDesForm = this.fb.group({
+      selfIntroduction: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(100)
+      ])]
+    })
   }
 }

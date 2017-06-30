@@ -6,7 +6,13 @@
     </span>
     <div class="user-des">
       <p class="user-name font24 text-center">{{userInfo?.userName}}</p>
-      <p class="des"><span class="font16 text-color-middle">{{userInfo?.selfIntroduction}}</span><i class="fa fa-edit color-blue"></i></p>
+      <div class="des">
+        <p class="font16 text-color-middle un-editable" *ngIf="!isEditable">{{userInfo?.selfIntroduction}}<i class="fa fa-edit color-blue" (click)="editDes()"></i></p>
+        <form class="editable" [formGroup]="userDesForm" *ngIf="isEditable" novalidate>
+          <textarea type="text" formControlName="selfIntroduction" maxlength="100"></textarea>
+          <button class="ysl-btn ysl-btn-xs" (click)="updateUserDes()">发布签名</button>
+        </form>
+      </div>
     </div>
   </div>
   <div class="user-nav container outer-nav"><ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar></div>

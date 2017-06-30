@@ -68,11 +68,8 @@ export class UserBaseInfoComponent implements OnInit,OnDestroy {
   infoEditSubmit(info) {
     if (!this.editForm) { return }
     let data = this.editForm.value;
-    let option = {userId: '', data: {}};
     data.id = this.userId;
-    option.userId = this.userId;
-    option.data = data;
-    this.httpService.updateUser(option)
+    this.httpService.updateUser(data)
       .then(res => {
         // 修改成功后对模板的修改
         this.userInfo.forEach(item => {
