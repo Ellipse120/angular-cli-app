@@ -10,6 +10,7 @@
   font-size: 16px;
   padding-left: 10px;
 }
+/*个人资料*/
 .user-base-info .edit-wrapper{
   height: 40px;
   display: flex;
@@ -30,6 +31,9 @@
 .user-info-list input{
   border: 2px solid #efefef;
   line-height: 30px;
+}
+.user-info-list .ng-invalid{
+  border-color: #ec7c45;
 }
 .user-info-list input[disabled]{
   background: #fff;
@@ -78,6 +82,12 @@
   border: 1px solid #efefef;
   padding-left:10px;
   margin-left: 20px;
+}
+/*企业信息*/
+.organization-info .btn-ensure{
+  margin-top: 10px;
+  height: 30px;
+  line-height: 30px;
 }
 
 /*重写*/

@@ -2,11 +2,11 @@
   <div class="user-center-bg"></div>
   <div class="user-center-info container">
     <span class="profile-picture">
-      <img src="../../assets/images/person.jpg" alt="">
+      <img src="../../assets/images/person.png" alt="">
     </span>
     <div class="user-des">
-      <p class="user-name font24 text-center">用户名</p>
-      <p class="des"><span class="font16 text-color-middle">个性签名个性签名个性签名</span><i class="fa fa-edit color-blue"></i></p>
+      <p class="user-name font24 text-center">{{userInfo?.userName}}</p>
+      <p class="des"><span class="font16 text-color-middle">{{userInfo?.selfIntroduction}}</span><i class="fa fa-edit color-blue"></i></p>
     </div>
   </div>
   <div class="user-nav container outer-nav"><ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar></div>

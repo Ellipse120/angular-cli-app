@@ -36,6 +36,8 @@
 .user-center-info .des{
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 5px;
 }
 .user-center-info .des span{
   margin-right: 5px;

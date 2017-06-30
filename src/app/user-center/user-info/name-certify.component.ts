@@ -44,6 +44,7 @@ export class NameCertifyComponent implements OnInit{
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
               private cookie: CookieService,
+              private commonService: YslCommonService,
               public snackBar: MdSnackBar) {}
 
   ngOnInit() {
@@ -53,11 +54,14 @@ export class NameCertifyComponent implements OnInit{
 
   // 获取用户信息
   getUserInfo() {
-    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    this.httpService.getUserInfo(this.userId)
-      .then(res => {
-        this.userInfo = res;
-      });
+    this.commonService.getUserInfo().subscribe(e => {
+      this.userInfo = e.userInfo
+    });
+    // this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    // this.httpService.getUserInfo(this.userId)
+    //   .then(res => {
+    //     this.userInfo = res;
+    //   });
   }
 
   // 获取验证码

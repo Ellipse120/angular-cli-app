@@ -1,8 +1,4 @@
 import {Component , OnInit} from '@angular/core';
-import {YslHttpService} from '../../core/ysl-http.service';
-import {CookieService} from "ngx-cookie";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   selector: 'user-info',
@@ -20,12 +16,9 @@ export class UserInfoComponent implements OnInit {
     {text: '手机绑定', path: 'userVerify'}
   ];
 
-  constructor(private httpService: YslHttpService,
-              private cookie: CookieService,
-              private fb: FormBuilder,
-              private commonService: YslCommonService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-  }
+  ngOnInit() {}
+
+
 }
