@@ -11,9 +11,10 @@ export class YslHttpService {
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
   // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  public url = 'http://192.168.19.11:1337/192.168.19.20:8080/ysl-ws/';
+  // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
   // public url = 'http://192.168.19.11:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
-  public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
 
   // 用户信息
   user = {
@@ -267,7 +268,7 @@ export class YslHttpService {
   // 编辑信息
   updateUser(option): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.put(this.url + 'api/user/' + option.userId, option.data, {
+      this.http.put(this.url + 'api/user/' + option.id, option, {
         headers: new Headers({
           'Content-Type': 'application/json'
         })

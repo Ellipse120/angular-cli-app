@@ -4,6 +4,7 @@ import {YslHttpService} from "../../core/ysl-http.service";
 import {CookieService} from "ngx-cookie";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {resolve} from "url";
+import {Subscription} from "rxjs";
 
 @Component({
   templateUrl: './organization-info.component.html',
@@ -13,8 +14,16 @@ import {resolve} from "url";
 export class organizationInfoComponent implements OnInit {
 
   organizationForm: FormGroup;
+  subscription: Subscription;
   userId: any;
   userInfo: any;
+  isEditable: boolean = false;
+  orgViewInfo = [
+    {label: '组织名称', formControlName: 'name', model: ''},
+    {label: '联系人姓名', formControlName: 'contactName', model: ''},
+    {label: '手机号', formControlName: 'contactPhone', model: ''},
+    {label: '公司官网URL', formControlName: 'webSite', model: ''},
+  ];
   orgFormError = {
     name: '',
     contactName: '',
@@ -44,23 +53,25 @@ export class organizationInfoComponent implements OnInit {
               private cookie: CookieService) {}
 
   ngOnInit() {
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.createForm();
     this.getUserInfo();
   }
 
   // 获取用户信息
   getUserInfo() {
-    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    // this.commonService.getUserInfo(this.userId).then(() => { this.userInfo = this.commonService.userInfo; });
-    // console.log('org user info', this.userInfo)
-    this.httpService.getUserInfo(this.userId)
-      .then(res => {
-        this.userInfo = res;
+    this.subscription = this.commonService.getUserInfo().subscribe(e => {
+      this.userInfo = e.userInfo;
+      this.orgViewInfo.forEach(item => {
+        item['model'] = this.userInfo[item.formControlName];
+        if (item.formControlName == 'name') { item.model = this.userInfo['orgName']}
+        item['edit'] = false;
       });
+    });
   }
 
   // 提交组织认证
-  submitOrganization() {
+  submitOrganization(isVerify) {
     let form = this.organizationForm;
     for (let mess in this.orgFormError) {
       this.orgFormError[mess] = '';
@@ -82,9 +93,39 @@ export class organizationInfoComponent implements OnInit {
         // let userInfo = this.userInfo;
         // userInfo['userType'] = parseInt(userInfo['userType'] + '0');
         // this.cookie.putObject('yslUserInfo', userInfo);
-        this.getUserInfo();
+        this.updateUserInfo();
         // window.location.reload();
+        if (!isVerify) {
+          this.orgViewInfo.forEach(item => {
+            item['edit'] = false;
+            this.isEditable = false;
+          })
+        }
       })
+  }
+
+  // 更新用户信息
+  updateUserInfo() {
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.commonService.updateUserInfo(res);
+      });
+  }
+
+  // 修改组织信息
+  editable() {
+    let controls = {
+      name: '',
+      contactName: '',
+      contactPhone: '',
+      webSite: ''
+    };
+    this.orgViewInfo.forEach(item => {
+      item['edit'] = true;
+      controls[item.formControlName] = item.model;
+    });
+    this.organizationForm.patchValue(controls);
+    this.isEditable = true;
   }
 
   createForm() {

@@ -20,6 +20,7 @@ import {organizationInfoComponent} from "./user-info/organization-info.component
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {YslMaterialModule} from "../core/ysl-material.module";
 import {MyDatePickerModule} from "mydatepicker";
+import {FileUploadModule} from "ng2-file-upload";
 import {ProductImportComponent} from "./product-management/product-import.component";
 
 
@@ -47,8 +48,8 @@ import {ProductImportComponent} from "./product-management/product-import.compon
     OperationManagementModule,
     YslMaterialModule,
     NgxDatatableModule,
-    MyDatePickerModule
-
+    MyDatePickerModule,
+    FileUploadModule
   ],
   providers: [YslHttpService]
 })

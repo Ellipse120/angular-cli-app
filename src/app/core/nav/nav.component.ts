@@ -9,6 +9,7 @@ import {SearchService} from '../../search/search.service';
 import {YslHttpService} from '../ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {YslPopupDirective} from "../directive/ysl-popup.directive";
+import {YslCommonService} from "../ysl-common.service";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class NavComponent implements OnInit {
   constructor(private router: Router,
               private dialog: MdDialog,
               public eventEmit: SearchService,
+              private commonService: YslCommonService,
               private httpService: YslHttpService,
               private cookie: CookieService,
               private location: Location) {}
@@ -55,11 +57,9 @@ export class NavComponent implements OnInit {
   }
 
   getUserInfo() {
-    if (!this.userId) { return }
-    this.httpService.getUserInfo(this.userId)
-      .then(res => {
-        this.loginInfo = res;
-      })
+    this.commonService.getUserInfo().subscribe(e => {
+      this.loginInfo = e.userInfo;
+    });
   }
 
   // 小屏个人中心等导航

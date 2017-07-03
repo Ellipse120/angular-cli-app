@@ -2,11 +2,18 @@
   <div class="user-center-bg"></div>
   <div class="user-center-info container">
     <span class="profile-picture">
-      <img src="" alt="">
+      <img src="../../assets/images/person.png" alt="">
+      <input type="file" ng2FileSelect [uploader]="uploader" multiple accept="image/*" (change)="selectedFileOnChanged($event)">
     </span>
     <div class="user-des">
-      <p class="user-name font24 text-center">用户名</p>
-      <p class="des"><span class="font16 text-color-middle">个性签名个性签名个性签名</span><i class="fa fa-edit color-blue"></i></p>
+      <p class="user-name font24 text-center">{{userInfo?.userName}}</p>
+      <div class="des">
+        <p class="font16 text-color-middle un-editable" *ngIf="!isEditable">{{userInfo?.selfIntroduction}}<i class="fa fa-edit color-blue" (click)="editDes()"></i></p>
+        <form class="editable" [formGroup]="userDesForm" *ngIf="isEditable" novalidate>
+          <textarea type="text" formControlName="selfIntroduction" maxlength="100"></textarea>
+          <button class="ysl-btn ysl-btn-xs" (click)="updateUserDes()">发布签名</button>
+        </form>
+      </div>
     </div>
   </div>
   <div class="user-nav container outer-nav"><ysl-sidebar [ysl-sides]="userTag"></ysl-sidebar></div>

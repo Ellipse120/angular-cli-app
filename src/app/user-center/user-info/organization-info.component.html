@@ -1,6 +1,7 @@
 <div class="organization-info inner-cont">
-  <div class="before-verify" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">
-    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization()" novalidate>
+  <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
+  <div class="before-verify" *ngIf="userInfo?.userType == '10'">
+    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization(1)" novalidate>
       <div class="form-group">
         <label class="col-sm-3 col-xs-12">机构名称</label>
         <div class="col-sm-9 col-xs-12">
@@ -46,21 +47,13 @@
   <div class="after-verify" *ngIf="userInfo?.userType == '20'">
     <div class="user-edit">
       <form [formGroup]="organizationForm" class="user-info-list">
-        <div class="info-item row">
-          <span class="user-tag col-xs-3">组织名称</span>
-          <p class="col-xs-9"><span>{{userInfo?.orgName}}</span></p>
+        <div class="info-item row" *ngFor="let o of orgViewInfo">
+          <span class="user-tag col-xs-3">{{o.label}}</span>
+          <p class="col-xs-9"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text" [formControlName]="o.formControlName" *ngIf="o?.edit"></p>
         </div>
-        <div class="info-item row">
-          <span class="user-tag col-xs-3">联系人姓名</span>
-          <p class="col-xs-9"><span>{{userInfo?.contactName}}</span></p>
-        </div>
-        <div class="info-item row">
-          <span class="user-tag col-xs-3">手机号</span>
-          <p class="col-xs-9"><span>{{userInfo?.contactPhone}}</span></p>
-        </div>
-        <div class="info-item row">
-          <span class="user-tag col-xs-3">公司官网URL</span>
-          <p class="col-xs-9"><span>{{userInfo?.website}}</span></p>
+        <div class="ysl-btn-group clearfix">
+          <button class="ysl-btn btn-ensure pull-right" *ngIf="!isEditable" (click)="editable()">修改</button>
+          <button class="ysl-btn btn-ensure pull-right" *ngIf="isEditable" (click)="submitOrganization(0)">保存</button>
         </div>
       </form>
     </div>
