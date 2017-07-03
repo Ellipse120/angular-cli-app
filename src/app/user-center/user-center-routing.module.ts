@@ -12,12 +12,13 @@ import {ProductManagementComponent} from "./product-management/product-managemen
 import {ProductListComponent} from "./product-management/product-list.component";
 import {ProductErrataComponent} from "./product-management/product-errata.component";
 import {organizationInfoComponent} from "./user-info/organization-info.component";
+import {ProductImportComponent} from "./product-management/product-import.component";
 
 // 定义个人中心第三级路由
 // 产品管理
 const productManageChild: Routes = [
   {
-    path: 'productList',
+    path: 'list',
     component: ProductListComponent
   },
   {
@@ -25,7 +26,15 @@ const productManageChild: Routes = [
     component: ProductErrataComponent
   },
   {
-    path: '**',redirectTo: 'productList'
+    path: 'import',
+    component: ProductImportComponent
+  },
+  {
+    path: 'edit/:productId',
+    component: ProductImportComponent
+  },
+  {
+    path: '**',redirectTo: 'list'
   }
 ];
 // 个人资料

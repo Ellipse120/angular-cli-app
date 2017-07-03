@@ -1,0 +1,162 @@
+.product {
+  border-radius: 5px;
+}
+
+.pro-name:before {
+  content: "* ";
+  color: red;
+  font-size: 100%;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+.alert {
+  padding: 5px;
+  margin-bottom: 0;
+}
+
+.import-form {
+  margin: 0;
+  background: #fff;
+  padding: 10px -10px;
+}
+
+.import-title {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.content-form {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.content-form label {
+  display: inline-block;
+  font-size: 14px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-flex {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-flex {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ysl-form-control {
+  border: 1px solid #ddd;
+  padding: 5px;
+  outline: none;
+  margin-right: 20px;
+}
+
+[type="file"] {
+  height: 0.1px;
+  width: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+[type="file"] + label {
+  background-color: #39baf6;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  overflow: hidden;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+select {
+  width: 120px;
+}
+
+.proimport-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.13);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.date-range {
+  margin-bottom: 0;
+}
+
+.ysl-import-tag {
+  height: 230px;
+  overflow-y: auto;
+}
+
+.tagDimensions {
+  display: inline-block;
+  width: 600px;
+  text-align: left;
+  list-style-type: none;
+  position: relative;
+  min-height: 134px;
+  margin-top: 20px;
+}
+
+.tagDimensions li {
+  float: left;
+  cursor: pointer;
+  background: #fff;
+}
+
+.secondTagDimensions {
+  width: 500px;
+  position: absolute;
+  list-style: none;
+  margin-top: 20px;
+  color: #676767;
+  left: 0;
+  top: 8px;
+  border: none;
+}
+
+.second-nav {
+  padding: 3px 5px;
+  margin: 2px 5px;
+  background: #f6f9fa;
+}
+
+.isActive {
+  color: #1c94c4;
+  border: 1px solid #d8e5e7;
+  border-bottom: none;
+  padding: 5px 10px;
+}

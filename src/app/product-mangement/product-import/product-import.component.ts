@@ -26,8 +26,8 @@ export class ProductImportComponent implements OnInit {
     serviceMethod: '',
     area: '',
     premium: '',
-    dataSince: '' + Date.now(),
-    dataUntil: '' + Date.now(),
+    dataSince: Date.now(),
+    dataUntil: Date.now(),
     tags: []
   };
   import = true;
@@ -54,7 +54,7 @@ export class ProductImportComponent implements OnInit {
     date: {
       year: this.today.getFullYear(),
       month: this.today.getMonth() + 1,
-      day: this.today.getDay()
+      day: this.today.getDate()
     }
   };
 
@@ -62,7 +62,7 @@ export class ProductImportComponent implements OnInit {
     date: {
       year: this.today.getFullYear(),
       month: this.today.getMonth() + 1,
-      day: this.today.getDay()
+      day: this.today.getDate()
     }
   };
 
@@ -85,6 +85,25 @@ export class ProductImportComponent implements OnInit {
         this.tagDimensions = data;
       });
 
+    if(!this.isProImport) {
+      let a = new Date(this.data.dataSince);
+      let b = new Date(this.data.dataUntil);
+      this.timeFrom = {
+        date: {
+          year: a.getFullYear(),
+          month: a.getMonth() + 1,
+          day: a.getDate()
+        }
+      };
+      this.timeTo = {
+        date: {
+          year: b.getFullYear(),
+          month: b.getMonth() + 1,
+          day: b.getDate()
+        }
+      }
+    }
+
     this.getSelectionOption();
 
   }
@@ -95,11 +114,11 @@ export class ProductImportComponent implements OnInit {
   }
 
   onDateFromChanged(event: IMyDateModel) {
-    this.data.dataSince = '' + event.epoc * 1000;
+    this.data.dataSince = event.epoc * 1000;
   }
 
   onDateToChanged(event: IMyDateModel) {
-    this.data.dataUntil = '' + event.epoc * 1000;
+    this.data.dataUntil = event.epoc * 1000;
   }
 
   proTagImport(tagId) {

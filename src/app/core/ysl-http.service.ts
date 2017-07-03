@@ -10,9 +10,10 @@ export class YslHttpService {
   private dataListUrl = './assets/data/';
 
   //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
   // public url = 'http://192.168.19.11:1337/192.168.19.20:8080/ysl-ws/';
   // REPLACE
+  public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
 
   // 用户信息
   user = {

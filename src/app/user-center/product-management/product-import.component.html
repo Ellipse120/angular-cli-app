@@ -1,0 +1,119 @@
+<div class="">
+  <md-dialog-content>
+    <div class="content-form">
+      <form (ngSubmit)="doProductSubmit()" #productForm="ngForm">
+        <div class="form-group">
+          <div class="">
+            <md-input-container>
+              <input mdInput placeholder="名称" type="text" maxlength="32" style="width: 75vw;" required
+                     class="select-flex"
+                     [(ngModel)]="product.name" name="name">
+              <md-error>名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
+            </md-input-container>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <md-input-container class="input-flex">
+          <textarea mdInput name="description" rows="3" maxlength="512" style="width: 75vw;" placeholder="简介"
+                    [(ngModel)]="product.description" name="description" #description></textarea>
+              <md-hint align="end">{{description.value.length}}&nbsp;/&nbsp;512</md-hint>
+            </md-input-container>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <md-input-container>
+              <input mdInput type="url" placeholder="官网" maxlength="256" style="width: 75vw;"
+                     [(ngModel)]="product.webSite" name="webSite">
+            </md-input-container>
+          </div>
+        </div>
+
+          <div class="form-group select-flex">
+            <md-select placeholder="数据来源" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.dataSource" name="dataSource">
+              <md-option *ngFor="let dataSource of dataSources" [value]="dataSource.value">
+                {{dataSource.viewValue}}
+              </md-option>
+            </md-select>
+
+            <md-select placeholder="数据类型" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.dataCategory"
+                       name="dataCategory">
+              <md-option *ngFor="let dataCategory of dataCategories" [value]="dataCategory.value">
+                {{dataCategory.viewValue}}
+              </md-option>
+            </md-select>
+
+
+          <div class="form-group select-flex">
+            <md-select placeholder="采集方式" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.collectionMethod"
+                       name="collectionMethod">
+              <md-option *ngFor="let dataCollection of dataCollections" [value]="dataCollection.value">
+                {{dataCollection.viewValue}}
+              </md-option>
+            </md-select>
+
+            <md-select placeholder="服务方式" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.serviceMethod"
+                       name="serviceMethod">
+              <md-option *ngFor="let dataService of dataServices" [value]="dataService.value">
+                {{dataService.viewValue}}
+              </md-option>
+            </md-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>数据样本</label>
+          <input id="upload" type="file">
+          <label for="upload">
+            <span> 上传文件&hellip;</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>是否收费</label>
+          <md-radio-group [(ngModel)]="product.premium" name="premium">
+            <md-radio-button *ngFor="let item of radioItems" [value]="item.value">
+              {{item.viewValue}}&nbsp;&nbsp;
+            </md-radio-button>
+          </md-radio-group>
+        </div>
+
+        <div class="form-group date-range">
+          <label>时间范围</label>
+          <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
+                          [(ngModel)]="timeFrom" (dateChanged)="onDateFromChanged($event)"></my-date-picker>
+          &nbsp; &minus; &nbsp;
+          <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions"
+                          [(ngModel)]="timeTo" (dateChanged)="onDateToChanged($event)"></my-date-picker>
+        </div>
+
+        <div class="form-group">
+          <label>标签分类</label>
+          <div class="ysl-import-tag">
+            <ul class="tagDimensions">
+              <li *ngFor="let item of tagDimensions;let i=index">
+                <button type="button" class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">
+                  {{item.name}}
+                </button>
+                <ul class="secondTagDimensions" *ngIf="isActive == i">
+                  <li *ngFor="let itemc of item.items" class="second-nav">
+                    <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
+                           (click)="proTagImport(itemc.id)">
+                    <label [for]="[itemc.id]">{{itemc.name}}</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="ysl-btn btn-submit" [disabled]="!productForm.form.valid">保存</button>
+        </div>
+      </form>
+    </div>
+  </md-dialog-content>
+</div>

@@ -20,6 +20,7 @@ import {organizationInfoComponent} from "./user-info/organization-info.component
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {YslMaterialModule} from "../core/ysl-material.module";
 import {MyDatePickerModule} from "mydatepicker";
+import {ProductImportComponent} from "./product-management/product-import.component";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MyDatePickerModule} from "mydatepicker";
     ProductCommentComponent,
     ProductListComponent,
     ProductErrataComponent,
-    organizationInfoComponent
+    organizationInfoComponent,
+    ProductImportComponent
   ],
   imports: [
     BrowserModule,

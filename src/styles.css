@@ -355,17 +355,28 @@ textarea::-webkit-scrollbar-thumb
 }
 .outer-nav .ysl-sidebar-item{
   width: 129px;
-  font-size: 18px;
+  font-size: 1em;
   position: relative;
   background-color: #fff;
   border-top: 1px solid #b8c4ce;
   border-bottom: 1px solid #b8c4ce;
   border-right: 1px dashed #b8c4ce;
 }
-.inner-nav .ysl-sidebar-item{
-  width: 100px;
-  font-size: 16px;
+
+@media (min-width: 375px) {
+  .inner-nav .ysl-sidebar-item{
+    width: 100px;
+    font-size: 13px;
+  }
 }
+
+@media (min-width: 1024px) {
+  .inner-nav .ysl-sidebar-item{
+    width: 100px;
+    font-size: 16px;
+  }
+}
+
 .outer-nav .ysl-sidebar-item:first-of-type{
   border-left: 1px solid #b8c4ce;
 }

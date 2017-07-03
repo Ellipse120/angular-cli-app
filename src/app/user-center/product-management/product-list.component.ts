@@ -1,4 +1,4 @@
-import {Component,OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {MdDialog} from "@angular/material";
 import {CookieService} from "ngx-cookie";
@@ -6,8 +6,8 @@ import {YslHttpService} from "../../core/ysl-http.service";
 import {ProductListService} from "../../product-mangement/product-list/product-list.service";
 import {isNullOrUndefined} from "util";
 
-import {ProductImportComponent} from '../../product-mangement/product-import/product-import.component';
-import {Router} from "@angular/router";
+import {ProductImportComponent} from "../../product-mangement/product-import/product-import.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'product-list',
@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./product-management.component.css']
 })
 
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
 
   // 定义table
   rows = [];
@@ -75,7 +75,8 @@ export class ProductListComponent implements OnInit{
               private dialog: MdDialog,
               private cookie: CookieService,
               private service: YslHttpService,
-  private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
 
     this.userInfo = this.cookie.getObject('yslUserInfo');
 
@@ -165,10 +166,10 @@ export class ProductListComponent implements OnInit{
     dialogRef.afterClosed().subscribe(res => {
       this.getProducts();
     });
-
   }
 
   选择每一行触发事件
+
   onSelect({selected}) {
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
@@ -179,25 +180,12 @@ export class ProductListComponent implements OnInit{
   }
 
   importProduct(): void {
-    if (!isNullOrUndefined(this.userInfo)) {
-      let dialogRef = this.dialog.open(ProductImportComponent, {disableClose: true});
-      dialogRef.afterClosed().subscribe(result => {
-        this.getProducts();
-      });
-    } else {
-    }
+    this.router.navigate(['../import'], {relativeTo: this.route});
   }
 
-  // showLoginComp() {
-  //   let dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
-  //   dialogLog.afterClosed().subscribe(result => {
-  //     if (!result) {
-  //       return;
-  //     }
-  //     this.cookie.putObject('yslUserInfo', result.userLoginInfo);
-  //     this.getProducts();
-  //   });
-  // }
+  editProduct2(row): void {
+    this.router.navigate(['../edit', row.productId],{relativeTo: this.route});
+  }
 
   setProductsPage(pageInfo) {
     this.pageNumber = pageInfo.offset;
@@ -215,7 +203,7 @@ export class ProductListComponent implements OnInit{
   doFilter() {
     switch (this.pagingOption.startModifiedOn) {
       case 1: {
-        this.pagingOption.startModifiedOn = Date.now() - 7*24*60*60*1000;
+        this.pagingOption.startModifiedOn = Date.now() - 7 * 24 * 60 * 60 * 1000;
         break;
       }
       case 2: {
