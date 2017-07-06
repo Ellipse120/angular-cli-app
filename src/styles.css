@@ -748,15 +748,29 @@ app-index .mat-ripple{
 }
 
 /*个人中心公用*/
-.user-center-cont{
+@media screen and (min-width: 450px) {
+  .user-center-cont {
+    padding: 0;
+  }
+
+  .user-center-cont .inner-cont {
+    padding:0;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .user-center-cont{
   padding: 15px 40px 40px;
   background-color: #fff;
-}
-.user-center .inner-cont{
+  }
+
+  .user-center .inner-cont{
   margin-top: 20px;
   padding: 40px 50px;
   background-color: #f9fbfb;
+  }
 }
+
 @media screen and (max-width: 1200px){
   .ysl-container{
     padding: 0 5%;

@@ -32,8 +32,31 @@
   padding-top: 0;
 }
 
-.selected-filter {
-  margin-bottom: 0;
+@media (min-width: 450px) {
+  .product-list {
+    margin: 0 10px;
+  }
+
+  .selected-filter-list {
+    margin: 0 10px;
+  }
+
+}
+
+@media screen and (min-width: 768px){
+  .product-list {
+    margin: 0 45px;
+  }
+
+  .selected-filter-list {
+    margin: 20px -15px 10px -15px;
+  }
+}
+
+@media screen and (max-width: 414px){
+ .fixpadding{
+   padding: 0 15px 0 30px;
+ }
 }
 
 .pro-list .ngx-datatable {
@@ -108,3 +131,23 @@
   color: #004974;
   text-decoration: none;
 }
+
+.flex-center {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  overflow: auto;
+}
+
+.flex-center span {
+  padding: 0px;
+}
+
+.edit-btn {
+  background-color: #39baf6;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+}
+
