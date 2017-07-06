@@ -149,5 +149,16 @@
   border-radius: 5px;
   color: #fff;
   text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.product-list-name {
+  color: #333333;
+  cursor: pointer;
+}
+
+.product-list-name:hover {
+  color: #39baf6;
 }
 

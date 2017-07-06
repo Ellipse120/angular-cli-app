@@ -151,13 +151,11 @@ export class ProductImportComponent implements OnInit {
     if(this.route.routeConfig.path === 'import'){
       this.productListService.doProductImport(this.product)
         .then(res => {
-          console.log(res);
           this.router.navigate(['./list'],{relativeTo: this.route})
         });
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
-          console.log(res);
           this.router.navigate(['./list'],{relativeTo: this.route})
         });
     }

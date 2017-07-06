@@ -27,14 +27,17 @@ const productManageChild: Routes = [
   },
   {
     path: 'import',
-    component: ProductImportComponent
+    component: ProductImportComponent,
+    outlet:'importoutlet'
   },
   {
     path: 'edit/:productId',
     component: ProductImportComponent
   },
   {
-    path: '**',redirectTo: 'list'
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full'
   }
 ];
 // 个人资料
