@@ -22,6 +22,7 @@ import {YslMaterialModule} from "../core/ysl-material.module";
 import {MyDatePickerModule} from "mydatepicker";
 import {FileUploadModule} from "ng2-file-upload";
 import {ProductImportComponent} from "./product-management/product-import.component";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {ProductImportComponent} from "./product-management/product-import.compon
     YslMaterialModule,
     NgxDatatableModule,
     MyDatePickerModule,
-    FileUploadModule
+    FileUploadModule,
+    NgxPaginationModule
   ],
   providers: [YslHttpService]
 })

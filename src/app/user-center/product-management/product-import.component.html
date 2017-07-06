@@ -5,7 +5,7 @@
         <div class="form-group">
           <div class="">
             <md-input-container>
-              <input mdInput placeholder="名称" type="text" maxlength="32" style="width: 75vw;" required
+              <input mdInput placeholder="名称" type="text" maxlength="32" style="width: 50vw;" required
                      class="select-flex"
                      [(ngModel)]="product.name" [pattern]="pattern" name="name">
               <md-error>名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
@@ -16,7 +16,7 @@
         <div class="form-group">
           <div>
             <md-input-container class="input-flex">
-          <textarea mdInput name="description" rows="3" maxlength="512" style="width: 75vw;" placeholder="简介"
+          <textarea mdInput name="description" rows="3" maxlength="512" style="width: 50vw;" placeholder="简介"
                     [(ngModel)]="product.description" name="description" #description></textarea>
               <md-hint align="end">{{description.value.length}}&nbsp;/&nbsp;512</md-hint>
             </md-input-container>
@@ -26,7 +26,7 @@
         <div class="form-group">
           <div>
             <md-input-container>
-              <input mdInput type="url" placeholder="官网" maxlength="256" style="width: 75vw;"
+              <input mdInput type="url" placeholder="官网" maxlength="256" style="width: 50vw;"
                      [(ngModel)]="product.webSite" name="webSite">
             </md-input-container>
           </div>

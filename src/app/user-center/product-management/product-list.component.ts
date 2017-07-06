@@ -70,6 +70,10 @@ export class ProductListComponent implements OnInit {
     {value: 3, viewValue: '三个月内'}
   ];
 
+  // paging args
+  page: number = 1;
+  isLoading: boolean;
+
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService,
               private dialog: MdDialog,
@@ -89,6 +93,7 @@ export class ProductListComponent implements OnInit {
       this.pagingOption.userId = this.userInfo.id;
       this.productListService.getProductList(this.pagingOption).then((data) => {
         this.isFinished = false;
+        this.isLoading = false;
         this.dataItems = data.items;
 
         this.rows = this.dataItems;
@@ -98,17 +103,13 @@ export class ProductListComponent implements OnInit {
         this.count = data.totalLength;
 
       });
-    } else {
-      // this.showLoginComp();
     }
-
   }
 
   // 启用或禁用
   openOrClose(i) {
     this.isOn[i] = !this.isOn[i];
   }
-
 
   // 编辑产品
   editProduct(info) {
@@ -168,8 +169,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  选择每一行触发事件
-
+  //选择每一行触发事件
   onSelect({selected}) {
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
@@ -184,7 +184,7 @@ export class ProductListComponent implements OnInit {
   }
 
   editProduct2(row): void {
-    this.router.navigate(['../edit', row.productId],{relativeTo: this.route});
+    this.router.navigate(['../edit', row.productId], {relativeTo: this.route});
   }
 
   setProductsPage(pageInfo) {
@@ -192,6 +192,15 @@ export class ProductListComponent implements OnInit {
     this.pagingOption.offset = (pageInfo.offset) * 10;
     this.pagingOption.userId = this.userInfo.id;
     this.getProducts();
+  }
+
+  getPage(e) {
+    this.isLoading = true;
+    this.page = e;
+    this.pagingOption.offset = (e - 1) * 10;
+    this.pagingOption.userId = this.userInfo.id;
+    this.getProducts();
+
   }
 
   doProductsSort(event) {
