@@ -27,8 +27,7 @@ const productManageChild: Routes = [
   },
   {
     path: 'import',
-    component: ProductImportComponent,
-    outlet:'importoutlet'
+    component: ProductImportComponent
   },
   {
     path: 'edit/:productId',
