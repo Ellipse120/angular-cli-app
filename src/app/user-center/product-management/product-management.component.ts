@@ -16,9 +16,9 @@ export class ProductManagementComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (this.router.url.split('/').includes('import')) {
-        this.userTag = [{text: '产品录入', path: 'import'}];
+        this.userTag = [{text: '录入产品', path: 'import'}];
       } else if (this.router.url.split('/').includes('edit')) {
-        this.userTag = [{text: '产品修改', path: 'edit'}];
+        this.userTag = [{text: '修改产品', path: 'edit'}];
       } else {
         this.userTag = [
           {text: '产品列表', path: 'list'},
