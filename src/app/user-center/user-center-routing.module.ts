@@ -22,21 +22,21 @@ const productManageChild: Routes = [
     component: ProductListComponent
   },
   {
-    path: 'errata',
-    component: ProductErrataComponent
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full'
   },
   {
     path: 'import',
     component: ProductImportComponent
   },
   {
-    path: 'edit/:productId',
-    component: ProductImportComponent
+    path: 'errata',
+    component: ProductErrataComponent
   },
   {
-    path: '',
-    redirectTo: 'list',
-    pathMatch: 'full'
+    path: 'edit/:productId',
+    component: ProductImportComponent
   }
 ];
 // 个人资料

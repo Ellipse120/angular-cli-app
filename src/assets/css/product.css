@@ -148,7 +148,7 @@
   padding: 5px 10px;
   border-radius: 5px;
   color: #fff;
-  text-decoration: none;
+  text-decoration: none !important;
   font-size: 12px;
   cursor: pointer;
 }
@@ -160,5 +160,13 @@
 
 .product-list-name:hover {
   color: #39baf6;
+}
+
+.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #39baf6;
+}
+
+.mat-radio-inner-circle {
+  background-color: black;
 }
 

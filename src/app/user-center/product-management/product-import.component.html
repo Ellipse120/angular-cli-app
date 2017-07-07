@@ -95,7 +95,7 @@
           <div class="ysl-import-tag">
             <ul class="tagDimensions">
               <li *ngFor="let item of tagDimensions;let i=index">
-                <button type="button" class="ysl-btn btn-none" [class.isActive]="isActive === i" (click)="changeTab(i)">
+                <button type="button" class="ysl-btn btn-none" style="outline: none;" [class.isActive]="isActive === i" (click)="changeTab(i)">
                   {{item.name}}
                 </button>
                 <ul class="secondTagDimensions" *ngIf="isActive == i">
