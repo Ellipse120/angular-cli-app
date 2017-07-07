@@ -32,30 +32,31 @@
           </div>
         </div>
 
+        <div>
           <div class="form-group select-flex">
-            <md-select placeholder="数据来源" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.dataSource" name="dataSource">
+            <md-select placeholder="数据来源" style="width: 50vw;margin:10px 0;" [(ngModel)]="product.dataSource" name="dataSource">
               <md-option *ngFor="let dataSource of dataSources" [value]="dataSource.value">
                 {{dataSource.viewValue}}
               </md-option>
             </md-select>
 
-            <md-select placeholder="数据类型" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.dataCategory"
+            <md-select placeholder="数据类型" style="width: 50vw;margin:10px 0;" [(ngModel)]="product.dataCategory"
                        name="dataCategory">
               <md-option *ngFor="let dataCategory of dataCategories" [value]="dataCategory.value">
                 {{dataCategory.viewValue}}
               </md-option>
             </md-select>
-
+          </div>
 
           <div class="form-group select-flex">
-            <md-select placeholder="采集方式" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.collectionMethod"
+            <md-select placeholder="采集方式" style="width: 50vw;margin:10px 0;" [(ngModel)]="product.collectionMethod"
                        name="collectionMethod">
               <md-option *ngFor="let dataCollection of dataCollections" [value]="dataCollection.value">
                 {{dataCollection.viewValue}}
               </md-option>
             </md-select>
 
-            <md-select placeholder="服务方式" style="width: 50vw;margin: 10px 0" [(ngModel)]="product.serviceMethod"
+            <md-select placeholder="服务方式" style="width: 50vw;margin:10px 0;" [(ngModel)]="product.serviceMethod"
                        name="serviceMethod">
               <md-option *ngFor="let dataService of dataServices" [value]="dataService.value">
                 {{dataService.viewValue}}
