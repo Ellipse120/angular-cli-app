@@ -125,7 +125,6 @@ select {
   list-style-type: none;
   position: relative;
   min-height: 134px;
-  margin-top: 20px;
 }
 
 .tagDimensions li {
@@ -170,6 +169,10 @@ select {
 }
 
 .product-import-item {
+  padding: 0px 30px;
+}
+
+.product-import-item2 {
   padding: 20px 30px;
 }
 
@@ -227,3 +230,8 @@ select {
   animation: inputHighlighter 0.3s ease;
 }
 
+.product-import-checkbox {
+  top: -3px;
+  position: relative;
+  margin-right: 40px;
+}

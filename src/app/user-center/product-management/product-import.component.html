@@ -123,11 +123,11 @@
     <div class="product-import-info">
       <p class="product-info">产品信息</p>
 
-      <div class="product-import-item">
+      <div class="product-import-item" style="padding-top: 20px;">
         <label for="name">名称</label>
         <input type="text" maxlength="32" required
                [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
-               style="width: 100%;height: 60px;font-size: 14px;border-radius: 5px;" placeholder="名称">
+               style="width: 100%;height: 60px;font-size: 14px;border-radius: 5px;border: 1px solid #dee1e0;" placeholder="名称">
         <!--<span class="highlight"></span>-->
         <!--<label>名称</label>-->
         <div align="end">{{name.value.length}}&nbsp;/&nbsp;32</div>
@@ -135,7 +135,7 @@
 
       <div class="product-import-item">
         <label for="description">简介</label>
-        <textarea style="width: 100%;border-radius: 5px;" name="description" rows="5" maxlength="512" id="description"
+        <textarea style="width: 100%;border-radius: 5px;border: 1px solid #dee1e0;" name="description" rows="5" maxlength="512" id="description"
                   [(ngModel)]="product.description" name="description" #description placeholder="简介"></textarea>
         <!--<span class="highlight"></span>-->
         <!--<label>简介</label>-->
@@ -144,7 +144,7 @@
 
       <div class="product-import-item">
         <label for="webSite">官网</label>
-        <input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width: 100%;height: 60px" #webSite placeholder="官网">
+        <input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width: 100%;height: 60px;border: 1px solid #dee1e0;" #webSite placeholder="官网">
         <!--<span class="highlight"></span>-->
         <!--<label>官网</label>-->
         <div align="end">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
@@ -188,7 +188,7 @@
 
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
-      <div class="product-import-item">
+      <div class="product-import-item2">
         <input id="upload" type="file">
         <label for="upload">
           <span> 上传文件&hellip;</span>
@@ -198,10 +198,10 @@
 
     <div class="product-import-info">
       <p class="product-info">是否收费</p>
-      <div class="product-import-item">
+      <div class="product-import-item2">
         <md-radio-group [(ngModel)]="product.premium" name="premium">
           <md-radio-button *ngFor="let item of radioItems" [value]="item.value">
-            {{item.viewValue}}&nbsp;&nbsp;
+            <span class="product-import-checkbox">{{item.viewValue}}&nbsp;&nbsp;</span>
           </md-radio-button>
         </md-radio-group>
       </div>
@@ -209,13 +209,13 @@
 
     <div class="product-import-info">
       <p class="product-info">时间范围</p>
-      <div class="product-import-item">
-        <span>
+      <div class="product-import-item2">
+        <span style="display: inline-block;">
           <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
                         [(ngModel)]="timeFrom" (dateChanged)="onDateFromChanged($event)"></my-date-picker>
         </span>
-        <span>&nbsp; &minus; &nbsp;</span>
-        <span>
+        <span style="display: inline-block;top: -15px;position: relative;">&nbsp; &minus; &nbsp;</span>
+        <span style="display: inline-block;">
         <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions"
                         [(ngModel)]="timeTo" (dateChanged)="onDateToChanged($event)"></my-date-picker>
         </span>
@@ -224,7 +224,7 @@
 
     <div class="product-import-info">
       <p class="product-info">标签分类</p>
-      <div class="product-import-item">
+      <div class="product-import-item2">
         <div class="ysl-import-tag">
           <ul class="tagDimensions">
             <li *ngFor="let item of tagDimensions;let i=index">
@@ -246,7 +246,7 @@
     </div>
 
     <div style="padding: 40px 0 0 0">
-      <button type="submit" class="btn btn-info" [disabled]="!productForm.form.valid">保存</button>
+      <button type="submit" class="btn btn-info" style="background-color: #39baf6;" [disabled]="!productForm.form.valid">保存</button>
       <button class="btn btn-default">返回</button>
     </div>
 
