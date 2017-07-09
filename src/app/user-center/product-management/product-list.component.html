@@ -127,9 +127,10 @@
         <ul class="list-group">
           <li *ngFor="let item of dataItems | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"
               class="list-group-item row product-list-ul"
-              style="background-color: #f6faf9;border: none; margin-bottom: 10px">
-            <span class="col-xs-12 col-sm-12 col-md-6 col-lg-7 product-list-name" style="font-size: 14px;" (click)="doViewProductDetail(item)">{{item.name}}</span>
-            <span class="col-xs-8 col-sm-9 col-md-4 col-lg-4">
+              style="background-color: #f6faf9;border: none; margin-bottom: 10px;">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 product-list-name" style="font-size: 14px;padding-top: 3.5px;" ><span (click)="doViewProductDetail(item)">{{item.name}}</span></div>
+            <div class="col-xs-8 col-sm-9 col-md-4 col-lg-4" style="padding-top: 3.5px">
+              <span>
               <i class="fa fa-eye" style="color: #b8c5ce"></i><span
                   style="width: 50px;display: inline-block;padding-left: 10px;color: #a5aaad;font-size: 12px;">&nbsp;{{item?.viewedCount}}</span>
               <i class="fa fa-star " style="color: #b8c5ce"></i><span
@@ -137,7 +138,8 @@
               <i class="fa fa-thumbs-up " style="color: #b8c5ce"></i><span
                   style="width: 50px;display: inline-block;padding-left: 10px;color: #a5aaad;font-size: 12px;">&nbsp;{{item?.favoredCount}}</span>
             </span>
-            <span class="col-xs-4 col-sm-3 col-md-2 col-lg-1" ><a class="edit-btn" (click)="editProduct2(item)">修改</a></span>
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1"><span><a class="edit-btn" (click)="editProduct2(item)">修改</a></span></div>
           </li>
         </ul>
       </div>
