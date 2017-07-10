@@ -7,7 +7,7 @@
         <input type="text" maxlength="32" required
                [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
                class="product-import-name"
-               placeholder="名称">
+               placeholder="名称" style="padding-right: 40px;">
         <md-error *ngIf="!name.validity.patternMismatch === false">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
         <div align="end" style="color: #a5aaad;margin-top: 2px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
       </div>
@@ -15,14 +15,14 @@
       <div class="product-import-item">
         <textarea class="product-description" name="description" rows="3"
                   maxlength="512" id="description"
-                  [(ngModel)]="product.description" name="description" #description placeholder="简介"></textarea>
+                  [(ngModel)]="product.description"name="description" #description placeholder="简介"></textarea>
         <div align="end" style="color: #a5aaad;margin-top: -2px;">{{description.value.length}}&nbsp;/&nbsp;512</div>
       </div>
 
       <div class="product-import-item">
-        <input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite"
-               #webSite placeholder="官网">
-        <div align="end" style="color: #a5aaad;margin-top: 2px;">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
+        <span><input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite"
+               #webSite placeholder="官网" maxlength="256"></span>
+        <div align="end" style="color: #a5aaad;margin-top: 2px;bottom: 15px;">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
       </div>
 
       <div>

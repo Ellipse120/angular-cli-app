@@ -231,8 +231,12 @@ select {
   }
 }
 
-#productForm input, #productForm textarea {
+#productForm input {
   padding: 10px;
+}
+
+#productForm textarea {
+  padding: 10px 50px 10px 10px;
 }
 
 .product-webSite {
