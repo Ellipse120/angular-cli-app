@@ -114,8 +114,9 @@ select {
 }
 
 .ysl-import-tag {
-  height: 230px;
+  height: 260px;
   overflow-y: auto;
+  margin-bottom: -15px;
 }
 
 .tagDimensions {
@@ -142,6 +143,11 @@ select {
   left: 0;
   top: 8px;
   border: none;
+  background-color: #fff;
+}
+
+.btn-none {
+  background-color: #f5f8f7;
 }
 
 .second-nav {
@@ -155,6 +161,7 @@ select {
   border: 1px solid #d8e5e7;
   border-bottom: none;
   padding: 5px 10px;
+  background-color: #fff;
 }
 
 .product-import-info {
@@ -235,3 +242,26 @@ select {
   position: relative;
   margin-right: 40px;
 }
+
+@media all and (min-width: 350px) {
+  .my-product-import{
+    padding: 0;
+    color: #333333;
+  }
+
+  .product-import-btn {
+    display: flex;flex-direction: row;justify-content:center;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .my-product-import{
+    padding: 0 50px;
+    color: #333333;
+  }
+
+  .product-import-btn {
+    display: block;
+  }
+}
+

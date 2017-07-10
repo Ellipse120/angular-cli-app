@@ -118,7 +118,7 @@
 <!--</div>-->
 <!--</md-dialog-content>-->
 <!--</div>-->
-<div style="padding: 0 50px;color: #333333;">
+<div class="my-product-import">
   <form (ngSubmit)="doProductSubmit()" #productForm="ngForm">
     <div class="product-import-info">
       <p class="product-info">产品信息</p>
@@ -130,6 +130,7 @@
                style="width: 100%;height: 60px;font-size: 14px;border-radius: 5px;border: 1px solid #dee1e0;" placeholder="名称">
         <!--<span class="highlight"></span>-->
         <!--<label>名称</label>-->
+        <md-error *ngIf="!name.validity.patternMismatch === false">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
         <div align="end">{{name.value.length}}&nbsp;/&nbsp;32</div>
       </div>
 
@@ -245,8 +246,8 @@
       </div>
     </div>
 
-    <div style="padding: 40px 0 0 0">
-      <button type="submit" class="btn btn-info" style="background-color: #39baf6;" [disabled]="!productForm.form.valid">保存</button>
+    <div style="padding: 40px 0 0 0;" class="product-import-btn">
+      <button type="submit" class="btn btn-info" style="background-color: #39baf6;margin-right: 10px;" [disabled]="!productForm.form.valid">保存</button>
       <button class="btn btn-default" (click)="goBackList">返回</button>
     </div>
 
