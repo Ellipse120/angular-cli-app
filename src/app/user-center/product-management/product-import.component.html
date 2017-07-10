@@ -62,7 +62,7 @@
 
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
-      <div class="product-import-item2">
+      <div class="product-import-item2" style="padding: 0px 30px 10px 30px;">
         <input id="upload" type="file">
         <label for="upload">
           <span> 上传文件&hellip;</span>
@@ -83,7 +83,7 @@
 
     <div class="product-import-info">
       <p class="product-info">时间范围</p>
-      <div class="product-import-item2">
+      <div class="product-import-item2" style="padding: 20px 30px;">
         <span style="display: inline-block;">
           <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
                           [(ngModel)]="timeFrom" (dateChanged)="onDateFromChanged($event)"></my-date-picker>
