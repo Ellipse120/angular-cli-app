@@ -8,7 +8,6 @@ import {isNullOrUndefined} from "util";
 
 import {ProductImportComponent} from "../../product-mangement/product-import/product-import.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from "@angular/common";
 
 @Component({
   selector: 'product-list',
@@ -81,8 +80,7 @@ export class ProductListComponent implements OnInit {
               private cookie: CookieService,
               private service: YslHttpService,
               private router: Router,
-              private route: ActivatedRoute,
-  private location: Location) {
+              private route: ActivatedRoute) {
 
     this.userInfo = this.cookie.getObject('yslUserInfo');
 
@@ -181,7 +179,7 @@ export class ProductListComponent implements OnInit {
     // console.log('Activate Event', event);
   }
 
-  importProduct(): void {
+  importProductNew(e): void {
     this.router.navigate(['../import'], {relativeTo: this.route});
   }
 
@@ -242,10 +240,6 @@ export class ProductListComponent implements OnInit {
 
   doViewProductDetail(item) {
     this.router.navigate(['datadetail', {productId: item.productId}]);
-  }
-
-  goBackList() {
-    this.location.back();
   }
 
   ngOnInit(): void {

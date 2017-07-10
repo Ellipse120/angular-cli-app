@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import {ProductListService} from "../../product-mangement/product-list/product-list.service";
 import {CookieService} from "ngx-cookie";
-
+import {Location} from "@angular/common";
 
 @Component({
   templateUrl: './product-import.component.html',
@@ -35,7 +35,7 @@ export class ProductImportComponent implements OnInit {
   };
 
   isActive = 0;
-  tagDimensions = [];
+  tagDimensionsNew = [];
   dataSources = [];
   dataCategories = [];
   dataCollections = [];
@@ -76,7 +76,8 @@ export class ProductImportComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private productListService: ProductListService,
-              private cookie: CookieService) {
+              private cookie: CookieService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -109,7 +110,7 @@ export class ProductImportComponent implements OnInit {
 
     this.service.getTagDimensions()
       .then(data => {
-        this.tagDimensions = data;
+        this.tagDimensionsNew = data;
       });
 
     this.getSelectionOption();
@@ -187,6 +188,11 @@ export class ProductImportComponent implements OnInit {
           }
         });
       });
+  }
+
+  goBackList() {
+    // this.location.back();
+    this.router.navigate(['../list'],{relativeTo: this.route})
   }
 
 }
