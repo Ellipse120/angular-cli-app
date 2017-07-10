@@ -26,7 +26,7 @@ export class UserCenterComponent implements OnInit {
     }
   };
   userTag = [
-    {text: '产品管理', path: 'productManagement'},
+    {text: '产品', path: 'productManagement'},
     {text: '评论', path: 'comment'},
     {text: '收藏', path: 'likes'},
     {text: '赞', path: 'favorite'},

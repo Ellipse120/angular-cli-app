@@ -13,7 +13,7 @@ export class OperationManagementComponent implements OnInit {
   currSideChild: number;
   operateTag = [
     {text: '用户管理', path: 'userManage'},
-    {text: '产品管理',path: 'productlist',children: [
+    {text: '产品',path: 'productlist',children: [
       {text: '产品列表', path: 'productlist'},
       {text: '纠错处理', path: 'error'}
     ]}

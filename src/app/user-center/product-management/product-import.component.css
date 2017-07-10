@@ -184,57 +184,19 @@ select {
 }
 
 ::-webkit-input-placeholder {
-  color:    #999;
-}
-:-moz-placeholder {
-  color:    #999;
-}
-::-moz-placeholder {
-  color:    #999;
-}
-:-ms-input-placeholder {
-  color:    #999;
-}
-
-.my-input input {
-  padding: 10px 10px 10px 5px;
-  display: block;
-}
-
-.my-input label {
   color: #999;
-  font-size: 18px;
-  font-weight: normal;
-  position: relative;
-  pointer-events: none;
-  left: 5px;
-  top: -40px;
-  transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all;
 }
 
-.my-input input:focus ~ label,
-.my-input input:valid ~ label {
-  top: -80px;
-  font-size: 14px;
-  color: #5264AE;
+:-moz-placeholder {
+  color: #999;
 }
 
-.highlight {
-  position: relative;
-  height: 60%;
-  width: 100px;
-  top: 25%;
-  left: 0;
-  pointer-events: none;
-  opacity: 0.5;
+::-moz-placeholder {
+  color: #999;
 }
 
-.my-input input:focus ~ .highlight {
-  -webkit-animation: inputHighlighter 0.3s ease;
-  -moz-animation: inputHighlighter 0.3s ease;
-  animation: inputHighlighter 0.3s ease;
+:-ms-input-placeholder {
+  color: #999;
 }
 
 .product-import-checkbox {
@@ -244,18 +206,20 @@ select {
 }
 
 @media all and (min-width: 350px) {
-  .my-product-import{
+  .my-product-import {
     padding: 0;
     color: #333333;
   }
 
   .product-import-btn {
-    display: flex;flex-direction: row;justify-content:center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 }
 
 @media all and (min-width: 768px) {
-  .my-product-import{
+  .my-product-import {
     padding: 0 50px;
     color: #333333;
   }
@@ -263,5 +227,36 @@ select {
   .product-import-btn {
     display: block;
   }
+}
+
+#productForm input, #productForm textarea {
+  padding: 10px;
+}
+
+.product-webSite {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #dee1e0;
+}
+
+.product-description {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #dee1e0;
+}
+
+.product-import-name {
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #dee1e0;
+}
+
+.mat-select-placeholder .ng-trigger .ng-trigger-transformPlaceholder {
+  color: #000;
 }
 

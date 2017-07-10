@@ -342,10 +342,21 @@ textarea::-webkit-scrollbar-thumb
 .outer-nav .ysl-sidebar-nav{
   justify-content: center;
 }
-.inner-nav .ysl-sidebar-nav{
-  border-bottom: 1px solid #39baf6;
-  padding: 0 50px;
+
+@media screen and (min-width: 450px) {
+  .inner-nav .ysl-sidebar-nav{
+    border-bottom: 1px solid #39baf6;
+    padding: 0;
+  }
 }
+
+@media screen and (min-width: 768px) {
+  .inner-nav .ysl-sidebar-nav{
+    border-bottom: 1px solid #39baf6;
+    padding: 0 50px;
+  }
+}
+
 .ysl-sidebar-item{
   text-align: center;
   height: 45px;

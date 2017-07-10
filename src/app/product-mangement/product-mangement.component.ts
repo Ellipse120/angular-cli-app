@@ -9,7 +9,7 @@ import {CookieService} from "ngx-cookie";
 export class ProductMangementComponent implements OnInit {
 
   proMangeTag = [
-    {text: '产品管理',children: [
+    {text: '产品',children: [
       {text: '产品列表', path: 'productlist'},
       {text: '纠错处理', path: 'error'}
     ]}
