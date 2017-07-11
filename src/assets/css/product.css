@@ -36,20 +36,11 @@
   .product-list {
     margin: 0 10px;
   }
-
-  .selected-filter-list {
-    margin: 0 10px;
-  }
-
 }
 
 @media screen and (min-width: 768px){
   .product-list {
     margin: 0 45px;
-  }
-
-  .selected-filter-list {
-    margin: 20px -15px 10px -15px;
   }
 }
 
@@ -171,4 +162,16 @@
   background-color: black;
 }
 
+.select1 .mat-select-trigger{
+  color: #333333;
+  font-size: 14px;
+}
+
+.select1 .mat-select-arrow {
+  color: #333;
+}
+
+.select1 .mat-select-underline {
+  background-color: #dee1e0;
+}
 

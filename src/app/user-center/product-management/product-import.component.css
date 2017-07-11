@@ -61,7 +61,7 @@
   display: -webkit-flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 30px 30px;
+  padding: 20px 30px 30px 30px;
 }
 
 .ysl-form-control {
@@ -178,7 +178,7 @@ select {
 }
 
 .product-import-item {
-  padding: 0px 30px;
+  padding: 10px 30px;
 }
 
 .product-import-item2 {

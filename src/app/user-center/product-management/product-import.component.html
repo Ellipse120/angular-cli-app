@@ -3,54 +3,54 @@
     <div class="product-import-info">
       <p class="product-info">产品信息</p>
 
-      <div class="product-import-item" style="padding-top: 20px;">
+      <div class="product-import-item" style="padding-top: 20px;position: relative;">
         <input type="text" maxlength="32" required
                [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
                class="product-import-name"
                placeholder="名称" style="padding-right: 40px;">
         <md-error *ngIf="!name.validity.patternMismatch === false">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
-        <div align="end" style="color: #a5aaad;margin-top: 2px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
+        <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
       </div>
 
-      <div class="product-import-item">
+      <div class="product-import-item" style="position: relative;padding-bottom: 4px;">
         <textarea class="product-description" name="description" rows="3"
                   maxlength="512" id="description"
                   [(ngModel)]="product.description"name="description" #description placeholder="简介"></textarea>
-        <div align="end" style="color: #a5aaad;margin-top: -2px;">{{description.value.length}}&nbsp;/&nbsp;512</div>
+        <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{description.value.length}}&nbsp;/&nbsp;512</div>
       </div>
 
-      <div class="product-import-item">
+      <div class="product-import-item" style="position: relative;">
         <span><input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite"
                #webSite placeholder="官网" maxlength="256"></span>
-        <div align="end" style="color: #a5aaad;margin-top: 2px;bottom: 15px;">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
+        <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
       </div>
 
       <div>
         <div>
           <div class="select-flex">
             <md-select placeholder="数据来源" [(ngModel)]="product.dataSource"
-                       name="dataSource">
+                       name="dataSource" class="select1">
               <md-option *ngFor="let dataSource of dataSources" [value]="dataSource.value">
                 {{dataSource.viewValue}}
               </md-option>
             </md-select>
 
             <md-select placeholder="数据类型" [(ngModel)]="product.dataCategory"
-                       name="dataCategory">
+                       name="dataCategory" class="select1">
               <md-option *ngFor="let dataCategory of dataCategories" [value]="dataCategory.value">
                 {{dataCategory.viewValue}}
               </md-option>
             </md-select>
 
             <md-select placeholder="采集方式" [(ngModel)]="product.collectionMethod"
-                       name="collectionMethod">
+                       name="collectionMethod" class="select1">
               <md-option *ngFor="let dataCollection of dataCollections" [value]="dataCollection.value">
                 {{dataCollection.viewValue}}
               </md-option>
             </md-select>
 
             <md-select placeholder="服务方式" [(ngModel)]="product.serviceMethod"
-                       name="serviceMethod">
+                       name="serviceMethod" class="select1">
               <md-option *ngFor="let dataService of dataServices" [value]="dataService.value">
                 {{dataService.viewValue}}
               </md-option>

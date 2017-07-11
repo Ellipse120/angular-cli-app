@@ -30,7 +30,7 @@ export class UserCenterComponent implements OnInit {
     {text: '评论', path: 'comment'},
     {text: '收藏', path: 'likes'},
     {text: '赞', path: 'favorite'},
-    {text: '个人资料', path: 'userInfo'}
+    {text: '个人', path: 'userInfo'}
   ];
   public uploader:FileUploader = new FileUploader({url: ''});
   public hasBaseDropZoneOver:boolean = false;
