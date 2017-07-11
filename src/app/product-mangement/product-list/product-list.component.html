@@ -106,8 +106,8 @@
         <ngx-datatable-column [canAutoResize]="true" [width]="60" name="更新时间" prop="modifiedOn"></ngx-datatable-column>
         <ngx-datatable-column [canAutoResize]="true" name="操作" prop="option" [width]="90">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <img style="width: 15px; height: 15px" (click)="openOrClose(row.$$index)"
-                 [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' " alt="">&nbsp;
+            <img style="width: 15px; height: 15px" (click)="openOrClose(row)"
+                 [src]=" isOn[row.$$index] ? './assets/images/on.png' : './assets/images/off.png' "  [title]="isOn[row.$$index] ? '启用':'禁用'">&nbsp;
             <label href="javascript:;" class="upload-file">上传<input type="file"></label>
             <!--<a href="javascript:;" style="text-decoration: none;" class="color-orange" (click)="viewInfo(row)">&nbsp;修改 </a>-->
             <a href="javascript:;" style="text-decoration: none;margin-right: 10px" class="color-orange"

@@ -107,9 +107,9 @@ export class ProductListComponent implements OnInit {
   }
 
   // 启用或禁用
-  openOrClose(i) {
-    this.isOn[i] = !this.isOn[i];
-  }
+  // openOrClose(i) {
+  //   this.isOn[i] = !this.isOn[i];
+  // }
 
   // 编辑产品
   editProduct(info) {

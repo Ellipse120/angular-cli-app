@@ -146,8 +146,14 @@ export class ProductListComponent implements OnInit {
   }
 
   // 启用或禁用
-  openOrClose(i) {
-    this.isOn[i] = !this.isOn[i];
+  openOrClose(row) {
+    this.isOn[row.$$index] = !this.isOn[row.$$index];
+
+    this.productListService.doChangeStatus(row.productId, this.isOn[row.$$index] ? '2' : '3')
+      .then(res => {
+        // console.log(res);
+      });
+
   }
 
   // 录入产品
