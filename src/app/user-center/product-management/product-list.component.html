@@ -109,9 +109,9 @@
         <!--<md-option *ngFor="let item of modifiedDates" [value]="item.value">{{item.viewValue}}</md-option>-->
         <!--</md-select>-->
         <!--<div class="col-xs-12 col-sm-6 col-md-12  col-lg-3" style="padding-left: 0;padding-right: 0;">-->
-        <div style="position: fixed;bottom: 70px;right: 5px;background-color: #dee1e0">
-          <a class="btn text-right" style="background-color: #39baf6;border-radius: 5px;color: #fff;"
-             (click)="importProductNew($event)"><i class="fa fa-edit"></i>
+        <div class="product-import-my-btn">
+          <a class="btn product-import-my-a" style=""
+             (click)="importProductNew($event)"><i class="fa fa-plus"></i><span class="import-product-text">&nbsp;录入产品</span>
           </a>
         </div>
         <!--<div style="float:right;width:50%;">-->
@@ -126,8 +126,7 @@
       <div>
         <ul class="list-group">
           <li *ngFor="let item of dataItems | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"
-              class="list-group-item row product-list-ul"
-              style="background-color: #f6faf9;border: none; margin-bottom: 10px;">
+              class="list-group-item row product-list-ul">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 product-list-name"
                  style="font-size: 14px;padding-top: 3.5px;"><span
               (click)="doViewProductDetail(item)">{{item.name}}</span></div>
