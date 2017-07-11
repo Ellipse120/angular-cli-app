@@ -34,7 +34,7 @@
 
 .product-import-my-btn {
   float: right;
-  margin: 5px;
+  margin: 10px 0;
 }
 
 .product-import-my-a {
@@ -217,4 +217,7 @@
   background-color: #dee1e0;
 }
 
+.ngx-pagination .current {
+  margin-bottom: 30px;
+}
 
