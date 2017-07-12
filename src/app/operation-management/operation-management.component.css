@@ -106,5 +106,88 @@
 
 /*查看用户信息弹框*/
 
+/* new start */
+.user-center{
+  background-color: #f7f7f7;
+  padding-bottom: 60px;
+}
+.user-center-bg{
+  height: 200px;
+  background: url(../../assets/images/user-center-bg.jpg) no-repeat left top/cover;
+}
+.user-nav{
+  margin-bottom: 40px;
+}
+.user-des .fa-edit{
+  cursor: pointer;
+}
+.user-center-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -69px auto 40px;
+}
+.user-center-info .profile-picture{
+  display: inline-block;
+  height: 138px;
+  width: 138px;
+  border-radius: 100%;
+  background-color: #fff;
+  border: 3px solid #fff;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.user-center-info .profile-picture [type=file]{
+  width: 106%;
+  height: 106%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 0;
+  cursor: pointer;
+}
+.user-center-info .profile-picture img{
+  width: 130%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.user-center-info .des{
+  margin-top: 5px;
+}
+.user-center-info .un-editable{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-center-info .editable{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-center-info .editable textarea{
+  width: 300px;
+  padding: 0 5px;
+}
+.user-center-info .editable .ng-invalid{
+  border-color: #ec7c45;
+}
+.user-center-info .editable .ysl-btn{
+  background-color: #ec7c45;
+  color: #fff;
+  margin-top: 5px;
+}
+.user-center-info .fa-edit{
+  display: block;
+  font-size: 18px;
+  margin-bottom: -3px;
+  margin-left: 5px;
+}
+
+/* new end */
 
 

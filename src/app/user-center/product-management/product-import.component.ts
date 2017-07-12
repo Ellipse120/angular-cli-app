@@ -40,6 +40,7 @@ export class ProductImportComponent implements OnInit {
   dataCategories = [];
   dataCollections = [];
   dataServices = [];
+  isDisableRipple = true;
 
   radioItems = [
     {value: true, viewValue: '是'},

@@ -36,6 +36,7 @@ export class ProductListComponent implements OnInit {
   };
   isFinished = true;
   userInfo: any;
+  userGenre: any;
   pagingOption: any = {
     userId: 0,
     limit: 10,
@@ -83,7 +84,7 @@ export class ProductListComponent implements OnInit {
               private route: ActivatedRoute) {
 
     this.userInfo = this.cookie.getObject('yslUserInfo');
-
+    this.userGenre = this.cookie.getObject('userType');
     this.getProducts();
 
   }

@@ -63,7 +63,7 @@
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
       <div class="product-import-item2" style="padding: 0px 30px 10px 30px;">
-        <input id="upload" type="file">
+        <input id="upload" type="file" name="upload">
         <label for="upload">
           <span> 上传文件&hellip;</span>
         </label>
@@ -74,7 +74,7 @@
       <p class="product-info">是否收费</p>
       <div class="product-import-item2">
         <md-radio-group [(ngModel)]="product.premium" name="premium">
-          <md-radio-button *ngFor="let item of radioItems" [value]="item.value">
+          <md-radio-button *ngFor="let item of radioItems" [value]="item.value" [disableRipple]="isDisableRipple">
             <span class="product-import-checkbox">{{item.viewValue}}&nbsp;&nbsp;</span>
           </md-radio-button>
         </md-radio-group>
@@ -99,24 +99,43 @@
     <div class="product-import-info">
       <p class="product-info">标签分类</p>
       <div class="product-import-item2">
-        <div class="ysl-import-tag">
-          <ul class="tagDimensions">
-            <li *ngFor="let item of tagDimensionsNew;let i=index">
-              <button type="button" class="ysl-btn btn-none" style="outline: none;" [class.isActive]="isActive === i"
-                      (click)="changeTab(i)">
-                {{item.name}}
-              </button>
-              <ul class="secondTagDimensions" *ngIf="isActive == i">
-                <li *ngFor="let itemc of item.items" class="second-nav">
-                  <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
-                         (click)="proTagImport(itemc.id)">
-                  <label style="font-weight: initial;" [for]="[itemc.id]">{{itemc.name}}</label>
-                </li>
-              </ul>
+
+        <!-- old UI -->
+        <!--<div class="ysl-import-tag">-->
+          <!--<ul class="tagDimensions">-->
+            <!--<li *ngFor="let item of tagDimensionsNew;let i=index">-->
+              <!--<button type="button" class="ysl-btn btn-none" style="outline: none;" [class.isActive]="isActive === i"-->
+                      <!--(click)="changeTab(i)">-->
+                <!--{{item.name}}-->
+              <!--</button>-->
+              <!--<ul class="secondTagDimensions" *ngIf="isActive == i">-->
+                <!--<li *ngFor="let itemc of item.items" class="second-nav">-->
+                  <!--<input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"-->
+                         <!--(click)="proTagImport(itemc.id)">-->
+                  <!--<label style="font-weight: initial;" [for]="[itemc.id]">{{itemc.name}}</label>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+
+        <!-- new UI -->
+      <md-tab-group class="" [disableRipple]="isDisableRipple">
+        <md-tab label="{{item.name}}" *ngFor="let item of tagDimensionsNew;">
+          <ul class="" style="background-color: #fff">
+            <li *ngFor="let itemc of item.items;let i=index" style="float: left;margin:10px 10px 0px 0px;">
+              <!--<input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"-->
+                     <!--(click)="proTagImport(itemc.id)">-->
+              <label style="font-weight: initial;color:#666666;" [for]="[itemc.id]"><input style="vertical-align: middle;margin:0;" type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
+                                                                             (click)="proTagImport(itemc.id)">&nbsp;{{itemc.name}}</label>
             </li>
           </ul>
-        </div>
+        </md-tab>
+      </md-tab-group>
+
       </div>
+
     </div>
 
     <div style="padding: 20px 0 30px 0;" class="product-import-btn">
