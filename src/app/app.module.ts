@@ -36,6 +36,8 @@ import {ServiceAgreementComponent} from "./statement/service-agreement.component
 import {YslPrivacyComponent} from "./statement/privacy.component";
 import {YslLoadingComponent} from "./core/loading/loading.component";
 import {SearchHistoryComponent} from "./search/search-input/search-history.component";
+import { VerifySuccessComponent } from './register/verify-success.component';
+import { VerifyFailureComponent } from './register/verify-failure.component';
 
 
 let ueditorPath = {
@@ -62,7 +64,9 @@ let ueditorPath = {
     YslPopupDirective,
     SearchAdvancedComponent,
     SearchHistoryComponent,
-    ProductErrataComponent
+    ProductErrataComponent,
+    VerifySuccessComponent,
+    VerifyFailureComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule,Routes,Router, ActivatedRoute} from '@angular/router';
+import {RouterModule, Routes, Router, ActivatedRoute} from '@angular/router';
 
 
 import {IndexComponent} from './search/index/index.component';
@@ -9,20 +9,24 @@ import {RegisterComponent} from './register/register.component';
 import {ProductRoutingModule} from './product-mangement/product-routing.module';
 import {OperationRoutingModule} from './operation-management/operation-routing.module';
 import construct = Reflect.construct;
-import {YslPrivacyComponent} from "./statement/privacy.component";
-import {ServiceAgreementComponent} from "./statement/service-agreement.component";
-import {UserCenterRoutingModule} from "./user-center/user-center-routing.module";
+import {YslPrivacyComponent} from './statement/privacy.component';
+import {ServiceAgreementComponent} from './statement/service-agreement.component';
+import {UserCenterRoutingModule} from './user-center/user-center-routing.module';
+import {VerifySuccessComponent} from './register/verify-success.component';
+import {VerifyFailureComponent} from './register/verify-failure.component';
 
 // 定义普通路由
-const appRouters:Routes = [
+const appRouters: Routes = [
   // 重定向路由
   {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'index', component: IndexComponent},
   {path: 'datalist', component: DatalistComponent},
   {path: 'datadetail', component: DataDetailComponent},
-  {path: 'register',component: RegisterComponent},
-  {path: 'privacy',component: YslPrivacyComponent},
-  {path: 'service',component: ServiceAgreementComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'verify-success', component: VerifySuccessComponent},
+  {path: 'verify-failure', component: VerifyFailureComponent},
+  {path: 'privacy', component: YslPrivacyComponent},
+  {path: 'service', component: ServiceAgreementComponent},
   {path: '**', component: IndexComponent}
 ];
 
