@@ -1,35 +1,60 @@
 import { NgModule } from '@angular/core';
 import { RouterModule , Routes } from '@angular/router';
 
-
 import {OperationManagementComponent} from './operation-management.component';
 import {UserManagementComponent} from './user-management/user-management.component';
 import {ProductListComponent} from "../product-mangement/product-list/product-list.component";
 import {ErrorCorrectComponent} from "../product-mangement/error-correct/error-correct.component";
+import {ProductManagementComponent} from "../user-center/product-management/product-management.component";
 
 
-const operationChildRouters:Routes = [
+const operationProductChildRouters:Routes = [
   {
-    path: 'userManage',
-    component: UserManagementComponent
+    path: 'list',
+    component: ProductListComponent
   },
   {
-    path: 'productlist',
-    component: ProductListComponent
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full'
   },
   {
     path: 'error',
     component: ErrorCorrectComponent
   },
-  //{path: 'productList'}
   {
     path: '**', redirectTo: 'userManage'
   }
 ];
 
+const operationChildRouters = [
+  {
+    path: 'userManage',
+    component: UserManagementComponent
+  },
+  {
+    path: 'productManagement',
+    component: ProductManagementComponent,
+    children: operationProductChildRouters
+  },
+  {
+    path:'',
+    redirectTo: 'productManagement',
+    pathMatch: 'full'
+  },
+  {
+   path: '**',
+    redirectTo: 'productManagement'
+  }
+];
+
 const operationRouters = [
-  {path: 'operation',component: OperationManagementComponent, children: operationChildRouters}
-]
+  {
+    path: 'operation',
+    component: OperationManagementComponent,
+    children: operationChildRouters
+  }
+];
 
 @NgModule({
   imports: [

@@ -1,19 +1,48 @@
-<div class="operate-manage">
-  <div class="manage-left">
-    <img src="./assets/images/userpic.png"><br>
-    <span></span>
-    <ysl-sidebar [ysl-sides]="operateTag"></ysl-sidebar>
-    <!--<ul class="operate-menu">-->
-      <!--<li *ngFor="let item of operateTag;let i = index" [routerLink]="[item.path]" class="menu-item" routerLinkActive="active">-->
-        <!--{{item.text}} <img class="user-arrow" [src]="currSideIndex==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">-->
-        <!--<ul class="operate-second-menu" *ngIf="(currSideIndex == i) && item.children">-->
-          <!--<li *ngFor="let itemc of item.children; let ind = index;" [class.bg-lightblue]="currSideChild == ind" (click)="$event.stopPropagation();" [routerLink]="[itemc.path]">{{itemc.text}}</li>-->
-        <!--</ul>-->
-      <!--</li>-->
-    <!--</ul>-->
+<div class="user-center">
+  <div class="user-center-bg"></div>
+  <div class="user-center-info container">
+    <span class="profile-picture">
+      <img src="../../assets/images/person.png">
+      <!--<input type="file" ng2FileSelect [uploader]="uploader" multiple accept="image/*" (change)="selectedFileOnChanged($event)">-->
+    </span>
+    <div class="user-des">
+      <p class="user-name font24 text-center">{{userInfo?.userName}}</p>
+      <div class="des">
+        <p class="font16 text-color-middle un-editable" *ngIf="!isEditable">{{userInfo?.selfIntroduction}}<i class="fa fa-edit color-blue"></i></p>
+        <form class="editable" *ngIf="isEditable" novalidate>
+          <textarea type="text" maxlength="100"></textarea>
+          <button class="ysl-btn ysl-btn-xs">发布签名</button>
+        </form>
+      </div>
+    </div>
   </div>
-
-  <div class="manage-right">
+  <div class="user-nav container outer-nav"><ysl-sidebar [ysl-sides]="operateTag"></ysl-sidebar></div>
+  <div class="user-cont container">
     <router-outlet></router-outlet>
   </div>
 </div>
+
+
+
+<!-- old start -->
+<!--<div class="operate-manage">-->
+  <!--<div class="manage-left">-->
+    <!--<img src="./assets/images/userpic.png"><br>-->
+    <!--<span></span>-->
+    <!--<ysl-sidebar [ysl-sides]="operateTag"></ysl-sidebar>-->
+    <!--&lt;!&ndash;<ul class="operate-menu">&ndash;&gt;-->
+      <!--&lt;!&ndash;<li *ngFor="let item of operateTag;let i = index" [routerLink]="[item.path]" class="menu-item" routerLinkActive="active">&ndash;&gt;-->
+        <!--&lt;!&ndash;{{item.text}} <img class="user-arrow" [src]="currSideIndex==i ? './assets/images/arrow.png' : './assets/images/arrow2.png'">&ndash;&gt;-->
+        <!--&lt;!&ndash;<ul class="operate-second-menu" *ngIf="(currSideIndex == i) && item.children">&ndash;&gt;-->
+          <!--&lt;!&ndash;<li *ngFor="let itemc of item.children; let ind = index;" [class.bg-lightblue]="currSideChild == ind" (click)="$event.stopPropagation();" [routerLink]="[itemc.path]">{{itemc.text}}</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+      <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+  <!--</div>-->
+
+  <!--<div class="manage-right">-->
+    <!--<router-outlet></router-outlet>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!-- old end -->

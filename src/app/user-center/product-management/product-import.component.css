@@ -222,6 +222,10 @@ select {
     flex-direction: row;
     justify-content: center;
   }
+
+  .mat-tab-label {
+    min-width: 100px !important;
+  }
 }
 
 @media all and (min-width: 322px) and (max-width: 450px) {
