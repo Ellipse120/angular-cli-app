@@ -7,8 +7,8 @@
         <input type="text" maxlength="32" required
                [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
                class="product-import-name"
-               placeholder="名称" style="padding-right: 40px;">
-        <md-error *ngIf="!name.validity.patternMismatch === false">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
+               placeholder="名称*" style="padding-right: 40px;">
+        <md-error *ngIf="(name.validity.patternMismatch)">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
         <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
       </div>
 
@@ -83,14 +83,14 @@
 
     <div class="product-import-info">
       <p class="product-info">时间范围</p>
-      <div class="product-import-item2" style="padding: 20px 30px;">
+      <div class="product-import-item2 product-import-date">
         <span style="display: inline-block;">
-          <my-date-picker class="calendar" name="timeFrom" [options]="myDatePickerOptions"
+          <my-date-picker class="calendar" style="width: 130px;" name="timeFrom" [options]="myDatePickerOptions"
                           [(ngModel)]="timeFrom" (dateChanged)="onDateFromChanged($event)"></my-date-picker>
         </span>
         <span style="display: inline-block;top: -15px;position: relative;">&nbsp; &minus; &nbsp;</span>
         <span style="display: inline-block;">
-        <my-date-picker class="calendar" name="timeTo" [options]="myDatePickerOptions"
+        <my-date-picker class="calendar" style="width: 130px;" name="timeTo" [options]="myDatePickerOptions"
                         [(ngModel)]="timeTo" (dateChanged)="onDateToChanged($event)"></my-date-picker>
         </span>
       </div>
@@ -110,7 +110,7 @@
                 <li *ngFor="let itemc of item.items" class="second-nav">
                   <input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
                          (click)="proTagImport(itemc.id)">
-                  <label [for]="[itemc.id]">{{itemc.name}}</label>
+                  <label style="font-weight: initial;" [for]="[itemc.id]">{{itemc.name}}</label>
                 </li>
               </ul>
             </li>
@@ -119,7 +119,7 @@
       </div>
     </div>
 
-    <div style="padding: 40px 0 0 0;" class="product-import-btn">
+    <div style="padding: 20px 0 30px 0;" class="product-import-btn">
       <button type="submit" class="btn btn-info" style="background-color: #39baf6;margin-right: 10px;"
               [disabled]="!productForm.form.valid">保存
       </button>

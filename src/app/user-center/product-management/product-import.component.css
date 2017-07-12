@@ -142,7 +142,6 @@ select {
   color: #676767;
   left: 0;
   top: 8px;
-  border: none;
   background-color: #fff;
   border: 1px solid #d8e5e7;
   border-top:none;
@@ -205,9 +204,27 @@ select {
   top: -3px;
   position: relative;
   margin-right: 40px;
+  font-weight: normal;
 }
 
-@media all and (min-width: 350px) {
+@media all and (max-width: 321px){
+  .product-import-date {
+    padding: 20px 16px;
+    white-space: nowrap;
+  }
+
+  .product-import-date {
+    padding: 20px 16px;
+  }
+
+  .product-import-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media all and (min-width: 322px) and (max-width: 450px) {
   .my-product-import {
     padding: 0;
     color: #333333;
@@ -217,6 +234,10 @@ select {
     display: flex;
     flex-direction: row;
     justify-content: center;
+  }
+
+  .product-import-date {
+    padding: 20px 30px;
   }
 }
 

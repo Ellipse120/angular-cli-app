@@ -185,6 +185,7 @@
   font-size: 12px;
   cursor: pointer;
   float: right;
+  width: 40px;
 }
 
 .product-list-name {
@@ -202,6 +203,10 @@
 
 .mat-radio-inner-circle {
   background-color: black;
+}
+
+.select1 {
+  padding-bottom: 20px;
 }
 
 .select1 .mat-select-trigger {

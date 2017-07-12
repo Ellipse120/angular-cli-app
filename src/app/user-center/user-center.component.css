@@ -2,10 +2,48 @@
   background-color: #f7f7f7;
   padding-bottom: 60px;
 }
-.user-center-bg{
-  height: 200px;
-  background: url(../../assets/images/user-center-bg.jpg) no-repeat left top/cover;
+
+@media all and (min-width: 300px){
+  .user-center-bg {
+    height: 120px;
+    background: url(../../assets/images/userCenterBackgroundPic.png) no-repeat left top/cover;
+  }
+
+  .profile-picture {
+    display: inline-block;
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    background-color: #fff;
+    border: 3px solid #fff;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
 }
+
+@media all and (min-width: 768px){
+  .user-center-bg{
+    height: 200px;
+    background: url(../../assets/images/userCenterBackgroundPic.png) no-repeat top/cover;
+  }
+
+  .profile-picture {
+    display: inline-block;
+    height: 138px;
+    width: 138px;
+    border-radius: 100%;
+    background-color: #fff;
+    border: 3px solid #fff;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+}
+
 .user-nav{
   margin-bottom: 40px;
 }
@@ -18,18 +56,18 @@
   align-items: center;
   margin: -69px auto 40px;
 }
-.user-center-info .profile-picture{
-  display: inline-block;
-  height: 138px;
-  width: 138px;
-  border-radius: 100%;
-  background-color: #fff;
-  border: 3px solid #fff;
-  margin: 0 auto 20px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-}
+/*.user-center-info .profile-picture{*/
+  /*display: inline-block;*/
+  /*height: 138px;*/
+  /*width: 138px;*/
+  /*border-radius: 100%;*/
+  /*background-color: #fff;*/
+  /*border: 3px solid #fff;*/
+  /*margin: 0 auto 20px;*/
+  /*overflow: hidden;*/
+  /*position: relative;*/
+  /*cursor: pointer;*/
+/*}*/
 .user-center-info .profile-picture [type=file]{
   width: 106%;
   height: 106%;
@@ -68,7 +106,8 @@
   border-color: #ec7c45;
 }
 .user-center-info .editable .ysl-btn{
-  background-color: #ec7c45;
+  /*background-color: #ec7c45;*/
+  background-color: #39baf6;
   color: #fff;
   margin-top: 5px;
 }
