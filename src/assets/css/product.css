@@ -231,3 +231,38 @@
   margin: 20px;
   height: 40px;
 }
+
+.mat-tab-label {
+  color: black;
+}
+
+.product-import-item2 .mat-tab-label-container {
+  overflow: scroll;
+}
+
+.product-import-item2 .mat-tab-label-container::-webkit-scrollbar, .mat-tab-labels::-webkit-scrollbar {
+  color: transparent;
+}
+
+
+.product-import-item2 .mat-tab-label {
+  min-width: 110px !important;
+}
+
+.product-import-item2 .mat-tab-label-active {
+  color: #1c94c4;
+}
+
+.product-import-item2 .mat-tab-header-pagination {
+  height: 48px;
+}
+
+.product-import-item2 .mat-elevation-z4 {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.product-import-item2 .mat-ink-bar {
+  background-color: #f5f8f7;
+}

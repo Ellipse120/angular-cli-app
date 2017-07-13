@@ -123,11 +123,9 @@
         <!-- new UI -->
       <md-tab-group class="" [disableRipple]="isDisableRipple">
         <md-tab label="{{item.name}}" *ngFor="let item of tagDimensionsNew;">
-          <ul class="" style="background-color: #fff">
+          <ul class="" style="background-color: #fff;">
             <li *ngFor="let itemc of item.items;let i=index" style="float: left;margin:10px 10px 0px 0px;">
-              <!--<input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"-->
-                     <!--(click)="proTagImport(itemc.id)">-->
-              <label style="font-weight: initial;color:#666666;" [for]="[itemc.id]"><input style="vertical-align: middle;margin:0;" type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
+              <label style="font-weight: initial;color:#999999;" [for]="[itemc.id]"><input style="vertical-align: middle;margin:0;" type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
                                                                              (click)="proTagImport(itemc.id)">&nbsp;{{itemc.name}}</label>
             </li>
           </ul>
@@ -139,10 +137,10 @@
     </div>
 
     <div style="padding: 20px 0 30px 0;" class="product-import-btn">
-      <button type="submit" class="btn btn-info" style="background-color: #39baf6;margin-right: 10px;"
+      <button type="submit" class="btn btn-info" style="background-color: #39baf6;border-color:#39baf6;margin-right: 10px;"
               [disabled]="!productForm.form.valid">保存
       </button>
-      <button class="btn btn-default" (click)="goBackList()">返回</button>
+      <button class="btn btn-default" (click)="goBackList()" style="color: #666666;">取消</button>
     </div>
 
   </form>
