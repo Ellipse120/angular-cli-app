@@ -1,20 +1,25 @@
-<div class="user-base-info inner-cont">
+<div class="user-base-info inner-cont" style="padding: 10px 0">
   <!--<div class="login-history">-->
     <!--<span>上次登录时间：{{viewInfo?.lastLogonTime}}</span>-->
   <!--</div>-->
-  <div class="user-edit">
-    <form [formGroup]="editForm" class="user-info-list">
-      <div class="info-item row">
-        <span class="user-tag col-xs-3">账号</span>
-        <p class="col-xs-9"><span>{{viewInfo?.loginId}}</span></p>
+  <div class="">
+    <form [formGroup]="editForm" class="">
+      <div class="row" style="padding: 10px 0;">
+      <!--<div class="row" style="background-color: #F5F8F7;padding: 10px 0;">-->
+        <span class=" col-xs-4" style="text-align: right;">账号</span>
+        <span class="col-xs-5">{{viewInfo?.loginId}}</span>
+        <span class="col-xs-3">&nbsp;</span>
       </div>
-      <div class="info-item row" *ngFor="let i of userInfo">
-        <span class="user-tag col-xs-3">{{i.label}}</span>
-        <p class="col-xs-6"><input type="text" [formControlName]="i.formControlName" *ngIf="i.edit"><span *ngIf="!i.edit">{{i.model}}</span></p>
-        <div class="edit-wrapper col-xs-3">
-          <button class="ysl-btn edit-btn" *ngIf="!i.edit" (click)="ableEdit(i)">修改</button>
-          <button class="ysl-btn save-btn" *ngIf="i.edit" (click)="infoEditSubmit(i)">保存</button>
-        </div>
+      <div class="row" *ngFor="let i of userInfo" style="margin-top: 5px;padding: 10px 0;">
+        <span class="col-xs-4" style="text-align: right;">{{i.label}}</span>
+        <span class="col-xs-5">
+          <input type="text" [formControlName]="i.formControlName" *ngIf="i.edit">
+          <span *ngIf="!i.edit">{{i.model}}</span>
+        </span>
+        <span class="col-xs-3">
+          <a class="" *ngIf="!i.edit" (click)="ableEdit(i)">修改</a>
+          <a class="" *ngIf="i.edit" (click)="infoEditSubmit(i)">保存</a>
+        </span>
       </div>
     </form>
   </div>

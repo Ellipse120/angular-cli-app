@@ -128,6 +128,13 @@ export class organizationInfoComponent implements OnInit {
     this.isEditable = true;
   }
 
+  cancel() {
+    this.orgViewInfo.forEach(item => {
+      item['edit'] = false;
+    });
+    this.isEditable = false;
+  }
+
   createForm() {
     this.organizationForm = this.fb.group({
       name: ['', Validators.required],

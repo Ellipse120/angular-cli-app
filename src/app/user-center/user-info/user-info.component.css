@@ -125,8 +125,8 @@
 }
 .identify .input-group-addon{
   width: 116px;
-  height: 33px;
-  line-height: 33px;
+  height: 31px;
+  line-height: 31px;
   padding: 0;
 }
 .edit-form .ysl-error-tip{
@@ -150,3 +150,4 @@
     height: 68px;
   }
 }
+

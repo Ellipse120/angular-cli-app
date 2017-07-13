@@ -1,7 +1,9 @@
 <div class="organization-info inner-cont">
-  <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
+  <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a
+    routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
   <div class="before-verify" *ngIf="userInfo?.userType == '10'">
-    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization(1)" novalidate>
+    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization(1)"
+          novalidate>
       <div class="form-group">
         <label class="col-sm-3 col-xs-12">机构名称</label>
         <div class="col-sm-9 col-xs-12">
@@ -17,7 +19,8 @@
           <input type="text" class="form-control" placeholder="请输入您的真实姓名" formControlName="contactName">
         </div>
       </div>
-      <div class="form-group ysl-error-tip" *ngIf="orgFormError.contactName && organizationForm.controls['contactName'].invalid">
+      <div class="form-group ysl-error-tip"
+           *ngIf="orgFormError.contactName && organizationForm.controls['contactName'].invalid">
         <p class="col-sm-9 col-xs-12 col-sm-offset-3">{{orgFormError.contactName}}</p>
       </div>
       <div class="form-group">
@@ -26,7 +29,8 @@
           <input type="text" class="form-control" placeholder="请输入您的手机号" formControlName="contactPhone">
         </div>
       </div>
-      <div class="form-group ysl-error-tip" *ngIf="orgFormError.contactPhone && organizationForm.controls['contactPhone'].invalid">
+      <div class="form-group ysl-error-tip"
+           *ngIf="orgFormError.contactPhone && organizationForm.controls['contactPhone'].invalid">
         <p class="col-sm-9 col-xs-12 col-sm-offset-3">{{orgFormError.contactPhone}}</p>
       </div>
       <div class="form-group">
@@ -35,25 +39,39 @@
           <input type="text" class="form-control" placeholder="请输入公司官网URL" formControlName="webSite">
         </div>
       </div>
-      <div class="form-group ysl-error-tip" *ngIf="orgFormError.webSite && organizationForm.controls['webSite'].invalid">
+      <div class="form-group ysl-error-tip"
+           *ngIf="orgFormError.webSite && organizationForm.controls['webSite'].invalid">
         <p class="col-sm-9 col-xs-12 col-sm-offset-3">{{orgFormError.webSite}}</p>
       </div>
       <div class="form-group">
         <label class="sr-only"></label>
-        <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
+        <div class="col-sm-offset-3 col-sm-9 col-xs-12">
+          <button class="ysl-btn btn-ensure">确认</button>
+        </div>
       </div>
     </form>
   </div>
   <div class="after-verify" *ngIf="userInfo?.userType == '20'">
     <div class="user-edit">
       <form [formGroup]="organizationForm" class="user-info-list">
-        <div class="info-item row" *ngFor="let o of orgViewInfo">
-          <span class="user-tag col-xs-3">{{o.label}}</span>
-          <p class="col-xs-9"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text" [formControlName]="o.formControlName" *ngIf="o?.edit"></p>
+        <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
+        <div class="info-item row" *ngFor="let o of orgViewInfo"  style="padding: 0;margin-bottom: 5px;">
+          <span class="user-tag col-xs-5">{{o.label}}</span>
+          <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"
+                                                                              [formControlName]="o.formControlName"
+                                                                              *ngIf="o?.edit"></p>
         </div>
-        <div class="ysl-btn-group clearfix">
-          <button class="ysl-btn btn-ensure pull-right" *ngIf="!isEditable" (click)="editable()">修改</button>
-          <button class="ysl-btn btn-ensure pull-right" *ngIf="isEditable" (click)="submitOrganization(0)">保存</button>
+        <div class="ysl-btn-group row" style="margin:10px;">
+
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <button class="btn btn-info" style="background-color: #39baf6;float:right;" *ngIf="!isEditable" (click)="editable()">修改</button>
+            <button class="btn btn-info" style="background-color: #39baf6; float:right;" *ngIf="isEditable" (click)="submitOrganization(0)">保存</button>
+          </div>
+
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <button class="btn btn-default" style="background-color: #eee;float:left;" (click)="cancel()">取消</button>
+          </div>
+
         </div>
       </form>
     </div>

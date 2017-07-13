@@ -1,4 +1,4 @@
-<div class="modify-psd inner-cont">
+<div class="modify-psd inner-cont" style="padding: 30px 20px">
   <form class="form-horizontal edit-form" [formGroup]="modifyForm" (ngSubmit)="modifySubmit()" novalidate>
     <div class="form-group">
       <label class="col-sm-3 col-xs-12">原密码</label>
@@ -32,7 +32,7 @@
     </div>
     <div class="form-group">
       <label class="sr-only"></label>
-      <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="ysl-btn btn-ensure">确认</button></div>
+      <div class="col-sm-offset-3 col-sm-9 col-xs-12"><button class="btn btn-info" style="background-color: #39baf6">确认</button></div>
     </div>
     <!--<div><span>原密码</span> <input class="psd-input" type="password" placeholder="请输入您的原密码" [(ngModel)]="modify.old"></div>-->
     <!--<li><span>新密码</span> <input class="psd-input" type="password" placeholder="请输入您的新密码" [(ngModel)]="modify.new"></li>-->

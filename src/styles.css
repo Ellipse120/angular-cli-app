@@ -437,9 +437,8 @@ textarea::-webkit-scrollbar-thumb {
 
 @media (max-width: 375px) {
   .inner-nav .ysl-sidebar-item {
-    /*width: 100px;*/
-    /*padding: 0 15px;*/
-    /*padding: 0;*/
+    font-size: 16px;
+    padding:0 8px;
   }
 }
 
@@ -998,7 +997,7 @@ app-index .mat-ripple {
   }
 
   .user-center .inner-cont {
-    padding: 40px 20px;
+    padding: 20px 20px;
   }
 }
 
