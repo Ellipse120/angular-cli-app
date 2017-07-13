@@ -28,6 +28,7 @@ import { LikeListComponent } from './likes/like-list.component';
 import { ThumbsUpToMeComponent } from './thumbs-up/thumbs-up-to-me.component';
 import { ThumbsUpByMeComponent } from './thumbs-up/thumbs-up-by-me.component';
 import { CommentListByMeComponent } from './comment/comment-list-by-me.component';
+import {LikeService} from 'app/user-center/likes/service/like-service';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { CommentListByMeComponent } from './comment/comment-list-by-me.component
     FileUploadModule,
     NgxPaginationModule
   ],
-  providers: [YslHttpService]
+  providers: [YslHttpService, LikeService]
 })
 
 export class UserCenterModule {

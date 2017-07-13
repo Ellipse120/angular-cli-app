@@ -7,6 +7,6 @@ import {Component} from "@angular/core";
 export class ProductLikesComponent {
 
   userTag = [
-    {text: '收藏列表', path: 'likeList'}
+    {text: '收藏列表', path: 'list'}
   ];
 }

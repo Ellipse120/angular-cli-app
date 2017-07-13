@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comment-list-by-me.component.css']
 })
 export class CommentListByMeComponent implements OnInit {
-
+  comments = [];
   constructor() { }
 
   ngOnInit() {

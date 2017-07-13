@@ -226,3 +226,8 @@
   margin-bottom: 30px;
 }
 
+.list-empty {
+  text-align: center;
+  margin: 20px;
+  height: 40px;
+}
