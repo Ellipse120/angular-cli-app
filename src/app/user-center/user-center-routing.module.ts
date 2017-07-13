@@ -1,18 +1,23 @@
-import {NgModule} from "@angular/core";
-import {Routes, RouterModule} from "@angular/router";
-import {UserInfoComponent} from "./user-info/user-info.component";
-import {UserBaseInfoComponent} from "./user-info/user-base-info.component";
-import {NameCertifyComponent} from "./user-info/name-certify.component";
-import {PsdModifyComponent} from "./user-info/psd-modify.component";
-import {UserCenterComponent} from "./user-center.component";
-import {ThumbsUpComponent} from "./thumbs-up/thumbs-up.component";
-import {ProductCommentComponent} from "./comment/comment.component";
-import {ProductLikesComponent} from "./likes/likes.component";
-import {ProductManagementComponent} from "./product-management/product-management.component";
-import {ProductListComponent} from "./product-management/product-list.component";
-import {ProductErrataComponent} from "./product-management/product-errata.component";
-import {organizationInfoComponent} from "./user-info/organization-info.component";
-import {ProductImportComponent} from "./product-management/product-import.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {UserInfoComponent} from './user-info/user-info.component';
+import {UserBaseInfoComponent} from './user-info/user-base-info.component';
+import {NameCertifyComponent} from './user-info/name-certify.component';
+import {PsdModifyComponent} from './user-info/psd-modify.component';
+import {UserCenterComponent} from './user-center.component';
+import {ThumbsUpComponent} from './thumbs-up/thumbs-up.component';
+import {ProductCommentComponent} from './comment/comment.component';
+import {ProductLikesComponent} from './likes/likes.component';
+import {ProductManagementComponent} from './product-management/product-management.component';
+import {ProductListComponent} from './product-management/product-list.component';
+import {ProductErrataComponent} from './product-management/product-errata.component';
+import {organizationInfoComponent} from './user-info/organization-info.component';
+import {ProductImportComponent} from './product-management/product-import.component';
+import {CommentListComponent} from './comment/comment-list.component';
+import {LikeListComponent} from './likes/like-list.component';
+import {ThumbsUpByMeComponent} from './thumbs-up/thumbs-up-by-me.component';
+import {ThumbsUpToMeComponent} from './thumbs-up/thumbs-up-to-me.component';
+import {CommentListByMeComponent} from "./comment/comment-list-by-me.component";
 
 // 定义个人中心第三级路由
 // 产品管理
@@ -58,12 +63,12 @@ const userCenterChild: Routes = [
     component: PsdModifyComponent
   },
   {
-    path: '**',redirectTo: 'userBaseInfo'
+    path: '**', redirectTo: 'userBaseInfo'
   }
 ];
 
 // 定义用户中心管理嵌套路由二级
-const childUserCenterRoutes:Routes = [
+const childUserCenterRoutes: Routes = [
   // 重定向路由
   {
     path: 'productManagement',
@@ -73,17 +78,49 @@ const childUserCenterRoutes:Routes = [
   {
     path: 'comment',
     component: ProductCommentComponent,
-    children: userCenterChild
+    children: [
+      {
+        path: 'list',
+        component: CommentListComponent
+      },
+      {
+        path: 'list-by-me',
+        component: CommentListByMeComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'list'
+      }
+    ]
   },
   {
     path: 'favorite',
     component: ThumbsUpComponent,
-    children: userCenterChild
+    children: [{
+      path: 'by-me',
+      component: ThumbsUpByMeComponent
+    }, {
+      path: 'to-me',
+      component: ThumbsUpToMeComponent
+    }, {
+      path: '**',
+      redirectTo: 'to-me'
+    }
+    ]
   },
   {
     path: 'likes',
     component: ProductLikesComponent,
-    children: userCenterChild
+    children: [
+      {
+        path: 'list',
+        component: LikeListComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'list'
+      }
+    ]
   },
   {
     path: 'userInfo',
@@ -91,7 +128,8 @@ const childUserCenterRoutes:Routes = [
     children: userCenterChild
   },
   {
-    path: '**',redirectTo: 'userInfo'
+    path: '**',
+    redirectTo: 'userInfo'
   }
 ];
 

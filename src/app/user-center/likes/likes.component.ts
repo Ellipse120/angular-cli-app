@@ -7,8 +7,6 @@ import {Component} from "@angular/core";
 export class ProductLikesComponent {
 
   userTag = [
-    {text: '个人信息', path: 'userBaseInfo'},
-    {text: '修改密码', path: 'userPsdModify'},
-    {text: '手机绑定', path: 'userVerify'}
+    {text: '收藏列表', path: 'likeList'}
   ];
 }

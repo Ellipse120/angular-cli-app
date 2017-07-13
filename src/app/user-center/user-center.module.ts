@@ -23,6 +23,11 @@ import {MyDatePickerModule} from 'mydatepicker';
 import {FileUploadModule} from 'ng2-file-upload';
 import {ProductImportComponent} from './product-management/product-import.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { CommentListComponent } from './comment/comment-list.component';
+import { LikeListComponent } from './likes/like-list.component';
+import { ThumbsUpToMeComponent } from './thumbs-up/thumbs-up-to-me.component';
+import { ThumbsUpByMeComponent } from './thumbs-up/thumbs-up-by-me.component';
+import { CommentListByMeComponent } from './comment/comment-list-by-me.component';
 
 
 @NgModule({
@@ -39,7 +44,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ProductListComponent,
     ProductErrataComponent,
     organizationInfoComponent,
-    ProductImportComponent
+    ProductImportComponent,
+    CommentListComponent,
+    LikeListComponent,
+    ThumbsUpToMeComponent,
+    ThumbsUpByMeComponent,
+    CommentListByMeComponent
   ],
   imports: [
     BrowserModule,
