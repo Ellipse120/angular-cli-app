@@ -79,12 +79,15 @@
     -webkit-border-radius:50%;
     -moz-border-radius:50%;
     border-radius:50%;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
     padding:0;
-    font-size: 25px;
-    -webkit-text-stroke: 3px #39baf6;
+    font-size: 40px;
+    -webkit-text-stroke: 7px #39baf6;
+    -webkit-box-shadow: 1px 2px 5px #cccccc;
+    -moz-box-shadow: 1px 2px 5px #cccccc;
+    box-shadow: 1px 2px 5px #cccccc;
   }
 
   .import-product-text {
