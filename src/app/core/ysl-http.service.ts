@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise'
+import {reject} from "q";
 // import reject = Q.reject;
 
 // 此处的@Injectable是一个装饰器
@@ -208,7 +209,6 @@ export class YslHttpService {
   createProductFavor(option) {
     return new Promise((resolve, reject) => {
       let data = JSON.stringify(option.data);
-      console.log('api', data)
       this.http.post(this.url + 'api/product/' + option.productId + '/favor/' + option.status, data, {
         headers: new Headers({
           'Content-Type': 'application/json'
@@ -335,4 +335,31 @@ export class YslHttpService {
         .then(response => resolve(response.json()))
     })
   }
+
+  /*
+  * 我赞过的产品列表API
+  */
+  getThumbsUpByMe(option): Promise<any> {
+    return new Promise((resolve, reject)=> {
+      this.http.get(this.url + 'api/product/favor/list/'+ option.userId,{
+        params: option
+      })
+        .toPromise()
+        .then(res => resolve(res.json()))
+    });
+  }
+
+  /*
+  * 产品收到的赞列表API
+  */
+  getThumbsToMe(option): Promise<any> {
+    return new Promise((resolve, reject)=> {
+      this.http.get(this.url + 'api/product/favored/list/'+ option.userId,{
+        params: option
+      })
+        .toPromise()
+        .then(res => resolve(res.json()))
+    });
+  }
+
 }

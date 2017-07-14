@@ -20,7 +20,7 @@ import {ThumbsUpToMeComponent} from './thumbs-up/thumbs-up-to-me.component';
 import {CommentListByMeComponent} from "./comment/comment-list-by-me.component";
 
 // 定义个人中心第三级路由
-// 产品管理
+// 产品
 const productManageChild: Routes = [
   {
     path: 'list',
@@ -96,16 +96,24 @@ const childUserCenterRoutes: Routes = [
   {
     path: 'favorite',
     component: ThumbsUpComponent,
-    children: [{
-      path: 'by-me',
-      component: ThumbsUpByMeComponent
-    }, {
-      path: 'to-me',
-      component: ThumbsUpToMeComponent
-    }, {
-      path: '**',
-      redirectTo: 'to-me'
-    }
+    children: [
+      {
+        path: 'by-me',
+        component: ThumbsUpByMeComponent
+      },
+      {
+        path:'',
+        redirectTo: 'by-me',
+        pathMatch: 'full'
+      },
+      {
+        path: 'to-me',
+        component: ThumbsUpToMeComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'to-me'
+      }
     ]
   },
   {
@@ -150,4 +158,5 @@ const userCenterRoutes: Routes = [
   ]
 })
 
-export class UserCenterRoutingModule {}
+export class UserCenterRoutingModule {
+}

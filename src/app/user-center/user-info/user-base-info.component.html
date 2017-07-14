@@ -7,19 +7,19 @@
     <form [formGroup]="editForm">
       <div class="row" style="padding: 20px 0 15px 0px;">
       <!--<div class="row" style="background-color: #F5F8F7;padding: 10px 0;">-->
-        <span class=" col-xs-4" style="text-align: right;">账号</span>
-        <span class="col-xs-5">{{viewInfo?.loginId}}</span>
-        <span class="col-xs-3">&nbsp;</span>
+        <span class=" col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: right;">账号</span>
+        <span class="col-xs-5 col-sm-2 col-md-2 col-lg-2">{{viewInfo?.loginId}}</span>
+        <span class="col-xs-3 col-sm-4 col-md-4 col-lg-4">&nbsp;</span>
       </div>
       <div class="row" *ngFor="let i of userInfo" style="padding: 10px 0 15px 0;">
-        <span class="col-xs-4" style="text-align: right;">{{i.label}}</span>
-        <span class="col-xs-5">
+        <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: right;">{{i.label}}</span>
+        <span class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
           <input type="text" [formControlName]="i.formControlName" *ngIf="i.edit">
           <span *ngIf="!i.edit">{{i.model}}</span>
         </span>
-        <span class="col-xs-3">
-          <a class="" *ngIf="!i.edit" (click)="ableEdit(i)">修改</a>
-          <a class="" *ngIf="i.edit" (click)="infoEditSubmit(i)">保存</a>
+        <span class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+          <a style="color: #39bff6" *ngIf="!i.edit" (click)="ableEdit(i)">修改</a>
+          <a style="color: #39bff6" *ngIf="i.edit" (click)="infoEditSubmit(i)">保存</a>
         </span>
       </div>
     </form>
