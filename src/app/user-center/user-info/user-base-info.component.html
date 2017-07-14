@@ -1,16 +1,17 @@
-<div class="user-base-info inner-cont" style="padding: 10px 0">
+<div class="user-base-info inner-cont">
   <!--<div class="login-history">-->
     <!--<span>上次登录时间：{{viewInfo?.lastLogonTime}}</span>-->
   <!--</div>-->
-  <div class="">
-    <form [formGroup]="editForm" class="">
-      <div class="row" style="padding: 10px 0;">
+  <div style="margin-bottom: 20px;">
+  <div class="my-user-base-info">
+    <form [formGroup]="editForm">
+      <div class="row" style="padding: 20px 0 15px 0px;">
       <!--<div class="row" style="background-color: #F5F8F7;padding: 10px 0;">-->
         <span class=" col-xs-4" style="text-align: right;">账号</span>
         <span class="col-xs-5">{{viewInfo?.loginId}}</span>
         <span class="col-xs-3">&nbsp;</span>
       </div>
-      <div class="row" *ngFor="let i of userInfo" style="margin-top: 5px;padding: 10px 0;">
+      <div class="row" *ngFor="let i of userInfo" style="padding: 10px 0 15px 0;">
         <span class="col-xs-4" style="text-align: right;">{{i.label}}</span>
         <span class="col-xs-5">
           <input type="text" [formControlName]="i.formControlName" *ngIf="i.edit">
@@ -23,4 +24,7 @@
       </div>
     </form>
   </div>
+  </div>
+
+
 </div>
