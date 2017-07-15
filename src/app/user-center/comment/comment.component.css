@@ -57,3 +57,27 @@
 .list-group-item:last-of-type{
   margin-bottom: 0;
 }
+.comment-list-by-me .user-name{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment-list-by-me .remove-btn{
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 768px){
+  .comment{
+    padding: 0;
+  }
+  .list-group{
+    margin-top: 10px;
+  }
+  .score-summary{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .score-summary .score-text{
+    margin-left: 0;
+  }
+}

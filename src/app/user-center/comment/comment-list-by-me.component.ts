@@ -35,6 +35,7 @@ export class CommentListByMeComponent implements OnInit {
       });
   }
 
+  // 获取评论列表
   getCommentToMe() {
     if (!this.userId) { return };
     let options = {userId: this.userId, offset: this.pagination.offset, limit: this.pagination.limit};
@@ -43,11 +44,21 @@ export class CommentListByMeComponent implements OnInit {
         this.comments = res;
         this.comments['items'].forEach(item => {
           item.createdOn = this.commonService.getDateForDay(item.createdOn);
-          item.averageScore = ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4).toFixed(1);
+          item.averageScore = item.scoreOnTimeliness ? ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4).toFixed(1) : 0;
         });
       });
   }
 
+  // 删除评论
+  deleteMyComment(comment) {
+    console.log('评论', comment)
+    this.httpService.deleteMyComment(comment.id)
+      .then(res => {
+        console.log('删除评论', res);
+      })
+  }
+
+  // 下一页
   toNextPage(e) {
     this.pagination['offset'] = (e - 1) * (this.pagination['limit']);
     let navigationExtras: NavigationExtras = {

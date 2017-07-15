@@ -314,7 +314,7 @@ export class YslHttpService {
     });
   }
 
-  // 评论我的
+  // 个人中心/评论我的
   getCommentToMe(option): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/commented/' + option.userId, {params: option})
@@ -327,6 +327,15 @@ export class YslHttpService {
   getCommentByMe(option): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/comment/' + option.userId, {params: option})
+        .toPromise()
+        .then(response => resolve(response.json()));
+    });
+  }
+
+  // 个人中心/删除评价
+  deleteMyComment(commentId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.url + 'api/product/comment/' + commentId)
         .toPromise()
         .then(response => resolve(response.json()));
     });

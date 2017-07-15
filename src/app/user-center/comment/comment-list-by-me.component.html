@@ -5,8 +5,8 @@
       <li class="list-group-item" *ngFor="let c of comments['items']  | paginate: {itemsPerPage: pagination['limit'],
                                                       currentPage: currPage,
                                                       totalItems: comments.totalLength}">
-        <h4 class="user-name font16">{{c.userName}}</h4>
-        <p class="comment-cont mgb6 font16">{{c.remark}}</p>
+        <h4 class="user-name font16">{{c.userName}} <button class="btn remove-btn" (click)="deleteMyComment(c)">删除</button></h4>
+        <p class="comment-cont mgb6 font16"><span *ngIf="c.remark">{{c.remark}}</span><span *ngIf="!c.remark">该用户未写评语</span></p>
         <div class="score-summary" *ngIf="c.averageScore">
           <ul class="stars-list clearfix">
             <li *ngFor="let s of averageScore; let i = index;"><i class="fa" [class.fa-star-o]="(i+1)>c.averageScore" [class.fa-star]="((i+1) < c.averageScore) || ((i+1) == c.averageScore)" [class.fa-star-half-o]="(i+1)>c.averageScore && i < c.averageScore"></i></li>
@@ -21,5 +21,9 @@
                          autoHide="true"
                          previousLabel="上一页"
                          nextLabel="下一页"></pagination-controls>
+    <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="<"
+                         nextLabel=">"></pagination-controls>
   </div>
 </div>

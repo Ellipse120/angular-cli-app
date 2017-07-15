@@ -225,7 +225,9 @@ textarea::-webkit-scrollbar-thumb {
 .btn:focus, .btn:active {
   outline: none;
 }
-
+.btn:active:focus{
+  outline: none;
+}
 .disabled {
   cursor: not-allowed !important;
 }
@@ -596,7 +598,7 @@ footer {
 .ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after {
   display: none !important;
 }
-.comment-list .ngx-pagination{
+.comment .ngx-pagination{
   justify-content: flex-end;
 }
 

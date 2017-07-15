@@ -6,7 +6,7 @@
                                                       currentPage: currPage,
                                                       totalItems: comments.totalLength}">
         <h4 class="user-name font16">{{c.userName}}</h4>
-        <p class="comment-cont mgb6 font16">{{c.remark}}</p>
+        <p class="comment-cont mgb6 font16"><span *ngIf="c.remark">{{c.remark}}</span><span *ngIf="!c.remark">该用户未写评语</span></p>
         <p class="product-name">{{c.productName}}</p>
         <p>评论时间：{{c.createdOn}}</p>
       </li>
@@ -15,5 +15,9 @@
                          autoHide="true"
                          previousLabel="上一页"
                          nextLabel="下一页"></pagination-controls>
+    <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="<"
+                         nextLabel=">"></pagination-controls>
   </div>
 </div>
