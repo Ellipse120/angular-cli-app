@@ -18,19 +18,6 @@ export class YslHttpService {
    // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // REPLACE
 
-  // 用户信息
-  user = {
-    count: '123@qq.com',
-    username: 'wangming',
-    truename: '王明',
-    sex: '男',
-    birthday: '1996-3-14',
-    address: '上海',
-    phone: 1234254325,
-    job: 'web',
-    logintime: '2017.03.05'
-  };
-
   constructor(public http: Http) {
 
   }
@@ -41,8 +28,8 @@ export class YslHttpService {
     return new Promise(resolve => {
       this.http.get(this.url + 'api/operation/provision/summary')
         .toPromise()
-        .then(response => resolve(response.json()))
-    })
+        .then(response => resolve(response.json()));
+    });
   }
 
   // 获取标签
@@ -52,8 +39,8 @@ export class YslHttpService {
     return new Promise(resolve => {
       this.http.get(this.url + 'api/tag/dimension/hierarchy')
           .toPromise()
-          .then(response => resolve(response.json()))
-    })
+          .then(response => resolve(response.json()));
+    });
   }
 
   // 获得用户列表
@@ -61,8 +48,8 @@ export class YslHttpService {
     return new Promise(resolve => {
       this.http.get(this.dataListUrl + 'userList.json')
         .toPromise()
-        .then(response => resolve(response.json()))
-    })
+        .then(response => resolve(response.json()));
+    });
   }
 
   // 获得数据列表
@@ -70,7 +57,7 @@ export class YslHttpService {
     return new Promise(resolve => {
       this.http.get(this.dataListUrl + 'list.json')
         .toPromise()
-        .then(response =>resolve(response.json()))
+        .then(response => resolve(response.json()));
     });
   }
 
@@ -89,7 +76,7 @@ export class YslHttpService {
   // 获得纠错信息数据
   getError(callback) {
     const req = new XMLHttpRequest();
-    req.open('GET',`assets/data/error.json`);
+    req.open('GET','assets/data/error.json');
     req.onload = () => {
       callback(JSON.parse(req.response));
     }
@@ -101,10 +88,10 @@ export class YslHttpService {
     return new Promise(resolve => {
       this.http.get(this.dataListUrl + 'error.json')
       .toPromise()
-      .then(response => resolve(response.json()))
+      .then(response => resolve(response.json()));
     }
 
-    )
+    );
   }
 
   // 获得用户信息
@@ -118,7 +105,7 @@ export class YslHttpService {
       this.http.post(this.url + 'api/user/signup', {contactMail: mail, userType: 1, loginId: mail})
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
-    })
+    });
   }
 
   // 登录
@@ -132,7 +119,7 @@ export class YslHttpService {
       })
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error))
-    })
+    });
   }
 
   // 退出
@@ -144,8 +131,8 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(response), error => reject(error))
-    })
+        .then(response => resolve(response), error => reject(error));
+    });
   }
 
   // 获取高级搜索字段
@@ -153,8 +140,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/dict/data_category,data_source,data_collection,data_service')
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
+        .then(response => resolve(response.json()), error => reject(error));
+    });
   }
 
   // 产品--搜索
@@ -164,8 +151,8 @@ export class YslHttpService {
         params: options
       })
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-      })
+        .then(response => resolve(response.json()), error => reject(error));
+      });
   }
 
   // 产品--详情
@@ -173,8 +160,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/' + productId)
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
+        .then(response => resolve(response.json()), error => reject(error));
+    });
   }
 
   // 获取用户是否点赞收藏/userproperties/{productId}/{userId}
@@ -182,8 +169,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/userproperties/' + productId + '/' + userId, {withCredentials: true})
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
+        .then(response => resolve(response.json()), error => reject(error));
+    });
   }
 
   // 样本下载
@@ -191,7 +178,7 @@ export class YslHttpService {
   return new Promise((resolve, reject) => {
     this.http.get(this.url + 'api/product/' + productId +'/file/content')
       .toPromise()
-      .then(response => resolve(response.json()), error => reject(error))
+      .then(response => resolve(response.json()), error => reject(error));
   })
   }
 
@@ -201,8 +188,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/related/' + option.type + '/' + option.productId)
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
+        .then(response => resolve(response.json()), error => reject(error));
+    });
   }
 
   // 产品点赞
@@ -215,8 +202,8 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
+        .then(response => resolve(response.json()), error => reject(error));
+    });
   }
 
   // 产品纠错
@@ -229,8 +216,8 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
-    })
+        .then(response => resolve(response.json()), error => reject(error));
+    });
   }
 
   // 产品评价
@@ -243,8 +230,8 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(response.json()))
-    })
+        .then(response => resolve(response.json()));
+    });
   }
 
   // 获取产品评论
@@ -252,8 +239,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/product/' + option.productId + '/comment', {params: option.data})
         .toPromise()
-        .then(response => resolve(response.json()))
-    })
+        .then(response => resolve(response.json()));
+    });
   }
 
   // 个人中心
@@ -262,8 +249,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/user/' + userId)
         .toPromise()
-        .then(response => resolve(response.json()))
-    })
+        .then(response => resolve(response.json()));
+    });
   }
 
   // 编辑信息
@@ -275,8 +262,8 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(), error => reject())
-    })
+        .then(response => resolve(), error => reject());
+    });
   }
 
   // 修改密码
@@ -289,7 +276,7 @@ export class YslHttpService {
       })
         .toPromise()
         .then(response => resolve(), error => reject())
-    })
+    });
   }
 
   // 个人中心/认证/手机验证码
@@ -310,8 +297,8 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(), error => reject())
-    })
+        .then(response => resolve(), error => reject());
+    });
   }
 
   // 个人中心/认证/组织
@@ -323,17 +310,36 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(), error => reject())
-    })
+        .then(response => resolve(), error => reject());
+    });
   }
+
+  // 评论我的
+  getCommentToMe(option): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/commented/' + option.userId, {params: option})
+        .toPromise()
+        .then(response => resolve(response.json()));
+    });
+  }
+
+  // 个人中心/我评论的
+  getCommentByMe(option): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/comment/' + option.userId, {params: option})
+        .toPromise()
+        .then(response => resolve(response.json()));
+    });
+  }
+
 
   // 运营中心/用户管理/获取用户列表
   getUserList(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/user')
         .toPromise()
-        .then(response => resolve(response.json()))
-    })
+        .then(response => resolve(response.json()));
+    });
   }
 
   /*

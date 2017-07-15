@@ -55,7 +55,7 @@ export class NameCertifyComponent implements OnInit{
   // 获取用户信息
   getUserInfo() {
     this.commonService.getUserInfo().subscribe(e => {
-      this.userInfo = e.userInfo
+      this.userInfo = e.userInfo;
     });
     // this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     // this.httpService.getUserInfo(this.userId)

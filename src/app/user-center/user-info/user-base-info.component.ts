@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {Subscription} from "rxjs";
 
-declare var $: any;
 @Component({
   selector: 'user-info',
   templateUrl: './user-base-info.component.html',

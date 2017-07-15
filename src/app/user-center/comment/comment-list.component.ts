@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {YslHttpService} from "../../core/ysl-http.service";
+import {CookieService} from "ngx-cookie";
+import {YslCommonService} from "../../core/ysl-common.service";
+import {NavigationExtras, Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-comment-list',
@@ -7,15 +11,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentListComponent implements OnInit {
 
-  comments = [
-    {averageScore: 4.5, scoreOnTimeliness: 4.5, scoreOnAccuracy: 4.5, scoreOnNormalization: 4, scoreOnIntegrity: 5},
-    {averageScore: 4.5, scoreOnTimeliness: 4.5, scoreOnAccuracy: 4.5, scoreOnNormalization: 4, scoreOnIntegrity: 5}
-    ];
+  userId: any;
+  comments = {items: []};
+  pagination = {
+    offset: 0, limit: 5
+  };
+  currPage: any;
   averageScore: Array<any>;
-  constructor() { }
+  constructor(private httpService: YslHttpService,
+              private cookie: CookieService,
+              private commonService: YslCommonService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.averageScore = Array(5).fill(1).map((x, i) => i);
+    this.route.queryParams
+      .subscribe((params) => {
+        let param = Object.assign({}, params);
+        this.currPage = param['offset'] ? ((param['offset']/this.pagination['limit']) + 1) : 1;
+        this.getCommentToMe();
+      });
   }
 
+  getCommentToMe() {
+    if (!this.userId) { return };
+    let options = {userId: this.userId, offset: this.pagination.offset, limit: this.pagination.limit};
+    this.httpService.getCommentToMe(options)
+      .then(res => {
+        this.comments = res;
+        this.comments['items'].forEach(item => {
+          item.createdOn = this.commonService.getDateForDay(item.createdOn);
+        });
+      });
+  }
+
+  toNextPage(e) {
+    this.pagination['offset'] = (e - 1) * (this.pagination['limit']);
+    let navigationExtras: NavigationExtras = {
+      queryParams: {offset: this.pagination.offset}
+    }
+    this.router.navigate(['userCenter/comment/list'], navigationExtras);
+  }
 }

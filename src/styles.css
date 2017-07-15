@@ -596,6 +596,9 @@ footer {
 .ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after {
   display: none !important;
 }
+.comment-list .ngx-pagination{
+  justify-content: flex-end;
+}
 
 .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after {
   /*text-align: center;*/

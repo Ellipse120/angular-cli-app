@@ -1,11 +1,19 @@
 <div class="comment comment-list">
-  <div class="list-empty" *ngIf="comments.length==0">评论列表为空</div>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let c of comments">
-      <h4 class="user-name font16">用户名</h4>
-      <p class="comment-cont mgb6 font16">评论内容</p>
-      <p class="product-name">万德</p>
-      <p>评论时间：2017.7.15</p>
-    </li>
-  </ul>
+  <div class="list-empty" *ngIf="!comments['items']?.length">评论列表为空</div>
+  <div *ngIf="comments['items']?.length">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let c of comments['items'] | paginate: {itemsPerPage: pagination['limit'],
+                                                      currentPage: currPage,
+                                                      totalItems: comments.totalLength}">
+        <h4 class="user-name font16">{{c.userName}}</h4>
+        <p class="comment-cont mgb6 font16">{{c.remark}}</p>
+        <p class="product-name">{{c.productName}}</p>
+        <p>评论时间：{{c.createdOn}}</p>
+      </li>
+    </ul>
+    <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="上一页"
+                         nextLabel="下一页"></pagination-controls>
+  </div>
 </div>
