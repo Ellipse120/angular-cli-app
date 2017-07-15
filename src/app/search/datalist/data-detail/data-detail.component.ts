@@ -352,9 +352,9 @@ export class DataDetailComponent implements OnInit{
       this.service.updateFavorite({
         favorite: true,
         productId: this.productDetail.productId,
-      }).subscribe( data => {
-        console.log('delete star:', data);
-        this.getUserProp();
+        userId: this.userId
+      }).subscribe( () => {
+         this.getUserProp();
       });
     }
   }

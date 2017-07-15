@@ -323,7 +323,7 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(), error => reject())
+        .then(response => resolve(), error => reject());
     })
   }
 
@@ -371,11 +371,33 @@ export class YslHttpService {
     let api = `api/product/${params.productId}/favorite`;
     if (!params.favorite) {
       api = `api/product/${params.productId}/favorite/${params.userId}`;
-      return this.http.delete(this.url + api)
-        .map(resp => resp.json());
+      return this.http.delete(this.url + api);
     }
-    return this.http.post(this.url + api, null)
+
+    return this.http.post(this.url + api, {
+      userId: params['userId']
+    })
       .map(resp => resp.json());
+  }
+
+  /**
+   * get favorite list
+   * @param params
+   *    {
+   *        userId,
+   *        offset,
+   *        limit,
+   *        sortBy,
+   *        ascending:boolean
+   *    }
+   * @returns {Observable<R>}
+   */
+  favoriteList(params): Observable<any> {
+    const api = `api/product/${params.userId}/favorite/list`;
+
+    return this.http.get(this.url + api, {
+      params: params
+    }).map( resp => resp.json());
   }
 
 }
