@@ -380,24 +380,5 @@ export class YslHttpService {
       .map(resp => resp.json());
   }
 
-  /**
-   * get favorite list
-   * @param params
-   *    {
-   *        userId,
-   *        offset,
-   *        limit,
-   *        sortBy,
-   *        ascending:boolean
-   *    }
-   * @returns {Observable<R>}
-   */
-  favoriteList(params): Observable<any> {
-    const api = `api/product/${params.userId}/favorite/list`;
-
-    return this.http.get(this.url + api, {
-      params: params
-    }).map( resp => resp.json());
-  }
 
 }

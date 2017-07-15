@@ -14,17 +14,22 @@ export class LikeService {
   }
 
   /**
-   * 获取收藏列表
+   * get favorite list
    * @param params
+   *    {
+   *        userId,
+   *        offset,
+   *        limit,
+   *        sortBy,
+   *        ascending:boolean
+   *    }
    * @returns {Observable<R>}
    */
-  getLikeList(params: any): Observable<any> {
-    return this.http.get(
-      this.yslService.url + `api/product/${params.userId}/favorite`,
-      {
-        params
-      }
-    ).map(resp => resp.json());
-  }
+  favoriteList(params): Observable<any> {
+    const api = `api/product/${params.userId}/favorite/list`;
 
+    return this.http.get(this.yslService.url + api, {
+      params: params
+    }).map( resp => resp.json());
+  }
 }

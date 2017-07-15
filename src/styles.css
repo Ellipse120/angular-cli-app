@@ -906,6 +906,7 @@ app-index .mat-ripple {
 .user-center-cont {
   background-color: #FFFFFF;
   /*height: 235px;*/
+  padding-bottom: 10px;
 }
 
 /*个人中心公用*/

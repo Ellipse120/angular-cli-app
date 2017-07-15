@@ -1,0 +1,15 @@
+.item-list {
+  margin-top: 20px;
+}
+
+@media all and (max-width: 450px) {
+  .item-list {
+    margin-top: 0px;
+  }
+}
+
+@media all and (min-width: 768px){
+  .item-list {
+    margin-top: 20px;
+  }
+}
