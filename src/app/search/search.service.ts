@@ -1,8 +1,8 @@
 import {Injectable, EventEmitter, OnInit} from '@angular/core';
-import {YslHttpService} from "../core/ysl-http.service";
+import {YslHttpService} from '../core/ysl-http.service';
 
 @Injectable()
-export class SearchService implements OnInit{
+export class SearchService implements OnInit {
 
   public keyword: string;
   public keywordSearch: EventEmitter<any> = new EventEmitter<any>();
@@ -18,7 +18,7 @@ export class SearchService implements OnInit{
     data_service: []
   };
   constructor(private httpService: YslHttpService) {
-    this.keyword = ''
+    this.keyword = '';
   }
 
   ngOnInit() {
@@ -35,20 +35,20 @@ export class SearchService implements OnInit{
             data_collection: [],
             data_service: []
           };
-          let data: any = res;
-          let advanced = this.advancedKeys;
+          const data: any = res;
+          const advanced = this.advancedKeys;
 
           for (const type in advanced) {
             data.forEach((item) => {
               if (item.categoryCode == type) {
-                this.advancedKeys[type].push(item)
+                this.advancedKeys[type].push(item);
               }
-            })
+            });
           }
-          resolve(this.advancedKeys)
+          resolve(this.advancedKeys);
           // this.searchService.advancedKeys = this.advanceInfo;
-        })
-    })
+        });
+    });
   }
 
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise'
 import {reject} from "q";
+import {Observable} from "rxjs/Observable";
 // import reject = Q.reject;
 
 // 此处的@Injectable是一个装饰器
@@ -17,6 +18,19 @@ export class YslHttpService {
   public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
    // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // REPLACE
+
+  // 用户信息
+  user = {
+    count: '123@qq.com',
+    username: 'wangming',
+    truename: '王明',
+    sex: '男',
+    birthday: '1996-3-14',
+    address: '上海',
+    phone: 1234254325,
+    job: 'web',
+    logintime: '2017.03.05'
+  };
 
   constructor(public http: Http) {
 
@@ -92,6 +106,7 @@ export class YslHttpService {
     }
 
     );
+
   }
 
   // 获得用户信息
@@ -312,6 +327,8 @@ export class YslHttpService {
         .toPromise()
         .then(response => resolve(), error => reject());
     });
+        .then(response => resolve(), error => reject());
+    })
   }
 
   // 个人中心/评论我的
@@ -368,13 +385,32 @@ export class YslHttpService {
   * 产品收到的赞列表API
   */
   getThumbsToMe(option): Promise<any> {
-    return new Promise((resolve, reject)=> {
-      this.http.get(this.url + 'api/product/favored/list/'+ option.userId,{
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/favored/list/' + option.userId,{
         params: option
       })
         .toPromise()
-        .then(res => resolve(res.json()))
+        .then(res => resolve(res.json()));
     });
   }
+
+  /**
+   * udate favorite status
+   * @param params
+   * @returns {Observable<R>}
+   */
+  updateFavorite(params): Observable<any> {
+    let api = `api/product/${params.productId}/favorite`;
+    if (!params.favorite) {
+      api = `api/product/${params.productId}/favorite/${params.userId}`;
+      return this.http.delete(this.url + api);
+    }
+
+    return this.http.post(this.url + api, {
+      userId: params['userId']
+    })
+      .map(resp => resp.json());
+  }
+
 
 }

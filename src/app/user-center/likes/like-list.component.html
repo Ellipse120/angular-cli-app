@@ -1,3 +1,20 @@
 <div class="product-list">
-  <div class="list-empty" *ngIf="likes.length==0">收藏列表为空</div>
+  <div class="list-empty" *ngIf="items.length==0">收藏列表为空</div>
+
+  <div class="item-list" *ngIf="items.length !==0">
+    <div>
+      <ul class="list-group">
+        <li *ngFor="let item of items"
+            class="list-group-item row product-list-ul">
+          <div class="row"
+               style="font-size: 14px;padding-top: 4px;">
+            <span class="col-xs-12 col-sm-12 col-md-12 col-lg-12">创建者: {{item.creator}}</span>
+            <span class="col-xs-10 col-sm-10 col-md-10 col-lg-10"><a class="item-name">{{item.name}}</a></span>
+            <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><div (click)="deleteFavorite(item)" class="btn">取消</div></span>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
