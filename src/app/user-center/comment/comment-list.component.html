@@ -1,3 +1,11 @@
-<div class="product-list">
+<div class="comment comment-list">
   <div class="list-empty" *ngIf="comments.length==0">评论列表为空</div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let c of comments">
+      <h4 class="user-name font16">用户名</h4>
+      <p class="comment-cont mgb6 font16">评论内容</p>
+      <p class="product-name">万德</p>
+      <p>评论时间：2017.7.15</p>
+    </li>
+  </ul>
 </div>

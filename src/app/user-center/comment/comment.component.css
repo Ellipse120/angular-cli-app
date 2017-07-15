@@ -1,0 +1,59 @@
+.mgb6{
+  margin-bottom: 6px;
+}
+.comment{
+  padding: 20px;
+}
+.user-name{
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+.score-summary{
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.score-summary li{
+  width: 15px;
+  height: 15px;
+}
+.score-summary .half-star{
+  background-position: left -15px;
+}
+.score-summary .score-text{
+  margin-bottom: 0;
+  margin-left: 10px;
+  color: #999;
+  font-size: 12px;
+}
+.score-summary .score-text span{
+  margin-left: 10px;
+}
+.score-summary .score-text span:first-of-type{
+  margin-left: 0;
+}
+.stars-list .fa{
+  font-size: 16px;
+  color: rgb(255,165,78);
+}
+.stars-list li{
+  width: 19px;
+  height: 19px;
+  background-size: 100%;
+  float: left;
+  margin-right: 5px;
+}
+.product-name{
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 6px;
+}
+.list-group-item{
+  border: none;
+  background-color: #f6faf9;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+.list-group-item:last-of-type{
+  margin-bottom: 0;
+}
