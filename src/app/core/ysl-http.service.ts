@@ -327,8 +327,6 @@ export class YslHttpService {
         .toPromise()
         .then(response => resolve(), error => reject());
     });
-        .then(response => resolve(), error => reject());
-    })
   }
 
   // 个人中心/评论我的
