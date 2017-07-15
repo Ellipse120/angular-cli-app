@@ -27,6 +27,13 @@
   background-color: #fff;
   color: #a6b8c4;
 }
+.star-btn {
+  background-color: #fff;
+  color: #a6b8c4;
+}
+.is-star{
+  color:rgb(255,165,78);
+}
 .thumb-up{
   color: #40bf52;
 }

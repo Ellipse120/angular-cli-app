@@ -39,6 +39,7 @@
     <!--纠错处理-->
     <div yslMenu class="add-product-errata">
       <button class="zan-btn btn" [class.thumb-up]="isThumbsUp" (click)="thumbsUp()"><i class="fa fa-thumbs-up"></i> <i *ngIf="favoredCount">{{favoredCount}}</i>点赞</button>
+      <button class="star-btn btn" [class.is-star]="isStar" (click)="star()"><i class="fa fa-star"></i>收藏</button>
       <button class="errata-btn btn" (click)="createErrata();$event.stopPropagation()"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;我要纠错</button>
       <div class="errata-edit-cont" ysl-popup></div>
     </div>
