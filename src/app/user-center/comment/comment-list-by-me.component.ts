@@ -3,6 +3,7 @@ import {CookieService} from "ngx-cookie";
 import {YslHttpService} from "../../core/ysl-http.service";
 import {YslCommonService} from "../../core/ysl-common.service";
 import {Router, ActivatedRoute, NavigationExtras} from "@angular/router";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-comment-list-by-me',
@@ -22,7 +23,8 @@ export class CommentListByMeComponent implements OnInit {
               private cookie: CookieService,
               private commonService: YslCommonService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              public snackBar: MdSnackBar) { }
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
@@ -30,6 +32,7 @@ export class CommentListByMeComponent implements OnInit {
     this.route.queryParams
       .subscribe((params) => {
         let param = Object.assign({}, params);
+        this.pagination.offset = param['offset'] ? param['offset'] : 0;
         this.currPage = param['offset'] ? ((param['offset']/this.pagination['limit']) + 1) : 1;
         this.getCommentToMe();
       });
@@ -46,16 +49,29 @@ export class CommentListByMeComponent implements OnInit {
           item.createdOn = this.commonService.getDateForDay(item.createdOn);
           item.averageScore = item.scoreOnTimeliness ? ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4).toFixed(1) : 0;
         });
+
+        if (this.pagination.offset >= 5) {
+          if (!res['items']) {
+            console.log('offset', this.pagination.offset)
+            this.pagination['offset'] = (this.currPage - 1) * (this.pagination['limit']);
+            let navigationExtras: NavigationExtras = {
+              queryParams: {offset: this.pagination.offset}
+            };
+            this.router.navigate(['userCenter/comment/list-by-me'], navigationExtras);
+          }
+        }
       });
   }
 
   // 删除评论
   deleteMyComment(comment) {
-    console.log('评论', comment)
     this.httpService.deleteMyComment(comment.id)
       .then(res => {
-        console.log('删除评论', res);
-      })
+        this.getCommentToMe();
+        this.snackBar.open('评论删除成功', '', {
+          duration: 3000
+        });
+      });
   }
 
   // 下一页

@@ -352,7 +352,7 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.delete(this.url + 'api/product/comment/' + commentId)
         .toPromise()
-        .then(response => resolve(response.json()));
+        .then(response => resolve(response));
     });
   }
 

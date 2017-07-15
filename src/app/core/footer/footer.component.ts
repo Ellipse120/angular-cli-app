@@ -12,7 +12,7 @@ import {Router, NavigationStart} from "@angular/router";
                   <li><a routerLink="/privacy" [target]="'_blank'">隐私协议</a></li>
                   </ul>
                   </div>
-                  <p>版权所有 : 长江众创 Copyright&nbsp;&copy;&nbsp;2017 All Rights Reserved 版本 1.0.3</p>
+                  <p>版权所有 : 长江众创 Copyright&nbsp;&copy;&nbsp;2017 All Rights Reserved 版本 1.5.0</p>
              </div></div>`
 })
 

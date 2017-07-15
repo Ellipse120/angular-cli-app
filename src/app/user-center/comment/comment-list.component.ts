@@ -41,9 +41,11 @@ export class CommentListComponent implements OnInit {
     this.httpService.getCommentToMe(options)
       .then(res => {
         this.comments = res;
-        this.comments['items'].forEach(item => {
-          item.createdOn = this.commonService.getDateForDay(item.createdOn);
-        });
+        if (res['items']) {
+          this.comments['items'].forEach(item => {
+            item.createdOn = this.commonService.getDateForDay(item.createdOn);
+          });
+        }
       });
   }
 
