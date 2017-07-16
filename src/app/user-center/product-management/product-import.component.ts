@@ -10,6 +10,7 @@ import {isNullOrUndefined} from "util";
 import {ProductListService} from "../../product-mangement/product-list/product-list.service";
 import {CookieService} from "ngx-cookie";
 import {Location} from "@angular/common";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   templateUrl: './product-import.component.html',
@@ -29,8 +30,8 @@ export class ProductImportComponent implements OnInit {
     serviceMethod: '',
     area: '',
     premium: '',
-    dataSince: Date.now(),
-    dataUntil: Date.now(),
+    dataSince: +'',
+    dataUntil: +'',
     tags: []
   };
 
@@ -78,7 +79,8 @@ export class ProductImportComponent implements OnInit {
               private route: ActivatedRoute,
               private productListService: ProductListService,
               private cookie: CookieService,
-              private location: Location) {
+              private location: Location,
+  private snackbar: MdSnackBar) {
   }
 
   ngOnInit(): void {
@@ -149,15 +151,21 @@ export class ProductImportComponent implements OnInit {
 
   doProductSubmit(): any {
     this.product.userId = this.userInfo;
-
+    this.product.name = this.product.name.trim();
     if(this.route.routeConfig.path === 'import'){
       this.productListService.doProductImport(this.product)
         .then(res => {
+          this.snackbar.open('产品录入成功', '', {
+            duration: 3000
+          });
           this.router.navigate(['../list'],{relativeTo: this.route})
         });
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
+          this.snackbar.open('产品修改成功', '', {
+            duration: 3000
+          });
           this.router.navigate(['../../list'],{relativeTo: this.route})
         });
     }

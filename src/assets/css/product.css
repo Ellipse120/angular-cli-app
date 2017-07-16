@@ -250,7 +250,7 @@
 }
 
 .product-import-item2 .mat-tab-label-container::-webkit-scrollbar, .mat-tab-labels::-webkit-scrollbar {
-  color: transparent;
+  display: none;
 }
 
 

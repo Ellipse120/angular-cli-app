@@ -4,7 +4,11 @@
 
 @media all and (max-width: 450px) {
   .thumb-up-list {
-    margin-top: 0px;
+    margin-top: 0;
+  }
+
+  .product-total-thumb{
+    padding-right: 10px;
   }
 }
 

@@ -8,20 +8,22 @@
                [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
                class="product-import-name"
                placeholder="名称*" style="padding-right: 40px;">
-        <md-error *ngIf="(name.validity.patternMismatch)">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</md-error>
-        <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
+        <div align="end" style="color: #a5aaad;position: absolute;top: 31px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
+        <span style="color: red;" *ngIf="(name.validity.patternMismatch)">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</span>
       </div>
 
       <div class="product-import-item" style="position: relative;padding-bottom: 4px;">
         <textarea class="product-description" name="description" rows="3"
                   maxlength="512" id="description"
-                  [(ngModel)]="product.description"name="description" #description placeholder="简介"></textarea>
-        <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{description.value.length}}&nbsp;/&nbsp;512</div>
+                  [(ngModel)]="product.description" name="description" #description placeholder="简介"></textarea>
+        <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">
+          {{description.value.length}}&nbsp;/&nbsp;512
+        </div>
       </div>
 
       <div class="product-import-item" style="position: relative;">
         <span><input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite"
-               #webSite placeholder="官网" maxlength="256"></span>
+                     #webSite placeholder="官网" maxlength="256"></span>
         <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
       </div>
 
@@ -96,48 +98,54 @@
       </div>
     </div>
 
+    <!--<div class="product-import-info">-->
+    <!--<p class="product-info">标签分类</p>-->
+    <!--<div class="product-import-item2">-->
+
+    <!-- old UI -->
+    <!--<div class="ysl-import-tag">-->
+    <!--<ul class="tagDimensions">-->
+    <!--<li *ngFor="let item of tagDimensionsNew;let i=index">-->
+    <!--<button type="button" class="ysl-btn btn-none" style="outline: none;" [class.isActive]="isActive === i"-->
+    <!--(click)="changeTab(i)">-->
+    <!--{{item.name}}-->
+    <!--</button>-->
+    <!--<ul class="secondTagDimensions" *ngIf="isActive == i">-->
+    <!--<li *ngFor="let itemc of item.items" class="second-nav">-->
+    <!--<input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"-->
+    <!--(click)="proTagImport(itemc.id)">-->
+    <!--<label style="font-weight: initial;" [for]="[itemc.id]">{{itemc.name}}</label>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!-- new UI -->
+
     <div class="product-import-info">
       <p class="product-info">标签分类</p>
       <div class="product-import-item2">
-
-        <!-- old UI -->
-        <!--<div class="ysl-import-tag">-->
-          <!--<ul class="tagDimensions">-->
-            <!--<li *ngFor="let item of tagDimensionsNew;let i=index">-->
-              <!--<button type="button" class="ysl-btn btn-none" style="outline: none;" [class.isActive]="isActive === i"-->
-                      <!--(click)="changeTab(i)">-->
-                <!--{{item.name}}-->
-              <!--</button>-->
-              <!--<ul class="secondTagDimensions" *ngIf="isActive == i">-->
-                <!--<li *ngFor="let itemc of item.items" class="second-nav">-->
-                  <!--<input type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"-->
-                         <!--(click)="proTagImport(itemc.id)">-->
-                  <!--<label style="font-weight: initial;" [for]="[itemc.id]">{{itemc.name}}</label>-->
-                <!--</li>-->
-              <!--</ul>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
-      <!--</div>-->
-
-        <!-- new UI -->
-      <md-tab-group class="" [disableRipple]="isDisableRipple">
-        <md-tab label="{{item.name}}" *ngFor="let item of tagDimensionsNew;">
-          <ul class="" style="background-color: #fff;">
-            <li *ngFor="let itemc of item.items;let i=index" style="float: left;margin:10px 10px 0px 0px;">
-              <label style="font-weight: initial;color:#999999;" [for]="[itemc.id]"><input style="vertical-align: middle;margin:0;" type="checkbox" [id]="[itemc.id]" [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
-                                                                             (click)="proTagImport(itemc.id)">&nbsp;{{itemc.name}}</label>
-            </li>
-          </ul>
-        </md-tab>
-      </md-tab-group>
-
+        <md-tab-group class="" [disableRipple]="isDisableRipple">
+          <md-tab label="{{item.name}}" *ngFor="let item of tagDimensionsNew;">
+            <ul class="" style="background-color: #fff;">
+              <li *ngFor="let itemc of item.items;let i=index" style="float: left;margin:10px 10px 0 0;">
+                <label style="font-weight: initial;color:#999999;" [for]="[itemc.id]">
+                  <input style="vertical-align: middle;margin: 0;" type="checkbox" [id]="[itemc.id]"
+                         [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
+                         (click)="proTagImport(itemc.id)">&nbsp;{{itemc.name}}</label>
+              </li>
+            </ul>
+          </md-tab>
+        </md-tab-group>
       </div>
 
     </div>
 
     <div style="padding: 20px 0 30px 0;" class="product-import-btn">
-      <button type="submit" class="btn btn-info" style="background-color: #39baf6;border-color:#39baf6;margin-right: 10px;"
+      <button type="submit" class="btn btn-info"
+              style="background-color: #39baf6;border-color:#39baf6;margin-right: 10px;"
               [disabled]="!productForm.form.valid">保存
       </button>
       <button class="btn btn-default" (click)="goBackList()" style="color: #666666;">取消</button>
