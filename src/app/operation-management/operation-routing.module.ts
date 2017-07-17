@@ -3,12 +3,13 @@ import { RouterModule , Routes } from '@angular/router';
 
 import {OperationManagementComponent} from './operation-management.component';
 import {UserManagementComponent} from './user-management/user-management.component';
-import {ProductListComponent} from "../product-mangement/product-list/product-list.component";
-import {ErrorCorrectComponent} from "../product-mangement/error-correct/error-correct.component";
-import {ProductManagementComponent} from "../user-center/product-management/product-management.component";
+import {ProductListComponent} from '../product-mangement/product-list/product-list.component';
+import {ErrorCorrectComponent} from '../product-mangement/error-correct/error-correct.component';
+import {ProductManagementComponent} from '../user-center/product-management/product-management.component';
+import {OperationalReportComponent} from "./operational-report/operational-report.component";
 
 
-const operationProductChildRouters:Routes = [
+const operationProductChildRouters: Routes = [
   {
     path: 'list',
     component: ProductListComponent
@@ -38,9 +39,8 @@ const operationChildRouters = [
     children: operationProductChildRouters
   },
   {
-    path:'',
-    redirectTo: 'productManagement',
-    pathMatch: 'full'
+    path: 'operationManagement',
+    component: OperationalReportComponent
   },
   {
    path: '**',
