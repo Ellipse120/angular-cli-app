@@ -1,1 +1,47 @@
-<div class="inner-cont">纠错</div>
+<div class="product-list">
+
+  <div style="margin-top: 20px;">
+
+    <div>
+      <ul class="list-group">
+        <li *ngFor="let item of errorLists | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"
+            class="list-group-item row product-list-ul">
+          <div>
+            <div class="row">
+              <div class="col-xs-6 col-sm-8 col-md-8 col-lg-10">
+                <span>{{item.userName}}</span></div>
+              <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" style="font-size: 12px;">
+                <span>状态：{{item.statusText}}</span>
+                <span>修改时间：{{item.submitTime | date:'yyyy-MM-dd'}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-list-name row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <span (click)="doViewProductDetail(item)" class="col-">{{item.productName}}</span>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <span><a class="" (click)="editProductError(item)">修改</a></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <span>纠错原因：{{item.comment}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="product-list-paging">
+      <div>
+        <div class="spinner" [ngClass]="{ 'hidden':isLoading }"></div>
+        <pagination-controls [autoHide]="true" [maxSize]="5" (pageChange)="getErrorPage($event)" previousLabel="上一页"
+                             nextLabel="下一页">
+        </pagination-controls>
+      </div>
+    </div>
+
+
+  </div>
+</div>
