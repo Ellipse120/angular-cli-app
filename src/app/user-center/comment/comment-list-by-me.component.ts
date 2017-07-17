@@ -51,9 +51,9 @@ export class CommentListByMeComponent implements OnInit {
         });
 
         if (this.pagination.offset >= 5) {
-          if (!res['items']) {
-            console.log('offset', this.pagination.offset)
-            this.pagination['offset'] = (this.currPage - 1) * (this.pagination['limit']);
+          if (!res['items'].length) {
+            console.log('offset', this.pagination.offset, this.pagination['offset'])
+            this.pagination['offset'] = (this.currPage - 2) * (this.pagination['limit']);
             let navigationExtras: NavigationExtras = {
               queryParams: {offset: this.pagination.offset}
             };

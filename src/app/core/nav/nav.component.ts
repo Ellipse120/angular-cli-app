@@ -59,7 +59,6 @@ export class NavComponent implements OnInit {
   getUserInfo() {
     this.commonService.getUserInfo().subscribe(e => {
       this.loginInfo = e.userInfo;
-      console.log('login info')
     });
   }
 
