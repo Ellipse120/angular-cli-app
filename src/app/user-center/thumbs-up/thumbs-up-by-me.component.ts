@@ -26,7 +26,7 @@ export class ThumbsUpByMeComponent implements OnInit {
   constructor(private yslHttpService: YslHttpService,
               private cookie: CookieService,
               private router: Router,) {
-    this.userId = this.cookie.get('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.userId = this.cookie.getObject('yslUserInfo')['id'];
     this.getThumbsByMe();
   }
 
@@ -36,14 +36,13 @@ export class ThumbsUpByMeComponent implements OnInit {
       .then((data) => {
         this.totalThumbsNum = data.totalLength;
         this.thumbs = data.items;
-        console.log(data);
       });
   }
 
   getPage(e) {
     this.isLoading = true;
     this.page = e;
-    this.pagingOption.offset = (e - 1 ) * 10;
+    this.pagingOption.offset = (e - 1) * 10;
     this.pagingOption.userId = this.userId;
     this.getThumbsByMe();
   }

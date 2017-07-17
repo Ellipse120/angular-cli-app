@@ -26,7 +26,7 @@ export class ThumbsUpToMeComponent implements OnInit {
   constructor(private yslHttpService: YslHttpService,
               private cookie: CookieService,
               private router: Router,) {
-    this.userId = this.cookie.get('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.userId = this.cookie.getObject('yslUserInfo')['id'];
     this.getThumbsToMe();
   }
 
@@ -35,7 +35,6 @@ export class ThumbsUpToMeComponent implements OnInit {
       .then((data) => {
         this.totalThumbedNum = data.totalLength;
         this.thumbs = data.items;
-        console.log(data);
       });
   }
 
