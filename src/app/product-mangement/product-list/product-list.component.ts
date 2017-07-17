@@ -307,10 +307,6 @@ export class ProductListComponent implements OnInit {
     }
 
     this.getProducts();
-    this.pagingOption.userName = '';
-    this.pagingOption.userType = '';
-    this.pagingOption.status = '';
-    this.pagingOption.startModifiedOn = '';
   }
 
   getCellNameClass({row, column, value}) {

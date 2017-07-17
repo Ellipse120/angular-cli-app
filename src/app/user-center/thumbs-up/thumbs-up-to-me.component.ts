@@ -31,6 +31,7 @@ export class ThumbsUpToMeComponent implements OnInit {
   }
 
   getThumbsToMe() {
+    this.pagingOption.userId = this.userId;
     this.yslHttpService.getThumbsToMe(this.pagingOption)
       .then((data) => {
         this.totalThumbedNum = data.totalLength;
