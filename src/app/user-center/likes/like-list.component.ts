@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LikeService} from './service/like-service';
 import {CookieService} from 'ngx-cookie';
-import {YslHttpService} from "../../core/ysl-http.service";
+import {YslHttpService} from '../../core/ysl-http.service';
 
 @Component({
   selector: 'app-like-list',

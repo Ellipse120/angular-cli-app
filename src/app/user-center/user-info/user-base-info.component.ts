@@ -1,9 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {YslHttpService} from '../../core/ysl-http.service';
-import {CookieService} from "ngx-cookie";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {Subscription} from "rxjs";
+import {CookieService} from 'ngx-cookie';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'user-info',
@@ -11,7 +11,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user-info.component.css']
 })
 
-export class UserBaseInfoComponent implements OnInit,OnDestroy {
+export class UserBaseInfoComponent implements OnInit, OnDestroy {
 
   editForm: FormGroup;
   subscription: Subscription;
@@ -37,7 +37,7 @@ export class UserBaseInfoComponent implements OnInit,OnDestroy {
       this.viewInfo = e.userInfo;
       this.userInfo.forEach(item => {         // 初始化个人信息
         for (const key in this.viewInfo) {
-          if (item.formControlName == key) {
+          if (item.formControlName === key) {
             item.model = this.viewInfo[key];
           }
         }
@@ -48,15 +48,15 @@ export class UserBaseInfoComponent implements OnInit,OnDestroy {
 
   // 编辑用户信息
   ableEdit(info) {
-    let controls = {
+    const controls = {
       userName: '',
       contactMail: ''
     };
     this.userInfo.forEach(item => {
-      if (item == info) {
+      if (item === info) {
         item.edit = true;
       }
-      for(let key in controls) {
+      for(const key in controls) {
         controls[item.formControlName] = item.model;
       }
     });
@@ -65,17 +65,17 @@ export class UserBaseInfoComponent implements OnInit,OnDestroy {
 
   // 提交修改资料
   infoEditSubmit(info) {
-    if (!this.editForm) { return }
-    let data = this.editForm.value;
+    if (!this.editForm) { return; }
+    const data = this.editForm.value;
     data.id = this.userId;
     this.httpService.updateUser(data)
       .then(res => {
         // 修改成功后对模板的修改
         this.userInfo.forEach(item => {
-          if (item == info) { item.edit = false }
+          if (item === info) { item.edit = false }
         });
         this.updateUserInfo();
-      })
+      });
   }
 
   // 更新用户信息

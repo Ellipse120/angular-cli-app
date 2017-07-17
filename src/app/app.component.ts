@@ -22,29 +22,29 @@ export class AppComponent implements OnInit {
   setStyle() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
-        if (e.url.includes('/index') || e.url == '/') {
+        if (e.url.includes('/index') || e.url === '/') {
           this.outerWrapperStyle = {
             // background: 'url(assets/images/index-bg.jpg) no-repeat left top/cover'
             backgroundColor: '#242424'
-          }
+          };
           this.yslNavStyle = {
             background : 'rgba(0,0,0,0.3)'
-          }
+          };
           this.yslFooterStyle = {
             backgroundColor: 'rgba(0,0,0,0.3)'
-          }
+          };
         } else {
           this.outerWrapperStyle = {
             background: '#fff'
           };
           this.yslNavStyle = {
             background: 'linear-gradient(#323232, #3d3d3d, #414141)'
-          }
+          };
           this.yslFooterStyle = {
             backgroundColor: '#333'
-          }
+          };
         }
       }
-    })
+    });
   }
 }

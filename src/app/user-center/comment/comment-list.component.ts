@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {YslHttpService} from "../../core/ysl-http.service";
-import {CookieService} from "ngx-cookie";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {NavigationExtras, Router, ActivatedRoute} from "@angular/router";
+import {YslHttpService} from '../../core/ysl-http.service';
+import {CookieService} from 'ngx-cookie';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {NavigationExtras, Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-comment-list',
@@ -29,16 +29,16 @@ export class CommentListComponent implements OnInit {
     this.averageScore = Array(5).fill(1).map((x, i) => i);
     this.route.queryParams
       .subscribe((params) => {
-        let param = Object.assign({}, params);
-        this.currPage = param['offset'] ? ((param['offset']/this.pagination['limit']) + 1) : 1;
+        const param = Object.assign({}, params);
+        this.currPage = param['offset'] ? ((param['offset'] / this.pagination['limit']) + 1) : 1;
         this.getCommentToMe();
       });
   }
 
   // 获取评论列表
   getCommentToMe() {
-    if (!this.userId) { return };
-    let options = {userId: this.userId, offset: this.pagination.offset, limit: this.pagination.limit};
+    if (!this.userId) { return; }
+    const options = {userId: this.userId, offset: this.pagination.offset, limit: this.pagination.limit};
     this.httpService.getCommentToMe(options)
       .then(res => {
         this.comments = res;
@@ -70,9 +70,9 @@ export class CommentListComponent implements OnInit {
   // 分页
   toNextPage(e) {
     this.pagination['offset'] = (e - 1) * (this.pagination['limit']);
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: {offset: this.pagination.offset}
-    }
+    };
     this.router.navigate(['userCenter/comment/list'], navigationExtras);
   }
 }

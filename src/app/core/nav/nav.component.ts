@@ -8,8 +8,8 @@ import { LoginComponent } from '../../login/login.component';
 import {SearchService} from '../../search/search.service';
 import {YslHttpService} from '../ysl-http.service';
 import {CookieService} from 'ngx-cookie';
-import {YslPopupDirective} from "../directive/ysl-popup.directive";
-import {YslCommonService} from "../ysl-common.service";
+import {YslPopupDirective} from '../directive/ysl-popup.directive';
+import {YslCommonService} from '../ysl-common.service';
 
 
 @Component({
@@ -53,10 +53,14 @@ export class NavComponent implements OnInit {
     this.eventEmit.logoutEvent.subscribe(() => {
       this.logout();
     });
-    document.addEventListener('click', () => { this.isShowPhoneNav = false }, false)
+    document.addEventListener('click', () => { this.isShowPhoneNav = false; }, false);
   }
 
   getUserInfo() {
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.loginInfo = res;
+      });
     this.commonService.getUserInfo().subscribe(e => {
       this.loginInfo = e.userInfo;
     });
@@ -72,8 +76,7 @@ export class NavComponent implements OnInit {
   showLogin(): void {
     let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
-      if (!result) { return }
-      this.loginInfo = result.userLoginInfo;
+      if (!result) { return; }
       this.cookie.putObject('yslUserInfo', this.loginInfo);
       this.eventEmit.loginSuccessEvent.emit();
       this.loginState = true;
@@ -95,27 +98,27 @@ export class NavComponent implements OnInit {
         this.cookie.remove('x-access-token');
         this.loginState = false;
         if (!path.includes('/datalist') || !path.includes('/datadetail')) {
-          this.router.navigate(['index'])
+          this.router.navigate(['index']);
         }
-      })
+      });
   }
 
   // 设置搜索框显示隐藏
   setNavStyle() {
-    let subscription = this.router.events.subscribe(e => {
-      if(e instanceof NavigationStart) {
-        if (e.url.includes('/index') || e.url == '/') {
-          this.subnavStyle = {background: 'rgba(0,0,0,0.3)'}
+    const subscription = this.router.events.subscribe(e => {
+      if (e instanceof NavigationStart) {
+        if (e.url.includes('/index') || e.url === '/') {
+          this.subnavStyle = {background: 'rgba(0,0,0,0.3)'};
         } else {
-          this.subnavStyle = {background: '#3f3f3f'}
+          this.subnavStyle = {background: '#3f3f3f'};
         }
-        if (e.url.includes('/index') || e.url.includes('/register') || e.url == '/') {
+        if (e.url.includes('/index') || e.url.includes('/register') || e.url === '/') {
           this.isShowSearch = false;
         } else {
           this.isShowSearch = true;
         }
       }
-    })
+    });
   }
 }
 

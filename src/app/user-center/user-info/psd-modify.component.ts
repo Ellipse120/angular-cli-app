@@ -2,12 +2,12 @@ import {Component , OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 
-import {YslHttpService} from "../../core/ysl-http.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {CookieService} from "ngx-cookie";
-import {MdSnackBar} from "@angular/material";
-import {SearchService} from "../../search/search.service";
+import {YslHttpService} from '../../core/ysl-http.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {CookieService} from 'ngx-cookie';
+import {MdSnackBar} from '@angular/material';
+import {SearchService} from '../../search/search.service';
 
 @Component({
   selector: 'psd-modify',
@@ -39,7 +39,7 @@ export class PsdModifyComponent implements OnInit{
     oldPass: {
       required: '请输入原密码'
     }
-  }
+  };
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
               private router: Router,
@@ -58,7 +58,7 @@ export class PsdModifyComponent implements OnInit{
     const form = this.modifyForm;
     const formValue = form.value;
     this.isSubmit = true;
-    this.isInconsistent = (formValue['newPass'] != formValue['confirmPass']) ? true : false;
+    this.isInconsistent = (formValue['newPass'] !== formValue['confirmPass']) ? true : false;
     for (const field in this.formError) {
       this.formError[field] = '';
       const control = form.controls[field];
@@ -69,14 +69,14 @@ export class PsdModifyComponent implements OnInit{
         }
       }
     }
-    if (form.invalid || this.isInconsistent) { return }
+    if (form.invalid || this.isInconsistent) { return; }
     this.httpService.updatePass({userId: this.userId, data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
       .then(res => {
         this.snackBar.open('密码修改成功，请重新登录', '', {
           duration: 1000
         });
-        setTimeout(() => { this.searchService.logoutEvent.emit(); }, 1000)
-      })
+        setTimeout(() => { this.searchService.logoutEvent.emit(); }, 1000);
+      });
   }
   // 创建表单
   createForm() {
@@ -89,6 +89,6 @@ export class PsdModifyComponent implements OnInit{
         Validators.maxLength(12)
       ])],
       confirmPass: ['', Validators.required]
-    })
+    });
   }
 }

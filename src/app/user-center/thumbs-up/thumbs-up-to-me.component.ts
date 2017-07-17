@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {CookieService} from "ngx-cookie";
-import {YslHttpService} from "../../core/ysl-http.service";
+import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie';
+import {YslHttpService} from '../../core/ysl-http.service';
 
 @Component({
   selector: 'app-thumbs-up-to-me',
@@ -25,7 +25,7 @@ export class ThumbsUpToMeComponent implements OnInit {
 
   constructor(private yslHttpService: YslHttpService,
               private cookie: CookieService,
-              private router: Router,) {
+              private router: Router) {
     this.userId = this.cookie.getObject('yslUserInfo')['id'];
     this.getThumbsToMe();
   }

@@ -1,13 +1,13 @@
-import {Component, OnInit} from "@angular/core";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {MdDialog} from "@angular/material";
-import {CookieService} from "ngx-cookie";
-import {YslHttpService} from "../../core/ysl-http.service";
-import {ProductListService} from "../../product-mangement/product-list/product-list.service";
-import {isNullOrUndefined} from "util";
+import {Component, OnInit} from '@angular/core';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {MdDialog} from '@angular/material';
+import {CookieService} from 'ngx-cookie';
+import {YslHttpService} from '../../core/ysl-http.service';
+import {ProductListService} from '../../product-mangement/product-list/product-list.service';
+import {isNullOrUndefined} from 'util';
 
-import {ProductImportComponent} from "../../product-mangement/product-import/product-import.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ProductImportComponent} from '../../product-mangement/product-import/product-import.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'product-list',
@@ -30,9 +30,9 @@ export class ProductListComponent implements OnInit {
   showProInfo = false;
   dataItems = [];
   messages: any = {
-    emptyMessage: " 无数据 ",
-    totalMessage: " 总数",
-    selectedMessage: " 条选中"
+    emptyMessage: ' 无数据 ',
+    totalMessage: ' 总数',
+    selectedMessage: ' 条选中'
   };
   isFinished = true;
   userInfo: any;
@@ -72,7 +72,7 @@ export class ProductListComponent implements OnInit {
   ];
 
   // paging args
-  page: number = 1;
+  page = 1;
   isLoading: boolean;
 
   constructor(private productListService: ProductListService,
@@ -121,46 +121,46 @@ export class ProductListComponent implements OnInit {
     }
 
     switch (info.userType) {
-      case "未认证的个人用户": {
+      case '未认证的个人用户': {
         info.userType = 1;
         break;
       }
-      case "未认证的机构用户": {
+      case '未认证的机构用户': {
         info.userType = 2;
         break;
       }
-      case "认证的个人用户": {
+      case '认证的个人用户': {
         info.userType = 10;
         break;
       }
-      case "认证的机构用户": {
+      case '认证的机构用户': {
         info.userType = 20;
         break;
       }
-      case "运营方用户": {
+      case '运营方用户': {
         info.userType = 30;
         break;
       }
     }
 
     switch (info.status) {
-      case "注册": {
+      case '注册': {
         info.status = 1;
         break;
       }
-      case "激活": {
+      case '激活': {
         info.status = 2;
         break;
       }
-      case "禁用": {
+      case '禁用': {
         info.status = 3;
         break;
       }
     }
 
-    let productTitle = '产品修改';
+    const productTitle = '产品修改';
 
-    let dialogRef = this.dialog.open(ProductImportComponent, {data: {info, productTitle}, disableClose: true});
+    const dialogRef = this.dialog.open(ProductImportComponent, {data: {info, productTitle}, disableClose: true});
     dialogRef.componentInstance.productTitle = productTitle;
     dialogRef.componentInstance.isProImport = false;
     dialogRef.componentInstance.data = info;
@@ -170,7 +170,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  //选择每一行触发事件
+  // 选择每一行触发事件
   onSelect({selected}) {
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
@@ -236,7 +236,7 @@ export class ProductListComponent implements OnInit {
   getCellNameClass({row, column, value}) {
     return {
       'is-name-left': true
-    }
+    };
   }
 
   doViewProductDetail(item) {
