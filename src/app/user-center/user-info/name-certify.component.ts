@@ -1,4 +1,4 @@
-import {Component , OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {resource} from 'selenium-webdriver/http';
@@ -45,7 +45,8 @@ export class NameCertifyComponent implements OnInit {
               private fb: FormBuilder,
               private cookie: CookieService,
               private commonService: YslCommonService,
-              public snackBar: MdSnackBar) {}
+              public snackBar: MdSnackBar) {
+  }
 
   ngOnInit() {
     this.getUserInfo();
@@ -95,17 +96,29 @@ export class NameCertifyComponent implements OnInit {
   submitIndividual() {
     const form = this.individualForm;
     for (const mess in this.individualFormError) {
-      this.individualFormError[mess] = '';
-      const control = form.get(mess);
-      if (control && control.errors) {
-        const message = this.individualFormErrorMess[mess];
-        for (const error in control.errors) {
-          this.individualFormError[mess] += message[error] + '';
+      if (this.individualFormError.hasOwnProperty(mess)) {
+        this.individualFormError[mess] = '';
+        const control = form.get(mess);
+        if (control && control.errors) {
+          const message = this.individualFormErrorMess[mess];
+          for (const error in control.errors) {
+            if (control.errors.hasOwnProperty(error)) {
+              this.individualFormError[mess] += message[error] + '';
+            }
+          }
         }
       }
     }
-    if (this.individualForm.invalid) { return }
-    const option = {userId: this.userId, name: form.value['name'], userContactPhone: form.value['tel'], smsCode: form.value['validCode']};
+
+    if (this.individualForm.invalid) {
+      return;
+    }
+    const option = {
+      userId: this.userInfo['userId'],
+      name: form.value['name'],
+      userContactPhone: form.value['tel'],
+      smsCode: form.value['validCode']
+    };
     this.httpService.verifyIndividual(option)
       .then(res => {
         // let userInfo = this.userInfo;

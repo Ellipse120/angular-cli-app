@@ -56,8 +56,10 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
       if (item === info) {
         item.edit = true;
       }
-      for(const key in controls) {
-        controls[item.formControlName] = item.model;
+      for (const key in controls) {
+        if (controls.hasOwnProperty(key)) {
+          controls[item.formControlName] = item.model;
+        }
       }
     });
     this.editForm.patchValue(controls);
@@ -72,7 +74,7 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
       .then(res => {
         // 修改成功后对模板的修改
         this.userInfo.forEach(item => {
-          if (item === info) { item.edit = false }
+          if (item === info) { item.edit = false; }
         });
         this.updateUserInfo();
       });
