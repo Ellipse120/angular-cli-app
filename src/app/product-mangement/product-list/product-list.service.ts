@@ -1,11 +1,11 @@
 /**
  * Created by Lusai on 6/13/17.
  */
-import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {YslHttpService} from "../../core/ysl-http.service";
-import {CookieService} from "ngx-cookie";
-import {isNullOrUndefined} from "util";
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {YslHttpService} from '../../core/ysl-http.service';
+import {CookieService} from 'ngx-cookie';
+import {isNullOrUndefined} from 'util';
 
 @Injectable()
 export class ProductListService {
@@ -23,13 +23,13 @@ export class ProductListService {
 
   getProductList(option): Promise<any> {
     return new Promise(resolve => {
-      if (!isNullOrUndefined(this.userId)){
+      if (!isNullOrUndefined(this.userId)) {
         this.http.get(this.yslHttpservice.url + 'api/product', {
           params: option
         })
           .toPromise()
           .then(res => resolve(res.json()))
-          .catch(this.handleError)
+          .catch(this.handleError);
       }
     });
   }
@@ -42,8 +42,8 @@ export class ProductListService {
         })
       })
         .toPromise()
-        .then(res => resolve(res.json()), error => reject(error))
-    })
+        .then(res => resolve(res.json()), error => reject(error));
+    });
   }
 
   doProductUpdate(option) {
@@ -54,20 +54,20 @@ export class ProductListService {
         })
       })
         .toPromise()
-        .then(res => resolve(res), error => reject(error))
-    })
+        .then(res => resolve(res), error => reject(error));
+    });
   }
 
   doChangeStatus(productId, newStatus) {
-    return new Promise((resolve,reject) => {
-      this.http.put(this.yslHttpservice.url + 'api/product/' + productId + '/status/' + newStatus,{
+    return new Promise((resolve, reject) => {
+      this.http.put(this.yslHttpservice.url + 'api/product/' + productId + '/status/' + newStatus, {
         headers: new Headers({
           'Content-type': 'application/json'
         })
       })
         .toPromise()
-        .then(res => resolve(res), error => reject(error))
-    })
+        .then(res => resolve(res), error => reject(error));
+    });
   }
 
   private handleError(error: any): Promise<any> {

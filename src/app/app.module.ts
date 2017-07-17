@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ProductMangementModule } from './product-mangement/product-mangement.module';
+import { ProductManagementModule } from './product-mangement/product-mangement.module';
 import { YslMaterialModule } from './core/ysl-material.module';
 import { UserCenterModule } from './user-center/user-center.module';
 import { OperationManagementModule } from './operation-management/operation-management.module';
@@ -25,27 +25,27 @@ import { DataDetailComponent } from './search/datalist/data-detail/data-detail.c
 import { LoginComponent } from './login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { UEditorModule } from 'ngx-ueditor';
-import {CookieModule} from "ngx-cookie";
-import {YslCommonService} from "./core/ysl-common.service";
-import {SearchService} from "./search/search.service";
-import {ProductListService} from "./product-mangement/product-list/product-list.service";
-import {YslPopupDirective} from "./core/directive/ysl-popup.directive";
-import {SearchAdvancedComponent} from "./search/search-input/search-advanced/search-advanced.component";
-import {ProductErrataComponent} from "./search/datalist/data-detail/product-errata.component";
-import {ServiceAgreementComponent} from "./statement/service-agreement.component";
-import {YslPrivacyComponent} from "./statement/privacy.component";
-import {YslLoadingComponent} from "./core/loading/loading.component";
-import {SearchHistoryComponent} from "./search/search-input/search-history.component";
+import {CookieModule} from 'ngx-cookie';
+import {YslCommonService} from './core/ysl-common.service';
+import {SearchService} from './search/search.service';
+import {ProductListService} from './product-mangement/product-list/product-list.service';
+import {YslPopupDirective} from './core/directive/ysl-popup.directive';
+import {SearchAdvancedComponent} from './search/search-input/search-advanced/search-advanced.component';
+import {ProductErrataComponent} from './search/datalist/data-detail/product-errata.component';
+import {ServiceAgreementComponent} from './statement/service-agreement.component';
+import {YslPrivacyComponent} from './statement/privacy.component';
+import {YslLoadingComponent} from './core/loading/loading.component';
+import {SearchHistoryComponent} from './search/search-input/search-history.component';
 import { VerifySuccessComponent } from './register/verify-success.component';
 import { VerifyFailureComponent } from './register/verify-failure.component';
 
 
-let ueditorPath = {
+const ueditorPath = {
   path: 'assets/ueditor/',
   options: {
     themePath: '/assets/ueditor/themes/'
   }
-}
+};
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ let ueditorPath = {
     HttpModule,
     NgxPaginationModule,
     MyDatePickerModule,
-    ProductMangementModule,
+    ProductManagementModule,
     UserCenterModule,
     OperationManagementModule,
     BrowserAnimationsModule,

@@ -17,7 +17,7 @@ import {CommentListComponent} from './comment/comment-list.component';
 import {LikeListComponent} from './likes/like-list.component';
 import {ThumbsUpByMeComponent} from './thumbs-up/thumbs-up-by-me.component';
 import {ThumbsUpToMeComponent} from './thumbs-up/thumbs-up-to-me.component';
-import {CommentListByMeComponent} from "./comment/comment-list-by-me.component";
+import {CommentListByMeComponent} from './comment/comment-list-by-me.component';
 
 // 定义个人中心第三级路由
 // 产品
@@ -102,7 +102,7 @@ const childUserCenterRoutes: Routes = [
         component: ThumbsUpByMeComponent
       },
       {
-        path:'',
+        path: '',
         redirectTo: 'by-me',
         pathMatch: 'full'
       },

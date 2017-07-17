@@ -8,10 +8,10 @@ import {CookieService} from 'ngx-cookie';
 import {MdDialog} from '@angular/material';
 import {isNullOrUndefined} from 'util';
 import {LoginComponent} from '../../login/login.component';
-import {ConfirmDialogComponent} from "../../core/commons/confirm-dialog.component";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {ProductService} from "../service/product.service";
-import {ProductImportComponent} from "../product-import/product-import.component";
+import {ConfirmDialogComponent} from '../../core/commons/confirm-dialog.component';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {ProductService} from '../service/product.service';
+import {ProductImportComponent} from '../product-import/product-import.component';
 
 const USER_COOKIE = 'yslUserInfo';
 
@@ -140,14 +140,14 @@ export class ErrorCorrectComponent implements OnInit {
   }
 
   listError() {
-    var params = {};
+    const params = {};
     if (this.user['userType'] === 20) {
       params['userName'] = this.user['name'];
     }
     this.service.list(params).subscribe(data => {
       console.log('data:', data);
-      let total = data.totalLength;
-      let items = data.items;
+      const total = data.totalLength;
+      const items = data.items;
       items.forEach(item => {
         item.submitTime = this.commonService.getDateForDay(item.submitTime);
         if (item.status === 2) {
@@ -155,7 +155,7 @@ export class ErrorCorrectComponent implements OnInit {
         } else {
           item.statusText = '已修改';
         }
-      })
+      });
       this.rows = items;
     });
   }

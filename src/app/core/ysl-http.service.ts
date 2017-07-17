@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
-import 'rxjs/add/operator/toPromise'
-import {reject} from "q";
-import {Observable} from "rxjs/Observable";
+import 'rxjs/add/operator/toPromise';
+import {reject} from 'q';
+import {Observable} from 'rxjs/Observable';
 // import reject = Q.reject;
 
 // 此处的@Injectable是一个装饰器
@@ -11,11 +11,11 @@ export class YslHttpService {
 
   private dataListUrl = './assets/data/';
 
-  //private url = 'http://ysl.dev.cjzc.net.cn/' ;
-  // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/' ;
+  // private url = 'http://ysl.dev.cjzc.net.cn/';
+  // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // public url = 'http://192.168.19.11:1337/192.168.19.20:8080/ysl-ws/';
   // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
-  public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
+  public url = 'http://192.168.14.14:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
    // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // REPLACE
 
@@ -47,9 +47,9 @@ export class YslHttpService {
   }
 
   // 获取标签
-  getTagDimensions():Promise<any>{
-    //var headers = new Headers({ 'Content-Type': 'application/json' });
-    //var options = new RequestOptions({ headers: headers });
+  getTagDimensions(): Promise<any> {
+    // var headers = new Headers({ 'Content-Type': 'application/json' });
+    // var options = new RequestOptions({ headers: headers });
     return new Promise(resolve => {
       this.http.get(this.url + 'api/tag/dimension/hierarchy')
           .toPromise()
@@ -58,7 +58,7 @@ export class YslHttpService {
   }
 
   // 获得用户列表
-  getUser():Promise<any> {
+  getUser(): Promise<any> {
     return new Promise(resolve => {
       this.http.get(this.dataListUrl + 'userList.json')
         .toPromise()
@@ -82,7 +82,7 @@ export class YslHttpService {
 
     req.onload = () => {
       cb(JSON.parse(req.response));
-    }
+    };
 
     req.send();
   }
@@ -90,10 +90,10 @@ export class YslHttpService {
   // 获得纠错信息数据
   getError(callback) {
     const req = new XMLHttpRequest();
-    req.open('GET','assets/data/error.json');
+    req.open('GET', 'assets/data/error.json');
     req.onload = () => {
       callback(JSON.parse(req.response));
-    }
+    };
 
     req.send();
   }
@@ -119,13 +119,13 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.post(this.url + 'api/user/signup', {contactMail: mail, userType: 1, loginId: mail})
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
+        .then(response => resolve(response.json()), error => reject(error));
     });
   }
 
   // 登录
   userLogin(user): Promise<any> {
-    let data = JSON.stringify(user);
+    const data = JSON.stringify(user);
     return new Promise((resolve, reject) => {
       this.http.post(this.url + 'api/authentication/login', data, {
         headers: new Headers({
@@ -133,7 +133,7 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(response.json()), error => reject(error))
+        .then(response => resolve(response.json()), error => reject(error));
     });
   }
 
@@ -191,10 +191,10 @@ export class YslHttpService {
   // 样本下载
   downloadSampleFile(productId) {
   return new Promise((resolve, reject) => {
-    this.http.get(this.url + 'api/product/' + productId +'/file/content')
+    this.http.get(this.url + 'api/product/' + productId + '/file/content')
       .toPromise()
       .then(response => resolve(response.json()), error => reject(error));
-  })
+  });
   }
 
   // 获取相关产品
@@ -210,7 +210,7 @@ export class YslHttpService {
   // 产品点赞
   createProductFavor(option) {
     return new Promise((resolve, reject) => {
-      let data = JSON.stringify(option.data);
+      const data = JSON.stringify(option.data);
       this.http.post(this.url + 'api/product/' + option.productId + '/favor/' + option.status, data, {
         headers: new Headers({
           'Content-Type': 'application/json'
@@ -222,9 +222,9 @@ export class YslHttpService {
   }
 
   // 产品纠错
-  createProductErrata(option):Promise<any> {
+  createProductErrata(option): Promise<any> {
     return new Promise((resolve, reject) => {
-      let data = JSON.stringify(option.data);
+      const data = JSON.stringify(option.data);
       this.http.post(this.url + 'api/product/' + option.productId + '/errata', data, {
         headers: new Headers({
           'Content-Type': 'application/json'
@@ -237,7 +237,7 @@ export class YslHttpService {
 
   // 产品评价
   addProductComment(option): Promise<any> {
-    let data = JSON.stringify(option.data);
+    const data = JSON.stringify(option.data);
     return new Promise((resolve, reject) => {
       this.http.post(this.url + 'api/product/' + option.productId + '/comment', data, {
         headers: new Headers({
@@ -290,7 +290,7 @@ export class YslHttpService {
         })
       })
         .toPromise()
-        .then(response => resolve(), error => reject())
+        .then(response => resolve(), error => reject());
     });
   }
 
@@ -299,8 +299,8 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/authentication/sms', {params: {phone: phone}})
         .toPromise()
-        .then(res => resolve(), error => reject())
-    })
+        .then(res => resolve(), error => reject());
+    });
   }
 
   // 个人中心/认证/个人
@@ -370,12 +370,12 @@ export class YslHttpService {
   * 我赞过的产品列表API
   */
   getThumbsUpByMe(option): Promise<any> {
-    return new Promise((resolve, reject)=> {
-      this.http.get(this.url + 'api/product/favor/list/'+ option.userId,{
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + 'api/product/favor/list/' + option.userId, {
         params: option
       })
         .toPromise()
-        .then(res => resolve(res.json()))
+        .then(res => resolve(res.json()));
     });
   }
 
@@ -384,7 +384,7 @@ export class YslHttpService {
   */
   getThumbsToMe(option): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + 'api/product/favored/list/' + option.userId,{
+      this.http.get(this.url + 'api/product/favored/list/' + option.userId, {
         params: option
       })
         .toPromise()

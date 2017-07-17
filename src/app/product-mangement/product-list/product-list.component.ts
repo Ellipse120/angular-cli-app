@@ -1,13 +1,13 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 
-import {YslCommonService} from "../../core/ysl-common.service";
-import {ProductListService} from "./product-list.service";
-import {MdDialog} from "@angular/material";
-import {ProductImportComponent} from "../product-import/product-import.component";
-import {LoginComponent} from "../../login/login.component";
-import {CookieService} from "ngx-cookie";
-import {isNullOrUndefined} from "util";
-import {YslHttpService} from "../../core/ysl-http.service";
+import {YslCommonService} from '../../core/ysl-common.service';
+import {ProductListService} from './product-list.service';
+import {MdDialog} from '@angular/material';
+import {ProductImportComponent} from '../product-import/product-import.component';
+import {LoginComponent} from '../../login/login.component';
+import {CookieService} from 'ngx-cookie';
+import {isNullOrUndefined} from 'util';
+import {YslHttpService} from '../../core/ysl-http.service';
 
 @Component({
   selector: 'product-list',
@@ -30,9 +30,9 @@ export class ProductListComponent implements OnInit {
   showProInfo = false;
   dataItems = [];
   messages: any = {
-    emptyMessage: " 无数据 ",
-    totalMessage: " 总数",
-    selectedMessage: " 条选中"
+    emptyMessage: ' 无数据 ',
+    totalMessage: ' 总数',
+    selectedMessage: ' 条选中'
   };
   isFinished = true;
   userInfo: any;
@@ -97,23 +97,23 @@ export class ProductListComponent implements OnInit {
         this.dataItems.forEach(item => {
           switch ('' + item.userType) {
             case  '1': {
-              item.userType = "未认证的个人用户";
+              item.userType = '未认证的个人用户';
               break;
             }
             case  '2': {
-              item.userType = "未认证的机构用户";
+              item.userType = '未认证的机构用户';
               break;
             }
             case  '10': {
-              item.userType = "认证的个人用户";
+              item.userType = '认证的个人用户';
               break;
             }
             case  '20': {
-              item.userType = "认证的机构用户";
+              item.userType = '认证的机构用户';
               break;
             }
             case  '30': {
-              item.userType = "运营方用户";
+              item.userType = '运营方用户';
               break;
             }
             default: {
@@ -123,17 +123,17 @@ export class ProductListComponent implements OnInit {
 
           switch ('' + item.status) {
             case '2':
-              item.status = "激活";
+              item.status = '激活';
               break;
             case '1':
-              item.status = "注册";
+              item.status = '注册';
               break;
             case '3':
-              item.status = "禁用";
+              item.status = '禁用';
               break;
           }
 
-          item.premium = item.premium ? "是" : "否";
+          item.premium = item.premium ? '是' : '否';
           item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn);
           this.isOn.push(true);
         });
@@ -181,46 +181,46 @@ export class ProductListComponent implements OnInit {
     }
 
     switch (info.userType) {
-      case "未认证的个人用户": {
+      case '未认证的个人用户': {
         info.userType = 1;
         break;
       }
-      case "未认证的机构用户": {
+      case '未认证的机构用户': {
         info.userType = 2;
         break;
       }
-      case "认证的个人用户": {
+      case '认证的个人用户': {
         info.userType = 10;
         break;
       }
-      case "认证的机构用户": {
+      case '认证的机构用户': {
         info.userType = 20;
         break;
       }
-      case "运营方用户": {
+      case '运营方用户': {
         info.userType = 30;
         break;
       }
     }
 
     switch (info.status) {
-      case "注册": {
+      case '注册': {
         info.status = 1;
         break;
       }
-      case "激活": {
+      case '激活': {
         info.status = 2;
         break;
       }
-      case "禁用": {
+      case '禁用': {
         info.status = 3;
         break;
       }
     }
 
-    let productTitle = '产品修改';
+    const productTitle = '产品修改';
 
-    let dialogRef = this.dialog.open(ProductImportComponent, {data: {info, productTitle}, disableClose: true});
+    const dialogRef = this.dialog.open(ProductImportComponent, {data: {info, productTitle}, disableClose: true});
     dialogRef.componentInstance.productTitle = productTitle;
     dialogRef.componentInstance.isProImport = false;
     dialogRef.componentInstance.data = info;
@@ -257,7 +257,7 @@ export class ProductListComponent implements OnInit {
 
   importProduct(): void {
     if (!isNullOrUndefined(this.userInfo)) {
-      let dialogRef = this.dialog.open(ProductImportComponent, {disableClose: true});
+      const dialogRef = this.dialog.open(ProductImportComponent, {disableClose: true});
       dialogRef.afterClosed().subscribe(result => {
         this.getProducts();
       });
@@ -267,7 +267,7 @@ export class ProductListComponent implements OnInit {
   }
 
   showLoginComp() {
-    let dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
+    const dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
     dialogLog.afterClosed().subscribe(result => {
       if (!result) {
         return;
@@ -293,7 +293,7 @@ export class ProductListComponent implements OnInit {
   doFilter() {
     switch (this.pagingOption.startModifiedOn) {
       case 1: {
-        this.pagingOption.startModifiedOn = Date.now() - 7*24*60*60*1000;
+        this.pagingOption.startModifiedOn = Date.now() - 7 * 24 * 60 * 60 * 1000;
         break;
       }
       case 2: {
@@ -316,7 +316,7 @@ export class ProductListComponent implements OnInit {
   getCellNameClass({row, column, value}) {
     return {
       'is-name-left': true
-    }
+    };
   }
 
   ngOnInit() {

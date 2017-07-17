@@ -69,7 +69,7 @@ export class ProductImportComponent implements OnInit {
   userInfo;
   productTitle = '产品录入';
   isProImport = true;
-  pattern ='[^,，.。;；]+$';
+  pattern = '[^,，.。;；]+$';
 
   constructor(public service: YslHttpService,
               private productListService: ProductListService,
@@ -85,9 +85,9 @@ export class ProductImportComponent implements OnInit {
         this.tagDimensions = data;
       });
 
-    if(!this.isProImport) {
-      let a = new Date(this.data.dataSince);
-      let b = new Date(this.data.dataUntil);
+    if (!this.isProImport) {
+      const a = new Date(this.data.dataSince);
+      const b = new Date(this.data.dataUntil);
       this.timeFrom = {
         date: {
           year: a.getFullYear(),
@@ -101,7 +101,7 @@ export class ProductImportComponent implements OnInit {
           month: b.getMonth() + 1,
           day: b.getDate()
         }
-      }
+      };
     }
 
     this.getSelectionOption();
@@ -149,7 +149,7 @@ export class ProductImportComponent implements OnInit {
   checkTag(id) {
     let ret = false;
     this.data.tags.forEach(tag => {
-      if (tag.id == id) {
+      if (tag.id === id) {
         ret = true;
       }
     });
@@ -159,24 +159,24 @@ export class ProductImportComponent implements OnInit {
   getSelectionOption() {
     this.service.getAdvancedSearchInfo()
       .then((res) => {
-        let options: any = res;
+        const options: any = res;
 
         options.forEach(option => {
           switch (option.categoryCode) {
             case 'data_category': {
-              this.dataCategories.push({value:+option.entryCode, viewValue: option.entryValue});
+              this.dataCategories.push({value: + option.entryCode, viewValue: option.entryValue});
               break;
             }
             case 'data_source': {
-              this.dataSources.push({value:+option.entryCode, viewValue: option.entryValue});
+              this.dataSources.push({value: + option.entryCode, viewValue: option.entryValue});
               break;
             }
             case 'data_collection': {
-              this.dataCollections.push({value:+option.entryCode, viewValue: option.entryValue});
+              this.dataCollections.push({value: + option.entryCode, viewValue: option.entryValue});
               break;
             }
             case 'data_service': {
-              this.dataServices.push({value:+option.entryCode, viewValue: option.entryValue});
+              this.dataServices.push({value: + option.entryCode, viewValue: option.entryValue});
               break;
             }
           }

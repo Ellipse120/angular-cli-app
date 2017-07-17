@@ -1,4 +1,4 @@
-export class DataType{
- title:string;
-  content:string;
+export class DataType {
+  title: string;
+  content: string;
 }

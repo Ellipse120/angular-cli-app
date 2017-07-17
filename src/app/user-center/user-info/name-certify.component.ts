@@ -1,10 +1,10 @@
 import {Component , OnInit} from '@angular/core';
-import {YslHttpService} from "../../core/ysl-http.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {resource} from "selenium-webdriver/http";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {CookieService} from "ngx-cookie";
-import {MdSnackBar} from "@angular/material";
+import {YslHttpService} from '../../core/ysl-http.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {resource} from 'selenium-webdriver/http';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {CookieService} from 'ngx-cookie';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   selector: 'name-certify',
@@ -12,7 +12,7 @@ import {MdSnackBar} from "@angular/material";
   styleUrls: ['./user-info.component.css']
 })
 
-export class NameCertifyComponent implements OnInit{
+export class NameCertifyComponent implements OnInit {
 
   individualForm: FormGroup;
   userInfo: any;
@@ -66,7 +66,7 @@ export class NameCertifyComponent implements OnInit{
 
   // 获取验证码
   getValidateCode() {
-    let form = this.individualForm;
+    const form = this.individualForm;
     if (form.controls['tel'].invalid) {
       this.individualFormError.tel = '请输入手机号';
       return;
@@ -88,24 +88,24 @@ export class NameCertifyComponent implements OnInit{
         // this.snackBar.open('验证码发送成功', '', {
         //   duration: 3000
         // });
-      })
+      });
   }
 
   // 提交个人认证
   submitIndividual() {
-    let form = this.individualForm;
-    for (let mess in this.individualFormError) {
+    const form = this.individualForm;
+    for (const mess in this.individualFormError) {
       this.individualFormError[mess] = '';
-      let control = form.get(mess);
+      const control = form.get(mess);
       if (control && control.errors) {
-        let message = this.individualFormErrorMess[mess];
-        for (let error in control.errors) {
-          this.individualFormError[mess] += message[error] + ''
+        const message = this.individualFormErrorMess[mess];
+        for (const error in control.errors) {
+          this.individualFormError[mess] += message[error] + '';
         }
       }
     }
     if (this.individualForm.invalid) { return }
-    let option = {userId: this.userId, name: form.value['name'], userContactPhone: form.value['tel'], smsCode: form.value['validCode']};
+    const option = {userId: this.userId, name: form.value['name'], userContactPhone: form.value['tel'], smsCode: form.value['validCode']};
     this.httpService.verifyIndividual(option)
       .then(res => {
         // let userInfo = this.userInfo;
@@ -113,7 +113,7 @@ export class NameCertifyComponent implements OnInit{
         // this.cookie.putObject('yslUserInfo', userInfo);
         this.getUserInfo();
         // window.location.reload();
-      })
+      });
   }
 
   // 切换tab

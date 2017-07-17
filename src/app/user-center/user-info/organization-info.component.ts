@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {YslHttpService} from "../../core/ysl-http.service";
-import {CookieService} from "ngx-cookie";
-import {YslCommonService} from "../../core/ysl-common.service";
-import {resolve} from "url";
-import {Subscription} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {YslHttpService} from '../../core/ysl-http.service';
+import {CookieService} from 'ngx-cookie';
+import {YslCommonService} from '../../core/ysl-common.service';
+import {resolve} from 'url';
+import {Subscription} from 'rxjs';
 
 @Component({
   templateUrl: './organization-info.component.html',
@@ -17,7 +17,7 @@ export class organizationInfoComponent implements OnInit {
   subscription: Subscription;
   userId: any;
   userInfo: any;
-  isEditable: boolean = false;
+  isEditable = false;
   orgViewInfo = [
     {label: '组织名称', formControlName: 'name', model: ''},
     {label: '联系人姓名', formControlName: 'contactName', model: ''},
@@ -64,7 +64,7 @@ export class organizationInfoComponent implements OnInit {
       this.userInfo = e.userInfo;
       this.orgViewInfo.forEach(item => {
         item['model'] = this.userInfo[item.formControlName];
-        if (item.formControlName == 'name') { item.model = this.userInfo['orgName']}
+        if (item.formControlName === 'name') { item.model = this.userInfo['orgName']; }
         item['edit'] = false;
       });
     });
@@ -72,20 +72,20 @@ export class organizationInfoComponent implements OnInit {
 
   // 提交组织认证
   submitOrganization(isVerify) {
-    let form = this.organizationForm;
-    for (let mess in this.orgFormError) {
+    const form = this.organizationForm;
+    for (const mess in this.orgFormError) {
       this.orgFormError[mess] = '';
-      let control = form.get(mess);
+      const control = form.get(mess);
       if (control && control.errors) {
-        let message = this.orgFormErrorMess[mess];
-        for (let error in control.errors) {
-          this.orgFormError[mess] += message[error] + ''
+        const message = this.orgFormErrorMess[mess];
+        for (const error in control.errors) {
+          this.orgFormError[mess] += message[error] + '';
         }
       }
     }
-    if (this.organizationForm.invalid) { return }
-    let option = {userId: this.userId};
-    for (let key in form.value) {
+    if (this.organizationForm.invalid) { return; }
+    const option = {userId: this.userId};
+    for (const key in form.value) {
       option[key] = form.value[key];
     }
     this.httpService.verifyOrganization(option)
@@ -99,9 +99,9 @@ export class organizationInfoComponent implements OnInit {
           this.orgViewInfo.forEach(item => {
             item['edit'] = false;
             this.isEditable = false;
-          })
+          });
         }
-      })
+      });
   }
 
   // 更新用户信息
@@ -114,7 +114,7 @@ export class organizationInfoComponent implements OnInit {
 
   // 修改组织信息
   editable() {
-    let controls = {
+    const controls = {
       name: '',
       contactName: '',
       contactPhone: '',
@@ -145,7 +145,7 @@ export class organizationInfoComponent implements OnInit {
       webSite: ['', Validators.compose([
         Validators.required
       ])]
-    })
+    });
   }
 }
 

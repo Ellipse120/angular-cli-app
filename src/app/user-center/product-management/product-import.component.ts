@@ -1,16 +1,12 @@
-/**
- * Created by Lusai on 30/06/2017.
- */
-
-import {Component, OnInit} from "@angular/core";
-import {IMyDateModel, IMyDpOptions} from "mydatepicker";
-import {YslHttpService} from "../../core/ysl-http.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {isNullOrUndefined} from "util";
-import {ProductListService} from "../../product-mangement/product-list/product-list.service";
-import {CookieService} from "ngx-cookie";
-import {Location} from "@angular/common";
-import {MdSnackBar} from "@angular/material";
+import {Component, OnInit} from '@angular/core';
+import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
+import {YslHttpService} from '../../core/ysl-http.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {isNullOrUndefined} from 'util';
+import {ProductListService} from '../../product-mangement/product-list/product-list.service';
+import {CookieService} from 'ngx-cookie';
+import {Location} from '@angular/common';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   templateUrl: './product-import.component.html',
@@ -72,7 +68,7 @@ export class ProductImportComponent implements OnInit {
   };
 
   userInfo;
-  pattern ='[^,，.。;；]+$';
+  pattern = '[^,，.。;；]+$';
 
   constructor(public service: YslHttpService,
               private router: Router,
@@ -80,19 +76,19 @@ export class ProductImportComponent implements OnInit {
               private productListService: ProductListService,
               private cookie: CookieService,
               private location: Location,
-  private snackbar: MdSnackBar) {
+              private snackbar: MdSnackBar) {
   }
 
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
 
-    if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))){
+    if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
       this.service.getProductDetail(this.route.snapshot.paramMap.get('productId'))
         .then(data => {
           this.product = data;
 
-          let a = new Date(this.product.dataSince);
-          let b = new Date(this.product.dataUntil);
+          const a = new Date(this.product.dataSince);
+          const b = new Date(this.product.dataUntil);
 
           this.timeFrom = {
             date: {
@@ -138,12 +134,12 @@ export class ProductImportComponent implements OnInit {
   checkedTag(id) {
     let ret = false;
     this.product.tags.forEach(tag => {
-      if(!isNullOrUndefined(tag.items)){
+      if (!isNullOrUndefined(tag.items)) {
         tag.items.forEach(item => {
           if (item.id === id) {
             ret = true;
           }
-        })
+        });
       }
     });
     return ret;
@@ -152,13 +148,13 @@ export class ProductImportComponent implements OnInit {
   doProductSubmit(): any {
     this.product.userId = this.userInfo;
     this.product.name = this.product.name.trim();
-    if(this.route.routeConfig.path === 'import'){
+    if (this.route.routeConfig.path === 'import') {
       this.productListService.doProductImport(this.product)
         .then(res => {
           this.snackbar.open('产品录入成功', '', {
             duration: 3000
           });
-          this.router.navigate(['../list'],{relativeTo: this.route})
+          this.router.navigate(['../list'], {relativeTo: this.route});
         });
     } else {
       this.productListService.doProductUpdate(this.product)
@@ -166,7 +162,7 @@ export class ProductImportComponent implements OnInit {
           this.snackbar.open('产品修改成功', '', {
             duration: 3000
           });
-          this.router.navigate(['../../list'],{relativeTo: this.route})
+          this.router.navigate(['../../list'], {relativeTo: this.route});
         });
     }
   }
@@ -174,7 +170,7 @@ export class ProductImportComponent implements OnInit {
   getSelectionOption() {
     this.service.getAdvancedSearchInfo()
       .then((res) => {
-        let options: any = res;
+        const options: any = res;
 
         options.forEach(option => {
           switch (option.categoryCode) {
@@ -200,8 +196,7 @@ export class ProductImportComponent implements OnInit {
   }
 
   goBackList() {
-    // this.location.back();
-    this.router.navigate(['../list'],{relativeTo: this.route})
+    this.router.navigate(['../list'], {relativeTo: this.route});
   }
 
 }
