@@ -1,9 +1,6 @@
 .mgb6{
   margin-bottom: 6px;
 }
-.comment{
-  padding: 20px;
-}
 .user-name{
   margin-top: 0;
   margin-bottom: 8px;
@@ -47,19 +44,6 @@
   background-color: #fff;
   padding: 10px;
   margin-bottom: 6px;
-  cursor: pointer;
-}
-.product-name:hover{
-  text-decoration: underline;
-}
-.list-group-item{
-  border: none;
-  background-color: #f6faf9;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-.list-group-item:last-of-type{
-  margin-bottom: 0;
 }
 .comment-list-by-me .user-name{
   display: flex;
@@ -71,12 +55,6 @@
 }
 
 @media screen and (max-width: 768px){
-  .comment{
-    padding: 0;
-  }
-  .list-group{
-    margin-top: 10px;
-  }
   .score-summary{
     flex-direction: column;
     align-items: flex-start;

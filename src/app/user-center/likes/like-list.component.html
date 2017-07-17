@@ -1,12 +1,12 @@
-<div class="product-list">
+<div class="like-list ysl-info-wrapper">
   <div class="list-empty" *ngIf="items.length==0">收藏列表为空</div>
-  <div class="item-list" *ngIf="items.length !==0">
-    <ul class="list-group">
-      <li class="list-group-item product-list-ul" *ngFor="let item of items | paginate: {itemsPerPage: pagination['limit'],
+  <div *ngIf="items.length !==0">
+    <ul class="ysl-list-group">
+      <li class="ysl-list-item" *ngFor="let item of items | paginate: {itemsPerPage: pagination['limit'],
                                                       currentPage: currPage,
-                                                      totalItems: items.totalLength}">
-        <h4 class="user-name font16">{{item.creator}}<span>更新时间：{{item.createdOn}}</span></h4>
-        <p class="product-name" (click)="toProductDetail(c)">{{item.name}}<button (click)="deleteFavorite(item)" class="btn cancel-btn">取消</button></p>
+                                                      totalItems: totalLength}">
+        <h4 class="user-name font16">{{item.creator}}<span class="font14">更新时间：{{item.createdOn}}</span></h4>
+        <p class="product-name"><a (click)="toProductDetail(item)">{{item.name}}</a><button (click)="deleteFavorite(item)" class="btn cancel-btn">取消</button></p>
       </li>
     </ul>
     <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"

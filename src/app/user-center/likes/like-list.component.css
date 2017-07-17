@@ -1,18 +1,7 @@
-.item-list {
-  margin-top: 20px;
+.user-name,.product-name{
+  display: flex;
+  justify-content: space-between;
 }
 .cancel-btn{
   padding: 0 8px;
-}
-
-@media all and (max-width: 450px) {
-  .item-list {
-    margin-top: 0px;
-  }
-}
-
-@media all and (min-width: 768px){
-  .item-list {
-    margin-top: 20px;
-  }
 }

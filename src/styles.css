@@ -20,7 +20,7 @@ body {
   overflow-y: scroll;
 }
 
-p, div, section, ul, ol, li, input, textarea, select, a, i, span, img {
+p, div, section, ul, ol, li, input, textarea, select, a, i, span, img, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -28,19 +28,19 @@ p, div, section, ul, ol, li, input, textarea, select, a, i, span, img {
 }
 
 input, textarea, a, ul, li, select {
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
 }
 
 *::-moz-placeholder {
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
 }
 
 *:-ms-input-placeholder {
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
 }
 
 *::-webkit-input-placeholder {
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
 }
 
 ul li {
@@ -49,11 +49,11 @@ ul li {
 
 a {
   text-decoration: none;
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
 }
 
 p {
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
 }
 
 img {
@@ -598,7 +598,7 @@ footer {
 .ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after {
   display: none !important;
 }
-.comment .ngx-pagination{
+.ysl-info-wrapper .ngx-pagination{
   justify-content: flex-end;
 }
 
@@ -910,8 +910,29 @@ app-index .mat-ripple {
 
 .user-center-cont {
   background-color: #FFFFFF;
-  /*height: 235px;*/
-  padding-bottom: 10px;
+}
+
+/*管理、个人中心列表*/
+.ysl-info-wrapper{
+  padding: 20px;
+}
+.ysl-list-item{
+  border: none;
+  background-color: #f6faf9;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+.ysl-list-item:last-of-type{
+  margin-bottom: 0;
+}
+.ysl-list-item .user-name{
+  margin-bottom: 10px;
+}
+.ysl-list-item .product-name a{
+  cursor: pointer;
+}
+.ysl-list-item .product-name a:hover{
+  text-decoration: underline;
 }
 
 /*个人中心公用*/
@@ -1005,6 +1026,9 @@ app-index .mat-ripple {
 
   .user-center .inner-cont {
     padding: 20px 20px;
+  }
+  .ysl-info-wrapper{
+    padding: 10px 0;
   }
 }
 
