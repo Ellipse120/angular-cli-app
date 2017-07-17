@@ -2,7 +2,8 @@
   <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a
     routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
   <div class="my-user-base-info">
-  <div class="before-verify" *ngIf="userInfo?.userType == '10'">
+  <!--<div class="before-verify" *ngIf="userInfo?.userType == '10'">-->
+  <div class="before-verify" *ngIf="false">
     <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization(1)"
           novalidate>
       <div class="form-group">
@@ -54,13 +55,13 @@
   </div>
   </div>
 
-  <div class="after-verify" *ngIf="userInfo?.userType == '20'">
+  <div class="after-verify">
 
     <div class="my-user-base-info">
-    <div class="user-edit">
+    <div class="user-edit" style="padding-top: 10px;">
       <form [formGroup]="organizationForm" class="user-info-list">
         <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
-        <div class="info-item row" *ngFor="let o of orgViewInfo"  style="padding:10px 0 0 0;margin-bottom: 5px;">
+        <div class="info-item row" *ngFor="let o of orgViewInfo">
           <span class="user-tag col-xs-5">{{o.label}}</span>
           <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"
                                                                               [formControlName]="o.formControlName"

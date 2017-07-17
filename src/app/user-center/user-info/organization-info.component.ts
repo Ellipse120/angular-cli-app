@@ -4,7 +4,7 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {resolve} from 'url';
-import {Subscription} from 'rxjs';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   templateUrl: './organization-info.component.html',
@@ -50,7 +50,8 @@ export class organizationInfoComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private httpService: YslHttpService,
               private commonService: YslCommonService,
-              private cookie: CookieService) {}
+              private cookie: CookieService) {
+  }
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
@@ -64,7 +65,9 @@ export class organizationInfoComponent implements OnInit {
       this.userInfo = e.userInfo;
       this.orgViewInfo.forEach(item => {
         item['model'] = this.userInfo[item.formControlName];
-        if (item.formControlName === 'name') { item.model = this.userInfo['orgName']; }
+        if (item.formControlName === 'name') {
+          item.model = this.userInfo['orgName'];
+        }
         item['edit'] = false;
       });
     });
@@ -74,19 +77,27 @@ export class organizationInfoComponent implements OnInit {
   submitOrganization(isVerify) {
     const form = this.organizationForm;
     for (const mess in this.orgFormError) {
-      this.orgFormError[mess] = '';
-      const control = form.get(mess);
-      if (control && control.errors) {
-        const message = this.orgFormErrorMess[mess];
-        for (const error in control.errors) {
-          this.orgFormError[mess] += message[error] + '';
+      if (this.orgFormError.hasOwnProperty(mess)) {
+        this.orgFormError[mess] = '';
+        const control = form.get(mess);
+        if (control && control.errors) {
+          const message = this.orgFormErrorMess[mess];
+          for (const error in control.errors) {
+            if (control.errors.hasOwnProperty(error)) {
+              this.orgFormError[mess] += message[error] + '';
+            }
+          }
         }
       }
     }
-    if (this.organizationForm.invalid) { return; }
+    if (this.organizationForm.invalid) {
+      return;
+    }
     const option = {userId: this.userId};
     for (const key in form.value) {
-      option[key] = form.value[key];
+      if (form.value.hasOwnProperty(key)) {
+        option[key] = form.value[key];
+      }
     }
     this.httpService.verifyOrganization(option)
       .then(res => {

@@ -1,4 +1,4 @@
-import {Component , OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 
@@ -15,7 +15,7 @@ import {SearchService} from '../../search/search.service';
   styleUrls: ['./user-info.component.css']
 })
 
-export class PsdModifyComponent implements OnInit{
+export class PsdModifyComponent implements OnInit {
 
   modifyForm: FormGroup;
   userId: any;
@@ -40,13 +40,15 @@ export class PsdModifyComponent implements OnInit{
       required: '请输入原密码'
     }
   };
+
   constructor(private httpService: YslHttpService,
               private fb: FormBuilder,
               private router: Router,
               private commonService: YslCommonService,
               private cookie: CookieService,
               public snackBar: MdSnackBar,
-              private searchService: SearchService) {}
+              private searchService: SearchService) {
+  }
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo')['id'];
@@ -60,24 +62,36 @@ export class PsdModifyComponent implements OnInit{
     this.isSubmit = true;
     this.isInconsistent = (formValue['newPass'] !== formValue['confirmPass']) ? true : false;
     for (const field in this.formError) {
-      this.formError[field] = '';
-      const control = form.controls[field];
-      if (control && control.errors && !control.valid) {
-        const mess = this.formErrorMess[field];
-        for (const err in control.errors) {
-          this.formError[field] += mess[err] + '';
+      if (this.formError.hasOwnProperty(field)) {
+        this.formError[field] = '';
+        const control = form.controls[field];
+        if (control && control.errors && !control.valid) {
+          const mess = this.formErrorMess[field];
+          for (const err in control.errors) {
+            if (control.errors.hasOwnProperty(err)) {
+              this.formError[field] += mess[err] + '';
+            }
+          }
         }
       }
     }
-    if (form.invalid || this.isInconsistent) { return; }
-    this.httpService.updatePass({userId: this.userId, data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}})
+    if (form.invalid || this.isInconsistent) {
+      return;
+    }
+    this.httpService.updatePass({
+      userId: this.userId,
+      data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}
+    })
       .then(res => {
         this.snackBar.open('密码修改成功，请重新登录', '', {
           duration: 1000
         });
-        setTimeout(() => { this.searchService.logoutEvent.emit(); }, 1000);
+        setTimeout(() => {
+          this.searchService.logoutEvent.emit();
+        }, 1000);
       });
   }
+
   // 创建表单
   createForm() {
     this.modifyForm = this.fb.group({
