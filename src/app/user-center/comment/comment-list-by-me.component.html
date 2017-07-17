@@ -13,7 +13,7 @@
           </ul>
           <p class="score-text"><span>及时性：{{c.scoreOnTimeliness}}</span><span>准确性：{{c.scoreOnAccuracy}}</span><span>规范性：{{c.scoreOnNormalization}}</span><span>完整性：{{c.scoreOnIntegrity}}</span></p>
         </div>
-        <p class="product-name">{{c.productName}}</p>
+        <p class="product-name" (click)="toProductDetail(c)">{{c.productName}}</p>
         <p>评论时间：{{c.createdOn}}</p>
       </li>
     </ul>

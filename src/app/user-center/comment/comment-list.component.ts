@@ -35,6 +35,7 @@ export class CommentListComponent implements OnInit {
       });
   }
 
+  // 获取评论列表
   getCommentToMe() {
     if (!this.userId) { return };
     let options = {userId: this.userId, offset: this.pagination.offset, limit: this.pagination.limit};
@@ -46,9 +47,27 @@ export class CommentListComponent implements OnInit {
             item.createdOn = this.commonService.getDateForDay(item.createdOn);
           });
         }
+
+        // 当前页评论删完回到上一页
+        if (this.pagination.offset >= 5) {
+          if (!res['items'].length) {
+            console.log('offset', this.pagination.offset, this.pagination['offset'])
+            this.pagination['offset'] = (this.currPage - 2) * (this.pagination['limit']);
+            let navigationExtras: NavigationExtras = {
+              queryParams: {offset: this.pagination.offset}
+            };
+            this.router.navigate(['userCenter/comment/list'], navigationExtras);
+          }
+        }
       });
   }
 
+  // 产品详情
+  toProductDetail(product) {
+    this.router.navigate(['datadetail', {productId: product.productId}]);
+  }
+
+  // 分页
   toNextPage(e) {
     this.pagination['offset'] = (e - 1) * (this.pagination['limit']);
     let navigationExtras: NavigationExtras = {

@@ -50,6 +50,7 @@ export class CommentListByMeComponent implements OnInit {
           item.averageScore = item.scoreOnTimeliness ? ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity)/4).toFixed(1) : 0;
         });
 
+        // 当前页评论删完回到上一页
         if (this.pagination.offset >= 5) {
           if (!res['items'].length) {
             console.log('offset', this.pagination.offset, this.pagination['offset'])
@@ -72,6 +73,11 @@ export class CommentListByMeComponent implements OnInit {
           duration: 3000
         });
       });
+  }
+
+  // 产品详情
+  toProductDetail(product) {
+    this.router.navigate(['datadetail', {productId: product.productId}]);
   }
 
   // 下一页
