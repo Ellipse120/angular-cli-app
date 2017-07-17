@@ -1,6 +1,9 @@
 .item-list {
   margin-top: 20px;
 }
+.cancel-btn{
+  padding: 0 8px;
+}
 
 @media all and (max-width: 450px) {
   .item-list {

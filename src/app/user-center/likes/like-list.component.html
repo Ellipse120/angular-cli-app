@@ -1,20 +1,21 @@
 <div class="product-list">
   <div class="list-empty" *ngIf="items.length==0">收藏列表为空</div>
-
   <div class="item-list" *ngIf="items.length !==0">
-    <div>
-      <ul class="list-group">
-        <li *ngFor="let item of items"
-            class="list-group-item row product-list-ul">
-          <div class="row"
-               style="font-size: 14px;padding-top: 4px;">
-            <span class="col-xs-12 col-sm-12 col-md-12 col-lg-12">创建者: {{item.creator}}</span>
-            <span class="col-xs-10 col-sm-10 col-md-10 col-lg-10"><a class="item-name">{{item.name}}</a></span>
-            <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><div (click)="deleteFavorite(item)" class="btn">取消</div></span>
-          </div>
-
-        </li>
-      </ul>
-    </div>
+    <ul class="list-group">
+      <li class="list-group-item product-list-ul" *ngFor="let item of items | paginate: {itemsPerPage: pagination['limit'],
+                                                      currentPage: currPage,
+                                                      totalItems: items.totalLength}">
+        <h4 class="user-name font16">{{item.creator}}<span>更新时间：{{item.createdOn}}</span></h4>
+        <p class="product-name" (click)="toProductDetail(c)">{{item.name}}<button (click)="deleteFavorite(item)" class="btn cancel-btn">取消</button></p>
+      </li>
+    </ul>
+    <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="上一页"
+                         nextLabel="下一页"></pagination-controls>
+    <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="<"
+                         nextLabel=">"></pagination-controls>
   </div>
 </div>

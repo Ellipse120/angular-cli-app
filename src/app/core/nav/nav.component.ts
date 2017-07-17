@@ -57,6 +57,7 @@ export class NavComponent implements OnInit {
   }
 
   getUserInfo() {
+    if (!this.userId) { return; }
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.loginInfo = res;
@@ -77,6 +78,7 @@ export class NavComponent implements OnInit {
     let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return; }
+      this.loginInfo = result.userLoginInfo;
       this.cookie.putObject('yslUserInfo', this.loginInfo);
       this.eventEmit.loginSuccessEvent.emit();
       this.loginState = true;

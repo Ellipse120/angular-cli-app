@@ -12,6 +12,10 @@ export class LikeListComponent implements OnInit {
 
   userInfo: any;
   items = [];
+  pagination = {
+    offset: 0, limit: 5
+  };
+  currPage: any;
   constructor(private likeService: LikeService,
               private yslHttpService: YslHttpService,
               private cookie: CookieService,
@@ -19,7 +23,6 @@ export class LikeListComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.cookie.getObject('yslUserInfo');
-    console.log('userInfo:', this.userInfo);
     this.getLikes();
   }
 
@@ -29,7 +32,6 @@ export class LikeListComponent implements OnInit {
       offset: 0,
       limit: 10
     }).subscribe(data => {
-      console.log('data:', data);
       if ( data['totalLength'] > 0) {
         this.items = data.items;
       } else {
