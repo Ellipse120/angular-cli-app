@@ -201,7 +201,7 @@ export class DataDetailComponent implements OnInit{
   // 评价星星
   productScore(parentInd, ind) {
     this.score.forEach((item, i) => {
-      if (i == parentInd) {
+      if (i === parentInd) {
         item.curr = ind;
         item.score = ind + 1;
       }
@@ -255,39 +255,41 @@ export class DataDetailComponent implements OnInit{
   // 获取产品评论
   getComment() {
     this.isShowCommentLoading = true;
-    this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination})
-      .then(res => {
-        if (!res.items) { return; }
-        const items: any = res.items;
-        items.forEach(item => {
-          item.modifiedOn = this.commonService.getDateForTime(item.modifiedOn);
-          if (item['items']) {
-            item['items'].forEach(reply => {
-              reply.modifiedOn = this.commonService.getDateForTime(reply.modifiedOn);
-            });
-          }
-          // let timeDis = (new Date).getTime() - item.modifiedOn;
-          item.averageScore = ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity) / 4).toFixed(1);
-          item.showSecond = false;
-          // if (timeDis < 3600000) {
-          //   item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
-          // } else if (timeDis < 86400000) {
-          //   item.modifiedOn = (new Date(item.modifiedOn)).getHours() + '小时前';
-          // } else if (timeDis < 86400000*3) {
-          //   item.modifiedOn = (new Date(item.modifiedOn)).getDay() + '天前';
-          // } else {
-          //   item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
-          // }
+    return new Promise(resolve => {
+      this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination})
+        .then(res => {
+          if (!res.items) { return; }
+          const items: any = res.items;
+          items.forEach(item => {
+            item.modifiedOn = this.commonService.getDateForTime(item.modifiedOn);
+            if (item['items']) {
+              item['items'].forEach(reply => {
+                reply.modifiedOn = this.commonService.getDateForTime(reply.modifiedOn);
+              });
+            }
+            // let timeDis = (new Date).getTime() - item.modifiedOn;
+            item.averageScore = ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity) / 4).toFixed(1);
+            item.showSecond = false;
+            // if (timeDis < 3600000) {
+            //   item.modifiedOn = (new Date(item.modifiedOn)).getMinutes() + '分钟前';
+            // } else if (timeDis < 86400000) {
+            //   item.modifiedOn = (new Date(item.modifiedOn)).getHours() + '小时前';
+            // } else if (timeDis < 86400000*3) {
+            //   item.modifiedOn = (new Date(item.modifiedOn)).getDay() + '天前';
+            // } else {
+            //   item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn)
+            // }
+          });
+          this.productComment['totalLength'] = res['totalLength'];
+          res['items'].forEach(com => {
+            if (!com.remark) { com.remark = '该用户未写评语'; }
+            if (!com.userName) { com.userName = '匿名'; }
+            this.productComment['items'].push(com);
+          });
+          this.isMoreComment = (parseInt(this.productComment.totalLength) > ((this.currCommentPage + 1) * this.commentPagination['limit'])) ? true : false;
+          this.isShowCommentLoading = false;
         });
-        this.productComment['totalLength'] = res['totalLength'];
-        res['items'].forEach(com => {
-          if (!com.remark) { com.remark = '该用户未写评语'; }
-          if (!com.userName) { com.userName = '匿名'; }
-          this.productComment['items'].push(com);
-        });
-        this.isMoreComment = (parseInt(this.productComment.totalLength) > ((this.currCommentPage + 1) * this.commentPagination['limit'])) ? true : false;
-        this.isShowCommentLoading = false;
-      });
+    });
   }
 
   // 加载更多评论
@@ -326,7 +328,14 @@ export class DataDetailComponent implements OnInit{
     this.service.addProductComment(option)
       .then(res => {
         this.productComment['items'][ind]['showSecond'] = false;
-        this.getProductDetail(this.productDetail.productId);
+        this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination}).then(data => {
+          console.log('reply', data['items'], common);
+          data['items'].forEach(com => {
+            if (com['id'] === common['id']) {
+              this.productComment['items'][ind]['items'] = com['items'];
+            }
+          });
+        });
       });
   }
 
@@ -337,14 +346,12 @@ export class DataDetailComponent implements OnInit{
   }
 
   star() {
-    console.log('star...');
     if (this.isStar) { // delete status
       this.service.updateFavorite({
         favorite: false,
         productId: this.productDetail.productId,
         userId: this.userId
       }).subscribe(data => {
-        console.log('star:', data);
         this.getUserProp();
       });
     } else {
