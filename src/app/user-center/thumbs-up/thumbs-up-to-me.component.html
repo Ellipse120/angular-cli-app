@@ -1,9 +1,9 @@
 <div class="product-list">
-  <div class="list-empty" *ngIf="(totalThumbedNum===0)">
+  <div class="list-empty" *ngIf="(totalThumbsNum===0)">
     Oops!还没有收到赞
   </div>
 
-  <div class="pro-list" *ngIf="(totalThumbedNum!==0)">
+  <div class="pro-list" *ngIf="(totalThumbsNum!==0)">
     <div align="end" style="margin-top: 10px;">
       <svg class="icon" style="width: 16px; height: 16px;vertical-align: text-top;fill: #ff4307;overflow: hidden;"
            viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1954">
@@ -12,7 +12,7 @@
           p-id="1955">
         </path>
       </svg>
-      <i style="color: #FF4307;" class="product-total-thumb">{{totalThumbedNum}}</i>
+      <i style="color: #FF4307;" class="product-total-thumb">{{totalThumbsNum}}</i>
     </div>
 
     <div class="thumb-up-list">
