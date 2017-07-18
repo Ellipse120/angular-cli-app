@@ -29,7 +29,6 @@ export class PsdModifyComponent implements OnInit {
   formErrorMess = {
     newPass: {
       required: '新密码不能为空',
-      pattern: '密码格式不正确',
       minlength: '密码长度不能小于6',
       maxlength: '密码长度不得超过12'
     },
@@ -98,9 +97,8 @@ export class PsdModifyComponent implements OnInit {
       oldPass: ['', Validators.required],
       newPass: ['', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]*$'),
-        Validators.minLength(6),
-        Validators.maxLength(12)
+        Validators.minLength(8),
+        Validators.maxLength(16)
       ])],
       confirmPass: ['', Validators.required]
     });
