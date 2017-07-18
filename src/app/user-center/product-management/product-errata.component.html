@@ -2,7 +2,12 @@
 
   <div style="margin-top: 20px;">
 
-    <div>
+    <div style="padding-bottom: 20px;">
+    <div class="list-empty" *ngIf="count===0">
+      没有纠错数据
+    </div>
+
+    <div *ngIf="count!==0">
       <ul class="list-group">
         <li *ngFor="let item of errorLists | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"
             class="list-group-item row product-list-ul">
@@ -33,6 +38,7 @@
       </ul>
     </div>
 
+
     <div class="product-list-paging">
       <div>
         <div class="spinner" [ngClass]="{ 'hidden':isLoading }"></div>
@@ -42,6 +48,6 @@
       </div>
     </div>
 
-
+    </div>
   </div>
 </div>
