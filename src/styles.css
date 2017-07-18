@@ -239,6 +239,7 @@ textarea::-webkit-scrollbar-thumb {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .ysl-btn:focus {
@@ -247,23 +248,23 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .ysl-btn-xs {
-  height: 24px;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
 }
 
 .ysl-btn-md {
-  height: 36px;
-  padding: 0 21px;
-  border-radius: 4px;
+  padding: 5px 12px;
   font-size: 14px;
 }
 
 .ysl-btn-lg {
   height: 40px;
   width: 260px;
-  border-radius: 4px;
   font-size: 16px;
+}
+.ysl-btn-primary{
+  background-color: #39baf6;
+  color: #fff;
 }
 
 .ysl-pointer {
@@ -486,10 +487,11 @@ textarea::-webkit-scrollbar-thumb {
   color: #39baf6;
   border-bottom: 3px solid #39baf6;
 }
-
+.inner-nav .active{
+  border-bottom: 2px solid #39baf6;
+}
 .inner-nav .active .primary-nav {
   color: #39baf6;
-  border-bottom: 2px solid #39baf6;
 }
 
 .outer-nav .ysl-sidebar-sub {
@@ -927,6 +929,8 @@ app-index .mat-ripple {
   margin-bottom: 0;
 }
 .ysl-list-item .user-name{
+  font-size: 16px;
+  font-weight: normal;
   margin-bottom: 10px;
 }
 .ysl-list-item .product-name a{
