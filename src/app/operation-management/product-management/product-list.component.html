@@ -3,43 +3,58 @@
     <a class="btn product-import-sm-a hidden-md hidden-lg"><i class="fa fa-plus"></i></a>
   </div>
   <div class="filter-group">
-    <form class="form-inline">
-      <input type="text" class="col-md-1 col-xs-3 minw74" placeholder="用户名">
+    <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
+      <input type="text" class="col-md-1 col-xs-3 minw74" placeholder="用户名" formControlName="userName" (blur)="filter()">
       <div class="ysl-select-group col-md-2 col-xs-4">
-        <select name="" class="col-xs-12">
-          <option value="">认证</option>
+        <select name="" class="col-xs-12" formControlName="userType" (change)="filter()">
+          <option value='' disabled selected style='display:none;'>用户类型</option>
+          <option *ngFor="let t of userTypes" [value]="t.value">{{t.viewValue}}</option>
         </select>
       </div>
       <div class="ysl-select-group col-md-1 col-xs-3 minw74">
-        <select name="" class="col-xs-12">
-          <option value="">状态</option>
+        <select name="" class="col-xs-12" formControlName="status" (change)="filter()">
+          <option value='' disabled selected style='display:none;'>状态</option>
+          <option *ngFor="let s of status" [value]="s.value">{{s.viewValue}}</option>
         </select>
       </div>
-      <div class="input-group col-md-5 col-xs-12">
-        <input type="text">
-        <i class="fa fa-search"></i>
-      </div>
+      <!--<div class="input-group col-md-5 col-xs-12">-->
+        <!--<input type="text" formControlName="keyword">-->
+        <!--<i class="fa fa-search" (click)="keywordSearch()"></i>-->
+      <!--</div>-->
     </form>
     <button class="ysl-btn ysl-btn-primary ysl-btn-md visible-md visible-lg">录入产品</button>
   </div>
-  <ul class="ysl-list-group">
-    <li class="ysl-list-item">
-      <h1 class="user-name">
-        <span>用户名 <i class="verify-account">认证的个人用户</i></span>
-        <p class="other-info font12 text-color-middle">
-          <span>收费</span>
-          <span>状态：注册</span>
-          <span>更新时间：2016.10.15</span>
-        </p>
-      </h1>
-      <div class="product">
-        <p class="product-name text-color-middle">陕西数据通中国经济数据库陕西数据通中国经济数据库陕西数据通中国经济数据库</p>
-        <div class="ysl-btn-group">
-          <button class="ysl-btn ysl-btn-primary ysl-btn-xs">上传</button>
-          <button class="ysl-btn ysl-btn-primary ysl-btn-xs">禁用</button>
-          <button class="ysl-btn ysl-btn-primary ysl-btn-xs">修改</button>
+  <p class="font16 text-center empty-list" *ngIf="!dataItems?.length">暂未找到您要查询的数据产品</p>
+  <div *ngIf="dataItems?.length">
+    <ul class="ysl-list-group">
+      <li class="ysl-list-item"  *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
+                                                      currentPage: currentPage,
+                                                      totalItems: totalLength}">
+        <h1 class="user-name">
+          <span>{{c.userName}} <i class="verify-account">{{c.userType}}</i></span>
+          <p class="other-info font12 text-color-middle">
+            <span>收费: {{c.premium}}</span>
+            <span [ngSwitch]="c.status">状态：<i *ngSwitchCase="1">注册</i><i *ngSwitchCase="2">激活</i><i *ngSwitchCase="3">禁用</i></span>
+            <span>更新时间：{{c.modifiedOn}}</span>
+          </p>
+        </h1>
+        <div class="product">
+          <p class="product-name text-color-middle">{{c.name}}</p>
+          <div class="ysl-btn-group">
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs ysl-upload-file">上传 <input type="file"></button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c)"><i *ngIf="c.status == '3' || c.status == '1'">激活</i><i *ngIf="c.status == '2'">禁用</i></button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs">修改</button>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+    <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="上一页"
+                         nextLabel="下一页"></pagination-controls>
+    <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+                         autoHide="true"
+                         previousLabel="<"
+                         nextLabel=">"></pagination-controls>
+  </div>
 </div>
