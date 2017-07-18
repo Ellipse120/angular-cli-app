@@ -96,6 +96,22 @@ export class ProductListComponent implements OnInit {
         this.isFinished = false;
         this.isLoading = false;
         this.dataItems = data.items;
+        data.items.forEach(item => {
+          switch (item.status) {
+            case 1: {
+              item.statusText = '注册';
+              break;
+            }
+            case 2: {
+              item.statusText = '激活';
+              break;
+            }
+            case 3: {
+              item.statusText = '禁用';
+              break;
+            }
+          }
+        });
 
         this.rows = this.dataItems;
 

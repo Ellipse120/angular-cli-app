@@ -36,7 +36,11 @@ const productManageChild: Routes = [
     component: ProductImportComponent
   },
   {
-    path: 'errata',
+    path: 'errata-by-me',
+    component: ProductErrataComponent
+  },
+  {
+    path: 'errata-for-me',
     component: ProductErrataComponent
   },
   {

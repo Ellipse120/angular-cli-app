@@ -14,6 +14,7 @@ export class ProductErrataComponent implements OnInit {
   errorLists = [];
   count: number;
   pagingOption = {
+    type: 1,
     userId: 0,
     userName: '',
     limit: 10,
@@ -26,7 +27,7 @@ export class ProductErrataComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userId =  this.cookie.getObject('yslUserInfo')['id'];
+    this.userId = this.cookie.getObject('yslUserInfo')['id'];
 
     this.getErrorList();
   }
@@ -39,9 +40,13 @@ export class ProductErrataComponent implements OnInit {
 
   getErrorList() {
     const params = {};
-    // if (this.user['userType'] !== 30) {
-    //   params['userName']  = this.user['userName'];
-    // }
+    params['userId'] = this.userId;
+    if (this.router.url.split('/').pop().split('-').includes('by')) {
+      params['type'] = 1;
+    } else {
+      params['type'] = 2;
+    }
+
     this.service.list(params).subscribe(data => {
       this.count = data.totalLength;
       data.items.forEach(item => {
@@ -53,7 +58,6 @@ export class ProductErrataComponent implements OnInit {
       });
       this.errorLists = data.items;
     });
-
   }
 
   editProductError(row) {
