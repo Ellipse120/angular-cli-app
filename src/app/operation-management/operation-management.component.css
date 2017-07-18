@@ -189,5 +189,15 @@
 }
 
 /* new end */
+.filter-group{
+  height: 60px;
+  background-color: #e0ebf0;
+  display: flex;
+  justify-content: space-between;
+}
+.filter-group .form-inline>*{
+  height: 30px;
+  line-height: 30px;
+}
 
 
