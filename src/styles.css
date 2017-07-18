@@ -233,7 +233,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .ysl-btn {
-  font-family: '微软雅黑';
+  font-family: 'Microsoft YaHei';
   display: flex;
   border: none;
   align-items: center;
@@ -243,6 +243,7 @@ textarea::-webkit-scrollbar-thumb {
 
 .ysl-btn:focus {
   border: none;
+  outline: none;
 }
 
 .ysl-btn-xs {

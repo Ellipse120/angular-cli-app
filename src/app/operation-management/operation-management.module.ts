@@ -9,6 +9,8 @@ import {OperationManagementComponent} from './operation-management.component';
 import {YslSidebarComponent} from '../core/sidebar/sidebar.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { OperationalReportComponent } from './operational-report/operational-report.component';
+import {OperationProductListComponent} from './product-management/product-list.component';
+import {OperationProductErrataComponent} from './product-management/product-errata.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { OperationalReportComponent } from './operational-report/operational-rep
     UserManagementComponent,
     YslSidebarComponent,
     ProductManagementComponent,
-    OperationalReportComponent
+    OperationalReportComponent,
+    OperationProductErrataComponent,
+    OperationProductListComponent
   ],
   imports: [
     BrowserModule,

@@ -27,7 +27,7 @@ export class OperationManagementComponent implements OnInit {
   operateTag = [
     {text: '产品管理', path: 'productManagement'},
     {text: '用户管理', path: 'userManage'},
-    {text: '运营报告', path: 'userManage'}
+    {text: '运营报告', path: 'operationalReport'}
   ];
 
   constructor(private router: Router, private location: Location) {}

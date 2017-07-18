@@ -3,16 +3,16 @@ import { RouterModule , Routes } from '@angular/router';
 
 import {OperationManagementComponent} from './operation-management.component';
 import {UserManagementComponent} from './user-management/user-management.component';
-import {ProductListComponent} from '../product-mangement/product-list/product-list.component';
-import {ErrorCorrectComponent} from '../product-mangement/error-correct/error-correct.component';
-import {ProductManagementComponent} from '../user-center/product-management/product-management.component';
-import {OperationalReportComponent} from "./operational-report/operational-report.component";
+import {ProductManagementComponent} from './product-management/product-management.component';
+import {OperationalReportComponent} from './operational-report/operational-report.component';
+import {OperationProductListComponent} from './product-management/product-list.component';
+import {OperationProductErrataComponent} from 'app/operation-management/product-management/product-errata.component';
 
 
 const operationProductChildRouters: Routes = [
   {
     path: 'list',
-    component: ProductListComponent
+    component: OperationProductListComponent
   },
   {
     path: '',
@@ -20,11 +20,11 @@ const operationProductChildRouters: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'error',
-    component: ErrorCorrectComponent
+    path: 'errata',
+    component: OperationProductErrataComponent
   },
   {
-    path: '**', redirectTo: 'userManage'
+    path: '**', redirectTo: 'list'
   }
 ];
 
@@ -39,7 +39,7 @@ const operationChildRouters = [
     children: operationProductChildRouters
   },
   {
-    path: 'operationManagement',
+    path: 'operationalReport',
     component: OperationalReportComponent
   },
   {
