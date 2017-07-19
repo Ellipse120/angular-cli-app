@@ -30,9 +30,9 @@ export class NameCertifyComponent implements OnInit {
     validCode: ''
   };
   individualFormErrorMess = {
-    name: {
-      required: '请输入姓名'
-    },
+    // name: {
+    //   required: '请输入姓名'
+    // },
     tel: {
       required: '请输入手机号'
     },
@@ -115,7 +115,6 @@ export class NameCertifyComponent implements OnInit {
     }
     const option = {
       userId: this.userInfo['userId'],
-      name: form.value['name'],
       userContactPhone: form.value['tel'],
       smsCode: form.value['validCode']
     };
@@ -137,7 +136,7 @@ export class NameCertifyComponent implements OnInit {
   // 创建表单
   createForm() {
     this.individualForm = this.fb.group({
-      name: ['', Validators.required],
+      // name: ['', Validators.required],
       tel: ['', Validators.required],
       validCode: ['', Validators.required]
     });
