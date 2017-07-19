@@ -11,7 +11,10 @@ import { ProductManagementComponent } from './product-management/product-managem
 import { OperationalReportComponent } from './operational-report/operational-report.component';
 import {OperationProductListComponent} from './product-management/product-list.component';
 import {OperationProductErrataComponent} from './product-management/product-errata.component';
-import {NgxPaginationModule} from "ngx-pagination";
+import {NgxPaginationModule} from 'ngx-pagination';
+import {OperationProductAddComponent} from './product-management/product-add.component';
+import {YslMaterialModule} from '../core/ysl-material.module';
+import {MyDatePickerModule} from 'mydatepicker';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     ProductManagementComponent,
     OperationalReportComponent,
     OperationProductErrataComponent,
-    OperationProductListComponent
+    OperationProductListComponent,
+    OperationProductAddComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,9 @@ import {NgxPaginationModule} from "ngx-pagination";
     NgxDatatableModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    YslMaterialModule,
+    MyDatePickerModule
   ],
   exports: [YslSidebarComponent]
 })

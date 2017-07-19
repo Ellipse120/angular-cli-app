@@ -7,6 +7,7 @@ import {ProductManagementComponent} from './product-management/product-managemen
 import {OperationalReportComponent} from './operational-report/operational-report.component';
 import {OperationProductListComponent} from './product-management/product-list.component';
 import {OperationProductErrataComponent} from 'app/operation-management/product-management/product-errata.component';
+import {OperationProductAddComponent} from './product-management/product-add.component';
 
 
 const operationProductChildRouters: Routes = [
@@ -15,13 +16,21 @@ const operationProductChildRouters: Routes = [
     component: OperationProductListComponent
   },
   {
-    path: '',
-    redirectTo: 'list',
-    pathMatch: 'full'
+    path: 'add',
+    component: OperationProductAddComponent
+  },
+  {
+    path: 'edit',
+    component: OperationProductAddComponent
   },
   {
     path: 'errata',
     component: OperationProductErrataComponent
+  },
+  {
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full'
   },
   {
     path: '**', redirectTo: 'list'

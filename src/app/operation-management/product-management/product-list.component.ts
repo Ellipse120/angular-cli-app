@@ -33,8 +33,8 @@ export class OperationProductListComponent implements OnInit {
     userId: 0,
     limit: 10,
     offset: 0,
-    sortBy: '',
-    ascending: true,
+    sortBy: 'modifiedOn',
+    ascending: false,
     userName: '',
     userType: '',
     status: '',
@@ -119,7 +119,6 @@ export class OperationProductListComponent implements OnInit {
 
   // 启用或禁用
   openOrClose(product) {
-    console.log('product', product)
     let status;
     if (product['status'] === 1 || product['status'] === 3) {
       status = 2;
@@ -155,6 +154,21 @@ export class OperationProductListComponent implements OnInit {
       queryParams: {offset: this.pagingOption.offset}
     };
     this.router.navigate(['operation/productManagement/list'], navigationExtras);
+  }
+
+  // 添加产品
+  addProduct() {
+   this.router.navigate(['operation/productManagement/add']);
+  }
+
+  // 修改产品
+  editProduct(product) {
+    this.router.navigate(['../edit', {productId: product.productId}], {relativeTo: this.route});
+  }
+
+  // 产品详情
+  toProductDetail(product) {
+    this.router.navigate(['datadetail', {productId: product.productId}]);
   }
 
   createForm() {

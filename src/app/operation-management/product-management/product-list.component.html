@@ -1,6 +1,6 @@
 <div class="ysl-info-wrapper operation-product-list product-management">
-  <div class="product-import-sm-btn">
-    <a class="btn product-import-sm-a hidden-md hidden-lg"><i class="fa fa-plus"></i></a>
+  <div class="product-import-sm-btn" (click)="addProduct()">
+    <a class="btn product-import-sm-a visible-xs"><i class="fa fa-plus"></i></a>
   </div>
   <div class="filter-group">
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
@@ -22,14 +22,14 @@
         <!--<i class="fa fa-search" (click)="keywordSearch()"></i>-->
       <!--</div>-->
     </form>
-    <button class="ysl-btn ysl-btn-primary ysl-btn-md visible-md visible-lg">录入产品</button>
+    <button class="ysl-btn ysl-btn-primary ysl-btn-md hidden-xs" (click)="addProduct()">录入产品</button>
   </div>
   <p class="font16 text-center empty-list" *ngIf="!dataItems?.length">暂未找到您要查询的数据产品</p>
   <div *ngIf="dataItems?.length">
     <ul class="ysl-list-group">
       <li class="ysl-list-item"  *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
                                                       currentPage: currentPage,
-                                                      totalItems: totalLength}">
+                                                      totalItems: totalLength}; let ind = index;">
         <h1 class="user-name">
           <span>{{c.userName}} <i class="verify-account">{{c.userType}}</i></span>
           <p class="other-info font12 text-color-middle">
@@ -39,11 +39,11 @@
           </p>
         </h1>
         <div class="product">
-          <p class="product-name text-color-middle">{{c.name}}</p>
+          <p class="product-name text-color-middle"><a (click)="toProductDetail(c)">{{c.name}}</a></p>
           <div class="ysl-btn-group">
             <button class="ysl-btn ysl-btn-primary ysl-btn-xs ysl-upload-file">上传 <input type="file"></button>
             <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c)"><i *ngIf="c.status == '3' || c.status == '1'">激活</i><i *ngIf="c.status == '2'">禁用</i></button>
-            <button class="ysl-btn ysl-btn-primary ysl-btn-xs">修改</button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="editProduct(c, ind)">修改</button>
           </div>
         </div>
       </li>

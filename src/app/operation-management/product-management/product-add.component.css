@@ -1,0 +1,290 @@
+.product {
+  border-radius: 5px;
+}
+
+.pro-name:before {
+  content: "* ";
+  color: red;
+  font-size: 100%;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.alert {
+  padding: 5px;
+  margin-bottom: 0;
+}
+
+.import-form {
+  margin: 0;
+  background: #fff;
+  padding: 10px -10px;
+}
+
+.import-title {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.content-form {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.content-form label {
+  display: inline-block;
+  font-size: 14px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-flex {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-flex {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px 30px 30px 30px;
+}
+
+.ysl-form-control {
+  border: 1px solid #ddd;
+  padding: 5px;
+  outline: none;
+  margin-right: 20px;
+}
+
+[type="file"] {
+  height: 0.1px;
+  width: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+[type="file"] + label {
+  background-color: #39baf6;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  overflow: hidden;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+select {
+  width: 120px;
+}
+
+.proimport-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.13);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.date-range {
+  margin-bottom: 0;
+}
+
+.ysl-import-tag {
+  height: 260px;
+  overflow-y: auto;
+  margin-bottom: -15px;
+}
+
+.tagDimensions {
+  display: inline-block;
+  width: 600px;
+  text-align: left;
+  list-style-type: none;
+  position: relative;
+  min-height: 134px;
+}
+
+.tagDimensions li {
+  float: left;
+  cursor: pointer;
+  background: #fff;
+}
+
+.secondTagDimensions {
+  width: 500px;
+  position: absolute;
+  list-style: none;
+  margin-top: 20px;
+  color: #676767;
+  left: 0;
+  top: 8px;
+  background-color: #fff;
+  border: 1px solid #d8e5e7;
+  border-top:none;
+}
+
+.btn-none {
+  background-color: #f5f8f7;
+}
+
+.second-nav {
+  padding: 3px 5px;
+  margin: 2px 5px;
+  background: #f6f9fa;
+}
+
+.isActive {
+  color: #1c94c4;
+  border: 1px solid #d8e5e7;
+  border-bottom: none;
+  padding: 5px 10px;
+  background-color: #fff;
+}
+
+.product-import-info {
+  background-color: #f6faf9;
+  margin-top: 20px;
+}
+
+.product-info {
+  font-size: 14px;
+  padding: 20px 0 10px 20px;
+  border-bottom: 1px solid #dee1e0;
+}
+
+.product-import-item {
+  padding: 10px 30px;
+}
+
+.product-import-item2 {
+  padding: 10px 30px;
+}
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+:-moz-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+.product-import-checkbox {
+  top: -3px;
+  position: relative;
+  margin-right: 40px;
+  font-weight: normal;
+}
+
+@media all and (max-width: 321px){
+  .product-import-date {
+    padding: 20px 16px;
+    white-space: nowrap;
+  }
+
+  .product-import-date {
+    padding: 20px 16px;
+  }
+
+  .product-import-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+}
+
+@media all and (min-width: 322px) and (max-width: 450px) {
+  .my-product-import {
+    padding: 0;
+    color: #333333;
+  }
+
+  .product-import-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .product-import-date {
+    padding: 20px 30px;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .my-product-import {
+    padding: 0 50px;
+    color: #333333;
+  }
+
+  .product-import-btn {
+    display: block;
+  }
+}
+
+#productForm input {
+  padding: 10px;
+}
+
+#productForm textarea {
+  padding: 10px 50px 10px 10px;
+}
+
+.product-webSite {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #dee1e0;
+}
+
+.product-description {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #dee1e0;
+}
+
+.product-import-name {
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #dee1e0;
+}
+
+.mat-select-placeholder .ng-trigger .ng-trigger-transformPlaceholder {
+  color: #000;
+}
+
