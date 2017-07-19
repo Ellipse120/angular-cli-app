@@ -40,40 +40,40 @@ export class SearchAdvancedComponent implements OnInit{
   getAdvancedInfo() {
     this.httpService.getAdvancedSearchInfo()
       .then((res) => {
-        let data: any = res;
-        let advanced = this.advanceInfo;
+        const data: any = res;
+        const advanced = this.advanceInfo;
 
         for (const type in advanced) {
           data.forEach((item) => {
             if (item.categoryCode == type) {
-              this.advanceInfo[type].push(item)
+              this.advanceInfo[type].push(item);
             }
-          })
+          });
         }
         // this.searchService.advancedKeys = this.advanceInfo;
-      })
+        console.log('advanced', this.advanceInfo);
+      });
   }
 
   // 提交高级搜索
   advancedSearchSubmit() {
-    if (!this.advancedSearchForm) { return }
-    let form = this.advancedSearchForm;
-    let data = {};
+    if (!this.advancedSearchForm) { return; }
+    const form = this.advancedSearchForm;
+    const data = {};
     for (const key in form.value) {
       if (form.value[key]) {
         if (form.value[key] instanceof Object) {
           data[key] = form.value[key].epoc;
-          console.log('date', form.value[key])
         } else {
           data[key] = form.value[key];
         }
       }
     }
 
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: data
-    }
-    this.router.navigate(['datalist'], navigationExtras)
+    };
+    this.router.navigate(['datalist'], navigationExtras);
   }
 
   createForm() {
@@ -87,13 +87,13 @@ export class SearchAdvancedComponent implements OnInit{
       sampleFileProvided: '',
       dataSince: null,
       dataUntil: null
-    })
+    });
   }
 
   // my-date-picker
   setDate(): void {
     // Set today date using the setValue function
-    let date = new Date();
+    const date = new Date();
     this.advancedSearchForm.setValue({dataSince: {
       date: {
         year: date.getFullYear(),
