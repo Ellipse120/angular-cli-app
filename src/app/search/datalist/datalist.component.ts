@@ -103,9 +103,20 @@ export class DatalistComponent implements OnInit {
     this.selectAdvanced = [];
     let keyword = this.searchOptions['keyword'];
     let keywordHis = window.localStorage.getItem('keyword_group') ? JSON.parse(window.localStorage.getItem('keyword_group')) : [];
-    if (keyword && (keywordHis.indexOf(keyword) <= -1)) {
+    if (keyword) {
+      let idx = keywordHis.indexOf(keyword);
+      if (idx > -1) {
+        keywordHis.splice(idx,1);
+      }
       keywordHis.push(keyword);
     }
+    // 限制搜索历史为5条
+    if (keywordHis.length > 5) {
+      keywordHis = keywordHis.slice(1, 6);
+    }
+
+    window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis));
+
     // 时间筛选
     if (this.product['dateFacets'].length) {
       let arr = [];
@@ -145,7 +156,7 @@ export class DatalistComponent implements OnInit {
         })
       })
     });
-    window.localStorage.setItem('keyword_group', JSON.stringify(keywordHis));
+
   }
 
   // 高级搜索字段处理

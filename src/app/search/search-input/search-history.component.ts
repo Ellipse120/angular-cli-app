@@ -26,6 +26,7 @@ export class SearchHistoryComponent implements OnInit{
   // 获取搜索历史
   getSearchHistory() {
     this.searchHistory = window.localStorage.getItem('keyword_group') ? JSON.parse(window.localStorage.getItem('keyword_group')) : [];
+    this.searchHistory = this.searchHistory.reverse();
   }
 
   // 按历史关键字搜索
