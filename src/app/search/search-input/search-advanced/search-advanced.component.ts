@@ -10,10 +10,12 @@ import {IMyDpOptions} from "mydatepicker";
   styleUrls: ['../search-input.component.css']
 })
 
-export class SearchAdvancedComponent implements OnInit{
+export class SearchAdvancedComponent implements OnInit {
 
   popupClose = new EventEmitter<any>();
   advancedSearchForm: FormGroup;
+  premiumChecked = [{text: '是', value: true, checked: false}, {text: '否', value: false, checked: false}];
+  sampleFileChecked = [{text: '有', value: true, checked: false}, {text: '无', value: false, checked: false}];
   advanceInfo = {
     data_category: [],
     data_source: [],
@@ -53,6 +55,27 @@ export class SearchAdvancedComponent implements OnInit{
         // this.searchService.advancedKeys = this.advanceInfo;
         console.log('advanced', this.advanceInfo);
       });
+  }
+
+  // 变多选为单选
+  transRadio(ind, t) {
+    if (t === 'p') {
+      this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
+      if (this.premiumChecked[ind]['checked']) {
+        this.premiumChecked.forEach(item => {
+          item['checked'] = false;
+          this.premiumChecked[ind]['checked'] = true;
+        });
+      }
+    } else {
+      this.sampleFileChecked[ind]['checked'] = !this.sampleFileChecked[ind]['checked'];
+      if (this.sampleFileChecked[ind]['checked']) {
+        this.sampleFileChecked.forEach(item => {
+          item['checked'] = false;
+          this.sampleFileChecked[ind]['checked'] = true;
+        });
+      }
+    }
   }
 
   // 提交高级搜索

@@ -68,7 +68,7 @@ export class ProductImportComponent implements OnInit {
   };
 
   userInfo;
-  pattern = '[^,，.。;；]+$';
+  pattern = '[^,，。;；]+$';
 
   constructor(public service: YslHttpService,
               private router: Router,
