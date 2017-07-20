@@ -63,7 +63,9 @@ img {
 i {
   font-style: normal;
 }
-
+button:focus{
+  outline: none;
+}
 .mb20 {
   margin-bottom: 20px;
 }

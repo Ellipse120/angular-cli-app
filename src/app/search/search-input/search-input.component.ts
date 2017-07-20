@@ -50,24 +50,25 @@ export class SearchInputComponent implements OnInit {
               private location: Location) {
     this.keywordSearch = new EventEmitter();
     this.showAdvancedBox = new EventEmitter();
-    this.keywordSearchOption.keyword = this.searchService.keyword ?　this.searchService.keyword : '';
+    this.keywordSearchOption.keyword = this.searchService.keyword ? this.searchService.keyword : '';
   }
 
   ngOnInit() {
     let path = this.location.path();
     this.searchService.changeKeyword.subscribe(e => {
-      this.keywordSearchForm.controls['keyword'].setValue(e)
+      this.keywordSearchForm.controls['keyword'].setValue(e['keyword']);
     });
     this.createForm();
   }
 
   showSearchHistory() {
-    this.yslPopup.toggle(SearchHistoryComponent)
+    this.yslPopup.toggle(SearchHistoryComponent);
   }
 
-  //关键字搜索
+  // 关键字搜索
   keywordSubmit() {
-    let navigationExtras: NavigationExtras = {
+    this.searchService.keywordSearch.emit(this.keywordSearchForm.value);
+    const navigationExtras: NavigationExtras = {
       queryParams: this.keywordSearchForm.value
     };
     this.router.navigate(['datalist'], navigationExtras);
@@ -82,7 +83,7 @@ export class SearchInputComponent implements OnInit {
     // this.getAdvancedInfo();
   }
 
-  //创建表单
+  // 创建表单
   createForm() {
     this.keywordSearchForm = this.fb.group({
       keyword: [this.keywordSearchOption.keyword]

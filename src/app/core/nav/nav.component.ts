@@ -87,6 +87,7 @@ export class NavComponent implements OnInit {
 
   // 搜索
   keywordSubmit(data) {
+    console.log('click', data)
     this.eventEmit.keywordSearch.emit(data);
   }
 

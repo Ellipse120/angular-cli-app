@@ -14,7 +14,7 @@ import {SearchService} from "../search.service";
   styleUrls: ['./search-input.component.css']
 })
 
-export class SearchHistoryComponent implements OnInit{
+export class SearchHistoryComponent implements OnInit {
   popupClose = new EventEmitter<any>();
   searchHistory = [];
 
@@ -31,8 +31,9 @@ export class SearchHistoryComponent implements OnInit{
 
   // 按历史关键字搜索
   searchByHistory(key) {
-    this.eventEmit.changeKeyword.emit(key);
-    let navigationExtras: NavigationExtras = {
+    this.eventEmit.changeKeyword.emit({keyword: key});
+    this.eventEmit.keywordSearch.emit({keyword: key});
+    const navigationExtras: NavigationExtras = {
       queryParams: {keyword: key}
     };
     this.router.navigate(['datalist'], navigationExtras);

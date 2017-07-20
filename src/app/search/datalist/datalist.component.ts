@@ -69,7 +69,8 @@ export class DatalistComponent implements OnInit {
         this.eventEmit.keyword = this.searchOptions['keyword'];
         this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
         if (this.searchOptions['tagId']) {
-          this.searchByTag({id: this.searchOptions['tagId'], name: params['tagName'], parent: params['tagParent']})
+          this.tagParams();
+          // this.searchByTag({id: this.searchOptions['tagId'], name: params['tagName'], parent: params['tagParent']})
         } else {
           this.getProductList();
         }
@@ -89,7 +90,6 @@ export class DatalistComponent implements OnInit {
   // 获取产品列表
   getProductList() {
     this.isShowLoading = true;
-    if (!this.searchOptions['keyword']) { this.searchOptions['keyword'] = undefined; }
     this.service.productKeywordSearch(this.searchOptions)
       .then(res => {
         this.product = res;
@@ -234,21 +234,21 @@ export class DatalistComponent implements OnInit {
 
   // 标签搜索去重
   tagUnique() {
-    let unique = {};
+    const unique = {};
     if (this.product['items'].length) {
       this.product['items'].forEach(item => {
         item.tags.forEach(tag => {
-          unique[JSON.stringify(tag)] = tag
-        })
+          unique[JSON.stringify(tag)] = tag;
+        });
       });
     }
-    this.tagsFilter = Object.keys(unique).map(function(u){return JSON.parse(u) });
+    this.tagsFilter = Object.keys(unique).map(function(u){ return JSON.parse(u); });
   }
 
   // 标签搜索
   searchByTag(item) {
     // 设置选中的标签
-    if(!this.selectedTagFilterO[item.id]){
+    if (!this.selectedTagFilterO[item.id]) {
       this.selectedTagFilterO[item.id] = item;
       this.selectedTagFilterA.push(item);
       this.tagParams();
@@ -261,7 +261,7 @@ export class DatalistComponent implements OnInit {
    */
   tagParams() {
     let tagS = '';
-    for (let key in this.selectedTagFilterO) {
+    for (const key in this.selectedTagFilterO) {
       tagS += key + ',';
     }
     this.searchOptions['tagId'] = tagS.substring(0, tagS.length - 1);
@@ -285,8 +285,8 @@ export class DatalistComponent implements OnInit {
     this.eventEmit.keywordSearch.subscribe(e => {
       this.eventEmit.keyword = e.keyword;
       this.searchOptions['keyword'] = e.keyword;
-      this.getProductList()
-    })
+      // this.getProductList();
+    });
   }
 
   // 时间条件搜索
