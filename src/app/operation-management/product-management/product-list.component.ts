@@ -17,6 +17,7 @@ export class OperationProductListComponent implements OnInit {
 
   searchFilterForm: FormGroup;
   userInfo: any;
+  isShowLoading: any;
   userTypes = [
     {value: 1, viewValue: '未认证的个人用户'},
     {value: 2, viewValue: '未认证的机构用户'},
@@ -64,8 +65,10 @@ export class OperationProductListComponent implements OnInit {
 
   getProducts() {
     if (!isNullOrUndefined(this.userInfo)) {
+      this.isShowLoading = true;
       this.pagingOption.userId = this.userInfo.id;
       this.productListService.getProductList(this.pagingOption).then((data) => {
+        this.isShowLoading = false;
         this.dataItems = data.items;
         this.totalLength = data.totalLength;
         this.dataItems.forEach(item => {
@@ -128,6 +131,8 @@ export class OperationProductListComponent implements OnInit {
     }
     this.productListService.doChangeStatus(product.productId, status)
       .then(res => {
+        console.log('禁用', res);
+        this.getProducts();
       });
   }
 

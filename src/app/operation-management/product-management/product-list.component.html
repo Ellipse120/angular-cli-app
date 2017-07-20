@@ -1,4 +1,5 @@
-<div class="ysl-info-wrapper operation-product-list product-management">
+<ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
+<div class="ysl-info-wrapper operation-product-list product-management" *ngIf="!isShowLoading">
   <div class="product-import-sm-btn" (click)="addProduct()">
     <a class="btn product-import-sm-a visible-xs"><i class="fa fa-plus"></i></a>
   </div>

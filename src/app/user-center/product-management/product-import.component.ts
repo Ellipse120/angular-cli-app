@@ -83,8 +83,8 @@ export class ProductImportComponent implements OnInit {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
 
     if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
-      this.service.getProductDetail(this.route.snapshot.paramMap.get('productId'))
-        .then(data => {
+      this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
+        .subscribe(data => {
           this.product = data;
 
           const a = new Date(this.product.dataSince);

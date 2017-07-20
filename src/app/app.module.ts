@@ -57,7 +57,6 @@ const ueditorPath = {
     RegisterComponent,
     ServiceAgreementComponent,
     YslPrivacyComponent,
-    YslLoadingComponent,
     NavComponent,
     FooterComponent,
     LoginComponent,

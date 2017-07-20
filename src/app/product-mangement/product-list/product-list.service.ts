@@ -6,6 +6,7 @@ import {Http, Headers} from '@angular/http';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {isNullOrUndefined} from 'util';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ProductListService {
@@ -32,6 +33,12 @@ export class ProductListService {
           .catch(this.handleError);
       }
     });
+  }
+
+  getProductDetail(productId): Observable<any> {
+    return this.http.get(this.yslHttpservice.url + 'api/product/' + productId + '?viewCount=1')
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   doProductImport(option) {
