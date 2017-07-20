@@ -346,6 +346,12 @@ export class DataDetailComponent implements OnInit{
   }
 
   star() {
+
+    if (!this.userId) {
+      this.showLogin();
+      return;
+    }
+
     if (this.isStar) { // delete status
       this.service.updateFavorite({
         favorite: false,
