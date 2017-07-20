@@ -32,7 +32,7 @@ export class UserCenterComponent implements OnInit {
     {text: '赞', path: 'favorite'},
     {text: '个人', path: 'userInfo'}
   ];
-  public uploader: FileUploader = new FileUploader({url: ''});
+  public uploader: FileUploader;
   public hasBaseDropZoneOver = false;
   public hasAnotherDropZoneOver = false;
 
@@ -44,6 +44,7 @@ export class UserCenterComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.uploader = new FileUploader({url: this.httpService.url + 'api/user/' + this.userId + '/logo'});
     this.createForm();
     this.getUserInfo();
     this.updateUserInfo();
