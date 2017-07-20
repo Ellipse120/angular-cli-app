@@ -8,11 +8,7 @@
     <div class="user-des">
       <p class="user-name font24 text-center">{{userInfo?.userName}}</p>
       <div class="des">
-        <p class="font16 text-color-middle un-editable" *ngIf="!isEditable">{{userInfo?.selfIntroduction}}<i class="fa fa-edit color-blue"></i></p>
-        <form class="editable" *ngIf="isEditable" novalidate>
-          <textarea type="text" maxlength="100"></textarea>
-          <button class="ysl-btn ysl-btn-xs">发布签名</button>
-        </form>
+        <p class="font16 text-color-middle un-editable" *ngIf="!isEditable">{{userInfo?.selfIntroduction}}</p>
       </div>
     </div>
   </div>

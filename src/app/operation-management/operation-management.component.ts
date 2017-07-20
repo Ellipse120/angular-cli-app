@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CookieService} from 'ngx-cookie';
+import {YslHttpService} from '../core/ysl-http.service';
 
 @Component({
   selector: 'app-operation-management',
@@ -28,7 +30,13 @@ export class OperationManagementComponent implements OnInit {
     {text: '运营报告', path: 'operationalReport'}
   ];
 
-  constructor() {}
+  constructor(private cookie: CookieService, private httpService: YslHttpService) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.userInfo = res;
+      });
+  }
 }
