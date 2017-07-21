@@ -196,7 +196,6 @@
   color: #999;
 }
 .user-info{
-  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -267,11 +266,22 @@ textarea::-webkit-input-placeholder{
 textarea:-ms-input-placeholder{
   color: #ddd;
 }
+.comment-list{
+  margin-top: 20px;
+}
 .comment-list>li{
   border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
 }
 .comment-list>li:last-of-type{
   border-bottom: none;
+  margin-bottom: 0;
+}
+.comment-list .comment-item>*{
+  margin-bottom: 10px;
+}
+.comment-list .comment-item>*:last-child{
+  margin-bottom: 0;
 }
 .second-comment-list li{
   width: 100%;
@@ -306,11 +316,10 @@ textarea:-ms-input-placeholder{
 .score-summary{
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 .score-summary li{
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 .score-summary .half-star{
   background-position: left -15px;
@@ -376,10 +385,10 @@ textarea:-ms-input-placeholder{
 textarea::-webkit-input-placeholder{
   color: #999;
 }
-
 .comment-content h4{
   font-size: 14px;
   color: #59717f !important;
+  margin: 10px 0;
 }
 .comment-content textarea{
   height: 106px;

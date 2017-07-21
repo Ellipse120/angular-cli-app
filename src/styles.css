@@ -9,7 +9,7 @@
 @import "assets/css/product.css";
 
 html {
-  font-size: 36px;
+  font-size: 24px;
 }
 
 body {
@@ -574,18 +574,21 @@ footer {
   cursor: pointer !important;
 }
 
-.ngx-pagination li:not(.pagination-previous):not(.pagination-next) a {
-  padding: 0.1875rem 0.45rem;
+.ngx-pagination li a {
+  padding: 0.333rem 0.667rem;
+}
+.ngx-pagination li a:hover{
+  text-decoration: none;
 }
 
 .ngx-pagination {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   display: flex;
 }
 
 .ngx-pagination .current {
   background-color: #ff4307 !important;
-  padding: 0.1875rem 0.45rem !important;
+  padding: 0.333rem 0.667rem !important;
 }
 
 .pagination-previous a:before, .pagination-next a:after {

@@ -1,7 +1,7 @@
 .index-cont{
-  padding-top: 1.5rem;
+  padding-top: 20px;
   text-align: center;
-  min-height: 600px;
+  min-height: 520px;
 }
 .ysl-logo{
   height: 166px;
@@ -70,7 +70,7 @@
 
 /*修改*/
 @media screen and (max-width: 1200px){
-  .ysl-label-search-cont{
+`.ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
   }
@@ -84,7 +84,18 @@
     color: transparent;
   }
 }
+@media screen and (max-width: 1380px){
+  .index-cont{
+    padding-top: 24px;
+  }
+  .ysl-logo{
+    height: 122px;
+  }
+}
 @media screen and (max-width: 768px){
+  .index-cont{
+    padding-top: 24px;
+  }
   .ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
