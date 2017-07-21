@@ -9,6 +9,7 @@ import {MdDialog} from '@angular/material';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ProductErrorService} from "../../product-mangement/error-correct/product-error.service";
 import {YslHttpService} from "../../core/ysl-http.service";
+import {IMyDpOptions} from "mydatepicker";
 
 @Component({
   templateUrl: './product-errata.component.html',
@@ -20,25 +21,28 @@ export class OperationProductErrataComponent implements OnInit {
   searchFilterForm: FormGroup;
   userId: any;
   userInfo: any;
+  isShowLoading: any;
+  listIsNull: any;
   status = [
     {value: 1, viewValue: '注册'},
     {value: 2, viewValue: '激活'},
     {value: 3, viewValue: '禁用'}
   ];
   pagingOption: any = {
-    userId: 0,
+    productName: '',
     limit: 10,
     offset: 0,
     sortBy: 'modifiedOn',
     ascending: false,
-    userName: '',
-    userType: '',
-    status: '',
-    keyword: ''
   };
   dataItems = [];
   currentPage: any;
   totalLength: any;
+  myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy.mm.dd',
+    inline: false,
+    showClearDateBtn: false
+  };
   constructor(private fb: FormBuilder,
               private cookie: CookieService,
               private productErrorService: ProductErrorService,
@@ -50,6 +54,7 @@ export class OperationProductErrataComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.setDate();
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.getUserInfo().then(() => {
       this.route.queryParams
@@ -73,15 +78,13 @@ export class OperationProductErrataComponent implements OnInit {
   }
 
   listError() {
-    const params = {};
-    if (this.userInfo['userType'] === 20) {
-      params['userName'] = this.userInfo['name'];
-    }
-    this.productErrorService.list(params).subscribe(data => {
-      console.log('errata data:', data);
-      const total = data.totalLength;
-      const items = data.items;
-      items.forEach(item => {
+    this.isShowLoading = true;
+    this.productErrorService.list(this.pagingOption).subscribe(data => {
+      this.isShowLoading = false;
+      this.totalLength = data.totalLength;
+      this.dataItems = data.items;
+      this.listIsNull = !this.dataItems.length;
+      this.dataItems.forEach(item => {
         item.submitTime = this.commonService.getDateForDay(item.submitTime);
         if (item.status === 2) {
           item.statusText = '未修改';
@@ -89,6 +92,8 @@ export class OperationProductErrataComponent implements OnInit {
           item.statusText = '已修改';
         }
       });
+    }, error => {
+      this.isShowLoading = false;
     });
   }
 
@@ -104,11 +109,20 @@ export class OperationProductErrataComponent implements OnInit {
   }
 
   // 筛选
-  filter() {
+  filter(type) {
     const form = this.searchFilterForm['value'];
-    this.pagingOption['userName'] = form['userName'];
-    this.pagingOption['userType'] = form['userType'];
-    this.pagingOption['status'] = form['status'];
+    const userNameControl = this.searchFilterForm.controls['productName'];
+    if (type === 1 && userNameControl.dirty) {
+      const name = form['productName'];
+      this.pagingOption['productName'] = form['productName'];
+      this.listError();
+      this.searchFilterForm.reset();
+      this.searchFilterForm.patchValue({productName: name});
+    } else if (type === 2) {
+      this.pagingOption['userType'] = form['userType'];
+      this.pagingOption['status'] = form['status'];
+      this.listError();
+    }
   }
 
   // 关键字搜索
@@ -123,17 +137,12 @@ export class OperationProductErrataComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       queryParams: {offset: this.pagingOption.offset}
     };
-    this.router.navigate(['operation/productManagement/list'], navigationExtras);
-  }
-
-  // 添加产品
-  addProduct() {
-    this.router.navigate(['operation/productManagement/add']);
+    this.router.navigate(['operation/productManagement/errata'], navigationExtras);
   }
 
   // 修改产品
-  editProduct(product) {
-    this.router.navigate(['../edit', {productId: product.productId}], {relativeTo: this.route});
+  processingError(product) {
+    this.router.navigate(['../edit', {productId: product.productId, editType: 2}], {relativeTo: this.route});
   }
 
   // 产品详情
@@ -143,11 +152,28 @@ export class OperationProductErrataComponent implements OnInit {
 
   createForm() {
     this.searchFilterForm = this.fb.group({
-      userName: '',
-      userType: '',
-      status: '',
-      keyword: ''
+      productName: '',
+      dataSince: null,
+      dataUntil: null
     });
+  }
+
+  // my-date-picker
+  setDate(): void {
+    // Set today date using the setValue function
+    const date = new Date();
+    this.searchFilterForm.patchValue({dataSince: {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()}
+    }});
+    this.searchFilterForm.patchValue({dataUntil: {
+      date: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()}
+    }});
   }
 
 }

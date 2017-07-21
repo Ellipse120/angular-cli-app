@@ -27,7 +27,8 @@ export class ProductListService {
     return new Promise(resolve => {
       if (!isNullOrUndefined(this.userId)) {
         this.http.get(this.yslHttpservice.url + 'api/product', {
-          params: option
+          params: option,
+          withCredentials: true
         })
           .toPromise()
           .then(res => resolve(res.json()))

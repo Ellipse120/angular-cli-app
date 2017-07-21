@@ -30,6 +30,7 @@ export class OperationProductAddComponent implements OnInit {
     tags: []
   };
 
+  editType: any;
   productId: any;
   isActive = 0;
   tagDimensionsNew = [];
@@ -80,39 +81,42 @@ export class OperationProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
-      this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
-        .subscribe(data => {
-          this.product = data;
+    this.route.params.subscribe(param => {
+      this.editType = param['editType'];
+      if (!isNullOrUndefined(param['productId'])) {
+        this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
+          .subscribe(data => {
+            this.product = data;
 
-          const a = !isNullOrUndefined(this.product.dataSince) ? new Date(this.product.dataSince) : new Date();
-          const b = !isNullOrUndefined(this.product.dataUntil) ? new Date(this.product.dataUntil) : new Date();
+            const a = !isNullOrUndefined(this.product.dataSince) ? new Date(this.product.dataSince) : new Date();
+            const b = !isNullOrUndefined(this.product.dataUntil) ? new Date(this.product.dataUntil) : new Date();
 
-          this.timeFrom = {
-            date: {
-              year: a.getFullYear(),
-              month: a.getMonth() + 1,
-              day: a.getDate()
-            }
-          };
-          this.timeTo = {
-            date: {
-              year: b.getFullYear(),
-              month: b.getMonth() + 1,
-              day: b.getDate()
-            }
-          };
-          if (!isNullOrUndefined(data['tags'])) {
-            data['tags'].forEach(tag => {
-              if (!isNullOrUndefined(tag['items'])) {
-                tag['items'].forEach(t => {
-                  this.checkedTag(t['id']);
-                });
+            this.timeFrom = {
+              date: {
+                year: a.getFullYear(),
+                month: a.getMonth() + 1,
+                day: a.getDate()
               }
-            });
-          }
-        });
-    }
+            };
+            this.timeTo = {
+              date: {
+                year: b.getFullYear(),
+                month: b.getMonth() + 1,
+                day: b.getDate()
+              }
+            };
+            if (!isNullOrUndefined(data['tags'])) {
+              data['tags'].forEach(tag => {
+                if (!isNullOrUndefined(tag['items'])) {
+                  tag['items'].forEach(t => {
+                    this.checkedTag(t['id']);
+                  });
+                }
+              });
+            }
+          });
+      }
+    });
 
     this.service.getTagDimensions()
       .then(data => {
@@ -200,7 +204,11 @@ export class OperationProductAddComponent implements OnInit {
             duration: 2000
           });
           setTimeout(() => {
-            this.router.navigate(['../list'], {relativeTo: this.route});
+            if (this.editType === 1) {
+              this.router.navigate(['../list'], {relativeTo: this.route});
+            } else {
+              this.router.navigate(['../errata'], {relativeTo: this.route});
+            }
           }, 2500);
         });
     }

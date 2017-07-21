@@ -1,11 +1,11 @@
-<ysl-loading *ngIf="false" style="display: block; height: 100px;"></ysl-loading>
-<div class="ysl-info-wrapper operation-product-list product-management">
-  <div class="product-import-sm-btn" (click)="addProduct()">
-    <a class="btn product-import-sm-a visible-xs"><i class="fa fa-plus"></i></a>
-  </div>
+<ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
+<div class="ysl-info-wrapper operation-product-errata product-management" *ngIf="!isShowLoading">
   <div class="filter-group">
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
-      <input type="text" class="col-md-1 col-xs-3 minw74" placeholder="输入产品名称" formControlName="userName" (blur)="filter()">
+      <div class="ysl-input-group">
+        <label class="visible-xs-inline-block">产品名称</label>
+        <input type="text" placeholder="输入产品名称" formControlName="productName" (blur)="filter(1)">
+      </div>
       <!--<div class="ysl-select-group col-md-2 col-xs-4">-->
         <!--<select name="" class="col-xs-12" formControlName="userType" (change)="filter()">-->
           <!--<option value='' disabled selected style='display:none;'>用户类型</option>-->
@@ -22,10 +22,17 @@
       <!--<input type="text" formControlName="keyword">-->
       <!--<i class="fa fa-search" (click)="keywordSearch()"></i>-->
       <!--</div>-->
+      <div class="ysl-datepicker-group">
+        <label>提交时间</label>
+        <div>
+        <my-date-picker class="calendar" name="dataSince" [options]="myDatePickerOptions" formControlName="dataSince"></my-date-picker> -
+        <my-date-picker class="calendar" name="dataUntil" [options]="myDatePickerOptions" formControlName="dataUntil"></my-date-picker>
+        </div>
+      </div>
     </form>
   </div>
-  <p class="font16 text-center empty-list" *ngIf="!dataItems?.length">暂未找到您要查询的数据产品</p>
-  <div *ngIf="dataItems?.length">
+  <p class="font16 text-center empty-list" *ngIf="listIsNull">暂未找到您要查询的数据产品</p>
+  <div *ngIf="!listIsNull">
     <ul class="ysl-list-group">
       <li class="ysl-list-item" *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
                                                       currentPage: currentPage,
@@ -33,17 +40,17 @@
         <h1 class="user-name">
           <span>{{c.userName}}</span>
           <p class="other-info font12 text-color-middle">
-            <span [ngSwitch]="c.status">状态：<i *ngSwitchCase="1">注册</i><i *ngSwitchCase="2">激活</i><i *ngSwitchCase="3">禁用</i></span>
-            <span>提交时间：{{c.modifiedOn}}</span>
+            <span>状态：{{c.statusText}}</span>
+            <span>提交时间：{{c.submitTime}}</span>
           </p>
         </h1>
         <div class="product">
-          <p class="product-name text-color-middle"><a (click)="toProductDetail(c)">{{c.name}}</a></p>
+          <p class="product-name text-color-middle"><a (click)="toProductDetail(c)">{{c.productName}}</a></p>
           <div class="ysl-btn-group">
-            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="editProduct(c, ind)">处理</button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="processingError(c)">处理</button>
           </div>
         </div>
-        <p class="modify-des">修改说明：文字描述</p>
+        <p class="modify-des">修改说明：{{c.comment}}</p>
       </li>
     </ul>
     <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"

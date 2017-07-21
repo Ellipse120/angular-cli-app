@@ -18,6 +18,7 @@ export class OperationProductListComponent implements OnInit {
   searchFilterForm: FormGroup;
   userInfo: any;
   isShowLoading: any;
+  listIsNull: any;
   userTypes = [
     {value: 1, viewValue: '未认证的个人用户'},
     {value: 2, viewValue: '未认证的机构用户'},
@@ -69,6 +70,7 @@ export class OperationProductListComponent implements OnInit {
         this.isShowLoading = false;
         this.dataItems = data.items;
         this.totalLength = data.totalLength;
+        this.listIsNull = !this.dataItems.length;
         this.dataItems.forEach(item => {
           switch ('' + item.userType) {
             case  '1': {
@@ -102,6 +104,7 @@ export class OperationProductListComponent implements OnInit {
 
       }, (error) => {
         this.isShowLoading = false;
+        // this.commonService.loginTimeout();
       });
     } else {
       this.showLoginComp();
@@ -133,12 +136,20 @@ export class OperationProductListComponent implements OnInit {
   }
 
   // 筛选
-  filter() {
+  filter(type) {
     const form = this.searchFilterForm['value'];
-    this.pagingOption['userName'] = form['userName'];
-    this.pagingOption['userType'] = form['userType'];
-    this.pagingOption['status'] = form['status'];
-    this.getProducts();
+    const userNameControl = this.searchFilterForm.controls['userName'];
+    if (type === 1 && userNameControl.dirty) {
+      const name = form['userName'];
+      this.pagingOption['userName'] = form['userName'];
+      this.getProducts();
+      this.searchFilterForm.reset();
+      this.searchFilterForm.patchValue({userName: name});
+    } else if (type === 2) {
+      this.pagingOption['userType'] = form['userType'];
+      this.pagingOption['status'] = form['status'];
+      this.getProducts();
+    }
   }
 
   // 关键字搜索
@@ -164,7 +175,7 @@ export class OperationProductListComponent implements OnInit {
 
   // 修改产品
   editProduct(product) {
-    this.router.navigate(['../edit', {productId: product.productId}], {relativeTo: this.route});
+    this.router.navigate(['../edit', {productId: product.productId, editType: 1}], {relativeTo: this.route});
   }
 
   // 产品详情

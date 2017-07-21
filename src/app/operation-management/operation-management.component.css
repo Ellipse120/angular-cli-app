@@ -216,6 +216,7 @@
   padding: 0 15px;
 }
 .filter-group .form-inline{
+  display: flex;
   width: 80%;
   color: #6d777f;
 }
@@ -251,6 +252,17 @@
   height: 100%;
   line-height: 100%;
   border: none;
+  padding-left: 10px;
+}
+.filter-group .ysl-select-group{
+  position: relative;
+}
+.filter-group .ysl-select-group .triangle-down{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top-color: #c1dce8;
 }
 .filter-group .input-group .fa-search{
   line-height: 28px;
@@ -261,6 +273,16 @@
 .filter-group .ysl-select-group{
   background-color: #fff;
   border: 1px solid #c1dce8;
+}
+.filter-group .form-inline>.ysl-datepicker-group{
+  background-color: transparent;
+  display: flex;
+}
+.ysl-datepicker-group>div{
+  display: flex;
+  align-items: center;
+  width: 212px;
+  justify-content: space-between;
 }
 .ysl-list-group{
   margin-top: 20px;
@@ -306,6 +328,9 @@
 .operation-product-list .form-inline .minw74{
   min-width: 74px;
 }
+.operation-product-list .form-inline .w100{
+  width: 100%;
+}
 .product-import-sm-btn{
   position: fixed;
   bottom: 70px;
@@ -327,6 +352,21 @@
   background-color: #39baf6;
   box-shadow: 1px 2px 5px #cccccc;
 }
+/*纠错处理*/
+.operation-product-errata .filter-group .ysl-input-group{
+  background-color: transparent;
+}
+.operation-product-errata .ysl-input-group input{
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #c1dce8;
+}
+.operation-product-errata label{
+  font-weight: normal;
+  width: 4em;
+  text-align: right;
+  margin-right: 8px;
+}
 
 
 @media screen and (max-width: 992px){
@@ -340,5 +380,26 @@
 @media screen and (max-width: 768px){
   .filter-group .form-inline{
     width: 100%;
+  }
+  .product-management .user-name{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .user-name .other-info{
+    margin-top: 10px;
+  }
+  .operation-product-errata .filter-group{
+    height: 80px;
+  }
+  .operation-product-errata .filter-group .ysl-input-group{
+    display: flex;
+  }
+  .operation-product-errata .ysl-input-group input{
+    width: 212px;
+  }
+  .operation-product-errata .filter-group .form-inline{
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
   }
 }

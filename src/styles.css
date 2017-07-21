@@ -355,7 +355,23 @@ textarea::-webkit-scrollbar-thumb {
 .search-box .btnpicker {
   border-radius: 0;
 }
-
+.operation-product-errata .calendar{
+  width: 105px;
+  height: 30px;
+}
+.operation-product-errata .selectiongroup{
+  border-radius: 0 !important;
+}
+.operation-product-errata .mydp{
+  border-color: #c1dce8;
+}
+.operation-product-errata .mydpicon{
+  color: #666;
+}
+.operation-product-errata .mydp .selection,.operation-product-errata .mydp .selbtngroup{
+  height: 30px !important;
+  border-radius: 0 !important;
+}
 .triggle-position {
   position: absolute;
   right: 15px;
@@ -1039,6 +1055,9 @@ app-index .mat-ripple {
   }
   .ysl-info-wrapper{
     padding: 10px 0;
+  }
+  .operation-product-errata .mydpicon{
+    font-size: 12px;
   }
 }
 
