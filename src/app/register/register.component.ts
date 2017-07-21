@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   registerError: boolean;
+  errorMessage = "注册失败";
   registerSuccess: boolean;
   isSubmit: boolean;
   formErrors = {
@@ -54,8 +55,11 @@ export class RegisterComponent implements OnInit {
       console.log('注册', res)
       this.registerSuccess = true;
     }, error => {
+      let body = JSON.parse(error._body);
+      this.errorMessage = body.errorMessage;
       this.registerError = true;
-      console.log('error c', error)
+      console.log(body);
+      //console.log('error c', error);
     })
   }
 
