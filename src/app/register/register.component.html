@@ -19,7 +19,7 @@
         <span *ngIf="formErrors.email">{{formErrors.email}}</span>
         <span *ngIf="!formErrors.email && formErrors.agreement">{{formErrors.agreement}}</span>
       </div>
-      <p class="ysl-error-tip" *ngIf="registerForm.valid && registerError">注册失败</p>
+      <p class="ysl-error-tip" *ngIf="registerForm.valid && registerError">{{errorMessage}}</p>
       <div class="form-group">
         <label class="sr-only"></label>
         <button class="btn btn-lg btn-block submit-btn">发送激活邮件</button>

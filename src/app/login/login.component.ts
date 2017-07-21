@@ -92,9 +92,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['index']);
         }
       }, error => {
+        const body = JSON.parse(error._body);
         this.loginMess = '登录';
-        this.loginFailed = '登录失败';
-      })
+        this.loginFailed = body.errorMessage;
+
+      });
   }
 
   gotoRegitster(){
