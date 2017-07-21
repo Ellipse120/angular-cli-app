@@ -6,7 +6,7 @@ import {Http, Headers} from '@angular/http';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {isNullOrUndefined} from 'util';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ProductListService {
@@ -22,6 +22,7 @@ export class ProductListService {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
   }
 
+  // 个人中心产品列表
   getProductList(option): Promise<any> {
     return new Promise(resolve => {
       if (!isNullOrUndefined(this.userId)) {
@@ -33,6 +34,12 @@ export class ProductListService {
           .catch(this.handleError);
       }
     });
+  }
+
+  // 产品管理产品列表
+  getOperateProductList(option): Observable<any> {
+    return this.http.get(this.yslHttpservice.url + 'api/product', {params: option, withCredentials: true})
+      .map(res => res.json());
   }
 
   getProductDetail(productId): Observable<any> {
@@ -67,10 +74,11 @@ export class ProductListService {
 
   doChangeStatus(productId, newStatus) {
     return new Promise((resolve, reject) => {
-      this.http.put(this.yslHttpservice.url + 'api/product/' + productId + '/status/' + newStatus, {
+      this.http.put(this.yslHttpservice.url + 'api/product/' + productId + '/status/' + newStatus, {}, {
         headers: new Headers({
           'Content-type': 'application/json'
-        })
+        }),
+        withCredentials: true
       })
         .toPromise()
         .then(res => resolve(res), error => reject(error));
@@ -80,6 +88,10 @@ export class ProductListService {
   private handleError(error: any): Promise<any> {
     console.log('an error occurred.' + error);
     return Promise.reject(error.message || error);
+  }
+
+  private handleErrorO(error) {
+    return Observable.throw(error);
   }
 
 }

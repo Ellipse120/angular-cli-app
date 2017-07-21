@@ -43,7 +43,7 @@
           <p class="product-name text-color-middle"><a (click)="toProductDetail(c)">{{c.name}}</a></p>
           <div class="ysl-btn-group">
             <button class="ysl-btn ysl-btn-primary ysl-btn-xs ysl-upload-file">上传 <input type="file"></button>
-            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c)"><i *ngIf="c.status == '3' || c.status == '1'">激活</i><i *ngIf="c.status == '2'">禁用</i></button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c,ind)"><i *ngIf="c.status == '3' || c.status == '1'">激活</i><i *ngIf="c.status == '2'">禁用</i></button>
             <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="editProduct(c, ind)">修改</button>
           </div>
         </div>

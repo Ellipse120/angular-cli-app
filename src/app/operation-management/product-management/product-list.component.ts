@@ -31,7 +31,6 @@ export class OperationProductListComponent implements OnInit {
     {value: 3, viewValue: '禁用'}
   ];
   pagingOption: any = {
-    userId: 0,
     limit: 10,
     offset: 0,
     sortBy: 'modifiedOn',
@@ -66,8 +65,7 @@ export class OperationProductListComponent implements OnInit {
   getProducts() {
     if (!isNullOrUndefined(this.userInfo)) {
       this.isShowLoading = true;
-      this.pagingOption.userId = this.userInfo.id;
-      this.productListService.getProductList(this.pagingOption).then((data) => {
+      this.productListService.getOperateProductList(this.pagingOption).subscribe((data) => {
         this.isShowLoading = false;
         this.dataItems = data.items;
         this.totalLength = data.totalLength;
@@ -102,6 +100,8 @@ export class OperationProductListComponent implements OnInit {
           item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn);
         });
 
+      }, (error) => {
+        this.isShowLoading = false;
       });
     } else {
       this.showLoginComp();
@@ -121,18 +121,14 @@ export class OperationProductListComponent implements OnInit {
   }
 
   // 启用或禁用
-  openOrClose(product) {
+  openOrClose(product, ind) {
+    console.log('product', product);
     let status;
-    if (product['status'] === 1 || product['status'] === 3) {
-      status = 2;
-    }
-    if (product['status'] === 2) {
-      status = 3;
-    }
+    status = (product['status'] === 1 || product['status'] === 3) ? 2 : 3;
     this.productListService.doChangeStatus(product.productId, status)
       .then(res => {
-        console.log('禁用', res);
-        this.getProducts();
+        const productStatus = this.dataItems[ind]['status'];
+        this.dataItems[ind]['status'] = (productStatus === 1 || productStatus === 3) ? 2 : 3;
       });
   }
 
