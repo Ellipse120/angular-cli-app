@@ -16,6 +16,10 @@ import {OperationProductAddComponent} from './product-management/product-add.com
 import {YslMaterialModule} from '../core/ysl-material.module';
 import {MyDatePickerModule} from 'mydatepicker';
 import {YslLoadingComponent} from "../core/loading/loading.component";
+import {OperationService} from "./service/operation-service";
+import { UserAddComponent } from './user-management/user-add.component';
+import { UserListComponent } from './user-management/user-list.component';
+import { UserInfoComponent } from './user-management/user-info.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import {YslLoadingComponent} from "../core/loading/loading.component";
     OperationProductErrataComponent,
     OperationProductListComponent,
     OperationProductAddComponent,
-    YslLoadingComponent
+    YslLoadingComponent,
+    UserAddComponent,
+    UserListComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,7 @@ import {YslLoadingComponent} from "../core/loading/loading.component";
     YslMaterialModule,
     MyDatePickerModule
   ],
+  providers: [OperationService],
   exports: [YslSidebarComponent, YslLoadingComponent]
 })
 

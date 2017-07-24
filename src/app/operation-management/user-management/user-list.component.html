@@ -1,0 +1,67 @@
+<div class="user-center-cont">
+  <div class="ysl-info-wrapper user-manage product-management">
+    <div class="product-import-sm-btn" (click)="addProduct()">
+      <a class="btn product-import-sm-a visible-xs"><i class="fa fa-plus"></i></a>
+    </div>
+    <div class="filter-group">
+      <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
+        <input type="text" class="col-md-3 col-xs-3 minw74" placeholder="用户账号" formControlName="loginId" (blur)="filter(1)">
+        <input type="text" class="col-md-2 col-xs-3 minw74" placeholder="用户名" formControlName="userName" (blur)="filter(1)">
+        <!--<div class="input-group minw74">-->
+        <!--<input type="text" placeholder="用户名" formControlName="userName">-->
+        <!--<i class="fa fa-search" (click)="filter()"></i>-->
+        <!--</div>-->
+        <div class="ysl-select-group">
+          <select name="" formControlName="userType" (change)="filter(2)">
+            <option value='' disabled selected style='display:none;'>用户类型</option>
+            <option *ngFor="let t of userTypes" [value]="t.value">{{t.viewValue}}</option>
+          </select>
+          <i class="triangle-down"></i>
+        </div>
+        <div class="ysl-select-group minw74">
+          <select class="w100" name="" formControlName="status" (change)="filter(2)">
+            <option value='' disabled selected style='display:none;'>状态</option>
+            <option *ngFor="let s of status" [value]="s.value">{{s.viewValue}}</option>
+          </select>
+          <i class="triangle-down"></i>
+        </div>
+        <!--<div class="input-group col-md-5 col-xs-12">-->
+        <!--<input type="text" formControlName="keyword">-->
+        <!--<i class="fa fa-search" (click)="keywordSearch()"></i>-->
+        <!--</div>-->
+      </form>
+      <!--<button class="ysl-btn ysl-btn-primary ysl-btn-md hidden-xs" (click)="addProduct()">新增用户</button>-->
+    </div>
+    <p class="font16 text-center empty-list" *ngIf="listIsNull"></p>
+    <ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
+    <div *ngIf="!listIsNull && !isShowLoading">
+      <ul class="ysl-list-group">
+        <li class="ysl-list-item" *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
+                                                      currentPage: currentPage,
+                                                      totalItems: totalLength}; let ind = index;">
+          <h1 class="user-name">
+            <span>{{c.userName}} <i class="verify-account">{{c.userType}}</i></span>
+            <p class="font14 visible-lg ysl-w-30">账号：{{c.loginId}}</p>
+            <p class="font14 visible-lg ysl-w-30">联系方式：{{c.contactMail}}</p>
+            <p class="other-info font12 text-color-middle">
+              <span [ngSwitch]="c.userStatus">状态：<i *ngSwitchCase="1">注册</i><i *ngSwitchCase="2">激活</i><i *ngSwitchCase="3">禁用</i></span>
+            </p>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c,ind)"><i *ngIf="c.userStatus == '3' || c.userStatus == '1'">激活</i><i *ngIf="c.userStatus == '2'">禁用</i></button>
+          </h1>
+          <div class="hidden-lg row">
+            <p class="font14 col-sm-6 col-xs-12">账号：{{c.loginId}}</p>
+            <p class="font14 col-sm-6 col-xs-12">联系方式：{{c.contactMail}}</p>
+          </div>
+        </li>
+      </ul>
+      <pagination-controls class="hidden-xs" (pageChange)="toNextPage($event);"
+                           autoHide="true"
+                           previousLabel="上一页"
+                           nextLabel="下一页"></pagination-controls>
+      <pagination-controls class="visible-xs-block" (pageChange)="toNextPage($event);"
+                           autoHide="true"
+                           previousLabel="<"
+                           nextLabel=">"></pagination-controls>
+    </div>
+  </div>
+</div>

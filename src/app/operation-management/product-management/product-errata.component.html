@@ -1,5 +1,4 @@
-<ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
-<div class="ysl-info-wrapper operation-product-errata product-management" *ngIf="!isShowLoading">
+<div class="ysl-info-wrapper operation-product-errata product-management">
   <div class="filter-group">
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
       <div class="ysl-input-group">
@@ -32,7 +31,8 @@
     </form>
   </div>
   <p class="font16 text-center empty-list" *ngIf="listIsNull">暂未找到您要查询的数据产品</p>
-  <div *ngIf="!listIsNull">
+  <ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
+  <div *ngIf="!listIsNull && !isShowLoading">
     <ul class="ysl-list-group">
       <li class="ysl-list-item" *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
                                                       currentPage: currentPage,

@@ -49,15 +49,6 @@
   align-items: center;
   cursor: pointer;
 }
-.new-user{
-  position: absolute;
-  top:0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.13);
-  z-index: 10000000;
-}
 .new-user-box{
   padding: 30px;
   width: 520px;
@@ -301,6 +292,9 @@
 .user-name .other-info>*{
   margin-right: 8px;
 }
+.user-name a{
+  cursor: pointer;
+}
 
 /*产品管理*/
 .product-management .user-name{
@@ -368,7 +362,12 @@
   margin-right: 8px;
 }
 
-
+/*用户管理*/
+@media screen and (min-width: 1200px){
+  .user-manage .ysl-w-30{
+    width: 30%;
+  }
+}
 @media screen and (max-width: 992px){
   .filter-group{
     padding: 0 15px;

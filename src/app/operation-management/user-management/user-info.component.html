@@ -1,0 +1,16 @@
+<div class="info-box">
+  <div class="info-content">
+    <div class="user-content">
+      <span class="edit-btn fr" (click)="editInfo()"> <img src="./assets/images/edit.png">&nbsp;&nbsp;修改</span>
+      <ul class="user-info-list">
+        <li><span class="user-tag">用户账号</span> <input type="text" [(ngModel)]="userInfo.userCount"  [disabled]="showEdit"></li>
+        <li><span class="user-tag">用户名</span> <input type="text" [(ngModel)]="userInfo.userName" [disabled]="showEdit"></li>
+        <li><span class="user-tag">用户类型</span> <input type="text" [(ngModel)]="userInfo.userType" [disabled]="showEdit"></li>
+        <li><span class="user-tag">用户状态</span> <input type="text" [(ngModel)]="userInfo.userState" [disabled]="showEdit"></li>
+        <li><span class="user-tag">联系方式</span> <input type="text" [(ngModel)]="userInfo.userPhone" [disabled]="showEdit"></li>
+      </ul>
+
+      <button class="ysl-btn save-btn">保存</button>
+    </div>
+  </div>
+</div>

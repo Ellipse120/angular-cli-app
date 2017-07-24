@@ -8,6 +8,9 @@ import {OperationalReportComponent} from './operational-report/operational-repor
 import {OperationProductListComponent} from './product-management/product-list.component';
 import {OperationProductErrataComponent} from 'app/operation-management/product-management/product-errata.component';
 import {OperationProductAddComponent} from './product-management/product-add.component';
+import {UserAddComponent} from './user-management/user-add.component';
+import {UserListComponent} from './user-management/user-list.component';
+import {UserInfoComponent} from "app/operation-management/user-management/user-info.component";
 
 
 const operationProductChildRouters: Routes = [
@@ -36,11 +39,34 @@ const operationProductChildRouters: Routes = [
     path: '**', redirectTo: 'list'
   }
 ];
+const userManageChildRouters: Routes = [
+  {
+    path: 'list',
+    component: UserListComponent
+  },
+  {
+    path: 'add',
+    component: UserAddComponent
+  },
+  {
+    path: 'user-info',
+    component: UserInfoComponent
+  },
+  {
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full'
+  },
+  {
+    path: '**', redirectTo: 'list'
+  }
+];
 
 const operationChildRouters = [
   {
     path: 'userManage',
-    component: UserManagementComponent
+    component: UserManagementComponent,
+    children: userManageChildRouters
   },
   {
     path: 'productManagement',

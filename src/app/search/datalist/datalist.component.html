@@ -99,20 +99,39 @@
         </sb-item>
       </squeezebox>
       <!--标签筛选-->
-      <div *ngFor="let t of tagsFilter">
-        <squeezebox class="search-condition-type" *ngIf="t.items">
-          <sb-item [collapsed]="false">
-            <sb-item-head class="search-condition-title">{{t.name}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
-            <sb-item-body>
-              <ul>
-                <li class="search-condition-type-item" *ngFor="let c of t.items; let i = index">
-                  <p class="readonly" (click)="searchByTag(c)" [class.active]="c.selected"><span>{{c.name}}</span></p>
-                </li>
-              </ul>
-            </sb-item-body>
-          </sb-item>
-        </squeezebox>
-      </div>
+      <squeezebox class="search-condition-type" *ngIf="this.product['tagFacets']?.length">
+        <sb-item [collapsed]="false">
+          <sb-item-head class="search-condition-title">标签<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+          <sb-item-body *ngFor="let t of tagsFilter">
+            <squeezebox class="search-condition-type" *ngIf="t.items">
+              <sb-item [collapsed]="false">
+                <sb-item-head class="search-condition-title">{{t.name}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>
+                <sb-item-body>
+                  <ul>
+                    <li class="search-condition-type-item" *ngFor="let c of t.items; let i = index">
+                      <p class="readonly" (click)="searchByTag(c)" [class.active]="c.selected"><span>{{c.name}}</span></p>
+                    </li>
+                  </ul>
+                </sb-item-body>
+              </sb-item>
+            </squeezebox>
+          </sb-item-body>
+        </sb-item>
+      </squeezebox>
+      <!--<div *ngFor="let t of tagsFilter">-->
+        <!--<squeezebox class="search-condition-type" *ngIf="t.items">-->
+          <!--<sb-item [collapsed]="false">-->
+            <!--<sb-item-head class="search-condition-title">{{t.name}}<i class="fa fa-angle-up" aria-hidden="true"></i></sb-item-head>-->
+            <!--<sb-item-body>-->
+              <!--<ul>-->
+                <!--<li class="search-condition-type-item" *ngFor="let c of t.items; let i = index">-->
+                  <!--<p class="readonly" (click)="searchByTag(c)" [class.active]="c.selected"><span>{{c.name}}</span></p>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</sb-item-body>-->
+          <!--</sb-item>-->
+        <!--</squeezebox>-->
+      <!--</div>-->
     </div>
   </div>
   <div class="data-list-area clearfix">

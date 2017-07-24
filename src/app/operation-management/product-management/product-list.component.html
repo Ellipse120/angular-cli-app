@@ -1,5 +1,4 @@
-<ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
-<div class="ysl-info-wrapper operation-product-list product-management" *ngIf="!isShowLoading">
+<div class="ysl-info-wrapper operation-product-list product-management">
   <div class="product-import-sm-btn" (click)="addProduct()">
     <a class="btn product-import-sm-a visible-xs"><i class="fa fa-plus"></i></a>
   </div>
@@ -13,6 +12,7 @@
       <div class="ysl-select-group ">
         <select name="" formControlName="userType" (change)="filter(2)">
           <option value='' disabled selected style='display:none;'>用户类型</option>
+          <option value="">全部</option>
           <option *ngFor="let t of userTypes" [value]="t.value">{{t.viewValue}}</option>
         </select>
         <i class="triangle-down"></i>
@@ -20,6 +20,7 @@
       <div class="ysl-select-group minw74">
         <select class="w100" name="" formControlName="status" (change)="filter(2)">
           <option value='' disabled selected style='display:none;'>状态</option>
+
           <option *ngFor="let s of status" [value]="s.value">{{s.viewValue}}</option>
         </select>
         <i class="triangle-down"></i>
@@ -32,7 +33,8 @@
     <button class="ysl-btn ysl-btn-primary ysl-btn-md hidden-xs" (click)="addProduct()">录入产品</button>
   </div>
   <p class="font16 text-center empty-list" *ngIf="listIsNull">暂未找到您要查询的数据产品</p>
-  <div *ngIf="!listIsNull">
+  <ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
+  <div *ngIf="!listIsNull && !isShowLoading">
     <ul class="ysl-list-group">
       <li class="ysl-list-item"  *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
                                                       currentPage: currentPage,
