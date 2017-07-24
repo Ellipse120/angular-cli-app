@@ -5,6 +5,7 @@ import {CookieService} from 'ngx-cookie';
 import {Router, NavigationEnd} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FileUploader} from 'ng2-file-upload';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-user-center',
@@ -19,6 +20,7 @@ export class UserCenterComponent implements OnInit {
   userInfo: any;
   selfIntroduction: string;
   isEditable = false;
+  profileSrc = '../../assets/images/userDefaultAvatar.png';
   userDesFormError = {
     selfIntroduction: {
       required: '请输入您的个性签名',
@@ -40,11 +42,12 @@ export class UserCenterComponent implements OnInit {
               private fb: FormBuilder,
               private cookie: CookieService,
               private router: Router,
-              private commonService: YslCommonService) {}
+              private commonService: YslCommonService,
+              private snackBar: MdSnackBar) {}
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    this.uploader = new FileUploader({url: this.httpService.url + 'api/user/' + this.userId + '/logo'});
+    this.uploader = new FileUploader({url: this.httpService.url + 'api/file/upload/user/logo/' + this.userId});
     this.createForm();
     this.getUserInfo();
     this.updateUserInfo();
@@ -54,10 +57,12 @@ export class UserCenterComponent implements OnInit {
     this.commonService.getUserInfo().subscribe(e => {
       if (e.userInfo) {
         this.userInfo = e.userInfo;
+        this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
       } else {
         this.httpService.getUserInfo(this.userId)
           .then(res => {
             this.userInfo = res;
+            this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
           });
       }
     });
@@ -105,9 +110,13 @@ export class UserCenterComponent implements OnInit {
 
   // 定义事件，上传文件
   uploadFile() {
-    this.uploader.queue[0].onSuccess = function (response, status, headers) {
+    this.uploader.queue[0].onSuccess = (response, status, headers) => {
       if (status === 200) {
-        const tempRes = JSON.parse(response);
+        const res = JSON.parse(response);
+        this.profileSrc = this.httpService.url + 'api/file/' + res['logoFilePath'] + '/download';
+        this.snackBar.open('头像更改成功', '', {
+          duration: 1000
+        });
       }
     };
     this.uploader.queue[0].upload();
