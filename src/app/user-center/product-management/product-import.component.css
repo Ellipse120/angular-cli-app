@@ -201,7 +201,7 @@ select {
 }
 
 .product-import-checkbox {
-  top: -3px;
+  /*top: -3px;*/
   position: relative;
   margin-right: 40px;
   font-weight: normal;
