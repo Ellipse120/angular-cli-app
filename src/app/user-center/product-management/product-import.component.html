@@ -4,10 +4,8 @@
       <p class="product-info">产品信息</p>
 
       <div class="product-import-item" style="padding-top: 20px;position: relative;">
-        <input type="text" maxlength="32" required
-               [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
-               class="product-import-name"
-               placeholder="名称*" style="padding-right: 40px;">
+        <input maxlength="32" required [(ngModel)]="product.name" [pattern]="pattern" #name name="name"
+               id="name" class="product-import-name" placeholder="名称 *" style="padding-right: 40px;">
         <div align="end" style="color: #a5aaad;position: absolute;top: 31px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
         <span style="color: red;" *ngIf="(name.validity.patternMismatch)">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</span>
       </div>
@@ -64,11 +62,20 @@
 
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
-      <div class="product-import-item2" style="padding: 0px 30px 10px 30px;">
-        <input id="upload" type="file" name="upload">
+      <div class="product-import-item2" style="padding: 0 30px 10px 30px;">
+        <input id="upload" ng2FileSelect type="file" name="upload" [uploader]="uploader"
+               (change)="selectedFileChange($event)">
         <label for="upload">
-          <span> 上传文件&hellip;</span>
+          <span *ngIf="uploader?.queue?.length===0"> 上传文件&hellip;</span>
+          <span>{{uploader.queue[uploader.queue.length - 1]?.file?.name}}</span>
+          <span>{{uploader.queue[uploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>
         </label>
+        <div class="progress" style="margin-bottom: 0;" *ngIf="uploader?.queue?.length!==0">
+          <div class="progress-bar" role="progressbar"
+               [ngStyle]="{ 'width': uploader.queue[uploader.queue.length - 1].progress + '%' }">
+            {{uploader.queue[this.uploader.queue.length - 1].progress + '%'}}
+          </div>
+        </div>
       </div>
     </div>
 

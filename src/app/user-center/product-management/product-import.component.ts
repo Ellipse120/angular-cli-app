@@ -7,6 +7,7 @@ import {ProductListService} from '../../product-mangement/product-list/product-l
 import {CookieService} from 'ngx-cookie';
 import {Location} from '@angular/common';
 import {MdSnackBar} from '@angular/material';
+import {FileUploader} from 'ng2-file-upload';
 
 @Component({
   templateUrl: './product-import.component.html',
@@ -28,6 +29,7 @@ export class ProductImportComponent implements OnInit {
     premium: '',
     dataSince: +'',
     dataUntil: +'',
+    sampleFilePath: '',
     tags: []
   };
 
@@ -69,6 +71,8 @@ export class ProductImportComponent implements OnInit {
 
   userInfo;
   pattern = '[^,，。;；]+$';
+  public uploader: FileUploader;
+  productSamplePath = 'api/file/upload/product/sample/';
 
   constructor(public service: YslHttpService,
               private router: Router,
@@ -81,8 +85,9 @@ export class ProductImportComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-
+    this.uploader = new FileUploader({url: this.service.url + 'api/file/upload'});
     if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
+      this.uploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
       this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
         .subscribe(data => {
           this.product = data;
@@ -113,6 +118,19 @@ export class ProductImportComponent implements OnInit {
       });
 
     this.getSelectionOption();
+  }
+
+  selectedFileChange(event) {
+    this.uploader.queue[this.uploader.queue.length - 1].onSuccess = (response, status, headers) => {
+      if (status === 200) {
+        const res = JSON.parse(response);
+        this.product.sampleFilePath = res['sampleFilePath'];
+        this.snackbar.open('数据样本上传成功', '', {
+          duration: 1000
+        });
+      }
+    };
+    this.uploader.queue[this.uploader.queue.length - 1].upload();
   }
 
   changeTab(i) {

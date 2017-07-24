@@ -15,12 +15,13 @@ export class ProductErrataComponent implements OnInit {
   count: number;
   pagingOption = {
     type: 1,
+    productName: '',
     userId: 0,
     userName: '',
     limit: 10,
     offset: 0,
     sortBy: '',
-    ascending: true
+    ascending: false
   };
   page = 1;
   isLoading: boolean;
@@ -43,11 +44,13 @@ export class ProductErrataComponent implements OnInit {
     params['userId'] = this.userId;
     if (this.router.url.split('/').pop().split('-').includes('by')) {
       params['type'] = 1;
+      this.pagingOption.type = 1;
     } else {
       params['type'] = 2;
+      this.pagingOption.type = 2;
     }
 
-    this.service.list(params).subscribe(data => {
+    this.service.list(this.pagingOption).subscribe(data => {
       this.count = data.totalLength;
       data.items.forEach(item => {
         if (item.status === 2) {

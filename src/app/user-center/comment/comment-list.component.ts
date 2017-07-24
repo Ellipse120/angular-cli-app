@@ -51,9 +51,9 @@ export class CommentListComponent implements OnInit {
         // 当前页评论删完回到上一页
         if (this.pagination.offset >= 5) {
           if (!res['items'].length) {
-            console.log('offset', this.pagination.offset, this.pagination['offset'])
+            console.log('offset', this.pagination.offset, this.pagination['offset']);
             this.pagination['offset'] = (this.currPage - 2) * (this.pagination['limit']);
-            let navigationExtras: NavigationExtras = {
+            const navigationExtras: NavigationExtras = {
               queryParams: {offset: this.pagination.offset}
             };
             this.router.navigate(['userCenter/comment/list'], navigationExtras);
