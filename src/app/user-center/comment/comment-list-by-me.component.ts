@@ -3,7 +3,8 @@ import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
-import {MdSnackBar} from '@angular/material';
+import {MdDialog, MdSnackBar} from '@angular/material';
+import {ConfirmDialogComponent} from '../../core/commons/confirm-dialog.component';
 
 @Component({
   selector: 'app-comment-list-by-me',
@@ -24,7 +25,8 @@ export class CommentListByMeComponent implements OnInit {
               private commonService: YslCommonService,
               private route: ActivatedRoute,
               private router: Router,
-              public snackBar: MdSnackBar) { }
+              public snackBar: MdSnackBar,
+              private dialog: MdDialog) { }
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
@@ -62,16 +64,23 @@ export class CommentListByMeComponent implements OnInit {
         }
       });
   }
-
   // 删除评论
   deleteMyComment(comment) {
-    this.httpService.deleteMyComment(comment.id)
-      .then(res => {
-        this.getCommentToMe();
-        this.snackBar.open('评论删除成功', '', {
-          duration: 3000
-        });
-      });
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: '确认删除评论？'
+      }
+    }).afterClosed().subscribe(result => {
+      if (result === 'OK') {
+        this.httpService.deleteMyComment(comment.id)
+          .then(res => {
+            this.getCommentToMe();
+            this.snackBar.open('评论删除成功', '', {
+              duration: 3000
+            });
+          });
+      }
+    });
   }
 
   // 产品详情

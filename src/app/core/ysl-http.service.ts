@@ -53,8 +53,8 @@ export class YslHttpService {
     // var options = new RequestOptions({ headers: headers });
     return new Promise(resolve => {
       this.http.get(this.url + 'api/tag/dimension/hierarchy')
-          .toPromise()
-          .then(response => resolve(response.json()));
+        .toPromise()
+        .then(response => resolve(response.json()));
     });
   }
 
@@ -101,11 +101,10 @@ export class YslHttpService {
 
   getErrorData(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.dataListUrl + 'error.json')
-      .toPromise()
-      .then(response => resolve(response.json()));
-    }
-
+        this.http.get(this.dataListUrl + 'error.json')
+          .toPromise()
+          .then(response => resolve(response.json()));
+      }
     );
 
   }
@@ -168,7 +167,7 @@ export class YslHttpService {
       })
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error));
-      });
+    });
   }
 
   // 产品--详情
@@ -190,12 +189,13 @@ export class YslHttpService {
   }
 
   // 样本下载
-  downloadSampleFile(productId) {
-  return new Promise((resolve, reject) => {
-    this.http.get(this.url + 'api/product/' + productId + '/file/content')
-      .toPromise()
-      .then(response => resolve(response.json()), error => reject(error));
-  });
+  downloadSampleFile(sampleFilePath) {
+    return new Promise((resolve, reject) => {
+      // this.http.get(this.url + 'api/product/' + productId + '/file/content')
+      this.http.get(this.url + 'api/file/' + sampleFilePath + '/download')
+        .toPromise()
+        .then(response => resolve(response), error => reject(error));
+    });
   }
 
   // 获取相关产品

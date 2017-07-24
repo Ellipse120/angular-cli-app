@@ -70,7 +70,7 @@
 
 /*修改*/
 @media screen and (max-width: 1200px){
-`.ysl-label-search-cont{
+.ysl-label-search-cont{
     height: 250px;
     overflow: scroll;
   }

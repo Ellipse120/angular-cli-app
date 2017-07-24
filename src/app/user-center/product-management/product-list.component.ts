@@ -42,7 +42,7 @@ export class ProductListComponent implements OnInit {
     limit: 10,
     offset: 0,
     sortBy: '',
-    ascending: true,
+    ascending: false,
     userName: '',
     userType: '',
     status: '',

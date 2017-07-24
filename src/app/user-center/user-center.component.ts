@@ -5,7 +5,7 @@ import {CookieService} from 'ngx-cookie';
 import {Router, NavigationEnd} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FileUploader} from 'ng2-file-upload';
-import {MdSnackBar} from "@angular/material";
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-user-center',
@@ -104,7 +104,7 @@ export class UserCenterComponent implements OnInit {
   // 上传文件
   // 定义事件，选择文件
   selectedFileOnChanged(event: any) {
-    console.log('上传', event.target.value);
+    // console.log('上传', event.target.value);
     this.uploadFile();
   }
 
