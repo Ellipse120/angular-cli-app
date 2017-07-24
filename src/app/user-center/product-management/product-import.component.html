@@ -4,6 +4,7 @@
       <p class="product-info">产品信息</p>
 
       <div class="product-import-item" style="padding-top: 20px;position: relative;">
+        <span style="position: absolute;left: 18px;top: 30px;color: red;font-size: 18px;">*</span>
         <input maxlength="32" required [(ngModel)]="product.name" [pattern]="pattern" #name name="name"
                id="name" class="product-import-name" placeholder="名称 *" style="padding-right: 40px;">
         <div align="end" style="color: #a5aaad;position: absolute;top: 31px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
