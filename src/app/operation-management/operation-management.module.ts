@@ -20,6 +20,7 @@ import {OperationService} from './service/operation-service';
 import { UserAddComponent } from './user-management/user-add.component';
 import { UserListComponent } from './user-management/user-list.component';
 import { UserInfoComponent } from './user-management/user-info.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserInfoComponent } from './user-management/user-info.component';
     FormsModule,
     ReactiveFormsModule,
     YslMaterialModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    FileUploadModule
   ],
   providers: [OperationService],
   exports: [YslSidebarComponent, YslLoadingComponent]

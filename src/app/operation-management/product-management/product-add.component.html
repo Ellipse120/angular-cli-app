@@ -4,6 +4,7 @@
       <p class="product-info">产品信息</p>
 
       <div class="product-import-item" style="padding-top: 20px;position: relative;">
+        <span style="position: absolute;left: 18px;top: 30px;color: red;font-size: 18px;">*</span>
         <input type="text" maxlength="32" required
                [(ngModel)]="product.name" [pattern]="pattern" #name name="name" id="name"
                class="product-import-name"
@@ -65,10 +66,19 @@
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
       <div class="product-import-item2" style="padding: 0px 30px 10px 30px;">
-        <input id="upload" type="file" name="upload">
+        <input id="upload" ng2FileSelect type="file" name="upload"
+               [uploader]="sampleUploader" (change)="selectedFileChanged($event)">
         <label for="upload">
-          <span> 上传文件&hellip;</span>
+          <span *ngIf="sampleUploader?.queue?.length===0"> 上传文件&hellip;</span>
+          <span>{{sampleUploader.queue[sampleUploader.queue.length - 1]?.file?.name}}</span>
+          <span>{{sampleUploader.queue[sampleUploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>
         </label>
+        <div class="progress" style="margin-bottom: 0;" *ngIf="sampleUploader?.queue?.length!==0">
+          <div class="progress-bar" role="progressbar"
+               [ngStyle]="{ 'width': sampleUploader.queue[sampleUploader.queue.length - 1].progress + '%' }">
+            {{sampleUploader.queue[this.sampleUploader.queue.length - 1].progress + '%'}}
+          </div>
+        </div>
       </div>
     </div>
 

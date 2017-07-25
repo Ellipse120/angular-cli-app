@@ -123,12 +123,16 @@ export class ProductImportComponent implements OnInit {
   selectedFileChange(event) {
     this.uploader.queue[this.uploader.queue.length - 1].onSuccess = (response, status, headers) => {
       if (status === 200) {
-        const res = JSON.parse(response);
-        this.product.sampleFilePath = res['sampleFilePath'];
-        this.snackbar.open('数据样本上传成功', '', {
-          duration: 1000
-        });
+        if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
+          const res = JSON.parse(response);
+          this.product.sampleFilePath = res['sampleFilePath'];
+        } else {
+          this.product.sampleFilePath = response;
+        }
       }
+      this.snackbar.open('数据样本上传成功', '', {
+        duration: 1000
+      });
     };
     this.uploader.queue[this.uploader.queue.length - 1].upload();
   }
@@ -170,17 +174,21 @@ export class ProductImportComponent implements OnInit {
       this.productListService.doProductImport(this.product)
         .then(res => {
           this.snackbar.open('产品录入成功', '', {
-            duration: 3000
+            duration: 2000
           });
-          this.router.navigate(['../list'], {relativeTo: this.route});
+          setTimeout(() => {
+            this.router.navigate(['../list'], {relativeTo: this.route});
+          }, 2500);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
           this.snackbar.open('产品修改成功', '', {
-            duration: 3000
+            duration: 2000
           });
-          this.router.navigate(['../../list'], {relativeTo: this.route});
+          setTimeout(() => {
+            this.router.navigate(['../../list'], {relativeTo: this.route});
+          }, 2500);
         });
     }
   }
