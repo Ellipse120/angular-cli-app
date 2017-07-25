@@ -244,6 +244,9 @@
   border: none;
   padding-left: 10px;
 }
+.filter-group select{
+  width: 100%;
+}
 .filter-group .ysl-select-group{
   position: relative;
 }

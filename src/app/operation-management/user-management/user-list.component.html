@@ -31,9 +31,9 @@
       </form>
       <!--<button class="ysl-btn ysl-btn-primary ysl-btn-md hidden-xs" (click)="addProduct()">新增用户</button>-->
     </div>
-    <p class="font16 text-center empty-list" *ngIf="listIsNull"></p>
+    <p class="font16 text-center empty-list" *ngIf="errorMessage">{{this.errorMessage}}</p>
     <ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
-    <div *ngIf="!listIsNull && !isShowLoading">
+    <div *ngIf="!errorMessage && !isShowLoading">
       <ul class="ysl-list-group">
         <li class="ysl-list-item" *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
                                                       currentPage: currentPage,
