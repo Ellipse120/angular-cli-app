@@ -21,6 +21,7 @@ import { UserAddComponent } from './user-management/user-add.component';
 import { UserListComponent } from './user-management/user-list.component';
 import { UserInfoComponent } from './user-management/user-info.component';
 import {EchartsNg2Module} from 'echarts-ng2';
+import {FileUploadModule} from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {EchartsNg2Module} from 'echarts-ng2';
     ReactiveFormsModule,
     YslMaterialModule,
     MyDatePickerModule,
-    EchartsNg2Module
+    EchartsNg2Module,
+    FileUploadModule
   ],
   providers: [OperationService],
   exports: [YslSidebarComponent, YslLoadingComponent]

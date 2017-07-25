@@ -6,6 +6,7 @@ import {ProductListService} from '../../product-mangement/product-list/product-l
 import {CookieService} from 'ngx-cookie';
 import {MdSnackBar} from '@angular/material';
 import {isNullOrUndefined} from 'util';
+import {FileUploader} from 'ng2-file-upload';
 
 @Component({
   templateUrl: './product-add.component.html',
@@ -27,6 +28,7 @@ export class OperationProductAddComponent implements OnInit {
     premium: '',
     dataSince: +'',
     dataUntil: +'',
+    sampleFilePath: '',
     tags: []
   };
 
@@ -70,6 +72,8 @@ export class OperationProductAddComponent implements OnInit {
 
   userInfo;
   pattern = '[^,，。;；]+$';
+  public sampleUploader: FileUploader;
+  productSamplePath = 'api/file/upload/product/sample/';
 
   constructor(public service: YslHttpService,
               private router: Router,
@@ -81,9 +85,11 @@ export class OperationProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.sampleUploader = new FileUploader({url: this.service.url + 'api/file/upload'});
     this.route.params.subscribe(param => {
       this.editType = param['editType'];
       if (!isNullOrUndefined(param['productId'])) {
+        this.sampleUploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
         this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
           .subscribe(data => {
             this.product = data;
@@ -131,6 +137,23 @@ export class OperationProductAddComponent implements OnInit {
       });
 
     this.getSelectionOption();
+  }
+
+  selectedFileChanged(event) {
+    this.sampleUploader.queue[this.sampleUploader.queue.length - 1].onSuccess = (response, status, headers) => {
+      if (status === 200) {
+        if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
+          const res = JSON.parse(response);
+          this.product.sampleFilePath = res['sampleFilePath'];
+        } else {
+          this.product.sampleFilePath = response;
+        }
+      }
+      this.snackbar.open('数据样本上传成功', '', {
+        duration: 1000
+      });
+    };
+    this.sampleUploader.queue[this.sampleUploader.queue.length - 1].upload();
   }
 
   changeTab(i) {
