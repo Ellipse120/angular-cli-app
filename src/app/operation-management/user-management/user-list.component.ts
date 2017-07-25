@@ -35,8 +35,6 @@ export class UserListComponent implements OnInit {
   pagingOption: any = {
     limit: 10,
     offset: 0,
-    sortBy: 'modifiedOn',
-    ascending: false,
     userName: '',
     userType: '',
     status: ''
@@ -63,7 +61,7 @@ export class UserListComponent implements OnInit {
 
   getUsers() {
     this.isShowLoading = true;
-    this.service.getUserList()
+    this.service.getUserList(this.pagingOption)
       .then(data => {
         this.isShowLoading = false;
         this.errorMessage = data['items'].length ? undefined : '用户列表为空';
@@ -138,18 +136,15 @@ export class UserListComponent implements OnInit {
   }
 
   // 筛选
-  filter(type) {
+  filter(type, name) {
     const form = this.searchFilterForm['value'];
-    const userNameControl = this.searchFilterForm.controls['userName'];
-    if (type === 1 && userNameControl.dirty) {
-      const name = form['userName'];
-      this.pagingOption['userName'] = form['userName'];
+    const control = this.searchFilterForm.controls[name];
+    if (type === 1 && control.dirty) {
+      this.pagingOption[name] = form[name];
       this.getUsers();
-      this.searchFilterForm.reset();
-      this.searchFilterForm.patchValue({userName: name});
+      this.searchFilterForm.reset(form);
     } else if (type === 2) {
-      this.pagingOption['userType'] = form['userType'];
-      this.pagingOption['status'] = form['status'];
+      this.pagingOption[name] = form[name];
       this.getUsers();
     }
   }

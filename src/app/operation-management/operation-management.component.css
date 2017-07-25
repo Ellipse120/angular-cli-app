@@ -208,18 +208,17 @@
 }
 .filter-group .form-inline{
   display: flex;
-  width: 80%;
+  flex-wrap: wrap;
+  height: 100%;
   color: #6d777f;
+  align-items: center;
+  justify-content: space-between;
 }
 .filter-group .form-inline>*{
   height: 30px;
   line-height: 30px;
-  margin-right: 10px;
   padding: 0;
   background-color: #fff;
-}
-.filter-group .form-inline>*:last-child{
-  margin-right: 0;
 }
 .filter-group .input-group{
   display: flex;
@@ -319,6 +318,9 @@
   margin-right: 0;
 }
 /*产品列表*/
+.operation-product-list .form-inline{
+  width: 52%;
+}
 .operation-product-list .form-inline .minw74{
   min-width: 74px;
 }
@@ -347,8 +349,13 @@
   box-shadow: 1px 2px 5px #cccccc;
 }
 /*纠错处理*/
+.operation-product-errata .form-inline{
+  width: 100%;
+  justify-content: flex-start;
+}
 .operation-product-errata .filter-group .ysl-input-group{
   background-color: transparent;
+  margin-right: 10px;
 }
 .operation-product-errata .ysl-input-group input{
   height: 30px;
@@ -375,10 +382,15 @@
   .ysl-info-wrapper{
     padding: 20px 0;
   }
+  .user-manage .filter-group{
+    height: 80px;
+  }
 }
 @media screen and (max-width: 768px){
   .filter-group .form-inline{
     width: 100%;
+    align-content: space-around;
+    justify-content: space-between;
   }
   .product-management .user-name{
     flex-direction: column;
@@ -386,6 +398,9 @@
   }
   .user-name .other-info{
     margin-top: 10px;
+  }
+  .operation-product-errata .form-inline{
+    align-items: flex-start;
   }
   .operation-product-errata .filter-group{
     height: 80px;
@@ -398,7 +413,6 @@
   }
   .operation-product-errata .filter-group .form-inline{
     flex-direction: column;
-    height: 100%;
     justify-content: space-around;
   }
 }

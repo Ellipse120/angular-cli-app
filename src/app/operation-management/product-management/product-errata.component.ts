@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CookieService} from 'ngx-cookie';
 import {isNullOrUndefined} from 'util';
@@ -7,9 +7,9 @@ import {YslCommonService} from '../../core/ysl-common.service';
 import {LoginComponent} from '../../login/login.component';
 import {MdDialog} from '@angular/material';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {ProductErrorService} from "../../product-mangement/error-correct/product-error.service";
-import {YslHttpService} from "../../core/ysl-http.service";
-import {IMyDpOptions} from "mydatepicker";
+import {ProductErrorService} from '../../product-mangement/error-correct/product-error.service';
+import {YslHttpService} from '../../core/ysl-http.service';
+import {IMyCalendarViewChanged, IMyDateModel, IMyDpOptions} from 'mydatepicker';
 
 @Component({
   templateUrl: './product-errata.component.html',
@@ -34,11 +34,18 @@ export class OperationProductErrataComponent implements OnInit {
     offset: 0,
     sortBy: 'modifiedOn',
     ascending: false,
+    dateSince: null,
+    dateUntil: null
   };
   dataItems = [];
   currentPage: any;
   totalLength: any;
-  myDatePickerOptions: IMyDpOptions = {
+  datePickerSinceOptions: IMyDpOptions = {
+    dateFormat: 'yyyy.mm.dd',
+    inline: false,
+    showClearDateBtn: false
+  };
+  datePickerUntilOptions: IMyDpOptions = {
     dateFormat: 'yyyy.mm.dd',
     inline: false,
     showClearDateBtn: false
@@ -113,15 +120,9 @@ export class OperationProductErrataComponent implements OnInit {
     const form = this.searchFilterForm['value'];
     const userNameControl = this.searchFilterForm.controls['productName'];
     if (type === 1 && userNameControl.dirty) {
-      const name = form['productName'];
       this.pagingOption['productName'] = form['productName'];
       this.listError();
-      this.searchFilterForm.reset();
-      this.searchFilterForm.patchValue({productName: name});
-    } else if (type === 2) {
-      this.pagingOption['userType'] = form['userType'];
-      this.pagingOption['status'] = form['status'];
-      this.listError();
+      this.searchFilterForm.reset(form);
     }
   }
 
@@ -129,6 +130,16 @@ export class OperationProductErrataComponent implements OnInit {
   keywordSearch() {
     const form = this.searchFilterForm['value'];
     this.pagingOption['keyword'] = form['keyword'];
+  }
+
+  onDateChanged(event: IMyDateModel, type) {
+    const time = event.epoc * 1000;
+    if (type === 1) {
+      this.pagingOption.dateSince = time;
+    } else {
+      this.pagingOption.dateSince = time;
+    }
+    this.listError();
   }
 
   // 分页

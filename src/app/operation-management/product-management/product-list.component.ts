@@ -140,11 +140,9 @@ export class OperationProductListComponent implements OnInit {
     const form = this.searchFilterForm['value'];
     const userNameControl = this.searchFilterForm.controls['userName'];
     if (type === 1 && userNameControl.dirty) {
-      const name = form['userName'];
       this.pagingOption['userName'] = form['userName'];
       this.getProducts();
-      this.searchFilterForm.reset();
-      this.searchFilterForm.patchValue({userName: name});
+      this.searchFilterForm.reset(form);
     } else if (type === 2) {
       this.pagingOption['userType'] = form['userType'];
       this.pagingOption['status'] = form['status'];

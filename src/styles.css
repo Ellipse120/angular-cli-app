@@ -66,6 +66,7 @@ i {
 input[type=submit],input[type=reset],input[type=button],input[type=text]{-webkit-appearance:none;}
 button:focus{
   outline: none;
+  border-radius: 0;
 }
 .mb20 {
   margin-bottom: 20px;
@@ -1040,6 +1041,12 @@ app-index .mat-ripple {
   }
   .operation-product-errata .mydpicon{
     font-size: 12px;
+  }
+  .operation-product-errata .second-date .selector{
+    left: -137px;
+  }
+  .operation-product-errata .second-date .mydp .selectorarrowleft:after,.operation-product-errata .second-date .mydp .selectorarrowleft:before{
+    left: 224px;
   }
 }
 

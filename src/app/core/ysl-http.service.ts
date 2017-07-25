@@ -13,11 +13,10 @@ export class YslHttpService {
 
   // private url = 'http://ysl.dev.cjzc.net.cn/';
   // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
-  // public url = 'http://192.168.19.11:1337/192.168.19.20:8080/ysl-ws/';
-  public url = 'http://192.168.14.17:1337/192.168.9.96:8080/ysl-ws/';
+  // public url = 'http://192.168.14.17:1337/192.168.9.96:8080/ysl-ws/';
+  public url = 'http://192.168.14.17:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // public url = 'http://192.168.14.14:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
-   // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // REPLACE
 
   // 用户信息
@@ -359,9 +358,9 @@ export class YslHttpService {
 
 
   // 运营中心/用户管理/获取用户列表
-  getUserList(): Promise<any> {
+  getUserList(option): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + 'api/user')
+      this.http.get(this.url + 'api/user', {params: option})
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error.json()));
     });

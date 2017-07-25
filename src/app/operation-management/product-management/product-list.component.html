@@ -4,12 +4,12 @@
   </div>
   <div class="filter-group">
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
-      <input type="text" class="col-md-1 col-xs-3 minw74" placeholder="用户名" formControlName="userName" (blur)="filter(1)">
+      <input type="text" class="col-md-4 col-xs-3 minw74" placeholder="用户名" formControlName="userName" (blur)="filter(1)">
       <!--<div class="input-group minw74">-->
         <!--<input type="text" placeholder="用户名" formControlName="userName">-->
         <!--<i class="fa fa-search" (click)="filter()"></i>-->
       <!--</div>-->
-      <div class="ysl-select-group ">
+      <div class="ysl-select-group col-md-4 col-xs-5">
         <select name="" formControlName="userType" (change)="filter(2)">
           <option value='' disabled selected style='display:none;'>用户类型</option>
           <option value="">全部</option>
@@ -17,7 +17,7 @@
         </select>
         <i class="triangle-down"></i>
       </div>
-      <div class="ysl-select-group minw74">
+      <div class="ysl-select-group col-md-3 col-xs-3 minw74">
         <select class="w100" name="" formControlName="status" (change)="filter(2)">
           <option value='' disabled selected style='display:none;'>状态</option>
 
