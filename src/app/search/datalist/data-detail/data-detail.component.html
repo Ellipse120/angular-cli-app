@@ -8,7 +8,8 @@
           <li>数据供应商：{{productDetail.orgName}}</li>
           <li>官方网址：<a [href]="productDetail.webSite" target="_blank">{{productDetail.webSite}}</a></li>
           <li>是否收费：<i class="green">{{productDetail.premium}}</i></li>
-          <li>数据样本：<a class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</a><span *ngIf="!productDetail.sampleFilePath">无</span></li>
+          <!--<li>数据样本：<a class="green text-underline" *ngIf="productDetail.sampleFilePath" (click)="downloadSampleFile()">下载</a><span *ngIf="!productDetail.sampleFilePath">无</span></li>-->
+          <li>数据样本：<a class="green text-underline" *ngIf="productDetail.sampleFilePath" [href]="downloadUrl" [download]="productDetail.name">下载</a><span *ngIf="!productDetail.sampleFilePath">无</span></li>
           <li>数据类型：<i *ngIf="productDetail.dataCategory">{{productDetail['dataCategory']}}</i><span *ngIf="!productDetail.dataCategory">无</span></li>
           <li>采集方式：<i *ngIf="productDetail.collectionMethod">{{productDetail['collectionMethod']}}</i><span *ngIf="!productDetail.collectionMethod">无</span></li>
           <li>服务方式：<i *ngIf="productDetail.serviceMethod">{{productDetail['serviceMethod']}}</i><span *ngIf="!productDetail.serviceMethod">无</span></li>

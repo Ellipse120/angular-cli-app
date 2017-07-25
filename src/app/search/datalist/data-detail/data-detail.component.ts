@@ -44,6 +44,7 @@ export class DataDetailComponent implements OnInit {
   productComment = {items: [], totalLength: ''};
   // if the product is star by user
   isStar = false;
+  downloadUrl;
 
   constructor(private route: ActivatedRoute,
               private service: YslHttpService,
@@ -101,6 +102,7 @@ export class DataDetailComponent implements OnInit {
             this.productDetail = res;
             this.productDetail.premium = this.productDetail.premium ? '是' : '否';
             this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
+            this.downloadUrl = 'ysl-ws/api/file/' + this.productDetail.sampleFilePath + '/download';
             for (const key in advancedKey) {
               if (advancedKey.hasOwnProperty(key)) {
                 switch (key) {
