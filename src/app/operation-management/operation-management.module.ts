@@ -20,6 +20,7 @@ import {OperationService} from './service/operation-service';
 import { UserAddComponent } from './user-management/user-add.component';
 import { UserListComponent } from './user-management/user-list.component';
 import { UserInfoComponent } from './user-management/user-info.component';
+import {EchartsNg2Module} from 'echarts-ng2';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserInfoComponent } from './user-management/user-info.component';
     FormsModule,
     ReactiveFormsModule,
     YslMaterialModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    EchartsNg2Module
   ],
   providers: [OperationService],
   exports: [YslSidebarComponent, YslLoadingComponent]

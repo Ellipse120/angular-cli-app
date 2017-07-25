@@ -6,7 +6,32 @@
       </li>
     </ul>
   </div>
-  <div class="user-info-cont">
-    <div class="user-center-cont">运营报告</div>
+  <div class="user-info-cont operational-report">
+    <div class="row chart-wrapper">
+      <div class="chart-item col-xs-12">
+        <h2 class="chart-title ">当前在线用户数及月度在线用户数</h2>
+        <echarts-ng2 #echarts [option]="chartOption" ></echarts-ng2>
+      </div>
+    </div>
+    <div class="row chart-wrapper">
+      <div class="chart-item col-sm-6 col-xs-12">
+        <h2 class="chart-title ">用户搜索关键词排行榜</h2>
+        <ul class="data-list"></ul>
+      </div>
+      <div class="chart-item col-sm-6 col-xs-12">
+        <h2 class="chart-title ">用户点击查看的数据库排行榜</h2>
+        <ul class="data-list"></ul>
+      </div>
+    </div>
+    <div class="row chart-wrapper">
+      <div class="chart-item col-sm-6 col-xs-12">
+        <h2 class="chart-title ">注册用户数量统计</h2>
+        <echarts-ng2 #echarts [option]="chartOption"></echarts-ng2>
+      </div>
+      <div class="chart-item col-sm-6 col-xs-12">
+        <h2 class="chart-title ">数据产品数量统计</h2>
+        <echarts-ng2 #echarts [option]="chartOption"></echarts-ng2>
+      </div>
+    </div>
   </div>
 </div>

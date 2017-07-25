@@ -373,6 +373,27 @@
 }
 
 /*用户管理*/
+
+/*运营报告*/
+.operational-report{
+  padding: 20px;
+}
+.operational-report .chart-title{
+  font-size: 16px;
+  height: 32px;
+  line-height: 32px;
+}
+.operational-report .chart-wrapper{
+  margin-bottom: 20px;
+}
+.operational-report .chart-wrapper:last-of-type{
+  margin-bottom: 0;
+}
+.operational-report .data-list{
+  height: 260px;
+  background-color: #f6faf9;
+}
+
 @media screen and (min-width: 1200px){
   .user-manage .ysl-w-30{
     width: 30%;
