@@ -45,12 +45,15 @@
             <p class="other-info font12 text-color-middle">
               <span [ngSwitch]="c.userStatus">状态：<i *ngSwitchCase="1">注册</i><i *ngSwitchCase="2">激活</i><i *ngSwitchCase="3">禁用</i></span>
             </p>
-            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c,ind)"><i *ngIf="c.userStatus == '3' || c.userStatus == '1'">激活</i><i *ngIf="c.userStatus == '2'">禁用</i></button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs visible-lg" (click)="openOrClose(c,ind)"><i *ngIf="c.userStatus == '3' || c.userStatus == '1'">激活</i><i *ngIf="c.userStatus == '2'">禁用</i></button>
           </h1>
-          <div class="hidden-lg">
-            <div class="hidden-lg row">
-              <p class="font14 col-sm-6 col-xs-12">账号：{{c.loginId}}</p>
-              <p class="font14 col-sm-6 col-xs-12">联系方式：{{c.contactMail}}</p>
+          <div class="hidden-lg row">
+            <div class="col-xs-8">
+              <p class="font14 col-sm-6 col-xs-12 ysl-no-padding">账号：{{c.loginId}}</p>
+              <p class="font14 col-sm-6 col-xs-12 ysl-no-padding">联系方式：{{c.contactMail}}</p>
+            </div>
+            <div class="pull-right">
+              <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c,ind)"><i *ngIf="c.userStatus == '3' || c.userStatus == '1'">激活</i><i *ngIf="c.userStatus == '2'">禁用</i></button>
             </div>
           </div>
         </li>

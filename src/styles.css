@@ -63,10 +63,12 @@ img {
 i {
   font-style: normal;
 }
-input[type=submit],input[type=reset],input[type=button],input[type=text]{-webkit-appearance:none;}
+input[type=submit],input[type=reset],input[type=button],input[type=text]{
+  -webkit-appearance:none;
+  border-radius: 0;
+}
 button:focus{
   outline: none;
-  border-radius: 0;
 }
 .mb20 {
   margin-bottom: 20px;
@@ -217,7 +219,9 @@ textarea::-webkit-scrollbar-thumb {
   visibility: hidden;
   clear: both;
 }
-
+.ysl-no-padding{
+  padding: 0;
+}
 .ysl-text-orange {
   color: #ff4307;
 }

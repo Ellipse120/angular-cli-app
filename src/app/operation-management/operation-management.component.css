@@ -375,6 +375,11 @@
     width: 30%;
   }
 }
+@media screen and (max-width: 1199px) {
+  .user-manage .hidden-lg .ysl-btn-primary{
+    margin-right: 15px;
+  }
+}
 @media screen and (max-width: 992px){
   .filter-group{
     padding: 0 15px;
