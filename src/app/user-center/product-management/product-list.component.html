@@ -132,12 +132,9 @@
               (click)="doViewProductDetail(item)">{{item.name}}</span></div>
             <div class="col-xs-10 col-sm-9 col-md-4 col-lg-4" style="padding-top: 3.5px">
               <span>
-              <i class="fa fa-eye" style="color: #b8c5ce"></i><span
-                style="display: inline-block;padding:0 10px 0 5px;color: #a5aaad;font-size: 12px;">&nbsp;{{item?.viewedCount}}</span>
-              <i class="fa fa-star " style="color: #b8c5ce"></i><span
-                style="display: inline-block;padding:0 10px 0 5px;color: #a5aaad;font-size: 12px;">&nbsp;{{item?.favoritedCount}}</span>
-              <i class="fa fa-thumbs-up " style="color: #b8c5ce"></i><span
-                style="display: inline-block;padding:0 10px 0 5px;color: #a5aaad;font-size: 12px;">&nbsp;{{item?.favoredCount}}</span>
+              <i class="fa fa-eye" style="color: #b8c5ce"></i><span class="product-list-fa-icon">&nbsp;{{item?.viewedCount}}</span>
+              <i class="fa fa-star" style="color: #b8c5ce"></i><span class="product-list-fa-icon">&nbsp;{{item?.favoritedCount}}</span>
+              <i class="fa fa-thumbs-up" style="color: #b8c5ce"></i><span class="product-list-fa-icon">&nbsp;{{item?.favoredCount}}</span>
                 <span style="font-size: 12px;color: #a5aaad;padding:0 10px 0 5px;">{{item.statusText}}</span>
             </span>
             </div>

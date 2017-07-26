@@ -4,10 +4,11 @@
   </div>
   <div class="filter-group">
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
-      <input type="text" class="col-md-4 col-xs-3 minw74" placeholder="用户名" formControlName="userName" (blur)="filter(1)">
+      <input type="text" class="col-md-4 col-xs-3 minw74" placeholder="用户名" formControlName="userName"
+             (blur)="filter(1)">
       <!--<div class="input-group minw74">-->
-        <!--<input type="text" placeholder="用户名" formControlName="userName">-->
-        <!--<i class="fa fa-search" (click)="filter()"></i>-->
+      <!--<input type="text" placeholder="用户名" formControlName="userName">-->
+      <!--<i class="fa fa-search" (click)="filter()"></i>-->
       <!--</div>-->
       <div class="ysl-select-group col-md-4 col-xs-5">
         <select name="" formControlName="userType" (change)="filter(2)">
@@ -26,8 +27,8 @@
         <i class="triangle-down"></i>
       </div>
       <!--<div class="input-group col-md-5 col-xs-12">-->
-        <!--<input type="text" formControlName="keyword">-->
-        <!--<i class="fa fa-search" (click)="keywordSearch()"></i>-->
+      <!--<input type="text" formControlName="keyword">-->
+      <!--<i class="fa fa-search" (click)="keywordSearch()"></i>-->
       <!--</div>-->
     </form>
     <button class="ysl-btn ysl-btn-primary ysl-btn-md hidden-xs" (click)="addProduct()">录入产品</button>
@@ -36,22 +37,27 @@
   <ysl-loading *ngIf="isShowLoading" style="display: block; height: 100px;"></ysl-loading>
   <div *ngIf="!listIsNull && !isShowLoading">
     <ul class="ysl-list-group">
-      <li class="ysl-list-item"  *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
+      <li class="ysl-list-item" *ngFor="let c of dataItems | paginate: {itemsPerPage: pagingOption['limit'],
                                                       currentPage: currentPage,
                                                       totalItems: totalLength}; let ind = index;">
         <h1 class="user-name">
           <span>{{c.userName}} <i class="verify-account">{{c.userType}}</i></span>
           <p class="other-info font12 text-color-middle">
             <span>收费: {{c.premium}}</span>
-            <span [ngSwitch]="c.status">状态：<i *ngSwitchCase="1">注册</i><i *ngSwitchCase="2">激活</i><i *ngSwitchCase="3">禁用</i></span>
+            <span [ngSwitch]="c.status">状态：<i *ngSwitchCase="1">注册</i><i *ngSwitchCase="2">激活</i><i
+              *ngSwitchCase="3">禁用</i></span>
             <span>更新时间：{{c.modifiedOn}}</span>
           </p>
         </h1>
         <div class="product">
           <p class="product-name text-color-middle"><a (click)="toProductDetail(c)">{{c.name}}</a></p>
           <div class="ysl-btn-group">
-            <button class="ysl-btn ysl-btn-primary ysl-btn-xs ysl-upload-file">上传 <input type="file"></button>
-            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c,ind)"><i *ngIf="c.status == '3' || c.status == '1'">激活</i><i *ngIf="c.status == '2'">禁用</i></button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs ysl-upload-file">上传 <input type="file" ng2FileSelect
+                                                                                         [uploader]="uploader"
+                                                                                         (change)="onFileChange($event, c)">
+            </button>
+            <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="openOrClose(c,ind)"><i
+              *ngIf="c.status == '3' || c.status == '1'">激活</i><i *ngIf="c.status == '2'">禁用</i></button>
             <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="editProduct(c, ind)">修改</button>
           </div>
         </div>

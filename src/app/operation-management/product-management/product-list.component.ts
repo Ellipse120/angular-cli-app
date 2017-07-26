@@ -4,9 +4,11 @@ import {CookieService} from 'ngx-cookie';
 import {isNullOrUndefined} from 'util';
 import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {YslCommonService} from '../../core/ysl-common.service';
+import {YslHttpService} from '../../core/ysl-http.service';
 import {LoginComponent} from '../../login/login.component';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdSnackBar} from '@angular/material';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {FileUploader} from 'ng2-file-upload';
 
 @Component({
   templateUrl: './product-list.component.html',
@@ -44,13 +46,19 @@ export class OperationProductListComponent implements OnInit {
   dataItems = [];
   currentPage: any;
   totalLength: any;
+  uploadUrl = 'api/file/upload/product/sample/';
+  public uploader: FileUploader = new FileUploader({url: this.uploadUrl});
+
   constructor(private fb: FormBuilder,
               private cookie: CookieService,
               private productListService: ProductListService,
               private commonService: YslCommonService,
               private dialog: MdDialog,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private service: YslHttpService,
+              private snackbar: MdSnackBar) {
+  }
 
   ngOnInit() {
     this.createForm();
@@ -168,7 +176,7 @@ export class OperationProductListComponent implements OnInit {
 
   // 添加产品
   addProduct() {
-   this.router.navigate(['operation/productManagement/add']);
+    this.router.navigate(['operation/productManagement/add']);
   }
 
   // 修改产品
@@ -188,6 +196,24 @@ export class OperationProductListComponent implements OnInit {
       status: '',
       keyword: ''
     });
+  }
+
+  onFileChange(event, item) {
+    this.uploadUrl = this.service.url + 'api/file/upload/product/sample/' + item.productId;
+    this.uploader.setOptions({
+      'url': this.uploadUrl
+    });
+    this.uploader.queue[this.uploader.queue.length - 1].onSuccess = (response, status, headers) => {
+      if (status === 200) {
+        const res = JSON.parse(response);
+        item.sampleFilePath = res['sampleFilePath'];
+        this.productListService.doProductUpdate(item);
+      }
+      this.snackbar.open('数据样本上传成功', '', {
+        duration: 1000
+      });
+    };
+    this.uploader.queue[this.uploader.queue.length - 1].upload();
   }
 
 }

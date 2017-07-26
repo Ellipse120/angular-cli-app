@@ -206,6 +206,10 @@
   color: #39baf6;
 }
 
+.product-list-fa-icon {
+  display: inline-block;padding:0 10px 0 5px;color: #a5aaad;font-size: 12px;
+}
+
 .mat-radio-checked .mat-radio-outer-circle {
   border-color: #39baf6;
 }
@@ -274,4 +278,8 @@
 
 .product-import-item2 .mat-ink-bar {
   background-color: #f5f8f7;
+}
+
+.pro-list {
+  padding-bottom: 10px;
 }
