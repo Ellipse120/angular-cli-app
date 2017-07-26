@@ -9,10 +9,12 @@ import {SearchService} from '../search/search.service';
 export class YslCommonService {
 
   private subject = new Subject<any>();
+  private loginStatus = new Subject<any>();
 
   constructor(private cookie: CookieService,
               private httpService: YslHttpService,
               private router: Router, private eventEmit: SearchService) {
+    this.processingLogin();
   }
 
   // 处理时间戳-天
@@ -41,10 +43,32 @@ export class YslCommonService {
     return this.subject.asObservable();
   }
 
+  // 登录状态处理
+  processingLogin() {
+    this.getLoginStatus().subscribe(e => {
+      if (e.loginStatus) {
+        this.cookie.remove('x-access-token');
+        this.cookie.put('x-access-token', e.userInfo['token']);
+        this.cookie.putObject('yslUserInfo', e.userInfo);
+      } else {
+        this.cookie.remove('yslUserInfo');
+        this.cookie.remove('x-access-token');
+      }
+    });
+  }
+
+  getLoginStatus(): Observable<any> {
+    return this.loginStatus.asObservable();
+  }
+
+  modifyLoginStatus(data) {
+    this.loginStatus.next(data);
+  }
+
   // 为登录统一处理
   loginTimeout() {
-    this.cookie.remove('yslUserInfo');
-    this.router.navigate(['index']);
-    this.eventEmit.loginEvent.emit();
+    const token = window.localStorage['user-token'];
+    this.modifyLoginStatus({loginState: false, userInfo: null});
+    this.router.navigate(['re-login']);
   }
 }

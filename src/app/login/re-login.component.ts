@@ -1,25 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import { Location } from '@angular/common';
-import { MdDialogRef } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import {YslHttpService} from '../core/ysl-http.service';
-import {Router} from '@angular/router';
-import {CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
+import { Router } from '@angular/router';
+import { YslHttpService } from '../core/ysl-http.service';
 import {YslCommonService} from "../core/ysl-common.service";
 
-
 @Component({
-  selector: 'ysl-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-re-login',
+  templateUrl: './re-login.component.html',
+  styleUrls: ['./re-login.component.css']
 })
-
-export class LoginComponent implements OnInit {
+export class ReLoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  isLogin: any;
   isLoginSubmit = false;
-  isRem: boolean;             //记住账号
+  isRem: boolean;             // 记住账号
   loginId: string;
   loginMess = '登录';
   loginFailed: string;
@@ -37,11 +33,9 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    public dialogRef: MdDialogRef<LoginComponent>,
     private fb: FormBuilder,
     private httpServer: YslHttpService,
     private commonService: YslCommonService,
-    private location: Location,
     private router: Router,
     private cookie: CookieService) {}
 
@@ -54,6 +48,10 @@ export class LoginComponent implements OnInit {
       this.isRem = false;
     }
     this.createForm();
+    this.isLogin = this.cookie.getObject('yslUserInfo');
+    this.commonService.getLoginStatus().subscribe(data => {
+      this.isLogin = data.loginStatus;
+    });
   }
 
   // 提交登录
@@ -74,7 +72,7 @@ export class LoginComponent implements OnInit {
     if (form.invalid) { return; }
     this.loginMess = '登录中....';
     const submitTime = new Date();
-    let submitData = {
+    const submitData = {
       loginId: form.value['userAccount'],
       passcode: form.value['userPassword'],
       oneTimeCode: submitTime.getTime()
@@ -83,24 +81,17 @@ export class LoginComponent implements OnInit {
       .then((res) => {
         this.commonService.modifyLoginStatus({loginStatus: true, userInfo: res});
         if (form.value['isRem']) {
-          // ae5125977d4a40269ce1abde1ad89951
           this.cookie.put('userAccount', res['loginId']);
         }
-        this.dialogRef.close();
-        const path = this.location.path();
-        if (path.includes('/register')) {
-          this.router.navigate(['index']);
-        }
+        this.router.navigate(['userCenter']);
       }, error => {
         const body = JSON.parse(error._body);
         this.loginMess = '登录';
         this.loginFailed = body.errorMessage;
-
       });
   }
 
   gotoRegitster() {
-    this.dialogRef.close();
     this.router.navigate(['register']);
   }
 
@@ -113,4 +104,3 @@ export class LoginComponent implements OnInit {
     });
   }
 }
-

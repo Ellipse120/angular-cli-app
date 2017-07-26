@@ -14,6 +14,7 @@ import {UserCenterRoutingModule} from './user-center/user-center-routing.module'
 import {VerifySuccessComponent} from './register/verify-success.component';
 import {VerifyFailureComponent} from './register/verify-failure.component';
 import construct = Reflect.construct;
+import {ReLoginComponent} from './login/re-login.component';
 
 // 定义普通路由
 const appRouters: Routes = [
@@ -23,6 +24,7 @@ const appRouters: Routes = [
   {path: 'datalist', component: DatalistComponent},
   {path: 'datadetail', component: DataDetailComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 're-login', component: ReLoginComponent},
   {path: 'verify-success', component: VerifySuccessComponent},
   {path: 'verify-failure', component: VerifyFailureComponent},
   {path: 'privacy', component: YslPrivacyComponent},

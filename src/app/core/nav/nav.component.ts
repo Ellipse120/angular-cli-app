@@ -46,6 +46,7 @@ export class NavComponent implements OnInit {
       this.userId = undefined;
     }
     this.setNavStyle();
+    this.getLoginStatus();
     this.getUserInfo();
     this.eventEmit.loginEvent.subscribe(() => {
       this.showLogin();
@@ -54,6 +55,13 @@ export class NavComponent implements OnInit {
       this.logout();
     });
     document.addEventListener('click', () => { this.isShowPhoneNav = false; }, false);
+  }
+
+  getLoginStatus() {
+    this.commonService.getLoginStatus().subscribe(data => {
+      this.loginState = data.loginStatus;
+      this.loginInfo = data.userInfo;
+    });
   }
 
   getUserInfo() {
@@ -76,18 +84,15 @@ export class NavComponent implements OnInit {
   //  显示登录框
   showLogin(): void {
     let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) { return; }
-      this.loginInfo = result.userLoginInfo;
-      this.cookie.putObject('yslUserInfo', this.loginInfo);
-      this.eventEmit.loginSuccessEvent.emit();
-      this.loginState = true;
+    dialogRef.afterClosed().subscribe(() => {
+      // if (!result) { return; }
+      // this.loginInfo = result.userLoginInfo;
+      // this.eventEmit.loginSuccessEvent.emit();
     });
   }
 
   // 搜索
   keywordSubmit(data) {
-    console.log('click', data)
     this.eventEmit.keywordSearch.emit(data);
   }
 
@@ -96,10 +101,8 @@ export class NavComponent implements OnInit {
     const token = window.localStorage['user-token'];
     this.httpService.logout(token)
       .then(res => {
+        this.commonService.modifyLoginStatus({loginState: false, userInfo: null});
         const path = this.location.path();
-        this.cookie.remove('yslUserInfo');
-        this.cookie.remove('x-access-token');
-        this.loginState = false;
         if (!path.includes('/datalist') || !path.includes('/datadetail')) {
           this.router.navigate(['index']);
         }

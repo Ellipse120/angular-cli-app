@@ -1,0 +1,38 @@
+<div class="re-login container">
+  <form *ngIf="!isLogin" [formGroup]="loginForm" class="register-box text-center" (ngSubmit)="loginSubmit()" novalidate>
+    <h2 class="color-blue register-title">用户登录</h2>
+    <div class="register-cont">
+      <div class="form-group email">
+        <label class="sr-only"></label>
+        <div class="input-group col-xs-12">
+          <div class="input-group-addon"><i class="fa fa-user"></i></div>
+          <input type="email" class="form-control" formControlName="userAccount" placeholder="帐号" required>
+        </div>
+      </div>
+      <div class="form-group email">
+        <label class="sr-only"></label>
+        <div class="input-group col-xs-12">
+          <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+          <input type="password" class="form-control" formControlName="userPassword" placeholder="密码" required>
+        </div>
+      </div>
+      <div class="form-group clearfix agreement">
+        <label class="sr-only"></label>
+        <div class="ysl-checkbox-group col-xs-12">
+          <label><input type="checkbox" id="auto-login" formControlName="isRem"><span></span>记住帐号</label>
+        </div>
+      </div>
+      <div class="error-group ysl-error-tip" *ngIf="loginForm.invalid && isLoginSubmit">
+        <span *ngIf="loginFormError.userAccount">{{loginFormError.userAccount}}</span>
+        <span *ngIf="!loginFormError.userAccount && loginFormError.userPassword">{{loginFormError.userPassword}}</span>
+      </div>
+      <P class="error-group ysl-error-tip" *ngIf="loginForm.valid && loginFailed">{{loginFailed}}</P>
+      <div class="form-group">
+        <label class="sr-only"></label>
+        <button class="btn btn-lg btn-block submit-btn">{{loginMess}}</button>
+      </div>
+    </div>
+    <p class="text-center register-link">还没有帐号？ <a class="color-blue" (click)="gotoRegitster()" >点击注册</a></p>
+  </form>
+  <div *ngIf="isLogin">您已登录</div>
+</div>

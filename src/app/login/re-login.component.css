@@ -1,4 +1,11 @@
-.register{
+/*re-login*/
+.re-login{
+  height: 100%;
+  background: url("../../assets/images/registerbg.png") no-repeat;
+  background-size: 100% 100%;
+  padding-top: 2.778rem;
+}
+.re-login{
   height: 100%;
   background: url("../../assets/images/registerbg.png") no-repeat;
   background-size: 100% 100%;
@@ -48,7 +55,7 @@
   background-color: #fff;
   padding-left: 0;
 }
-.email .fa-envelope{
+.form-group .fa{
   color: rgb(187,187,187);
 }
 .email input{
