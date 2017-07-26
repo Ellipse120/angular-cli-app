@@ -720,7 +720,12 @@ footer {
 .squeezebox .is-collapsed .fa-angle-up {
   transform: rotate(180deg);
 }
-
+.ysl-snack-bar{
+  position: absolute;
+  bottom: calc(100vh / 2);
+  left: calc(100vw / 2 - 168px);
+  transition: none !important;
+}
 /*产品详情*/
 .data-detail .comment-wrapper .spinner {
   margin: 10px auto;

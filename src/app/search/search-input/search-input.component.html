@@ -2,7 +2,7 @@
 <div class="search-box container">
   <form class="row keyword-search" [formGroup]="keywordSearchForm" (ngSubmit)="keywordSubmit()" novalidate>
     <div class="ysl-input-group col-md-11 col-xs-10">
-      <input type="text" class="search-input" placeholder="输入您要查找的数据产品的关键词或标签" formControlName="keyword" (focus)="showSearchHistory()" (click)="$event.stopPropagation()" required>
+      <input type="text" class="search-input" placeholder="输入您要查找的数据关键词或标签" formControlName="keyword" (focus)="showSearchHistory()" (click)="$event.stopPropagation()" required>
       <span class="triangle-down triggle-position" *ngIf="!hideAdvancedSearch" (click)="toggleAdvancedBox();$event.stopPropagation()"></span>
     </div>
     <button class="searchbtn col-md-1 col-xs-2"><i class="fa fa-search"></i></button>

@@ -4,6 +4,7 @@ import {YslHttpService} from './ysl-http.service';
 import {Subject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {SearchService} from '../search/search.service';
+import {MdSnackBar} from "@angular/material";
 
 @Injectable()
 export class YslCommonService {
@@ -13,7 +14,9 @@ export class YslCommonService {
 
   constructor(private cookie: CookieService,
               private httpService: YslHttpService,
-              private router: Router, private eventEmit: SearchService) {
+              private router: Router,
+              private eventEmit: SearchService,
+              public snackBar: MdSnackBar) {
     this.processingLogin();
   }
 
@@ -50,9 +53,17 @@ export class YslCommonService {
         this.cookie.remove('x-access-token');
         this.cookie.put('x-access-token', e.userInfo['token']);
         this.cookie.putObject('yslUserInfo', e.userInfo);
+        this.snackBar.open('登录成功', '', {
+          duration: 1000,
+          extraClasses: ['ysl-snack-bar']
+        });
       } else {
         this.cookie.remove('yslUserInfo');
         this.cookie.remove('x-access-token');
+        this.snackBar.open('退出登录成功', '', {
+          duration: 1000,
+          extraClasses: ['ysl-snack-bar']
+        });
       }
     });
   }
