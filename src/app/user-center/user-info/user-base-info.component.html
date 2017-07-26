@@ -18,8 +18,8 @@
           <span *ngIf="!i.edit">{{i.model}}</span>
         </span>
         <span class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
-          <a style="color: #39bff6" *ngIf="!i.edit" (click)="ableEdit(i)">修改</a>
-          <a style="color: #39bff6" *ngIf="i.edit" (click)="infoEditSubmit(i)">保存</a>
+          <a class="user-base-info-a-btn" *ngIf="!i.edit" (click)="ableEdit(i)">修改</a>
+          <a class="user-base-info-a-btn" *ngIf="i.edit" (click)="infoEditSubmit(i)">保存</a>
         </span>
       </div>
     </form>

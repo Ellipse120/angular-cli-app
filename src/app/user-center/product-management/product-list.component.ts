@@ -41,7 +41,7 @@ export class ProductListComponent implements OnInit {
     userId: 0,
     limit: 10,
     offset: 0,
-    sortBy: '',
+    sortBy: 'modifiedOn',
     ascending: false,
     userName: '',
     userType: '',
