@@ -19,25 +19,36 @@ export class OperationService {
       .map(res => res);
   }
 
+  // 当前在线用户数
+  currentOnlineAmountStats(): Observable<any> {
+    return this.http.get(this.httpService.url + 'api/operation/stats/onlineuser')
+      .map(res => res.json());
+  }
+
   // 在线用户数
-  getOnlineUserCount(type, option): Observable<any> {
-    return this.http.get(this.httpService.url + 'api/operation/status/onlineuser/' + type, {params: option})
+  OnlineAmountStats(type, option): Observable<any> {
+    return this.http.get(this.httpService.url + 'api/operation/stats/onlineuser/' + type, {params: option})
       .map(res => res.json());
   }
 
   // 热词排行
 
   // 点击查看排行
+  getHotProducts() {
+    return this.http.get(this.httpService.url + 'api/product/hot')
+      .map(res => res.json());
+  }
 
   // 注册统计
-  signupUserCount(type, option): Observable<any> {
-    return this.http.get(this.httpService.url + 'api/stats/signupuser/' + type, {params: option})
+  signupAmountStats(type, option): Observable<any> {
+    return this.http.get(this.httpService.url + 'api/operation/stats/signupuser/' + type, {params: option})
       .map(res => res.json());
   }
 
   // 产品统计
-  getProvisionSummary(): Observable<any> {
-    return this.http.get(this.httpService.url + 'api/operation/provision/summary')
+  productAmountStats(type, option): Observable<any> {
+    return this.http.get(this.httpService.url + 'api/operation/stats/product/' + type, {params: option})
       .map(res => res.json());
   }
+
 }

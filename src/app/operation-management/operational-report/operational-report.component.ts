@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { EChartOption, ECharts } from 'echarts-ng2';
 import {OperationService} from '../service/operation-service';
+import {isNullOrUndefined} from "util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-operational-report',
@@ -9,127 +11,265 @@ import {OperationService} from '../service/operation-service';
 })
 export class OperationalReportComponent implements OnInit {
 
-  @ViewChild('echarts') echarts: ECharts;
-  chartOption: any;
+  @ViewChild('onlineChart') onlineChart: ECharts;
+  @ViewChild('singnupChart') singnupChart: ECharts;
+  @ViewChild('productLineChart') productLineChart: ECharts;
   dataFilter = {
-    startTime: 0,
-    endTime: 0,
-    rangeType: 'year'
+    startTime: 1999,
+    endTime: 2017,
+    rangeType: 'YEAR'
   };
-  constructor(private apiService: OperationService) { }
+  currentOnlineAmount: any;
+  onlineAmountOption: any;
+  hotProducts = [];
+  signupAmountOption: any;
+  productAmountOption: any;
+
+  constructor(private apiService: OperationService, private router: Router) { }
 
   ngOnInit() {
-    this.chartOption = {
-      tooltip : {
-        trigger: 'axis'
-      },
-      backgroundColor: '#f6faf9',
-      legend: {
-        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis : [
-        {
-          type : 'category',
-          boundaryGap : false,
-          data : ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-      ],
-      yAxis : [
-        {
-          type : 'value'
-        }
-      ],
-      series : [
-        {
-          name: '邮件营销',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {normal: {}},
-          data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name: '联盟广告',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {normal: {}},
-          data: [220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name: '视频广告',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {normal: {}},
-          data: [150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name: '直接访问',
-          type: 'line',
-          stack: '总量',
-          areaStyle: {normal: {}},
-          data: [320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name: '搜索引擎',
-          type: 'line',
-          stack: '总量',
-          label: {
-            normal: {
-              show: true,
-              position: 'top'
-            }
-          },
-          areaStyle: {normal: {}},
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
-      ]
-    };
     this.getChartsData();
     window.onresize = () => {
-      this.echarts.resize();
+      this.onlineChart.resize();
+      this.singnupChart.resize();
+      this.productLineChart.resize();
     };
   }
 
   getChartsData() {
-    this.getOnlineUser();
-    this.getProvisionSummary();
-    this.signupUserCount();
+    this.currentOnlineAmountStats();
+    this.OnlineAmountStats();
+    this.getHotProducts();
+    this.signupAmountStats();
+    this.productAmountStats();
   }
 
-  // 在线用户数
-  getOnlineUser() {
-    const option = {startTime: this.dataFilter.startTime, endTime: this.dataFilter.endTime};
-    this.apiService.getOnlineUserCount(this.dataFilter.rangeType, option)
+  // 当前用户在线数
+  currentOnlineAmountStats() {
+    this.apiService.currentOnlineAmountStats()
       .subscribe(data => {
-        console.log('用户数', data);
+        if (!isNullOrUndefined(data['items']) && data['items'].length) {
+          this.currentOnlineAmount = data['items'][0]['amount'];
+        } else {
+          this.currentOnlineAmount = 0;
+        }
+      });
+  }
+
+  // 在线数统计
+  OnlineAmountStats() {
+    const option = {startTime: this.dataFilter.startTime, endTime: this.dataFilter.endTime};
+    const startTime = '' + new Date().getFullYear() + '01';
+    const endTime = '' + new Date().getFullYear() + (new Date().getMonth() + 1);
+    this.apiService.OnlineAmountStats('MONTH', {startTime: startTime, endTime: endTime})
+      .subscribe(data => {
+        const onlineAmount = {xData: [], data: []};
+        if (!isNullOrUndefined(data['items']) && data['items'].length) {
+          data['items'].forEach(item => {
+            onlineAmount.xData.push(item['time']);
+            onlineAmount.data.push(item['amount']);
+          });
+          this.onlineAmountOption = {
+            tooltip : {
+              trigger: 'axis'
+            },
+            backgroundColor: '#f6faf9',
+            legend: {
+              left: 'left',
+              data: ['月度在线用户数']
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '8%',
+              containLabel: true
+            },
+            xAxis : [
+              {
+                type : 'category',
+                boundaryGap : false,
+                data : onlineAmount.xData
+              }
+            ],
+            yAxis : [
+              {
+                type : 'value',
+                axisLine: {show: false},
+                axisLabel: {show: false},
+                axisTick: {show: false},
+                splitLine: {show: false}
+              }
+            ],
+            series : [
+              {
+                name: '月度在线用户数',
+                type: 'line',
+                lineStyle: {normal: {color: '#ff4307'}},
+                areaStyle: {normal: {color: 'transparent'}},
+                data: onlineAmount.data
+              }
+            ]
+          };
+        }
+      });
+  }
+
+  // 点击排行
+  getHotProducts() {
+    this.apiService.getHotProducts()
+      .subscribe(data => {
+        if (!isNullOrUndefined(data['items']) && data['items'].length) {
+          this.hotProducts = data['items'].splice(0, 10);
+          // this.hotProducts = this.hotProducts.splice(0, 9);
+        }
+        console.log('top 10', this.hotProducts);
       });
   }
 
   // 用户注册统计
-  signupUserCount() {
+  signupAmountStats() {
     const option = {startTime: this.dataFilter.startTime, endTime: this.dataFilter.endTime};
-    this.apiService.signupUserCount(this.dataFilter.rangeType, option)
+    const startTime = '' + new Date().getFullYear() + (this.getWeek() - 10);
+    const endTime = '' + new Date().getFullYear() + this.getWeek();
+    this.apiService.signupAmountStats('WEEK', {startTime: startTime, endTime: endTime})
       .subscribe(data => {
-        console.log('注册统计', data);
+        const signupAmount = {xData: [], data: []};
+        if (!isNullOrUndefined(data['items']) && data['items'].length) {
+          data['items'].forEach(item => {
+            signupAmount.xData.push(item['time']);
+            signupAmount.data.push(item['amount']);
+          });
+          this.signupAmountOption = {
+            tooltip : {
+              trigger: 'axis'
+            },
+            backgroundColor: '#f6faf9',
+            legend: {
+              left: 'left',
+              data: ['用户注册数']
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '8%',
+              containLabel: true
+            },
+            xAxis : [
+              {
+                type : 'category',
+                boundaryGap : false,
+                data : signupAmount.xData
+              }
+            ],
+            yAxis : [
+              {
+                type : 'value',
+                axisLine: {show: false},
+                axisLabel: {show: false},
+                axisTick: {show: false},
+                splitLine: {show: false}
+              }
+            ],
+            series : [
+              {
+                name: '用户注册数',
+                type: 'line',
+                lineStyle: {normal: {color: '#ff4307'}},
+                areaStyle: {normal: {color: 'transparent'}},
+                data: signupAmount.data
+              }
+            ]
+          };
+        }
       });
   }
 
   // 产品统计
-  getProvisionSummary() {
-    this.apiService.getProvisionSummary()
+  productAmountStats() {
+    const option = {startTime: this.dataFilter.startTime, endTime: this.dataFilter.endTime};
+    const startTime = '' + new Date().getFullYear() + (this.getWeek() - 10);
+    const endTime = '' + new Date().getFullYear() + this.getWeek();
+      this.apiService.productAmountStats('WEEK', {startTime: startTime, endTime: endTime})
       .subscribe(data => {
-        console.log('数据统计', data);
+        const chartOption = {xData: [], data: []};
+        if (!isNullOrUndefined(data['items']) && data['items'].length) {
+          data['items'].forEach(item => {
+            chartOption.xData.push(item['time']);
+            chartOption.data.push(item['amount']);
+          });
+          this.productAmountOption = {
+            tooltip : {
+              trigger: 'axis'
+            },
+            backgroundColor: '#f6faf9',
+            legend: {
+              left: 'left',
+              data: ['产品数量']
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '8%',
+              containLabel: true
+            },
+            xAxis : [
+              {
+                type : 'category',
+                boundaryGap : false,
+                data : chartOption.xData
+              }
+            ],
+            yAxis : [
+              {
+                type : 'value',
+                axisLine: {show: false},
+                axisLabel: {show: false},
+                axisTick: {show: false},
+                splitLine: {show: false}
+              }
+            ],
+            series : [
+              {
+                name: '产品数量',
+                type: 'line',
+                lineStyle: {normal: {color: '#ff4307'}},
+                areaStyle: {normal: {color: 'transparent'}},
+                data: chartOption.data
+              }
+            ]
+          };
+        }
       });
   }
 
+  // 产品详情
+  toProductDetail(product) {
+    this.router.navigate(['datadetail', {productId: product.id}]);
+  }
+
+  // 获取第几周
+  getWeek() {
+    const d1 = new Date();
+    const d2 = new Date();
+    d2.setMonth(0);
+    d2.setDate(1);
+    const rq = d1.getTime() - d2.getTime();
+    const s1 = Math.ceil(rq / (24 * 60 * 60 * 1000));
+    return Math.ceil(s1 / 7);
+  }
 }

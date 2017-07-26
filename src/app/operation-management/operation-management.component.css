@@ -378,10 +378,14 @@
 .operational-report{
   padding: 20px;
 }
+.operational-report .curr-online{
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
 .operational-report .chart-title{
   font-size: 16px;
-  height: 32px;
-  line-height: 32px;
+  margin-bottom: 15px;
 }
 .operational-report .chart-wrapper{
   margin-bottom: 20px;
@@ -390,8 +394,18 @@
   margin-bottom: 0;
 }
 .operational-report .data-list{
-  height: 260px;
+  min-height: 294px;
+  padding: 10px;
   background-color: #f6faf9;
+}
+.operational-report .data-list li{
+  margin: 5px 0;
+}
+.operational-report .data-list a{
+  cursor: pointer;
+}
+.operational-report .ysl-chart{
+  height: 310px;
 }
 
 @media screen and (min-width: 1200px){
@@ -443,5 +457,13 @@
   .operation-product-errata .filter-group .form-inline{
     flex-direction: column;
     justify-content: space-around;
+  }
+  .operational-report .chart-item:last-of-type{
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 414px){
+  .operational-report .ysl-chart{
+    height: 250px;
   }
 }

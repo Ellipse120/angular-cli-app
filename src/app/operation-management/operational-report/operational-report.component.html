@@ -7,30 +7,39 @@
     </ul>
   </div>
   <div class="user-info-cont operational-report">
+    <h2 class="curr-online">当前在线用户数：<i class="color-red">{{currentOnlineAmount}}</i></h2>
     <div class="row chart-wrapper">
       <div class="chart-item col-xs-12">
-        <h2 class="chart-title ">当前在线用户数及月度在线用户数</h2>
-        <echarts-ng2 #echarts [option]="chartOption" ></echarts-ng2>
+        <h2 class="chart-title ">月度在线用户数</h2>
+        <div class="ysl-chart">
+          <echarts-ng2 #onlineChart [option]="onlineAmountOption" [style]="{height: '100%', width: '100%'}"></echarts-ng2>
+        </div>
       </div>
     </div>
     <div class="row chart-wrapper">
       <div class="chart-item col-sm-6 col-xs-12">
         <h2 class="chart-title ">用户搜索关键词排行榜</h2>
-        <ul class="data-list"></ul>
+        <ul class="data-list"><li>暂无数据</li></ul>
       </div>
       <div class="chart-item col-sm-6 col-xs-12">
-        <h2 class="chart-title ">用户点击查看的数据库排行榜</h2>
-        <ul class="data-list"></ul>
+        <h2 class="chart-title">用户点击查看的数据库排行榜</h2>
+        <ul class="data-list hot-products">
+          <li class="hot-product-item" *ngFor="let i of hotProducts"><a (click)="toProductDetail(i)">{{i.name}}</a></li>
+        </ul>
       </div>
     </div>
     <div class="row chart-wrapper">
       <div class="chart-item col-sm-6 col-xs-12">
         <h2 class="chart-title ">注册用户数量统计</h2>
-        <echarts-ng2 #echarts [option]="chartOption"></echarts-ng2>
+        <div class="ysl-chart">
+          <echarts-ng2 #singnupChart [option]="signupAmountOption" [style]="{height: '100%', width: '100%'}"></echarts-ng2>
+        </div>
       </div>
       <div class="chart-item col-sm-6 col-xs-12">
         <h2 class="chart-title ">数据产品数量统计</h2>
-        <echarts-ng2 #echarts [option]="chartOption"></echarts-ng2>
+        <div class="ysl-chart">
+          <echarts-ng2 #productLineChart [option]="productAmountOption" [style]="{height: '100%', width: '100%'}"></echarts-ng2>
+        </div>
       </div>
     </div>
   </div>
