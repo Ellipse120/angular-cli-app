@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
-import { MdDialogRef } from "@angular/material";
+import { MdDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import {YslHttpService} from '../core/ysl-http.service';
-import {Router} from "@angular/router";
-import {CookieService} from "ngx-cookie";
-import {SearchService} from "../search/search.service";
+import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie';
 
 
 @Component({

@@ -8,12 +8,12 @@ import {DataDetailComponent} from './search/datalist/data-detail/data-detail.com
 import {RegisterComponent} from './register/register.component';
 import {ProductRoutingModule} from './product-mangement/product-routing.module';
 import {OperationRoutingModule} from './operation-management/operation-routing.module';
-import construct = Reflect.construct;
 import {YslPrivacyComponent} from './statement/privacy.component';
 import {ServiceAgreementComponent} from './statement/service-agreement.component';
 import {UserCenterRoutingModule} from './user-center/user-center-routing.module';
 import {VerifySuccessComponent} from './register/verify-success.component';
 import {VerifyFailureComponent} from './register/verify-failure.component';
+import construct = Reflect.construct;
 
 // 定义普通路由
 const appRouters: Routes = [

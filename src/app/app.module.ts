@@ -38,6 +38,7 @@ import {YslLoadingComponent} from './core/loading/loading.component';
 import {SearchHistoryComponent} from './search/search-input/search-history.component';
 import { VerifySuccessComponent } from './register/verify-success.component';
 import { VerifyFailureComponent } from './register/verify-failure.component';
+import { ReLoginComponent } from './login/re-login.component';
 
 
 const ueditorPath = {
@@ -65,7 +66,8 @@ const ueditorPath = {
     SearchHistoryComponent,
     ProductErrataComponent,
     VerifySuccessComponent,
-    VerifyFailureComponent
+    VerifyFailureComponent,
+    ReLoginComponent
   ],
   imports: [
     BrowserModule,

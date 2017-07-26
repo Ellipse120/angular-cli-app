@@ -32,7 +32,7 @@ export class OperationProductAddComponent implements OnInit {
     tags: []
   };
 
-  editType: any;
+  editType: number;
   productId: any;
   isActive = 0;
   tagDimensionsNew = [];
@@ -87,7 +87,7 @@ export class OperationProductAddComponent implements OnInit {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.sampleUploader = new FileUploader({url: this.service.url + 'api/file/upload'});
     this.route.params.subscribe(param => {
-      this.editType = param['editType'];
+      this.editType = param['editType'] - 0;
       if (!isNullOrUndefined(param['productId'])) {
         this.sampleUploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
         this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
