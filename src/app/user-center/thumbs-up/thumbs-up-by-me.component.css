@@ -7,13 +7,21 @@
     margin-top: 0;
   }
 
-  .product-total-thumb{
+  .product-total-thumb {
     padding-right: 10px;
   }
 }
 
-@media all and (min-width: 768px){
+@media all and (min-width: 768px) {
   .thumb-up-list {
     margin-top: 20px;
   }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-top;
+  fill: #ff4307;
+  overflow: hidden;
 }
