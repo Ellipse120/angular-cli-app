@@ -210,7 +210,8 @@ export class OperationProductListComponent implements OnInit {
         this.productListService.doProductUpdate(item);
       }
       this.snackbar.open('数据样本上传成功', '', {
-        duration: 1000
+        duration: 1000,
+        extraClasses: ['ysl-snack-bar']
       });
     };
     this.uploader.queue[this.uploader.queue.length - 1].upload();

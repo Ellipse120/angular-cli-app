@@ -150,7 +150,8 @@ export class OperationProductAddComponent implements OnInit {
         }
       }
       this.snackbar.open('数据样本上传成功', '', {
-        duration: 1000
+        duration: 1000,
+        extraClasses: ['ysl-snack-bar']
       });
     };
     this.sampleUploader.queue[this.sampleUploader.queue.length - 1].upload();
@@ -214,7 +215,8 @@ export class OperationProductAddComponent implements OnInit {
       this.productListService.doProductImport(this.product)
         .then(res => {
           this.snackbar.open('产品录入成功', '', {
-            duration: 2000
+            duration: 2000,
+            extraClasses: ['ysl-snack-bar']
           });
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
@@ -224,7 +226,8 @@ export class OperationProductAddComponent implements OnInit {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
           this.snackbar.open('产品修改成功', '', {
-            duration: 2000
+            duration: 2000,
+            extraClasses: ['ysl-snack-bar']
           });
           setTimeout(() => {
             if (this.editType === 1) {

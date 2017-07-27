@@ -73,7 +73,7 @@ export class NameCertifyComponent implements OnInit {
       return;
     }
     this.timer = setInterval(() => {
-      this.btnContent = this.countNum + 's后重新发送';
+      this.btnContent = this.countNum + '秒后重新发送';
       this.countNum--;
       this.isBtnDisabled = true;
       if (this.countNum <= 0) {

@@ -11,7 +11,7 @@ export class ProductManagementComponent implements OnInit {
   userTag = [
     {text: '产品列表', path: 'list'},
     {text: '我的纠错', path: 'errata-by-me'},
-    {text: '我被纠错', path: 'errata-for-me'}
+    {text: '错误反馈', path: 'errata-for-me'}
   ];
 
   constructor(private router: Router) {
@@ -27,7 +27,7 @@ export class ProductManagementComponent implements OnInit {
         this.userTag = [
           {text: '产品列表', path: 'list'},
           {text: '我的纠错', path: 'errata-by-me'},
-          {text: '我被纠错', path: 'errata-for-me'}
+          {text: '错误反馈', path: 'errata-for-me'}
         ];
       }
     });

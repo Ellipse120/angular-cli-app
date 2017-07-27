@@ -11,7 +11,7 @@ export class UserInfoComponent implements OnInit {
   userId: any;
   userTag = [
     {text: '个人信息', path: 'userBaseInfo'},
-    {text: '组织信息', path: 'organizationInfo'},
+    {text: '工作单位', path: 'organizationInfo'},
     {text: '修改密码', path: 'userPsdModify'},
     {text: '手机绑定', path: 'userVerify'}
   ];

@@ -83,7 +83,8 @@ export class PsdModifyComponent implements OnInit {
     })
       .then(res => {
         this.snackBar.open('密码修改成功，请重新登录', '', {
-          duration: 1000
+          duration: 1000,
+          extraClasses: ['ysl-snack-bar']
         });
         setTimeout(() => {
           this.searchService.logoutEvent.emit();
