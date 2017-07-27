@@ -68,8 +68,8 @@ export class DataDetailComponent implements OnInit {
     this.getUserId();
     this.route.params.subscribe(e => {
       this.productParams = e;
+      this.getProductDetail(this.productParams.productId);
     });
-    this.getProductDetail(this.productParams.productId);
     this.commonService.getLoginStatus().subscribe((data) => {
       this.userId = data.loginStatus ? data['userInfo']['id'] : undefined;
     });

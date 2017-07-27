@@ -170,19 +170,19 @@ export class ProductImportComponent implements OnInit {
   }
 
   transRadio2(ind) {
-    this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
-    if (this.premiumChecked[ind]['checked']) {
-      this.premiumChecked.forEach(item => {
-        item['checked'] = false;
-        this.premiumChecked[ind]['checked'] = true;
-        if (item.checked) {
-          this.product.premium = 'false';
-        } else {
-          this.product.premium = 'true';
-        }
-      });
-    }
+  this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
+  if (this.premiumChecked[ind]['checked']) {
+    this.premiumChecked.forEach(item => {
+      item['checked'] = false;
+      this.premiumChecked[ind]['checked'] = true;
+      if (item.checked) {
+        this.product.premium = 'false';
+      } else {
+        this.product.premium = 'true';
+      }
+    });
   }
+}
 
   doProductSubmit(): any {
     this.product.userId = this.userInfo;

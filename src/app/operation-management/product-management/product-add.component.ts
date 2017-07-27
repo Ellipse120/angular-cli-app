@@ -42,6 +42,7 @@ export class OperationProductAddComponent implements OnInit {
   dataCollections = [];
   dataServices = [];
   isDisableRipple = true;
+  premiumChecked = [{text: '是', value: true, checked: false}, {text: '否', value: false, checked: false}];
 
   radioItems = [
     {value: true, viewValue: '是'},
@@ -95,6 +96,13 @@ export class OperationProductAddComponent implements OnInit {
         this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
           .subscribe(data => {
             this.product = data;
+            if (data.premium) {
+              this.product.premium = 'true';
+              this.premiumChecked[0].checked = true;
+            } else {
+              this.product.premium = 'false';
+              this.premiumChecked[1].checked = true;
+            }
 
             const a = !isNullOrUndefined(this.product.dataSince) ? new Date(this.product.dataSince) : new Date();
             const b = !isNullOrUndefined(this.product.dataUntil) ? new Date(this.product.dataUntil) : new Date();
@@ -207,6 +215,21 @@ export class OperationProductAddComponent implements OnInit {
         });
       }
     });
+  }
+
+  transRadio2(ind) {
+    this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
+    if (this.premiumChecked[ind]['checked']) {
+      this.premiumChecked.forEach(item => {
+        item['checked'] = false;
+        this.premiumChecked[ind]['checked'] = true;
+        if (item.checked) {
+          this.product.premium = 'false';
+        } else {
+          this.product.premium = 'true';
+        }
+      });
+    }
   }
 
   doProductSubmit(): any {

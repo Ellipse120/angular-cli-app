@@ -85,11 +85,9 @@
     <div class="product-import-info">
       <p class="product-info">是否收费</p>
       <div class="product-import-item2">
-        <md-radio-group [(ngModel)]="product.premium" name="premium">
-          <md-radio-button *ngFor="let item of radioItems" [value]="item.value" [disableRipple]="isDisableRipple">
-            <span class="product-import-checkbox">{{item.viewValue}}&nbsp;&nbsp;</span>
-          </md-radio-button>
-        </md-radio-group>
+        <span class="checkbox-inline" *ngFor="let item of premiumChecked; let ind = index;">
+          <label><input type="checkbox" [(ngModel)]="item.value" name="premium" [value]="item.value" [checked]="item.checked" (click)="transRadio2(ind)">{{item.text}}</label>
+        </span>
       </div>
     </div>
 

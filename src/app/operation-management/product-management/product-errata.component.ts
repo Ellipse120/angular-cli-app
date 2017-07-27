@@ -68,6 +68,7 @@ export class OperationProductErrataComponent implements OnInit {
         .subscribe((params) => {
           const param = Object.assign({}, params);
           this.currentPage = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
+          this.pagingOption['offset'] = param['offset'];
           this.listError();
         });
     });
