@@ -114,21 +114,21 @@ export class OperationProductListComponent implements OnInit {
         this.commonService.loginTimeout(error);
       });
     } else {
-      this.showLoginComp();
+      // this.showLoginComp();
     }
   }
 
-  // 登录判断
-  showLoginComp() {
-    const dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
-    dialogLog.afterClosed().subscribe(result => {
-      if (!result) {
-        return;
-      }
-      this.cookie.putObject('yslUserInfo', result.userLoginInfo);
-      this.getProducts();
-    });
-  }
+  // // 登录判断
+  // showLoginComp() {
+  //   const dialogLog = this.dialog.open(LoginComponent, {disableClose: true});
+  //   dialogLog.afterClosed().subscribe(result => {
+  //     if (!result) {
+  //       return;
+  //     }
+  //     this.cookie.putObject('yslUserInfo', result.userLoginInfo);
+  //     this.getProducts();
+  //   });
+  // }
 
   // 启用或禁用
   openOrClose(product, ind) {
