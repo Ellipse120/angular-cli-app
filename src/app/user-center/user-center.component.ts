@@ -21,7 +21,7 @@ export class UserCenterComponent implements OnInit {
   userInfo: any;
   selfIntroduction: string;
   isEditable = false;
-  profileSrc = '../../assets/images/userDefaultAvatar.png';
+  profileSrc = '';
   userDesFormError = {
     selfIntroduction: {
       required: '请输入您的个性签名',
@@ -61,12 +61,16 @@ export class UserCenterComponent implements OnInit {
     this.commonService.getUserInfo().subscribe(e => {
       if (e.userInfo) {
         this.userInfo = e.userInfo;
-        this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
+        this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download' : '../../assets/images/userDefaultAvatar.png';
       } else {
         this.httpService.getUserInfo(this.userId)
           .then(res => {
             this.userInfo = res;
-            this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
+            if (this.userInfo.logoFilePath) {
+              this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
+            } else {
+              this.profileSrc = '../../assets/images/userDefaultAvatar.png';
+            }
           });
       }
     });
