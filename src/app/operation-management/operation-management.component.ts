@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../core/ysl-http.service';
-import {userInfo} from "os";
 
 @Component({
   selector: 'app-operation-management',
