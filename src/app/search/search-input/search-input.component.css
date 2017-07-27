@@ -44,8 +44,6 @@
   font-size: 20px;
 }
 .searchbtn{
-  display: flex;
-  align-items: center;
   height: 30px;
   line-height: 30px;
   background: #ff4307;

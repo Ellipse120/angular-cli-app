@@ -69,8 +69,8 @@ export class DatalistComponent implements OnInit {
         this.eventEmit.keyword = this.searchOptions['keyword'];
         this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
         if (this.searchOptions['tagId']) {
-          this.tagParams();
-          // this.searchByTag({id: this.searchOptions['tagId'], name: params['tagName'], parent: params['tagParent']})
+          // this.tagParams();
+          this.searchByTag({id: this.searchOptions['tagId'], name: params['tagName'], parent: params['tagParent']});
         } else {
           this.getProductList();
         }

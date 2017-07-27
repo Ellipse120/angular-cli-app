@@ -242,10 +242,8 @@ textarea::-webkit-scrollbar-thumb {
 
 .ysl-btn {
   font-family: 'Microsoft YaHei';
-  display: flex;
   border: none;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -840,7 +838,7 @@ app-index .mat-ripple {
 }
 
 .ysl-label-search-area .mat-tab-label {
-  min-width: 130px !important;
+  min-width: 108px !important;
   height: 34px !important;
   border-radius: 32px;
   padding: 0 14px !important;
@@ -849,16 +847,12 @@ app-index .mat-ripple {
   background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-right: 5px;
 }
 
 .ysl-label-search-area .mat-tab-label:last-of-type {
   margin-right: 0;
-}
-
-.ysl-label-search-area .mat-tab-label:focus {
-  background-color: #fff !important;
 }
 
 .ysl-label-search-area .mat-tab-label-active {
@@ -873,10 +867,12 @@ app-index .mat-ripple {
   width: 8px;
   background-color: #fff;
   border-radius: 100%;
+  margin-right: 10px;
 }
 
 .ysl-label-search-area .mat-tab-label-active:before {
   background-color: #ff7800;
+  margin-right: 10px;
 }
 
 .ysl-label-search-area .mat-tab-label-active:after {
@@ -901,8 +897,8 @@ app-index .mat-ripple {
 .ysl-label-search-cont li {
   display: flex;
   align-items: center;
-  height: 40px;
-  line-height: 24px;
+  height: 28px;
+  line-height: 28px;
   border-radius: 10px;
   background-color: rgba(246, 249, 250, 0.05);
   padding: 0 20px;
@@ -1018,7 +1014,7 @@ app-index .mat-ripple {
   }
 
   .ysl-label-search-area .mat-tab-labels {
-    justify-content: space-between;
+    justify-content: flex-start;
     overflow-y: hidden;
   }
 
