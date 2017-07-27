@@ -93,7 +93,7 @@ export class NavComponent implements OnInit {
 
   // 搜索
   keywordSubmit(data) {
-    this.eventEmit.keywordSearch.emit(data);
+    // this.eventEmit.keywordSearch.emit(data);
   }
 
   // 退出

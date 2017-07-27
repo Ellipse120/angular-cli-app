@@ -285,7 +285,7 @@ export class DatalistComponent implements OnInit {
     this.eventEmit.keywordSearch.subscribe(e => {
       this.eventEmit.keyword = e.keyword;
       this.searchOptions['keyword'] = e.keyword;
-      // this.getProductList();
+      this.getProductList();
     });
   }
 

@@ -10,6 +10,7 @@ import {SearchService} from "../../search.service";
   styles:[`
       :host{
         position: absolute;
+        width: 60%;
         right: 0;
         top: 42px;
         box-shadow: 0 0 12px #eee;
@@ -17,7 +18,7 @@ import {SearchService} from "../../search.service";
         z-index: 1;
       }
       .errata-write{
-        width: 450px;
+        width: 100%;
         height: 135px;
         padding: 20px;
         background-color: #fff;
@@ -58,6 +59,11 @@ import {SearchService} from "../../search.service";
         border-radius:5px;
         cursor: pointer;
       }
+    @media screen and (max-width: 768px) {
+      :host{
+        width: 90%;
+      }
+    }
   `]
 })
 

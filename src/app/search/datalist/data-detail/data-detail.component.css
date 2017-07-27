@@ -40,6 +40,9 @@
 .write-comment h5{
   font-size: 16px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 .product-name{
   margin: 0;

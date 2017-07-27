@@ -66,7 +66,9 @@ export class DataDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserId();
-    this.productParams = this.route.snapshot.params;
+    this.route.params.subscribe(e => {
+      this.productParams = e;
+    });
     this.getProductDetail(this.productParams.productId);
     this.searchService.loginSuccessEvent.subscribe(() => {
       this.getUserId();
@@ -96,6 +98,7 @@ export class DataDetailComponent implements OnInit {
     this.searchService.getAdvancedInfo()
       .then(data => {
         const advancedKey = data;
+        console.log('advanced', advancedKey)
         this.service.getProductDetail(productId)
           .then(res => {
             this.getUserProp();
@@ -112,28 +115,28 @@ export class DataDetailComponent implements OnInit {
                 switch (key) {
                   case 'data_category':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['dataCategory'] === item.entryCode) {
+                      if (this.productDetail['dataCategory'] === (item.entryCode - 0)) {
                         this.productDetail['dataCategory'] = item.entryValue;
                       }
                     });
                     break;
                   case 'data_collection':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['collectionMethod'] === item.entryCode) {
+                      if (this.productDetail['collectionMethod'] === (item.entryCode - 0)) {
                         this.productDetail['collectionMethod'] = item.entryValue;
                       }
                     });
                     break;
                   case 'data_service':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['serviceMethod'] === item.entryCode) {
+                      if (this.productDetail['serviceMethod'] === (item.entryCode - 0)) {
                         this.productDetail['serviceMethod'] = item.entryValue;
                       }
                     });
                     break;
                   case 'data_source':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['dataSource'] === item.entryCode) {
+                      if (this.productDetail['dataSource'] === (item.entryCode - 0)) {
                         this.productDetail['dataSource'] = item.entryValue;
                       }
                     });
@@ -223,7 +226,10 @@ export class DataDetailComponent implements OnInit {
     this.searchService.errataInfo = {productId: this.productParams.productId, userId: this.userId, status: this.productDetail.status};
     this.yslPopup.toggle(ProductErrataComponent)
       .then(data => {
-        console.log('errata', data);
+        this.snackBar.open('纠错提交成功', '', {
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
+        });
       });
   }
 
@@ -251,7 +257,8 @@ export class DataDetailComponent implements OnInit {
     this.service.addProductComment(score)
       .then(res => {
         this.snackBar.open('评论成功', '', {
-          duration: 3000
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
         });
         this.productComment['items'] = [];
         this.getComment();

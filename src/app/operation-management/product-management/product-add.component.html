@@ -15,10 +15,10 @@
 
       <div class="product-import-item" style="position: relative;padding-bottom: 4px;">
         <textarea class="product-description" name="description" rows="3"
-                  maxlength="512" id="description"
+                  maxlength="1000" id="description"
                   [(ngModel)]="product.description" name="description" #description placeholder="简介"></textarea>
         <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">
-          {{description.value.length}}&nbsp;/&nbsp;512
+          {{description.value.length}}&nbsp;/&nbsp;1000
         </div>
       </div>
 
