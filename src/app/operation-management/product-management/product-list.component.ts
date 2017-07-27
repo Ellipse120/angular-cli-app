@@ -67,8 +67,8 @@ export class OperationProductListComponent implements OnInit {
       .subscribe((params) => {
         const param = Object.assign({}, params);
         this.currentPage = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
-
-        this.getProducts();this.pagingOption['offset'] = param['offset'];
+        this.getProducts();
+        this.pagingOption['offset'] = param['offset'];
       });
   }
 
