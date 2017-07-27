@@ -3,6 +3,8 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {OperationService} from '../service/operation-service';
+import {YslCommonService} from "../../core/ysl-common.service";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   templateUrl: './user-list.component.html',
@@ -21,10 +23,10 @@ export class UserListComponent implements OnInit {
     {text: '用户管理', path: 'userManage'}
   ];
   userTypes = [
-    {value: 1, viewValue: '未认证的个人用户'},
-    {value: 2, viewValue: '未认证的机构用户'},
-    {value: 10, viewValue: '认证的个人用户'},
-    {value: 20, viewValue: '认证的机构用户'},
+    {value: 1, viewValue: '未认证用户'},
+    {value: 2, viewValue: '未认证用户'},
+    {value: 10, viewValue: '认证用户'},
+    {value: 20, viewValue: '认证用户'},
     {value: 30, viewValue: '运营方用户'}
   ];
   status = [
@@ -44,10 +46,12 @@ export class UserListComponent implements OnInit {
   totalLength: any;
 
   constructor(private service: YslHttpService,
+              private commonService: YslCommonService,
               private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
-              private operationService: OperationService) {}
+              private operationService: OperationService,
+              public snackbar: MdSnackBar) {}
 
   ngOnInit() {
     this.createForm();
@@ -72,19 +76,19 @@ export class UserListComponent implements OnInit {
           if (!item.userName) { item.userName = '匿名'; }
           switch ('' + item.userType) {
             case  '1': {
-              item.userType = '未认证的个人用户';
+              item.userType = '未认证用户';
               break;
             }
             case  '2': {
-              item.userType = '未认证的机构用户';
+              item.userType = '未认证用户';
               break;
             }
             case  '10': {
-              item.userType = '认证的个人用户';
+              item.userType = '认证用户';
               break;
             }
             case  '20': {
-              item.userType = '认证的机构用户';
+              item.userType = '认证用户';
               break;
             }
             case  '30': {
@@ -98,6 +102,7 @@ export class UserListComponent implements OnInit {
         });
       }, err => {
         this.errorMessage = err.message ? err.message : '请求出错了';
+        this.commonService.loginTimeout(err);
       });
   }
 
@@ -156,7 +161,21 @@ export class UserListComponent implements OnInit {
     this.operationService.changeUserStatus(user.userId, status)
       .subscribe(res => {
         const userStatus = this.dataItems[ind]['userStatus'];
-        this.dataItems[ind]['userStatus'] = (userStatus === 1 || userStatus === 3) ? 2 : 3;
+        if (userStatus === 1 || userStatus === 3) {
+          this.dataItems[ind]['userStatus'] = 2;
+          this.snackbar.open('激活成功', '', {
+            duration: 2000,
+            extraClasses: ['ysl-snack-bar']
+          });
+        } else {
+          this.dataItems[ind]['userStatus'] = 3;
+          this.snackbar.open('禁用成功', '', {
+            duration: 2000,
+            extraClasses: ['ysl-snack-bar']
+          });
+        }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 

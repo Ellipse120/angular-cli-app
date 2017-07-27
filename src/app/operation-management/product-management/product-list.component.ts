@@ -22,15 +22,15 @@ export class OperationProductListComponent implements OnInit {
   isShowLoading: any;
   listIsNull: any;
   userTypes = [
-    {value: 1, viewValue: '未认证的个人用户'},
-    {value: 2, viewValue: '未认证的机构用户'},
-    {value: 10, viewValue: '认证的个人用户'},
-    {value: 20, viewValue: '认证的机构用户'},
+    {value: 1, viewValue: '未认证用户'},
+    {value: 2, viewValue: '未认证用户'},
+    {value: 10, viewValue: '认证用户'},
+    {value: 20, viewValue: '认证用户'},
     {value: 30, viewValue: '运营方用户'}
   ];
   status = [
-    {value: 1, viewValue: '注册'},
-    {value: 2, viewValue: '激活'},
+    {value: 1, viewValue: '待发布'},
+    {value: 2, viewValue: '已发布'},
     {value: 3, viewValue: '禁用'}
   ];
   pagingOption: any = {
@@ -57,7 +57,7 @@ export class OperationProductListComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private service: YslHttpService,
-              private snackbar: MdSnackBar) {
+              public snackbar: MdSnackBar) {
   }
 
   ngOnInit() {
@@ -82,19 +82,19 @@ export class OperationProductListComponent implements OnInit {
         this.dataItems.forEach(item => {
           switch ('' + item.userType) {
             case  '1': {
-              item.userType = '未认证的个人用户';
+              item.userType = '未认证用户';
               break;
             }
             case  '2': {
-              item.userType = '未认证的机构用户';
+              item.userType = '未认证用户';
               break;
             }
             case  '10': {
-              item.userType = '认证的个人用户';
+              item.userType = '认证用户';
               break;
             }
             case  '20': {
-              item.userType = '认证的机构用户';
+              item.userType = '认证用户';
               break;
             }
             case  '30': {
@@ -109,10 +109,9 @@ export class OperationProductListComponent implements OnInit {
           item.premium = item.premium ? '是' : '否';
           item.modifiedOn = this.commonService.getDateForDay(item.modifiedOn);
         });
-
       }, (error) => {
         this.isShowLoading = false;
-        // this.commonService.loginTimeout();
+        this.commonService.loginTimeout(error);
       });
     } else {
       this.showLoginComp();
@@ -133,13 +132,27 @@ export class OperationProductListComponent implements OnInit {
 
   // 启用或禁用
   openOrClose(product, ind) {
-    console.log('product', product);
     let status;
     status = (product['status'] === 1 || product['status'] === 3) ? 2 : 3;
     this.productListService.doChangeStatus(product.productId, status)
       .then(res => {
         const productStatus = this.dataItems[ind]['status'];
         this.dataItems[ind]['status'] = (productStatus === 1 || productStatus === 3) ? 2 : 3;
+        if (productStatus === 1 || productStatus === 3) {
+          this.dataItems[ind]['status'] = 2;
+          this.snackbar.open('激活成功', '', {
+            duration: 2000,
+            extraClasses: ['ysl-snack-bar']
+          });
+        } else {
+          this.dataItems[ind]['status'] = 3;
+          this.snackbar.open('禁用成功', '', {
+            duration: 2000,
+            extraClasses: ['ysl-snack-bar']
+          });
+        }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -208,10 +221,10 @@ export class OperationProductListComponent implements OnInit {
         const res = JSON.parse(response);
         item.sampleFilePath = res['sampleFilePath'];
         this.productListService.doProductUpdate(item);
+        this.snackbar.open('数据样本上传成功', '', {
+          duration: 1000
+        });
       }
-      this.snackbar.open('数据样本上传成功', '', {
-        duration: 1000
-      });
     };
     this.uploader.queue[this.uploader.queue.length - 1].upload();
   }

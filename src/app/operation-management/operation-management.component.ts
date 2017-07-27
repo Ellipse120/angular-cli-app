@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../core/ysl-http.service';
+import {userInfo} from "os";
 
 @Component({
   selector: 'app-operation-management',
@@ -34,6 +35,9 @@ export class OperationManagementComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    if (!this.userId) {
+
+    }
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.userInfo = res;

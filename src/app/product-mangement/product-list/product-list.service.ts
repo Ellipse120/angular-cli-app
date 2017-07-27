@@ -7,6 +7,7 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {isNullOrUndefined} from 'util';
 import {Observable} from 'rxjs/Observable';
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Injectable()
 export class ProductListService {
@@ -15,9 +16,11 @@ export class ProductListService {
     devApi: 'http://localhost:1337/192.168.19.20:8080/ysl-ws/api/product'
   };
   userId: any;
+  str = 'test';
 
   constructor(private http: Http,
               private yslHttpservice: YslHttpService,
+              private commonService: YslCommonService,
               private cookie: CookieService) {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
   }
@@ -89,10 +92,6 @@ export class ProductListService {
   private handleError(error: any): Promise<any> {
     console.log('an error occurred.' + error);
     return Promise.reject(error.message || error);
-  }
-
-  private handleErrorO(error) {
-    return Observable.throw(error);
   }
 
 }

@@ -7,6 +7,7 @@ import {CookieService} from 'ngx-cookie';
 import {MdSnackBar} from '@angular/material';
 import {isNullOrUndefined} from 'util';
 import {FileUploader} from 'ng2-file-upload';
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   templateUrl: './product-add.component.html',
@@ -79,6 +80,7 @@ export class OperationProductAddComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private productListService: ProductListService,
+              private commonService: YslCommonService,
               private cookie: CookieService,
               private snackbar: MdSnackBar) {
   }
@@ -219,6 +221,8 @@ export class OperationProductAddComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
           }, 2500);
+        }, error => {
+          this.commonService.loginTimeout(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
@@ -233,6 +237,8 @@ export class OperationProductAddComponent implements OnInit {
               this.router.navigate(['../errata'], {relativeTo: this.route});
             }
           }, 2500);
+        }, error => {
+          this.commonService.loginTimeout(error);
         });
     }
   }

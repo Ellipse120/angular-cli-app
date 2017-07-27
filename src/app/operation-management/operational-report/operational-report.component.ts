@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { EChartOption, ECharts } from 'echarts-ng2';
 import {OperationService} from '../service/operation-service';
-import {isNullOrUndefined} from "util";
-import {Router} from "@angular/router";
+import {isNullOrUndefined} from 'util';
+import {Router} from '@angular/router';
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   selector: 'app-operational-report',
@@ -25,7 +26,9 @@ export class OperationalReportComponent implements OnInit {
   signupAmountOption: any;
   productAmountOption: any;
 
-  constructor(private apiService: OperationService, private router: Router) { }
+  constructor(private apiService: OperationService,
+              private router: Router,
+              private commonService: YslCommonService) { }
 
   ngOnInit() {
     this.getChartsData();
@@ -53,6 +56,8 @@ export class OperationalReportComponent implements OnInit {
         } else {
           this.currentOnlineAmount = 0;
         }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -116,6 +121,8 @@ export class OperationalReportComponent implements OnInit {
             ]
           };
         }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -127,7 +134,8 @@ export class OperationalReportComponent implements OnInit {
           this.hotProducts = data['items'].splice(0, 10);
           // this.hotProducts = this.hotProducts.splice(0, 9);
         }
-        console.log('top 10', this.hotProducts);
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -191,6 +199,8 @@ export class OperationalReportComponent implements OnInit {
             ]
           };
         }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -254,6 +264,8 @@ export class OperationalReportComponent implements OnInit {
             ]
           };
         }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 

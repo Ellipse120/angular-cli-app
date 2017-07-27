@@ -1,6 +1,5 @@
 import {Injectable, OnInit, EventEmitter} from '@angular/core';
 import {CookieService} from 'ngx-cookie';
-import {YslHttpService} from './ysl-http.service';
 import {Subject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {SearchService} from '../search/search.service';
@@ -13,7 +12,6 @@ export class YslCommonService {
   private loginStatus = new Subject<any>();
 
   constructor(private cookie: CookieService,
-              private httpService: YslHttpService,
               private router: Router,
               private eventEmit: SearchService,
               public snackBar: MdSnackBar) {
@@ -60,8 +58,8 @@ export class YslCommonService {
       } else {
         this.cookie.remove('yslUserInfo');
         this.cookie.remove('x-access-token');
-        this.snackBar.open('退出登录成功', '', {
-          duration: 1000,
+        this.snackBar.open(e.logoutMess, '', {
+          duration: e.duration,
           extraClasses: ['ysl-snack-bar']
         });
       }
@@ -77,9 +75,12 @@ export class YslCommonService {
   }
 
   // 为登录统一处理
-  loginTimeout() {
+  loginTimeout(error) {
+    const err = error.json();
+    if (err.errorCode && (err.errorCode === 2002)) {
+      this.modifyLoginStatus({loginStatus: false, userInfo: null, logoutMess: '登录超时，请重新登录', duration: 3000});
+      this.router.navigate(['re-login']);
+    }
     const token = window.localStorage['user-token'];
-    this.modifyLoginStatus({loginState: false, userInfo: null});
-    this.router.navigate(['re-login']);
   }
 }

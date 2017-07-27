@@ -101,7 +101,7 @@ export class NavComponent implements OnInit {
     const token = window.localStorage['user-token'];
     this.httpService.logout(token)
       .then(res => {
-        this.commonService.modifyLoginStatus({loginState: false, userInfo: null});
+        this.commonService.modifyLoginStatus({loginStatus: false, userInfo: null, logoutMess: '退出登录成功', duration: 1000});
         const path = this.location.path();
         if (!path.includes('/datalist') || !path.includes('/datadetail')) {
           this.router.navigate(['index']);

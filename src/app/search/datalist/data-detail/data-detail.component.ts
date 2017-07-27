@@ -70,8 +70,8 @@ export class DataDetailComponent implements OnInit {
       this.productParams = e;
     });
     this.getProductDetail(this.productParams.productId);
-    this.searchService.loginSuccessEvent.subscribe(() => {
-      this.getUserId();
+    this.commonService.getLoginStatus().subscribe((data) => {
+      this.userId = data.loginStatus ? data['userInfo']['id'] : undefined;
     });
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
@@ -98,7 +98,6 @@ export class DataDetailComponent implements OnInit {
     this.searchService.getAdvancedInfo()
       .then(data => {
         const advancedKey = data;
-        console.log('advanced', advancedKey)
         this.service.getProductDetail(productId)
           .then(res => {
             this.getUserProp();
@@ -203,6 +202,8 @@ export class DataDetailComponent implements OnInit {
       .then(res => {
         this.favoredCount = res['favoredCount'];
         this.isThumbsUp = res['favor'];
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -262,6 +263,8 @@ export class DataDetailComponent implements OnInit {
         });
         this.productComment['items'] = [];
         this.getComment();
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -321,7 +324,6 @@ export class DataDetailComponent implements OnInit {
       return;
     }
     const isShow = this.productComment['items'][ind]['showSecond'];
-    console.log('form', this.productComment);
     this.productComment['items'].forEach(item => {
       if (isShow) {
         item.showSecond = false;
@@ -342,13 +344,14 @@ export class DataDetailComponent implements OnInit {
       .then(res => {
         this.productComment['items'][ind]['showSecond'] = false;
         this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination}).then(data => {
-          console.log('reply', data['items'], common);
           data['items'].forEach(com => {
             if (com['id'] === common['id']) {
               this.productComment['items'][ind]['items'] = com['items'];
             }
           });
         });
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -372,6 +375,8 @@ export class DataDetailComponent implements OnInit {
         userId: this.userId
       }).subscribe(data => {
         this.getUserProp();
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
     } else {
       this.service.updateFavorite({
@@ -380,6 +385,8 @@ export class DataDetailComponent implements OnInit {
         userId: this.userId
       }).subscribe( () => {
          this.getUserProp();
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
     }
   }
