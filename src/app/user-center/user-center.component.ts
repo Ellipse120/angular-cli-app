@@ -6,6 +6,7 @@ import {Router, NavigationEnd} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FileUploader} from 'ng2-file-upload';
 import {MdSnackBar} from '@angular/material';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-user-center',
@@ -48,6 +49,9 @@ export class UserCenterComponent implements OnInit {
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.uploader = new FileUploader({url: this.httpService.url + 'api/file/upload/user/logo/' + this.userId});
+    if (isNullOrUndefined(this.userId)) {
+      this.router.navigate(['re-login']);
+    }
     this.createForm();
     this.getUserInfo();
     this.updateUserInfo();

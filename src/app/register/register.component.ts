@@ -158,14 +158,14 @@ export class RegisterComponent implements OnInit {
     this.service.getValidateCode(form.value['phone'])
       .then(res => {
         this.snackBar.open('验证码发送成功', '', {
-          duration: 3000,
+          duration: 2000,
           extraClasses: ['ysl-snack-bar']
         });
       }, error => {
         const body = JSON.parse(error._body);
         this.errorMessage = body.errorMessage;
         this.snackBar.open(this.errorMessage, '', {
-          duration: 3000,
+          duration: 2000,
           extraClasses: ['ysl-snack-bar']
         });
       });
