@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { Router } from '@angular/router';
 import { YslHttpService } from '../core/ysl-http.service';
-import {YslCommonService} from "../core/ysl-common.service";
+import {YslCommonService} from '../core/ysl-common.service';
 
 @Component({
   selector: 'app-re-login',

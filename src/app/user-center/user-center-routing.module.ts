@@ -102,17 +102,17 @@ const childUserCenterRoutes: Routes = [
     component: ThumbsUpComponent,
     children: [
       {
-        path: 'by-me',
-        component: ThumbsUpByMeComponent
+        path: 'to-me',
+        component: ThumbsUpToMeComponent
       },
       {
         path: '',
-        redirectTo: 'by-me',
+        redirectTo: 'to-me',
         pathMatch: 'full'
       },
       {
-        path: 'to-me',
-        component: ThumbsUpToMeComponent
+        path: 'by-me',
+        component: ThumbsUpByMeComponent
       },
       {
         path: '**',

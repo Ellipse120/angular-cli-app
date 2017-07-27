@@ -115,7 +115,8 @@ export class UserCenterComponent implements OnInit {
         const res = JSON.parse(response);
         this.profileSrc = this.httpService.url + 'api/file/' + res['logoFilePath'] + '/download';
         this.snackBar.open('头像更改成功', '', {
-          duration: 1000
+          duration: 1000,
+          extraClasses: ['ysl-snack-bar']
         });
       }
     };

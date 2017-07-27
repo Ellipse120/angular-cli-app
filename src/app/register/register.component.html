@@ -4,9 +4,20 @@
     <div class="register-cont" *ngIf="!registerSuccess">
       <div class="form-group email">
         <label class="sr-only"></label>
-        <div class="input-group col-xs-12">
-          <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-          <input type="email" class="form-control" formControlName="email" placeholder="请输入您的电子邮箱" required>
+        <div>
+          <div class="input-group col-xs-12">
+            <span class="input-group-addon"><i class="fa fa-phone"></i>&nbsp;手机号</span>
+            <input type="tel" class="form-control" formControlName="phone" required placeholder="请输入您的手机号,可用于登录" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group col-xs-12">
+            <span class="input-group-addon"><i class="fa fa-envelope-square"></i>&nbsp;验证码</span>
+            <input type="text" class="form-control" style="width: auto;" formControlName="smsCode" required placeholder="请输入验证码">
+            <button type="button" class="btn" style="float: right;" [class.disabled]="isBtnDisabled" (click)="getValidateCode()" [disabled]="isBtnDisabled">{{btnContent}}</button>
+          </div>
+          <div class="input-group col-xs-12">
+            <span class="input-group-addon"><i class="fa fa-key"></i>&nbsp;&nbsp;&nbsp;&nbsp;密码</span>
+            <input type="password" class="form-control" formControlName="password" required placeholder="请设置长度大于8位的登录密码" aria-describedby="basic-addon1">
+          </div>
         </div>
       </div>
       <div class="form-group clearfix agreement">
@@ -16,15 +27,17 @@
         </div>
       </div>
       <div class="form-group ysl-text-primary ysl-error-tip" *ngIf="registerForm.invalid && isSubmit">
-        <span *ngIf="formErrors.email">{{formErrors.email}}</span>
-        <span *ngIf="!formErrors.email && formErrors.agreement">{{formErrors.agreement}}</span>
+        <span *ngIf="formErrors.phone">{{formErrors.phone}}</span>
+        <span *ngIf="formErrors.smsCode">{{formErrors.smsCode}}</span>
+        <span *ngIf="formErrors.password">{{formErrors.password}}</span>
+        <span *ngIf="!formErrors.phone && formErrors.agreement">{{formErrors.agreement}}</span>
       </div>
       <p class="ysl-error-tip" *ngIf="registerForm.valid && registerError">{{errorMessage}}</p>
       <div class="form-group">
         <label class="sr-only"></label>
-        <button class="btn btn-lg btn-block submit-btn">发送激活邮件</button>
+        <button class="btn btn-lg btn-block submit-btn" [disabled]="registerForm.invalid">注册</button>
       </div>
     </div>
-    <div class="register-success" *ngIf="registerSuccess">注册成功，请查收邮件并激活</div>
+    <div class="register-success" *ngIf="registerSuccess">注册成功</div>
   </form>
 </div>

@@ -222,7 +222,8 @@ export class OperationProductListComponent implements OnInit {
         item.sampleFilePath = res['sampleFilePath'];
         this.productListService.doProductUpdate(item);
         this.snackbar.open('数据样本上传成功', '', {
-          duration: 1000
+          duration: 1000,
+          extraClasses: ['ysl-snack-bar']
         });
       }
     };

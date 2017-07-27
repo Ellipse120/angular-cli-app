@@ -258,7 +258,7 @@ export class DataDetailComponent implements OnInit {
     this.service.addProductComment(score)
       .then(res => {
         this.snackBar.open('评论成功', '', {
-          duration: 2000,
+          duration: 3000,
           extraClasses: ['ysl-snack-bar']
         });
         this.productComment['items'] = [];

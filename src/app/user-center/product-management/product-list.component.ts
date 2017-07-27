@@ -60,8 +60,8 @@ export class ProductListComponent implements OnInit {
   ];
 
   status = [
-    {value: 1, viewValue: '注册'},
-    {value: 2, viewValue: '激活'},
+    {value: 1, viewValue: '待发布'},
+    {value: 2, viewValue: '已发布'},
     {value: 3, viewValue: '禁用'}
   ];
 

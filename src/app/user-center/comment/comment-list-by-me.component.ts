@@ -76,7 +76,8 @@ export class CommentListByMeComponent implements OnInit {
           .then(res => {
             this.getCommentToMe();
             this.snackBar.open('评论删除成功', '', {
-              duration: 3000
+              duration: 3000,
+              extraClasses: ['ysl-snack-bar']
             });
           });
       }
