@@ -24,6 +24,7 @@ export class OperationManagementComponent implements OnInit {
 
   userId: any;
   userInfo: any;
+  profileSrc = '';
   selfIntroduction: string;
   isEditable: boolean = false;
 
@@ -46,9 +47,15 @@ export class OperationManagementComponent implements OnInit {
         this.userId = data['userInfo']['id'];
       }
     });
-    this.httpService.getUserInfo(this.userId)
-      .then(res => {
-        this.userInfo = res;
-      });
+
+    if (this.userId) {
+      this.httpService.getUserInfo(this.userId)
+        .then(res => {
+          this.userInfo = res;
+          this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
+        });
+    } else {
+      this.profileSrc = '../../assets/images/userDefaultAvatar.png';
+    }
   }
 }

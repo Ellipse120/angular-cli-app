@@ -53,12 +53,10 @@ export class UserCenterComponent implements OnInit {
       this.httpService.getUserInfo(this.userId)
         .then(res => {
           this.userInfo = res;
-          if (this.userInfo.logoFilePath) {
-            this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
-          } else {
-            this.profileSrc = '../../assets/images/userDefaultAvatar.png';
-          }
+          this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
         });
+    } else {
+      this.profileSrc = '../../assets/images/userDefaultAvatar.png';
     }
     this.getUserInfo();
   }
