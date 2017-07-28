@@ -41,6 +41,7 @@ export class ProductImportComponent implements OnInit {
   dataServices = [];
   isDisableRipple = true;
   checked = false;
+  editType: any;
   premiumChecked = [{text: '是', value: true, checked: false}, {text: '否', value: false, checked: false}];
 
   radioItems = [
@@ -75,43 +76,47 @@ export class ProductImportComponent implements OnInit {
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.uploader = new FileUploader({url: this.service.url + 'api/file/upload'});
-    if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
-      this.uploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
-      this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
-        .subscribe(data => {
-          if (data.premium) {
-            this.product.premium = 'true';
-            this.premiumChecked[0].checked = true;
-          } else {
-            this.product.premium = 'false';
-            this.premiumChecked[1].checked = true;
-          }
-          this.product = data;
+    this.route.params.subscribe(p => {
+      this.editType = p.type;
+      if (!isNullOrUndefined(p['productId'])) {
+        this.uploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
+        this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
+          .subscribe(data => {
+            if (data.premium) {
+              this.product.premium = 'true';
+              this.premiumChecked[0].checked = true;
+            } else {
+              this.product.premium = 'false';
+              this.premiumChecked[1].checked = true;
+            }
+            this.product = data;
 
-          if (!this.product.dataSince && !this.product.dataUntil) {
-            this.timeFrom = {};
-            this.timeFrom = {};
-          } else {
-            const a = new Date(this.product.dataSince);
-            const b = new Date(this.product.dataUntil);
+            if (!this.product.dataSince && !this.product.dataUntil) {
+              this.timeFrom = {};
+              this.timeFrom = {};
+            } else {
+              const a = new Date(this.product.dataSince);
+              const b = new Date(this.product.dataUntil);
 
-            this.timeFrom = {
-              date: {
-                year: a.getFullYear(),
-                month: a.getMonth() + 1,
-                day: a.getDate()
-              }
-            };
-            this.timeTo = {
-              date: {
-                year: b.getFullYear(),
-                month: b.getMonth() + 1,
-                day: b.getDate()
-              }
-            };
-          }
-        });
-    }
+              this.timeFrom = {
+                date: {
+                  year: a.getFullYear(),
+                  month: a.getMonth() + 1,
+                  day: a.getDate()
+                }
+              };
+              this.timeTo = {
+                date: {
+                  year: b.getFullYear(),
+                  month: b.getMonth() + 1,
+                  day: b.getDate()
+                }
+              };
+            }
+          });
+      }
+    })
+
 
     this.service.getTagDimensions()
       .then(data => {
@@ -201,13 +206,23 @@ export class ProductImportComponent implements OnInit {
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
-          this.snackbar.open('产品修改成功', '', {
-            duration: 2000,
-            extraClasses: ['ysl-snack-bar']
-          });
-          setTimeout(() => {
-            this.router.navigate(['../../list'], {relativeTo: this.route});
-          }, 2500);
+          if ((this.editType - 0) === 1) {
+            this.snackbar.open('产品修改成功', '', {
+              duration: 2000,
+              extraClasses: ['ysl-snack-bar']
+            });
+            setTimeout(() => {
+              this.router.navigate(['../list'], {relativeTo: this.route});
+            }, 2500);
+          } else {
+            this.snackbar.open('纠错处理成功', '', {
+              duration: 2000,
+              extraClasses: ['ysl-snack-bar']
+            });
+            setTimeout(() => {
+              this.router.navigate(['../errata-for-me'], {relativeTo: this.route});
+            }, 2500);
+          }
         });
     }
   }

@@ -145,7 +145,7 @@ export class ProductListComponent implements OnInit {
   }
 
   editProduct2(row): void {
-    this.router.navigate(['../edit', row.productId], {relativeTo: this.route});
+    this.router.navigate(['../edit', {productId: row.productId, type: 1}], {relativeTo: this.route});
   }
 
   setProductsPage(pageInfo) {

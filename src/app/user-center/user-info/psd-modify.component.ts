@@ -90,6 +90,13 @@ export class PsdModifyComponent implements OnInit {
         setTimeout(() => {
           this.searchService.logoutEvent.emit();
         }, 1000);
+      }, error => {
+        const err = error.json();
+        if (!err.errorMessage) { return; }
+        this.snackBar.open(err.errorMessage, '', {
+          duration: 1500,
+          extraClasses: ['ysl-snack-bar']
+        });
       });
   }
 
