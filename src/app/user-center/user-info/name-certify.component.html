@@ -92,8 +92,8 @@
   <!--</div>-->
 
   <!--<p class="" style="padding:0 0 20px 0;text-align: center;" *ngIf="(userInfo?.userType == 10) || (userInfo?.userType == 20)">-->
-    <div class="" style="text-align: center;" *ngIf="userInfo?.userContactPhone">
-      您已绑定手机号
+    <div class="binded-phone" *ngIf="userInfo?.userContactPhone">
+      您绑定的手机号：<i>{{userInfo.userContactPhone}}</i>
     </div>
   </div>
 

@@ -129,6 +129,10 @@
   line-height: 31px;
   padding: 0;
 }
+.identify .binded-phone{
+  padding: 20px;
+  text-align: center;
+}
 .edit-form .ysl-error-tip{
   height: 20px;
   line-height: 20px;
