@@ -29,8 +29,8 @@ export class PsdModifyComponent implements OnInit {
   formErrorMess = {
     newPass: {
       required: '新密码不能为空',
-      minlength: '密码长度不能小于6',
-      maxlength: '密码长度不得超过12'
+      minlength: '密码长度不能小于8',
+      maxlength: '密码长度不得超过16'
     },
     confirmPass: {
       required: '密码不能为空'
@@ -58,6 +58,7 @@ export class PsdModifyComponent implements OnInit {
   modifySubmit() {
     const form = this.modifyForm;
     const formValue = form.value;
+    console.log('form', form)
     this.isSubmit = true;
     this.isInconsistent = (formValue['newPass'] !== formValue['confirmPass']) ? true : false;
     for (const field in this.formError) {
