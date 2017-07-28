@@ -53,8 +53,18 @@ export class UserCenterComponent implements OnInit {
       this.router.navigate(['re-login']);
     }
     this.createForm();
+    if (this.userId) {
+      this.httpService.getUserInfo(this.userId)
+        .then(res => {
+          this.userInfo = res;
+          if (this.userInfo.logoFilePath) {
+            this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
+          } else {
+            this.profileSrc = '../../assets/images/userDefaultAvatar.png';
+          }
+        });
+    };
     this.getUserInfo();
-    this.updateUserInfo();
   }
 
   getUserInfo() {
@@ -62,30 +72,12 @@ export class UserCenterComponent implements OnInit {
       if (e.userInfo) {
         this.userInfo = e.userInfo;
         this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download' : '../../assets/images/userDefaultAvatar.png';
-      } else {
-        this.httpService.getUserInfo(this.userId)
-          .then(res => {
-            this.userInfo = res;
-            if (this.userInfo.logoFilePath) {
-              this.profileSrc = this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download';
-            } else {
-              this.profileSrc = '../../assets/images/userDefaultAvatar.png';
-            }
-          });
       }
     });
   }
 
   // 被修改信息时更新视图
   updateUserInfo() {
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationEnd) {
-        this.httpService.getUserInfo(this.userId)
-          .then(res => {
-            this.commonService.updateUserInfo(res);
-          });
-      }
-    });
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.commonService.updateUserInfo(res);

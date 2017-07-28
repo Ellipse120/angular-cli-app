@@ -49,6 +49,11 @@ export class NameCertifyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+        this.userInfo = res;
+      });
     this.getUserInfo();
     this.createForm();
   }
@@ -58,11 +63,6 @@ export class NameCertifyComponent implements OnInit {
     this.commonService.getUserInfo().subscribe(e => {
       this.userInfo = e.userInfo;
     });
-    // this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
-    // this.httpService.getUserInfo(this.userId)
-    //   .then(res => {
-    //     this.userInfo = res;
-    //   });
   }
 
   // 获取验证码

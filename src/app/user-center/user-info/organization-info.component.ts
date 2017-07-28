@@ -61,8 +61,10 @@ export class organizationInfoComponent implements OnInit {
 
   // 获取用户信息
   getUserInfo() {
-    this.subscription = this.commonService.getUserInfo().subscribe(e => {
-      this.userInfo = e.userInfo;
+    if (!this.userId) { return; }
+    this.httpService.getUserInfo(this.userId)
+      .then(res => {
+      this.userInfo = res;
       this.orgViewInfo.forEach(item => {
         item['model'] = this.userInfo[item.formControlName];
         if (item.formControlName === 'name') {

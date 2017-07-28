@@ -41,6 +41,12 @@ export class NavComponent implements OnInit {
     if (this.cookie.getObject('yslUserInfo')) {
       this.loginState = true;
       this.userId = this.cookie.getObject('yslUserInfo')['id'];
+      if (this.userId) {
+        this.httpService.getUserInfo(this.userId)
+          .then(res => {
+            this.loginInfo = res;
+          });
+      }
     } else {
       this.loginState = false;
       this.userId = undefined;
@@ -65,11 +71,6 @@ export class NavComponent implements OnInit {
   }
 
   getUserInfo() {
-    if (!this.userId) { return; }
-    this.httpService.getUserInfo(this.userId)
-      .then(res => {
-        this.loginInfo = res;
-      });
     this.commonService.getUserInfo().subscribe(e => {
       this.loginInfo = e.userInfo;
     });

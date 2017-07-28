@@ -28,22 +28,32 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    if (this.userId) {
+      this.httpService.getUserInfo(this.userId)
+        .then(res => {
+          this.userInfoProcessing(res);
+        });
+    }
     this.createForm();
     this.getViewInfo();
   }
 
   getViewInfo() {
     this.subscription = this.commonService.getUserInfo().subscribe(e => {
-      this.viewInfo = e.userInfo;
-      this.userInfo.forEach(item => {         // 初始化个人信息
-        for (const key in this.viewInfo) {
-          if (item.formControlName === key) {
-            item.model = this.viewInfo[key];
-          }
-        }
-      });
-      this.viewInfo['lastLogonTime'] = this.commonService.getDateForDay(this.viewInfo['lastLogonTime']);
+      this.userInfoProcessing(e.userInfo);
     });
+  }
+
+  userInfoProcessing(data) {
+    this.viewInfo = data;
+    this.userInfo.forEach(item => {         // 初始化个人信息
+      for (const key in this.viewInfo) {
+        if (item.formControlName === key) {
+          item.model = this.viewInfo[key];
+        }
+      }
+    });
+    this.viewInfo['lastLogonTime'] = this.commonService.getDateForDay(this.viewInfo['lastLogonTime']);
   }
 
   // 编辑用户信息
