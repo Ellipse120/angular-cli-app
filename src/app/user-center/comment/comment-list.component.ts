@@ -59,6 +59,8 @@ export class CommentListComponent implements OnInit {
             this.router.navigate(['userCenter/comment/list'], navigationExtras);
           }
         }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 

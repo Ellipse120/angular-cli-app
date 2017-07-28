@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../../core/ysl-http.service';
+import {YslCommonService} from '../../core/ysl-common.service';
 
 @Component({
   selector: 'app-thumbs-up-to-me',
@@ -24,6 +25,7 @@ export class ThumbsUpToMeComponent implements OnInit {
   };
 
   constructor(private yslHttpService: YslHttpService,
+              private commonService: YslCommonService,
               private cookie: CookieService,
               private router: Router) {
     this.userId = this.cookie.getObject('yslUserInfo')['id'];
@@ -36,6 +38,8 @@ export class ThumbsUpToMeComponent implements OnInit {
       .then((data) => {
         this.totalThumbedNum = data.totalLength;
         this.thumbs = data.items;
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 

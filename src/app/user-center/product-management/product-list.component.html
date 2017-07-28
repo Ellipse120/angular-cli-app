@@ -123,7 +123,8 @@
         <!--</div>-->
       </div>
 
-      <div>
+      <div class="list-empty" *ngIf="dataItems.length === 0">产品列表为空</div>
+      <div *ngIf="dataItems.length !== 0">
         <ul class="list-group">
           <li *ngFor="let item of dataItems | paginate: { itemsPerPage: 10, currentPage: page, totalItems: count }"
               class="list-group-item row product-list-ul">

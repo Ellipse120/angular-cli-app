@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {YslHttpService} from '../core/ysl-http.service';
 import {YslCommonService} from '../core/ysl-common.service';
 import {CookieService} from 'ngx-cookie';
-import {Router, NavigationEnd} from '@angular/router';
+import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FileUploader} from 'ng2-file-upload';
 import {MdSnackBar} from '@angular/material';
-import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-user-center',
@@ -49,9 +48,6 @@ export class UserCenterComponent implements OnInit {
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.uploader = new FileUploader({url: this.httpService.url + 'api/file/upload/user/logo/' + this.userId});
-    if (isNullOrUndefined(this.userId)) {
-      this.router.navigate(['re-login']);
-    }
     this.createForm();
     if (this.userId) {
       this.httpService.getUserInfo(this.userId)
@@ -63,7 +59,7 @@ export class UserCenterComponent implements OnInit {
             this.profileSrc = '../../assets/images/userDefaultAvatar.png';
           }
         });
-    };
+    }
     this.getUserInfo();
   }
 
@@ -71,7 +67,7 @@ export class UserCenterComponent implements OnInit {
     this.commonService.getUserInfo().subscribe(e => {
       if (e.userInfo) {
         this.userInfo = e.userInfo;
-        this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath + '/download' : '../../assets/images/userDefaultAvatar.png';
+        this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
       }
     });
   }

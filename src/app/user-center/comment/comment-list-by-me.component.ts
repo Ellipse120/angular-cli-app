@@ -62,6 +62,8 @@ export class CommentListByMeComponent implements OnInit {
             this.router.navigate(['userCenter/comment/list-by-me'], navigationExtras);
           }
         }
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
   // 删除评论

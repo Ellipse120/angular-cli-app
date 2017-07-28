@@ -6,7 +6,6 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {isNullOrUndefined} from 'util';
 
-import {ProductImportComponent} from '../../product-mangement/product-import/product-import.component';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -130,63 +129,6 @@ export class ProductListComponent implements OnInit {
   //   this.isOn[i] = !this.isOn[i];
   // }
 
-  // 编辑产品
-  editProduct(info) {
-    if (info.premium === '是') {
-      info.premium = 'true';
-    } else {
-      info.premium = 'false';
-    }
-
-    switch (info.userType) {
-      case '未认证的个人用户': {
-        info.userType = 1;
-        break;
-      }
-      case '未认证的机构用户': {
-        info.userType = 2;
-        break;
-      }
-      case '认证的个人用户': {
-        info.userType = 10;
-        break;
-      }
-      case '认证的机构用户': {
-        info.userType = 20;
-        break;
-      }
-      case '运营方用户': {
-        info.userType = 30;
-        break;
-      }
-    }
-
-    switch (info.status) {
-      case '注册': {
-        info.status = 1;
-        break;
-      }
-      case '激活': {
-        info.status = 2;
-        break;
-      }
-      case '禁用': {
-        info.status = 3;
-        break;
-      }
-    }
-
-    const productTitle = '产品修改';
-
-    const dialogRef = this.dialog.open(ProductImportComponent, {data: {info, productTitle}, disableClose: true});
-    dialogRef.componentInstance.productTitle = productTitle;
-    dialogRef.componentInstance.isProImport = false;
-    dialogRef.componentInstance.data = info;
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.getProducts();
-    });
-  }
 
   // 选择每一行触发事件
   onSelect({selected}) {

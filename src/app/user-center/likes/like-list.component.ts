@@ -3,7 +3,7 @@ import {LikeService} from './service/like-service';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {NavigationExtras, Router, ActivatedRoute} from '@angular/router';
-import {YslCommonService} from "../../core/ysl-common.service";
+import {YslCommonService} from '../../core/ysl-common.service';
 
 @Component({
   selector: 'app-like-list',
@@ -63,6 +63,8 @@ export class LikeListComponent implements OnInit {
       } else {
         this.items = [];
       }
+    }, error => {
+      this.commonService.loginTimeout(error);
     });
   }
 
