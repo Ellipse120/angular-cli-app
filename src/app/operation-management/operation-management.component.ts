@@ -43,7 +43,7 @@ export class OperationManagementComponent implements OnInit {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.commonService.getLoginStatus().subscribe(data => {
       if (data.loginStatus) {
-        this.userId = data.loginStatus['userInfo']['id'];
+        this.userId = data['userInfo']['id'];
       }
     });
     if (!this.userId) {
