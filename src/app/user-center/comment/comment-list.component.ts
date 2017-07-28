@@ -3,6 +3,7 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {NavigationExtras, Router, ActivatedRoute} from '@angular/router';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-comment-list',
@@ -42,7 +43,7 @@ export class CommentListComponent implements OnInit {
     this.httpService.getCommentToMe(options)
       .then(res => {
         this.comments = res;
-        if (res['items']) {
+        if (!isNullOrUndefined(this.comments['items']) && this.comments['items'].length) {
           this.comments['items'].forEach(item => {
             item.createdOn = this.commonService.getDateForDay(item.createdOn);
           });

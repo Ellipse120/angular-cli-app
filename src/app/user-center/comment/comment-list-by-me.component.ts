@@ -5,6 +5,7 @@ import {YslCommonService} from '../../core/ysl-common.service';
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import {ConfirmDialogComponent} from '../../core/commons/confirm-dialog.component';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-comment-list-by-me',
@@ -47,10 +48,12 @@ export class CommentListByMeComponent implements OnInit {
     this.httpService.getCommentByMe(options)
       .then(res => {
         this.comments = res;
-        this.comments['items'].forEach(item => {
-          item.createdOn = this.commonService.getDateForDay(item.createdOn);
-          item.averageScore = item.scoreOnTimeliness ? ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity) / 4).toFixed(1) : 0;
-        });
+        if (!isNullOrUndefined(this.comments['items']) && this.comments['items'].length) {
+          this.comments['items'].forEach(item => {
+            item.createdOn = this.commonService.getDateForDay(item.createdOn);
+            item.averageScore = item.scoreOnTimeliness ? ((item.scoreOnTimeliness + item.scoreOnNormalization + item.scoreOnAccuracy + item.scoreOnIntegrity) / 4).toFixed(1) : 0;
+          });
+        }
 
         // 当前页评论删完回到上一页
         if (this.pagination.offset >= 5) {
