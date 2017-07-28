@@ -32,7 +32,7 @@
   border: 2px solid #efefef;
   line-height: 30px;
 }
-.user-info-list .ng-invalid{
+.user-info-list .ng-invalid.submit{
   border-color: #ec7c45;
 }
 .user-info-list input[disabled]{

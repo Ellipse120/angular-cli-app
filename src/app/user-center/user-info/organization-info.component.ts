@@ -17,6 +17,7 @@ export class organizationInfoComponent implements OnInit {
   userId: any;
   userInfo: any;
   isEditable = false;
+  isSubmit = false;
   orgViewInfo = [
     {label: '组织名称', formControlName: 'name', model: ''},
     {label: '联系人姓名', formControlName: 'contactName', model: ''},
@@ -96,6 +97,7 @@ export class organizationInfoComponent implements OnInit {
   }
   // 提交组织认证
   submitOrganization(isVerify) {
+    this.isSubmit = true;
     const form = this.organizationForm;
     for (const mess in this.orgFormError) {
       if (this.orgFormError.hasOwnProperty(mess)) {

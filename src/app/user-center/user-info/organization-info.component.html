@@ -62,10 +62,8 @@
       <form [formGroup]="organizationForm" class="user-info-list">
         <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
         <div class="info-item row" *ngFor="let o of orgViewInfo">
-          <span class="user-tag col-xs-5">{{o.label}}</span>
-          <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"
-                                                                              [formControlName]="o.formControlName"
-                                                                              *ngIf="o?.edit"></p>
+          <span class="user-tag col-xs-5">{{o.label}} <i class="color-red" *ngIf="isEditable">*</i></span>
+          <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"  [class.submit]="isSubmit" [formControlName]="o.formControlName" *ngIf="o?.edit"></p>
         </div>
         <div class="ysl-btn-group row" style="margin:10px;padding-bottom: 20px;">
 
@@ -85,10 +83,9 @@
         <form [formGroup]="organizationForm" class="user-info-list">
           <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
           <div class="info-item row" *ngFor="let o of orgViewInfo">
-            <span class="user-tag col-xs-5">{{o.label}}</span>
-            <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"
-                                                                                [formControlName]="o.formControlName"
-                                                                                *ngIf="o?.edit"></p>
+            <span class="user-tag col-xs-5">{{o.label}}<i class="color-red">*</i></span>
+            <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span>
+              <input type="text" [class.submit]="isSubmit" [formControlName]="o.formControlName" *ngIf="o?.edit"></p>
           </div>
           <div class="ysl-btn-group row" style="margin:10px;padding-bottom: 20px;">
 
