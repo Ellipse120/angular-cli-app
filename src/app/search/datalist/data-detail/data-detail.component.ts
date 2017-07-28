@@ -106,7 +106,7 @@ export class DataDetailComponent implements OnInit {
             this.productDetail.modifiedOn = this.commonService.getDateForDay(this.productDetail.modifiedOn);
 
             if ( this.productDetail.sampleFilePath ) {
-               this.downloadUrl = 'ysl-ws/api/file/' + this.productDetail.sampleFilePath.split('.')[0] + '/download';
+               this.downloadUrl = 'ysl-ws/api/file/' + this.productDetail.sampleFilePath + '/download';
 
             }
             for (const key in advancedKey) {
