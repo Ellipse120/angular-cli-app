@@ -251,9 +251,10 @@ export class DatalistComponent implements OnInit {
     if (!this.selectedTagFilterO[item.id]) {
       this.selectedTagFilterO[item.id] = item;
       this.selectedTagFilterA.push(item);
-      this.tagParams();
+
       this.isShowSide = false;
     }
+    this.tagParams();
   }
 
   /**
