@@ -3,7 +3,7 @@
   <div class="user-center-info container">
     <span class="profile-picture">
       <img [src]="profileSrc" alt="">
-      <input type="file" ng2FileSelect [uploader]="uploader" multiple accept=".jpg, .jpeg, .png" (change)="selectedFileOnChanged($event)">
+      <input type="file" ng2FileSelect [uploader]="uploader" accept=".jpg, .jpeg, .png" (change)="selectedFileOnChanged($event)">
     </span>
     <div class="user-des">
       <p class="user-name font24 text-center">{{userInfo?.userName}}</p>
