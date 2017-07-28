@@ -17,6 +17,7 @@ export class organizationInfoComponent implements OnInit {
   userId: any;
   userInfo: any;
   isEditable = false;
+  isSubmit = false;
   orgViewInfo = [
     {label: '组织名称', formControlName: 'name', model: ''},
     {label: '联系人姓名', formControlName: 'contactName', model: ''},
@@ -55,38 +56,48 @@ export class organizationInfoComponent implements OnInit {
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.createForm();
+    if (this.userId) {
+      this.httpService.getUserInfo(this.userId)
+        .then(res => {
+          this.infoProcessing(res);
+        });
+    }
     this.getUserInfo();
   }
 
   // 获取用户信息
   getUserInfo() {
-    if (!this.userId) { return; }
-    this.httpService.getUserInfo(this.userId)
-      .then(res => {
-      this.userInfo = res;
-      if (!this.userInfo.hasOwnProperty('orgName')) {
-        this.orgViewInfo.forEach(item => {
-          item['model'] = this.userInfo[item.formControlName];
-          if (item.formControlName === 'name') {
-            item.model = this.userInfo['orgName'];
-          }
-          item['edit'] = true;
-        });
-        this.isEditable = true;
-      } else {
-        this.orgViewInfo.forEach(item => {
-          item['model'] = this.userInfo[item.formControlName];
-          if (item.formControlName === 'name') {
-            item.model = this.userInfo['orgName'];
-          }
-          item['edit'] = false;
-        });
+    this.commonService.getUserInfo().subscribe(e => {
+      if (e.userInfo) {
+        this.infoProcessing(e.userInfo);
       }
     });
   }
 
+  infoProcessing(data) {
+    this.userInfo = data;
+    if (!this.userInfo.hasOwnProperty('orgName')) {
+      this.orgViewInfo.forEach(item => {
+        item['model'] = this.userInfo[item.formControlName];
+        if (item.formControlName === 'name') {
+          item.model = this.userInfo['orgName'];
+        }
+        item['edit'] = true;
+      });
+      this.isEditable = true;
+    } else {
+      this.orgViewInfo.forEach(item => {
+        item['model'] = this.userInfo[item.formControlName];
+        if (item.formControlName === 'name') {
+          item.model = this.userInfo['orgName'];
+        }
+        item['edit'] = false;
+      });
+    }
+  }
   // 提交组织认证
   submitOrganization(isVerify) {
+    this.isSubmit = true;
     const form = this.organizationForm;
     for (const mess in this.orgFormError) {
       if (this.orgFormError.hasOwnProperty(mess)) {

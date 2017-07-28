@@ -3,7 +3,7 @@
     <div class="clearfix">
       <h3 class="product-name">{{productDetail.name}}</h3>
       <div class="data-info clear row">
-        <span class="firmlogo"><img [src]="productDetail?.logoFilePath ? productDetail.logoFilePath : './assets/images/product-logo-default.png'"></span>
+        <span class="firmlogo"><img [src]="'./assets/images/product-logo-default.png'"></span>
         <ul class="firm-detail clearfix">
           <li>数据供应商：{{productDetail.orgName}}</li>
           <li>官方网址：<a [href]="productDetail.webSite" target="_blank">{{productDetail.webSite}}</a></li>
@@ -28,7 +28,7 @@
             </ul>
           </li>
         </ul>
-        <p class="no-comment" *ngIf="!productDetail['tags']?.length">暂无标签</p>
+        <p class="" *ngIf="!productDetail['tags']?.length">暂无标签</p>
       </div>
     </div>
 

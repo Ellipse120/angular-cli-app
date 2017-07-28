@@ -10,6 +10,10 @@
   font-size: 16px;
   padding-left: 10px;
 }
+/*修改资料*/
+.modify-psd input[type=password]{
+  border-radius: 0;
+}
 /*个人资料*/
 .user-base-info .edit-wrapper{
   height: 40px;
@@ -32,7 +36,7 @@
   border: 2px solid #efefef;
   line-height: 30px;
 }
-.user-info-list .ng-invalid{
+.user-info-list .ng-invalid.submit{
   border-color: #ec7c45;
 }
 .user-info-list input[disabled]{
@@ -116,6 +120,9 @@
 }
 
 /*认证*/
+.identify .form-control{
+  padding: 5px 12px;
+}
 .identify .input-group{
   display: flex;
   padding: 0 15px;

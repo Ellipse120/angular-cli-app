@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
 import {ProductErrorService} from '../../product-mangement/error-correct/product-error.service';
 import {CookieService} from 'ngx-cookie';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -37,6 +38,7 @@ export class ProductErrataComponent implements OnInit {
 
   constructor(public service: ProductErrorService,
               private cookie: CookieService,
+              private location: Location,
               private router: Router,
               private route: ActivatedRoute) {
   }
@@ -68,7 +70,7 @@ export class ProductErrataComponent implements OnInit {
   }
 
   editProductError(row) {
-    this.router.navigate(['../edit', row.productId], {relativeTo: this.route});
+    this.router.navigate(['../edit', {productId: row.productId, type: 2}], {relativeTo: this.route});
     return false;
   }
 

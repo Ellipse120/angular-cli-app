@@ -45,7 +45,7 @@ const productManageChild: Routes = [
     component: ProductErrataComponent
   },
   {
-    path: 'edit/:productId',
+    path: 'edit',
     component: ProductImportComponent
   }
 ];

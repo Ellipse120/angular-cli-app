@@ -51,6 +51,9 @@ export class ReLoginComponent implements OnInit {
     this.isLogin = this.cookie.getObject('yslUserInfo');
     this.commonService.getLoginStatus().subscribe(data => {
       this.isLogin = data.loginStatus;
+      if (this.isLogin) {
+        this.router.navigate(['userCenter']);
+      }
     });
   }
 

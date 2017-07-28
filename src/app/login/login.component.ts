@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
 
   // 提交登录
   loginSubmit() {
+    this.cookie.remove('x-access-token');
     if (!this.loginForm) { return; }
     this.isLoginSubmit = true;
     const form = this.loginForm;

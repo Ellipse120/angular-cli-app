@@ -69,7 +69,7 @@ export class ProductListService {
       this.http.put(this.yslHttpservice.url + 'api/product/' + option.productId, option, {
         headers: new Headers({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       })
         .toPromise()
         .then(res => resolve(res), error => reject(error));

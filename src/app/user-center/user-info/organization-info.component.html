@@ -1,6 +1,6 @@
 <div class="organization-info inner-cont">
-  <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a
-    routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
+  <!--<div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a-->
+    <!--routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>-->
   <div class="my-user-base-info">
   <!--<div class="before-verify" *ngIf="userInfo?.userType == '10'">-->
   <div class="before-verify" *ngIf="false">
@@ -58,14 +58,12 @@
   <div class="after-verify">
 
     <div class="my-user-base-info">
-    <div class="user-edit" style="padding-top: 10px;">
+    <div class="user-edit" style="padding-top: 10px;" *ngIf="userInfo?.orgName">
       <form [formGroup]="organizationForm" class="user-info-list">
         <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
         <div class="info-item row" *ngFor="let o of orgViewInfo">
-          <span class="user-tag col-xs-5">{{o.label}}</span>
-          <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"
-                                                                              [formControlName]="o.formControlName"
-                                                                              *ngIf="o?.edit"></p>
+          <span class="user-tag col-xs-5">{{o.label}} <i class="color-red" *ngIf="isEditable">*</i></span>
+          <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"  [class.submit]="isSubmit" [formControlName]="o.formControlName" *ngIf="o?.edit"></p>
         </div>
         <div class="ysl-btn-group row" style="margin:10px;padding-bottom: 20px;">
 
@@ -75,12 +73,32 @@
           </div>
 
           <div class="col-xs-6 col-md-6 col-lg-6">
-            <button class="btn btn-default" style="background-color: #eee;float:left;" (click)="cancel()">取消</button>
+            <button class="btn btn-default" style="background-color: #eee;float:left;" *ngIf="isEditable" (click)="cancel()">取消</button>
           </div>
 
         </div>
       </form>
     </div>
+      <div class="user-edit" style="padding-top: 10px;" *ngIf="!(userInfo?.orgName)">
+        <form [formGroup]="organizationForm" class="user-info-list">
+          <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
+          <div class="info-item row" *ngFor="let o of orgViewInfo">
+            <span class="user-tag col-xs-5">{{o.label}}<i class="color-red">*</i></span>
+            <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span>
+              <input type="text" [class.submit]="isSubmit" [formControlName]="o.formControlName" *ngIf="o?.edit"></p>
+          </div>
+          <div class="ysl-btn-group row" style="margin:10px;padding-bottom: 20px;">
+
+            <div class="col-xs-6 col-md-6 col-lg-6">
+              <button class="btn btn-info" style="background-color: #39baf6;float:right;" *ngIf="!isEditable" (click)="editable()">修改</button>
+              <button class="btn btn-info" style="background-color: #39baf6; float:right;" *ngIf="isEditable" (click)="submitOrganization(0)">保存</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+
     </div>
 
   </div>
