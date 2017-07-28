@@ -58,7 +58,7 @@
   <div class="after-verify">
 
     <div class="my-user-base-info">
-    <div class="user-edit" style="padding-top: 10px;">
+    <div class="user-edit" style="padding-top: 10px;" *ngIf="userInfo?.orgName">
       <form [formGroup]="organizationForm" class="user-info-list">
         <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
         <div class="info-item row" *ngFor="let o of orgViewInfo">
@@ -75,12 +75,34 @@
           </div>
 
           <div class="col-xs-6 col-md-6 col-lg-6">
-            <button class="btn btn-default" style="background-color: #eee;float:left;" (click)="cancel()">取消</button>
+            <button class="btn btn-default" style="background-color: #eee;float:left;" *ngIf="isEditable" (click)="cancel()">取消</button>
           </div>
 
         </div>
       </form>
     </div>
+
+      <div class="user-edit" style="padding-top: 10px;" *ngIf="!(userInfo?.orgName)">
+        <form [formGroup]="organizationForm" class="user-info-list">
+          <!--<div class="info-item row" *ngFor="let o of orgViewInfo"  style="background-color: #F5F8F7;padding: 0;margin-bottom: 5px;">-->
+          <div class="info-item row" *ngFor="let o of orgViewInfo">
+            <span class="user-tag col-xs-5">{{o.label}}</span>
+            <p class="col-xs-7"><span *ngIf="!o?.edit">{{o.model}}</span><input type="text"
+                                                                                [formControlName]="o.formControlName"
+                                                                                *ngIf="o?.edit"></p>
+          </div>
+          <div class="ysl-btn-group row" style="margin:10px;padding-bottom: 20px;">
+
+            <div class="col-xs-6 col-md-6 col-lg-6">
+              <button class="btn btn-info" style="background-color: #39baf6;float:right;" *ngIf="!isEditable" (click)="editable()">修改</button>
+              <button class="btn btn-info" style="background-color: #39baf6; float:right;" *ngIf="isEditable" (click)="submitOrganization(0)">保存</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+
     </div>
 
   </div>
