@@ -10,8 +10,9 @@ import {OperationProductErrataComponent} from 'app/operation-management/product-
 import {OperationProductAddComponent} from './product-management/product-add.component';
 import {UserAddComponent} from './user-management/user-add.component';
 import {UserListComponent} from './user-management/user-list.component';
-import {UserInfoComponent} from "app/operation-management/user-management/user-info.component";
-import {AuthGuardService} from "../core/serve/auth-guard.service";
+import {UserInfoComponent} from 'app/operation-management/user-management/user-info.component';
+import {AuthGuardService} from '../core/serve/auth-guard.service';
+import {OperationAuthGuardService} from '../core/serve/operation-auth-guard.service';
 
 
 const operationProductChildRouters: Routes = [
@@ -88,7 +89,7 @@ const operationRouters = [
   {
     path: 'operation',
     component: OperationManagementComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService, OperationAuthGuardService],
     children: operationChildRouters
   }
 ];

@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
-import {YslHttpService} from '../ysl-http.service';
 import {YslCommonService} from '../ysl-common.service';
 import {MdSnackBar} from '@angular/material';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class OperationAuthGuardService implements CanActivate {
 
-  userId: any;
+  userInfo: any;
   constructor(private cookie: CookieService,
               private commonService: YslCommonService,
               private router: Router,
               public snackBar: MdSnackBar) {
-    this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo') : null;
     this.getLoginStatus();
   }
 
   getLoginStatus() {
     this.commonService.getLoginStatus().subscribe(e => {
-      if (e.loginStatus) { this.userId = e.userInfo['id']; }
+      if (e.loginStatus) { this.userInfo = e.userInfo; }
     });
   }
 
   canActivate() {
-    if (this.userId) { return true; }
-    this.snackBar.open('您未登录，请先登录', '', {
+    const userType = this.userInfo ? (this.userInfo['userType'] + '') : undefined;
+    if (userType === '30') { return true; }
+    this.snackBar.open('没有权限访问', '', {
       duration: 2000,
       extraClasses: ['ysl-snack-bar']
     });
-    this.router.navigate(['re-login']);
+    this.router.navigate(['userCenter']);
     return false;
   }
+
 }

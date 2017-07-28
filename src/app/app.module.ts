@@ -39,7 +39,8 @@ import {SearchHistoryComponent} from './search/search-input/search-history.compo
 import { VerifySuccessComponent } from './register/verify-success.component';
 import { VerifyFailureComponent } from './register/verify-failure.component';
 import { ReLoginComponent } from './login/re-login.component';
-import {AuthGuardService} from "./core/serve/auth-guard.service";
+import {AuthGuardService} from './core/serve/auth-guard.service';
+import {OperationAuthGuardService} from './core/serve/operation-auth-guard.service';
 
 
 const ueditorPath = {
@@ -99,7 +100,8 @@ const ueditorPath = {
     YslCommonService,
     SearchService,
     ProductListService,
-    AuthGuardService
+    AuthGuardService,
+    OperationAuthGuardService
   ],
   bootstrap: [AppComponent]
 })
