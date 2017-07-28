@@ -90,10 +90,10 @@ export class ProductListService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log('an error occurred.', error);
+    console.log('an error occurred:', error);
 
     if (error['_body']['errorCode'] === 2002) {
-        this.commonService.loginTimeout();
+        this.commonService.loginTimeout(error);
     }
 
     return Promise.reject(error.message || error);
