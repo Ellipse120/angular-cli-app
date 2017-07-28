@@ -1,6 +1,6 @@
 <div class="organization-info inner-cont">
-  <div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a
-    routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>
+  <!--<div class="text-center" *ngIf="userInfo?.userType == '1' || userInfo?.userType == '2'">请先绑定手机，再完善组织信息&nbsp;<a-->
+    <!--routerLink="/userCenter/userInfo/userVerify">立即绑定</a></div>-->
   <div class="my-user-base-info">
   <!--<div class="before-verify" *ngIf="userInfo?.userType == '10'">-->
   <div class="before-verify" *ngIf="false">
@@ -74,7 +74,7 @@
             <button class="btn btn-info" style="background-color: #39baf6; float:right;" *ngIf="isEditable" (click)="submitOrganization(0)">保存</button>
           </div>
 
-          <div class="col-xs-6 col-md-6 col-lg-6">
+          <div class="col-xs-6 col-md-6 col-lg-6" *ngIf="isEditable">
             <button class="btn btn-default" style="background-color: #eee;float:left;" (click)="cancel()">取消</button>
           </div>
 
