@@ -7,6 +7,7 @@ import {CookieService} from 'ngx-cookie';
 import {MdSnackBar} from '@angular/material';
 import {isNullOrUndefined} from 'util';
 import {FileUploader} from 'ng2-file-upload';
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   templateUrl: './product-add.component.html',
@@ -41,6 +42,7 @@ export class OperationProductAddComponent implements OnInit {
   dataCollections = [];
   dataServices = [];
   isDisableRipple = true;
+  premiumChecked = [{text: '是', value: true, checked: false}, {text: '否', value: false, checked: false}];
 
   radioItems = [
     {value: true, viewValue: '是'},
@@ -79,6 +81,7 @@ export class OperationProductAddComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private productListService: ProductListService,
+              private commonService: YslCommonService,
               private cookie: CookieService,
               private snackbar: MdSnackBar) {
   }
@@ -93,6 +96,13 @@ export class OperationProductAddComponent implements OnInit {
         this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
           .subscribe(data => {
             this.product = data;
+            if (data.premium) {
+              this.product.premium = 'true';
+              this.premiumChecked[0].checked = true;
+            } else {
+              this.product.premium = 'false';
+              this.premiumChecked[1].checked = true;
+            }
 
             const a = !isNullOrUndefined(this.product.dataSince) ? new Date(this.product.dataSince) : new Date();
             const b = !isNullOrUndefined(this.product.dataUntil) ? new Date(this.product.dataUntil) : new Date();
@@ -207,6 +217,21 @@ export class OperationProductAddComponent implements OnInit {
     });
   }
 
+  transRadio2(ind) {
+    this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
+    if (this.premiumChecked[ind]['checked']) {
+      this.premiumChecked.forEach(item => {
+        item['checked'] = false;
+        this.premiumChecked[ind]['checked'] = true;
+        if (item.checked) {
+          this.product.premium = 'false';
+        } else {
+          this.product.premium = 'true';
+        }
+      });
+    }
+  }
+
   doProductSubmit(): any {
     this.proTagImport();
     this.product.userId = this.userInfo;
@@ -221,6 +246,8 @@ export class OperationProductAddComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
           }, 2500);
+        }, error => {
+          this.commonService.loginTimeout(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
@@ -236,6 +263,8 @@ export class OperationProductAddComponent implements OnInit {
               this.router.navigate(['../errata'], {relativeTo: this.route});
             }
           }, 2500);
+        }, error => {
+          this.commonService.loginTimeout(error);
         });
     }
   }

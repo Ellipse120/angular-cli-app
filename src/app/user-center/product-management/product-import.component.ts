@@ -40,6 +40,8 @@ export class ProductImportComponent implements OnInit {
   dataCollections = [];
   dataServices = [];
   isDisableRipple = true;
+  checked = false;
+  premiumChecked = [{text: '是', value: true, checked: false}, {text: '否', value: false, checked: false}];
 
   radioItems = [
     {value: true, viewValue: '是'},
@@ -52,22 +54,9 @@ export class ProductImportComponent implements OnInit {
 
   model: Object = {date: {year: 2017, month: 6, day: 22}};
 
-  today: Date = new Date();
-  timeFrom: Object = {
-    date: {
-      year: this.today.getFullYear(),
-      month: this.today.getMonth() + 1,
-      day: this.today.getDate()
-    }
-  };
+  timeFrom: Object = {};
 
-  timeTo: Object = {
-    date: {
-      year: this.today.getFullYear(),
-      month: this.today.getMonth() + 1,
-      day: this.today.getDate()
-    }
-  };
+  timeTo: Object = {};
 
   userInfo;
   pattern = '[^,，。;；]+$';
@@ -90,25 +79,37 @@ export class ProductImportComponent implements OnInit {
       this.uploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
       this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
         .subscribe(data => {
+          if (data.premium) {
+            this.product.premium = 'true';
+            this.premiumChecked[0].checked = true;
+          } else {
+            this.product.premium = 'false';
+            this.premiumChecked[1].checked = true;
+          }
           this.product = data;
 
-          const a = new Date(this.product.dataSince);
-          const b = new Date(this.product.dataUntil);
+          if (!this.product.dataSince && !this.product.dataUntil) {
+            this.timeFrom = {};
+            this.timeFrom = {};
+          } else {
+            const a = new Date(this.product.dataSince);
+            const b = new Date(this.product.dataUntil);
 
-          this.timeFrom = {
-            date: {
-              year: a.getFullYear(),
-              month: a.getMonth() + 1,
-              day: a.getDate()
-            }
-          };
-          this.timeTo = {
-            date: {
-              year: b.getFullYear(),
-              month: b.getMonth() + 1,
-              day: b.getDate()
-            }
-          };
+            this.timeFrom = {
+              date: {
+                year: a.getFullYear(),
+                month: a.getMonth() + 1,
+                day: a.getDate()
+              }
+            };
+            this.timeTo = {
+              date: {
+                year: b.getFullYear(),
+                month: b.getMonth() + 1,
+                day: b.getDate()
+              }
+            };
+          }
         });
     }
 
@@ -167,6 +168,21 @@ export class ProductImportComponent implements OnInit {
     });
     return ret;
   }
+
+  transRadio2(ind) {
+  this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
+  if (this.premiumChecked[ind]['checked']) {
+    this.premiumChecked.forEach(item => {
+      item['checked'] = false;
+      this.premiumChecked[ind]['checked'] = true;
+      if (item.checked) {
+        this.product.premium = 'false';
+      } else {
+        this.product.premium = 'true';
+      }
+    });
+  }
+}
 
   doProductSubmit(): any {
     this.product.userId = this.userInfo;

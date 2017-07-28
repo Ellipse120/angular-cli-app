@@ -99,11 +99,11 @@ export class ProductListComponent implements OnInit {
         data.items.forEach(item => {
           switch (item.status) {
             case 1: {
-              item.statusText = '注册';
+              item.statusText = '待发布';
               break;
             }
             case 2: {
-              item.statusText = '激活';
+              item.statusText = '已发布';
               break;
             }
             case 3: {
@@ -119,6 +119,8 @@ export class ProductListComponent implements OnInit {
 
         this.count = data.totalLength;
 
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
     }
   }
@@ -217,7 +219,6 @@ export class ProductListComponent implements OnInit {
     this.pagingOption.offset = (e - 1) * 10;
     this.pagingOption.userId = this.userInfo.id;
     this.getProducts();
-
   }
 
   doProductsSort(event) {

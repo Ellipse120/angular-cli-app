@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../core/ysl-http.service';
+import {MdSnackBar} from "@angular/material";
+import {Router} from "@angular/router";
+import {YslCommonService} from "../core/ysl-common.service";
 
 @Component({
   selector: 'app-operation-management',
@@ -30,10 +33,28 @@ export class OperationManagementComponent implements OnInit {
     {text: '运营报告', path: 'operationalReport'}
   ];
 
-  constructor(private cookie: CookieService, private httpService: YslHttpService) {}
+  constructor(private cookie: CookieService,
+              private httpService: YslHttpService,
+              private commonService: YslCommonService,
+              public snackBar: MdSnackBar,
+              private router: Router) {}
 
   ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
+    this.commonService.getLoginStatus().subscribe(data => {
+      if (data.loginStatus) {
+        this.userId = data.loginStatus['userInfo']['id'];
+      }
+    });
+    if (!this.userId) {
+      this.snackBar.open('您未登录，请先登录', '', {
+        duration: 2000,
+        extraClasses: ['ysl-snack-bar']
+      });
+      setTimeout(() => {
+        this.router.navigate(['re-login']);
+      });
+    }
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.userInfo = res;

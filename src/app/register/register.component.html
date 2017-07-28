@@ -6,16 +6,16 @@
         <label class="sr-only"></label>
         <div>
           <div class="input-group col-xs-12">
-            <span class="input-group-addon"><i class="fa fa-phone"></i>&nbsp;手机号</span>
+            <span class="input-group-addon visible-sm"><i class="fa fa-phone"></i>&nbsp;手机号</span>
             <input type="tel" class="form-control" formControlName="phone" required placeholder="请输入您的手机号,可用于登录" aria-describedby="basic-addon1">
           </div>
           <div class="input-group col-xs-12">
-            <span class="input-group-addon"><i class="fa fa-envelope-square"></i>&nbsp;验证码</span>
+            <span class="input-group-addon visible-sm"><i class="fa fa-envelope-square"></i>&nbsp;验证码</span>
             <input type="text" class="form-control" style="width: auto;" formControlName="smsCode" required placeholder="请输入验证码">
             <button type="button" class="btn" style="float: right;" [class.disabled]="isBtnDisabled" (click)="getValidateCode()" [disabled]="isBtnDisabled">{{btnContent}}</button>
           </div>
           <div class="input-group col-xs-12">
-            <span class="input-group-addon"><i class="fa fa-key"></i>&nbsp;&nbsp;&nbsp;&nbsp;密码</span>
+            <span class="input-group-addon visible-sm"><i class="fa fa-key"></i>&nbsp;&nbsp;&nbsp;&nbsp;密码</span>
             <input type="password" class="form-control" formControlName="password" required placeholder="请设置长度大于8位的登录密码" aria-describedby="basic-addon1">
           </div>
         </div>

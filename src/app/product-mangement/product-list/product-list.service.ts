@@ -16,6 +16,7 @@ export class ProductListService {
     devApi: 'http://localhost:1337/192.168.19.20:8080/ysl-ws/api/product'
   };
   userId: any;
+  str = 'test';
 
   constructor(private http: Http,
               private yslHttpservice: YslHttpService,
@@ -96,10 +97,6 @@ export class ProductListService {
     }
 
     return Promise.reject(error.message || error);
-  }
-
-  private handleErrorO(error) {
-    return Observable.throw(error);
   }
 
 }

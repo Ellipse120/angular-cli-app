@@ -66,10 +66,12 @@ export class DataDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserId();
-    this.productParams = this.route.snapshot.params;
-    this.getProductDetail(this.productParams.productId);
-    this.searchService.loginSuccessEvent.subscribe(() => {
-      this.getUserId();
+    this.route.params.subscribe(e => {
+      this.productParams = e;
+      this.getProductDetail(this.productParams.productId);
+    });
+    this.commonService.getLoginStatus().subscribe((data) => {
+      this.userId = data.loginStatus ? data['userInfo']['id'] : undefined;
     });
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
@@ -112,28 +114,28 @@ export class DataDetailComponent implements OnInit {
                 switch (key) {
                   case 'data_category':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['dataCategory'] === item.entryCode) {
+                      if (this.productDetail['dataCategory'] === (item.entryCode - 0)) {
                         this.productDetail['dataCategory'] = item.entryValue;
                       }
                     });
                     break;
                   case 'data_collection':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['collectionMethod'] === item.entryCode) {
+                      if (this.productDetail['collectionMethod'] === (item.entryCode - 0)) {
                         this.productDetail['collectionMethod'] = item.entryValue;
                       }
                     });
                     break;
                   case 'data_service':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['serviceMethod'] === item.entryCode) {
+                      if (this.productDetail['serviceMethod'] === (item.entryCode - 0)) {
                         this.productDetail['serviceMethod'] = item.entryValue;
                       }
                     });
                     break;
                   case 'data_source':
                     advancedKey[key].forEach(item => {
-                      if (this.productDetail['dataSource'] === item.entryCode) {
+                      if (this.productDetail['dataSource'] === (item.entryCode - 0)) {
                         this.productDetail['dataSource'] = item.entryValue;
                       }
                     });
@@ -200,6 +202,8 @@ export class DataDetailComponent implements OnInit {
       .then(res => {
         this.favoredCount = res['favoredCount'];
         this.isThumbsUp = res['favor'];
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -223,7 +227,10 @@ export class DataDetailComponent implements OnInit {
     this.searchService.errataInfo = {productId: this.productParams.productId, userId: this.userId, status: this.productDetail.status};
     this.yslPopup.toggle(ProductErrataComponent)
       .then(data => {
-        console.log('errata', data);
+        this.snackBar.open('纠错提交成功', '', {
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
+        });
       });
   }
 
@@ -256,6 +263,8 @@ export class DataDetailComponent implements OnInit {
         });
         this.productComment['items'] = [];
         this.getComment();
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -315,7 +324,6 @@ export class DataDetailComponent implements OnInit {
       return;
     }
     const isShow = this.productComment['items'][ind]['showSecond'];
-    console.log('form', this.productComment);
     this.productComment['items'].forEach(item => {
       if (isShow) {
         item.showSecond = false;
@@ -336,13 +344,14 @@ export class DataDetailComponent implements OnInit {
       .then(res => {
         this.productComment['items'][ind]['showSecond'] = false;
         this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination}).then(data => {
-          console.log('reply', data['items'], common);
           data['items'].forEach(com => {
             if (com['id'] === common['id']) {
               this.productComment['items'][ind]['items'] = com['items'];
             }
           });
         });
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
   }
 
@@ -366,6 +375,8 @@ export class DataDetailComponent implements OnInit {
         userId: this.userId
       }).subscribe(data => {
         this.getUserProp();
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
     } else {
       this.service.updateFavorite({
@@ -374,6 +385,8 @@ export class DataDetailComponent implements OnInit {
         userId: this.userId
       }).subscribe( () => {
          this.getUserProp();
+      }, error => {
+        this.commonService.loginTimeout(error);
       });
     }
   }

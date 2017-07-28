@@ -2,6 +2,7 @@
 import {Component, EventEmitter} from "@angular/core";
 import {YslHttpService} from "../../../core/ysl-http.service";
 import {SearchService} from "../../search.service";
+import {YslCommonService} from "../../../core/ysl-common.service";
 @Component({
   template: `<div class="errata-write">
         <textarea autofocus="autofocus" placeholder="请填写问题描述" class="no-border error-area" [(ngModel)]="errataRemark"></textarea>
@@ -10,6 +11,7 @@ import {SearchService} from "../../search.service";
   styles:[`
       :host{
         position: absolute;
+        width: 60%;
         right: 0;
         top: 42px;
         box-shadow: 0 0 12px #eee;
@@ -17,7 +19,7 @@ import {SearchService} from "../../search.service";
         z-index: 1;
       }
       .errata-write{
-        width: 450px;
+        width: 100%;
         height: 135px;
         padding: 20px;
         background-color: #fff;
@@ -58,6 +60,11 @@ import {SearchService} from "../../search.service";
         border-radius:5px;
         cursor: pointer;
       }
+    @media screen and (max-width: 768px) {
+      :host{
+        width: 90%;
+      }
+    }
   `]
 })
 
@@ -65,22 +72,21 @@ export class ProductErrataComponent {
   errataRemark: string;
   popupClose = new EventEmitter<any>();
 
-  constructor(private service: YslHttpService, private searchService: SearchService) {}
+  constructor(private service: YslHttpService, private searchService: SearchService, private commonService: YslCommonService) {}
   // submitErrata() {
   //   this.popupClose.emit({data: this.errataRemark})
   // }
 
   // 纠错
   submitErrata() {
-    let data = this.searchService.errataInfo;
-    console.log('纠错 errata', this.searchService.errataInfo)
-    if ((!this.errataRemark) || (!data.userId)) { return }
-    let option = {productId: data.productId, data: {userId: data.userId, status: data.status, comment: this.errataRemark}};
-    console.log('remark', option)
+    const data = this.searchService.errataInfo;
+    if ((!this.errataRemark) || (!data.userId)) { return; }
+    const option = {productId: data.productId, data: {userId: data.userId, status: data.status, comment: this.errataRemark}};
     this.service.createProductErrata(option)
       .then(res => {
-        console.log('纠错成功', res)
-        this.popupClose.emit()
-      })
+        this.popupClose.emit();
+      }, error => {
+        this.commonService.loginTimeout(error);
+      });
   }
 }

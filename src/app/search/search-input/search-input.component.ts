@@ -67,7 +67,7 @@ export class SearchInputComponent implements OnInit {
 
   // 关键字搜索
   keywordSubmit() {
-    this.searchService.keywordSearch.emit(this.keywordSearchForm.value);
+    this.searchService.keywordSearch.emit({keyword: this.keywordSearchForm.value['keyword'], offset: 0});
     const navigationExtras: NavigationExtras = {
       queryParams: this.keywordSearchForm.value
     };

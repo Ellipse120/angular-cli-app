@@ -31,8 +31,8 @@ export class SearchHistoryComponent implements OnInit {
 
   // 按历史关键字搜索
   searchByHistory(key) {
-    this.eventEmit.changeKeyword.emit({keyword: key});
-    this.eventEmit.keywordSearch.emit({keyword: key});
+    this.eventEmit.changeKeyword.emit({keyword: key, offset: 0});
+    this.eventEmit.keywordSearch.emit({keyword: key, offset: 0});
     const navigationExtras: NavigationExtras = {
       queryParams: {keyword: key}
     };
