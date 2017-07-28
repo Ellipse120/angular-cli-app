@@ -75,24 +75,23 @@ export class NameCertifyComponent implements OnInit {
       this.individualFormError.tel = '请输入手机号';
       return;
     }
-    this.timer = setInterval(() => {
-      this.btnContent = this.countNum + '秒后重新发送';
-      this.countNum--;
-      this.isBtnDisabled = true;
-      if (this.countNum <= 0) {
-        clearInterval(this.timer);
-        this.countNum = 59;
-        this.btnContent = '发送验证码';
-        this.isBtnDisabled = false;
-      }
-    }, 1000);
-
     this.httpService.getValidateCode(form.value['tel'])
       .then(res => {
         this.snackBar.open('验证码发送成功', '', {
           duration: 3000,
           extraClasses: ['ysl-snack-bar']
         });
+        this.timer = setInterval(() => {
+          this.btnContent = this.countNum + '秒后重新发送';
+          this.countNum--;
+          this.isBtnDisabled = true;
+          if (this.countNum <= 0) {
+            clearInterval(this.timer);
+            this.countNum = 59;
+            this.btnContent = '发送验证码';
+            this.isBtnDisabled = false;
+          }
+        }, 1000);
       }, error => {
         const body = JSON.parse(error._body);
         this.snackBar.open(body.errorMessage, '', {
