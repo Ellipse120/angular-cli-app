@@ -143,14 +143,11 @@
   position: relative;
 }
 .find-result .curr-tag-list .remove-tag{
-  color: #288dec;
+  color: #ff4307;
   position: absolute;
   right: 4px;
   top: -1px;
   cursor: pointer;
-}
-.find-result .curr-tag-list .remove-tag:hover{
-  color: #ff4307;
 }
 .find-result .filter{
   display: flex;

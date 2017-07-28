@@ -28,7 +28,7 @@
             </ul>
           </li>
         </ul>
-        <p *ngIf="!productDetail['tags']?.length">无</p>
+        <p class="no-comment" *ngIf="!productDetail['tags']?.length">暂无标签</p>
       </div>
     </div>
 
@@ -124,7 +124,7 @@
   <div class="detail-right col-lg-3 col-xs-12">
     <p>评分</p>
     <div class="star-score">
-      <span *ngIf="!productDetail.averageScore">暂无评分</span>
+      <span class="no-comment" *ngIf="!productDetail.averageScore">暂无评分</span>
       <ul class="stars-list clearfix" *ngIf="productDetail.averageScore">
         <li *ngFor="let s of averageScore; let i = index;"><i class="fa" [class.fa-star-o]="(i+1)>productDetail.averageScore" [class.fa-star]="((i+1) < productDetail.averageScore) || ((i+1) == productDetail.averageScore)" [class.fa-star-half-o]="(i+1)>productDetail.averageScore && i < productDetail.averageScore"></i></li>
       </ul>
@@ -144,7 +144,7 @@
 
     <div class="relative-pro">
       <p>相关产品</p>
-      <p *ngIf="!relatedProductList?.length">暂无相关产品</p>
+      <p class="no-comment" *ngIf="!relatedProductList?.length">暂无相关产品</p>
       <ul class="relative-pro-list font12" *ngIf="relatedProductList?.length">
         <li *ngFor="let item of relatedProductList">
           <p (click)="relatedProductDetail(item)"><a>{{item.name}}</a></p>

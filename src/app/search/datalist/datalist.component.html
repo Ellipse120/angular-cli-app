@@ -56,7 +56,7 @@
                                                       totalItems: product.totalLength}"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
           <span class="data-content">{{item.description}}</span>
-          <div class="product-item-tags" [class.open]="item.tagOpen">
+          <div class="product-item-tags" *ngIf="item.tags && (item.tags?.length)" [class.open]="item.tagOpen">
             <ul>
               <li class="product-item-tag" *ngFor="let t of item.tags" [attr.title]="t.name"><i class="fa fa-tag"></i>{{t.name}}</li>
             </ul>
@@ -196,7 +196,7 @@
                                                       totalItems: product.totalLength}"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)">{{item.name}}</h3>
           <span class="data-content">{{item.description}}</span>
-          <div class="product-item-tags" [class.open]="item.tagOpen">
+          <div class="product-item-tags" *ngIf="item.tags && (item.tags?.length)"  [class.open]="item.tagOpen">
             <ul>
               <li class="product-item-tag" *ngFor="let t of item.tags" [attr.title]="t.name"><i class="fa fa-tag"></i>{{t.name}}</li>
             </ul>
