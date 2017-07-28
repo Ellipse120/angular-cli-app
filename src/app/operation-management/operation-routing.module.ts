@@ -11,6 +11,7 @@ import {OperationProductAddComponent} from './product-management/product-add.com
 import {UserAddComponent} from './user-management/user-add.component';
 import {UserListComponent} from './user-management/user-list.component';
 import {UserInfoComponent} from "app/operation-management/user-management/user-info.component";
+import {AuthGuardService} from "../core/serve/auth-guard.service";
 
 
 const operationProductChildRouters: Routes = [
@@ -87,6 +88,7 @@ const operationRouters = [
   {
     path: 'operation',
     component: OperationManagementComponent,
+    canActivate: [AuthGuardService],
     children: operationChildRouters
   }
 ];

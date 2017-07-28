@@ -46,15 +46,6 @@ export class OperationManagementComponent implements OnInit {
         this.userId = data['userInfo']['id'];
       }
     });
-    if (!this.userId) {
-      this.snackBar.open('您未登录，请先登录', '', {
-        duration: 2000,
-        extraClasses: ['ysl-snack-bar']
-      });
-      setTimeout(() => {
-        this.router.navigate(['re-login']);
-      });
-    }
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.userInfo = res;
