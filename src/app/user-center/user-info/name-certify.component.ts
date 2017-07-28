@@ -52,6 +52,10 @@ export class NameCertifyComponent implements OnInit {
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.userInfo = res;
+        if (this.userInfo.userContactPhone) {
+          const tel = this.userInfo.userContactPhone;
+          // this.userInfo.userContactPhone = tel.substr(0, 3) + '****' + tel.substr(7);
+        }
       });
     this.getUserInfo();
     this.createForm();

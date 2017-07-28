@@ -52,8 +52,7 @@ export class UserCenterComponent implements OnInit {
     if (this.userId) {
       this.httpService.getUserInfo(this.userId)
         .then(res => {
-          this.userInfo = res;
-          this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
+          this.infoProcessing(res);
         });
     } else {
       this.profileSrc = '../../assets/images/userDefaultAvatar.png';
@@ -64,10 +63,17 @@ export class UserCenterComponent implements OnInit {
   getUserInfo() {
     this.commonService.getUserInfo().subscribe(e => {
       if (e.userInfo) {
-        this.userInfo = e.userInfo;
-        this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
+        this.infoProcessing(e.userInfo);
       }
     });
+  }
+
+  infoProcessing(data) {
+    this.userInfo = data;
+    if (!this.userInfo.selfIntroduction) {
+      this.userInfo.selfIntroduction = '写句签名吧';
+    }
+    this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
   }
 
   // 被修改信息时更新视图

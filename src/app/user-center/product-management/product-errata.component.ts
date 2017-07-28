@@ -26,6 +26,8 @@ export class ProductErrataComponent implements OnInit {
   page = 1;
   isLoading: boolean;
 
+  isMine = true;
+
   ngOnInit(): void {
 
     this.userId = this.cookie.getObject('yslUserInfo')['id'];
@@ -45,9 +47,11 @@ export class ProductErrataComponent implements OnInit {
     if (this.router.url.split('/').pop().split('-').includes('by')) {
       params['type'] = 1;
       this.pagingOption.type = 1;
+      this.isMine = true;
     } else {
       params['type'] = 2;
       this.pagingOption.type = 2;
+      this.isMine = false;
     }
 
     this.service.list(this.pagingOption).subscribe(data => {
@@ -74,6 +78,11 @@ export class ProductErrataComponent implements OnInit {
     this.pagingOption.offset = (e - 1) * 10;
     this.pagingOption.userId = this.userId;
     this.getErrorList();
+  }
+
+
+  doViewProductDetail(item) {
+    this.router.navigate(['datadetail', {productId: item.productId}]);
   }
 
 }
