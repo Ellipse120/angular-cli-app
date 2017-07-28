@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {resource} from 'selenium-webdriver/http';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {CookieService} from 'ngx-cookie';
 import {MdSnackBar} from '@angular/material';
@@ -86,9 +85,16 @@ export class NameCertifyComponent implements OnInit {
 
     this.httpService.getValidateCode(form.value['tel'])
       .then(res => {
-        // this.snackBar.open('验证码发送成功', '', {
-        //   duration: 3000
-        // });
+        this.snackBar.open('验证码发送成功', '', {
+          duration: 3000,
+          extraClasses: ['ysl-snack-bar']
+        });
+      }, error => {
+        const body = JSON.parse(error._body);
+        this.snackBar.open(body.errorMessage, '', {
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
+        });
       });
   }
 

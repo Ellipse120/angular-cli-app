@@ -1,5 +1,6 @@
 <!--认证-->
-<div class="identify inner-cont" *ngIf="!(userInfo?.userType == 10) || !(userInfo?.userType == 2)">
+<!--<div class="identify inner-cont" *ngIf="!(userInfo?.userType == 10) || !(userInfo?.userType == 2)">-->
+<div class="identify inner-cont">
   <!--<div class="iden-type">-->
     <!--<ul class="clearfix">-->
       <!--<li *ngFor="let t of userTypeTabs; let i = index;" [class.select-type]="CurrTab == i" (click)="switchTab(i)">{{t}}</li>-->
@@ -7,7 +8,7 @@
   <!--</div>-->
   <!--个人认证-->
   <div class="my-user-base-info">
-  <div class="iden-content" *ngIf="CurrTab == 0"  style="padding-top: 10px;">
+  <div class="iden-content" *ngIf="!(userInfo?.userContactPhone)"  style="padding-top: 20px;">
     <form class="form-horizontal edit-form" [formGroup]="individualForm" novalidate>
       <!--<div class="form-group" style="padding-top: 10px;">-->
         <!--<label class="col-sm-3 col-xs-12">姓名</label>-->
@@ -54,45 +55,46 @@
     <!--<button class="ysl-btn btn-ensure" (click)="perEnsure(indexType)">确认</button>-->
   </div>
   <!--组织认证-->
-  <div class="gov-content" *ngIf="CurrTab == 1" style="padding-bottom: 10px;">
-    <form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization()" novalidate>
-      <div class="form-group">
-        <label class="col-sm-3 col-xs-12">机构名称</label>
-        <div class="col-sm-9 col-xs-12">
-          <input type="text" class="form-control" placeholder="请输入机构名称" formControlName="name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 col-xs-12">姓名</label>
-        <div class="col-sm-9 col-xs-12">
-          <input type="text" class="form-control" placeholder="请输入您的真实姓名" formControlName="contactName">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 col-xs-12">手机号</label>
-        <div class="col-sm-9 col-xs-12">
-          <input type="text" class="form-control" placeholder="请输入您的手机号" formControlName="contactPhone">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 col-xs-12">公司官网URL</label>
-        <div class="col-sm-9 col-xs-12">
-          <input type="text" class="form-control" placeholder="请输入公司官网URL" formControlName="webSite">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="sr-only"></label>
-        <div class="col-sm-offset-3 col-sm-9 col-xs-12">
-          <button class="btn btn-info" style="background-color: #39baf6">确认</button>
-        </div>
-      </div>
-    </form>
+  <!--<div class="gov-content" *ngIf="CurrTab == 1" style="padding-bottom: 10px;">-->
+    <!--<form class="form-horizontal edit-form" [formGroup]="organizationForm" (ngSubmit)="submitOrganization()" novalidate>-->
+      <!--<div class="form-group">-->
+        <!--<label class="col-sm-3 col-xs-12">机构名称</label>-->
+        <!--<div class="col-sm-9 col-xs-12">-->
+          <!--<input type="text" class="form-control" placeholder="请输入机构名称" formControlName="name">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label class="col-sm-3 col-xs-12">姓名</label>-->
+        <!--<div class="col-sm-9 col-xs-12">-->
+          <!--<input type="text" class="form-control" placeholder="请输入您的真实姓名" formControlName="contactName">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label class="col-sm-3 col-xs-12">手机号</label>-->
+        <!--<div class="col-sm-9 col-xs-12">-->
+          <!--<input type="tel" class="form-control" placeholder="请输入您的手机号" formControlName="contactPhone">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label class="col-sm-3 col-xs-12">公司官网URL</label>-->
+        <!--<div class="col-sm-9 col-xs-12">-->
+          <!--<input type="url" class="form-control" placeholder="请输入公司官网URL" formControlName="webSite">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label class="sr-only"></label>-->
+        <!--<div class="col-sm-offset-3 col-sm-9 col-xs-12">-->
+          <!--<button class="btn btn-info" style="background-color: #39baf6">确认</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</form>-->
 
-  </div>
+  <!--</div>-->
 
-  <p class="" style="padding:0 0 20px 0;text-align: center;" *ngIf="(userInfo?.userType == 10) || (userInfo?.userType == 20)">
-    您已绑定手机号
-  </p>
+  <!--<p class="" style="padding:0 0 20px 0;text-align: center;" *ngIf="(userInfo?.userType == 10) || (userInfo?.userType == 20)">-->
+    <div class="" style="text-align: center;" *ngIf="userInfo?.userContactPhone">
+      您已绑定手机号
+    </div>
   </div>
 
 </div>

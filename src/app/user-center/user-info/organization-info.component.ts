@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {CookieService} from 'ngx-cookie';
 import {YslCommonService} from '../../core/ysl-common.service';
-import {resolve} from 'url';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -65,13 +64,24 @@ export class organizationInfoComponent implements OnInit {
     this.httpService.getUserInfo(this.userId)
       .then(res => {
       this.userInfo = res;
-      this.orgViewInfo.forEach(item => {
-        item['model'] = this.userInfo[item.formControlName];
-        if (item.formControlName === 'name') {
-          item.model = this.userInfo['orgName'];
-        }
-        item['edit'] = false;
-      });
+      if (!this.userInfo.hasOwnProperty('orgName')) {
+        this.orgViewInfo.forEach(item => {
+          item['model'] = this.userInfo[item.formControlName];
+          if (item.formControlName === 'name') {
+            item.model = this.userInfo['orgName'];
+          }
+          item['edit'] = true;
+        });
+        this.isEditable = true;
+      } else {
+        this.orgViewInfo.forEach(item => {
+          item['model'] = this.userInfo[item.formControlName];
+          if (item.formControlName === 'name') {
+            item.model = this.userInfo['orgName'];
+          }
+          item['edit'] = false;
+        });
+      }
     });
   }
 
