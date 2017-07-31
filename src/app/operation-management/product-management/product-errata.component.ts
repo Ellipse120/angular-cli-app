@@ -5,7 +5,7 @@ import {isNullOrUndefined} from 'util';
 import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {LoginComponent} from '../../login/login.component';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdSnackBar} from '@angular/material';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ProductErrorService} from '../../product-mangement/error-correct/product-error.service';
 import {YslHttpService} from '../../core/ysl-http.service';
@@ -56,6 +56,7 @@ export class OperationProductErrataComponent implements OnInit {
               private httpService: YslHttpService,
               private commonService: YslCommonService,
               private dialog: MdDialog,
+              private snackbar: MdSnackBar,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -94,10 +95,10 @@ export class OperationProductErrataComponent implements OnInit {
       this.listIsNull = !this.dataItems.length;
       this.dataItems.forEach(item => {
         item.submitTime = this.commonService.getDateForDay(item.submitTime);
-        if (item.status === 2) {
-          item.statusText = '未修改';
+        if (item.status === 1) {
+          item.statusText = '未处理';
         } else {
-          item.statusText = '已修改';
+          item.statusText = '已处理';
         }
       });
     }, error => {
@@ -139,7 +140,7 @@ export class OperationProductErrataComponent implements OnInit {
     if (type === 1) {
       this.pagingOption.dateSince = time;
     } else {
-      this.pagingOption.dateSince = time;
+      this.pagingOption.dateUntil = time;
     }
     this.listError();
   }
@@ -156,6 +157,19 @@ export class OperationProductErrataComponent implements OnInit {
   // 修改产品
   processingError(product) {
     this.router.navigate(['../edit', {productId: product.productId, editType: 2}], {relativeTo: this.route});
+  }
+
+  // 更改纠错状态
+  modifyErrataStatus(product, ind) {
+    this.productErrorService.status(product['id'], 2)
+      .subscribe(resp => {
+        this.dataItems[ind]['status'] = 2;
+        this.dataItems[ind]['statusText'] = '已处理';
+        this.snackbar.open('标记成功', '', {
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
+        });
+      });
   }
 
   // 产品详情

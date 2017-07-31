@@ -371,6 +371,10 @@
   text-align: right;
   margin-right: 8px;
 }
+.operation-product-errata .ysl-btn-disabled{
+  background-color: #ddd;
+  cursor: not-allowed;
+}
 
 /*用户管理*/
 

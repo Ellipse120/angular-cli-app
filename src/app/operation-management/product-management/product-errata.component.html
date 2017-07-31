@@ -48,6 +48,7 @@
           <p class="product-name text-color-middle"><a (click)="toProductDetail(c)">{{c.productName}}</a></p>
           <div class="ysl-btn-group">
             <button class="ysl-btn ysl-btn-primary ysl-btn-xs" (click)="processingError(c)">处理</button>
+            <button class="ysl-btn ysl-btn-xs ysl-btn-primary" [class.ysl-btn-disabled]="c.status === 2" [disabled]="c.status === 2" (click)="modifyErrataStatus(c, ind)">标记为已处理</button>
           </div>
         </div>
         <p class="modify-des">修改说明：{{c.comment}}</p>

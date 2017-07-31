@@ -31,7 +31,7 @@ export class ProductErrorService {
    * @param errataId
    *    纠错记录ID
    * @param status
-   *    2表示未处理，3表示已处理
+   *    1表示未处理，2表示已处理
    * @returns {Observable<Response>}
    */
   status(errataId, status) {
@@ -41,7 +41,8 @@ export class ProductErrorService {
       {
         headers: new Headers({
           'Content-Type': 'application/json'
-        })
+        }),
+        withCredentials: true
       }
     ).map(resp => resp.text());
   }
