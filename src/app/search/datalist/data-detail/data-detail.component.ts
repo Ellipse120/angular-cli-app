@@ -263,6 +263,7 @@ export class DataDetailComponent implements OnInit {
           duration: 3000,
           extraClasses: ['ysl-snack-bar']
         });
+        this.commentRemark = '';
         this.productComment['items'] = [];
         this.getComment();
       }, error => {
