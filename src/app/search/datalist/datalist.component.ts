@@ -1,8 +1,8 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router, ActivatedRoute, Params, NavigationExtras} from '@angular/router';
 
-import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/switchMap';
 
 import {YslHttpService} from '../../core/ysl-http.service';
 import {SearchService} from "../search.service";
@@ -15,7 +15,7 @@ import {isNullOrUndefined} from "util";
 })
 export class DatalistComponent implements OnInit {
 
-  @ViewChild('yslSideNav') sideNav;
+
   yearSearchForm: FormGroup;
   state = false;
   isShowLoading: boolean = false;
@@ -156,6 +156,10 @@ export class DatalistComponent implements OnInit {
         })
       })
     });
+
+    setTimeout(() => {
+      // console.log('after search:',document.querySelectorAll('.product-item-tags'));
+    })
 
   }
 

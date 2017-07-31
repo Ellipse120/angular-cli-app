@@ -735,10 +735,10 @@ footer {
 }
 
 /*产品列表*/
-.dataShow .data-item h3 span{
+.dataShow .data-item h3 .highlight{
   color: #ff4307;
 }
-.dataShow .data-item .data-content span{
+.dataShow .data-item .data-content .highlight{
   color: #ff4307;
 }
 /*产品详情*/
