@@ -116,7 +116,6 @@ export class RegisterComponent implements OnInit {
         duration: 2000,
         extraClasses: ['ysl-snack-bar']
       });
-      console.log(body);
     });
   }
 
@@ -125,9 +124,12 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    // const emailExp = /((([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?/;
+    const phoneExp = /^1[34578]\\d{9}$/;
     this.registerForm = this.fb.group({
-      phone: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(phoneExp)
+      ])),
       smsCode: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
         Validators.required,
@@ -141,6 +143,10 @@ export class RegisterComponent implements OnInit {
     const form = this.registerForm;
     if (form.controls['phone'].invalid) {
       this.formErrors.phone = '请输入手机号';
+      this.snackBar.open('请输入正确格式的手机号', '', {
+        duration: 2000,
+        extraClasses: ['ysl-snack-bar']
+      });
       return;
     }
     this.service.getValidateCode(form.value['phone'])
