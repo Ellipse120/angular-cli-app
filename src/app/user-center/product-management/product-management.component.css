@@ -1,0 +1,12 @@
+.product-errata-list-a-enable {
+  float: left;
+  color: #39baf6;
+  text-decoration: none;
+}
+
+.product-errata-list-a-disable {
+  float: left;
+  color: #ddd;
+  cursor: not-allowed;
+  text-decoration: none;
+}

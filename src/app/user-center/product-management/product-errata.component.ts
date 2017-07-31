@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import {ProductErrorService} from '../../product-mangement/error-correct/product-error.service';
 import {CookieService} from 'ngx-cookie';
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   templateUrl: './product-errata.component.html',
@@ -39,6 +40,7 @@ export class ProductErrataComponent implements OnInit {
   constructor(public service: ProductErrorService,
               private cookie: CookieService,
               private location: Location,
+              private snackBar: MdSnackBar,
               private router: Router,
               private route: ActivatedRoute) {
   }
@@ -59,10 +61,10 @@ export class ProductErrataComponent implements OnInit {
     this.service.list(this.pagingOption).subscribe(data => {
       this.count = data.totalLength;
       data.items.forEach(item => {
-        if (item.status === 2) {
-          item.statusText = '未修改';
+        if (item.status === 1) {
+          item.statusText = '未处理';
         } else {
-          item.statusText = '已修改';
+          item.statusText = '已处理';
         }
       });
       this.errorLists = data.items;
@@ -85,6 +87,19 @@ export class ProductErrataComponent implements OnInit {
 
   doViewProductDetail(item) {
     this.router.navigate(['datadetail', {productId: item.productId}]);
+  }
+
+  // 更改纠错状态
+  modifyErrataStatus(product, ind) {
+    this.service.status(product['id'], 2)
+      .subscribe(resp => {
+        this.errorLists[ind]['status'] = 2;
+        this.errorLists[ind]['statusText'] = '已处理';
+        this.snackBar.open('标记处理成功', '', {
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
+        });
+      });
   }
 
 }

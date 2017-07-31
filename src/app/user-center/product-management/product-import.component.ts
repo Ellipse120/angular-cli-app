@@ -35,10 +35,10 @@ export class ProductImportComponent implements OnInit {
 
   isActive = 0;
   tagDimensionsNew = [];
-  dataSources = [];
-  dataCategories = [];
-  dataCollections = [];
-  dataServices = [];
+  dataSources = [{value: '', viewValue: '全部'}];
+  dataCategories = [{value: '', viewValue: '全部'}];
+  dataCollections = [{value: '', viewValue: '全部'}];
+  dataServices = [{value: '', viewValue: '全部'}];
   isDisableRipple = true;
   checked = false;
   editType: any;
@@ -115,7 +115,7 @@ export class ProductImportComponent implements OnInit {
             }
           });
       }
-    })
+    });
 
 
     this.service.getTagDimensions()
@@ -235,19 +235,19 @@ export class ProductImportComponent implements OnInit {
         options.forEach(option => {
           switch (option.categoryCode) {
             case 'data_category': {
-              this.dataCategories.push({value: +option.entryCode, viewValue: option.entryValue});
+              this.dataCategories.push({value: option.entryCode, viewValue: option.entryValue});
               break;
             }
             case 'data_source': {
-              this.dataSources.push({value: +option.entryCode, viewValue: option.entryValue});
+              this.dataSources.push({value: option.entryCode, viewValue: option.entryValue});
               break;
             }
             case 'data_collection': {
-              this.dataCollections.push({value: +option.entryCode, viewValue: option.entryValue});
+              this.dataCollections.push({value: option.entryCode, viewValue: option.entryValue});
               break;
             }
             case 'data_service': {
-              this.dataServices.push({value: +option.entryCode, viewValue: option.entryValue});
+              this.dataServices.push({value: option.entryCode, viewValue: option.entryValue});
               break;
             }
           }
