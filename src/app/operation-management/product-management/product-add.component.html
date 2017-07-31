@@ -10,7 +10,7 @@
                class="product-import-name"
                placeholder="名称*" style="padding-right: 40px;">
         <div align="end" style="color: #a5aaad;position: absolute;top: 31px;right: 40px;">{{name.value.length}}&nbsp;/&nbsp;32</div>
-        <span style="color: red;" *ngIf="(name.validity.patternMismatch)">名称不能为空且不要包含中英文 ，。；,.; 的逗号句号分号</span>
+        <span style="color: red;" *ngIf="(name.validity.patternMismatch)">名称不能为空且不要包含中英文 ，。；,; 的逗号句号分号</span>
       </div>
 
       <div class="product-import-item" style="position: relative;padding-bottom: 4px;">
@@ -23,9 +23,9 @@
       </div>
 
       <div class="product-import-item" style="position: relative;">
-        <span><input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite"
-                     #webSite placeholder="官网" maxlength="256"></span>
+        <span><input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite" #webSite [pattern]="websitePattern" placeholder="官网（以http://或https://开头）" maxlength="256"></span>
         <div align="end" style="color: #a5aaad;position: absolute;bottom: 20px;right: 40px;">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
+        <span style="color: red;" *ngIf="(webSite.validity.patternMismatch)">请输入正确的网址（以http://或https://开头）</span>
       </div>
 
       <div>
