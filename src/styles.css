@@ -730,6 +730,9 @@ footer {
   left: calc(100vw / 2 - 168px);
   transition: none !important;
 }
+.ysl-snack-bar .mat-simple-snackbar{
+  justify-content: center;
+}
 /*产品详情*/
 .data-detail .comment-wrapper .spinner {
   margin: 10px auto;

@@ -23,9 +23,7 @@ export class OperationProductListComponent implements OnInit {
   listIsNull: any;
   userTypes = [
     {value: 1, viewValue: '未认证用户'},
-    {value: 2, viewValue: '未认证用户'},
     {value: 10, viewValue: '认证用户'},
-    {value: 20, viewValue: '认证用户'},
     {value: 30, viewValue: '运营方用户'}
   ];
   status = [
