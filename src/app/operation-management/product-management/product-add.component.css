@@ -184,6 +184,12 @@ select {
   padding: 10px 30px;
 }
 
+.file-list-group{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
 ::-webkit-input-placeholder {
   color: #999;
 }

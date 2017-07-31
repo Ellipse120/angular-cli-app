@@ -36,6 +36,7 @@ export class OperationProductAddComponent implements OnInit {
   editType: number;
   productId: any;
   isActive = 0;
+  cancelBtn = false;
   tagDimensionsNew = [];
   dataSources = [{value: '', viewValue: '全部'}];
   dataCategories = [{value: '', viewValue: '全部'}];
@@ -151,9 +152,10 @@ export class OperationProductAddComponent implements OnInit {
     this.getSelectionOption();
   }
 
-  selectedFileChanged(event) {
-    this.sampleUploader.queue[this.sampleUploader.queue.length - 1].onSuccess = (response, status, headers) => {
+  uploadFile(ind) {
+    this.sampleUploader.queue[ind].onSuccess = (response, status, headers) => {
       if (status === 200) {
+        this.cancelBtn = true;
         if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
           const res = JSON.parse(response);
           this.product.sampleFilePath = res['sampleFilePath'];
@@ -166,7 +168,11 @@ export class OperationProductAddComponent implements OnInit {
         extraClasses: ['ysl-snack-bar']
       });
     };
-    this.sampleUploader.queue[this.sampleUploader.queue.length - 1].upload();
+    this.sampleUploader.queue[ind].upload();
+  }
+
+  cancelFile(ind) {
+    this.sampleUploader.queue[ind].remove();
   }
 
   changeTab(i) {

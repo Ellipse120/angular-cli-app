@@ -65,20 +65,29 @@
 
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
+
       <div class="product-import-item2" style="padding: 0px 30px 10px 30px;">
-        <input id="upload" ng2FileSelect type="file" name="upload"
-               [uploader]="sampleUploader" (change)="selectedFileChanged($event)">
-        <label for="upload">
-          <span *ngIf="sampleUploader?.queue?.length===0"> 上传文件&hellip;</span>
-          <span>{{sampleUploader.queue[sampleUploader.queue.length - 1]?.file?.name}}</span>
-          <span>{{sampleUploader.queue[sampleUploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>
-        </label>
+        <div class="file-list-group" *ngIf="sampleUploader?.queue?.length!==0">
+          <div class="file-info">
+            <span>{{sampleUploader.queue[sampleUploader.queue.length - 1]?.file?.name}}</span>
+            <span>{{sampleUploader.queue[sampleUploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>
+          </div>
+          <div class="ysl-btn-group" *ngIf="!cancelBtn">
+            <span class="ysl-btn ysl-btn-xs ysl-btn-primary" (click)="uploadFile(sampleUploader.queue.length - 1)">上传</span>
+            <span class="ysl-btn ysl-btn-xs btn-danger" (click)="cancelFile(sampleUploader.queue.length - 1)">取消</span>
+          </div>
+        </div>
         <div class="progress" style="margin-bottom: 0;" *ngIf="sampleUploader?.queue?.length!==0">
           <div class="progress-bar" role="progressbar"
                [ngStyle]="{ 'width': sampleUploader.queue[sampleUploader.queue.length - 1].progress + '%' }">
             {{sampleUploader.queue[this.sampleUploader.queue.length - 1].progress + '%'}}
           </div>
         </div>
+        <input id="upload" ng2FileSelect type="file" name="upload"
+               [uploader]="sampleUploader">
+        <label for="upload">
+          <span>选择文件&hellip;</span>
+        </label>
       </div>
     </div>
 

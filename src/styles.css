@@ -733,6 +733,14 @@ footer {
 .ysl-snack-bar .mat-simple-snackbar{
   justify-content: center;
 }
+
+/*产品列表*/
+.dataShow .data-item h3 span{
+  color: #ff4307;
+}
+.dataShow .data-item .data-content span{
+  color: #ff4307;
+}
 /*产品详情*/
 .data-detail .comment-wrapper .spinner {
   margin: 10px auto;
