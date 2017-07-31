@@ -264,6 +264,8 @@
 
 .product-import-item2 .mat-tab-label-active {
   color: #1c94c4;
+  background-color: rgba(197,202,233,.3);
+  opacity: 1 !important;
 }
 
 .product-import-item2 .mat-tab-header-pagination {

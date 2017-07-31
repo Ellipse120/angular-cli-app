@@ -132,7 +132,8 @@ export class YslHttpService {
       this.http.post(this.url + 'api/authentication/login', data, {
         headers: new Headers({
           'Content-Type': 'application/json'
-        })
+        }),
+        withCredentials: true
       })
         .toPromise()
         .then(response => resolve(response.json()), error => reject(error));
