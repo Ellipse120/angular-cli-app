@@ -36,7 +36,6 @@ export class OperationProductAddComponent implements OnInit {
   editType: number;
   productId: any;
   isActive = 0;
-  cancelBtn = false;
   tagDimensionsNew = [];
   dataSources = [{value: '', viewValue: '全部'}];
   dataCategories = [{value: '', viewValue: '全部'}];
@@ -152,10 +151,10 @@ export class OperationProductAddComponent implements OnInit {
     this.getSelectionOption();
   }
 
-  uploadFile(ind) {
-    this.sampleUploader.queue[ind].onSuccess = (response, status, headers) => {
+  uploadFile() {
+    const len = this.sampleUploader.queue.length;
+    this.sampleUploader.queue[len - 1].onSuccess = (response, status, headers) => {
       if (status === 200) {
-        this.cancelBtn = true;
         if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
           const res = JSON.parse(response);
           this.product.sampleFilePath = res['sampleFilePath'];
@@ -168,11 +167,11 @@ export class OperationProductAddComponent implements OnInit {
         extraClasses: ['ysl-snack-bar']
       });
     };
-    this.sampleUploader.queue[ind].upload();
+    this.sampleUploader.queue[len - 1].upload();
   }
 
-  cancelFile(ind) {
-    this.sampleUploader.queue[ind].remove();
+  cancelFile() {
+    this.sampleUploader.clearQueue();
   }
 
   changeTab(i) {
@@ -247,6 +246,9 @@ export class OperationProductAddComponent implements OnInit {
     if (this.route.routeConfig.path === 'add') {
       this.productListService.doProductImport(this.product)
         .then(res => {
+          if (this.sampleUploader.queue.length) {
+            this.uploadFile();
+          }
           this.snackbar.open('产品录入成功', '', {
             duration: 2000,
             extraClasses: ['ysl-snack-bar']
@@ -260,6 +262,9 @@ export class OperationProductAddComponent implements OnInit {
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
+          if (this.sampleUploader.queue.length) {
+            this.uploadFile();
+          }
           this.snackbar.open('产品修改成功', '', {
             duration: 2000,
             extraClasses: ['ysl-snack-bar']

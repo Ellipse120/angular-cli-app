@@ -46,7 +46,7 @@ export class DatalistComponent implements OnInit {
   tagsFilter = [{title: '', value: '', child: []}];
   selectedTagFilterO = {};
   selectedTagFilterA = [];
-  sortList = [{text: '按日期排序', value: 'modifiedOn'}, {text: '按热度排序', value: 'viewedCount'}];
+  sortList = [{text: '按相关度排序', value: ''}, {text: '按日期排序', value: 'modifiedOn'}, {text: '按热度排序', value: 'viewedCount'}];
   currSortItem = this.sortList[0];
   currPage: any;
 
