@@ -92,6 +92,12 @@
   border-radius: 5px;
 }
 
+.file-list-group{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
 select {
   width: 120px;
 }

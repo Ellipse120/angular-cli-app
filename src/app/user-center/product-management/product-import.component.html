@@ -22,8 +22,9 @@
 
       <div class="product-import-item" style="position: relative;">
         <span><input type="text" id="webSite" [(ngModel)]="product.webSite" name="webSite" class="product-webSite"
-                     #webSite placeholder="官网" maxlength="256"></span>
+                     #webSite placeholder="官网（以http://或https://开头）" [pattern]="websitePattern" maxlength="256"></span>
         <div class="word-count-description">{{webSite.value.length}}&nbsp;/&nbsp;256</div>
+        <span style="color: red;" *ngIf="(webSite.validity.patternMismatch)">请输入正确的网址（以http://或https://开头）</span>
       </div>
 
       <div>
@@ -63,21 +64,38 @@
 
     <div class="product-import-info">
       <p class="product-info">数据样本</p>
-      <div class="product-import-item2" style="padding: 0 30px 10px 30px;">
-        <input id="upload" ng2FileSelect type="file" name="upload" [uploader]="uploader"
-               (change)="selectedFileChange($event)">
-        <label for="upload">
-          <span *ngIf="uploader?.queue?.length===0"> 上传文件&hellip;</span>
-          <span>{{uploader.queue[uploader.queue.length - 1]?.file?.name}}</span>
-          <span>{{uploader.queue[uploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>
-        </label>
-        <div class="progress" style="margin-bottom: 0;" *ngIf="uploader?.queue?.length!==0">
-          <div class="progress-bar" role="progressbar"
-               [ngStyle]="{ 'width': uploader.queue[uploader.queue.length - 1].progress + '%' }">
-            {{uploader.queue[this.uploader.queue.length - 1].progress + '%'}}
+      <div class="product-import-item2" style="padding: 0px 30px 10px 30px;">
+        <div class="file-list-group" *ngIf="uploader?.queue?.length!==0">
+          <div class="file-info">
+            <span>{{uploader.queue[uploader.queue.length - 1]?.file?.name}}</span>
+            <span>{{uploader.queue[uploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>
+          </div>
+          <div class="ysl-btn-group">
+            <span class="ysl-btn ysl-btn-xs btn-danger" (click)="cancelFile()">取消</span>
           </div>
         </div>
+        <input id="upload" ng2FileSelect type="file" name="upload"
+               [uploader]="uploader">
+        <label for="upload">
+          <span>选择文件&hellip;</span>
+        </label>
       </div>
+
+      <!--<div class="product-import-item2" style="padding: 0 30px 10px 30px;">-->
+        <!--<input id="upload" ng2FileSelect type="file" name="upload" [uploader]="uploader"-->
+               <!--(change)="selectedFileChange($event)">-->
+        <!--<label for="upload">-->
+          <!--<span *ngIf="uploader?.queue?.length===0"> 上传文件&hellip;</span>-->
+          <!--<span>{{uploader.queue[uploader.queue.length - 1]?.file?.name}}</span>-->
+          <!--<span>{{uploader.queue[uploader.queue.length - 1]?.file.size / 1024 / 1024 | number:'.2'}} MB</span>-->
+        <!--</label>-->
+        <!--<div class="progress" style="margin-bottom: 0;" *ngIf="uploader?.queue?.length!==0">-->
+          <!--<div class="progress-bar" role="progressbar"-->
+               <!--[ngStyle]="{ 'width': uploader.queue[uploader.queue.length - 1].progress + '%' }">-->
+            <!--{{uploader.queue[this.uploader.queue.length - 1].progress + '%'}}-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
 
     <div class="product-import-info">
@@ -156,7 +174,7 @@
 
     <div class="product-import-btn">
       <button type="submit" class="btn btn-info product-import-saveBtn"
-              [disabled]="!productForm.form.valid">保存
+              [disabled]="!productForm.form.valid || isDisabled">保存
       </button>
       <button class="btn btn-default" (click)="goBackList()" style="color: #666666;">取消</button>
     </div>

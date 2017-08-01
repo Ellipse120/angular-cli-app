@@ -8,6 +8,7 @@ import {CookieService} from 'ngx-cookie';
 import {Location} from '@angular/common';
 import {MdSnackBar} from '@angular/material';
 import {FileUploader} from 'ng2-file-upload';
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   templateUrl: './product-import.component.html',
@@ -35,10 +36,11 @@ export class ProductImportComponent implements OnInit {
 
   isActive = 0;
   tagDimensionsNew = [];
-  dataSources = [{value: '', viewValue: '全部'}];
-  dataCategories = [{value: '', viewValue: '全部'}];
-  dataCollections = [{value: '', viewValue: '全部'}];
-  dataServices = [{value: '', viewValue: '全部'}];
+  dataSources = [{value: '', viewValue: '请选择'}];
+  dataCategories = [{value: '', viewValue: '请选择'}];
+  dataCollections = [{value: '', viewValue: '请选择'}];
+  dataServices = [{value: '', viewValue: '请选择'}];
+  isDisabled = false;
   isDisableRipple = true;
   checked = false;
   editType: any;
@@ -61,12 +63,14 @@ export class ProductImportComponent implements OnInit {
 
   userInfo;
   pattern = '[^,，。;；]+$';
+  websitePattern = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$';
   public uploader: FileUploader;
   productSamplePath = 'api/file/upload/product/sample/';
 
   constructor(public service: YslHttpService,
               private router: Router,
               private route: ActivatedRoute,
+              private commonService: YslCommonService,
               private productListService: ProductListService,
               private cookie: CookieService,
               private location: Location,
@@ -144,6 +148,29 @@ export class ProductImportComponent implements OnInit {
     this.uploader.queue[this.uploader.queue.length - 1].upload();
   }
 
+  uploadFile() {
+    const len = this.uploader.queue.length;
+    this.uploader.queue[len - 1].onSuccess = (response, status, headers) => {
+      if (status === 200) {
+        if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
+          const res = JSON.parse(response);
+          this.product.sampleFilePath = res['sampleFilePath'];
+        } else {
+          this.product.sampleFilePath = response;
+        }
+      }
+      this.snackbar.open('数据样本上传成功', '', {
+        duration: 1000,
+        extraClasses: ['ysl-snack-bar']
+      });
+    };
+    this.uploader.queue[len - 1].upload();
+  }
+
+  cancelFile() {
+    this.uploader.clearQueue();
+  }
+
   changeTab(i) {
     this.isActive = i;
   }
@@ -190,22 +217,33 @@ export class ProductImportComponent implements OnInit {
 }
 
   doProductSubmit(): any {
+    this.isDisabled = true;
     this.product.userId = this.userInfo;
     this.product.name = this.product.name.trim();
     if (this.route.routeConfig.path === 'import') {
       this.productListService.doProductImport(this.product)
         .then(res => {
+          this.isDisabled = false;
+          if (this.uploader.queue.length) {
+            this.uploadFile();
+          }
           this.snackbar.open('产品录入成功', '', {
             duration: 2000,
             extraClasses: ['ysl-snack-bar']
           });
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
-          }, 2500);
+          });
+        }, error => {
+          this.isDisabled = false;
+          this.commonService.loginTimeout(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
+          if (this.uploader.queue.length) {
+            this.uploadFile();
+          }
           if ((this.editType - 0) === 1) {
             this.snackbar.open('产品修改成功', '', {
               duration: 2000,
@@ -213,7 +251,7 @@ export class ProductImportComponent implements OnInit {
             });
             setTimeout(() => {
               this.router.navigate(['../list'], {relativeTo: this.route});
-            }, 2500);
+            });
           } else {
             this.snackbar.open('纠错处理成功', '', {
               duration: 2000,
@@ -221,8 +259,11 @@ export class ProductImportComponent implements OnInit {
             });
             setTimeout(() => {
               this.router.navigate(['../errata-for-me'], {relativeTo: this.route});
-            }, 2500);
+            });
           }
+        }, error => {
+          this.isDisabled = false;
+          this.commonService.loginTimeout(error);
         });
     }
   }

@@ -7,7 +7,7 @@ import {CookieService} from 'ngx-cookie';
 import {MdSnackBar} from '@angular/material';
 import {isNullOrUndefined} from 'util';
 import {FileUploader} from 'ng2-file-upload';
-import {YslCommonService} from "../../core/ysl-common.service";
+import {YslCommonService} from '../../core/ysl-common.service';
 
 @Component({
   templateUrl: './product-add.component.html',
@@ -36,11 +36,12 @@ export class OperationProductAddComponent implements OnInit {
   editType: number;
   productId: any;
   isActive = 0;
+  isDisabled = false;
   tagDimensionsNew = [];
-  dataSources = [{value: '', viewValue: '全部'}];
-  dataCategories = [{value: '', viewValue: '全部'}];
-  dataCollections = [{value: '', viewValue: '全部'}];
-  dataServices = [{value: '', viewValue: '全部'}];
+  dataSources = [{value: '', viewValue: '请选择'}];
+  dataCategories = [{value: '', viewValue: '请选择'}];
+  dataCollections = [{value: '', viewValue: '请选择'}];
+  dataServices = [{value: '', viewValue: '请选择'}];
   isDisableRipple = true;
   premiumChecked = [{text: '是', value: true, checked: false}, {text: '否', value: false, checked: false}];
 
@@ -240,12 +241,14 @@ export class OperationProductAddComponent implements OnInit {
   }
 
   doProductSubmit(): any {
+    this.isDisabled = true;
     this.proTagImport();
     this.product.userId = this.userInfo;
     this.product.name = this.product.name.trim();
     if (this.route.routeConfig.path === 'add') {
       this.productListService.doProductImport(this.product)
         .then(res => {
+          this.isDisabled = false;
           if (this.sampleUploader.queue.length) {
             this.uploadFile();
           }
@@ -255,13 +258,15 @@ export class OperationProductAddComponent implements OnInit {
           });
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
-          }, 2500);
+          });
         }, error => {
+          this.isDisabled = false;
           this.commonService.loginTimeout(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
         .then(res => {
+          this.isDisabled = false;
           if (this.sampleUploader.queue.length) {
             this.uploadFile();
           }
@@ -275,8 +280,9 @@ export class OperationProductAddComponent implements OnInit {
             } else {
               this.router.navigate(['../errata'], {relativeTo: this.route});
             }
-          }, 2500);
+          });
         }, error => {
+          this.isDisabled = false;
           this.commonService.loginTimeout(error);
         });
     }
