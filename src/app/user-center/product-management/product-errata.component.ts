@@ -4,6 +4,7 @@ import {ProductErrorService} from '../../product-mangement/error-correct/product
 import {CookieService} from 'ngx-cookie';
 import {Router, ActivatedRoute} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
+import {YslCommonService} from "../../core/ysl-common.service";
 
 @Component({
   templateUrl: './product-errata.component.html',
@@ -39,6 +40,7 @@ export class ProductErrataComponent implements OnInit {
 
   constructor(public service: ProductErrorService,
               private cookie: CookieService,
+              private commonService: YslCommonService,
               private location: Location,
               private snackBar: MdSnackBar,
               private router: Router,
@@ -69,6 +71,8 @@ export class ProductErrataComponent implements OnInit {
         }
       });
       this.errorLists = data.items;
+    }, error => {
+      this.commonService.loginTimeout(error);
     });
   }
 

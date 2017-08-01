@@ -209,7 +209,7 @@ select {
 .word-count-description {
   color: #a5aaad;
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   right: 40px;
 }
 
