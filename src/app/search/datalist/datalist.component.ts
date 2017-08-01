@@ -15,7 +15,6 @@ import {isNullOrUndefined} from "util";
 })
 export class DatalistComponent implements OnInit {
 
-
   yearSearchForm: FormGroup;
   state = false;
   isShowLoading: boolean = false;
@@ -79,6 +78,9 @@ export class DatalistComponent implements OnInit {
     this.keywordSearch();
     this.createForm();
     this.handleAdvancedKey();
+    window.onresize = () => {
+      this.showArrow();
+    };
   }
 
   // 侧边栏
@@ -156,11 +158,22 @@ export class DatalistComponent implements OnInit {
         })
       })
     });
-
     setTimeout(() => {
-      // console.log('after search:',document.querySelectorAll('.product-item-tags'));
-    })
+      this.showArrow();
+    });
+  }
 
+  // 标签下拉箭头是否显示处理
+  showArrow() {
+    const tags = document.querySelectorAll('.product-item-tags ul');
+    for (let i = 0; i < tags.length; i ++) {
+      const ind = tags[i].getAttribute('position');
+      if (tags[i].clientHeight > tags[i]['offsetParent']['clientHeight']) {
+        this.product['items'][ind]['showArrow'] = true;
+      } else {
+        this.product['items'][ind]['showArrow'] = false;
+      }
+    }
   }
 
   // 高级搜索字段处理
