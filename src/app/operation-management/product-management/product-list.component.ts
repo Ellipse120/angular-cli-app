@@ -155,6 +155,12 @@ export class OperationProductListComponent implements OnInit {
       });
   }
 
+  enterKey(e) {
+    if (e.keyCode === 13) {
+      this.filter(1);
+    }
+  }
+
   // 筛选
   filter(type) {
     const form = this.searchFilterForm['value'];

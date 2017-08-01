@@ -2,8 +2,8 @@
   <div class="ysl-info-wrapper user-manage product-management">
     <div class="filter-group">
       <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
-        <input type="text" class="col-md-3 col-xs-5 minw74" placeholder="用户账号" formControlName="loginId" (blur)="filter(1, 'loginId')">
-        <input type="text" class="col-md-2 col-xs-5 minw74" placeholder="用户名" formControlName="userName" (blur)="filter(1, 'userName')">
+        <input type="text" class="col-md-3 col-xs-5 minw74" placeholder="用户账号" formControlName="loginId" (blur)="filter(1, 'loginId')" (keydown)="enterKey($event, 1)">
+        <input type="text" class="col-md-2 col-xs-5 minw74" placeholder="用户名" formControlName="userName" (blur)="filter(1, 'userName')" (keydown)="enterKey($event, 2)">
         <!--<div class="input-group minw74">-->
         <!--<input type="text" placeholder="用户名" formControlName="userName">-->
         <!--<i class="fa fa-search" (click)="filter()"></i>-->

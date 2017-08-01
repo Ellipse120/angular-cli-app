@@ -13,8 +13,8 @@ export class YslHttpService {
 
   // public url = 'http://ysl.dev.cjzc.net.cn/ysl-ws/';
   // public url = 'http://192.168.19.11:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
-  public url = 'http://192.168.14.17:1337/192.168.9.89:8080/ysl-ws/';
-  // public url = 'http://192.168.14.17:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
+  // public url = 'http://192.168.14.17:1337/192.168.9.89:8080/ysl-ws/';
+  public url = 'http://192.168.14.17:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // public url = 'http://localhost:1337/ysl.dev.cjzc.net.cn/ysl-ws/';
   // public url = 'http://192.168.14.17:1337/192.168.9.96:8080/ysl-ws/';
   // public url = 'http://192.168.14.17:1337/ysl.dev.cjzc.net.cn/ysl-ws/';

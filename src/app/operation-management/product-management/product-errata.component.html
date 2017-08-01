@@ -3,7 +3,7 @@
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
       <div class="ysl-input-group">
         <label class="visible-xs-inline-block">产品名称</label>
-        <input type="text" placeholder="输入产品名称" formControlName="productName" (blur)="filter(1)">
+        <input type="text" placeholder="输入产品名称" formControlName="productName" (blur)="filter(1)" (keydown)="enterKey($event)">
       </div>
       <!--<div class="ysl-select-group col-md-2 col-xs-4">-->
         <!--<select name="" class="col-xs-12" formControlName="userType" (change)="filter()">-->

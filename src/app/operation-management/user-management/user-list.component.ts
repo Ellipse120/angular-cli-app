@@ -139,6 +139,16 @@ export class UserListComponent implements OnInit {
     this.selected = [];
   }
 
+  enterKey(e, type) {
+    if (e.keyCode === 13) {
+      if (type === 1) {
+        this.filter(1, 'loginId');
+      } else {
+        this.filter(1, 'userName');
+      }
+    }
+  }
+
   // 筛选
   filter(type, name) {
     const form = this.searchFilterForm['value'];

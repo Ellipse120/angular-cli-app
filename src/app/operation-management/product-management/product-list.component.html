@@ -5,7 +5,7 @@
   <div class="filter-group">
     <form class="form-inline" [formGroup]="searchFilterForm" novalidate>
       <input type="text" class="col-md-4 col-xs-3 minw74" placeholder="用户名" formControlName="userName"
-             (blur)="filter(1)">
+             (blur)="filter(1)" (keydown)="enterKey($event)" >
       <!--<div class="input-group minw74">-->
       <!--<input type="text" placeholder="用户名" formControlName="userName">-->
       <!--<i class="fa fa-search" (click)="filter()"></i>-->
