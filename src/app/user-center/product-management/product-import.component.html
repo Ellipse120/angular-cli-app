@@ -116,12 +116,12 @@
       <p class="product-info">时间范围</p>
       <div class="product-import-item2 product-import-date">
         <span style="display: inline-block;">
-          <my-date-picker class="calendar" style="width: 130px;" name="timeFrom" [options]="myDatePickerOptions"
+          <my-date-picker class="calendar" style="width: 140px;" name="timeFrom" [options]="myDatePickerOptions"
                           [(ngModel)]="timeFrom" (dateChanged)="onDateFromChanged($event)"></my-date-picker>
         </span>
         <span style="display: inline-block;top: -15px;position: relative;">&nbsp; &minus; &nbsp;</span>
         <span style="display: inline-block;">
-        <my-date-picker class="calendar" style="width: 130px;" name="timeTo" [options]="myDatePickerOptions"
+        <my-date-picker class="calendar" style="width: 140px;" name="timeTo" [options]="myDatePickerOptions"
                         [(ngModel)]="timeTo" (dateChanged)="onDateToChanged($event)"></my-date-picker>
         </span>
       </div>

@@ -30,7 +30,8 @@ export class PsdModifyComponent implements OnInit {
     newPass: {
       required: '新密码不能为空',
       minlength: '密码长度不能小于8',
-      maxlength: '密码长度不得超过16'
+      maxlength: '密码长度不得超过16',
+      notBlank: '密码不能以空格开头或空格结尾'
     },
     confirmPass: {
       required: '密码不能为空'
@@ -80,7 +81,7 @@ export class PsdModifyComponent implements OnInit {
     }
     this.httpService.updatePass({
       userId: this.userId,
-      data: {newPasscode: formValue['newPass'], oldPasscode: formValue['oldPass']}
+      data: {newPasscode: formValue['newPass'].replace(/(^\s*)|(\s*$)/g, ''), oldPasscode: formValue['oldPass'].replace(/(^\s*)|(\s*$)/g, '')}
     })
       .then(res => {
         this.snackBar.open('密码修改成功，请重新登录', '', {
@@ -107,7 +108,10 @@ export class PsdModifyComponent implements OnInit {
       newPass: ['', Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(16)
+        Validators.maxLength(16),
+        ((arg) => {
+          return  arg.value.startsWith(' ') || arg.value.endsWith(' ') ? {'notBlank': true} : null;
+        })
       ])],
       confirmPass: ['', Validators.required]
     });

@@ -83,11 +83,6 @@ export class OperationalReportComponent implements OnInit {
               left: 'left',
               data: ['月度在线用户数']
             },
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
-            },
             grid: {
               left: '3%',
               right: '4%',
@@ -161,11 +156,6 @@ export class OperationalReportComponent implements OnInit {
               left: 'left',
               data: ['用户注册数']
             },
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
-            },
             grid: {
               left: '3%',
               right: '4%',
@@ -225,11 +215,6 @@ export class OperationalReportComponent implements OnInit {
             legend: {
               left: 'left',
               data: ['产品数量']
-            },
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
             },
             grid: {
               left: '3%',

@@ -1,0 +1,90 @@
+.register{
+  height: 100%;
+  background: url("../../assets/images/registerbg.png") no-repeat;
+  background-size: 100% 100%;
+  padding-top: 2.778rem;
+}
+.register-title{
+  margin: 0 0 2.083rem;
+  font-size: 1.0rem;
+}
+.register-box{
+  width: 700px;
+  height: 400px;
+  margin: 0 auto;
+  border: 1px solid #dce0e1;
+  padding: 0.833rem 4.167rem;
+  background: #fff;
+}
+.ysl-checkbox-group{
+  display: flex;
+}
+.ysl-checkbox-group input+span{
+  height: 12px;
+  width: 12px;
+  border-color: #666;
+}
+.email{
+  margin-bottom: 20px;
+}
+.email .input-group{
+  position: relative;
+  overflow: hidden;
+  padding: 4px 0;
+}
+.email .input-group:after{
+  content: "";
+  display: inline-block;
+  height: 1px;
+  width: 100%;
+  background-color: #a7bec9;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+}
+.email .input-group-addon{
+  border: none;
+  background-color: #fff;
+  padding-left: 0;
+}
+.email .fa-envelope{
+  color: rgb(187,187,187);
+}
+.email input{
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  font-size: 0.666rem;
+}
+.agreement{
+  text-align: left;
+  margin-top: 10px;
+}
+.ysl-checkbox-group{
+  font-size: 12px;
+  padding-left: 0;
+}
+.ysl-checkbox-group label{
+  color: #666;
+}
+.agreement a{
+  cursor: pointer;
+}
+.submit-btn{
+  background-color: #39baf6;
+  color: #fff;
+  font-size: 0.666rem;
+  margin-top: 1.528rem;
+}
+@media screen and (max-width: 768px) {
+  .register-box{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 414px){
+  .register-box{
+    padding: 30px 10px;
+  }
+}

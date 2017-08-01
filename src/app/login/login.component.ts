@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
     const submitTime = new Date();
     let submitData = {
       loginId: form.value['userAccount'],
-      passcode: form.value['userPassword'],
+      passcode: form.value['userPassword'].replace(/(^\s*)|(\s*$)/g, ''),
       oneTimeCode: submitTime.getTime()
     };
     this.httpServer.userLogin(submitData)
@@ -103,6 +103,12 @@ export class LoginComponent implements OnInit {
   gotoRegitster() {
     this.dialogRef.close();
     this.router.navigate(['register']);
+  }
+
+  // 找回密码
+  toRetrievePass() {
+    this.dialogRef.close();
+    this.router.navigate(['retrieve-pass']);
   }
 
   // 创建表单

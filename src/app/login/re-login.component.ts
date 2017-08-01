@@ -77,7 +77,7 @@ export class ReLoginComponent implements OnInit {
     const submitTime = new Date();
     const submitData = {
       loginId: form.value['userAccount'],
-      passcode: form.value['userPassword'],
+      passcode: form.value['userPassword'].replace(/(^\s*)|(\s*$)/g, ''),
       oneTimeCode: submitTime.getTime()
     };
     this.httpServer.userLogin(submitData)

@@ -41,6 +41,7 @@ import { VerifyFailureComponent } from './register/verify-failure.component';
 import { ReLoginComponent } from './login/re-login.component';
 import {AuthGuardService} from './core/serve/auth-guard.service';
 import {OperationAuthGuardService} from './core/serve/operation-auth-guard.service';
+import { RetrievePassComponent } from './login/retrieve-pass.component';
 
 
 const ueditorPath = {
@@ -69,7 +70,8 @@ const ueditorPath = {
     ProductErrataComponent,
     VerifySuccessComponent,
     VerifyFailureComponent,
-    ReLoginComponent
+    ReLoginComponent,
+    RetrievePassComponent
   ],
   imports: [
     BrowserModule,

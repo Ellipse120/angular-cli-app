@@ -125,6 +125,17 @@ export class YslHttpService {
     });
   }
 
+  // 找回密码
+  resetPassword(option): Observable<any> {
+    return this.http.post(this.url + 'api/user/resetpasscode/checksmscode', option, {
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      withCredentials: true
+    })
+      .map(res => res);
+  }
+
   // 登录
   userLogin(user): Promise<any> {
     const data = JSON.stringify(user);

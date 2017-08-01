@@ -15,6 +15,7 @@ import {VerifySuccessComponent} from './register/verify-success.component';
 import {VerifyFailureComponent} from './register/verify-failure.component';
 import construct = Reflect.construct;
 import {ReLoginComponent} from './login/re-login.component';
+import {RetrievePassComponent} from './login/retrieve-pass.component';
 
 // 定义普通路由
 const appRouters: Routes = [
@@ -24,6 +25,7 @@ const appRouters: Routes = [
   {path: 'datalist', component: DatalistComponent},
   {path: 'datadetail', component: DataDetailComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'retrieve-pass', component: RetrievePassComponent},
   {path: 're-login', component: ReLoginComponent},
   {path: 'verify-success', component: VerifySuccessComponent},
   {path: 'verify-failure', component: VerifyFailureComponent},

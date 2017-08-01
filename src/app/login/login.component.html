@@ -6,7 +6,7 @@
       <input type="password" class="user-psd form-control" placeholder="密码" formControlName="userPassword" required>
       <div class="login-state">
         <label for="auto-login" class="color-gray"><input type="checkbox" id="auto-login" formControlName="isRem"> 记住帐号</label>
-        <!--<a class="forget-psd">忘记密码? </a>-->
+        <a class="forget-psd" (click)="toRetrievePass()">忘记密码? </a>
       </div>
       <div class="error-group ysl-error-tip" *ngIf="loginForm.invalid && isLoginSubmit">
         <span *ngIf="loginFormError.userAccount">{{loginFormError.userAccount}}</span>

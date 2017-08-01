@@ -1,18 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
-import {YslHttpService} from '../core/ysl-http.service';
-import {MdSnackBar} from '@angular/material';
-import {CookieService} from 'ngx-cookie';
-import {Router} from '@angular/router';
-import {YslCommonService} from '../core/ysl-common.service';
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {YslHttpService} from "../core/ysl-http.service";
+import {CookieService} from "ngx-cookie";
+import {YslCommonService} from "../core/ysl-common.service";
+import {MdSnackBar} from "@angular/material";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-retrieve-pass',
+  templateUrl: './retrieve-pass.component.html',
+  styleUrls: ['./retrieve-pass.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RetrievePassComponent implements OnInit {
 
   registerForm: FormGroup;
   registerError: boolean;
@@ -20,7 +19,6 @@ export class RegisterComponent implements OnInit {
   registerSuccess: boolean;
   isSubmit: boolean;
   formErrors = {
-    agreement: '',
     password: '',
     smsCode: '',
     phone: ''
@@ -31,15 +29,13 @@ export class RegisterComponent implements OnInit {
       pattern: '请输入正确格式的手机号'
     },
     smsCode: {
-      required: '请输入验证码'
+      required: '请输入验证码',
     },
     password: {
       required: '请输入密码',
       minlength: '密码不能少于8位',
+      pattern: '密码不能以空格开头或结尾',
       notBlank: '密码不能以空格开头或空格结尾'
-    },
-    agreement: {
-      required: '请仔细阅读用户协议并同意'
     }
   };
   timer;
@@ -95,24 +91,13 @@ export class RegisterComponent implements OnInit {
       smsCode: this.registerForm.value['smsCode'],
       passcode: this.registerForm.value['password'].replace(/(^\s*)|(\s*$)/g, '')
     };
-    this.service.userRegister(signUpParas).then(res => {
-      const loginData = {
-        loginId: this.registerForm.value['phone'],
-        passcode: this.registerForm.value['password'],
-        oneTimeCode: new Date().getTime()
-      };
+    this.service.resetPassword(signUpParas).subscribe(res => {
       this.registerSuccess = true;
-      this.snackBar.open('注册成功', '', {
+      this.snackBar.open('密码修改成功', '', {
         duration: 2000,
         extraClasses: ['ysl-snack-bar']
       });
-      this.service.userLogin(loginData).then((resp) => {
-        this.commonService.modifyLoginStatus({loginStatus: true, userInfo: resp});
-        this.router.navigate(['../index']);
-      }, error => {
-        // const body = JSON.parse(error._body);
-        // console.log(body.errorMessage);
-      });
+      this.router.navigate(['re-login']);
     }, error => {
       this.commonService.requestErrorHandle(error);
     });
@@ -130,16 +115,15 @@ export class RegisterComponent implements OnInit {
         Validators.pattern(phoneExp)
       ])),
       smsCode: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         ((arg) => {
-          return  arg.value.startsWith(' ') || arg.value.endsWith(' ') ? {'notBlank': true} : null;
+           return  arg.value.startsWith(' ') || arg.value.endsWith(' ') ? {'notBlank': true} : null;
         })
-      ])),
-      agreement: ['', Validators.required]
+      ]))
     });
   }
 
@@ -155,8 +139,8 @@ export class RegisterComponent implements OnInit {
       });
       return;
     }
-    this.service.getValidateCode(form.value['phone'])
-      .then(res => {
+    this.service.reacquireValidCode(form.value['phone'])
+      .subscribe(res => {
         this.sendValidCodeSuccess();
       }, error => {
         this.commonService.requestErrorHandle(error);
