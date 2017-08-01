@@ -59,6 +59,7 @@ export class DatalistComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {
+      console.log('params', params)
         let param = Object.assign({}, params);
         for (let k in param) {
           if (param[k] && (param[k] != 'null') && (param[k] != '')) {
@@ -66,7 +67,8 @@ export class DatalistComponent implements OnInit {
           }
         }
         this.eventEmit.keyword = this.searchOptions['keyword'];
-        this.currPage = param['offset'] ? ((param['offset']/param['limit']) + 1) : 1;
+        this.currPage = param['offset'] ? ((param['offset'] / param['limit']) + 1) : 1;
+        this.searchOptions['offset'] = param['offset'] ? param['offset'] : 0;
         if (this.searchOptions['tagId']) {
           // this.tagParams();
           this.searchByTag({id: this.searchOptions['tagId'], name: params['tagName'], parent: params['tagParent']});
