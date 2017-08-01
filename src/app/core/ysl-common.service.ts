@@ -83,4 +83,14 @@ export class YslCommonService {
     }
     const token = window.localStorage['user-token'];
   }
+
+  requestErrorHandle(error) {
+    const err = error.json();
+    if (err.errorCode && (err.errorCode !== 2002)) {
+      this.snackBar.open(err.errorMessage, '', {
+        duration: 2000,
+        extraClasses: ['ysl-snack-bar']
+      });
+    }
+  }
 }

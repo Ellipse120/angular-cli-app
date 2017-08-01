@@ -140,6 +140,12 @@ export class YslHttpService {
     });
   }
 
+  // 忘记密码/获取验证码
+  reacquireValidCode(phone): Observable<any> {
+    return this.http.get(this.url + 'api/user/resetpasscode/' + phone)
+      .map(res => res);
+  }
+
   // 退出
   logout(token) {
     return new Promise((resolve, reject) => {

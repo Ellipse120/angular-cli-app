@@ -16,29 +16,26 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   registerError: boolean;
-  errorMessage = '注册失败';
   registerSuccess: boolean;
+  isFirstSend = true;
   isSubmit: boolean;
   formErrors = {
-    phone: '',
-    smsCode: '',
+    agreement: '',
     password: '',
-    agreement: ''
+    smsCode: '',
+    phone: ''
   };
   validationMessages = {
-    email: {
-      required: '请输入邮箱',
-      pattern: '邮箱格式不正确'
-    },
     phone: {
-      required: '请输入手机号'
+      required: '请输入手机号',
+      pattern: '请输入正确格式的手机号'
     },
     smsCode: {
       required: '请输入验证码'
     },
-    passcode: {
+    password: {
       required: '请输入密码',
-      pattern: '密码不能少于8位'
+      minlength: '密码不能少于8位'
     },
     agreement: {
       required: '请仔细阅读用户协议并同意'
@@ -61,22 +58,30 @@ export class RegisterComponent implements OnInit {
     if (!this.registerForm) {
       return;
     }
-    if (this.registerForm.invalid) {
-      return;
-    }
     this.isSubmit = true;
     const form = this.registerForm;
-
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
+        let control;
+        if (field === 'phone') {
+          control = form.get(field);
+        } else if (field === 'smsCode') {
+          control = form.get(field);
+        } else if (field === 'password') {
+          control = form.get(field);
+        } else if (field === 'agreement') {
+          control = form.get(field);
+        }
         this.formErrors[field] = '';
-        const control = form.get(field);
-
         if (control && !control.valid) {
           const messages = this.validationMessages[field];
           for (const err in control.errors) {
-            if (control.errors.hasOwnProperty(err)) {
+            if (control.errors[err]) {
               this.formErrors[field] += messages[err] + '';
+              this.snackBar.open(this.formErrors[field], '', {
+                duration: 2000,
+                extraClasses: ['ysl-snack-bar']
+              });
             }
           }
         }
@@ -109,13 +114,7 @@ export class RegisterComponent implements OnInit {
         // console.log(body.errorMessage);
       });
     }, error => {
-      const body = JSON.parse(error._body);
-      this.errorMessage = body.errorMessage;
-      this.registerError = true;
-      this.snackBar.open('注册失败', '', {
-        duration: 2000,
-        extraClasses: ['ysl-snack-bar']
-      });
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -124,7 +123,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    const phoneExp = /^1[34578]\\d{9}$/;
+    const phoneExp = '^1[34578]\\d{9}$';
     this.registerForm = this.fb.group({
       phone: new FormControl('', Validators.compose([
         Validators.required,
@@ -139,7 +138,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  getValidateCode() {
+  getValidateCode(type) {
     const form = this.registerForm;
     if (form.controls['phone'].invalid) {
       this.formErrors.phone = '请输入手机号';
@@ -149,31 +148,42 @@ export class RegisterComponent implements OnInit {
       });
       return;
     }
-    this.service.getValidateCode(form.value['phone'])
-      .then(res => {
-        this.snackBar.open('验证码发送成功', '', {
-          duration: 2000,
-          extraClasses: ['ysl-snack-bar']
+    // 第一次发送验证码
+    if (type === 1) {
+      this.service.getValidateCode(form.value['phone'])
+        .then(res => {
+          this.isFirstSend = false;
+          this.sendValidCodeSuccess();
+        }, error => {
+          this.commonService.requestErrorHandle(error);
         });
-        this.timer = setInterval(() => {
-          this.btnContent = this.countNum + '秒后重新发送';
-          this.countNum--;
-          this.isBtnDisabled = true;
-          if (this.countNum <= 0) {
-            clearInterval(this.timer);
-            this.countNum = 59;
-            this.btnContent = '发送验证码';
-            this.isBtnDisabled = false;
-          }
-        }, 1000);
-      }, error => {
-        const body = JSON.parse(error._body);
-        this.errorMessage = body.errorMessage;
-        this.snackBar.open(this.errorMessage, '', {
-          duration: 2000,
-          extraClasses: ['ysl-snack-bar']
+    } else {
+      this.service.reacquireValidCode(form.value['phone'])
+        .subscribe(res => {
+          this.sendValidCodeSuccess();
+        }, error => {
+          this.commonService.requestErrorHandle(error);
         });
-      });
+    }
+
   }
 
+  // 验证码发送成功
+  sendValidCodeSuccess() {
+    this.snackBar.open('验证码发送成功', '', {
+      duration: 2000,
+      extraClasses: ['ysl-snack-bar']
+    });
+    this.timer = setInterval(() => {
+      this.btnContent = this.countNum + '秒后重新发送';
+      this.countNum--;
+      this.isBtnDisabled = true;
+      if (this.countNum <= 0) {
+        clearInterval(this.timer);
+        this.countNum = 59;
+        this.btnContent = '重新发送';
+        this.isBtnDisabled = false;
+      }
+    }, 1000);
+  }
 }

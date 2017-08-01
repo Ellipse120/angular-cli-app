@@ -12,7 +12,8 @@
           <div class="input-group col-xs-12">
             <span class="input-group-addon hidden-xs"><i class="fa fa-envelope-square"></i>&nbsp;验证码</span>
             <input type="text" class="form-control" style="width: auto;" formControlName="smsCode" required placeholder="请输入验证码">
-            <button type="button" class="btn" style="float: right;" [class.disabled]="isBtnDisabled" (click)="getValidateCode()" [disabled]="isBtnDisabled">{{btnContent}}</button>
+            <button type="button" class="btn" style="float: right;" [class.disabled]="isBtnDisabled" (click)="getValidateCode(1)" [disabled]="isBtnDisabled" *ngIf="isFirstSend">发送验证码</button>
+            <button type="button" class="btn" style="float: right;" [class.disabled]="isBtnDisabled" (click)="getValidateCode(2)" [disabled]="isBtnDisabled" *ngIf="!isFirstSend">{{btnContent}}</button>
           </div>
           <div class="input-group col-xs-12">
             <span class="input-group-addon hidden-xs"><i class="fa fa-key"></i>&nbsp;&nbsp;&nbsp;&nbsp;密码</span>
@@ -26,16 +27,16 @@
           <label><input type="checkbox" formControlName="agreement" required><span></span>已阅读</label><a class="color-blue">《用户协议》</a>
         </div>
       </div>
-      <div class="form-group ysl-text-primary ysl-error-tip" *ngIf="registerForm.invalid && isSubmit">
-        <span *ngIf="formErrors.phone">{{formErrors.phone}}</span>
-        <span *ngIf="formErrors.smsCode">{{formErrors.smsCode}}</span>
-        <span *ngIf="formErrors.password">{{formErrors.password}}</span>
-        <span *ngIf="!formErrors.phone && formErrors.agreement">{{formErrors.agreement}}</span>
-      </div>
-      <p class="ysl-error-tip" *ngIf="registerForm.valid && registerError">{{errorMessage}}</p>
+      <!--<div class="form-group ysl-text-primary ysl-error-tip" *ngIf="registerForm.invalid && isSubmit">-->
+        <!--<span *ngIf="formErrors.phone">{{formErrors.phone}}</span>-->
+        <!--<span *ngIf="formErrors.smsCode">{{formErrors.smsCode}}</span>-->
+        <!--<span *ngIf="formErrors.password">{{formErrors.password}}</span>-->
+        <!--<span *ngIf="!formErrors.phone && formErrors.agreement">{{formErrors.agreement}}</span>-->
+      <!--</div>-->
+      <!--<p class="ysl-error-tip" *ngIf="registerForm.valid && registerError">{{errorMessage}}</p>-->
       <div class="form-group">
         <label class="sr-only"></label>
-        <button class="btn btn-lg btn-block submit-btn" [disabled]="registerForm.invalid">注册</button>
+        <button class="btn btn-lg btn-block submit-btn">注册</button>
       </div>
     </div>
     <div class="register-success" *ngIf="registerSuccess">注册成功</div>
