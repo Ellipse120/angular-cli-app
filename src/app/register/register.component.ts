@@ -16,8 +16,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   registerError: boolean;
+  isBtnDisabled = false;
   registerSuccess: boolean;
-  isFirstSend = true;
   isSubmit: boolean;
   formErrors = {
     agreement: '',
@@ -43,7 +43,6 @@ export class RegisterComponent implements OnInit {
   };
   timer;
   countNum = 59;
-  isBtnDisabled = false;
   btnContent = '发送验证码';
 
   constructor(public service: YslHttpService,
@@ -141,35 +140,26 @@ export class RegisterComponent implements OnInit {
   getValidateCode(type) {
     const form = this.registerForm;
     if (form.controls['phone'].invalid) {
-      this.formErrors.phone = '请输入手机号';
-      this.snackBar.open('请输入正确格式的手机号', '', {
+      const phone = form.controls['phone'];
+      const errorMess = phone['errors']['required'] ? '请输入手机号' : '请输入正确格式的手机号';
+      // this.formErrors.phone = '请输入手机号';
+      this.snackBar.open(errorMess, '', {
         duration: 2000,
         extraClasses: ['ysl-snack-bar']
       });
       return;
     }
-    // 第一次发送验证码
-    if (type === 1) {
-      this.service.getValidateCode(form.value['phone'])
-        .then(res => {
-          this.isFirstSend = false;
-          this.sendValidCodeSuccess();
-        }, error => {
-          this.commonService.requestErrorHandle(error);
-        });
-    } else {
-      this.service.reacquireValidCode(form.value['phone'])
-        .subscribe(res => {
-          this.sendValidCodeSuccess();
-        }, error => {
-          this.commonService.requestErrorHandle(error);
-        });
-    }
-
+    this.service.getValidateCode(form.value['phone'])
+      .then(res => {
+        this.sendValidCodeSuccess();
+      }, error => {
+        this.commonService.requestErrorHandle(error);
+      });
   }
 
   // 验证码发送成功
   sendValidCodeSuccess() {
+    this.isBtnDisabled = true;
     this.snackBar.open('验证码发送成功', '', {
       duration: 2000,
       extraClasses: ['ysl-snack-bar']
@@ -177,12 +167,11 @@ export class RegisterComponent implements OnInit {
     this.timer = setInterval(() => {
       this.btnContent = this.countNum + '秒后重新发送';
       this.countNum--;
-      this.isBtnDisabled = true;
       if (this.countNum <= 0) {
+        this.isBtnDisabled = false;
         clearInterval(this.timer);
         this.countNum = 59;
         this.btnContent = '重新发送';
-        this.isBtnDisabled = false;
       }
     }, 1000);
   }

@@ -260,7 +260,7 @@ export class DataDetailComponent implements OnInit {
     this.service.addProductComment(score)
       .then(res => {
         this.snackBar.open('评论成功', '', {
-          duration: 3000,
+          duration: 2000,
           extraClasses: ['ysl-snack-bar']
         });
         this.commentRemark = '';
@@ -345,6 +345,7 @@ export class DataDetailComponent implements OnInit {
     const option = {productId: this.productDetail.productId, data: {remark: this.replyCommentCont, replyTo: common.id, userId: this.userId}};
     this.service.addProductComment(option)
       .then(res => {
+        this.replyCommentCont = '';
         this.productComment['items'][ind]['showSecond'] = false;
         this.service.getProductComment({productId: this.productDetail.productId, data: this.commentPagination}).then(data => {
           data['items'].forEach(com => {
@@ -352,6 +353,10 @@ export class DataDetailComponent implements OnInit {
               this.productComment['items'][ind]['items'] = com['items'];
             }
           });
+        });
+        this.snackBar.open('评论成功', '', {
+          duration: 2000,
+          extraClasses: ['ysl-snack-bar']
         });
       }, error => {
         this.commonService.loginTimeout(error);
