@@ -24,7 +24,7 @@
       <div class="form-group clearfix agreement">
         <label class="sr-only"></label>
         <div class="ysl-checkbox-group col-xs-12">
-          <label><input type="checkbox" formControlName="agreement" required><span></span>已阅读</label><a class="color-blue">《用户协议》</a>
+          <label><input type="checkbox" formControlName="agreement" required><span></span>已阅读</label><a class="color-blue" routerLink="/service" [target]="'_blank'">《服务协议》</a>
         </div>
       </div>
       <!--<div class="form-group ysl-text-primary ysl-error-tip" *ngIf="registerForm.invalid && isSubmit">-->

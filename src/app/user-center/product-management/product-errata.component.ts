@@ -48,6 +48,7 @@ export class ProductErrataComponent implements OnInit {
   getErrorList() {
     const params = {};
     params['userId'] = this.userId;
+    this.pagingOption['userId'] = this.userId;
     if (this.router.url.split('/').pop().split('-').includes('by')) {
       params['type'] = 1;
       this.pagingOption.type = 1;
