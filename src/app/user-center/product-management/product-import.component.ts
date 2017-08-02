@@ -8,14 +8,13 @@ import {CookieService} from 'ngx-cookie';
 import {Location} from '@angular/common';
 import {MdSnackBar} from '@angular/material';
 import {FileUploader} from 'ng2-file-upload';
-import {YslCommonService} from "../../core/ysl-common.service";
+import {YslCommonService} from '../../core/ysl-common.service';
 
 @Component({
   templateUrl: './product-import.component.html',
   styleUrls: ['./product-import.component.css']
 })
 export class ProductImportComponent implements OnInit {
-
 
   product = {
     userId: '',

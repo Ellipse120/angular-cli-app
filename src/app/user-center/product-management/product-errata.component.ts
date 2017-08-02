@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import {ProductErrorService} from '../../product-mangement/error-correct/product-error.service';
 import {CookieService} from 'ngx-cookie';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import {MdSnackBar} from '@angular/material';
-import {YslCommonService} from "../../core/ysl-common.service";
+import {YslCommonService} from '../../core/ysl-common.service';
 
 @Component({
   templateUrl: './product-errata.component.html',
@@ -28,15 +28,8 @@ export class ProductErrataComponent implements OnInit {
   };
   page = 1;
   isLoading: boolean;
-
   isMine = true;
-
-  ngOnInit(): void {
-
-    this.userId = this.cookie.getObject('yslUserInfo')['id'];
-
-    this.getErrorList();
-  }
+  currentPage: any;
 
   constructor(public service: ProductErrorService,
               private cookie: CookieService,
@@ -45,6 +38,17 @@ export class ProductErrataComponent implements OnInit {
               private snackBar: MdSnackBar,
               private router: Router,
               private route: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    this.userId = this.cookie.getObject('yslUserInfo')['id'];
+    this.route.queryParams
+      .subscribe((params) => {
+        const param = Object.assign({}, params);
+        this.currentPage = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
+        this.getErrorList();
+        this.pagingOption['offset'] = param['offset'];
+      });
   }
 
   getErrorList() {
@@ -86,7 +90,10 @@ export class ProductErrataComponent implements OnInit {
     this.page = e;
     this.pagingOption.offset = (e - 1) * 10;
     this.pagingOption.userId = this.userId;
-    this.getErrorList();
+    const navigationExtras: NavigationExtras = {
+      queryParams: {offset: this.pagingOption.offset}
+    };
+    this.router.navigate(['userCenter/productManagement/errata-for-me'], navigationExtras);
   }
 
 
