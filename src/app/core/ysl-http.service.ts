@@ -285,7 +285,7 @@ export class YslHttpService {
     return new Promise((resolve, reject) => {
       this.http.get(this.url + 'api/user/' + userId)
         .toPromise()
-        .then(response => resolve(response.json()));
+        .then(response => resolve(response.json()), error => reject(error));
     });
   }
 

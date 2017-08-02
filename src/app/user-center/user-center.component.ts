@@ -53,6 +53,9 @@ export class UserCenterComponent implements OnInit {
       this.httpService.getUserInfo(this.userId)
         .then(res => {
           this.infoProcessing(res);
+        }, error => {
+          this.commonService.requestErrorHandle(error);
+          this.profileSrc = '../../assets/images/userDefaultAvatar.png';
         });
     } else {
       this.profileSrc = '../../assets/images/userDefaultAvatar.png';

@@ -53,6 +53,9 @@ export class OperationManagementComponent implements OnInit {
         .then(res => {
           this.userInfo = res;
           this.profileSrc = this.userInfo.logoFilePath ? this.httpService.url + 'api/file/' + this.userInfo.logoFilePath  + '/download' : '../../assets/images/userDefaultAvatar.png';
+        }, error => {
+          this.commonService.requestErrorHandle(error);
+          this.profileSrc = '../../assets/images/userDefaultAvatar.png';
         });
     } else {
       this.profileSrc = '../../assets/images/userDefaultAvatar.png';
