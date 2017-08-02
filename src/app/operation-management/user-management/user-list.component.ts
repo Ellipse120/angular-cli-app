@@ -60,7 +60,7 @@ export class UserListComponent implements OnInit {
         this.pagingOption['offset'] = param['offset'];
         this.getUsers();
       });
-  }
+}
 
   getUsers() {
     this.isShowLoading = true;

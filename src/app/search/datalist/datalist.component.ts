@@ -126,7 +126,7 @@ export class DatalistComponent implements OnInit {
       this.advancedFilter.forEach(d => {
         this.product['dateFacets'].forEach((item, ind) => {
           if (d.apiKey == 'dataSince') {
-            const date = item < 0 ? (new Date(item / 1000)) : (new Date(item));
+            const date = (new Date(item));
             arr[ind] = {type: 'date_facets', title: date.getFullYear() + '年' + (date.getMonth() + 1) + '月以来', value: item, parent: '时间', selected: false};
             d.child = arr;
           }

@@ -26,10 +26,9 @@ export class ProductErrataComponent implements OnInit {
     sortBy: '',
     ascending: false
   };
-  page = 1;
   isLoading: boolean;
   isMine = true;
-  currentPage: any;
+  page: any;
 
   constructor(public service: ProductErrorService,
               private cookie: CookieService,
@@ -45,9 +44,9 @@ export class ProductErrataComponent implements OnInit {
     this.route.queryParams
       .subscribe((params) => {
         const param = Object.assign({}, params);
-        this.currentPage = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
-        this.getErrorList();
+        this.page = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
         this.pagingOption['offset'] = param['offset'];
+        this.getErrorList();
       });
   }
 
@@ -87,7 +86,6 @@ export class ProductErrataComponent implements OnInit {
 
   getErrorPage(e) {
     this.isLoading = true;
-    this.page = e;
     this.pagingOption.offset = (e - 1) * 10;
     this.pagingOption.userId = this.userId;
     const navigationExtras: NavigationExtras = {

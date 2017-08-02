@@ -66,9 +66,8 @@ export class ProductListComponent implements OnInit {
   ];
 
   // paging args
-  page = 1;
   isLoading: boolean;
-  currentPage: any;
+  page: any;
 
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService,
@@ -84,9 +83,9 @@ export class ProductListComponent implements OnInit {
     this.route.queryParams
       .subscribe((params) => {
         const param = Object.assign({}, params);
-        this.currentPage = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
-        this.getProducts();
+        this.page = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
         this.pagingOption['offset'] = param['offset'];
+        this.getProducts();
       });
   }
 
@@ -154,7 +153,6 @@ export class ProductListComponent implements OnInit {
 
   getPage(e) {
     this.isLoading = true;
-    this.page = e;
     this.pagingOption.offset = (e - 1) * this.pagingOption['limit'];
     this.pagingOption.userId = this.userInfo.id;
     const navigationExtras: NavigationExtras = {
