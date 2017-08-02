@@ -16,6 +16,7 @@ import {VerifyFailureComponent} from './register/verify-failure.component';
 import construct = Reflect.construct;
 import {ReLoginComponent} from './login/re-login.component';
 import {RetrievePassComponent} from './login/retrieve-pass.component';
+import {NotFoundComponent} from "./other/not-found.component";
 
 // 定义普通路由
 const appRouters: Routes = [
@@ -31,7 +32,8 @@ const appRouters: Routes = [
   {path: 'verify-failure', component: VerifyFailureComponent},
   {path: 'privacy', component: YslPrivacyComponent},
   {path: 'service', component: ServiceAgreementComponent},
-  {path: '**', component: IndexComponent}
+  {path: 'not-found', component: NotFoundComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 // @NgModule是一个装饰函数，它接收一个用来描述模块属性的元数据对象
