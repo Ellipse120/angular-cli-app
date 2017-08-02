@@ -62,10 +62,9 @@ export class ProductImportComponent implements OnInit {
 
   userInfo;
   pattern = '[^,，。;；]+$';
-  websitePattern = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$';
+  websitePattern = '(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]\\.[^\\s]{2,})';
   public uploader: FileUploader;
   productSamplePath = 'api/file/upload/product/sample/';
-  private target: any;
   @ViewChild('uploadEl') uploadElRef: ElementRef;
 
   constructor(public service: YslHttpService,
