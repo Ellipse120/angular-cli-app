@@ -175,6 +175,10 @@ select {
 
 }
 
+select:focus{
+  outline: 0 none;
+}
+
 select::-ms-expand {
   display: none;
 }
