@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {YslCommonService} from '../../core/ysl-common.service';
@@ -14,7 +14,7 @@ export class ThumbsUpToMeComponent implements OnInit {
   userId: number;
   thumbs = [];
   totalThumbedNum: number;
-  page = 1;
+  page: any;
   isLoading: boolean;
   pagingOption = {
     userId: 0,
@@ -27,9 +27,18 @@ export class ThumbsUpToMeComponent implements OnInit {
   constructor(private yslHttpService: YslHttpService,
               private commonService: YslCommonService,
               private cookie: CookieService,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {}
+
+  ngOnInit() {
     this.userId = this.cookie.getObject('yslUserInfo')['id'];
-    this.getThumbsToMe();
+    this.route.queryParams
+      .subscribe((params) => {
+        const param = Object.assign({}, params);
+        this.page = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
+        this.pagingOption['offset'] = param['offset'];
+        this.getThumbsToMe();
+      });
   }
 
   getThumbsToMe() {
@@ -45,17 +54,16 @@ export class ThumbsUpToMeComponent implements OnInit {
 
   getPage(e) {
     this.isLoading = true;
-    this.page = e;
-    this.pagingOption.offset = (e - 1 ) * 10;
-    this.pagingOption.userId = this.userId;
-    this.getThumbsToMe();
+    this.pagingOption['offset'] = (e - 1) * (this.pagingOption['limit']);
+    const navigationExtras: NavigationExtras = {
+      queryParams: {offset: this.pagingOption.offset},
+      relativeTo: this.route
+    };
+    this.router.navigate(['../to-me'], navigationExtras);
   }
 
   doViewThumbedProductDetail(item) {
     this.router.navigate(['datadetail', {productId: item.productId}]);
-  }
-
-  ngOnInit() {
   }
 
 }
