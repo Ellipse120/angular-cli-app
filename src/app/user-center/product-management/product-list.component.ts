@@ -6,10 +6,10 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {isNullOrUndefined} from 'util';
 
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
 @Component({
-  selector: 'product-list',
+  selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-management.component.css']
 })
@@ -20,13 +20,9 @@ export class ProductListComponent implements OnInit {
   rows = [];
   rowIndex;
   selected = [];
-  proInfo = [];
   isOn = [];
   temp = [];
-  rowState = true;
   import = false;
-  showEdit = true;
-  showProInfo = false;
   dataItems = [];
   messages: any = {
     emptyMessage: ' 无数据 ',
@@ -35,7 +31,6 @@ export class ProductListComponent implements OnInit {
   };
   isFinished = true;
   userInfo: any;
-  userGenre: any;
   pagingOption: any = {
     userId: 0,
     limit: 10,
@@ -73,6 +68,7 @@ export class ProductListComponent implements OnInit {
   // paging args
   page = 1;
   isLoading: boolean;
+  currentPage: any;
 
   constructor(private productListService: ProductListService,
               private commonService: YslCommonService,
@@ -80,13 +76,20 @@ export class ProductListComponent implements OnInit {
               private cookie: CookieService,
               private service: YslHttpService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute) {}
 
+
+  ngOnInit() {
     this.userInfo = this.cookie.getObject('yslUserInfo');
-    this.userGenre = this.cookie.getObject('userType');
-    this.getProducts();
-
+    this.route.queryParams
+      .subscribe((params) => {
+        const param = Object.assign({}, params);
+        this.currentPage = param['offset'] ? ((param['offset'] / this.pagingOption['limit']) + 1) : 1;
+        this.getProducts();
+        this.pagingOption['offset'] = param['offset'];
+      });
   }
+
 
   getProducts() {
     if (!isNullOrUndefined(this.userInfo)) {
@@ -124,12 +127,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // 启用或禁用
-  // openOrClose(i) {
-  //   this.isOn[i] = !this.isOn[i];
-  // }
-
-
   // 选择每一行触发事件
   onSelect({selected}) {
     this.selected.splice(0, this.selected.length);
@@ -158,9 +155,12 @@ export class ProductListComponent implements OnInit {
   getPage(e) {
     this.isLoading = true;
     this.page = e;
-    this.pagingOption.offset = (e - 1) * 10;
+    this.pagingOption.offset = (e - 1) * this.pagingOption['limit'];
     this.pagingOption.userId = this.userInfo.id;
-    this.getProducts();
+    const navigationExtras: NavigationExtras = {
+      queryParams: {offset: this.pagingOption.offset}
+    };
+    this.router.navigate(['userCenter/productManagement/list'], navigationExtras);
   }
 
   doProductsSort(event) {
@@ -200,9 +200,6 @@ export class ProductListComponent implements OnInit {
 
   doViewProductDetail(item) {
     this.router.navigate(['datadetail', {productId: item.productId}]);
-  }
-
-  ngOnInit(): void {
   }
 
 }
