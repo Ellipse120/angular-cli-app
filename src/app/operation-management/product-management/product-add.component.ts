@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -79,6 +79,7 @@ export class OperationProductAddComponent implements OnInit {
   websitePattern = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$';
   public sampleUploader: FileUploader;
   productSamplePath = 'api/file/upload/product/sample/';
+  @ViewChild('uploadEl') uploadElRef: ElementRef;
 
   constructor(public service: YslHttpService,
               private router: Router,
@@ -92,10 +93,16 @@ export class OperationProductAddComponent implements OnInit {
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.sampleUploader = new FileUploader({url: this.service.url + 'api/file/upload'});
+    this.sampleUploader.onAfterAddingFile = (fileItem => {
+      this.uploadElRef.nativeElement.value = '';
+    });
     this.route.params.subscribe(param => {
       this.editType = param['editType'] - 0;
       if (!isNullOrUndefined(param['productId'])) {
         this.sampleUploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
+        this.sampleUploader.onAfterAddingFile = (fileItem => {
+          this.uploadElRef.nativeElement.value = '';
+        });
         this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
           .subscribe(data => {
             this.product = data;
