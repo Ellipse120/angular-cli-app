@@ -53,11 +53,11 @@
       <ul>
         <li *ngFor="let item of product.items | paginate: {itemsPerPage: limit,
                                                       currentPage: currPage,
-                                                      totalItems: product.totalLength}"  class="data-item">
+                                                      totalItems: product.totalLength}; let ind = index"  class="data-item">
           <h3 style="cursor: pointer" (click)="toProductDetail(item)" [innerHtml]="item.name"></h3>
           <span class="data-content" [innerHtml]="item.description"></span>
           <div class="product-item-tags" *ngIf="item.tags && (item.tags?.length)" [class.open]="item.tagOpen" >
-            <ul id="productItemTags">
+            <ul [attr.position]="ind" class="clearfix">
               <li class="product-item-tag" *ngFor="let t of item.tags" [attr.title]="t.name"><i class="fa fa-tag"></i>{{t.name}}</li>
             </ul>
             <i class="fa fa-angle color-blue" [class.fa-angle-down]="!item.tagOpen"  [class.fa-angle-up]="item.tagOpen" (click)="item.tagOpen = !item.tagOpen"></i>
@@ -197,7 +197,7 @@
           <h3 style="cursor: pointer" (click)="toProductDetail(item)" [innerHtml]="item.name"></h3>
           <span class="data-content" [innerHtml]="item.description"></span>
           <div class="product-item-tags" *ngIf="item.tags && (item.tags?.length)"  [class.open]="item.tagOpen">
-            <ul [attr.position]="ind">
+            <ul [attr.position]="ind" class="clearfix">
               <li class="product-item-tag" *ngFor="let t of item.tags" [attr.title]="t.name"><i class="fa fa-tag"></i>{{t.name}}</li>
             </ul>
             <i class="fa fa-angle color-blue" *ngIf="item?.showArrow" [class.fa-angle-down]="!item.tagOpen"  [class.fa-angle-up]="item.tagOpen" (click)="item.tagOpen = !item.tagOpen"></i>

@@ -170,7 +170,7 @@ export class DatalistComponent implements OnInit {
     const tags = document.querySelectorAll('.product-item-tags ul');
     for (let i = 0; i < tags.length; i ++) {
       const ind = tags[i].getAttribute('position');
-      if (tags[i].clientHeight > tags[i]['offsetParent']['clientHeight']) {
+      if (tags[i].clientHeight > tags[i]['children'][0]['clientHeight']) {
         this.product['items'][ind]['showArrow'] = true;
       } else {
         this.product['items'][ind]['showArrow'] = false;
