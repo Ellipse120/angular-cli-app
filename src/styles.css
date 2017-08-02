@@ -747,7 +747,7 @@ footer {
   align-items: center;
   justify-content: center;
 }
-.spinner {
+.loading-wrap .spinner {
   margin: 100px auto;
   width: 20px;
   height: 20px;
@@ -767,7 +767,7 @@ footer {
   animation-fill-mode: both;
 }
 
-.spinner .spinner-container {
+.loading-wrap .spinner .spinner-container {
   position: absolute;
   width: 100%;
   height: 100%;
