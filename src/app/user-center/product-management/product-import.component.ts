@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -65,6 +65,8 @@ export class ProductImportComponent implements OnInit {
   websitePattern = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$';
   public uploader: FileUploader;
   productSamplePath = 'api/file/upload/product/sample/';
+  private target: any;
+  @ViewChild('uploadEl') uploadElRef: ElementRef;
 
   constructor(public service: YslHttpService,
               private router: Router,
@@ -79,10 +81,16 @@ export class ProductImportComponent implements OnInit {
   ngOnInit(): void {
     this.userInfo = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['id'] : undefined;
     this.uploader = new FileUploader({url: this.service.url + 'api/file/upload'});
+    this.uploader.onAfterAddingFile = (fileItem => {
+      this.uploadElRef.nativeElement.value = '';
+    });
     this.route.params.subscribe(p => {
       this.editType = p.type;
       if (!isNullOrUndefined(p['productId'])) {
         this.uploader = new FileUploader({url: this.service.url + this.productSamplePath + this.route.snapshot.paramMap.get('productId')});
+        this.uploader.onAfterAddingFile = (fileItem => {
+          this.uploadElRef.nativeElement.value = '';
+        });
         this.productListService.getProductDetail(this.route.snapshot.paramMap.get('productId'))
           .subscribe(data => {
             if (data.premium) {
@@ -149,6 +157,9 @@ export class ProductImportComponent implements OnInit {
 
   uploadFile() {
     const len = this.uploader.queue.length;
+    this.uploader.onAfterAddingFile = (fileItem => {
+      this.uploadElRef.nativeElement.value = '';
+    });
     this.uploader.queue[len - 1].onSuccess = (response, status, headers) => {
       if (status === 200) {
         if (!isNullOrUndefined(this.route.snapshot.paramMap.get('productId'))) {
@@ -223,9 +234,9 @@ export class ProductImportComponent implements OnInit {
       this.productListService.doProductImport(this.product)
         .then(res => {
           this.isDisabled = false;
-          if (this.uploader.queue.length) {
-            this.uploadFile();
-          }
+          // if (this.uploader.queue.length) {
+          //   this.uploadFile();
+          // }
           this.snackbar.open('产品录入成功', '', {
             duration: 2000,
             extraClasses: ['ysl-snack-bar']

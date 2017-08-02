@@ -74,7 +74,7 @@
             <span class="ysl-btn ysl-btn-xs btn-danger" (click)="cancelFile()">取消</span>
           </div>
         </div>
-        <input id="upload" ng2FileSelect type="file" name="upload"
+        <input #uploadEl id="upload" ng2FileSelect type="file" name="upload"
                [uploader]="uploader">
         <label for="upload">
           <span>选择文件&hellip;</span>
