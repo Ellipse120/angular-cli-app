@@ -61,7 +61,7 @@ export class CommentListComponent implements OnInit {
           }
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 

@@ -57,7 +57,7 @@ export class OperationalReportComponent implements OnInit {
           this.currentOnlineAmount = 0;
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -117,7 +117,7 @@ export class OperationalReportComponent implements OnInit {
           };
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -130,7 +130,7 @@ export class OperationalReportComponent implements OnInit {
           // this.hotProducts = this.hotProducts.splice(0, 9);
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -190,7 +190,7 @@ export class OperationalReportComponent implements OnInit {
           };
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -250,7 +250,7 @@ export class OperationalReportComponent implements OnInit {
           };
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 

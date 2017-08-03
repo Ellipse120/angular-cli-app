@@ -66,7 +66,7 @@ export class CommentListByMeComponent implements OnInit {
           }
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
   // 删除评论

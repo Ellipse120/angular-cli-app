@@ -37,7 +37,7 @@ export class ThumbsUpByMeComponent implements OnInit {
         this.totalThumbsNum = data.totalLength;
         this.thumbs = data.items;
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 

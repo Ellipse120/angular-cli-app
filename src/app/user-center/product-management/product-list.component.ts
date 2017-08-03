@@ -121,7 +121,7 @@ export class ProductListComponent implements OnInit {
         this.count = data.totalLength;
 
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
     }
   }

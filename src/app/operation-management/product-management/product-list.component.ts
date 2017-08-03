@@ -110,7 +110,7 @@ export class OperationProductListComponent implements OnInit {
         });
       }, (error) => {
         this.isShowLoading = false;
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
     } else {
       // this.showLoginComp();
@@ -151,7 +151,7 @@ export class OperationProductListComponent implements OnInit {
           });
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 

@@ -205,7 +205,7 @@ export class DataDetailComponent implements OnInit {
         this.favoredCount = res['favoredCount'];
         this.isThumbsUp = res['favor'];
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -272,7 +272,7 @@ export class DataDetailComponent implements OnInit {
             this.productDetail.averageScore = resp['averageScore'] ? resp['averageScore'].toFixed(1) : undefined;
           });
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -364,7 +364,7 @@ export class DataDetailComponent implements OnInit {
           extraClasses: ['ysl-snack-bar']
         });
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -389,7 +389,7 @@ export class DataDetailComponent implements OnInit {
       }).subscribe(data => {
         this.getUserProp();
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
     } else {
       this.service.updateFavorite({
@@ -399,7 +399,7 @@ export class DataDetailComponent implements OnInit {
       }).subscribe( () => {
          this.getUserProp();
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
     }
   }

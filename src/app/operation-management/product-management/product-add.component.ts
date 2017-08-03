@@ -271,7 +271,6 @@ export class OperationProductAddComponent implements OnInit {
           });
         }, (error) => {
           this.isDisabled = false;
-          this.commonService.loginTimeout(error);
           this.commonService.requestErrorHandle(error);
         });
     } else {
@@ -294,7 +293,6 @@ export class OperationProductAddComponent implements OnInit {
           });
         }, error => {
           this.isDisabled = false;
-          this.commonService.loginTimeout(error);
           this.commonService.requestErrorHandle(error);
         });
     }

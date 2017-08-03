@@ -103,7 +103,7 @@ export class OperationProductErrataComponent implements OnInit {
       });
     }, error => {
       this.isShowLoading = false;
-      this.commonService.loginTimeout(error);
+      this.commonService.requestErrorHandle(error);
     });
   }
 

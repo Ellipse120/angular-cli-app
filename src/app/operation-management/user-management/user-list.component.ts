@@ -101,7 +101,7 @@ export class UserListComponent implements OnInit {
         });
       }, err => {
         this.errorMessage = err.message ? err.message : '请求出错了';
-        this.commonService.loginTimeout(err);
+        this.commonService.requestErrorHandle(err);
       });
   }
 
@@ -184,7 +184,7 @@ export class UserListComponent implements OnInit {
           });
         }
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 

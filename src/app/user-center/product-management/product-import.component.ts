@@ -326,7 +326,7 @@ export class ProductImportComponent implements OnInit {
           });
         }, error => {
           this.isDisabled = false;
-          this.commonService.loginTimeout(error);
+          this.commonService.requestErrorHandle(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
@@ -352,14 +352,8 @@ export class ProductImportComponent implements OnInit {
             });
           }
         }, error => {
-          if (error.status === 500) {
-            this.snackbar.open('服务器跪了', '', {
-              duration: 2000,
-              extraClasses: ['ysl-snack-bar']
-            });
-          }
           this.isDisabled = false;
-          this.commonService.loginTimeout(error);
+          this.commonService.requestErrorHandle(error);
         });
     }
   }

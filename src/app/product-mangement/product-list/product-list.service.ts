@@ -91,7 +91,7 @@ export class ProductListService {
 
   private handleError(error: any): Promise<any> {
     console.log('an error occurred:', error);
-    this.commonService.loginTimeout(error);
+    this.commonService.requestErrorHandle(error);
 
     return Promise.reject(error.message || error);
   }

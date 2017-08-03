@@ -74,18 +74,20 @@ export class YslCommonService {
     this.loginStatus.next(data);
   }
 
-  // 为登录统一处理
-  loginTimeout(error) {
+  requestErrorHandle(error) {
+    if (error.status === 500) {
+      this.snackBar.open('服务器出错', '', {
+        duration: 2000,
+        extraClasses: ['ysl-snack-bar']
+      });
+      return;
+    }
     const err = error.json();
+    const token = window.localStorage['user-token'];
     if (err.errorCode && (err.errorCode === 2002)) {
       this.modifyLoginStatus({loginStatus: false, userInfo: null, logoutMess: '登录超时，请重新登录', duration: 3000});
       this.router.navigate(['re-login']);
     }
-    const token = window.localStorage['user-token'];
-  }
-
-  requestErrorHandle(error) {
-    const err = error.json();
     if (err.errorCode && (err.errorCode !== 2002)) {
       this.snackBar.open(err.errorMessage, '', {
         duration: 2000,

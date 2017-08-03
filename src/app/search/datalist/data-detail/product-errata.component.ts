@@ -86,7 +86,7 @@ export class ProductErrataComponent {
       .then(res => {
         this.popupClose.emit();
       }, error => {
-        this.commonService.loginTimeout(error);
+        this.commonService.requestErrorHandle(error);
       });
   }
 }

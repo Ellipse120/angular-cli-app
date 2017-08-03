@@ -75,7 +75,7 @@ export class ProductErrataComponent implements OnInit {
       });
       this.errorLists = data.items;
     }, error => {
-      this.commonService.loginTimeout(error);
+      this.commonService.requestErrorHandle(error);
     });
   }
 

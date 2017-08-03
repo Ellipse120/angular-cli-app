@@ -64,7 +64,7 @@ export class LikeListComponent implements OnInit {
         this.items = [];
       }
     }, error => {
-      this.commonService.loginTimeout(error);
+      this.commonService.requestErrorHandle(error);
     });
   }
 
