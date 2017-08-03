@@ -124,15 +124,26 @@ export class ProductImportComponent implements OnInit {
                 }
               };
             }
-            if (!isNullOrUndefined(data['tags'])) {
-              data['tags'].forEach(parentTag => {
-                if (!isNullOrUndefined(parentTag['items'])) {
-                  parentTag['items'].forEach(tag => {
-                    this.tags.push({id: tag.id});
-                  });
-                }
-              });
-            }
+            setTimeout(() => {
+              if (!isNullOrUndefined(data['tags'])) {
+                data['tags'].forEach(tag => {
+                  if (!isNullOrUndefined(tag['items'])) {
+                    tag['items'].forEach(t => {
+                      this.checkedTag(t['id']);
+                    });
+                  }
+                });
+              }
+            });
+            // if (!isNullOrUndefined(data['tags'])) {
+            //   data['tags'].forEach(parentTag => {
+            //     if (!isNullOrUndefined(parentTag['items'])) {
+            //       parentTag['items'].forEach(tag => {
+            //         this.tags.push({id: tag.id});
+            //       });
+            //     }
+            //   });
+            // }
           });
       }
     });
@@ -141,6 +152,13 @@ export class ProductImportComponent implements OnInit {
     this.service.getTagDimensions()
       .then(data => {
         this.tagDimensionsNew = data;
+        this.tagDimensionsNew.forEach(tagParent => {
+          if (tagParent['items'] && tagParent['items'].length) {
+            tagParent['items'].forEach(tag => {
+              tag.checked = false;
+            });
+          }
+        });
       });
 
     this.getSelectionOption();
@@ -202,33 +220,71 @@ export class ProductImportComponent implements OnInit {
     this.product.dataUntil = event.epoc * 1000;
   }
 
-  proTagImport(tagId, e) {
-    const isChecked = e.currentTarget.checked;
-    if (isChecked) {
-      this.tags.push({id: tagId});
-    } else {
-      if (!isNullOrUndefined(this.tags)) {
-        this.tags.forEach((tag, ind) => {
-          if (tag.id === tagId) {
-            this.tags.splice(ind, 1);
-          }
-        });
-      }
-    }
-  }
-
-  checkedTag(id) {
-    let ret = false;
-    this.product.tags.forEach(tag => {
-      if (!isNullOrUndefined(tag.items)) {
-        tag.items.forEach(item => {
-          if (item.id === id) {
-            ret = true;
+  setChecked(id) {
+    this.tagDimensionsNew.forEach(parentTag => {
+      if (!isNullOrUndefined(parentTag['items'])) {
+        parentTag['items'].forEach(tag => {
+          if (tag.id === id) {
+            tag['checked'] = !tag['checked'];
           }
         });
       }
     });
-    return ret;
+  }
+
+  proTagImport() {
+    this.product.tags = [];
+    this.tagDimensionsNew.forEach(parentTag => {
+      if (!isNullOrUndefined(parentTag['items'])) {
+        parentTag['items'].forEach(tag => {
+          if (tag['checked']) {
+            this.product.tags.push({id: tag['id']});
+          }
+        });
+      }
+    });
+  }
+
+  // proTagImport(tagId, e) {
+  //   const isChecked = e.currentTarget.checked;
+  //   if (isChecked) {
+  //     this.tags.push({id: tagId});
+  //   } else {
+  //     if (!isNullOrUndefined(this.tags)) {
+  //       this.tags.forEach((tag, ind) => {
+  //         if (tag.id === tagId) {
+  //           this.tags.splice(ind, 1);
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
+
+  // checkedTag(id) {
+  //   let ret = false;
+  //   this.product.tags.forEach(tag => {
+  //     if (!isNullOrUndefined(tag.items)) {
+  //       tag.items.forEach(item => {
+  //         if (item.id === id) {
+  //           ret = true;
+  //         }
+  //       });
+  //     }
+  //   });
+  //   return ret;
+  // }
+
+  // 默认标签选中
+  checkedTag(id) {
+    this.tagDimensionsNew.forEach(tag => {
+      if (!isNullOrUndefined(tag.items)) {
+        tag.items.forEach(item => {
+          if (item.id === id) {
+            item.checked = true;
+          }
+        });
+      }
+    });
   }
 
   transRadio2(ind) {
@@ -252,7 +308,8 @@ export class ProductImportComponent implements OnInit {
     this.isDisabled = true;
     this.product.userId = this.userInfo;
     this.product.name = this.product.name.trim();
-    this.product.tags = this.tags;
+    // this.product.tags = this.tags;
+    this.proTagImport();
     if (this.route.routeConfig.path === 'import') {
       this.productListService.doProductImport(this.product)
         .then(res => {
@@ -295,6 +352,12 @@ export class ProductImportComponent implements OnInit {
             });
           }
         }, error => {
+          if (error.status === 500) {
+            this.snackbar.open('服务器跪了', '', {
+              duration: 2000,
+              extraClasses: ['ysl-snack-bar']
+            });
+          }
           this.isDisabled = false;
           this.commonService.loginTimeout(error);
         });

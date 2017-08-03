@@ -162,8 +162,8 @@
               <li *ngFor="let itemc of item.items;let i=index" style="float: left;margin:10px 10px 0 0;">
                 <label style="font-weight: initial;color:#999999;" [for]="[itemc.id]">
                   <input style="vertical-align: middle;margin: 0;" type="checkbox" [id]="[itemc.id]"
-                         [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
-                         (click)="proTagImport(itemc.id, $event)" name="tags">&nbsp;{{itemc.name}}</label>
+                         [value]="[itemc.name]" [checked]="itemc.checked"
+                         (click)="setChecked(itemc.id)" name="tags">&nbsp;{{itemc.name}}</label>
               </li>
             </ul>
           </md-tab>
