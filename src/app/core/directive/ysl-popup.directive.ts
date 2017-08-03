@@ -44,8 +44,8 @@ export class YslPopupDirective {
       // console.log('dir contains', this._el.nativeElement.nextElementSibling.contains(event.target))
       // console.log('parent next', this._el.nativeElement.nextElementSibling)
       // console.log('target -------------', event.target)
-      if (!this.isOpen || this.contains(this._el.nativeElement.nextElementSibling, btn)) { return; }
-      // if (!this.isOpen || this._el.nativeElement.nextElementSibling.contains(event.target)) { return; }
+      // if (!this.isOpen || this.contains(this._el.nativeElement.nextElementSibling, btn)) { return; }
+      if (!this.isOpen || this._el.nativeElement.nextElementSibling.contains(btn.target)) { return; }
       this._vcr.clear();
       this.isOpen = false;
     }

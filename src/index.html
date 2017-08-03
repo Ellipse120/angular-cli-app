@@ -59,6 +59,13 @@
         }
     </style>
     <![endif]-->
+  <script>
+    if (window.Node && Node.prototype && !Node.prototype.contains){
+      Node.prototype.contains = function (arg) {
+        return !!(this.compareDocumentPosition(arg) & 16)
+      }
+    }
+  </script>
 </head>
 <body>
 <!--[if lt IE 9]>
