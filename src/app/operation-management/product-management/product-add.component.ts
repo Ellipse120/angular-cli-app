@@ -1,13 +1,13 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
-import {YslHttpService} from '../../core/ysl-http.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ProductListService} from '../../product-mangement/product-list/product-list.service';
-import {CookieService} from 'ngx-cookie';
-import {MdSnackBar} from '@angular/material';
-import {isNullOrUndefined} from 'util';
-import {FileUploader} from 'ng2-file-upload';
-import {YslCommonService} from '../../core/ysl-common.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { IMyDateModel, IMyDpOptions } from 'mydatepicker';
+import { YslHttpService } from '../../core/ysl-http.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductListService } from '../../product-mangement/product-list/product-list.service';
+import { CookieService } from 'ngx-cookie';
+import { MdSnackBar } from '@angular/material';
+import { isNullOrUndefined } from 'util';
+import { FileUploader } from 'ng2-file-upload';
+import { YslCommonService } from '../../core/ysl-common.service';
 
 @Component({
   templateUrl: './product-add.component.html',
@@ -239,10 +239,12 @@ export class OperationProductAddComponent implements OnInit {
       this.premiumChecked.forEach(item => {
         item['checked'] = false;
         this.premiumChecked[ind]['checked'] = true;
-        if (item.checked) {
+        if (item.checked === true) {
           this.product.premium = 'false';
-        } else {
+        } else if (item.checked === false) {
           this.product.premium = 'true';
+        } else {
+          this.product.premium = '';
         }
       });
     }

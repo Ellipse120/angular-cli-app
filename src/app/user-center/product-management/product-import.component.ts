@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
-import {YslHttpService} from '../../core/ysl-http.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {isNullOrUndefined} from 'util';
-import {ProductListService} from '../../product-mangement/product-list/product-list.service';
-import {CookieService} from 'ngx-cookie';
-import {Location} from '@angular/common';
-import {MdSnackBar} from '@angular/material';
-import {FileUploader} from 'ng2-file-upload';
-import {YslCommonService} from '../../core/ysl-common.service';
+import { IMyDateModel, IMyDpOptions } from 'mydatepicker';
+import { YslHttpService } from '../../core/ysl-http.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { isNullOrUndefined } from 'util';
+import { ProductListService } from '../../product-mangement/product-list/product-list.service';
+import { CookieService } from 'ngx-cookie';
+import { Location } from '@angular/common';
+import { MdSnackBar } from '@angular/material';
+import { FileUploader } from 'ng2-file-upload';
+import { YslCommonService } from '../../core/ysl-common.service';
 
 @Component({
   templateUrl: './product-import.component.html',
@@ -232,19 +232,21 @@ export class ProductImportComponent implements OnInit {
   }
 
   transRadio2(ind) {
-  this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
-  if (this.premiumChecked[ind]['checked']) {
-    this.premiumChecked.forEach(item => {
-      item['checked'] = false;
-      this.premiumChecked[ind]['checked'] = true;
-      if (item.checked) {
-        this.product.premium = 'false';
-      } else {
-        this.product.premium = 'true';
-      }
-    });
+    this.premiumChecked[ind]['checked'] = !this.premiumChecked[ind]['checked'];
+    if (this.premiumChecked[ind]['checked']) {
+      this.premiumChecked.forEach(item => {
+        item['checked'] = false;
+        this.premiumChecked[ind]['checked'] = true;
+        if (item.checked === true) {
+          this.product.premium = 'false';
+        } else if (item.checked === false) {
+          this.product.premium = 'true';
+        } else {
+          this.product.premium = '';
+        }
+      });
+    }
   }
-}
 
   doProductSubmit(): any {
     this.isDisabled = true;
@@ -255,9 +257,9 @@ export class ProductImportComponent implements OnInit {
       this.productListService.doProductImport(this.product)
         .then(res => {
           this.isDisabled = false;
-          // if (this.uploader.queue.length) {
-          //   this.uploadFile();
-          // }
+          if (this.uploader.queue.length) {
+            this.uploadFile();
+          }
           this.snackbar.open('产品录入成功', '', {
             duration: 2000,
             extraClasses: ['ysl-snack-bar']
