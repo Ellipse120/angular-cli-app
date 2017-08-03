@@ -266,6 +266,11 @@ export class DataDetailComponent implements OnInit {
         this.commentRemark = '';
         this.productComment['items'] = [];
         this.getComment();
+        // 更改评分
+        this.service.getProductDetail(this.productParams.productId)
+          .then(resp => {
+            this.productDetail.averageScore = resp['averageScore'] ? resp['averageScore'].toFixed(1) : undefined;
+          });
       }, error => {
         this.commonService.loginTimeout(error);
       });

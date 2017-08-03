@@ -53,7 +53,6 @@ export class SearchAdvancedComponent implements OnInit {
           });
         }
         // this.searchService.advancedKeys = this.advanceInfo;
-        console.log('advanced', this.advanceInfo);
       });
   }
 

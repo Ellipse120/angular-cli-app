@@ -1,13 +1,13 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
-import {YslHttpService} from '../../core/ysl-http.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ProductListService} from '../../product-mangement/product-list/product-list.service';
-import {CookieService} from 'ngx-cookie';
-import {MdSnackBar} from '@angular/material';
-import {isNullOrUndefined} from 'util';
-import {FileUploader} from 'ng2-file-upload';
-import {YslCommonService} from '../../core/ysl-common.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { IMyDateModel, IMyDpOptions } from 'mydatepicker';
+import { YslHttpService } from '../../core/ysl-http.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductListService } from '../../product-mangement/product-list/product-list.service';
+import { CookieService } from 'ngx-cookie';
+import { MdSnackBar } from '@angular/material';
+import { isNullOrUndefined } from 'util';
+import { FileUploader } from 'ng2-file-upload';
+import { YslCommonService } from '../../core/ysl-common.service';
 
 @Component({
   templateUrl: './product-add.component.html',
@@ -73,10 +73,11 @@ export class OperationProductAddComponent implements OnInit {
     }
   };
 
-
   userInfo;
   pattern = '[^,，。;；]+$';
-  websitePattern = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$';
+  // websitePattern = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$';
+  websitePattern = '(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]\\.[^\\s]{2,})';
+
   public sampleUploader: FileUploader;
   productSamplePath = 'api/file/upload/product/sample/';
   @ViewChild('uploadEl') uploadElRef: ElementRef;
@@ -238,10 +239,12 @@ export class OperationProductAddComponent implements OnInit {
       this.premiumChecked.forEach(item => {
         item['checked'] = false;
         this.premiumChecked[ind]['checked'] = true;
-        if (item.checked) {
+        if (item.checked === true) {
           this.product.premium = 'false';
-        } else {
+        } else if (item.checked === false) {
           this.product.premium = 'true';
+        } else {
+          this.product.premium = '';
         }
       });
     }
@@ -266,9 +269,10 @@ export class OperationProductAddComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
           });
-        }, error => {
+        }, (error) => {
           this.isDisabled = false;
           this.commonService.loginTimeout(error);
+          this.commonService.requestErrorHandle(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
@@ -291,6 +295,7 @@ export class OperationProductAddComponent implements OnInit {
         }, error => {
           this.isDisabled = false;
           this.commonService.loginTimeout(error);
+          this.commonService.requestErrorHandle(error);
         });
     }
   }

@@ -85,7 +85,7 @@ export class OperationalReportComponent implements OnInit {
             },
             grid: {
               left: '3%',
-              right: '4%',
+              right: '10%',
               bottom: '8%',
               containLabel: true
             },
@@ -158,7 +158,7 @@ export class OperationalReportComponent implements OnInit {
             },
             grid: {
               left: '3%',
-              right: '4%',
+              right: '10%',
               bottom: '8%',
               containLabel: true
             },
@@ -218,7 +218,7 @@ export class OperationalReportComponent implements OnInit {
             },
             grid: {
               left: '3%',
-              right: '4%',
+              right: '10%',
               bottom: '8%',
               containLabel: true
             },

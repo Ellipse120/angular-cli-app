@@ -1,5 +1,5 @@
 <div class="my-product-import">
-  <form (ngSubmit)="doProductSubmit()" id="productForm" #productForm="ngForm">
+  <form (ngSubmit)="doProductSubmit(productForm)" id="productForm" #productForm="ngForm">
     <div class="product-import-info">
       <p class="product-info">产品信息</p>
 
@@ -163,7 +163,7 @@
                 <label style="font-weight: initial;color:#999999;" [for]="[itemc.id]">
                   <input style="vertical-align: middle;margin: 0;" type="checkbox" [id]="[itemc.id]"
                          [value]="[itemc.name]" [checked]="checkedTag(itemc.id)"
-                         (click)="proTagImport(itemc.id)">&nbsp;{{itemc.name}}</label>
+                         (click)="proTagImport(itemc.id, $event)" name="tags">&nbsp;{{itemc.name}}</label>
               </li>
             </ul>
           </md-tab>
