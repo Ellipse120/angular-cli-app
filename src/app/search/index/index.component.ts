@@ -41,17 +41,10 @@ export class IndexComponent implements OnInit {
     this.service.getTagDimensions()
       .then(data => {
         this.tagDimensions = data;
-        const userAgent = navigator.userAgent;
-        if (userAgent.indexOf('Firefox') > -1) {
-          // setTimeout(() => {
-          //   const contents = document.getElementsByClassName('ysl-label-search-cont');
-          //   console.log('content', contents)
-          //   for (let i = 0; i < contents.length; i ++) {
-          //     contents[i]['style'].overflow = 'visible';
-          //   }
-          // })
-        }
-      })
+        setTimeout(() => {
+          this.setStyle();
+        });
+      });
   }
 
   // 标签搜索
@@ -77,9 +70,21 @@ export class IndexComponent implements OnInit {
     this.router.navigate(['datalist'], navigationExtras)
   }
 
-  // 根据浏览器类型设置样式
-  setStyle() {
-
+  tagSelectChanged() {
+    console.log('changed')
+    this.setStyle();
   }
 
+  // 根据浏览器类型设置样式
+  setStyle() {
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf('Firefox') > -1) {
+      const contents = document.getElementsByClassName('ysl-label-search-cont');
+      for (let i = 0; i < contents.length; i ++) {
+        contents[i]['style'].overflow = 'visible';
+        contents[i]['style'].height = 'auto';
+        contents[i]['style'].marginBottom = '60px';
+      }
+    }
+  }
 }
