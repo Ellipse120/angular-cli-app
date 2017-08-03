@@ -23,8 +23,9 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.eventEmit.keyword = '';
-    this.getTags()
-    this.getQuantity()
+    this.getTags();
+    this.getQuantity();
+    this.setStyle();
   }
 
   // 获取可用产品数量、供应商数量
@@ -40,16 +41,25 @@ export class IndexComponent implements OnInit {
     this.service.getTagDimensions()
       .then(data => {
         this.tagDimensions = data;
+        const userAgent = navigator.userAgent;
+        if (userAgent.indexOf('Firefox') > -1) {
+          // setTimeout(() => {
+          //   const contents = document.getElementsByClassName('ysl-label-search-cont');
+          //   console.log('content', contents)
+          //   for (let i = 0; i < contents.length; i ++) {
+          //     contents[i]['style'].overflow = 'visible';
+          //   }
+          // })
+        }
       })
   }
 
   // 标签搜索
   tagSearch(tag, parentTag) {
-    console.log('tag', tag, parentTag)
     this.searchOption['tagId'] = tag.id;
     this.searchOption['tagName'] = tag.name;
     this.searchOption['tagParent'] = parentTag.name;
-    this.toDataList()
+    this.toDataList();
   }
 
   // 切换高级搜索
@@ -65,6 +75,11 @@ export class IndexComponent implements OnInit {
     };
 
     this.router.navigate(['datalist'], navigationExtras)
+  }
+
+  // 根据浏览器类型设置样式
+  setStyle() {
+
   }
 
 }

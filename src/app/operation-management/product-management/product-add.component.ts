@@ -267,9 +267,10 @@ export class OperationProductAddComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['../list'], {relativeTo: this.route});
           });
-        }, error => {
+        }, (error) => {
           this.isDisabled = false;
           this.commonService.loginTimeout(error);
+          this.commonService.requestErrorHandle(error);
         });
     } else {
       this.productListService.doProductUpdate(this.product)
@@ -292,6 +293,7 @@ export class OperationProductAddComponent implements OnInit {
         }, error => {
           this.isDisabled = false;
           this.commonService.loginTimeout(error);
+          this.commonService.requestErrorHandle(error);
         });
     }
   }

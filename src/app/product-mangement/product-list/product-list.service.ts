@@ -60,7 +60,7 @@ export class ProductListService {
         })
       })
         .toPromise()
-        .then(res => resolve(res.json()), error => reject(error));
+        .then(res => resolve(res.json()), (error) => reject(error));
     });
   }
 

@@ -32,6 +32,7 @@ export class ProductImportComponent implements OnInit {
     sampleFilePath: '',
     tags: []
   };
+  tags = [];
 
   isActive = 0;
   tagDimensionsNew = [];
@@ -123,6 +124,15 @@ export class ProductImportComponent implements OnInit {
                 }
               };
             }
+            if (!isNullOrUndefined(data['tags'])) {
+              data['tags'].forEach(parentTag => {
+                if (!isNullOrUndefined(parentTag['items'])) {
+                  parentTag['items'].forEach(tag => {
+                    this.tags.push({id: tag.id});
+                  });
+                }
+              });
+            }
           });
       }
     });
@@ -192,8 +202,19 @@ export class ProductImportComponent implements OnInit {
     this.product.dataUntil = event.epoc * 1000;
   }
 
-  proTagImport(tagId) {
-    this.product.tags.push({id: tagId});
+  proTagImport(tagId, e) {
+    const isChecked = e.currentTarget.checked;
+    if (isChecked) {
+      this.tags.push({id: tagId});
+    } else {
+      if (!isNullOrUndefined(this.tags)) {
+        this.tags.forEach((tag, ind) => {
+          if (tag.id === tagId) {
+            this.tags.splice(ind, 1);
+          }
+        });
+      }
+    }
   }
 
   checkedTag(id) {
@@ -229,6 +250,7 @@ export class ProductImportComponent implements OnInit {
     this.isDisabled = true;
     this.product.userId = this.userInfo;
     this.product.name = this.product.name.trim();
+    this.product.tags = this.tags;
     if (this.route.routeConfig.path === 'import') {
       this.productListService.doProductImport(this.product)
         .then(res => {
