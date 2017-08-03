@@ -132,15 +132,17 @@ export class OperationProductAddComponent implements OnInit {
                 day: b.getDate()
               }
             };
-            if (!isNullOrUndefined(data['tags'])) {
-              data['tags'].forEach(tag => {
-                if (!isNullOrUndefined(tag['items'])) {
-                  tag['items'].forEach(t => {
-                    this.checkedTag(t['id']);
-                  });
-                }
-              });
-            }
+            setTimeout(() => {
+              if (!isNullOrUndefined(data['tags'])) {
+                data['tags'].forEach(tag => {
+                  if (!isNullOrUndefined(tag['items'])) {
+                    tag['items'].forEach(t => {
+                      this.checkedTag(t['id']);
+                    });
+                  }
+                });
+              }
+            })
           });
       }
     });
