@@ -3,7 +3,7 @@ import { EChartOption, ECharts } from 'echarts-ng2';
 import {OperationService} from '../service/operation-service';
 import {isNullOrUndefined} from 'util';
 import {Router} from '@angular/router';
-import {YslCommonService} from "../../core/ysl-common.service";
+import {YslCommonService} from '../../core/ysl-common.service';
 
 @Component({
   selector: 'app-operational-report',

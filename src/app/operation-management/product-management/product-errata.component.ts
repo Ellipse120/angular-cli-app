@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CookieService} from 'ngx-cookie';
-import {isNullOrUndefined} from 'util';
-import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {LoginComponent} from '../../login/login.component';
 import {MdDialog, MdSnackBar} from '@angular/material';

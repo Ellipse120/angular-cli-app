@@ -21,9 +21,9 @@ export class UserInfoComponent implements OnInit {
           .then(res => {
             this.userInfo = res;
             console.log('user', this.userInfo);
-          })
+          });
       }
-    })
+    });
   }
 
   // 修改用户信息

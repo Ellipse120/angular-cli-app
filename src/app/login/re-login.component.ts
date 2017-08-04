@@ -63,12 +63,16 @@ export class ReLoginComponent implements OnInit {
     this.isLoginSubmit = true;
     const form = this.loginForm;
     for (const field in this.loginFormError) {
-      this.loginFormError[field] = '';
-      const control = form.get(field);
-      if (control && control.invalid) {
-        const message = this.loginErrorMess[field];
-        for (const error in control.errors) {
-          this.loginFormError[field] += message[error] + '';
+      if (this.loginFormError.hasOwnProperty(field)) {
+        this.loginFormError[field] = '';
+        const control = form.get(field);
+        if (control && control.invalid) {
+          const message = this.loginErrorMess[field];
+          for (const error in control.errors) {
+            if (control.errors.hasOwnProperty(error)) {
+              this.loginFormError[field] += message[error] + '';
+            }
+          }
         }
       }
     }

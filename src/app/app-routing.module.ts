@@ -16,7 +16,7 @@ import {VerifyFailureComponent} from './register/verify-failure.component';
 import construct = Reflect.construct;
 import {ReLoginComponent} from './login/re-login.component';
 import {RetrievePassComponent} from './login/retrieve-pass.component';
-import {NotFoundComponent} from "./other/not-found.component";
+import {NotFoundComponent} from './other/not-found.component';
 
 // 定义普通路由
 const appRouters: Routes = [

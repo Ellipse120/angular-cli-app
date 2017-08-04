@@ -1,9 +1,9 @@
 /**
  * Created by Administrator on 2017-06-17.
  */
-import {Component, OnInit, Input} from "@angular/core";
-import {Location} from "@angular/common";
-import {Router, NavigationStart} from "@angular/router";
+import {Component, OnInit, Input} from '@angular/core';
+import {Location} from '@angular/common';
+import {Router, NavigationStart} from '@angular/router';
 
 
 @Component({
@@ -27,12 +27,12 @@ export class YslSidebarComponent implements OnInit {
 
   constructor(private router: Router, private location: Location) {}
   ngOnInit() {
-    this.handlePath()
+    this.handlePath();
   }
 
   handlePath() {
-    let path = this.location.path();
-    let findCurrSide = path => {
+    const path = this.location.path();
+    const findCurrSide = path => {
       this.yslSides.forEach((item, index) => {
         if (path.includes(item.path)) {
           this.currSideIndex = index;
@@ -43,15 +43,15 @@ export class YslSidebarComponent implements OnInit {
               this.currSideIndex = index;
               this.currSideChild = ind;
             }
-          })
+          });
         }
-      })
-    }
-    findCurrSide(path)
+      });
+    };
+    findCurrSide(path);
     this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
-        findCurrSide(e.url)
+        findCurrSide(e.url);
       }
-    })
+    });
   }
 }

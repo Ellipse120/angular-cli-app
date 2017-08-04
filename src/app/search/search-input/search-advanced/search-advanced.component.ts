@@ -1,9 +1,9 @@
-import {Component, EventEmitter, OnInit} from "@angular/core";
-import {YslHttpService} from "../../../core/ysl-http.service";
-import {SearchService} from "../../search.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Router, NavigationExtras} from "@angular/router";
-import {IMyDpOptions} from "mydatepicker";
+import {Component, EventEmitter, OnInit} from '@angular/core';
+import {YslHttpService} from '../../../core/ysl-http.service';
+import {SearchService} from '../../search.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router, NavigationExtras} from '@angular/router';
+import {IMyDpOptions} from 'mydatepicker';
 
 @Component({
   templateUrl: `./search-advanced.component.html`,
@@ -46,11 +46,13 @@ export class SearchAdvancedComponent implements OnInit {
         const advanced = this.advanceInfo;
 
         for (const type in advanced) {
-          data.forEach((item) => {
-            if (item.categoryCode == type) {
-              this.advanceInfo[type].push(item);
-            }
-          });
+          if (advanced.hasOwnProperty(type)) {
+            data.forEach((item) => {
+              if (item.categoryCode === type) {
+                this.advanceInfo[type].push(item);
+              }
+            });
+          }
         }
         // this.searchService.advancedKeys = this.advanceInfo;
       });

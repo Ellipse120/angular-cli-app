@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {YslHttpService} from "../core/ysl-http.service";
-import {CookieService} from "ngx-cookie";
-import {YslCommonService} from "../core/ysl-common.service";
-import {MdSnackBar} from "@angular/material";
-import {Router} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {YslHttpService} from '../core/ysl-http.service';
+import {CookieService} from 'ngx-cookie';
+import {YslCommonService} from '../core/ysl-common.service';
+import {MdSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-retrieve-pass',

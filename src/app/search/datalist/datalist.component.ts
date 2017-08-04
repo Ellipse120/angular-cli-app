@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router, ActivatedRoute, Params, NavigationExtras} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
 import {YslHttpService} from '../../core/ysl-http.service';
-import {SearchService} from "../search.service";
-import {isNullOrUndefined} from "util";
+import {SearchService} from '../search.service';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-datalist',
@@ -17,7 +17,7 @@ export class DatalistComponent implements OnInit {
 
   yearSearchForm: FormGroup;
   state = false;
-  isShowLoading: boolean = false;
+  isShowLoading = false;
   isShowSide: boolean;
   limit;
   searchOptions = {
@@ -59,9 +59,9 @@ export class DatalistComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {
-        let param = Object.assign({}, params);
+        const param = Object.assign({}, params);
         for (let k in param) {
-          if (param[k] && (param[k] != 'null') && (param[k] != '')) {
+          if (param[k] && (param[k] !== 'null') && (param[k] !== '')) {
             this.searchOptions[k] = param[k];
           }
         }
@@ -109,7 +109,7 @@ export class DatalistComponent implements OnInit {
     if (keyword) {
       let idx = keywordHis.indexOf(keyword);
       if (idx > -1) {
-        keywordHis.splice(idx,1);
+        keywordHis.splice(idx, 1);
       }
       keywordHis.push(keyword);
     }
@@ -125,7 +125,7 @@ export class DatalistComponent implements OnInit {
       let arr = [];
       this.advancedFilter.forEach(d => {
         this.product['dateFacets'].forEach((item, ind) => {
-          if (d.apiKey == 'dataSince') {
+          if (d.apiKey === 'dataSince') {
             const date = (new Date(item));
             arr[ind] = {type: 'date_facets', title: date.getFullYear() + '年' + (date.getMonth() + 1) + '月以来', value: item, parent: '时间', selected: false};
             d.child = arr;
@@ -138,27 +138,27 @@ export class DatalistComponent implements OnInit {
       let filter = this.searchOptions[item.apiKey];
       if (!isNullOrUndefined(filter)) {
         item['child'].forEach(c => {
-          if (c.value == filter) {
+          if (c.value === filter) {
             c.selected = true;
             this.selectAdvanced.push(c);
           } else {
             c.selected = false;
           }
-        })
+        });
       }
     });
     // 标签筛选
     this.tagsFilter = this.product['tagFacets'].length ? this.product['tagFacets'] : [];
     this.tagsFilter.forEach(p => {
-      if (!p['items']) { return }
+      if (!p['items']) { return; }
       p['items'].forEach(c => {
         c.parent = p['name'];
         this.selectedTagFilterA.forEach(selected => {
-          if (selected.id == c.id) {
+          if (selected.id === c.id) {
             c['selected'] = true;
           }
-        })
-      })
+        });
+      });
     });
     setTimeout(() => {
       this.showArrow();
@@ -184,12 +184,12 @@ export class DatalistComponent implements OnInit {
       let advancedKeys = this.eventEmit.advancedKeys;
       for (let key in advancedKeys) {
         this.advancedFilter.forEach(t => {
-          if (t.type == key) {
+          if (t.type === key) {
             advancedKeys[key].forEach((child, i) => {
               t.child[i] = {type: key, title: child.entryValue, value: child.entryCode, parent: t.title, selected: false};
-            })
+            });
           }
-        })
+        });
       }
     });
   }
@@ -225,10 +225,10 @@ export class DatalistComponent implements OnInit {
       }
     });
     this.advancedFilter.forEach(i => {
-      if (item.type == i.type){
+      if (item.type === i.type) {
         i.child.forEach(c => {
-          if (item.value == c.value) { c.selected = false }
-        })
+          if (item.value === c.value) { c.selected = false }
+        });
       }
     });
     switch (item.type) {
@@ -292,8 +292,8 @@ export class DatalistComponent implements OnInit {
 
   cancelTagFilter(item) {
     delete this.selectedTagFilterO[item.id];
-    this.selectedTagFilterA.forEach((tag ,ind) => {
-      if (tag == item) {
+    this.selectedTagFilterA.forEach((tag , ind) => {
+      if (tag === item) {
         this.selectedTagFilterA.splice(ind, 1);
       }
     });
@@ -323,12 +323,14 @@ export class DatalistComponent implements OnInit {
     const thisYear = (new Date()).getFullYear();
     let form = this.yearSearchForm;
     let values = form.value;
-    if (form.invalid) { return }
+    if (form.invalid) { return; }
     for (let key in values) {
-      if (values[key] && (parseInt(values[key]) <= thisYear) && (parseInt(values[key]) >= 1970)) {
-        this.searchOptions[key] = new Date(form.value[key] + '/01/01').getTime();
-      } else {
-        this.searchOptions[key] = undefined;
+      if (values.hasOwnProperty(key)) {
+        if (values[key] && (parseInt(values[key]) <= thisYear) && (parseInt(values[key]) >= 1970)) {
+          this.searchOptions[key] = new Date(form.value[key] + '/01/01').getTime();
+        } else {
+          this.searchOptions[key] = undefined;
+        }
       }
     }
     let [since, until] = [this.searchOptions['dataSince'], this.searchOptions['dataUntil']];
@@ -346,7 +348,7 @@ export class DatalistComponent implements OnInit {
         .then(res => {
           // searchCondition children
           // let len = this.searchCondition[0]['children'].length;
-        })
+        });
     }
   }
 
@@ -365,14 +367,14 @@ export class DatalistComponent implements OnInit {
   // 下一页
   toNextPage(e) {
     this.searchOptions['offset'] = (e - 1) * (this.searchOptions['limit']);
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: this.searchOptions
-    }
-    this.router.navigate(['datalist'], navigationExtras)
+    };
+    this.router.navigate(['datalist'], navigationExtras);
   }
 
   createForm() {
-    let exp = /[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}/;
+    const exp = /[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}/;
     this.yearSearchForm = this.fb.group({
       dataSince: ['', Validators.compose([
         Validators.minLength(4),
@@ -382,7 +384,7 @@ export class DatalistComponent implements OnInit {
         Validators.minLength(4),
         Validators.pattern(exp)
       ])]
-    })
+    });
   }
 
 }

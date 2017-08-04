@@ -2,9 +2,7 @@ import {Injectable} from '@angular/core';
 import {YslHttpService} from '../../core/ysl-http.service';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
-/**
- * Created by liangdi on 6/23/17.
- */
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProductService {
