@@ -5,7 +5,7 @@
       <li class="ysl-list-item" *ngFor="let item of items | paginate: {itemsPerPage: pagination['limit'],
                                                       currentPage: currPage,
                                                       totalItems: totalLength}">
-        <h4 class="user-name font16">{{item.creator}}<span class="font14">更新时间：{{item.createdOn}}</span></h4>
+        <h4 class="user-name font16">{{item.creator}}<span class="font14">时间：{{item.createdOn}}</span></h4>
         <p class="product-name"><a (click)="toProductDetail(item)">{{item.name}}</a><button (click)="deleteFavorite(item)" class="btn cancel-btn">取消</button></p>
       </li>
     </ul>
