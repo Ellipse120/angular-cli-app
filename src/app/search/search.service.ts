@@ -39,11 +39,13 @@ export class SearchService implements OnInit {
           const advanced = this.advancedKeys;
 
           for (const type in advanced) {
-            data.forEach((item) => {
-              if (item.categoryCode == type) {
-                this.advancedKeys[type].push(item);
-              }
-            });
+            if (advanced.hasOwnProperty(type)) {
+              data.forEach((item) => {
+                if (item.categoryCode === type) {
+                  this.advancedKeys[type].push(item);
+                }
+              });
+            }
           }
           resolve(this.advancedKeys);
           // this.searchService.advancedKeys = this.advanceInfo;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { YslHttpService } from "../../core/ysl-http.service";
-import {SearchService} from "../search.service";
+import { YslHttpService } from '../../core/ysl-http.service';
+import {SearchService} from '../search.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class IndexComponent implements OnInit {
     this.service.getIndexQuantity()
       .then(res => {
         this.activeProductCount = res['activeProductCount'];
-      })
+      });
   }
 
   // 获取首页标签数据
@@ -63,7 +63,7 @@ export class IndexComponent implements OnInit {
 
   // 搜索跳转页面
   toDataList() {
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: this.searchOption
     };
 

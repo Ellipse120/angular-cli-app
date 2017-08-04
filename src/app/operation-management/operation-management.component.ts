@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {YslHttpService} from '../core/ysl-http.service';
-import {MdSnackBar} from "@angular/material";
-import {Router} from "@angular/router";
-import {YslCommonService} from "../core/ysl-common.service";
+import {MdSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
+import {YslCommonService} from '../core/ysl-common.service';
 
 @Component({
   selector: 'app-operation-management',
@@ -26,7 +26,7 @@ export class OperationManagementComponent implements OnInit {
   userInfo: any;
   profileSrc = '';
   selfIntroduction: string;
-  isEditable: boolean = false;
+  isEditable = false;
 
   operateTag = [
     {text: '产品管理', path: 'productManagement'},
@@ -46,6 +46,8 @@ export class OperationManagementComponent implements OnInit {
       if (data.loginStatus) {
         this.userId = data['userInfo']['id'];
       }
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
 
     if (this.userId) {

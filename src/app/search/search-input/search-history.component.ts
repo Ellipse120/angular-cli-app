@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit} from "@angular/core";
-import {NavigationExtras, Router} from "@angular/router";
-import {SearchService} from "../search.service";
+import {Component, EventEmitter, OnInit} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
+import {SearchService} from '../search.service';
 
 @Component({
   template: `

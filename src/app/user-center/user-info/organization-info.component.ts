@@ -60,6 +60,8 @@ export class organizationInfoComponent implements OnInit {
       this.httpService.getUserInfo(this.userId)
         .then(res => {
           this.infoProcessing(res);
+        }, error => {
+          this.commonService.requestErrorHandle(error);
         });
     }
     this.getUserInfo();
@@ -71,6 +73,8 @@ export class organizationInfoComponent implements OnInit {
       if (e.userInfo) {
         this.infoProcessing(e.userInfo);
       }
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -135,6 +139,8 @@ export class organizationInfoComponent implements OnInit {
             this.isEditable = false;
           });
         }
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -143,6 +149,8 @@ export class organizationInfoComponent implements OnInit {
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.commonService.updateUserInfo(res);
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 

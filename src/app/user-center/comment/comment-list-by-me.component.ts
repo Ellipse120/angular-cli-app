@@ -5,7 +5,7 @@ import {YslCommonService} from '../../core/ysl-common.service';
 import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import {ConfirmDialogComponent} from '../../core/commons/confirm-dialog.component';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-comment-list-by-me',

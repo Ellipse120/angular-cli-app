@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {YslHttpService} from '../core/ysl-http.service';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
-import {YslCommonService} from "../core/ysl-common.service";
+import {YslCommonService} from '../core/ysl-common.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isLoginSubmit = false;
-  isRem: boolean;             //记住账号
+  isRem: boolean;             // 记住账号
   loginId: string;
   loginMess = '登录';
   loginFailed: string;
@@ -63,19 +63,23 @@ export class LoginComponent implements OnInit {
     this.isLoginSubmit = true;
     const form = this.loginForm;
     for (const field in this.loginFormError) {
-      this.loginFormError[field] = '';
-      const control = form.get(field);
-      if (control && control.invalid) {
-        const message = this.loginErrorMess[field];
-        for (const error in control.errors) {
-          this.loginFormError[field] += message[error] + '';
+      if (this.loginFormError.hasOwnProperty(field)) {
+        this.loginFormError[field] = '';
+        const control = form.get(field);
+        if (control && control.invalid) {
+          const message = this.loginErrorMess[field];
+          for (const error in control.errors) {
+            if (control.errors.hasOwnProperty(error)) {
+              this.loginFormError[field] += message[error] + '';
+            }
+          }
         }
       }
     }
     if (form.invalid) { return; }
     this.loginMess = '登录中....';
     const submitTime = new Date();
-    let submitData = {
+    const submitData = {
       loginId: form.value['userAccount'],
       passcode: form.value['userPassword'].replace(/(^\s*)|(\s*$)/g, ''),
       oneTimeCode: submitTime.getTime()

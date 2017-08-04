@@ -16,11 +16,11 @@ export class ProductMangementComponent implements OnInit {
   ];
   userEmail;
 
-  constructor(private cookie: CookieService){}
+  constructor(private cookie: CookieService) {}
 
 
   ngOnInit() {
-    this.userEmail = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['contactMail'] : undefined
+    this.userEmail = this.cookie.getObject('yslUserInfo') ? this.cookie.getObject('yslUserInfo')['contactMail'] : undefined;
   }
 
 }

@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CookieService} from 'ngx-cookie';
-import {isNullOrUndefined} from 'util';
-import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {LoginComponent} from '../../login/login.component';
 import {MdDialog, MdSnackBar} from '@angular/material';
@@ -72,6 +70,8 @@ export class OperationProductErrataComponent implements OnInit {
           this.pagingOption['offset'] = param['offset'];
           this.listError();
         });
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -82,6 +82,8 @@ export class OperationProductErrataComponent implements OnInit {
         .then(res => {
           this.userInfo = res;
           resolve();
+        }, error => {
+          this.commonService.requestErrorHandle(error);
         });
     });
   }
@@ -115,6 +117,8 @@ export class OperationProductErrataComponent implements OnInit {
         return;
       }
       this.cookie.putObject('yslUserInfo', result.userLoginInfo);
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -175,6 +179,8 @@ export class OperationProductErrataComponent implements OnInit {
           duration: 2000,
           extraClasses: ['ysl-snack-bar']
         });
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 

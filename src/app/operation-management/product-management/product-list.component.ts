@@ -5,7 +5,6 @@ import {isNullOrUndefined} from 'util';
 import {ProductListService} from '../../product-mangement/product-list/product-list.service';
 import {YslCommonService} from '../../core/ysl-common.service';
 import {YslHttpService} from '../../core/ysl-http.service';
-import {LoginComponent} from '../../login/login.component';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {FileUploader} from 'ng2-file-upload';

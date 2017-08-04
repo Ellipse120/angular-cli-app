@@ -198,7 +198,8 @@
 }
 
 .product-list-name {
-  color: #333333;
+  /*color: #333333;*/
+  color: #337ab7;
   cursor: pointer;
 }
 

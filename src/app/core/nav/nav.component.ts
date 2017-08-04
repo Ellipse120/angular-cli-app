@@ -84,7 +84,7 @@ export class NavComponent implements OnInit {
 
   //  显示登录框
   showLogin(): void {
-    let dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
+    const dialogRef = this.dialog.open(LoginComponent, {disableClose: true});
     dialogRef.afterClosed().subscribe(() => {
       // if (!result) { return; }
       // this.loginInfo = result.userLoginInfo;

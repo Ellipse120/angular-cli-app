@@ -3,8 +3,8 @@ import {YslHttpService} from '../../core/ysl-http.service';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {OperationService} from '../service/operation-service';
-import {YslCommonService} from "../../core/ysl-common.service";
-import {MdSnackBar} from "@angular/material";
+import {YslCommonService} from '../../core/ysl-common.service';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   templateUrl: './user-list.component.html',
@@ -210,7 +210,5 @@ export class UserListComponent implements OnInit {
       loginId: ''
     });
   }
-
-
 
 }

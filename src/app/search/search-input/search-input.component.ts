@@ -7,12 +7,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, NavigationExtras} from '@angular/router';
 
 import { YslHttpService } from '../../core/ysl-http.service';
-import { IMyDpOptions } from "mydatepicker";
+import { IMyDpOptions } from 'mydatepicker';
 
-import {SearchService} from "../search.service";
-import {YslPopupDirective} from "../../core/directive/ysl-popup.directive";
-import {SearchAdvancedComponent} from "./search-advanced/search-advanced.component";
-import {SearchHistoryComponent} from "./search-history.component";
+import {SearchService} from '../search.service';
+import {YslPopupDirective} from '../../core/directive/ysl-popup.directive';
+import {SearchAdvancedComponent} from './search-advanced/search-advanced.component';
+import {SearchHistoryComponent} from './search-history.component';
 
 @Component({
   selector: 'search-input',
@@ -54,7 +54,7 @@ export class SearchInputComponent implements OnInit {
   }
 
   ngOnInit() {
-    let path = this.location.path();
+    const path = this.location.path();
     this.searchService.changeKeyword.subscribe(e => {
       this.keywordSearchForm.controls['keyword'].setValue(e['keyword']);
     });
