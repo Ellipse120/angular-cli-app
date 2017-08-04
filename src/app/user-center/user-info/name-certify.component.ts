@@ -56,6 +56,8 @@ export class NameCertifyComponent implements OnInit {
           const tel = this.userInfo.userContactPhone;
           // this.userInfo.userContactPhone = tel.substr(0, 3) + '****' + tel.substr(7);
         }
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
     this.getUserInfo();
     this.createForm();
@@ -94,6 +96,7 @@ export class NameCertifyComponent implements OnInit {
         }, 1000);
       }, error => {
         const body = JSON.parse(error._body);
+          this.commonService.requestErrorHandle(error);
         this.snackBar.open(body.errorMessage, '', {
           duration: 2000,
           extraClasses: ['ysl-snack-bar']
@@ -134,6 +137,8 @@ export class NameCertifyComponent implements OnInit {
         // this.cookie.putObject('yslUserInfo', userInfo);
         this.getUserInfo();
         // window.location.reload();
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 

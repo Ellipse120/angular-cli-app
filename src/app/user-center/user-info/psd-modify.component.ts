@@ -93,6 +93,7 @@ export class PsdModifyComponent implements OnInit {
         }, 1000);
       }, error => {
         const err = error.json();
+        this.commonService.requestErrorHandle(error);
         if (!err.errorMessage) { return; }
         this.snackBar.open(err.errorMessage, '', {
           duration: 1500,

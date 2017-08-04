@@ -68,6 +68,8 @@ export class UserCenterComponent implements OnInit {
       if (e.userInfo) {
         this.infoProcessing(e.userInfo);
       }
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -84,6 +86,8 @@ export class UserCenterComponent implements OnInit {
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.commonService.updateUserInfo(res);
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -101,6 +105,8 @@ export class UserCenterComponent implements OnInit {
       .then(res => {
         this.isEditable = false;
         this.updateUserInfo();
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 

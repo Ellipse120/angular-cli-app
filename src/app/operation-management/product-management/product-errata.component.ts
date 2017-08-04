@@ -70,6 +70,8 @@ export class OperationProductErrataComponent implements OnInit {
           this.pagingOption['offset'] = param['offset'];
           this.listError();
         });
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -80,6 +82,8 @@ export class OperationProductErrataComponent implements OnInit {
         .then(res => {
           this.userInfo = res;
           resolve();
+        }, error => {
+          this.commonService.requestErrorHandle(error);
         });
     });
   }
@@ -113,6 +117,8 @@ export class OperationProductErrataComponent implements OnInit {
         return;
       }
       this.cookie.putObject('yslUserInfo', result.userLoginInfo);
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -173,6 +179,8 @@ export class OperationProductErrataComponent implements OnInit {
           duration: 2000,
           extraClasses: ['ysl-snack-bar']
         });
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 

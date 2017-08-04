@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {isNullOrUndefined} from 'util';
 import {YslHttpService} from '../../core/ysl-http.service';
+import { YslCommonService } from '../../core/ysl-common.service';
 
 @Component({
   selector: 'app-user-info',
@@ -12,7 +13,9 @@ export class UserInfoComponent implements OnInit {
 
   showEdit = true;
   userInfo: any;
-  constructor(private route: ActivatedRoute, private httpService: YslHttpService) { }
+  constructor(private route: ActivatedRoute,
+              private commonService: YslCommonService,
+              private httpService: YslHttpService) { }
 
   ngOnInit() {
     this.route.params.subscribe(p => {
@@ -21,6 +24,8 @@ export class UserInfoComponent implements OnInit {
           .then(res => {
             this.userInfo = res;
             console.log('user', this.userInfo);
+          }, error => {
+            this.commonService.requestErrorHandle(error);
           });
       }
     });

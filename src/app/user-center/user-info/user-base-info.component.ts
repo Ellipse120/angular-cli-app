@@ -32,6 +32,8 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
       this.httpService.getUserInfo(this.userId)
         .then(res => {
           this.userInfoProcessing(res);
+        }, error => {
+          this.commonService.requestErrorHandle(error);
         });
     }
     this.createForm();
@@ -41,6 +43,8 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
   getViewInfo() {
     this.subscription = this.commonService.getUserInfo().subscribe(e => {
       this.userInfoProcessing(e.userInfo);
+    }, error => {
+      this.commonService.requestErrorHandle(error);
     });
   }
 
@@ -87,6 +91,8 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
           if (item === info) { item.edit = false; }
         });
         this.updateUserInfo();
+      }, error => {
+          this.commonService.requestErrorHandle(error);
       });
   }
 
@@ -95,6 +101,8 @@ export class UserBaseInfoComponent implements OnInit, OnDestroy {
     this.httpService.getUserInfo(this.userId)
       .then(res => {
         this.commonService.updateUserInfo(res);
+      }, error => {
+          this.commonService.requestErrorHandle(error);
       });
   }
 

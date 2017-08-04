@@ -109,6 +109,8 @@ export class ProductErrataComponent implements OnInit {
           duration: 2000,
           extraClasses: ['ysl-snack-bar']
         });
+      }, error => {
+        this.commonService.requestErrorHandle(error);
       });
   }
 

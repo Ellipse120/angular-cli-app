@@ -142,7 +142,9 @@ export class OperationProductAddComponent implements OnInit {
                   }
                 });
               }
-            })
+            });
+          }, error => {
+            this.commonService.requestErrorHandle(error);
           });
       }
     });
