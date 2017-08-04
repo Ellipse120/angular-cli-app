@@ -14,7 +14,7 @@
               p-id="1955">
             </path>
           </svg>
-          <i style="color: #FF4307;" class="product-total-thumb">{{totalThumbedNum}}</i>
+          <i class="product-total-thumb ysl-text-orange">{{totalThumbedNum}}</i>
         </div>
 
         <div class="thumb-up-list" style="padding-top: 20px;">
@@ -24,8 +24,8 @@
                 *ngFor="let item of thumbs | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalThumbedNum }"
                 class="list-group-item row product-list-ul">
                 <div class="row"
-                     style="font-size: 14px;padding-top: 3.5px;">
-                  <span class="col-xs-12 col-sm-12 col-md-12 col-lg-12">{{item.creator}}</span>
+                     style="padding-top: 3.5px;">
+                  <span class="col-xs-12 col-sm-12 col-md-12 col-lg-12 font16">{{item.creator}}</span>
                   <span class="col-xs-9 col-sm-9 col-md-9 col-lg-10 product-list-name"
                         (click)="doViewThumbedProductDetail(item)">{{item.productName}}</span>
                   <span
