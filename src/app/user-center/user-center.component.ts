@@ -93,8 +93,10 @@ export class UserCenterComponent implements OnInit {
 
   // 编辑个性签名
   editDes() {
-    this.isEditable = true;
-    this.userDesForm.patchValue({selfIntroduction: this.userInfo['selfIntroduction']});
+    this.isEditable = !this.isEditable;
+    if (this.isEditable) {
+      this.userDesForm.patchValue({selfIntroduction: this.userInfo['selfIntroduction']});
+    }
   }
 
   // 发布签名
@@ -119,7 +121,22 @@ export class UserCenterComponent implements OnInit {
 
   // 定义事件，上传文件
   uploadFile() {
-    this.uploader.queue[0].onSuccess = (response, status, headers) => {
+    const len = this.uploader.queue.length;
+    const file = this.uploader.queue[len - 1].file;
+    if (file.size < 1024) {
+      this.snackBar.open('图片大小不能小于1k', '', {
+        duration: 1000,
+        extraClasses: ['ysl-snack-bar']
+      });
+      return;
+    } else if (file.size > (1024 * 1024 * 5)) {
+      this.snackBar.open('图片大小不能大于5M', '', {
+        duration: 1000,
+        extraClasses: ['ysl-snack-bar']
+      });
+      return;
+    }
+    this.uploader.queue[len - 1].onSuccess = (response, status, headers) => {
       if (status === 200) {
         const res = JSON.parse(response);
         this.profileSrc = this.httpService.url + 'api/file/' + res['logoFilePath'] + '/download';
@@ -129,14 +146,20 @@ export class UserCenterComponent implements OnInit {
         });
       }
     };
-    this.uploader.queue[0].upload();
+    this.uploader.queue[len - 1].onError = (error, status) => {
+      this.snackBar.open(error, '', {
+        duration: 1000,
+        extraClasses: ['ysl-snack-bar']
+      });
+    };
+    this.uploader.queue[len - 1].upload();
   }
 
   createForm() {
     this.userDesForm = this.fb.group({
       selfIntroduction: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(100)
+        Validators.maxLength(45)
       ])]
     });
   }

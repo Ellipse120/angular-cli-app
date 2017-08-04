@@ -79,7 +79,7 @@
   cursor: pointer;
 }
 .user-center-info .profile-picture img{
-  width: 130%;
+  width: 105%;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -87,10 +87,13 @@
 }
 .user-center-info .des{
   margin-top: 5px;
+  display: flex;
+  justify-content: center;
 }
 .user-center-info .un-editable{
+  width: 45%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 }
 .user-center-info .editable{
@@ -98,22 +101,24 @@
   flex-direction: column;
   align-items: center;
 }
+.user-center-info .editable .text-tip{
+  width: 100%;
+  text-align: right;
+  color: #ec7c45;
+}
 .user-center-info .editable textarea{
+  height: 64px;
   width: 300px;
   padding: 0 5px;
 }
 .user-center-info .editable .ng-invalid{
   border-color: #ec7c45;
 }
-.user-center-info .editable .ysl-btn{
-  /*background-color: #ec7c45;*/
-  background-color: #39baf6;
-  color: #fff;
-  margin-top: 5px;
+.user-center-info .editable .ysl-btn-group{
+  margin-top: 10px;
 }
 .user-center-info .fa-edit{
   display: block;
   font-size: 18px;
-  margin-bottom: -3px;
   margin-left: 5px;
 }

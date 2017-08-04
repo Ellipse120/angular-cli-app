@@ -273,8 +273,11 @@ textarea::-webkit-scrollbar-thumb {
   font-size: 16px;
 }
 .ysl-btn-primary{
-  background-color: #39baf6;
-  color: #fff;
+   background-color: #39baf6;
+   color: #fff;
+ }
+.ysl-btn-gray{
+  background-color: #ddd;
 }
 
 .ysl-pointer {

@@ -11,7 +11,11 @@
         <p class="font16 text-color-middle un-editable" *ngIf="!isEditable">{{userInfo?.selfIntroduction}}<i class="fa fa-edit color-blue" (click)="editDes()"></i></p>
         <form class="editable" [formGroup]="userDesForm" *ngIf="isEditable" novalidate>
           <textarea type="text" formControlName="selfIntroduction" maxlength="100"></textarea>
-          <button class="ysl-btn ysl-btn-xs" (click)="updateUserDes()">发布签名</button>
+          <p class="text-tip">还可输入{{45 - userDesForm?.value?.selfIntroduction?.length}}字</p>
+          <div class="ysl-btn-group">
+            <span class="ysl-btn ysl-btn-xs ysl-btn-primary" (click)="updateUserDes()">发布签名</span>
+            <span class="ysl-btn ysl-btn-xs ysl-btn-gray" (click)="editDes()">取消</span>
+          </div>
         </form>
       </div>
     </div>
