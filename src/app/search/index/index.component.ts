@@ -67,19 +67,20 @@ export class IndexComponent implements OnInit {
       queryParams: this.searchOption
     };
 
-    this.router.navigate(['datalist'], navigationExtras)
+    this.router.navigate(['datalist'], navigationExtras);
   }
 
   tagSelectChanged() {
-    console.log('changed')
     this.setStyle();
   }
 
   // 根据浏览器类型设置样式
   setStyle() {
     const userAgent = navigator.userAgent;
-    if (userAgent.indexOf('Firefox') > -1) {
+    if (userAgent.indexOf('AppleWebKit') <= -1) {
       const contents = document.getElementsByClassName('ysl-label-search-cont');
+      const labels = document.getElementsByClassName('mat-tab-label-container')[0];
+      labels['style'].overflow = 'hidden';
       for (let i = 0; i < contents.length; i ++) {
         contents[i]['style'].overflow = 'visible';
         contents[i]['style'].height = 'auto';

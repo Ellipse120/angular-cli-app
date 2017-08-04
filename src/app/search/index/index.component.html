@@ -6,7 +6,7 @@
     <i class="fa fa-line-chart"></i>数据资源量 <span>{{activeProductCount}}</span>
   </div>
   <search-input></search-input>
-  <md-tab-group class="ysl-label-search-area" (selectChange)="tagSelectChanged()">
+  <md-tab-group class="ysl-label-search-area" (selectChange)="tagSelectChanged">
     <md-tab label="{{item.name}}" *ngFor="let item of tagDimensions">
       <ul class="ysl-label-search-cont">
         <li *ngFor="let itemc of item.items" (click)="tagSearch(itemc, item)">{{itemc.name}}</li>

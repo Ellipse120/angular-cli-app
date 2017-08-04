@@ -959,6 +959,12 @@ app-index .mat-tab-body-content {
 app-index .mat-tab-body.mat-tab-body-active {
   overflow-y: hidden !important;
 }
+app-index .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron,app-index .mat-tab-header-pagination-after .mat-tab-header-pagination-chevron,app-index .mat-tab-header-pagination-before .mat-tab-header-pagination-chevron,app-index .mat-tab-header-rtl .mat-tab-header-pagination-after .mat-tab-header-pagination-chevron{
+  border-color: #fff;
+}
+app-index .mat-elevation-z4{
+  box-shadow: none;
+}
 
 app-index .mat-ripple {
   overflow: visible;
@@ -1059,8 +1065,7 @@ app-index .mat-ripple {
 }
 
 .ysl-label-search-area .mat-tab-body-wrapper {
-  padding-top: 30px;
-  margin-top: -19px;
+  margin-top: 12px;
 }
 
 .user-center-cont {
